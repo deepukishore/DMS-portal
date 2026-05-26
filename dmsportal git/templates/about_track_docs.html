@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+
+{% block title %}About Track My Docs - Smart DMS{% endblock %}
+
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">About Track My Docs</span>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ system.name }}</h1>
+    <p class="page-sub">{{ system.tagline }}</p>
+  </div>
+</div>
+
+<div class="info-grid-main-aside" style="margin-bottom: 2rem;">
+  <div class="surface-panel">
+    <h3 style="color: var(--accent); margin-bottom: 0.75rem;">About</h3>
+    <p>{{ system.description }}</p>
+    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+      <p style="font-size: 0.85rem; color: var(--text-dim);">Version {{ system.version }}</p>
+    </div>
+  </div>
+
+  <div class="surface-panel">
+    <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Supported Plants</h3>
+    <ul class="feature-check-list">
+      {% for plant in system.supported_plants %}
+      <li><span class="check-mark" style="margin-right: 0.5rem;">+</span>{{ plant }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div style="margin-bottom: 2rem;">
+  <h2 style="font-size: 1.3rem; margin-bottom: 1.25rem;">Key Features</h2>
+
+  <div class="feature-grid-wide">
+    {% for feature in system.features %}
+    <div class="surface-panel">
+      <h3 style="font-size: 0.95rem; margin-bottom: 0.5rem;">{{ feature.title }}</h3>
+      <p style="font-size: 0.9rem; color: var(--text-sub);">{{ feature.description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="surface-panel">
+  <h3 style="color: var(--accent); margin-bottom: 1rem;">Key Benefits</h3>
+
+  <div class="benefits-grid">
+    {% for benefit in system.key_benefits %}
+    <div class="benefit-row">
+      <div class="check-mark">+</div>
+      <div>
+        <p style="font-size: 0.9rem; margin: 0;">{{ benefit }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div style="margin-top: 2rem;">
+  <h2 style="font-size: 1.3rem; margin-bottom: 1.25rem;">Document Categories</h2>
+
+  <div class="docs-category-grid">
+    <div class="surface-panel">
+      <h3 style="margin-bottom: 0.5rem;">Procedures</h3>
+      <p style="font-size: 0.9rem; color: var(--text-sub); margin: 0;">Management, customer, and support-oriented procedures.</p>
+    </div>
+    <div class="surface-panel">
+      <h3 style="margin-bottom: 0.5rem;">Standard Manual</h3>
+      <p style="font-size: 0.9rem; color: var(--text-sub); margin: 0;">Standard operating procedures and manuals.</p>
+    </div>
+    <div class="surface-panel">
+      <h3 style="margin-bottom: 0.5rem;">Awards</h3>
+      <p style="font-size: 0.9rem; color: var(--text-sub); margin: 0;">Recognition and award documentation.</p>
+    </div>
+    <div class="surface-panel">
+      <h3 style="margin-bottom: 0.5rem;">Certification</h3>
+      <p style="font-size: 0.9rem; color: var(--text-sub); margin: 0;">Certifications and compliance documentation.</p>
+    </div>
+    <div class="surface-panel">
+      <h3 style="margin-bottom: 0.5rem;">CQ Manuals</h3>
+      <p style="font-size: 0.9rem; color: var(--text-sub); margin: 0;">Continuous quality improvement manuals.</p>
+    </div>
+    <div class="surface-panel">
+      <h3 style="margin-bottom: 0.5rem;">Business Procedures</h3>
+      <p style="font-size: 0.9rem; color: var(--text-sub); margin: 0;">Core business processes and workflows.</p>
+    </div>
+    <div class="surface-panel">
+      <h3 style="margin-bottom: 0.5rem;">Core Tool Manuals</h3>
+      <p style="font-size: 0.9rem; color: var(--text-sub); margin: 0;">Technical manuals for core tools and systems.</p>
+    </div>
+    <div class="surface-panel">
+      <h3 style="margin-bottom: 0.5rem;">Master Records</h3>
+      <p style="font-size: 0.9rem; color: var(--text-sub); margin: 0;">Plant-specific master documents and assets.</p>
+    </div>
+  </div>
+</div>
+
+<div class="callout-panel">
+  <h3>Getting Started</h3>
+  <p>
+    Navigate through the main menu to access different document categories. Each category lets you browse documents by plant and department, and the search tools help you reach specific files faster.
+  </p>
+</div>
+{% endblock %}

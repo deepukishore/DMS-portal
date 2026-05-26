@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block title %}Archive · Smart DMS{% endblock %}
+
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">Archive</span>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Deleted Items Archive</h1>
+    <p class="page-sub">Archived and soft-deleted records. Restore if needed.</p>
+  </div>
+</div>
+
+<div class="alert alert-warning" style="margin-bottom:1.5rem;">
+  <span>⚠ These documents have been archived. Review before permanent removal.</span>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 140px;">Deleted Date</th>
+        <th style="width: 25%;">File Name</th>
+        <th style="width: 140px;">Plant</th>
+        <th style="width: 160px;">Department</th>
+        <th style="width: 160px;">Uploaded By</th>
+        <th style="width: 120px; text-align: center;">Original Status</th>
+        <th style="width: 100px; text-align: center;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in records %}
+      <tr>
+        <td class="mono text-dim">{{ r.timestamp }}</td>
+        <td class="file-cell">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>{{ r.file_name }}</span>
+        </td>
+        <td><span class="plant-badge">{{ r.plant }}</span></td>
+        <td>{{ r.department }}</td>
+        <td>
+          <div class="person-stack">
+            <strong>{{ r.uploaded_by }}</strong>
+            <span class="text-dim">{{ r.user_id }}</span>
+          </div>
+        </td>
+        <td style="text-align: center;"><span class="status-pill status-{{ r.approval_status|lower }}">{{ r.approval_status }}</span></td>
+        <td style="text-align: center;">
+          <form method="POST" action="{{ url_for('archive.delete_archived', archive_index=loop.index0) }}" style="display:inline;">
+            <button type="submit" class="btn-outline btn-sm" onclick="return confirm('Permanently delete this record? This cannot be undone.');">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'layout.html' %}
+
+{% block title %}About Company · Smart DMS{% endblock %}
+
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">About Company</span>
+{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<div class="page-header">
+  <div>
+    <p class="eyebrow">Company Profile</p>
+    <h1 class="page-title">{{ company.name }}</h1>
+    <p class="page-sub" style="font-size:.8rem; color:var(--text-dim); margin-top:.3rem;">{{ company.formerly }}</p>
+  </div>
+</div>
+
+<!-- Overview strip -->
+<div class="surface-panel" style="margin-bottom:1.5rem;">
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.25rem;">
+    <div>
+      <span style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);">Registered Office</span>
+      <p style="margin-top:.3rem;font-size:.85rem;">{{ company.registered_office }}</p>
+    </div>
+    <div>
+      <span style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);">Industry</span>
+      <p style="margin-top:.3rem;font-size:.85rem;">Automotive Components Manufacturing</p>
+    </div>
+    <div>
+      <span style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);">Employees</span>
+      <p style="margin-top:.3rem;font-size:.85rem;font-weight:700;color:var(--accent);">{{ company.employees }}</p>
+    </div>
+    <div>
+      <span style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);">Incorporated</span>
+      <p style="margin-top:.3rem;font-size:.85rem;">{{ company.incorporated }}</p>
+    </div>
+    <div>
+      <span style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);">CIN</span>
+      <p style="margin-top:.3rem;font-size:.8rem;font-family:'IBM Plex Mono',monospace;">{{ company.cin }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Divisions -->
+<h2 style="font-size:1rem;font-weight:600;margin-bottom:1rem;">Our Two Divisions</h2>
+<div class="info-grid-two" style="margin-bottom:1.75rem;">
+  {% for div in company.divisions %}
+  <div class="surface-panel" style="margin-bottom:0;">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem;">
+      <span style="background:var(--accent);color:#000;font-weight:700;font-size:.75rem;padding:.25rem .6rem;border-radius:4px;font-family:'IBM Plex Mono',monospace;">{{ div.id }}</span>
+      <strong style="font-size:.95rem;">{{ div.name }}</strong>
+    </div>
+    <p style="font-size:.78rem;color:var(--text-dim);font-style:italic;margin-bottom:.85rem;border-left:2px solid var(--accent);padding-left:.75rem;line-height:1.55;">"{{ div.vision }}"</p>
+    <ul style="list-style:none;padding:0;margin:0 0 .85rem;display:flex;flex-direction:column;gap:.4rem;">
+      {% for p in div.products %}
+      <li style="font-size:.8rem;color:var(--text-sub);padding-left:1rem;position:relative;">
+        <span style="position:absolute;left:0;top:.55rem;width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;"></span>
+        {{ p }}
+      </li>
+      {% endfor %}
+    </ul>
+    <p style="font-size:.75rem;color:var(--text-dim);">
+      <span style="color:var(--text-sub);font-weight:600;">Plants:</span> {{ div.plants }}
+    </p>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Plants -->
+<h2 style="font-size:1rem;font-weight:600;margin-bottom:1rem;">Our Plants</h2>
+<div class="plants-grid-wide" style="margin-bottom:1.75rem;">
+  {% for plant in company.plants %}
+  <div class="surface-panel" style="margin-bottom:0;">
+    <div class="info-card-row" style="margin-bottom:.75rem;">
+      <div class="plant-id-badge">{{ plant.id }}</div>
+      <div>
+        <strong style="font-size:.9rem;">{{ plant.name }}</strong>
+        <p style="color:var(--text-dim);font-size:.78rem;margin-top:.15rem;">{{ plant.location }}</p>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:.75rem;display:flex;flex-direction:column;gap:.4rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:.72rem;color:var(--text-dim);">Division</span>
+        <span style="font-size:.78rem;font-weight:600;color:var(--accent);">{{ plant.division }}</span>
+      </div>
+      <div>
+        <span style="font-size:.72rem;color:var(--text-dim);">Key Products</span>
+        <p style="font-size:.8rem;margin-top:.2rem;">{{ plant.products }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Customers -->
+<h2 style="font-size:1rem;font-weight:600;margin-bottom:1rem;">Our Customers</h2>
+<div class="surface-panel" style="margin-bottom:1.75rem;">
+  <p style="font-size:.8rem;color:var(--text-dim);margin-bottom:1rem;">ZF Rane is a preferred OEM partner for major Indian and global automotive manufacturers.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+    {% for c in company.customers %}
+    <span style="background:var(--bg-3);border:1px solid var(--border);border-radius:99px;padding:.3rem .85rem;font-size:.78rem;color:var(--text-sub);">{{ c }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Certifications & Awards -->
+<div class="info-grid-two" style="margin-bottom:1.75rem;">
+  <div class="surface-panel" style="margin-bottom:0;">
+    <h3 style="font-size:.9rem;font-weight:600;color:var(--accent);margin-bottom:.85rem;">Certifications</h3>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.55rem;">
+      {% for cert in company.certifications %}
+      <li style="font-size:.82rem;display:flex;gap:.6rem;align-items:flex-start;">
+        <span>{{ cert.icon }}</span><span style="color:var(--text-sub);">{{ cert.text }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="surface-panel" style="margin-bottom:0;">
+    <h3 style="font-size:.9rem;font-weight:600;color:var(--accent);margin-bottom:.85rem;">Awards & Recognition</h3>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.55rem;">
+      {% for award in company.awards %}
+      <li style="font-size:.82rem;display:flex;gap:.6rem;align-items:flex-start;">
+        <span>{{ award.icon }}</span><span style="color:var(--text-sub);">{{ award.text }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<!-- Technology & R&D -->
+<h2 style="font-size:1rem;font-weight:600;margin-bottom:1rem;">Technology &amp; R&amp;D</h2>
+<div class="surface-panel">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+    {% for tool in company.tools %}
+    <div style="background:var(--bg-3);border:1px solid var(--border);border-radius:6px;padding:.85rem 1rem;">
+      <span style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);font-weight:700;">{{ tool.cat }}</span>
+      <p style="font-size:.8rem;color:var(--text-sub);margin-top:.4rem;line-height:1.55;">{{ tool.items }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

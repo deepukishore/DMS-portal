@@ -1,0 +1,221 @@
+{% extends 'layout.html' %}
+
+{% block title %}Approvals - Smart DMS{% endblock %}
+
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">Approvals</span>
+{% endblock %}
+
+{% block content %}
+{% set pending_count = records | selectattr('approval_status', 'equalto', 'Pending') | list | length %}
+{% set approved_count = records | selectattr('approval_status', 'equalto', 'Approved') | list | length %}
+{% set rejected_count = records | selectattr('approval_status', 'equalto', 'Rejected') | list | length %}
+
+<section class="hero-panel">
+  <div class="hero-copy">
+    <p class="eyebrow">Approval Queue</p>
+    <h1 class="page-title">Approvals</h1>
+    <p class="page-sub">View the live approval queue here. Only admins can record the final approval or rejection decision.</p>
+  </div>
+  <div class="page-actions">
+    <a href="{{ url_for('approvals.export_records', status=selected_status, search=search) }}" class="btn-outline">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export CSV
+    </a>
+  </div>
+</section>
+
+<section class="stats-grid stats-grid-compact">
+  <article class="stat-card stat-card-pending">
+    <span class="stat-label">Pending</span>
+    <strong class="stat-value">{{ pending_count }}</strong>
+    <p class="stat-foot">Needs approver action</p>
+  </article>
+  <article class="stat-card stat-card-approved">
+    <span class="stat-label">Approved</span>
+    <strong class="stat-value">{{ approved_count }}</strong>
+    <p class="stat-foot">Accepted documents</p>
+  </article>
+  <article class="stat-card stat-card-rejected">
+    <span class="stat-label">Rejected</span>
+    <strong class="stat-value">{{ rejected_count }}</strong>
+    <p class="stat-foot">Returned to uploader</p>
+  </article>
+</section>
+
+<section class="surface-panel">
+  <div class="panel-head">
+    <div>
+      <h2 class="section-title">Approval Filters</h2>
+      <p class="section-sub">Switch between the live states in the queue.</p>
+    </div>
+  </div>
+
+  <form method="GET" action="{{ url_for('approvals.index') }}" class="filter-bar">
+    <div class="search-wrap search-wrap-wide">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" name="search" placeholder="Search by file, uploader, document number, revision, category, or date range" value="{{ search or '' }}" />
+    </div>
+    <select name="status">
+      <option value="">All statuses</option>
+      <option value="Pending" {% if selected_status == 'Pending' %}selected{% endif %}>Pending</option>
+      <option value="Approved" {% if selected_status == 'Approved' %}selected{% endif %}>Approved</option>
+      <option value="Rejected" {% if selected_status == 'Rejected' %}selected{% endif %}>Rejected</option>
+    </select>
+    <button type="submit" class="btn-primary">Apply</button>
+    <a href="{{ url_for('approvals.index') }}" class="btn-outline">Reset</a>
+  </form>
+</section>
+
+{% if is_admin_user %}
+<section class="surface-panel">
+  <div class="panel-head">
+    <div>
+      <h2 class="section-title">Bulk Approval</h2>
+      <p class="section-sub">Select multiple pending documents, then approve or reject them together.</p>
+    </div>
+  </div>
+
+  <form id="bulk-approval-form" class="review-actions review-actions-stacked">
+    <div class="alert alert-info">
+      <span><strong id="bulk-selected-count">0</strong> document(s) selected.</span>
+    </div>
+    <textarea name="rejection_comment" id="bulk-rejection-comment" rows="3" placeholder="Required when rejecting selected documents."></textarea>
+    <div class="page-actions">
+      <button type="button" class="btn-primary" data-bulk-status="Approved">Bulk Approve</button>
+      <button type="button" class="btn-outline" data-bulk-status="Rejected">Bulk Reject</button>
+    </div>
+  </form>
+</section>
+{% endif %}
+
+<section class="surface-panel">
+  <div class="panel-head">
+    <div>
+      <h2 class="section-title">Approval Records</h2>
+      <p class="section-sub">{{ records | length }} document(s) in this filtered view.</p>
+    </div>
+  </div>
+
+  <div class="table-wrap table-wrap-rich">
+    <table class="data-table">
+      <thead>
+        <tr>
+          {% if is_admin_user %}<th style="width: 44px;"><input type="checkbox" id="bulk-select-all" /></th>{% endif %}
+          <th>Date</th>
+          <th>File</th>
+          <th>Plant</th>
+          <th>Department</th>
+          <th>Customer</th>
+          <th>Status</th>
+          <th>Review</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if records %}
+          {% for r in records %}
+          <tr data-doc-id="{{ r.id }}">
+            {% if is_admin_user %}
+              <td>
+                {% if r.approval_status == 'Pending' %}
+                  <input type="checkbox" class="bulk-doc-checkbox" value="{{ r.id }}" />
+                {% endif %}
+              </td>
+            {% endif %}
+            <td class="mono text-dim">{{ r.uploaded_at }}</td>
+            <td>
+              <div class="file-block">
+                <div class="mono file-cell">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  {{ r.file_name }}
+                </div>
+                <div class="text-dim" style="font-size:.72rem;margin-top:.25rem;">
+                  {{ r.document_number or 'No doc number' }} | {{ r.revision_number or 'No revision' }} | {{ r.category or 'No category' }}
+                </div>
+              </div>
+            </td>
+            <td><span class="plant-badge">{{ r.plant }}</span></td>
+            <td>{{ r.department }}</td>
+            <td>{{ r.customer }}</td>
+            <td>
+              <span class="status-pill status-{{ r.approval_status | lower }}" data-approval-status>{{ r.approval_status }}</span>
+            </td>
+            <td>
+              <a href="{{ url_for('approvals.review_document', token=r.review_token) }}" class="btn-outline btn-sm">Open Review</a>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr><td colspan="{% if is_admin_user %}8{% else %}7{% endif %}" class="empty-state">No approval records found for the selected filter.</td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const bulkForm = document.getElementById('bulk-approval-form');
+  const bulkSelectAll = document.getElementById('bulk-select-all');
+  const bulkCheckboxes = Array.from(document.querySelectorAll('.bulk-doc-checkbox'));
+  const bulkSelectedCount = document.getElementById('bulk-selected-count');
+  const bulkComment = document.getElementById('bulk-rejection-comment');
+
+  function updateBulkCount() {
+    if (!bulkSelectedCount) return;
+    bulkSelectedCount.textContent = bulkCheckboxes.filter((checkbox) => checkbox.checked).length;
+  }
+
+  bulkSelectAll?.addEventListener('change', () => {
+    bulkCheckboxes.forEach((checkbox) => {
+      checkbox.checked = bulkSelectAll.checked;
+    });
+    updateBulkCount();
+  });
+
+  bulkCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', updateBulkCount);
+  });
+
+  bulkForm?.querySelectorAll('[data-bulk-status]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const status = button.dataset.bulkStatus;
+      const selectedIds = bulkCheckboxes.filter((checkbox) => checkbox.checked).map((checkbox) => checkbox.value);
+      if (!selectedIds.length) {
+        alert('Select at least one pending document first.');
+        return;
+      }
+      if (status === 'Rejected' && !bulkComment.value.trim()) {
+        alert('Please add rejection comments for the selected documents.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.set('status', status);
+      formData.set('rejection_comment', bulkComment.value.trim());
+      selectedIds.forEach((docId) => formData.append('doc_ids', docId));
+
+      fetch('{{ url_for("approvals.bulk_update_decision") }}', {
+        method: 'POST',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        body: formData
+      })
+      .then(async (response) => {
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.message || 'Bulk decision failed.');
+        }
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert(error.message || 'Unable to process the bulk decision.');
+      });
+    });
+  });
+
+  updateBulkCount();
+</script>
+{% endblock %}

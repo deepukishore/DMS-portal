@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% block title %}Customer Records - Smart DMS{% endblock %}
+
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">Customer Records</span>
+{% endblock %}
+
+{% block content %}
+<section class="hero-panel">
+  <div class="hero-copy">
+    <p class="eyebrow">Customer Records</p>
+    <h1 class="page-title">Customer Records</h1>
+    <p class="page-sub">
+      Browse documents linked to each customer.
+      Select a customer to view all related documents.
+    </p>
+  </div>
+</section>
+
+<div class="flow-steps">
+  <span class="flow-step active" id="cstep-customer">1 - Select Customer</span>
+  <span class="flow-step" id="cstep-files">2 - Browse Files</span>
+</div>
+
+<div class="customer-card-grid" id="customer-grid">
+  {% for customer in customers %}
+  <div class="customer-card" onclick="selectCustomer(this, '{{ customer }}')">
+    <div class="customer-avatar">{{ customer[0] }}</div>
+    <div class="customer-info">
+      <strong>{{ customer }}</strong>
+      <small>Click to view documents</small>
+    </div>
+    <div class="plant-card-arrow">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="asset-panel" id="asset-panel" style="display:none">
+  <div class="asset-panel-header">
+    <div>
+      <p class="eyebrow">Selected Customer</p>
+      <h2 id="selected-customer-label">-</h2>
+    </div>
+    <button class="btn-outline" onclick="resetCustomer()">Change customer</button>
+  </div>
+  <p class="section-sub" style="margin-bottom:1rem">
+    All documents linked to this customer are shown below.
+  </p>
+
+  <div class="file-view-area" id="file-view-area">
+    <div class="file-view-placeholder">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+      <p>Choose a customer to see files.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VIEW_URL = "{{ url_for('customer_records.view_file') }}";
+const FILE_URL = "{{ url_for('customer_records.get_files') }}";
+const PRESELECT_CUSTOMER = "{{ request.args.get('customer', '') }}";
+
+if (PRESELECT_CUSTOMER) {
+  document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.customer-card');
+    cards.forEach(card => {
+      const strong = card.querySelector('strong');
+      if (strong && strong.textContent.trim() === PRESELECT_CUSTOMER) {
+        selectCustomer(card, PRESELECT_CUSTOMER);
+      }
+    });
+  });
+}
+</script>
+<script src="{{ url_for('static', filename='js/customer_records.js') }}"></script>
+{% endblock %}

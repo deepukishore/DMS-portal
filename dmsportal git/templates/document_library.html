@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% block title %}Document Library - Smart DMS{% endblock %}
+
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">Document Library</span>
+{% endblock %}
+
+{% block content %}
+<section class="hero-panel">
+  <div class="hero-copy">
+    <p class="eyebrow">Document Library</p>
+    <h1 class="page-title">Document Library</h1>
+    <p class="page-sub">Browse controlled documents by category and source.</p>
+  </div>
+</section>
+
+<nav class="horiz-tab-bar" role="tablist">
+  {% for cat in categories %}
+  <a href="{{ url_for('document_library.index', category_key=cat.key) }}"
+     class="horiz-tab {% if cat.key == active_category.key %}active{% endif %}"
+     role="tab" aria-selected="{{ 'true' if cat.key == active_category.key else 'false' }}">
+    <span class="horiz-tab-icon">{{ cat.icon }}</span>
+    <span class="horiz-tab-label">{{ cat.label }}</span>
+  </a>
+  {% endfor %}
+</nav>
+
+<div class="doc-library-body">
+  <div id="library-content">
+    <div class="file-view-placeholder"><p>Loading document library...</p></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const CATEGORY_KEY = "{{ category_key }}";
+const CATEGORY_DATA = {{ category_data | tojson }};
+const PRESELECT_PRIMARY = "{{ preselected_primary }}";
+const PRESELECT_SECONDARY = "{{ preselected_secondary }}";
+const VIEW_URL = "{{ url_for('document_library.view_file') }}";
+</script>
+<script src="{{ url_for('static', filename='js/document_library.js') }}"></script>
+{% endblock %}

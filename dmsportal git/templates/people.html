@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% block title %}People - Smart DMS{% endblock %}
+
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">People</span>
+{% endblock %}
+
+{% block content %}
+<section class="hero-panel">
+  <div class="hero-copy">
+    <p class="eyebrow">Admin · Directory</p>
+    <h1 class="page-title">People</h1>
+    <p class="page-sub">All registered users across plants and departments — {{ users|length }} total.</p>
+  </div>
+</section>
+
+<section class="surface-panel">
+  <div class="panel-head">
+    <div>
+      <h2 class="section-title">User Directory</h2>
+      <p class="section-sub">Search and browse all user profiles.</p>
+    </div>
+    <input type="text" id="people-search" class="filter-input" placeholder="Search by name, email, role…" style="max-width:260px;" />
+  </div>
+
+  <div class="log-table-wrapper">
+    <table class="log-table" id="people-table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Employee ID</th>
+          <th>Email</th>
+          <th>Plant</th>
+          <th>Department</th>
+          <th>Role</th>
+          <th>Joined</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:.6rem;">
+              {% if user.avatar %}
+                <img src="{{ url_for('static', filename='avatars/' + user.avatar) }}"
+                     style="width:32px;height:32px;border-radius:50%;object-fit:cover;" alt="" />
+              {% else %}
+                <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff;">
+                  {{ user.name[0]|upper }}
+                </div>
+              {% endif %}
+              <span>{{ user.name }}</span>
+            </div>
+          </td>
+          <td>{{ user.emp_id or '—' }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.plant or '—' }}</td>
+          <td>{{ user.department or '—' }}</td>
+          <td>
+            <span class="badge badge-{{ user.role|lower }}">{{ user.role }}</span>
+          </td>
+          <td>{{ user.created_at[:10] if user.created_at else '—' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('people-search').addEventListener('input', function () {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('#people-table tbody tr').forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+</script>
+{% endblock %}

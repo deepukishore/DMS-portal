@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document View - Smart DMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" />
+</head>
+<body class="review-body">
+  <main class="review-shell">
+    <section class="review-topbar">
+      <div>
+        <p class="eyebrow">Document View</p>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <h1 class="page-title">{{ record.file_name }}</h1>
+          <button class="btn-icon btn-bookmark" data-doc-id="{{ record.id }}" title="Add to bookmarks" onclick="toggleBookmark(event, {{ record.id }})">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="bookmark-icon"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </button>
+        </div>
+        <p class="page-sub">Preview the document details and content.</p>
+      </div>
+      <span class="status-pill status-{{ record.approval_status | lower }}">{{ record.approval_status }}</span>
+    </section>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            <span>{{ message }}</span>
+            <button type="button" onclick="this.parentElement.remove()">x</button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <section class="review-layout">
+      <div class="review-main">
+        <section class="review-card">
+          <div class="panel-head">
+            <div>
+              <h2 class="section-title">Preview</h2>
+              <p class="section-sub">Document content and details are shown below.</p>
+            </div>
+          </div>
+
+          <div class="review-preview" oncontextmenu="return false;">
+            {% if file_exists %}
+              {% if preview.mode == 'image' %}
+                <img src="{{ preview.url }}" alt="{{ record.file_name }}" class="review-image" draggable="false" oncontextmenu="return false;" />
+              {% elif preview.mode == 'pdf' %}
+                <iframe src="{{ preview.url }}#toolbar=0&navpanes=0&scrollbar=1&view=FitH" title="{{ record.file_name }}" class="review-frame"></iframe>
+              {% elif preview.mode == 'html' %}
+                <iframe src="{{ preview.url }}" title="{{ record.file_name }}" class="review-frame" sandbox=""></iframe>
+              {% elif preview.mode == 'text' %}
+                <pre class="review-text-preview">{{ preview.content }}</pre>
+              {% elif preview.mode == 'docx' %}
+                <div class="review-generated-preview">
+                  {% for block in preview.blocks %}
+                    {% if block.type == 'paragraph' %}
+                      <p class="review-paragraph">{{ block.text }}</p>
+                    {% elif block.type == 'table' %}
+                      <div class="review-table-wrap">
+                        <table class="review-table">
+                          <tbody>
+                            {% for row in block.rows %}
+                              <tr>
+                                {% for cell in row %}
+                                  <td>{{ cell }}</td>
+                                {% endfor %}
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% elif preview.mode == 'table' %}
+                <div class="review-generated-preview">
+                  {% for sheet in preview.sheets %}
+                    <section class="review-sheet">
+                      <div class="review-sheet-head">
+                        <h3>{{ sheet.name }}</h3>
+                      </div>
+                      <div class="review-table-wrap">
+                        <table class="review-table">
+                          <tbody>
+                            {% for row in sheet.rows %}
+                              <tr>
+                                {% for cell in row %}
+                                  <td>{{ cell }}</td>
+                                {% endfor %}
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  {% endfor %}
+                </div>
+              {% elif preview.mode == 'unsupported' %}
+                <div class="file-view-placeholder">
+                  <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="14" r="3"/></svg>
+                  <p>{{ preview.message }}</p>
+                </div>
+              {% endif %}
+            {% else %}
+              <div class="file-view-placeholder">
+                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="14" r="3"/></svg>
+                <p>The file was not found in the uploads folder.</p>
+              </div>
+            {% endif %}
+          </div>
+        </section>
+      </div>
+
+      <aside class="review-side">
+        <section class="review-card">
+          <div class="panel-head">
+            <div>
+              <h2 class="section-title">Document Details</h2>
+              <p class="section-sub">Information about this uploaded file.</p>
+            </div>
+          </div>
+
+            <div class="review-meta-grid review-meta-grid-single">
+            <div class="review-meta-item">
+              <span>Document number</span>
+              <strong>{{ record.document_number or 'Not set' }}</strong>
+            </div>
+            <div class="review-meta-item">
+              <span>Revision number</span>
+              <strong>{{ record.revision_number or 'Not set' }}</strong>
+            </div>
+            <div class="review-meta-item">
+              <span>Category</span>
+              <strong>{{ record.category or 'Not set' }}</strong>
+            </div>
+            <div class="review-meta-item">
+              <span>Uploaded by</span>
+              <strong>{{ record.name }} ({{ record.user_id }})</strong>
+            </div>
+            <div class="review-meta-item">
+              <span>Plant</span>
+              <strong>{{ record.plant }}</strong>
+            </div>
+            <div class="review-meta-item">
+              <span>Department</span>
+              <strong>{{ record.department }}</strong>
+            </div>
+            <div class="review-meta-item">
+              <span>Customer</span>
+              <strong>{{ record.customer or 'N/A' }}</strong>
+            </div>
+            <div class="review-meta-item">
+              <span>Uploaded on</span>
+              <strong>{{ record.uploaded_at }}</strong>
+            </div>
+            <div class="review-meta-item">
+              <span>Current status</span>
+              <strong>{{ record.approval_status }}</strong>
+            </div>
+            {% if record.approval_updated_at %}
+              <div class="review-meta-item">
+                <span>Status updated at</span>
+                <strong>{{ record.approval_updated_at }}</strong>
+              </div>
+            {% endif %}
+            {% if record.rejection_comment %}
+              <div class="review-meta-item">
+                <span>Rejection comments</span>
+                <strong>{{ record.rejection_comment }}</strong>
+              </div>
+            {% endif %}
+          </div>
+        </section>
+
+        <section class="review-card">
+          <div class="panel-head">
+            <div>
+              <h2 class="section-title">Actions</h2>
+              <p class="section-sub">Return to previous page or dashboard.</p>
+            </div>
+          </div>
+
+          <div class="review-actions review-actions-stacked">
+            <button onclick="window.history.back()" class="btn-outline" style="border: none; cursor: pointer; width: 100%;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Back to Previous Page
+            </button>
+            <a href="{{ url_for('dashboard.index') }}" class="btn-outline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              Go to Dashboard
+            </a>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    // Bookmark functionality
+    function toggleBookmark(event, docId) {
+      event.preventDefault();
+      const btn = event.currentTarget;
+      
+      fetch(`/api/bookmark/${docId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          if (data.is_bookmarked) {
+            btn.classList.add('active');
+            btn.title = 'Remove from bookmarks';
+          } else {
+            btn.classList.remove('active');
+            btn.title = 'Add to bookmarks';
+          }
+        }
+      })
+      .catch(error => console.error('Bookmark error:', error));
+    }
+
+    // Initialize bookmark state
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.querySelector('.btn-bookmark');
+      const isBookmarked = {{ 'true' if is_bookmarked else 'false' }};
+      if (isBookmarked && btn) {
+        btn.classList.add('active');
+        btn.title = 'Remove from bookmarks';
+      }
+    });
+  </script>
+</body>
+</html>

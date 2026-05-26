@@ -1,0 +1,102 @@
+{% extends 'layout.html' %}
+
+{% block title %}Revision History · Smart DMS{% endblock %}
+
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">Revision History</span>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Revision History</h1>
+    <p class="page-sub">Track document revisions across plants and departments.</p>
+  </div>
+</div>
+
+<!-- Filter section -->
+<div class="surface-panel" style="margin-bottom: 1.5rem;">
+  <form method="GET" class="form-row" style="gap: 1rem;">
+    <div style="flex: 1;">
+      <label style="display: block; font-size: 0.8rem; font-weight: 500; color: var(--text-sub); margin-bottom: 0.5rem;">Plant</label>
+      <select name="plant" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-2); color: var(--text);">
+        <option value="">All Plants</option>
+        {% for p in plants %}
+          <option value="{{ p.label }}" {% if plant_filter == p.label %}selected{% endif %}>{{ p.label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <div style="flex: 1;">
+      <label style="display: block; font-size: 0.8rem; font-weight: 500; color: var(--text-sub); margin-bottom: 0.5rem;">Department</label>
+      <select name="department" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-2); color: var(--text);">
+        <option value="">All Departments</option>
+        {% for d in departments %}
+          <option value="{{ d }}" {% if department_filter == d %}selected{% endif %}>{{ d }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <div style="display: flex; gap: 0.5rem; align-items: flex-end;">
+      <button type="submit" class="btn-primary">Filter</button>
+      <a href="{{ url_for('revision_history.index') }}" class="btn-outline">Clear</a>
+    </div>
+  </form>
+</div>
+
+<!-- Revisions table -->
+<div class="log-table-wrapper">
+  <table class="log-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>File Name</th>
+        <th>Revision</th>
+        <th>Revised By</th>
+        <th>Plant</th>
+        <th>Department</th>
+        <th>Change Summary</th>
+        <th>Previous Version</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if revisions %}
+        {% for rev in revisions %}
+        <tr>
+          <td style="font-size: 0.75rem; color: var(--text-dim);">{{ rev.revision_date }}</td>
+          <td>
+            <code style="font-size: 0.75rem; background: var(--bg-3); padding: 0.2rem 0.4rem; border-radius: 3px;">{{ rev.file_name }}</code>
+          </td>
+          <td>
+            <span class="badge" style="background: rgba(240,165,0,.15); color: var(--accent);">{{ rev.revision_number }}</span>
+          </td>
+          <td>{{ rev.revised_by }}</td>
+          <td>{{ rev.plant or '—' }}</td>
+          <td>{{ rev.department or '—' }}</td>
+          <td style="max-width: 300px; color: var(--text-sub);">{{ rev.change_summary or '—' }}</td>
+          <td>
+            {% if rev.previous_file_name %}
+              <code style="font-size: 0.75rem; background: var(--bg-3); padding: 0.2rem 0.4rem; border-radius: 3px;">{{ rev.previous_file_name }}</code>
+            {% else %}
+              <span style="color: var(--text-dim);">—</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="8" style="text-align: center; padding: 2rem; color: var(--text-dim);">
+            No revision history found.
+          </td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+<div style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-dim);">
+  Total revisions: <strong>{{ revisions|length }}</strong>
+</div>
+{% endblock %}

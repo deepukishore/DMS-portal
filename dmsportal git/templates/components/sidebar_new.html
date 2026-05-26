@@ -1,0 +1,138 @@
+<aside class="sidebar">
+  <a href="{{ url_for('dashboard.index') }}" class="sidebar-brand" style="text-decoration: none; color: inherit;">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect width="28" height="28" rx="6" fill="#f0a500"/>
+      <rect x="6" y="6" width="6" height="6" fill="#0f1117"/>
+      <rect x="16" y="6" width="6" height="6" fill="#0f1117"/>
+      <rect x="6" y="16" width="6" height="6" fill="#0f1117"/>
+      <rect x="16" y="16" width="6" height="6" fill="#0f1117"/>
+    </svg>
+    <span>Smart<strong>DMS</strong></span>
+  </a>
+
+  <nav class="sidebar-nav">
+    <p class="nav-section-label">Main</p>
+
+    <a href="{{ url_for('dashboard.index') }}" class="nav-item {% if request.endpoint == 'dashboard.index' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+
+    <a href="{{ url_for('upload.index') }}" class="nav-item {% if request.endpoint == 'upload.index' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Upload
+    </a>
+
+    <a href="{{ url_for('approvals.index') }}" class="nav-item {% if request.endpoint == 'approvals.index' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      Pending's
+      {% if pending_count > 0 %}
+        <span class="nav-badge">{{ pending_count }}</span>
+      {% endif %}
+    </a>
+
+    <a href="{{ url_for('graphics_report.index') }}" class="nav-item {% if request.endpoint == 'graphics_report.index' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 000 7H6"/></svg>
+      Graphics Report
+    </a>
+
+    {% if can_access_admin_sections %}
+      <a href="{{ url_for('archive.index') }}" class="nav-item {% if request.endpoint == 'archive.index' %}active{% endif %}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+        Archive
+      </a>
+    {% endif %}
+
+    <p class="nav-section-label">Plants &amp; Customers</p>
+
+    <a href="{{ url_for('plant_assets.index') }}" class="nav-item {% if request.endpoint and 'plant_assets' in request.endpoint %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      Master Records
+    </a>
+
+    <a href="{{ url_for('customer_records.index') }}" class="nav-item {% if request.endpoint and 'customer_records' in request.endpoint %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Customer Records
+    </a>
+
+    <p class="nav-section-label">Document Categories</p>
+
+    <a href="{{ url_for('procedures.index') }}" class="nav-item {% if request.endpoint and 'procedures' in request.endpoint %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="13" x2="8" y2="13"/><line x1="12" y1="17" x2="8" y2="17"/></svg>
+      Procedures
+    </a>
+
+    <a href="{{ url_for('categories.std_manual') }}" class="nav-item {% if request.endpoint == 'categories.std_manual' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Std. Manual
+    </a>
+
+    <a href="{{ url_for('categories.awards') }}" class="nav-item {% if request.endpoint == 'categories.awards' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+      Awards
+    </a>
+
+    <a href="{{ url_for('categories.certification') }}" class="nav-item {% if request.endpoint == 'categories.certification' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Certification
+    </a>
+
+    <a href="{{ url_for('categories.cq_manuals') }}" class="nav-item {% if request.endpoint == 'categories.cq_manuals' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"/><path d="M12 6v6l4 2"/></svg>
+      CQ Manuals
+    </a>
+
+    <a href="{{ url_for('categories.business_procedures') }}" class="nav-item {% if request.endpoint == 'categories.business_procedures' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      Business Procedures
+    </a>
+
+    <a href="{{ url_for('categories.core_tool_manuals') }}" class="nav-item {% if request.endpoint == 'categories.core_tool_manuals' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 1 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      Core Tool Manuals
+    </a>
+
+    <a href="{{ url_for('revision_history.index') }}" class="nav-item {% if request.endpoint == 'revision_history.index' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Rev. History
+    </a>
+
+    <p class="nav-section-label">Account</p>
+
+    <a href="{{ url_for('profile.index') }}" class="nav-item {% if request.endpoint == 'profile.index' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Profile
+    </a>
+
+    {% if can_access_admin_sections %}
+      <p class="nav-section-label">System</p>
+
+      <a href="{{ url_for('system_log.index') }}" class="nav-item {% if request.endpoint == 'system_log.index' %}active{% endif %}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        System Log
+      </a>
+    {% endif %}
+
+    <p class="nav-section-label">Info</p>
+
+    <a href="{{ url_for('about.about_company') }}" class="nav-item {% if request.endpoint == 'about.about_company' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      About Company
+    </a>
+
+    <a href="{{ url_for('about.about_track_docs') }}" class="nav-item {% if request.endpoint == 'about.about_track_docs' %}active{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><path d="M12 1v6m0 6v6"/><path d="M4.22 4.22l4.24 4.24m2.12 2.12l4.24 4.24M1 12h6m6 0h6"/><path d="M4.22 19.78l4.24-4.24m2.12-2.12l4.24-4.24M19 12h-6"/></svg>
+      About Track My Docs
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="plant-indicators">
+      <span class="plant-dot p1" title="P1 Trichy"></span>
+      <span class="plant-dot p2" title="P2 Guduvachery"></span>
+      <span class="plant-dot p3" title="P3 Guduvachery"></span>
+      <span class="plant-dot p4" title="P4 Uttarakhand"></span>
+    </div>
+    <small>v2.0.0 · Smart DMS</small>
+  </div>
+</aside>

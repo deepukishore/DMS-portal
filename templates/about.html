@@ -1,0 +1,212 @@
+{% extends 'layout.html' %}
+{% block title %}About - Smart DMS{% endblock %}
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">About</span>
+{% endblock %}
+{% block content %}
+
+<section class="hero-panel">
+  <div class="hero-copy">
+    <p class="eyebrow">Welcome to Smart DMS</p>
+    <h1 class="page-title">Your Document Control Hub</h1>
+    <p class="page-sub">
+      Smart DMS is a manufacturing-grade Document Management System built for
+      multi-plant operations. Everything from uploading a file to getting it
+      approved, archived, and audited happens here.
+    </p>
+  </div>
+</section>
+
+<section class="surface-panel" style="margin-bottom:1.25rem">
+  <div class="panel-head">
+    <div>
+      <h2 class="section-title">How It Works - Quick Tour</h2>
+      <p class="section-sub">Follow these steps to get started as a new user.</p>
+    </div>
+  </div>
+  <div class="about-tour-steps">
+
+    <div class="about-tour-step">
+      <div class="about-tour-num">1</div>
+      <div class="about-tour-body">
+        <strong>Log in with your credentials</strong>
+        <p>Use your company email and password. First-time users can register from the login page. Your plant and department are set by your admin and auto-attach to every document you upload.</p>
+      </div>
+    </div>
+
+    <div class="about-tour-step">
+      <div class="about-tour-num">2</div>
+      <div class="about-tour-body">
+        <strong>Upload a document</strong>
+        <p>Go to <em>Upload Documents</em> in the sidebar. Drop a PDF, Word, Excel, or PowerPoint file. Select the customer (or mark it Internal). Hit Upload - the file is saved and an approval request email is sent automatically to the approver.</p>
+      </div>
+    </div>
+
+    <div class="about-tour-step">
+      <div class="about-tour-num">3</div>
+      <div class="about-tour-body">
+        <strong>Wait for approval</strong>
+        <p>Your document lands in <em>Pending's</em>. The admin approver receives an email with a review link, signs in, then approves or rejects the request. You get a notification email once a decision is made.</p>
+      </div>
+    </div>
+
+    <div class="about-tour-step">
+      <div class="about-tour-num">4</div>
+      <div class="about-tour-body">
+        <strong>Browse the Document Library</strong>
+        <p>All controlled documents live in the <em>Document Library</em>. Switch between tabs - Procedures, Std. Manual, CQ Manuals, Core Tool Manuals, Business Procedures, Awards, and Certifications. Each tab has its own browsing experience.</p>
+      </div>
+    </div>
+
+    <div class="about-tour-step">
+      <div class="about-tour-num">5</div>
+      <div class="about-tour-body">
+        <strong>Browse Master Records &amp; Customer Records</strong>
+        <p><em>Master Records</em> organizes documents by plant to department. <em>Customer Records</em> organizes them by customer and shows all matching files in one view. Both are read-only browsing views.</p>
+      </div>
+    </div>
+
+    <div class="about-tour-step">
+      <div class="about-tour-num">6</div>
+      <div class="about-tour-body">
+        <strong>Track revisions</strong>
+        <p>Every time a document is updated (Admin only), a new version is created and stored. The old version is never deleted. Visit <em>Revision History</em> to see the full version trail for any document.</p>
+      </div>
+    </div>
+
+    <div class="about-tour-step">
+      <div class="about-tour-num">7</div>
+      <div class="about-tour-body">
+        <strong>Admin tools</strong>
+        <p>Admins can delete documents (moved to Archive), restore archived files, view the full System Log (every login, upload, view, delete action), and update documents to create new versions.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="surface-panel" style="margin-bottom:1.25rem">
+  <div class="panel-head">
+    <div>
+      <h2 class="section-title">Key Features</h2>
+      <p class="section-sub">Everything the system can do at a glance.</p>
+    </div>
+  </div>
+  <div class="about-features-grid">
+
+    <div class="about-feature-card">
+      <div class="about-feature-icon">Upload</div>
+      <strong>Upload &amp; Approve</strong>
+      <p>Multi-file upload with drag-and-drop. Automatic approval email workflow on every submission.</p>
+    </div>
+
+    <div class="about-feature-card">
+      <div class="about-feature-icon">Library</div>
+      <strong>Document Library</strong>
+      <p>7 category tabs - Procedures, Std. Manual, CQ Manuals, Core Tool Manuals, Business Procedures, Awards, Certifications.</p>
+    </div>
+
+    <div class="about-feature-card">
+      <div class="about-feature-icon">Plants</div>
+      <strong>Master Records</strong>
+      <p>Browse documents plant-by-plant and department-by-department across all 4 manufacturing sites.</p>
+    </div>
+
+    <div class="about-feature-card">
+      <div class="about-feature-icon">Customers</div>
+      <strong>Customer Records</strong>
+      <p>Documents linked to official customers like AL - Ashok Leyland, TML - Tata Motors Limited, M&amp;M - Mahindra and Mahindra, and more - browsable customer-by-customer.</p>
+    </div>
+
+    <div class="about-feature-card">
+      <div class="about-feature-icon">Versions</div>
+      <strong>Version Control</strong>
+      <p>Every document update creates a new version. All previous versions are retained and traceable in Revision History.</p>
+    </div>
+
+    <div class="about-feature-card">
+      <div class="about-feature-icon">Reports</div>
+      <strong>Graphics Report</strong>
+      <p>Visual charts showing document counts by status (Approved / Pending / Rejected) across plants and departments.</p>
+    </div>
+
+    <div class="about-feature-card">
+      <div class="about-feature-icon">Archive</div>
+      <strong>Archive</strong>
+      <p>Deleted documents are soft-archived, not permanently removed. Admins can restore any archived document.</p>
+    </div>
+
+    <div class="about-feature-card">
+      <div class="about-feature-icon">Audit</div>
+      <strong>System Log</strong>
+      <p>Full audit trail of every action - login, logout, upload, view, delete, approval - filterable by action type.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="upload-grid">
+  <section class="surface-panel">
+    <div class="panel-head">
+      <div>
+        <h2 class="section-title">Manufacturing Plants</h2>
+        <p class="section-sub">Four plants covered by this system.</p>
+      </div>
+    </div>
+    <div class="about-plants-grid">
+      <div class="about-plant-card">
+        <span class="plant-badge">P1</span>
+        <strong>Trichy Plant</strong>
+        <p>Trichy, Tamil Nadu</p>
+      </div>
+      <div class="about-plant-card">
+        <span class="plant-badge">P2</span>
+        <strong>Guduvachery Plant</strong>
+        <p>Guduvachery, Tamil Nadu</p>
+      </div>
+      <div class="about-plant-card">
+        <span class="plant-badge">P3</span>
+        <strong>Guduvachery Plant</strong>
+        <p>Guduvachery, Tamil Nadu</p>
+      </div>
+      <div class="about-plant-card">
+        <span class="plant-badge">P4</span>
+        <strong>Uttarakhand Plant</strong>
+        <p>Uttarakhand</p>
+      </div>
+    </div>
+  </section>
+
+  <aside class="stack-panel">
+    <section class="surface-panel info-card">
+      <div class="panel-head">
+        <div>
+          <h2 class="section-title">User Roles</h2>
+          <p class="section-sub">What each role can do.</p>
+        </div>
+      </div>
+      <ul class="compact-list">
+        <li><strong style="color:var(--accent)">Admin</strong> - full access: upload, approve or reject requests, delete, update versions, view system log, manage archive</li>
+        <li><strong style="color:var(--blue)">Manager / Approver</strong> - upload and view documents</li>
+        <li><strong style="color:var(--text)">User</strong> - upload and view documents; no delete or admin tools</li>
+      </ul>
+    </section>
+    <section class="surface-panel info-card">
+      <div class="panel-head">
+        <div><h2 class="section-title">System Info</h2></div>
+      </div>
+      <ul class="compact-list">
+        <li>Version: 2.0.0</li>
+        <li>Framework: Flask (Python)</li>
+        <li>Database: SQLite</li>
+        <li>File formats: PDF, Word, Excel, PowerPoint</li>
+        <li>All files viewed as PDF in-browser</li>
+        <li>Theme: Dark Industrial (toggle top-right)</li>
+      </ul>
+    </section>
+  </aside>
+</div>
+
+{% endblock %}

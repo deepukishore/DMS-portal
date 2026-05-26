@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Smart DMS{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" />
+</head>
+<body>
+  <div class="shell">
+    {% include 'components/sidebar.html' %}
+    <button type="button" class="sidebar-backdrop" id="sidebar-backdrop" aria-label="Close navigation"></button>
+    <div class="main-wrap">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="btn-nav" type="button" aria-controls="app-sidebar" aria-expanded="false" aria-label="Open navigation">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="breadcrumb">
+            {% block breadcrumb %}{% endblock %}
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="notification-wrap" id="notification-wrap">
+            <button id="notification-toggle" class="btn-theme btn-notification" type="button" aria-label="Open notifications" aria-expanded="false">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/>
+                <path d="M9 17a3 3 0 0 0 6 0"/>
+              </svg>
+              {% if notification_unread_count > 0 %}
+                <span class="notif-badge" id="notification-badge">{{ notification_unread_count }}</span>
+              {% endif %}
+            </button>
+            <div class="notification-panel" id="notification-panel" hidden>
+              <div class="notification-head">
+                <strong>Notifications</strong>
+                <button type="button" class="link-btn" id="notification-mark-all">Mark all read</button>
+              </div>
+              <div class="notification-list">
+                {% if notifications %}
+                  {% for notification in notifications %}
+                    <a
+                      href="{{ notification.link_url or '#' }}"
+                      class="notification-item {% if not notification.is_read %}is-unread{% endif %}"
+                      data-notification-id="{{ notification.id }}"
+                      data-has-link="{{ '1' if notification.link_url else '0' }}"
+                    >
+                      <div class="notification-copy">
+                        <strong>{{ notification.title }}</strong>
+                        <p>{{ notification.message }}</p>
+                      </div>
+                      <span class="notification-time">{{ notification.created_at }}</span>
+                    </a>
+                  {% endfor %}
+                {% else %}
+                  <div class="notification-empty">No notifications yet.</div>
+                {% endif %}
+              </div>
+              <div class="notification-shortcuts">Shortcuts: <kbd>D</kbd> Dashboard, <kbd>U</kbd> Upload, <kbd>P</kbd> Pending's</div>
+            </div>
+          </div>
+          <button id="theme-toggle" class="btn-theme" title="Toggle dark/light mode" aria-label="Toggle theme">
+            <svg class="theme-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="theme-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+          <a href="{{ url_for('profile.index') }}" class="user-chip" style="text-decoration: none;">
+            {% if session.get('user_avatar') %}
+              <img src="{{ url_for('static', filename='avatars/' + session['user_avatar']) }}" class="topbar-avatar" alt="" />
+            {% else %}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            {% endif %}
+            <span class="user-chip-text">{{ session.get('user_name', 'Guest') }}</span>
+          </a>
+          <a href="{{ url_for('auth.logout') }}" class="btn-logout">Sign out</a>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="welcome-banner">
+          Welcome, <strong>{{ session.get('user_name', 'User') }}</strong>
+          {% if session.get('user_emp_id') %}&nbsp;·&nbsp;<span style="font-family:'IBM Plex Mono',monospace;font-size:.8rem;">{{ session.get('user_emp_id') }}</span>{% endif %}
+          {% if session.get('user_role') %}&nbsp;·&nbsp;<span style="color:var(--accent);font-weight:600;">{{ session.get('user_role') }}</span>{% endif %}
+          {% if session.get('user_plant') %}&nbsp;·&nbsp;{{ session.get('user_plant') }}{% endif %}
+          {% if session.get('user_department') %}&nbsp;·&nbsp;{{ session.get('user_department') }}{% endif %}
+          &nbsp;— Document Management System
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                <span>{{ message }}</span>
+                <button type="button" onclick="this.parentElement.remove()">x</button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+  <script>
+    window.APP_SHORTCUTS = {
+      dashboard: "{{ url_for('dashboard.index') }}",
+      upload: "{{ url_for('upload.index') }}",
+      approvals: "{{ url_for('approvals.index') }}",
+      markNotificationReadBase: "{{ url_for('notifications.mark_read', notification_id=0)[:-1] }}",
+      markAllNotificationsRead: "{{ url_for('notifications.mark_all_read') }}"
+    };
+  </script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
