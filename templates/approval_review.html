@@ -45,6 +45,13 @@
                 <h2 class="section-title">Preview</h2>
                 <p class="section-sub">Review the document below and make your decision.</p>
               </div>
+              {% if file_exists and review_file_url %}
+              <div class="review-toolbar">
+                <a href="{{ review_file_url }}" target="_blank" rel="noreferrer noopener" class="btn-outline btn-sm">
+                  Open file in new tab
+                </a>
+              </div>
+              {% endif %}
             </div>
 
             <div class="review-preview" oncontextmenu="return false;">
@@ -185,13 +192,29 @@
 
             {% if can_decide %}
               <form method="POST" action="{{ url_for('approvals.update_decision', token=token) }}" class="review-actions review-actions-stacked" id="approval-form" data-doc-id="{{ record.id }}">
+                {% if record.category == 'master_records' and record.approval_status == 'Pending' %}
+                <label style="display:flex;flex-direction:column;gap:.4rem;">
+                  <span class="section-sub">Selected people or department heads for the final approval mail trigger.</span>
+                  <textarea name="selected_recipients" id="selected-recipients-input" rows="3" placeholder="Enter email addresses separated by commas">{{ record.selected_recipients or '' }}</textarea>
+                </label>
+                {% elif record.category == 'master_records' and record.selected_recipients %}
+                <div class="alert alert-info">
+                  <span>Selected final notification recipients: {{ record.selected_recipients }}</span>
+                </div>
+                {% endif %}
                 <label style="display:flex;flex-direction:column;gap:.4rem;">
                   <span class="section-sub">Rejection comments are required when rejecting.</span>
                   <textarea name="rejection_comment" id="rejection-comment-input" rows="4" placeholder="Tell the uploader exactly what needs to be fixed...">{{ record.rejection_comment or '' }}</textarea>
                 </label>
-                <button type="submit" name="status" value="Approved" class="btn-decision btn-approve {% if record.approval_status == 'Approved' %}is-active{% endif %}">
-                  Approve
+                {% if record.category == 'master_records' and record.approval_status == 'Pending' %}
+                <button type="submit" name="status" value="First Approved" class="btn-decision btn-approve">
+                  First Approver Accept
                 </button>
+                {% else %}
+                <button type="submit" name="status" value="Approved" class="btn-decision btn-approve {% if record.approval_status == 'Approved' %}is-active{% endif %}">
+                  {% if record.category == 'master_records' and record.approval_status == 'Pending Final Approval' %}Final Approver Accept{% else %}Approve{% endif %}
+                </button>
+                {% endif %}
                 <button type="submit" name="status" value="Rejected" class="btn-decision btn-reject {% if record.approval_status == 'Rejected' %}is-active{% endif %}">
                   Reject
                 </button>

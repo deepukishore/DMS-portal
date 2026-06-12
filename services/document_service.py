@@ -360,20 +360,39 @@ class DocumentService:
         return versions
 
     @staticmethod
-    def update_approval_status(doc_id, status, rejection_comment="", decided_by=""):
+    def update_approval_status(doc_id, status, rejection_comment="", decided_by="", selected_recipients=""):
         conn = get_connection()
         cursor = conn.cursor()
         
         cursor.execute('SELECT * FROM documents WHERE id = ?', (int(doc_id),))
-        if not cursor.fetchone():
+        existing_row = cursor.fetchone()
+        if not existing_row:
             conn.close()
             return None, "Document not found."
+        existing = dict(existing_row)
         
         normalized_comment = rejection_comment.strip() if status == "Rejected" else ""
-        cursor.execute('''UPDATE documents SET approval_status = ?, approval_updated_at = ?, rejection_comment = ?, decision_by = ?
-                         WHERE id = ?''',
-            (status, datetime.now().strftime("%Y-%m-%d %H:%M:%S"), normalized_comment, decided_by, int(doc_id))
-        )
+        updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        if status == "First Approved":
+            cursor.execute('''UPDATE documents
+                             SET approval_status = ?, approval_updated_at = ?, rejection_comment = ?,
+                                 decision_by = ?, selected_recipients = ?, first_approver = ?,
+                                 first_approved_at = ?
+                             WHERE id = ?''',
+                ("Pending Final Approval", updated_at, "", decided_by, selected_recipients.strip(), decided_by, updated_at, int(doc_id))
+            )
+        elif status == "Approved" and existing.get("approval_status") == "Pending Final Approval":
+            cursor.execute('''UPDATE documents
+                             SET approval_status = ?, approval_updated_at = ?, rejection_comment = ?,
+                                 decision_by = ?, final_approver = ?, final_approved_at = ?
+                             WHERE id = ?''',
+                (status, updated_at, normalized_comment, decided_by, decided_by, updated_at, int(doc_id))
+            )
+        else:
+            cursor.execute('''UPDATE documents SET approval_status = ?, approval_updated_at = ?, rejection_comment = ?, decision_by = ?
+                             WHERE id = ?''',
+                (status, updated_at, normalized_comment, decided_by, int(doc_id))
+            )
         conn.commit()
         
         cursor.execute('SELECT * FROM documents WHERE id = ?', (int(doc_id),))
@@ -382,7 +401,7 @@ class DocumentService:
         return record, None
 
     @staticmethod
-    def bulk_update_approval_status(doc_ids, status, rejection_comment="", decided_by=""):
+    def bulk_update_approval_status(doc_ids, status, rejection_comment="", decided_by="", selected_recipients=""):
         updated_records = []
         for doc_id in doc_ids:
             updated_record, error = DocumentService.update_approval_status(
@@ -390,6 +409,7 @@ class DocumentService:
                 status,
                 rejection_comment=rejection_comment,
                 decided_by=decided_by,
+                selected_recipients=selected_recipients,
             )
             if error:
                 return [], error

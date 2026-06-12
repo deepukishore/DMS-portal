@@ -1,5 +1,5 @@
-from data.departments import normalize_department
-from data.mock_data import DEPARTMENTS, MASTER_RECORD_PLANTS, PLANT_ASSETS
+from data.departments import OFFICIAL_DEPARTMENTS, normalize_department
+from data.mock_data import MASTER_RECORD_PLANTS, PLANT_ASSETS
 from database import get_connection
 
 
@@ -12,9 +12,12 @@ class PlantAssetService:
 
     @staticmethod
     def get_departments_for_plant(plant_label, access_department=""):
+        # If access is restricted to a single department, return only that
         if access_department:
             return [normalize_department(access_department)]
-        return list(DEPARTMENTS)
+
+        # Always return all 9 official departments so every folder is visible
+        return list(OFFICIAL_DEPARTMENTS)
 
     @staticmethod
     def get_files_for_plant_department(plant_label, department, access_department=""):

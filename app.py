@@ -13,7 +13,6 @@ from routes.approval_routes import approval_bp
 from routes.archive_routes import archive_bp
 from routes.document_library_routes import document_library_bp
 from routes.plant_assets_routes import plant_assets_bp
-from routes.customer_records_routes import customer_records_bp
 from routes.system_log_routes import system_log_bp
 from routes.profile_routes import profile_bp
 from routes.graphics_report_routes import graphics_report_bp
@@ -40,7 +39,6 @@ def create_app():
     app.register_blueprint(archive_bp)
     app.register_blueprint(document_library_bp)
     app.register_blueprint(plant_assets_bp)
-    app.register_blueprint(customer_records_bp)
     app.register_blueprint(system_log_bp)
     app.register_blueprint(profile_bp)
     app.register_blueprint(graphics_report_bp)
@@ -85,4 +83,5 @@ def create_app():
 app = create_app()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get('PORT', 5001))
+    app.run(host='0.0.0.0', port=port, debug=True)

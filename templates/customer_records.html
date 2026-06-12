@@ -9,20 +9,12 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero-panel">
-  <div class="hero-copy">
+<div class="page-header">
+  <div>
     <p class="eyebrow">Customer Records</p>
     <h1 class="page-title">Customer Records</h1>
-    <p class="page-sub">
-      Browse documents linked to each customer.
-      Select a customer to view all related documents.
-    </p>
+    <p class="page-sub">Browse documents linked to each customer. Select a customer to view all related files.</p>
   </div>
-</section>
-
-<div class="flow-steps">
-  <span class="flow-step active" id="cstep-customer">1 - Select Customer</span>
-  <span class="flow-step" id="cstep-files">2 - Browse Files</span>
 </div>
 
 <div class="customer-card-grid" id="customer-grid">
@@ -44,20 +36,14 @@
   <div class="asset-panel-header">
     <div>
       <p class="eyebrow">Selected Customer</p>
-      <h2 id="selected-customer-label">-</h2>
+      <h2 id="selected-customer-label"></h2>
     </div>
-    <button class="btn-outline" onclick="resetCustomer()">Change customer</button>
+    <button class="btn-outline btn-sm" onclick="resetCustomer()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to customers
+    </button>
   </div>
-  <p class="section-sub" style="margin-bottom:1rem">
-    All documents linked to this customer are shown below.
-  </p>
-
-  <div class="file-view-area" id="file-view-area">
-    <div class="file-view-placeholder">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-      <p>Choose a customer to see files.</p>
-    </div>
-  </div>
+  <div class="file-view-area" id="file-view-area"></div>
 </div>
 {% endblock %}
 
@@ -78,6 +64,4 @@ if (PRESELECT_CUSTOMER) {
     });
   });
 }
-</script>
-<script src="{{ url_for('static', filename='js/customer_records.js') }}"></script>
 {% endblock %}

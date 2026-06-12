@@ -1,4 +1,5 @@
 import os
+import re
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
@@ -54,6 +55,28 @@ def upload_avatar():
     UserStoreService.update_avatar(session["user_email"], filename)
     session["user_avatar"] = filename
     flash("Profile photo updated.", "success")
+    return redirect(url_for("profile.index"))
+
+
+@profile_bp.route("/profile/update", methods=["POST"])
+def update_profile():
+    redir = _require_login()
+    if redir:
+        return redir
+
+    mobile = request.form.get("mobile", "").strip()
+    if mobile and not re.match(r'^[0-9()+\-\s]{6,20}$', mobile):
+        flash("Please enter a valid mobile number using digits, +, -, spaces, or parentheses.", "error")
+        return redirect(url_for("profile.index"))
+
+    updated_user = UserStoreService.update_user_profile(
+        session["user_email"],
+        mobile=mobile,
+    )
+    if updated_user:
+        session["user_mobile"] = updated_user.get("mobile", "")
+
+    flash("Profile updated successfully.", "success")
     return redirect(url_for("profile.index"))
 
 

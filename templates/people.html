@@ -13,7 +13,7 @@
   <div class="hero-copy">
     <p class="eyebrow">Admin · Directory</p>
     <h1 class="page-title">People</h1>
-    <p class="page-sub">All registered users across plants and departments — {{ users|length }} total.</p>
+    <p class="page-sub">All registered users across plants and departments &mdash; {{ users|length }} total.</p>
   </div>
 </section>
 
@@ -23,7 +23,8 @@
       <h2 class="section-title">User Directory</h2>
       <p class="section-sub">Search and browse all user profiles.</p>
     </div>
-    <input type="text" id="people-search" class="filter-input" placeholder="Search by name, email, role…" style="max-width:260px;" />
+    <input type="text" id="people-search" placeholder="Search by name, email, role…"
+           style="background:var(--bg-2);border:1px solid var(--border);color:var(--text);border-radius:var(--radius-sm);padding:.5rem .75rem;font-size:.85rem;outline:none;max-width:280px;transition:border-color .15s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" />
   </div>
 
   <div class="log-table-wrapper">

@@ -9,58 +9,27 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero-panel">
-  <div class="hero-copy">
+<div class="page-header">
+  <div>
     <p class="eyebrow">New Submission</p>
     <h1 class="page-title">Upload Documents</h1>
-    <p class="page-sub">Follow the steps below — select files, fill in the details, then submit for approval.</p>
+    <p class="page-sub">Upload documents to the Document Library. Every file is submitted for approval.</p>
   </div>
-</section>
+</div>
 
 <div class="upload-grid">
   <section class="surface-panel">
     <form method="POST" action="{{ url_for('upload.index') }}" enctype="multipart/form-data" id="upload-form" class="upload-form">
+      <input type="hidden" name="upload_target" value="library" />
 
       <!-- ── Step 1: Where to upload ─────────────────────────────── -->
+      <!-- ── Step 2: Pick files ──────────────────────────────────── -->
       <div class="upload-step-card">
         <div class="upload-step-header">
           <span class="upload-step-badge">1</span>
           <div>
-            <strong>Where should this document go?</strong>
-            <p>Choose the destination for your upload.</p>
-          </div>
-        </div>
-        <div class="upload-target-options">
-          <label class="target-option" id="target-opt-documents">
-            <input type="radio" name="upload_target" value="documents" checked />
-            <div class="target-option-body">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-              <div>
-                <strong>Approval Queue</strong>
-                <span>Document goes to Pending's for review and approval</span>
-              </div>
-            </div>
-          </label>
-          <label class="target-option" id="target-opt-library">
-            <input type="radio" name="upload_target" value="library" />
-            <div class="target-option-body">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-              <div>
-                <strong>Document Library</strong>
-                <span>File is saved directly into a library category</span>
-              </div>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <!-- ── Step 2: Pick files ──────────────────────────────────── -->
-      <div class="upload-step-card">
-        <div class="upload-step-header">
-          <span class="upload-step-badge">2</span>
-          <div>
             <strong>Select your file(s)</strong>
-            <p>Drag and drop or click to browse. PDF, Word, Excel, PowerPoint — max 100 MB each.</p>
+            <p>Drag and drop or click to browse. PDF, Word, Excel, PowerPoint — max 100 MB each. All uploads go to the Document Library and require approval.</p>
           </div>
         </div>
 
@@ -87,10 +56,10 @@
       <!-- ── Step 3: Document details ───────────────────────────── -->
       <div class="upload-step-card">
         <div class="upload-step-header">
-          <span class="upload-step-badge">3</span>
+          <span class="upload-step-badge">2</span>
           <div>
-            <strong>Document details</strong>
-            <p>All fields below are required unless marked optional.</p>
+            <strong>Document details and library path</strong>
+            <p>Select the exact Document Library folder. Every upload is sent for approval.</p>
           </div>
         </div>
 
@@ -168,8 +137,20 @@
           </label>
         </div>
 
-        <!-- Library-only fields (shown only when target = library) -->
-        <div id="library-meta" style="display:none;">
+        <!-- Library path picker -->
+        <div id="library-meta">
+          <div class="library-path-card">
+            <div class="library-path-head">
+              <div>
+                <strong>Document Library path</strong>
+                <p>Choose the exact folder where this upload should be saved. The selected path updates live here.</p>
+              </div>
+              <span class="path-status" id="library-path-status">Path required</span>
+            </div>
+            <div class="library-path-preview" id="library-path-preview" aria-live="polite">No library path selected</div>
+            <p class="field-hint" style="margin-top:.5rem;">Only the library fields shown for the selected category are required.</p>
+          </div>
+
           <div class="form-row">
             <label>Category <span class="field-required">*</span>
               <select name="category" id="library-category-select">
@@ -179,20 +160,21 @@
                 {% endfor %}
               </select>
             </label>
-            <label id="library-sub-wrapper">Subcategory <span class="field-hint">(optional)</span>
+            <label id="library-primary-wrapper" style="display:none;">Folder <span class="field-required" id="library-primary-required">*</span>
+              <select name="library_primary" id="library-primary-select">
+                <option value="">Select folder</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="form-row" id="library-secondary-row" style="display:none;">
+            <label id="library-sub-wrapper">Subfolder <span class="field-required" id="library-sub-required">*</span>
               <select name="library_subcategory_select" id="library-subcategory-select" style="display:none;">
                 <option value="">Select subcategory</option>
               </select>
-              <input type="text" name="library_subcategory" id="library-subcategory-input" placeholder="e.g. plant_procedures" />
             </label>
           </div>
-          <div class="form-row">
-            <label id="library-primary-wrapper" style="display:none;">Primary
-              <select name="library_primary" id="library-primary-select">
-                <option value="">Select primary (optional)</option>
-              </select>
-            </label>
-          </div>
+
           <input type="hidden" name="library_subcategory_hidden" id="library-subcategory-hidden" value="" />
         </div>
       </div>
@@ -200,7 +182,7 @@
       <!-- ── Step 4: Revision notes (optional) ─────────────────── -->
       <div class="upload-step-card">
         <div class="upload-step-header">
-          <span class="upload-step-badge" style="background:var(--bg-3);color:var(--text-sub);border:1px solid var(--border);">4</span>
+          <span class="upload-step-badge" style="background:var(--bg-3);color:var(--text-sub);border:1px solid var(--border);">3</span>
           <div>
             <strong>Revision change summary <span class="field-hint">(optional)</span></strong>
             <p>Only needed if this file replaces a previous version.</p>
@@ -223,7 +205,7 @@
       <div class="upload-submit-row">
         <button type="submit" class="btn-primary btn-upload-submit" id="submit-btn" disabled>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Submit Upload
+          Submit for Approval
         </button>
         <a href="{{ url_for('dashboard.index') }}" class="btn-outline">Cancel</a>
         <span class="upload-submit-hint" id="submit-hint">Select at least one file to continue</span>

@@ -1,8 +1,7 @@
-// Initialize theme from localStorage or system preference
+// Initialize theme from localStorage or system preference (default to light mode)
 function initializeTheme() {
   const savedTheme = localStorage.getItem('theme');
-  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+  const theme = savedTheme || 'light'; // Default to light mode
   
   if (theme === 'light') {
     document.documentElement.setAttribute('data-theme', 'light');
@@ -128,30 +127,58 @@ notificationMarkAll?.addEventListener('click', async () => {
   }
 });
 
+function getUnreadNotificationCount() {
+  return document.querySelectorAll('.notification-item.is-unread').length;
+}
+
+async function markNotificationRead(notificationId, item) {
+  if (!notificationId || !item || !item.classList.contains('is-unread')) {
+    return false;
+  }
+  if (item.dataset.readPending === '1') {
+    return false;
+  }
+
+  item.dataset.readPending = '1';
+  try {
+    const response = await fetch(`${window.APP_SHORTCUTS.markNotificationReadBase}${notificationId}`, {
+      method: 'POST',
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.message || 'Notification update failed.');
+    }
+    item.classList.remove('is-unread');
+    setNotificationBadgeCount(getUnreadNotificationCount());
+    return true;
+  } catch (error) {
+    console.error('Notification mark-read error:', error);
+    return false;
+  } finally {
+    delete item.dataset.readPending;
+  }
+}
+
 document.querySelectorAll('.notification-item[data-notification-id]').forEach((item) => {
+  item.addEventListener('mouseenter', () => {
+    markNotificationRead(item.dataset.notificationId, item);
+  });
+
   item.addEventListener('click', async (event) => {
     const notificationId = item.dataset.notificationId;
     const hasLink = item.dataset.hasLink === '1';
     const href = item.getAttribute('href');
 
-    if (!hasLink) {
-      event.preventDefault();
+    event.preventDefault();
+    await markNotificationRead(notificationId, item);
+
+    if (hasLink && href && href !== '#') {
+      window.location.href = href;
+      return;
     }
 
-    try {
-      await fetch(`${window.APP_SHORTCUTS.markNotificationReadBase}${notificationId}`, {
-        method: 'POST',
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
-      });
-      item.classList.remove('is-unread');
-      setNotificationBadgeCount(document.querySelectorAll('.notification-item.is-unread').length);
-    } catch (error) {
-      console.error('Notification mark-read error:', error);
-    }
-
-    if (!hasLink || !href || href === '#') {
-      setNotificationsOpen(false);
-    }
+    setNotificationsOpen(false);
   });
 });
 
@@ -244,3 +271,17 @@ document.addEventListener('keydown', (event) => {
     window.location.href = window.APP_SHORTCUTS.approvals;
   }
 });
+
+function initializeWelcomeModal() {
+  const modal = document.getElementById('welcome-modal');
+  const closeButton = document.getElementById('welcome-close');
+  if (!modal || !closeButton) return;
+  // Only show on first landing after login (server sets SHOW_WELCOME once)
+  if (!window.SHOW_WELCOME) return;
+  modal.hidden = false;
+  closeButton.addEventListener('click', () => { modal.hidden = true; });
+  // Also close on overlay click
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.hidden = true; });
+}
+
+document.addEventListener('DOMContentLoaded', initializeWelcomeModal);

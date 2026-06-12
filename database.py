@@ -245,6 +245,26 @@ def init_db():
     except Exception:
         pass
     try:
+        cursor.execute('ALTER TABLE documents ADD COLUMN selected_recipients TEXT')
+    except Exception:
+        pass
+    try:
+        cursor.execute('ALTER TABLE documents ADD COLUMN first_approver TEXT')
+    except Exception:
+        pass
+    try:
+        cursor.execute('ALTER TABLE documents ADD COLUMN first_approved_at TEXT')
+    except Exception:
+        pass
+    try:
+        cursor.execute('ALTER TABLE documents ADD COLUMN final_approver TEXT')
+    except Exception:
+        pass
+    try:
+        cursor.execute('ALTER TABLE documents ADD COLUMN final_approved_at TEXT')
+    except Exception:
+        pass
+    try:
         cursor.execute('ALTER TABLE document_versions ADD COLUMN document_number TEXT')
     except Exception:
         pass

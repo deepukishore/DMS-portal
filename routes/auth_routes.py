@@ -43,6 +43,7 @@ def login():
         if user:
             ip = request.remote_addr or "-"
             SystemLogService.log_login(user["email"], user["name"], ip)
+            session['show_welcome'] = True
             return redirect(next_url)
         flash(error or "Invalid credentials", "error")
     return render_template("auth/login.html", next_url=next_url)

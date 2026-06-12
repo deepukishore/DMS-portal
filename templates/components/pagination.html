@@ -1,0 +1,37 @@
+{% macro pagination_bar(page, page_count, page_size, total, endpoint, extra_args={}) %}
+{% if page_count > 1 or total > 10 %}
+<div class="pg-bar">
+  <span class="pg-info">
+    Showing {{ ((page - 1) * page_size) + 1 }}–{{ [page * page_size, total] | min }} of {{ total }}
+  </span>
+  <div class="pg-controls">
+    <form method="GET" action="{{ url_for(endpoint, **extra_args) }}" class="pg-size-form">
+      {% for k, v in extra_args.items() %}
+        <input type="hidden" name="{{ k }}" value="{{ v }}" />
+      {% endfor %}
+      <input type="hidden" name="page" value="1" />
+      <label class="pg-size-label">Per page
+        <select name="page_size" onchange="this.form.submit()" class="pg-size-select">
+          {% for s in [10, 25, 50, 100] %}
+            <option value="{{ s }}" {% if page_size == s %}selected{% endif %}>{{ s }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </form>
+    <span class="pg-pages">Page {{ page }} of {{ page_count }}</span>
+    {% set prev_args = extra_args | dict | combine({'page': page - 1, 'page_size': page_size}) %}
+    {% set next_args = extra_args | dict | combine({'page': page + 1, 'page_size': page_size}) %}
+    {% if page > 1 %}
+      <a href="{{ url_for(endpoint, **prev_args) }}" class="btn-outline btn-sm">← Prev</a>
+    {% else %}
+      <button class="btn-outline btn-sm" disabled>← Prev</button>
+    {% endif %}
+    {% if page < page_count %}
+      <a href="{{ url_for(endpoint, **next_args) }}" class="btn-outline btn-sm">Next →</a>
+    {% else %}
+      <button class="btn-outline btn-sm" disabled>Next →</button>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endmacro %}

@@ -84,20 +84,34 @@ def index():
 
     status = request.args.get("status", "")
     search = request.args.get("search", "")
+    page = max(1, request.args.get("page", 1, type=int))
+    page_size = request.args.get("page_size", 10, type=int)
+    if page_size not in (10, 25, 50, 100):
+        page_size = 10
+
     records = DocumentService.get_all_documents(
         search=search,
         access_department=AuthService.get_visible_department(),
     )
-    
-    # Apply status filter if provided
     if status:
-        records = [record for record in records if record.get("approval_status", "Pending") == status]
+        records = [r for r in records if r.get("approval_status", "Pending") == status]
+
+    total = len(records)
+    import math
+    page_count = max(1, math.ceil(total / page_size))
+    page = min(page, page_count)
+    page_records = _records_with_tokens(records[(page - 1) * page_size: page * page_size])
 
     return render_template(
         "approvals.html",
-        records=_records_with_tokens(records),
+        records=records,
+        page_records=page_records,
         selected_status=status,
         search=search,
+        page=page,
+        page_size=page_size,
+        page_count=page_count,
+        total_records=total,
     )
 
 
@@ -178,6 +192,7 @@ def review_document(token):
         record=record,
         token=token,
         file_exists=file_exists,
+        review_file_url=review_file_url,
         preview=preview,
         can_decide=AuthService.is_admin(),
     )
@@ -200,13 +215,13 @@ def review_file(token):
         abort(404)
 
     mime_type, _ = mimetypes.guess_type(file_path)
+    mime_type = mime_type or "application/octet-stream"
     # as_attachment=False tells the browser to attempt to display the file inline
     response = send_file(file_path, mimetype=mime_type, as_attachment=False)
     
-    # Explicitly set headers to enforce inline viewing and prevent easy downloading
-    response.headers["Content-Disposition"] = "inline"
+    # Explicitly set headers to enforce inline viewing and reduce caching
+    response.headers["Content-Disposition"] = f'inline; filename="{os.path.basename(file_path)}"'
     response.headers["X-Content-Type-Options"] = "nosniff"
-    # Discourage caching to prevent local storage of the document
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     return response
 
@@ -230,15 +245,22 @@ def update_decision(token):
         return render_template("approval_review.html", invalid_link=True), 404
 
     status = request.form.get("status", "")
-    if status not in {"Approved", "Rejected"}:
+    if status not in {"Approved", "Rejected", "First Approved"}:
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
-            return jsonify({"ok": False, "message": "Please choose Approved or Rejected."}), 400
-        flash("Please choose Approved or Rejected.", "error")
+            return jsonify({"ok": False, "message": "Please choose a valid approval action."}), 400
+        flash("Please choose a valid approval action.", "error")
         return redirect(url_for("approvals.review_document", token=token))
 
     rejection_comment = request.form.get("rejection_comment", "").strip()
+    selected_recipients = request.form.get("selected_recipients", "").strip()
     if status == "Rejected" and not rejection_comment:
         message = "Please add rejection comments so the uploader knows what to fix."
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            return jsonify({"ok": False, "message": message}), 400
+        flash(message, "error")
+        return redirect(url_for("approvals.review_document", token=token))
+    if status == "First Approved" and record.get("category") == "master_records" and not selected_recipients:
+        message = "Please add selected recipients or department heads before sending to final approval."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": message}), 400
         flash(message, "error")
@@ -253,6 +275,7 @@ def update_decision(token):
         status,
         rejection_comment=rejection_comment,
         decided_by=current_user.get("name", "Approver"),
+        selected_recipients=selected_recipients,
     )
     if error:
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
@@ -263,24 +286,28 @@ def update_decision(token):
     SystemLogService.log_approval_decision(
         current_user.get("email", current_app.config["APPROVAL_RECIPIENT"]),
         updated_record["file_name"],
-        status,
+        updated_record.get("approval_status", status),
         current_user.get("name", "Approver"),
     )
     
-    # Send notification email to uploader
+    # Send notification email to uploader after final decisions only.
     uploader_email = updated_record.get("uploader_email", "")
-    flash_category = "success" if status == "Approved" else "warning"
-    message = f"Document marked as {status}."
-    if uploader_email:
-        sent, mail_error = MailService.send_approval_decision_notification(
+    effective_status = updated_record.get("approval_status", status)
+    flash_category = "success" if effective_status == "Approved" else "warning"
+    message = f"Document marked as {effective_status}."
+    if status == "First Approved":
+        message = "First approval accepted. Document moved to final approval."
+
+    if uploader_email and status != "First Approved":
+        uploader_sent, uploader_error = MailService.send_approval_decision_notification(
             uploader_email,
             updated_record,
             status,
             decision_time,
             rejection_comment=rejection_comment,
         )
-        if not sent:
-            message = f"Document marked as {status}, but notification email failed: {mail_error}"
+        if not uploader_sent:
+            message = f"Document marked as {status}, but uploader notification email failed: {uploader_error}"
             flash_category = "warning"
         else:
             message = f"Document marked as {status}. Uploader notified via email."
@@ -292,12 +319,28 @@ def update_decision(token):
             notification_type="warning" if status == "Rejected" else "success",
         )
 
+    if status == "Approved" and record.get("category") == "master_records":
+        recipients = [
+            item.strip()
+            for item in (updated_record.get("selected_recipients") or "").replace(";", ",").split(",")
+            if item.strip() and "@" in item
+        ]
+        if recipients:
+            selected_sent, selected_error = MailService.send_master_records_final_notification(
+                recipients,
+                updated_record,
+                decision_time,
+            )
+            if not selected_sent:
+                message = f"Document approved, but selected-recipient email failed: {selected_error}"
+                flash_category = "warning"
+
     if request.headers.get("X-Requested-With") == "XMLHttpRequest":
         return jsonify(
             {
                 "ok": True,
                 "doc_id": updated_record["id"],
-                "status": status,
+                "status": effective_status,
                 "message": message,
                 "flash_category": flash_category,
                 "approval_updated_at": updated_record.get("approval_updated_at", decision_time),

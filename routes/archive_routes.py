@@ -27,9 +27,27 @@ def index():
     access_redir = _require_high_level_access()
     if access_redir:
         return access_redir
-    
-    archived_records = DocumentService.get_all_archived_records()
-    return render_template('archive.html', records=archived_records)
+
+    import math
+    from flask import request
+    page = max(1, request.args.get('page', 1, type=int))
+    page_size = request.args.get('page_size', 10, type=int)
+    if page_size not in (10, 25, 50, 100):
+        page_size = 10
+
+    all_records = DocumentService.get_all_archived_records()
+    total = len(all_records)
+    page_count = max(1, math.ceil(total / page_size))
+    page = min(page, page_count)
+    page_records = all_records[(page - 1) * page_size: page * page_size]
+
+    return render_template('archive.html',
+        records=page_records,
+        total_records=total,
+        page=page,
+        page_size=page_size,
+        page_count=page_count,
+    )
 
 
 @archive_bp.route('/archive/delete/<int:archive_index>', methods=['POST'])

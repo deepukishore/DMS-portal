@@ -33,7 +33,20 @@ def index():
     plant = request.args.get("plant", "")
     department = request.args.get("department", "")
     customer = request.args.get("customer", "")
-    
+    page = request.args.get("page", "1")
+    page_size = request.args.get("page_size", "10")
+
+    try:
+        page = max(1, int(page))
+    except (ValueError, TypeError):
+        page = 1
+
+    try:
+        page_size = int(page_size)
+    except (ValueError, TypeError):
+        page_size = 10
+    page_size = page_size if page_size in (10, 25, 50, 100) else 10
+
     # Get all documents from database
     all_records = DocumentService.get_all_documents("", "", "", "", access_department=visible_department)
     
@@ -60,18 +73,29 @@ def index():
     else:
         records = DocumentService.get_all_documents(search, plant, department, customer, access_department=visible_department)
 
+    total_records = len(records)
+    page_count = max(1, (total_records + page_size - 1) // page_size)
+    page = min(max(page, 1), page_count)
+    page_records = records[(page - 1) * page_size: page * page_size] if total_records else []
+
     pending_count = sum(1 for r in records if r.get('approval_status') == 'Pending')
+    
+    # Pop the one-time welcome flag set on login
+    show_welcome = session.pop('show_welcome', False)
     
     # Get user data for recently viewed and bookmarks
     user_email = session.get('user_email', '')
     recently_viewed = DocumentTrackingService.get_recently_viewed(user_email, limit=5, access_department=visible_department) if user_email else []
     bookmarks = DocumentTrackingService.get_bookmarks(user_email, access_department=visible_department) if user_email else []
-    trend_data = DocumentTrackingService.get_upload_trend_data(days=90, access_department=visible_department) if user_email else []
-    upload_stats = DocumentTrackingService.get_upload_stats_summary(access_department=visible_department) if user_email else {}
 
     return render_template(
         "dashboard.html",
         records=records,
+        page_records=page_records,
+        total_records=total_records,
+        page=page,
+        page_size=page_size,
+        page_count=page_count,
         plants=PLANTS,
         departments=DEPARTMENTS,
         customers=CUSTOMER_FILTERS,
@@ -80,11 +104,11 @@ def index():
         selected_dept=department,
         selected_customer=customer,
         can_manage_documents=AuthService.has_high_level_access(),
+        can_access_admin_sections=AuthService.has_high_level_access(),
         pending_count=pending_count,
         recently_viewed=recently_viewed,
         bookmarks=bookmarks,
-        trend_data=json.dumps(trend_data),
-        upload_stats=upload_stats,
+        show_welcome=show_welcome,
     )
 
 

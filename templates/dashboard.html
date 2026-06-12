@@ -65,7 +65,7 @@
   <a href="{{ url_for('approvals.index') }}" class="quick-action-card">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
     <div>
-      <strong>Pending's</strong>
+      <strong>Pending Items</strong>
       <p>{{ pending_count }} document(s) awaiting review</p>
     </div>
   </a>
@@ -85,7 +85,7 @@
   </a>
 </section>
 
-<!-- Recently Viewed & Trend Chart Grid -->
+<!-- Recently Viewed -->
 <section class="dashboard-insights-grid">
   <article class="surface-panel">
     <div class="panel-head">
@@ -106,16 +106,6 @@
       <p class="text-dim" style="text-align: center; padding: 1.5rem 0;">No recently viewed documents yet.</p>
     {% endif %}
   </article>
-
-  <article class="surface-panel">
-    <div class="panel-head">
-      <h2 class="section-title">Upload Trend</h2>
-      <p class="section-sub">Document activity (last 90 days)</p>
-    </div>
-    <div id="trend-chart-container" style="height: 220px; position: relative;">
-      <canvas id="trend-chart"></canvas>
-    </div>
-  </article>
 </section>
 
 <section class="surface-panel">
@@ -127,6 +117,7 @@
   </div>
 
   <form method="GET" action="{{ url_for('dashboard.index') }}" class="filter-bar">
+    <input type="hidden" name="page_size" value="{{ page_size }}" />
     <div class="search-wrap search-wrap-wide">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" name="search" placeholder="Search by file, uploader, document number, revision, category, customer, department, or date range" value="{{ search }}" />
@@ -158,7 +149,40 @@
   <div class="panel-head">
     <div>
       <h2 class="section-title">Documents</h2>
-      <p class="section-sub">{{ records | length }} record(s) shown in the current view.</p>
+      <p class="section-sub">{{ total_records }} record(s) shown in the current view.</p>
+    </div>
+  </div>
+
+  <div class="pg-bar">
+    <span class="pg-info">
+      Showing {{ ((page-1)*page_size)+1 }}–{{ [page*page_size, total_records]|min }} of {{ total_records }} document{{ 's' if total_records != 1 else '' }}
+    </span>
+    <div class="pg-controls">
+      <form method="GET" action="{{ url_for('dashboard.index') }}" class="pg-size-form">
+        <input type="hidden" name="search"     value="{{ search }}" />
+        <input type="hidden" name="plant"      value="{{ selected_plant }}" />
+        <input type="hidden" name="department" value="{{ selected_dept }}" />
+        <input type="hidden" name="customer"   value="{{ selected_customer }}" />
+        <input type="hidden" name="page"       value="1" />
+        <label class="pg-size-label">Per page
+          <select name="page_size" onchange="this.form.submit()" class="pg-size-select">
+            {% for size in [10, 25, 50, 100] %}
+              <option value="{{ size }}" {% if page_size == size %}selected{% endif %}>{{ size }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      </form>
+      <span class="pg-pages">Page {{ page }} of {{ page_count }}</span>
+      {% if page > 1 %}
+        <a href="{{ url_for('dashboard.index', search=search, plant=selected_plant, department=selected_dept, customer=selected_customer, page=page-1, page_size=page_size) }}" class="btn-outline btn-sm">← Prev</a>
+      {% else %}
+        <button class="btn-outline btn-sm" disabled>← Prev</button>
+      {% endif %}
+      {% if page < page_count %}
+        <a href="{{ url_for('dashboard.index', search=search, plant=selected_plant, department=selected_dept, customer=selected_customer, page=page+1, page_size=page_size) }}" class="btn-outline btn-sm">Next →</a>
+      {% else %}
+        <button class="btn-outline btn-sm" disabled>Next →</button>
+      {% endif %}
     </div>
   </div>
 
@@ -179,10 +203,10 @@
         </tr>
       </thead>
       <tbody>
-        {% if records %}
-          {% for r in records %}
+        {% if page_records %}
+          {% for r in page_records %}
           <tr data-doc-id="{{ r.id }}">
-            <td class="mono text-dim">{{ loop.index }}</td>
+            <td class="mono text-dim">{{ ((page - 1) * page_size) + loop.index }}</td>
             <td>
               <div class="person-stack">
                 <strong>{{ r.name }}</strong>
@@ -271,7 +295,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 <script>
 function openEditModal(docId, fileName, version) {
   document.getElementById('edit-modal-desc').textContent =
@@ -317,80 +340,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const btn = document.querySelector(`[data-doc-id="${id}"].btn-bookmark`);
     if (btn) btn.classList.add('active');
   });
-  
-  // Initialize trend chart
-  initTrendChart();
 });
-
-function initTrendChart() {
-  const canvas = document.getElementById('trend-chart');
-  if (!canvas) return;
-  
-  const trendData = {{ trend_data|safe }};
-  
-  if (!trendData || trendData.length === 0) {
-    canvas.parentElement.innerHTML = '<p class="text-dim" style="text-align:center;padding:3rem 0;">No upload data available yet.</p>';
-    return;
-  }
-  
-  const labels = trendData.map(d => {
-    const date = new Date(d.date);
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  });
-  const data = trendData.map(d => d.count);
-  
-  const ctx = canvas.getContext('2d');
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Documents Uploaded',
-        data: data,
-        borderColor: 'var(--accent)',
-        backgroundColor: 'rgba(51, 102, 255, 0.08)',
-        borderWidth: 2,
-        pointRadius: 4,
-        pointBackgroundColor: 'var(--accent)',
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        tension: 0.4,
-        fill: true
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            stepSize: 1,
-            color: 'var(--text-dim)',
-            font: { size: 11 }
-          },
-          grid: {
-            color: 'var(--border)',
-            drawBorder: false
-          }
-        },
-        x: {
-          ticks: {
-            color: 'var(--text-dim)',
-            font: { size: 11 }
-          },
-          grid: {
-            display: false
-          }
-        }
-      }
-    }
-  });
-}
 </script>
 {% endblock %}
+

@@ -11,7 +11,7 @@ class DocumentLibraryService:
     @staticmethod
     def resolve_category(category_key):
         if not category_key:
-            return "procedures", "", ""
+            return "qms", "", ""
 
         alias = CATEGORY_ALIASES.get(category_key)
         if alias:
@@ -24,7 +24,7 @@ class DocumentLibraryService:
         if category_key in LIBRARY_DATA:
             return category_key, "", ""
 
-        return "procedures", "", ""
+        return "qms", "", ""
 
     @staticmethod
     def get_category_data(category_key, access_department=""):

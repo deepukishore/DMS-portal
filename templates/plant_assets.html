@@ -9,76 +9,49 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero-panel">
-  <div class="hero-copy">
+<div class="page-header">
+  <div>
     <p class="eyebrow">Master Records</p>
-    <h1 class="page-title">Master Records</h1>
-    <p class="page-sub">
-      Browse controlled documents organized by plant and department.
-      Click a plant card to get started.
-    </p>
+    <h1 class="page-title">Plant Document Repository</h1>
+    <p class="page-sub">Browse controlled documents organized by plant and department folder.</p>
   </div>
-</section>
-
-<div class="flow-steps">
-  <span class="flow-step active" id="step-plant">1 · Select Plant</span>
-  <span class="flow-step" id="step-dept">2 · Select Department</span>
-  <span class="flow-step" id="step-files">3 · Browse Files</span>
 </div>
 
-<!-- Plant cards -->
-<div class="plant-card-grid" id="plant-grid">
+<div class="mr-plant-list" id="plant-list">
   {% for p in plants %}
-  <div class="plant-card" data-plant="{{ p.label }}" onclick="selectPlant(this, '{{ p.label }}')">
-    <div class="plant-card-id">{{ p.id }}</div>
-    <div class="plant-card-info">
-      <strong>{{ p.label }}</strong>
-      <small>{{ p.location }}</small>
+  <div class="mr-plant-block" id="plant-block-{{ loop.index }}">
+    <div class="mr-plant-header" onclick="togglePlant(this, '{{ p.label }}', {{ loop.index }})">
+      <div class="mr-plant-id">{{ p.id }}</div>
+      <div class="mr-plant-info">
+        <strong>{{ p.label }}</strong>
+        <span>{{ p.location }}</span>
+      </div>
+      <div class="mr-plant-meta" id="plant-meta-{{ loop.index }}">
+        <span class="mr-dept-count" id="dept-count-{{ loop.index }}">Loading…</span>
+      </div>
+      <svg class="mr-plant-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="plant-card-arrow">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-    </div>
+    <div class="mr-dept-grid" id="dept-grid-{{ loop.index }}" style="display:none"></div>
   </div>
   {% endfor %}
 </div>
 
-<!-- Department + file panel -->
-<div class="asset-panel" id="asset-panel" style="display:none">
-  <div class="asset-panel-header">
-    <div>
-      <p class="eyebrow">Selected Plant</p>
-      <h2 id="selected-plant-label">—</h2>
-    </div>
-    <button class="btn-outline" onclick="resetPlant()">← Change plant</button>
-  </div>
-  <p class="section-sub" style="margin-bottom:1rem">
-    Select a department below to view its documents.
-  </p>
-
-  <div class="dept-tabs" id="dept-tabs"></div>
-
-  <div class="file-view-area" id="file-view-area">
-    <div class="file-view-placeholder">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-      <p>Choose a department to see files.</p>
-    </div>
+<!-- File viewer modal -->
+<div class="modal-overlay" id="file-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box" style="max-width:560px">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <p class="eyebrow" id="modal-dept-label">Department</p>
+    <h3 id="modal-plant-label" style="margin-bottom:1rem">Plant</h3>
+    <div id="modal-file-list"></div>
   </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-const VIEW_URL = "{{ url_for('plant_assets.view_file') }}";
 const DEPT_URL = "{{ url_for('plant_assets.get_departments') }}";
 const FILE_URL = "{{ url_for('plant_assets.get_files') }}";
-const PRESELECT_PLANT = "{{ request.args.get('plant', '') }}";
-
-if (PRESELECT_PLANT) {
-  document.addEventListener('DOMContentLoaded', function() {
-    const card = document.querySelector(`.plant-card[data-plant="${PRESELECT_PLANT}"]`);
-    if (card) selectPlant(card, PRESELECT_PLANT);
-  });
-}
+const VIEW_URL = "{{ url_for('plant_assets.view_file') }}";
 </script>
 <script src="{{ url_for('static', filename='js/plant_assets.js') }}"></script>
 {% endblock %}

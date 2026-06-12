@@ -10,16 +10,26 @@ class AuthService:
     HIGH_LEVEL_ROLES = {"Admin", "Manager", "Supervisor", "Approver"}
 
     @staticmethod
+    def _set_session(user):
+        """Write all user fields into the Flask session."""
+        role = user.get('role', 'User')
+        # Admin always has full L1 access regardless of stored level
+        qms_level = 'L1' if role == 'Admin' else user.get('qms_level', 'L4')
+        session['user_email']      = user['email']
+        session['user_name']       = user['name']
+        session['user_id']         = user['user_id']
+        session['user_emp_id']     = user.get('emp_id', '')
+        session['user_mobile']     = user.get('mobile', '')
+        session['user_plant']      = user.get('plant', '')
+        session['user_department'] = user.get('department', '')
+        session['user_role']       = role
+        session['user_qms_level']  = qms_level
+
+    @staticmethod
     def login(email, password):
         user = UserStoreService.get_user_by_email(email)
         if user and check_password_hash(user['password_hash'], password):
-            session['user_email'] = user['email']
-            session['user_name'] = user['name']
-            session['user_id'] = user['user_id']
-            session['user_emp_id'] = user.get('emp_id', '')
-            session['user_plant'] = user.get('plant', '')
-            session['user_department'] = user.get('department', '')
-            session['user_role'] = user.get('role', 'User')
+            AuthService._set_session(user)
             return user, None
         return None, 'Invalid email or password.'
 
@@ -27,13 +37,7 @@ class AuthService:
     def login_by_genid(genid, password):
         user = UserStoreService.get_user_by_genid(genid)
         if user and check_password_hash(user['password_hash'], password):
-            session['user_email'] = user['email']
-            session['user_name'] = user['name']
-            session['user_id'] = user['user_id']
-            session['user_emp_id'] = user.get('emp_id', '')
-            session['user_plant'] = user.get('plant', '')
-            session['user_department'] = user.get('department', '')
-            session['user_role'] = user.get('role', 'User')
+            AuthService._set_session(user)
             return user, None
         return None, 'Invalid GENID or password.'
 
@@ -89,6 +93,11 @@ class AuthService:
         if not user:
             return False
         return user.get('role', 'User') == 'Admin'
+
+    @staticmethod
+    def get_qms_level():
+        """Return the current user's QMS access level (L1–L4). Admin always L1."""
+        return session.get('user_qms_level', 'L4')
 
     @staticmethod
     def get_visible_department(user=None):

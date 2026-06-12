@@ -1,232 +1,240 @@
 from data.customers import OFFICIAL_CUSTOMERS
+from data.mock_data import MASTER_RECORD_PLANTS
 
 
 LIBRARY_CATEGORIES = [
-    {"key": "procedures", "label": "Procedures", "icon": "📋"},
-    {"key": "standard_manuals", "label": "Standard Manuals", "icon": "📖"},
-    {"key": "core_tools_manuals", "label": "Core Tools Manuals", "icon": "🔧"},
-    {"key": "awards", "label": "Awards", "icon": "🏆"},
-    {"key": "certifications", "label": "Certifications", "icon": "📜"},
+    {"key": "qms", "label": "QMS", "icon": "Q"},
+    {"key": "csr", "label": "CSR", "icon": "C"},
+    {"key": "core_tools_manuals", "label": "Core Tools Manuals", "icon": "T"},
+    {"key": "customer_score_card", "label": "Customer Score Card", "icon": "S"},
+    {"key": "eohms", "label": "EOHMS", "icon": "E"},
+    {"key": "awards_certifications", "label": "Awards and Certifications", "icon": "A"},
+    {"key": "audit_nc", "label": "Audit NC", "icon": "N"},
+    {"key": "master_records", "label": "Master Records", "icon": "M"},
 ]
 
 
 CATEGORY_ALIASES = {
-    "std_manual": {"key": "standard_manuals"},
+    "procedures": {"key": "qms"},
+    "cq_manuals": {"key": "qms", "primary": "L1"},
+    "business_procedures": {"key": "qms", "primary": "L2"},
+    "standard_manuals": {"key": "csr"},
+    "std_manual": {"key": "csr"},
     "core_tool_manuals": {"key": "core_tools_manuals"},
-    "certification": {"key": "certifications"},
-    "cq_manuals": {"key": "procedures", "primary": "cq_manuals"},
-    "business_procedures": {"key": "procedures", "primary": "business_procedures"},
+    "awards": {"key": "awards_certifications", "primary": "awards"},
+    "certifications": {"key": "awards_certifications", "primary": "certifications"},
+    "certification": {"key": "awards_certifications", "primary": "certifications"},
 }
 
 
-STANDARD_MANUAL_CUSTOMER_DOCS = {
-    "AL - Ashok Leyland": [
-        "al_standard_manual_rev04.pdf",
-        "al_supplier_quality_manual.pdf",
-    ],
-    "TML - Tata Motors Limited": [
-        "tml_standard_manual_issue07.pdf",
-        "tml_document_retention_guideline.pdf",
-    ],
-    "M&M - Mahindra and Mahindra": [
-        "mm_standard_manual_rev03.pdf",
-        "mm_traceability_manual.pdf",
-    ],
-    "FML - Force Motors Limited": [
-        "fml_standard_manual_rev02.pdf",
-        "fml_special_characteristics_guide.pdf",
-    ],
-    "SML ISUZU": [
-        "sml_standard_manual_rev05.pdf",
-        "sml_control_plan_requirements.pdf",
-    ],
-    "Switch Mobility": [
-        "switch_standard_manual_rev01.pdf",
-        "switch_supplier_document_matrix.pdf",
-    ],
-    "VECV - Volvo Eicher Commercial Vehicles": [
-        "vecv_standard_manual_rev06.pdf",
-        "vecv_packaging_document_standard.pdf",
-    ],
-    "DICV - Daimler India Commercial Vehicles": [
-        "dicv_standard_manual_rev08.pdf",
-        "dicv_drawing_change_control_manual.pdf",
-    ],
-    "Renault Nissan": [
-        "renault_nissan_standard_manual_rev03.pdf",
-        "renault_nissan_supplier_spec_manual.pdf",
-    ],
+QMS_DOCUMENT_GROUPS = {
+    "quality_manuals": {
+        "label": "Quality Manuals",
+        "files": [
+            "quality_manual_master_index.pdf",
+            "qms_quality_policy_manual.pdf",
+            "quality_manual_revision_register.xlsx",
+        ],
+    },
+    "business_procedures": {
+        "label": "Business Procedures",
+        "files": [
+            "business_planning_procedure.pdf",
+            "document_control_procedure.pdf",
+            "risk_and_opportunity_procedure.docx",
+        ],
+    },
+    "sops": {
+        "label": "SOPs",
+        "files": [
+            "sop_document_control.pdf",
+            "sop_non_conforming_output.docx",
+            "sop_corrective_action.pdf",
+        ],
+    },
+    "plans": {
+        "label": "Plans",
+        "files": [
+            "quality_objective_plan.xlsx",
+            "internal_audit_plan.pdf",
+            "management_review_plan.docx",
+        ],
+    },
+    "checklists": {
+        "label": "Checklists",
+        "files": [
+            "process_audit_checksheet.xlsx",
+            "document_release_checksheet.pdf",
+            "sop_compliance_checksheet.xlsx",
+        ],
+    },
+    "other_reports": {
+        "label": "Other Reports",
+        "files": [
+            "monthly_qms_performance_report.pdf",
+            "customer_complaint_trend_report.xlsx",
+            "corrective_action_status_report.pdf",
+        ],
+    },
 }
 
 
-CORE_TOOLS_CUSTOMER_DOCS = {
-    "AL - Ashok Leyland": [
-        "al_apqp_customer_requirements.pdf",
-        "al_ppap_submission_manual.pdf",
-    ],
-    "TML - Tata Motors Limited": [
-        "tml_apqp_customer_requirements.pdf",
-        "tml_msa_spc_expectations.pdf",
-    ],
-    "M&M - Mahindra and Mahindra": [
-        "mm_ppap_customer_requirements.pdf",
-        "mm_fmea_submission_format.pdf",
-    ],
-    "FML - Force Motors Limited": [
-        "fml_ppap_submission_matrix.pdf",
-        "fml_spc_control_guideline.pdf",
-    ],
-    "SML ISUZU": [
-        "sml_ppap_customer_requirements.pdf",
-        "sml_gauge_rr_submission_guide.pdf",
-    ],
-    "Switch Mobility": [
-        "switch_apqp_customer_requirements.pdf",
-        "switch_process_capability_manual.pdf",
-    ],
-    "VECV - Volvo Eicher Commercial Vehicles": [
-        "vecv_ppap_submission_manual.pdf",
-        "vecv_control_plan_customer_format.pdf",
-    ],
-    "DICV - Daimler India Commercial Vehicles": [
-        "dicv_apqp_customer_requirements.pdf",
-        "dicv_process_audit_core_tools_guide.pdf",
-    ],
-    "Renault Nissan": [
-        "renault_nissan_ppap_requirements.pdf",
-        "renault_nissan_core_tools_reference.pdf",
-    ],
+QMS_LEVELS = {
+    "L1": {
+        "label": "L1 - Approver",
+        "description": "Top level QMS approver with access to every QMS document and edit/delete control.",
+        "access": "All QMS files",
+        "can_edit": True,
+        "can_delete": True,
+        "approver": True,
+        "groups": list(QMS_DOCUMENT_GROUPS.keys()),
+    },
+    "L2": {
+        "label": "L2 - Full Viewer",
+        "description": "Can view all QMS files, but cannot edit or delete documents.",
+        "access": "All QMS files",
+        "can_edit": False,
+        "can_delete": False,
+        "approver": False,
+        "groups": list(QMS_DOCUMENT_GROUPS.keys()),
+    },
+    "L3": {
+        "label": "L3 - Procedure Viewer",
+        "description": "Can view SOPs, plans, checklists, and other reports.",
+        "access": "SOPs, plans, checklists, and other reports",
+        "can_edit": False,
+        "can_delete": False,
+        "approver": False,
+        "groups": ["sops", "plans", "checklists", "other_reports"],
+    },
+    "L4": {
+        "label": "L4 - Checksheet Viewer",
+        "description": "Can only view checksheets/checklists.",
+        "access": "Checklists and checksheets only",
+        "can_edit": False,
+        "can_delete": False,
+        "approver": False,
+        "groups": ["checklists"],
+    },
 }
+
+
+def _customer_file_map(prefix, suffix):
+    return {
+        customer: [
+            f"{prefix}_{customer.split(' - ')[0].lower().replace('&', 'and').replace(' ', '_')}_{suffix}.pdf",
+            f"{prefix}_{customer.split(' - ')[0].lower().replace('&', 'and').replace(' ', '_')}_revision_register.xlsx",
+        ]
+        for customer in OFFICIAL_CUSTOMERS
+    }
+
+
+CSR_CUSTOMER_MANUALS = _customer_file_map("csr_manual", "requirements")
+CUSTOMER_SCORE_CARDS = _customer_file_map("score_card", "monthly_summary")
 
 
 LIBRARY_DATA = {
-    "procedures": {
-        "description": "Browse procedures by manual type or business orientation.",
-        "primary_options": {
-            "cq_manuals": {
-                "label": "CQ Manuals",
-                "full_label": "CQ Manuals - Customer Quality Manuals",
-                "description": "Customer quality manuals and controlled reference documents.",
-                "files": [
-                    "customer_quality_manual_master_index.pdf",
-                    "supplier_quality_manual_compendium.pdf",
-                    "customer_specific_quality_requirements_matrix.xlsx",
-                    "quality_manual_revision_register.pdf",
-                ],
-            },
-            "business_procedures": {
-                "label": "Business Procedures",
-                "description": "Business procedures organized by orientation.",
-                "secondary_options": {
-                    "management_oriented": {
-                        "label": "Management Oriented",
-                        "description": "Leadership, review, and policy-driven procedures.",
-                        "files": [
-                            "management_review_procedure.pdf",
-                            "business_planning_procedure.pdf",
-                            "risk_management_procedure.docx",
-                            "document_control_master_procedure.pdf",
-                        ],
-                    },
-                    "customer_oriented": {
-                        "label": "Customer Oriented",
-                        "description": "Procedures tied to customer communication and delivery.",
-                        "files": [
-                            "customer_complaint_handling_procedure.pdf",
-                            "customer_change_request_procedure.docx",
-                            "order_fulfillment_business_procedure.pdf",
-                            "customer_scorecard_response_matrix.xlsx",
-                        ],
-                    },
-                    "support_oriented": {
-                        "label": "Support Oriented",
-                        "description": "Support-function procedures for enabling teams.",
-                        "files": [
-                            "training_and_competency_procedure.pdf",
-                            "maintenance_support_procedure.docx",
-                            "procurement_support_workflow.pdf",
-                            "it_backup_and_restore_procedure.pdf",
-                        ],
-                    },
-                    "plant_procedures": {
-                        "label": "Plant Procedures",
-                        "description": "Procedures covering all four plants with consolidated plant-level workflows.",
-                        "files": [
-                            "plant_procedures_overview.pdf",
-                            "plant_health_safety_guidelines.pdf",
-                            "equipment_maintenance_for_all_plants.docx",
-                            "plant_operational_coordinations.xlsx",
-                        ],
-                    },
-                },
-            },
-        },
+    "qms": {
+        "description": "Quality Management System documents organized by L1 to L4 access hierarchy.",
+        "levels": QMS_LEVELS,
+        "document_groups": QMS_DOCUMENT_GROUPS,
     },
-    "standard_manuals": {
-        "description": "Browse standard manuals by source.",
+    "csr": {
+        "description": "Customer Specific Requirement documents.",
         "primary_options": {
-            "rane_docs": {
-                "label": "Rane Docs",
-                "description": "Internal standard manuals maintained by Rane.",
+            "csr_matrix": {
+                "label": "CSR Matrix",
+                "description": "Customer specific requirement matrix and trackers.",
                 "files": [
-                    "rane_standard_manual_issue_12.pdf",
-                    "process_standardization_manual.docx",
-                    "internal_document_control_standard.pdf",
-                    "master_work_instruction_format.xlsx",
+                    "csr_matrix_master.xlsx",
+                    "csr_compliance_tracker.pdf",
+                    "customer_requirement_cross_reference.xlsx",
                 ],
             },
-            "customer_docs": {
-                "label": "Customer Docs",
-                "description": "Customer-specific standard manuals.",
-                "customers": STANDARD_MANUAL_CUSTOMER_DOCS,
+            "customer_manual": {
+                "label": "Customer Manual",
+                "description": "Select a customer to view related manuals.",
+                "customers": CSR_CUSTOMER_MANUALS,
             },
         },
     },
     "core_tools_manuals": {
-        "description": "Browse core tools manuals by source.",
+        "description": "Core tools manuals and reference documents.",
+        "files": [
+            "apqp_manual.pdf",
+            "ppap_submission_manual.pdf",
+            "fmea_reference_manual.pdf",
+            "msa_reference_manual.pdf",
+            "spc_reference_manual.pdf",
+        ],
+    },
+    "customer_score_card": {
+        "description": "Customer score cards organized by customer.",
+        "customers": CUSTOMER_SCORE_CARDS,
+    },
+    "eohms": {
+        "description": "EOHMS manual and related documents.",
+        "files": [
+            "eohms_manual.pdf",
+            "environmental_operational_control_procedure.pdf",
+            "health_and_safety_risk_register.xlsx",
+            "eohms_legal_compliance_register.pdf",
+        ],
+    },
+    "awards_certifications": {
+        "description": "Awards, certificates, and recognition documents.",
         "primary_options": {
-            "rane_docs": {
-                "label": "Rane Docs",
-                "description": "Internal APQP, PPAP, FMEA, MSA, and SPC references.",
+            "awards": {
+                "label": "Awards",
+                "description": "Company awards and customer recognition.",
                 "files": [
-                    "rane_apqp_manual_rev09.pdf",
-                    "rane_ppap_submission_manual.pdf",
-                    "rane_process_fmea_handbook.docx",
-                    "rane_spc_msa_reference_guide.pdf",
+                    "best_supplier_award_2024.pdf",
+                    "quality_excellence_award_2025.pdf",
+                    "customer_appreciation_award.pdf",
                 ],
             },
-            "customer_docs": {
-                "label": "Customer Docs",
-                "description": "Customer-specific core tools references.",
-                "customers": CORE_TOOLS_CUSTOMER_DOCS,
+            "certifications": {
+                "label": "Certifications",
+                "description": "Compliance and management-system certificates.",
+                "files": [
+                    "iatf_16949_certificate.pdf",
+                    "iso_14001_certificate.pdf",
+                    "iso_45001_certificate.pdf",
+                ],
             },
         },
     },
-    "awards": {
-        "description": "Company awards and recognition documents.",
-        "files": [
-            "best_supplier_award_2024.pdf",
-            "quality_excellence_award_2025.pdf",
-            "operational_excellence_recognition.pdf",
-            "customer_appreciation_award_switch_mobility.pdf",
-        ],
+    "audit_nc": {
+        "description": "Audit non-conformance records.",
+        "primary_options": {
+            "iatf_external_audits": {
+                "label": "IATF External Audits",
+                "description": "External IATF audit NC files and closure evidence.",
+                "files": [
+                    "iatf_external_audit_nc_register.xlsx",
+                    "external_audit_closure_evidence.pdf",
+                    "external_audit_corrective_action_plan.docx",
+                ],
+            },
+            "iatf_internal_audits": {
+                "label": "IATF Internal Audits",
+                "description": "Internal IATF audit NC files and closure evidence.",
+                "files": [
+                    "iatf_internal_audit_nc_register.xlsx",
+                    "internal_audit_observation_report.pdf",
+                    "internal_audit_corrective_action_plan.docx",
+                ],
+            },
+        },
     },
-    "certifications": {
-        "description": "Certifications and compliance documents.",
-        "files": [
-            "iatf_16949_certificate.pdf",
-            "iso_14001_certificate.pdf",
-            "iso_45001_certificate.pdf",
-            "customer_specific_certification_register.xlsx",
+    "master_records": {
+        "description": "Master records organized by plant and department with a two-stage approval note.",
+        "plants": MASTER_RECORD_PLANTS,
+        "approval_flow": [
+            "First approver reviews and accepts the file.",
+            "First approver selects recipients or department heads for notification.",
+            "Final approver confirms and accepts the file.",
+            "Mail notification is sent to the selected people for new and revised documents.",
         ],
     },
 }
-
-
-for customer in OFFICIAL_CUSTOMERS:
-    LIBRARY_DATA["standard_manuals"]["primary_options"]["customer_docs"]["customers"].setdefault(
-        customer, []
-    )
-    LIBRARY_DATA["core_tools_manuals"]["primary_options"]["customer_docs"]["customers"].setdefault(
-        customer, []
-    )

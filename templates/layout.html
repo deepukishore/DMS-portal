@@ -62,7 +62,7 @@
                   <div class="notification-empty">No notifications yet.</div>
                 {% endif %}
               </div>
-              <div class="notification-shortcuts">Shortcuts: <kbd>D</kbd> Dashboard, <kbd>U</kbd> Upload, <kbd>P</kbd> Pending's</div>
+              <div class="notification-shortcuts">Shortcuts: <kbd>D</kbd> Dashboard, <kbd>U</kbd> Upload, <kbd>P</kbd> Pending</div>
             </div>
           </div>
           <button id="theme-toggle" class="btn-theme" title="Toggle dark/light mode" aria-label="Toggle theme">
@@ -82,14 +82,6 @@
       </header>
 
       <main class="content">
-        <div class="welcome-banner">
-          Welcome, <strong>{{ session.get('user_name', 'User') }}</strong>
-          {% if session.get('user_emp_id') %}&nbsp;·&nbsp;<span style="font-family:'IBM Plex Mono',monospace;font-size:.8rem;">{{ session.get('user_emp_id') }}</span>{% endif %}
-          {% if session.get('user_role') %}&nbsp;·&nbsp;<span style="color:var(--accent);font-weight:600;">{{ session.get('user_role') }}</span>{% endif %}
-          {% if session.get('user_plant') %}&nbsp;·&nbsp;{{ session.get('user_plant') }}{% endif %}
-          {% if session.get('user_department') %}&nbsp;·&nbsp;{{ session.get('user_department') }}{% endif %}
-          &nbsp;— Document Management System
-        </div>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
@@ -106,6 +98,18 @@
       </main>
     </div>
   </div>
+  {% if request.path == url_for('dashboard.index') %}
+  <div class="welcome-modal-overlay" id="welcome-modal" hidden>
+    <div class="welcome-modal-box">
+      <button type="button" class="modal-close" id="welcome-close" aria-label="Close welcome message">×</button>
+      <div class="welcome-modal-copy">
+        <p class="eyebrow">Welcome back</p>
+        <h2>Welcome, <strong>{{ session.get('user_name', 'User') }}</strong></h2>
+        <p class="page-sub">Your document overview is ready. Use quick actions or filters to find the files you need.</p>
+      </div>
+    </div>
+  </div>
+  {% endif %}
   <script>
     window.APP_SHORTCUTS = {
       dashboard: "{{ url_for('dashboard.index') }}",
@@ -114,6 +118,7 @@
       markNotificationReadBase: "{{ url_for('notifications.mark_read', notification_id=0)[:-1] }}",
       markAllNotificationsRead: "{{ url_for('notifications.mark_all_read') }}"
     };
+    window.SHOW_WELCOME = {{ (show_welcome | default(false)) | tojson }};
   </script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   {% block scripts %}{% endblock %}

@@ -37,15 +37,24 @@ class UserStoreService:
                     emp_id TEXT,
                     plant TEXT,
                     department TEXT,
+                    mobile TEXT,
                     role TEXT NOT NULL DEFAULT 'User',
                     password_hash TEXT NOT NULL,
                     created_at TEXT NOT NULL
                 )
                 """
             )
-            # Add avatar column if it doesn't exist (migration)
+            # Add mobile and avatar columns if they don't exist (migration)
+            try:
+                connection.execute("ALTER TABLE users ADD COLUMN mobile TEXT")
+            except Exception:
+                pass
             try:
                 connection.execute("ALTER TABLE users ADD COLUMN avatar TEXT")
+            except Exception:
+                pass
+            try:
+                connection.execute("ALTER TABLE users ADD COLUMN qms_level TEXT NOT NULL DEFAULT 'L4'")
             except Exception:
                 pass
             connection.commit()
@@ -62,8 +71,8 @@ class UserStoreService:
                 connection.execute(
                     """
                     INSERT INTO users (
-                        email, name, user_id, emp_id, plant, department, role, password_hash, created_at
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        email, name, user_id, emp_id, plant, department, role, password_hash, created_at, qms_level
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         email,
@@ -75,6 +84,7 @@ class UserStoreService:
                         user.get("role", "User"),
                         user["password_hash"],
                         now,
+                        user.get("qms_level", "L4"),
                     ),
                 )
             connection.commit()
@@ -122,7 +132,7 @@ class UserStoreService:
         return UserStoreService.get_user_by_email(email) is not None
 
     @staticmethod
-    def create_user(name, email, password_hash, emp_id="", plant="", department="", role="User"):
+    def create_user(name, email, password_hash, emp_id="", plant="", department="", mobile="", role="User"):
         user_id = UserStoreService._next_user_id()
         created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -130,8 +140,8 @@ class UserStoreService:
             connection.execute(
                 """
                 INSERT INTO users (
-                    email, name, user_id, emp_id, plant, department, role, password_hash, created_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    email, name, user_id, emp_id, plant, department, mobile, role, password_hash, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     email,
@@ -140,6 +150,7 @@ class UserStoreService:
                     emp_id,
                     plant,
                     normalize_department(department),
+                    mobile,
                     role,
                     password_hash,
                     created_at,
@@ -147,6 +158,26 @@ class UserStoreService:
             )
             connection.commit()
 
+        return UserStoreService.get_user_by_email(email)
+
+    @staticmethod
+    def update_user_profile(email, name=None, plant=None, department=None, role=None, mobile=None):
+        with UserStoreService._connect() as connection:
+            existing = connection.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
+            if not existing:
+                return None
+            connection.execute(
+                "UPDATE users SET name = ?, plant = ?, department = ?, role = ?, mobile = ? WHERE email = ?",
+                (
+                    name or existing["name"],
+                    plant or existing["plant"],
+                    department or existing["department"],
+                    role or existing["role"],
+                    mobile if mobile is not None else existing["mobile"],
+                    email,
+                ),
+            )
+            connection.commit()
         return UserStoreService.get_user_by_email(email)
 
     @staticmethod

@@ -47,6 +47,10 @@
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
           {{ current_user.role or '—' }}
         </span>
+        <span class="profile-meta-chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3 5.19 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72 12.2 12.2 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.3 10.7a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45 12.13 12.13 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          {{ current_user.mobile or session.get('user_mobile', '—') or '—' }}
+        </span>
       </div>
       <p class="profile-hero-dept">{{ current_user.department or '' }}</p>
     </div>
@@ -62,7 +66,7 @@
       </div>
     </div>
 
-    <div class="profile-info">
+    <form method="POST" action="{{ url_for('profile.update_profile') }}" class="profile-info">
       <div class="form-row">
         <label>Full Name
           <input type="text" value="{{ current_user.name }}" readonly class="readonly-field" />
@@ -88,8 +92,14 @@
         <label>Role
           <input type="text" value="{{ current_user.role }}" readonly class="readonly-field" />
         </label>
+        <label>Mobile Number
+          <input type="text" name="mobile" value="{{ current_user.mobile or session.get('user_mobile', '') }}" placeholder="Enter mobile number" />
+        </label>
       </div>
-    </div>
+      <div class="upload-actions" style="display:flex; justify-content:flex-end; margin-top:1rem; gap:.75rem;">
+        <button type="submit" class="btn-primary">Save Mobile Number</button>
+      </div>
+    </form>
 
     <div class="panel-head" style="margin-top: 2rem;">
       <div style="display: flex; justify-content: space-between; align-items: center;">

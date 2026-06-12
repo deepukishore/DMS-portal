@@ -1,5 +1,4 @@
 {% extends 'layout.html' %}
-
 {% block title %}System Log · Smart DMS{% endblock %}
 
 {% block breadcrumb %}
@@ -11,31 +10,60 @@
 {% block content %}
 <div class="page-header">
   <div>
+    <p class="eyebrow">System</p>
     <h1 class="page-title">System Log</h1>
-    <p class="page-sub">Audit trail — all user actions are recorded here.</p>
+    <p class="page-sub">Full audit trail — every significant user action is recorded here.</p>
   </div>
 </div>
 
-<!-- Action filter tabs -->
 <div class="log-filter-tabs">
-  {% set actions = ['', 'LOGIN', 'LOGOUT', 'REGISTER', 'UPLOAD', 'APPROVAL_EMAIL', 'APPROVED', 'REJECTED', 'VIEW', 'DELETE'] %}
-  {% set labels  = ['All', 'Login', 'Logout', 'Register', 'Upload', 'Approval Email', 'Approved', 'Rejected', 'View', 'Delete'] %}
+  {% set actions = ['','LOGIN','LOGOUT','REGISTER','UPLOAD','APPROVAL_EMAIL','APPROVED','REJECTED','VIEW','DELETE'] %}
+  {% set labels  = ['All','Login','Logout','Register','Upload','Approval Email','Approved','Rejected','View','Delete'] %}
   {% for a, l in zip(actions, labels) %}
     <a href="{{ url_for('system_log.index', action=a) }}"
        class="log-tab {% if action_filter == a %}active{% endif %}">{{ l }}</a>
   {% endfor %}
 </div>
 
-<div class="table-wrap">
+<!-- Pagination bar -->
+<div class="pg-bar">
+  <span class="pg-info">
+    Showing {{ ((page-1)*page_size)+1 }}–{{ [page*page_size, total_logs]|min }} of {{ total_logs }}
+  </span>
+  <div class="pg-controls">
+    <form method="GET" action="{{ url_for('system_log.index') }}" class="pg-size-form">
+      <input type="hidden" name="action" value="{{ action_filter }}" />
+      <input type="hidden" name="page"   value="1" />
+      <label class="pg-size-label">Per page
+        <select name="page_size" onchange="this.form.submit()" class="pg-size-select">
+          {% for s in [10,25,50,100] %}<option value="{{ s }}" {% if page_size==s %}selected{% endif %}>{{ s }}</option>{% endfor %}
+        </select>
+      </label>
+    </form>
+    <span class="pg-pages">Page {{ page }} of {{ page_count }}</span>
+    {% if page > 1 %}
+      <a href="{{ url_for('system_log.index', action=action_filter, page=page-1, page_size=page_size) }}" class="btn-outline btn-sm">← Prev</a>
+    {% else %}
+      <button class="btn-outline btn-sm" disabled>← Prev</button>
+    {% endif %}
+    {% if page < page_count %}
+      <a href="{{ url_for('system_log.index', action=action_filter, page=page+1, page_size=page_size) }}" class="btn-outline btn-sm">Next →</a>
+    {% else %}
+      <button class="btn-outline btn-sm" disabled>Next →</button>
+    {% endif %}
+  </div>
+</div>
+
+<div class="table-wrap table-wrap-rich">
   <table class="data-table">
     <thead>
       <tr>
-        <th>Timestamp</th>
+        <th style="width:160px">Timestamp</th>
         <th>User</th>
         <th>Email</th>
-        <th>Action</th>
+        <th style="width:140px">Action</th>
         <th>Details</th>
-        <th>IP Address</th>
+        <th style="width:120px">IP Address</th>
       </tr>
     </thead>
     <tbody>
@@ -45,16 +73,16 @@
           <td class="mono text-dim">{{ log.timestamp }}</td>
           <td>{{ log.user_name }}</td>
           <td class="mono text-dim">{{ log.user_email }}</td>
-          <td><span class="action-badge action-{{ log.action_type | lower }}">{{ log.action_type }}</span></td>
+          <td><span class="action-badge action-{{ log.action_type|lower }}">{{ log.action_type }}</span></td>
           <td class="log-detail">{{ log.details }}</td>
           <td class="mono text-dim">{{ log.ip_address }}</td>
         </tr>
         {% endfor %}
       {% else %}
-        <tr><td colspan="6" class="empty-state">No log entries yet. Actions will appear here after login.</td></tr>
+        <tr><td colspan="6" class="empty-state">No log entries yet.</td></tr>
       {% endif %}
     </tbody>
   </table>
 </div>
-<p class="table-count">{{ logs | length }} event(s)</p>
+<p class="table-count">{{ total_logs }} event(s) total</p>
 {% endblock %}

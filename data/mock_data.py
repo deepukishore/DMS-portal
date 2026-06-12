@@ -25,6 +25,7 @@ USERS = {
         "department": "Quality",
         "password_hash": generate_password_hash("Pass@12345"),
         "role": "Admin",
+        "qms_level": "L1",
     },
     "arun@example.com": {
         "name": "Arun Kumar",
@@ -35,6 +36,7 @@ USERS = {
         "department": "Production",
         "password_hash": generate_password_hash("Prod@12345"),
         "role": "Manager",
+        "qms_level": "L2",
     },
     "sneha@example.com": {
         "name": "Sneha Patel",
@@ -45,6 +47,7 @@ USERS = {
         "department": "Engineering",
         "password_hash": generate_password_hash("Eng@12345"),
         "role": "Approver",
+        "qms_level": "L1",
     },
     "rahul@example.com": {
         "name": "Rahul Mehta",
@@ -55,6 +58,7 @@ USERS = {
         "department": "Safety",
         "password_hash": generate_password_hash("Safe@12345"),
         "role": "User",
+        "qms_level": "L4",
     },
     "vani@example.com": {
         "name": "Vani Raj",
@@ -65,6 +69,7 @@ USERS = {
         "department": "Manufacturing",
         "password_hash": generate_password_hash("Mfg@12345"),
         "role": "Manager",
+        "qms_level": "L2",
     },
     "karthik@example.com": {
         "name": "Karthik S",
@@ -75,6 +80,7 @@ USERS = {
         "department": "Maintenance",
         "password_hash": generate_password_hash("Maint@12345"),
         "role": "User",
+        "qms_level": "L3",
     },
     "priya@example.com": {
         "name": "Priya Nair",
@@ -85,6 +91,7 @@ USERS = {
         "department": "Procurement",
         "password_hash": generate_password_hash("Proc@12345"),
         "role": "Approver",
+        "qms_level": "L2",
     },
     "vikram@example.com": {
         "name": "Vikram Sharma",
@@ -95,6 +102,7 @@ USERS = {
         "department": "R&D",
         "password_hash": generate_password_hash("Rd@12345"),
         "role": "User",
+        "qms_level": "L3",
     },
     "meera@example.com": {
         "name": "Meera Desai",
@@ -105,6 +113,7 @@ USERS = {
         "department": "Operations",
         "password_hash": generate_password_hash("Ops@12345"),
         "role": "Manager",
+        "qms_level": "L2",
     },
     "rajesh@example.com": {
         "name": "Rajesh Singh",
@@ -115,6 +124,52 @@ USERS = {
         "department": "Stores",
         "password_hash": generate_password_hash("Stores@12345"),
         "role": "User",
+        "qms_level": "L4",
+    },
+    # ── Dedicated QMS level demo users ──────────────────────────
+    "l1user@example.com": {
+        "name": "L1 Approver",
+        "user_id": "U301",
+        "emp_id": "EMP301",
+        "email": "l1user@example.com",
+        "plant": "P1 - Trichy Plant",
+        "department": "QAD - Quality Assurance Department",
+        "password_hash": generate_password_hash("L1@12345"),
+        "role": "Approver",
+        "qms_level": "L1",
+    },
+    "l2user@example.com": {
+        "name": "L2 Full Viewer",
+        "user_id": "U302",
+        "emp_id": "EMP302",
+        "email": "l2user@example.com",
+        "plant": "P2 - Guduvachery Plant",
+        "department": "MED - Manufacturing Engineering Department",
+        "password_hash": generate_password_hash("L2@12345"),
+        "role": "Manager",
+        "qms_level": "L2",
+    },
+    "l3user@example.com": {
+        "name": "L3 Procedure Viewer",
+        "user_id": "U303",
+        "emp_id": "EMP303",
+        "email": "l3user@example.com",
+        "plant": "P3 - Guduvachery Plant",
+        "department": "PED - Product Engineering Department",
+        "password_hash": generate_password_hash("L3@12345"),
+        "role": "User",
+        "qms_level": "L3",
+    },
+    "l4user@example.com": {
+        "name": "L4 Checksheet Viewer",
+        "user_id": "U304",
+        "emp_id": "EMP304",
+        "email": "l4user@example.com",
+        "plant": "P4 - Uttarakhand Plant",
+        "department": "HRD - Human Resources Department",
+        "password_hash": generate_password_hash("L4@12345"),
+        "role": "User",
+        "qms_level": "L4",
     },
 }
 

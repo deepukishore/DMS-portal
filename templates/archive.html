@@ -1,5 +1,4 @@
 {% extends 'layout.html' %}
-
 {% block title %}Archive · Smart DMS{% endblock %}
 
 {% block breadcrumb %}
@@ -11,53 +10,90 @@
 {% block content %}
 <div class="page-header">
   <div>
-    <h1 class="page-title">Deleted Items Archive</h1>
-    <p class="page-sub">Archived and soft-deleted records. Restore if needed.</p>
+    <p class="eyebrow">System</p>
+    <h1 class="page-title">Archive</h1>
+    <p class="page-sub">Soft-deleted documents are stored here. Review before permanent removal.</p>
   </div>
 </div>
 
-<div class="alert alert-warning" style="margin-bottom:1.5rem;">
-  <span>⚠ These documents have been archived. Review before permanent removal.</span>
+<div class="alert alert-warning">
+  <span>Documents here were removed from the dashboard. Permanently deleting cannot be undone.</span>
 </div>
 
-<div class="table-wrap">
+<!-- Pagination bar -->
+<div class="pg-bar">
+  <span class="pg-info">
+    Showing {{ ((page-1)*page_size)+1 }}–{{ [page*page_size, total_records]|min }} of {{ total_records }}
+  </span>
+  <div class="pg-controls">
+    <form method="GET" action="{{ url_for('archive.index') }}" class="pg-size-form">
+      <input type="hidden" name="page" value="1" />
+      <label class="pg-size-label">Per page
+        <select name="page_size" onchange="this.form.submit()" class="pg-size-select">
+          {% for s in [10,25,50,100] %}<option value="{{ s }}" {% if page_size==s %}selected{% endif %}>{{ s }}</option>{% endfor %}
+        </select>
+      </label>
+    </form>
+    <span class="pg-pages">Page {{ page }} of {{ page_count }}</span>
+    {% if page > 1 %}
+      <a href="{{ url_for('archive.index', page=page-1, page_size=page_size) }}" class="btn-outline btn-sm">← Prev</a>
+    {% else %}
+      <button class="btn-outline btn-sm" disabled>← Prev</button>
+    {% endif %}
+    {% if page < page_count %}
+      <a href="{{ url_for('archive.index', page=page+1, page_size=page_size) }}" class="btn-outline btn-sm">Next →</a>
+    {% else %}
+      <button class="btn-outline btn-sm" disabled>Next →</button>
+    {% endif %}
+  </div>
+</div>
+
+<div class="table-wrap table-wrap-rich">
   <table class="data-table">
     <thead>
       <tr>
-        <th style="width: 140px;">Deleted Date</th>
-        <th style="width: 25%;">File Name</th>
-        <th style="width: 140px;">Plant</th>
-        <th style="width: 160px;">Department</th>
-        <th style="width: 160px;">Uploaded By</th>
-        <th style="width: 120px; text-align: center;">Original Status</th>
-        <th style="width: 100px; text-align: center;">Action</th>
+        <th style="width:160px">Deleted Date</th>
+        <th>File Name</th>
+        <th style="width:160px">Plant</th>
+        <th style="width:180px">Department</th>
+        <th style="width:160px">Uploaded By</th>
+        <th style="width:120px;text-align:center">Status</th>
+        <th style="width:90px;text-align:center">Action</th>
       </tr>
     </thead>
     <tbody>
-      {% for r in records %}
-      <tr>
-        <td class="mono text-dim">{{ r.timestamp }}</td>
-        <td class="file-cell">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          <span>{{ r.file_name }}</span>
-        </td>
-        <td><span class="plant-badge">{{ r.plant }}</span></td>
-        <td>{{ r.department }}</td>
-        <td>
-          <div class="person-stack">
-            <strong>{{ r.uploaded_by }}</strong>
-            <span class="text-dim">{{ r.user_id }}</span>
-          </div>
-        </td>
-        <td style="text-align: center;"><span class="status-pill status-{{ r.approval_status|lower }}">{{ r.approval_status }}</span></td>
-        <td style="text-align: center;">
-          <form method="POST" action="{{ url_for('archive.delete_archived', archive_index=loop.index0) }}" style="display:inline;">
-            <button type="submit" class="btn-outline btn-sm" onclick="return confirm('Permanently delete this record? This cannot be undone.');">Delete</button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
+      {% if records %}
+        {% for r in records %}
+        <tr>
+          <td class="mono text-dim">{{ r.timestamp }}</td>
+          <td class="file-cell">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>{{ r.file_name }}</span>
+          </td>
+          <td><span class="plant-badge">{{ r.plant }}</span></td>
+          <td>{{ r.department }}</td>
+          <td>
+            <div class="person-stack">
+              <strong>{{ r.uploaded_by }}</strong>
+              <span class="text-dim">{{ r.user_id }}</span>
+            </div>
+          </td>
+          <td style="text-align:center">
+            <span class="status-pill status-{{ r.approval_status|lower }}">{{ r.approval_status }}</span>
+          </td>
+          <td style="text-align:center">
+            <form method="POST" action="{{ url_for('archive.delete_archived', archive_index=loop.index0) }}" style="display:inline">
+              <button type="submit" class="btn-outline btn-sm"
+                onclick="return confirm('Permanently delete this record? This cannot be undone.')">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr><td colspan="7" class="empty-state">No archived documents found.</td></tr>
+      {% endif %}
     </tbody>
   </table>
 </div>
+<p class="table-count">{{ total_records }} archived document(s)</p>
 {% endblock %}

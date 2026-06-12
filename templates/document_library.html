@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% block title %}Document Library - Smart DMS{% endblock %}
+{% block title %}Document Library · Smart DMS{% endblock %}
 
 {% block breadcrumb %}
   <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
@@ -8,13 +8,13 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero-panel">
-  <div class="hero-copy">
+<div class="page-header">
+  <div>
     <p class="eyebrow">Document Library</p>
     <h1 class="page-title">Document Library</h1>
     <p class="page-sub">Browse controlled documents by category and source.</p>
   </div>
-</section>
+</div>
 
 <nav class="horiz-tab-bar" role="tablist">
   {% for cat in categories %}
@@ -27,10 +27,8 @@
   {% endfor %}
 </nav>
 
-<div class="doc-library-body">
-  <div id="library-content">
-    <div class="file-view-placeholder"><p>Loading document library...</p></div>
-  </div>
+<div class="doc-library-body" id="library-content">
+  <div class="file-view-placeholder"><p>Loading…</p></div>
 </div>
 {% endblock %}
 
@@ -41,6 +39,10 @@ const CATEGORY_DATA = {{ category_data | tojson }};
 const PRESELECT_PRIMARY = "{{ preselected_primary }}";
 const PRESELECT_SECONDARY = "{{ preselected_secondary }}";
 const VIEW_URL = "{{ url_for('document_library.view_file') }}";
+const MASTER_DEPT_URL = "{{ url_for('document_library.master_record_departments') }}";
+const MASTER_FILE_URL = "{{ url_for('document_library.master_record_files') }}";
+const USER_QMS_LEVEL = "{{ user_qms_level }}";
+const IS_ADMIN = {{ 'true' if is_admin else 'false' }};
 </script>
 <script src="{{ url_for('static', filename='js/document_library.js') }}"></script>
 {% endblock %}

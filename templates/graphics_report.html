@@ -3,24 +3,103 @@
 {% block title %}Graphics Report - Smart DMS{% endblock %}
 
 {% block breadcrumb %}
-  <a href="{{ url_for('dashboard.index') }}">Dashboard</a>
-  <span>/</span>
-  <span>Graphics Report</span>
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">Graphics Report</span>
 {% endblock %}
 
 {% block content %}
 <div class="graphics-report-container">
-  <div class="report-header">
-    <h1>📊 Graphics Report</h1>
-    <p class="subtitle">Visual representation of document statistics and analytics</p>
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Reports</p>
+      <h1 class="page-title">Graphics Report</h1>
+      <p class="page-sub">Visual representation of document statistics and analytics across plants, departments and customers.</p>
+    </div>
+  </div>
+
+  <!-- Summary Statistics — top of page -->
+  <div class="summary-grid" style="margin-bottom:1.75rem">
+    <div class="summary-card">
+      <div class="summary-icon">📊</div>
+      <div class="summary-content">
+        <h3>Total Documents</h3>
+        <p class="summary-value">{{ stats.overall.total }}</p>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon">✅</div>
+      <div class="summary-content">
+        <h3>Approved</h3>
+        <p class="summary-value">{{ stats.overall.approved }}</p>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon">⏳</div>
+      <div class="summary-content">
+        <h3>Pending</h3>
+        <p class="summary-value">{{ stats.overall.pending }}</p>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon">❌</div>
+      <div class="summary-content">
+        <h3>Rejected</h3>
+        <p class="summary-value">{{ stats.overall.rejected }}</p>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon">📅</div>
+      <div class="summary-content">
+        <h3>This Month</h3>
+        <p class="summary-value">{{ stats.overall.this_month }}</p>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon">📆</div>
+      <div class="summary-content">
+        <h3>This Week</h3>
+        <p class="summary-value">{{ stats.overall.this_week }}</p>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon">🏭</div>
+      <div class="summary-content">
+        <h3>Plants</h3>
+        <p class="summary-value">{{ stats.total_plants }}</p>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon">👥</div>
+      <div class="summary-content">
+        <h3>Customers</h3>
+        <p class="summary-value">{{ stats.total_customers }}</p>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon">🏢</div>
+      <div class="summary-content">
+        <h3>Departments</h3>
+        <p class="summary-value">{{ stats.total_departments }}</p>
+      </div>
+    </div>
+    {% if stats.overall.total > 0 %}
+    <div class="summary-card">
+      <div class="summary-icon">📈</div>
+      <div class="summary-content">
+        <h3>Approval Rate</h3>
+        <p class="summary-value">{{ "%.1f"|format(stats.overall.approved * 100 / stats.overall.total) }}%</p>
+      </div>
+    </div>
+    {% endif %}
   </div>
 
   <div class="charts-grid">
-    <!-- Chart 1: Overall Documents Statistics -->
+    <!-- Chart 1: Overall Status Distribution -->
     <div class="chart-card">
       <div class="chart-header">
-        <h2>📈 Overall Documents</h2>
-        <p class="chart-subtitle">Document Status Distribution</p>
+        <h2>Overall Documents</h2>
+        <p class="chart-subtitle">Document status distribution</p>
       </div>
       <div class="chart-wrapper">
         <canvas id="overallChart"></canvas>
@@ -45,102 +124,48 @@
       </div>
     </div>
 
-    <!-- Chart 2: Plant-wise Documents -->
+    <!-- Chart 2: Plant-wise -->
     <div class="chart-card">
       <div class="chart-header">
-        <h2>🏭 Plant-wise Documents</h2>
-        <p class="chart-subtitle">Documents by Plant Location</p>
+        <h2>Plant-wise Documents</h2>
+        <p class="chart-subtitle">Documents by plant location</p>
       </div>
       <div class="chart-wrapper">
         <canvas id="plantChart"></canvas>
       </div>
     </div>
 
-    <!-- Chart 3: Customer-wise Documents -->
+    <!-- Chart 3: Customer-wise -->
     <div class="chart-card">
       <div class="chart-header">
-        <h2>👥 Customer-wise Documents</h2>
-        <p class="chart-subtitle">Documents by Customer</p>
+        <h2>Customer-wise Documents</h2>
+        <p class="chart-subtitle">Documents by customer</p>
       </div>
       <div class="chart-wrapper">
         <canvas id="customerChart"></canvas>
       </div>
     </div>
 
-    <!-- Chart 4: Department-wise Documents -->
+    <!-- Chart 4: Department-wise -->
     <div class="chart-card">
       <div class="chart-header">
-        <h2>🏢 Department-wise Documents</h2>
-        <p class="chart-subtitle">Documents by Department</p>
+        <h2>Department-wise Documents</h2>
+        <p class="chart-subtitle">Documents by department</p>
       </div>
       <div class="chart-wrapper">
         <canvas id="departmentChart"></canvas>
       </div>
     </div>
-  </div>
 
-  <!-- Summary Section -->
-  <div class="summary-section">
-    <h2>📋 Summary Statistics</h2>
-    <div class="summary-grid">
-      <div class="summary-card">
-        <div class="summary-icon">📊</div>
-        <div class="summary-content">
-          <h3>Total Documents</h3>
-          <p class="summary-value">{{ stats.overall.total }}</p>
-        </div>
+    <!-- Chart 5: Upload Trend -->
+    <div class="chart-card" style="grid-column:1/-1">
+      <div class="chart-header">
+        <h2>Upload Trend</h2>
+        <p class="chart-subtitle">Documents uploaded in the last 90 days</p>
       </div>
-      <div class="summary-card">
-        <div class="summary-icon">✅</div>
-        <div class="summary-content">
-          <h3>Approved</h3>
-          <p class="summary-value">{{ stats.overall.approved }}</p>
-        </div>
+      <div class="chart-wrapper">
+        <canvas id="uploadTrendChart"></canvas>
       </div>
-      <div class="summary-card">
-        <div class="summary-icon">⏳</div>
-        <div class="summary-content">
-          <h3>Pending</h3>
-          <p class="summary-value">{{ stats.overall.pending }}</p>
-        </div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon">❌</div>
-        <div class="summary-content">
-          <h3>Rejected</h3>
-          <p class="summary-value">{{ stats.overall.rejected }}</p>
-        </div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon">🏭</div>
-        <div class="summary-content">
-          <h3>Total Plants</h3>
-          <p class="summary-value">{{ stats.plant|length }}</p>
-        </div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon">👥</div>
-        <div class="summary-content">
-          <h3>Total Customers</h3>
-          <p class="summary-value">{{ stats.customer|length }}</p>
-        </div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon">🏢</div>
-        <div class="summary-content">
-          <h3>Total Departments</h3>
-          <p class="summary-value">{{ stats.department|length }}</p>
-        </div>
-      </div>
-      {% if stats.overall.total > 0 %}
-      <div class="summary-card">
-        <div class="summary-icon">📈</div>
-        <div class="summary-content">
-          <h3>Approval Rate</h3>
-          <p class="summary-value">{{ "%.1f"|format(stats.overall.approved * 100 / stats.overall.total) }}%</p>
-        </div>
-      </div>
-      {% endif %}
     </div>
   </div>
 </div>
@@ -152,264 +177,185 @@
 
 {% block scripts %}
 <script>
-  // Data from backend
-  const stats = {{ stats|tojson }};
+const stats = {{ stats|tojson }};
 
-  // Chart 1: Overall Documents (Doughnut Chart)
-  const overallCtx = document.getElementById('overallChart').getContext('2d');
-  new Chart(overallCtx, {
-    type: 'doughnut',
+// Resolve CSS variables to real colour strings at runtime
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#888';
+}
+
+const C_GREEN   = '#10b981';
+const C_AMBER   = '#f59e0b';
+const C_RED     = '#ef4444';
+const C_BLUE    = '#3b82f6';
+
+const tooltipDefaults = {
+  backgroundColor: 'rgba(10,14,26,0.92)',
+  titleColor: '#fff',
+  bodyColor: '#a8b8d8',
+  borderColor: 'rgba(255,255,255,0.1)',
+  borderWidth: 1,
+  titleFont: { size: 12, weight: '600' },
+  bodyFont: { size: 11 },
+  padding: 10,
+};
+
+const legendDefaults = {
+  position: 'bottom',
+  labels: { usePointStyle: true, padding: 16, font: { size: 11, weight: '500' }, color: cssVar('--text-sub') },
+};
+
+function scaleColor() { return cssVar('--text-dim'); }
+function gridColor()  { return 'rgba(255,255,255,0.06)'; }
+
+// ── Chart 1: Overall doughnut ──────────────────────────────────
+new Chart(document.getElementById('overallChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Approved', 'Pending', 'Rejected'],
+    datasets: [{
+      data: [stats.overall.approved, stats.overall.pending, stats.overall.rejected],
+      backgroundColor: [C_GREEN, C_AMBER, C_RED],
+      borderColor: 'transparent',
+      borderWidth: 2,
+      hoverOffset: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    cutout: '65%',
+    plugins: {
+      legend: legendDefaults,
+      tooltip: {
+        ...tooltipDefaults,
+        callbacks: {
+          label(ctx) {
+            const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+            const pct = total ? ((ctx.parsed * 100) / total).toFixed(1) : 0;
+            return ` ${ctx.label}: ${ctx.parsed} (${pct}%)`;
+          }
+        }
+      }
+    }
+  }
+});
+
+// ── Chart 2: Plant-wise bar ───────────────────────────────────
+const plantEntries = Object.entries(stats.plant);
+new Chart(document.getElementById('plantChart'), {
+  type: 'bar',
+  data: {
+    labels: plantEntries.map(([k]) => k.replace(/ Plant$/, '').replace(/ Plants$/, '')),
+    datasets: [
+      { label: 'Approved', data: plantEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 4 },
+      { label: 'Pending',  data: plantEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 4 },
+      { label: 'Rejected', data: plantEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 4 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    plugins: { legend: legendDefaults, tooltip: tooltipDefaults },
+    scales: {
+      x: { ticks: { color: scaleColor(), font: { size: 10 } }, grid: { color: gridColor() } },
+      y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1 }, grid: { color: gridColor() } }
+    }
+  }
+});
+
+// ── Chart 3: Customer-wise horizontal bar ─────────────────────
+const custEntries = Object.entries(stats.customer).sort((a, b) => b[1].total - a[1].total);
+new Chart(document.getElementById('customerChart'), {
+  type: 'bar',
+  data: {
+    labels: custEntries.map(([k]) => k),
+    datasets: [
+      { label: 'Approved', data: custEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 4 },
+      { label: 'Pending',  data: custEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 4 },
+      { label: 'Rejected', data: custEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 4 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    indexAxis: 'y',
+    plugins: { legend: legendDefaults, tooltip: tooltipDefaults },
+    scales: {
+      x: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1 }, grid: { color: gridColor() } },
+      y: { ticks: { color: scaleColor(), font: { size: 10 } }, grid: { display: false } }
+    }
+  }
+});
+
+// ── Chart 4: Department-wise horizontal bar ───────────────────
+const deptEntries = Object.entries(stats.department).sort((a, b) => b[1].total - a[1].total);
+// Shorten dept labels: keep just the code part before " - "
+const deptLabels = deptEntries.map(([k]) => k.includes(' - ') ? k.split(' - ')[0] : k);
+new Chart(document.getElementById('departmentChart'), {
+  type: 'bar',
+  data: {
+    labels: deptLabels,
+    datasets: [
+      { label: 'Approved', data: deptEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 4 },
+      { label: 'Pending',  data: deptEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 4 },
+      { label: 'Rejected', data: deptEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 4 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    indexAxis: 'y',
+    plugins: {
+      legend: legendDefaults,
+      tooltip: {
+        ...tooltipDefaults,
+        callbacks: {
+          title(items) { return deptEntries[items[0].dataIndex]?.[0] || items[0].label; }
+        }
+      }
+    },
+    scales: {
+      x: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1 }, grid: { color: gridColor() } },
+      y: { ticks: { color: scaleColor(), font: { size: 10 } }, grid: { display: false } }
+    }
+  }
+});
+
+// ── Chart 5: Upload trend line ────────────────────────────────
+const trendData = {{ trend_data | tojson }};
+const trendCtx = document.getElementById('uploadTrendChart');
+if (trendData && trendData.length) {
+  const labels = trendData.map(d => {
+    const dt = new Date(d.date);
+    return dt.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  });
+  new Chart(trendCtx, {
+    type: 'line',
     data: {
-      labels: ['Approved', 'Pending', 'Rejected'],
+      labels,
       datasets: [{
-        data: [
-          stats.overall.approved,
-          stats.overall.pending,
-          stats.overall.rejected
-        ],
-        backgroundColor: [
-          '#10b981',  // Green for Approved
-          '#f59e0b',  // Amber for Pending
-          '#ef4444'   // Red for Rejected
-        ],
-        borderColor: [
-          '#059669',
-          '#d97706',
-          '#dc2626'
-        ],
+        label: 'Uploads',
+        data: trendData.map(d => d.count),
+        borderColor: C_BLUE,
+        backgroundColor: 'rgba(59,130,246,0.1)',
+        pointBackgroundColor: C_BLUE,
+        pointBorderColor: '#fff',
+        pointRadius: 3,
+        pointHoverRadius: 5,
         borderWidth: 2,
-        borderRadius: 4
+        tension: 0.35,
+        fill: true,
       }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            padding: 15,
-            font: { size: 13, weight: '500' }
-          }
-        },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              const total = context.dataset.data.reduce((a, b) => a + b, 0);
-              const percentage = ((context.parsed * 100) / total).toFixed(1);
-              return context.label + ': ' + context.parsed + ' (' + percentage + '%)';
-            }
-          }
-        }
-      }
-    }
-  });
-
-  // Chart 2: Plant-wise Documents (Bar Chart)
-  const plantData = Object.entries(stats.plant).map(([plant, data]) => ({
-    plant: plant,
-    total: data.total,
-    approved: data.approved,
-    pending: data.pending,
-    rejected: data.rejected
-  }));
-
-  const plantCtx = document.getElementById('plantChart').getContext('2d');
-  new Chart(plantCtx, {
-    type: 'bar',
-    data: {
-      labels: plantData.map(p => p.plant),
-      datasets: [
-        {
-          label: 'Approved',
-          data: plantData.map(p => p.approved),
-          backgroundColor: '#10b981',
-          borderRadius: 4,
-          borderSkipped: false
-        },
-        {
-          label: 'Pending',
-          data: plantData.map(p => p.pending),
-          backgroundColor: '#f59e0b',
-          borderRadius: 4,
-          borderSkipped: false
-        },
-        {
-          label: 'Rejected',
-          data: plantData.map(p => p.rejected),
-          backgroundColor: '#ef4444',
-          borderRadius: 4,
-          borderSkipped: false
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      indexAxis: 'y',
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            padding: 15,
-            font: { size: 12, weight: '500' }
-          }
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          titleFont: { size: 12 },
-          bodyFont: { size: 11 }
-        }
-      },
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { display: false }, tooltip: tooltipDefaults },
       scales: {
-        x: {
-          stacked: false,
-          ticks: { beginAtZero: true }
-        }
+        x: { ticks: { color: scaleColor(), font: { size: 10 }, maxTicksLimit: 12 }, grid: { display: false } },
+        y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1 }, grid: { color: gridColor() } }
       }
     }
   });
-
-  // Chart 3: Customer-wise Documents (Horizontal Bar Chart)
-  const customerData = Object.entries(stats.customer)
-    .sort((a, b) => b[1].total - a[1].total)
-    .map(([customer, data]) => ({
-      customer: customer,
-      total: data.total,
-      approved: data.approved,
-      pending: data.pending,
-      rejected: data.rejected
-    }));
-
-  const customerCtx = document.getElementById('customerChart').getContext('2d');
-  new Chart(customerCtx, {
-    type: 'bar',
-    data: {
-      labels: customerData.map(c => c.customer),
-      datasets: [
-        {
-          label: 'Approved',
-          data: customerData.map(c => c.approved),
-          backgroundColor: '#10b981',
-          borderRadius: 4,
-          borderSkipped: false
-        },
-        {
-          label: 'Pending',
-          data: customerData.map(c => c.pending),
-          backgroundColor: '#f59e0b',
-          borderRadius: 4,
-          borderSkipped: false
-        },
-        {
-          label: 'Rejected',
-          data: customerData.map(c => c.rejected),
-          backgroundColor: '#ef4444',
-          borderRadius: 4,
-          borderSkipped: false
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      indexAxis: 'y',
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            padding: 15,
-            font: { size: 12, weight: '500' }
-          }
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          titleFont: { size: 12 },
-          bodyFont: { size: 11 }
-        }
-      },
-      scales: {
-        x: {
-          stacked: false,
-          ticks: { beginAtZero: true }
-        }
-      }
-    }
-  });
-
-  // Chart 4: Department-wise Documents (Radar Chart)
-  const departmentData = Object.entries(stats.department)
-    .sort((a, b) => b[1].total - a[1].total)
-    .map(([dept, data]) => ({
-      department: dept,
-      total: data.total,
-      approved: data.approved,
-      pending: data.pending,
-      rejected: data.rejected
-    }));
-
-  const departmentCtx = document.getElementById('departmentChart').getContext('2d');
-  new Chart(departmentCtx, {
-    type: 'radar',
-    data: {
-      labels: departmentData.map(d => d.department),
-      datasets: [
-        {
-          label: 'Approved',
-          data: departmentData.map(d => d.approved),
-          borderColor: '#10b981',
-          backgroundColor: 'rgba(16, 185, 129, 0.1)',
-          borderWidth: 2,
-          fill: true
-        },
-        {
-          label: 'Pending',
-          data: departmentData.map(d => d.pending),
-          borderColor: '#f59e0b',
-          backgroundColor: 'rgba(245, 158, 11, 0.1)',
-          borderWidth: 2,
-          fill: true
-        },
-        {
-          label: 'Rejected',
-          data: departmentData.map(d => d.rejected),
-          borderColor: '#ef4444',
-          backgroundColor: 'rgba(239, 68, 68, 0.1)',
-          borderWidth: 2,
-          fill: true
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            padding: 15,
-            font: { size: 12, weight: '500' }
-          }
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          titleFont: { size: 12 },
-          bodyFont: { size: 11 }
-        }
-      },
-      scales: {
-        r: {
-          beginAtZero: true,
-          ticks: {
-            stepSize: 1
-          }
-        }
-      }
-    }
-  });
+} else {
+  trendCtx.parentElement.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem 0;font-size:.85rem">No upload trend data available.</p>';
+}
 </script>
 {% endblock %}

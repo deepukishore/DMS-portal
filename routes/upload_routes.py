@@ -44,8 +44,8 @@ def index():
         category = request.form.get("category", "").strip()
         doc_type = request.form.get("doc_type", "external")
         files = request.files.getlist("files")
-        upload_target = request.form.get('upload_target', 'documents')
-        library_category = category if upload_target == 'library' else None
+        upload_target = request.form.get('upload_target', 'library')
+        library_category = category
 
         if not plant or not department:
             return _upload_error("Your profile is missing plant or department details. Please contact an admin.")
@@ -61,10 +61,17 @@ def index():
 
         if not document_number:
             return _upload_error("Document number is required.")
-        if not revision_number and upload_target == 'library':
+        if not revision_number:
             revision_number = 'Rev.00'
-        if upload_target == 'library' and not category:
-            return _upload_error("Please select a Document Library category when uploading to the library.")
+        if not category:
+            return _upload_error("Please select a Document Library category.")
+        library_subcategory = (
+            request.form.get('library_subcategory_hidden', '')
+            or request.form.get('library_subcategory', '')
+            or request.form.get('library_subcategory_select', '')
+        ).strip()
+        if not library_subcategory:
+            return _upload_error("Please select the exact Document Library folder path before uploading.")
 
         uploaded_count = 0
         email_failures = []
@@ -76,7 +83,6 @@ def index():
             if not uploaded_file or not uploaded_file.filename:
                 continue
 
-            # Save the uploaded file (store physically and create document record)
             record, error = DocumentService.save_upload(
                 uploaded_file,
                 session["user_name"],
@@ -94,30 +100,22 @@ def index():
                 email_failures.append(f"{uploaded_file.filename} (save failed: {error})")
                 continue
 
-            # If uploading to the Document Library, create a category_documents entry
-            if upload_target == 'library':
-                # library_subcategory may be provided via hidden field (preferred), a free-text input, or a select
-                library_subcategory = (
-                    request.form.get('library_subcategory_hidden', '')
-                    or request.form.get('library_subcategory', '')
-                    or request.form.get('library_subcategory_select', '')
+            try:
+                CategoryDocumentService.save_category_document(
+                    category=library_category,
+                    plant=plant,
+                    department=department,
+                    file_name=record['file_name'],
+                    uploaded_by=session['user_name'],
+                    user_id=session['user_id'],
+                    sub_category=library_subcategory,
+                    revision_number=revision_number,
                 )
-                try:
-                    CategoryDocumentService.save_category_document(
-                        category=library_category,
-                        plant=plant,
-                        department=department,
-                        file_name=record['file_name'],
-                        uploaded_by=session['user_name'],
-                        user_id=session['user_id'],
-                        sub_category=library_subcategory,
-                        revision_number=revision_number,
-                    )
-                except Exception as e:
-                    # Non-fatal: continue but notify
-                    email_failures.append(f"{record['file_name']} (library save failed: {str(e)})")
-                else:
-                    saved_files.append(record['file_name'])
+            except Exception as e:
+                # Non-fatal: continue but notify
+                email_failures.append(f"{record['file_name']} (library save failed: {str(e)})")
+            else:
+                saved_files.append(record['file_name'])
 
             uploaded_count += 1
             SystemLogService.log_upload(
@@ -128,7 +126,6 @@ def index():
                 department,
             )
 
-            # Log revision history if this is a revision
             if is_revision and revision_number:
                 RevisionHistoryService.add_revision(
                     document_id=record.get("id"),
@@ -150,7 +147,6 @@ def index():
                 notification_type="info",
             )
 
-            # Send upload confirmation to uploader
             sent_confirm, confirm_error = MailService.send_upload_confirmation(
                 session["user_email"],
                 record["file_name"],
@@ -198,20 +194,19 @@ def index():
                 "warning",
             )
 
-        # If this was an AJAX upload to the library, return saved filenames so client can preview
-        if upload_target == 'library':
-            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                return jsonify({
-                    'ok': True,
-                    'saved_files': saved_files,
-                    'email_failures': email_failures,
-                    'redirect': url_for('document_library.index', category_key=library_category) if library_category else url_for('document_library.index'),
-                })
-            # Non-AJAX: redirect to library
-            if library_category:
-                return redirect(url_for('document_library.index', category_key=library_category))
+        # Return library redirect on success so the user can continue working with the selected category.
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return jsonify({
+                'ok': True,
+                'saved_files': saved_files,
+                'email_failures': email_failures,
+                'redirect': url_for('document_library.index', category_key=library_category) if library_category else url_for('document_library.index'),
+            })
 
-        return redirect(url_for("dashboard.index"))
+        if library_category:
+            return redirect(url_for('document_library.index', category_key=library_category))
+
+        return redirect(url_for("document_library.index"))
 
     # Pass document library categories and data for optional library uploads
     categories = DocumentLibraryService.get_categories()

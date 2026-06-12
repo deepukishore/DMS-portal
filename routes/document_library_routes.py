@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, redirect, render_template, request, sessio
 
 from services.auth_service import AuthService
 from services.document_library_service import DocumentLibraryService
+from services.plant_asset_service import PlantAssetService
 from services.system_log_service import SystemLogService
 
 document_library_bp = Blueprint("document_library", __name__)
@@ -40,6 +41,8 @@ def index(category_key=None):
         category_data=DocumentLibraryService.get_category_data(resolved_key, access_department=access_department),
         preselected_primary=preselected_primary,
         preselected_secondary=preselected_secondary,
+        user_qms_level=AuthService.get_qms_level(),
+        is_admin=AuthService.is_admin(),
     )
 
 
@@ -56,3 +59,33 @@ def view_file():
         f"Document Library - {data.get('category', '')}",
     )
     return jsonify({"ok": True})
+
+
+@document_library_bp.route("/document-library/master-records/departments")
+def master_record_departments():
+    redir = _require_login()
+    if redir:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    plant_label = request.args.get("plant", "")
+    departments = PlantAssetService.get_departments_for_plant(
+        plant_label,
+        access_department=AuthService.get_visible_department(),
+    )
+    return jsonify({"departments": departments})
+
+
+@document_library_bp.route("/document-library/master-records/files")
+def master_record_files():
+    redir = _require_login()
+    if redir:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    plant_label = request.args.get("plant", "")
+    department = request.args.get("department", "")
+    files = PlantAssetService.get_files_for_plant_department(
+        plant_label,
+        department,
+        access_department=AuthService.get_visible_department(),
+    )
+    return jsonify({"files": files})

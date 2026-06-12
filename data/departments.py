@@ -3,6 +3,7 @@ OFFICIAL_DEPARTMENT_MAP = {
     "MFG": "Manufacturing",
     "MFG HT": "Manufacturing Heat Treatment",
     "PED": "Product Engineering Department",
+    "PMD": "Product Management Department",
     "PLE": "Plant Engineering",
     "MMD": "Material Management Department",
     "QAD": "Quality Assurance Department",
