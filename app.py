@@ -10,6 +10,7 @@ from routes.auth_routes import auth_bp
 from routes.dashboard_routes import dashboard_bp
 from routes.upload_routes import upload_bp
 from routes.approval_routes import approval_bp
+from routes.tracking_routes import tracking_bp
 from routes.archive_routes import archive_bp
 from routes.document_library_routes import document_library_bp
 from routes.plant_assets_routes import plant_assets_bp
@@ -36,6 +37,7 @@ def create_app():
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(upload_bp)
     app.register_blueprint(approval_bp)
+    app.register_blueprint(tracking_bp)
     app.register_blueprint(archive_bp)
     app.register_blueprint(document_library_bp)
     app.register_blueprint(plant_assets_bp)
