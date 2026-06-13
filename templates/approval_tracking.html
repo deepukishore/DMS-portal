@@ -1,0 +1,144 @@
+{% extends 'layout.html' %}
+{% block title %}Track Approvals · Smart DMS{% endblock %}
+
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">Track Approvals</span>
+{% endblock %}
+
+{% macro step_icon(name) %}
+  {% if name == 'upload' %}
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+  {% elif name == 'bell' %}
+    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+  {% elif name == 'user-check' %}
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/>
+  {% elif name == 'shield-check' %}
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+  {% else %}
+    <polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/>
+  {% endif %}
+{% endmacro %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <p class="eyebrow">Approval Tracking</p>
+    <h1 class="page-title">Track Approvals</h1>
+    <p class="page-sub">Follow each document from upload through first-level and high-level approval until it is published.</p>
+  </div>
+</div>
+
+<div class="stats-grid stats-grid-compact track-summary">
+  <article class="stat-card">
+    <span class="stat-label">Total Requests</span>
+    <strong class="stat-value">{{ summary.total }}</strong>
+    <p class="stat-foot">Documents tracked</p>
+  </article>
+  <article class="stat-card stat-card-pending">
+    <span class="stat-label">In Progress</span>
+    <strong class="stat-value">{{ summary.in_progress }}</strong>
+    <p class="stat-foot">Awaiting a decision</p>
+  </article>
+  <article class="stat-card stat-card-approved">
+    <span class="stat-label">Approved</span>
+    <strong class="stat-value">{{ summary.approved }}</strong>
+    <p class="stat-foot">Published documents</p>
+  </article>
+  <article class="stat-card stat-card-rejected">
+    <span class="stat-label">Rejected</span>
+    <strong class="stat-value">{{ summary.rejected }}</strong>
+    <p class="stat-foot">Returned to uploader</p>
+  </article>
+</div>
+
+<section class="surface-panel">
+  <form method="GET" action="{{ url_for('tracking.index') }}" class="filter-bar">
+    <input type="hidden" name="scope" value="{{ scope }}" />
+    <div class="search-wrap search-wrap-wide">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" name="search" placeholder="Search by file, uploader, document number…" value="{{ search or '' }}" />
+    </div>
+    <select name="status">
+      <option value="">All statuses</option>
+      <option value="Pending" {% if selected_status=='Pending' %}selected{% endif %}>Pending</option>
+      <option value="Pending Final Approval" {% if selected_status=='Pending Final Approval' %}selected{% endif %}>Pending Final Approval</option>
+      <option value="Approved" {% if selected_status=='Approved' %}selected{% endif %}>Approved</option>
+      <option value="Rejected" {% if selected_status=='Rejected' %}selected{% endif %}>Rejected</option>
+    </select>
+    <button type="submit" class="btn-primary">Apply</button>
+    <a href="{{ url_for('tracking.index') }}" class="btn-outline">Reset</a>
+  </form>
+  {% if can_view_all %}
+  <div class="track-scope">
+    <a href="{{ url_for('tracking.index', scope='mine', status=selected_status, search=search) }}"
+       class="track-scope-btn {% if scope != 'all' %}is-active{% endif %}">My uploads</a>
+    <a href="{{ url_for('tracking.index', scope='all', status=selected_status, search=search) }}"
+       class="track-scope-btn {% if scope == 'all' %}is-active{% endif %}">All documents</a>
+  </div>
+  {% endif %}
+</section>
+
+{% if trackers %}
+<div class="tracker-list">
+  {% for t in trackers %}
+  {% set r = t.record %}
+  <article class="tracker-card tone-{{ t.tone }}">
+    <header class="tracker-head">
+      <div class="tracker-file">
+        <span class="tracker-file-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </span>
+        <div>
+          <h2 class="tracker-title">{{ r.file_name }}</h2>
+          <p class="tracker-meta">
+            {{ r.document_number or '—' }} · {{ r.revision_number or '—' }}
+            <span class="dot-sep">•</span> {{ r.plant }}
+            <span class="dot-sep">•</span> {{ r.department }}
+            <span class="dot-sep">•</span> by {{ r.name }}
+          </p>
+        </div>
+      </div>
+      <span class="track-badge track-badge-{{ t.badge }}">{{ t.status_label }}</span>
+    </header>
+
+    <div class="tracker-progress" aria-hidden="true">
+      <div class="tracker-progress-fill state-{{ t.tone }}" style="width: {{ t.progress_pct }}%"></div>
+    </div>
+
+    <ol class="stepper">
+      {% for step in t.steps %}
+      <li class="step step-{{ step.state }}">
+        <span class="step-node">
+          {% if step.state == 'complete' %}
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          {% elif step.state == 'rejected' %}
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          {% else %}
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">{{ step_icon(step.icon) }}</svg>
+          {% endif %}
+        </span>
+        <div class="step-body">
+          <strong class="step-title">{{ step.title }}</strong>
+          <p class="step-desc">{{ step.desc }}</p>
+          {% if step.actor %}<span class="step-actor">{{ step.actor }}</span>{% endif %}
+          {% if step.time %}<span class="step-time">{{ step.time }}</span>{% endif %}
+          {% if step.state == 'active' %}<span class="step-flag">In progress</span>{% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<section class="surface-panel">
+  <div class="empty-state" style="padding:3rem 1rem;text-align:center">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.5;margin-bottom:.75rem"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    <p>No approval requests to track yet.</p>
+    <a href="{{ url_for('upload.index') }}" class="btn-primary btn-sm" style="margin-top:.75rem">Upload a document</a>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
