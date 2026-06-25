@@ -775,7 +775,7 @@ html[data-theme="light"] .btn-theme .theme-moon {
   vertical-align: middle;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
   font-size: .82rem;
 }
 .data-table td.action-cell,
@@ -793,7 +793,7 @@ html[data-theme="light"] .btn-theme .theme-moon {
 
 .mono { font-family: 'IBM Plex Mono', monospace; font-size: .73rem; }
 .text-dim { color: var(--text-dim); }
-.file-cell { display: flex; align-items: center; gap: .4rem; }
+.file-cell { display: grid-lanes; align-items: center; gap: .4rem; }
 .file-cell svg { opacity: .4; flex-shrink: 0; }
 
 
