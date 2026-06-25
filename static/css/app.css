@@ -797,7 +797,7 @@ html[data-theme="light"] .btn-theme .theme-moon {
 .file-cell svg { opacity: .4; flex-shrink: 0; }
 
 
-.action-cell { display: flex; align-items: center; gap: .4rem; white-space: nowrap; }
+.action-cell { display: grid-lanes; align-items: center; gap: .4rem; white-space: nowrap; }
 .person-stack,
 .file-block {
   display: flex;
@@ -819,7 +819,7 @@ html[data-theme="light"] .btn-theme .theme-moon {
   color: var(--accent);
   border-radius: 4px;
   padding: .15rem .5rem;
-  font-size: .7rem;
+  font-size: .66rem;
   font-weight: 600;
   white-space: nowrap;
 }
