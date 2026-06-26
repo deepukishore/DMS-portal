@@ -610,7 +610,7 @@ html[data-theme="light"] .btn-theme .theme-moon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px; height: 28px;
+  width: 20px; height: 20px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--bg-3);
@@ -781,8 +781,8 @@ html[data-theme="light"] .btn-theme .theme-moon {
 .data-table td.action-cell,
 .data-table td.file-block,
 .data-table td .file-block {
-  white-space: normal;
-  overflow: visible;
+  white-space: nowrap;
+  overflow: unset;
   text-overflow: clip;
 }
 .data-table tr:last-child td { border-bottom: none; }
@@ -949,7 +949,7 @@ html[data-theme="light"] .btn-theme .theme-moon {
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
 .form-row-three { grid-template-columns: repeat(3, 1fr); }
 .form-row-four { grid-template-columns: repeat(4, 1fr); }
-label { display: flex; flex-direction: column; gap: .3rem; font-size: .78rem; font-weight: 500; color: var(--text-sub); }
+label { display: flex; flex-direction: column; gap: .3rem; font-size: .78rem; font-weight: 500; color: var(--text-sub); align-items: baseline; justify-content: flex-end; }
 label input, label select {
   background: var(--bg-2);
   border: 1px solid var(--border);
