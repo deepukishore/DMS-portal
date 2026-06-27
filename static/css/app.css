@@ -1525,10 +1525,6 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   object-fit: contain;
   background: #0b1016;
   -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
   pointer-events: auto;
 }
 .review-generated-preview {
