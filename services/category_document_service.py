@@ -40,7 +40,8 @@ class CategoryDocumentService:
         return sorted({normalize_department(row) for row in rows})
 
     @staticmethod
-    def get_files_for_category(category, plant='', department='', sub_type=''):
+    def get_files_for_category(category, plant='', department='', sub_type='', sub_category=''):
+        sub_type = sub_type or sub_category
         department = normalize_department(department) if department else department
         conn = get_connection()
         cursor = conn.cursor()

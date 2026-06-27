@@ -70,6 +70,47 @@ COMPANY = {
     ],
 }
 
+TRACK_MY_DOCS = {
+    "name": "Track My Docs",
+    "tagline": "A document management and approval tracking portal for Smart DMS.",
+    "description": (
+        "Track My Docs helps teams upload, review, approve, browse, and audit "
+        "documents across plants, departments, customers, and controlled "
+        "document categories."
+    ),
+    "version": "2.0.0",
+    "supported_plants": [
+        "P1 - Trichy Plant",
+        "P2 - Guduvachery Plant",
+        "P3 - Guduvachery Plant",
+        "P4 - Uttarakhand Plant",
+    ],
+    "features": [
+        {
+            "title": "Document Uploads",
+            "description": "Submit files with plant, department, customer, category, and revision details.",
+        },
+        {
+            "title": "Approval Workflow",
+            "description": "Route documents through approvers and keep decisions, comments, and timestamps visible.",
+        },
+        {
+            "title": "Document Library",
+            "description": "Browse controlled records by category, plant, department, and customer.",
+        },
+        {
+            "title": "Audit Trail",
+            "description": "Track uploads, reviews, views, archive actions, and revision history.",
+        },
+    ],
+    "key_benefits": [
+        "Centralized access to current documents.",
+        "Clear approval status and ownership.",
+        "Reduced manual follow-up across teams.",
+        "Traceable history for audits and reviews.",
+    ],
+}
+
 
 @about_bp.route('/about')
 def index():
@@ -83,3 +124,15 @@ def company():
     if not AuthService.is_logged_in():
         return redirect(url_for('auth.login'))
     return render_template('about_company.html', company=COMPANY)
+
+
+@about_bp.route('/about/company-info', endpoint='about_company')
+def about_company():
+    return company()
+
+
+@about_bp.route('/about/track-docs', endpoint='about_track_docs')
+def about_track_docs():
+    if not AuthService.is_logged_in():
+        return redirect(url_for('auth.login'))
+    return render_template('about_track_docs.html', system=TRACK_MY_DOCS)

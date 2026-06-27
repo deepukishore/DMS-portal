@@ -199,6 +199,25 @@ class DocumentService:
         return records[0] if records else None
 
     @staticmethod
+    def get_document_by_file_name(file_name, access_department=""):
+        access_department = normalize_department(access_department) if access_department else access_department
+        conn = get_connection()
+        cursor = conn.cursor()
+        query = '''
+            SELECT * FROM documents
+            WHERE (file_name = ? OR original_file_name = ? OR pdf_file_name = ?)
+        '''
+        params = [file_name, file_name, file_name]
+        if access_department:
+            query += ' AND department = ?'
+            params.append(access_department)
+        query += ' ORDER BY uploaded_at DESC, id DESC LIMIT 1'
+        cursor.execute(query, params)
+        row = cursor.fetchone()
+        conn.close()
+        return DocumentService._normalize_record(dict(row)) if row else None
+
+    @staticmethod
     def delete_document(doc_id):
         conn = get_connection()
         cursor = conn.cursor()

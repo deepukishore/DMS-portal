@@ -238,6 +238,28 @@ def view_document(doc_id):
     )
 
 
+@dashboard_bp.route("/document-view")
+def view_document_by_file():
+    redir = _require_login()
+    if redir:
+        return redir
+
+    file_name = request.args.get("file", "").strip()
+    if not file_name:
+        flash("No file was selected for viewing.", "error")
+        return redirect(url_for("dashboard.index"))
+
+    document = DocumentService.get_document_by_file_name(
+        file_name,
+        access_department=AuthService.get_visible_department(),
+    )
+    if not document:
+        flash(f'"{file_name}" is not available as an uploaded document yet.', "error")
+        return redirect(url_for("dashboard.index"))
+
+    return redirect(url_for("dashboard.view_document", doc_id=document["id"]))
+
+
 @dashboard_bp.route("/dashboard/view/<int:doc_id>/file")
 def view_file(doc_id):
     redir = _require_login()
