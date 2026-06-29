@@ -18,6 +18,8 @@ def convert_to_pdf(src_path, dest_path):
     """Convert docx/xlsx/pptx to PDF. Returns (pdf_path, error)."""
     ext = os.path.splitext(src_path)[1].lower()
     if ext == '.pdf':
+        if os.path.abspath(src_path) == os.path.abspath(dest_path):
+            return dest_path, None
         import shutil
         shutil.copy2(src_path, dest_path)
         return dest_path, None
