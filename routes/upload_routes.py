@@ -9,6 +9,7 @@ from services.mail_service import MailService
 from services.notification_service import NotificationService
 from services.system_log_service import SystemLogService
 from services.revision_history_service import RevisionHistoryService
+from services.user_store_service import UserStoreService
 
 upload_bp = Blueprint("upload", __name__)
 
@@ -161,22 +162,25 @@ def index():
                 current_app.config["REVIEW_TOKEN_SALT"],
             )
             review_url = url_for("approvals.review_document", token=token, _external=True)
+            first_approvers = UserStoreService.get_users_by_qms_level("L2")
+            first_approver_emails = [user.get("email") for user in first_approvers if user.get("email")]
+            if not first_approver_emails and current_app.config["APPROVAL_RECIPIENT"]:
+                first_approver_emails = [current_app.config["APPROVAL_RECIPIENT"]]
             sent, mail_error = MailService.send_document_approval_request(
-                current_app.config["APPROVAL_RECIPIENT"],
+                first_approver_emails,
                 review_url,
                 record,
             )
-            NotificationService.notify_admins(
-                "Approval required",
-                f'{record.get("original_file_name", record["file_name"])} from {record["department"]} is pending review.',
+            NotificationService.notify_qms_level(
+                "L2",
+                "First approval required",
+                f'{record.get("original_file_name", record["file_name"])} from {record["department"]} is pending first approval.',
                 link_url=url_for("approvals.review_document", token=token),
                 notification_type="warning",
             )
             if sent:
-                SystemLogService.log_approval_email(
-                    current_app.config["APPROVAL_RECIPIENT"],
-                    record["file_name"],
-                )
+                for recipient in first_approver_emails:
+                    SystemLogService.log_approval_email(recipient, record["file_name"])
             else:
                 email_failures.append(f"{record['file_name']} (approval request email failed: {mail_error})")
 
@@ -219,6 +223,7 @@ def index():
         current_user=current_user,
         library_categories=categories,
         library_data=library_data,
+        user_qms_level=AuthService.get_qms_level(),
         PLANTS=PLANTS,
         DEPARTMENTS=DEPARTMENTS,
     )
@@ -270,14 +275,19 @@ def update_document(doc_id):
         current_app.config['REVIEW_TOKEN_SALT'],
     )
     review_url = url_for('approvals.review_document', token=token, _external=True)
+    first_approvers = UserStoreService.get_users_by_qms_level("L2")
+    first_approver_emails = [user.get("email") for user in first_approvers if user.get("email")]
+    if not first_approver_emails and current_app.config["APPROVAL_RECIPIENT"]:
+        first_approver_emails = [current_app.config["APPROVAL_RECIPIENT"]]
     MailService.send_document_approval_request(
-        current_app.config['APPROVAL_RECIPIENT'],
+        first_approver_emails,
         review_url,
         updated_doc,
     )
-    NotificationService.notify_admins(
-        "Updated document pending approval",
-        f'{updated_doc.get("original_file_name", updated_doc["file_name"])} is awaiting review.',
+    NotificationService.notify_qms_level(
+        "L2",
+        "Updated document pending first approval",
+        f'{updated_doc.get("original_file_name", updated_doc["file_name"])} is awaiting first approval.',
         link_url=url_for("approvals.review_document", token=token),
         notification_type="warning",
     )

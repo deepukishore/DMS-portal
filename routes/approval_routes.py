@@ -26,6 +26,7 @@ from services.mail_service import MailService
 from services.document_preview_service import DocumentPreviewService
 from services.notification_service import NotificationService
 from services.system_log_service import SystemLogService
+from services.user_store_service import UserStoreService
 
 approval_bp = Blueprint("approvals", __name__)
 
@@ -36,17 +37,14 @@ def _require_login():
     return None
 
 
-def _require_admin():
-    current_user = AuthService.get_current_user()
-    if AuthService.is_admin(current_user):
-        return None
-
-    message = "Only admins can approve or reject document requests."
-    if request.headers.get("X-Requested-With") == "XMLHttpRequest":
-        return jsonify({"ok": False, "message": message}), 403
-
-    flash(message, "error")
-    return redirect(url_for("dashboard.index"))
+def _can_decide_record(record, user=None):
+    user = user or AuthService.get_current_user()
+    status = record.get("approval_status", "Pending")
+    if status == "Pending":
+        return AuthService.is_qms_first_approver(user)
+    if status == "Pending Final Approval":
+        return AuthService.is_qms_final_approver(user)
+    return False
 
 
 def _records_with_tokens(records):
@@ -194,7 +192,7 @@ def review_document(token):
         file_exists=file_exists,
         review_file_url=review_file_url,
         preview=preview,
-        can_decide=AuthService.is_admin(),
+        can_decide=_can_decide_record(record),
     )
 
 
@@ -234,21 +232,42 @@ def update_decision(token):
             return jsonify({"ok": False, "message": message}), 401
         return redirect(url_for("auth.login", next=request.path))
 
-    access_redir = _require_admin()
-    if access_redir:
-        return access_redir
-
     record = _resolve_record_or_none(token)
     if not record:
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": "Invalid review link."}), 404
         return render_template("approval_review.html", invalid_link=True), 404
 
+    current_user = AuthService.get_current_user()
+    record_status = record.get("approval_status", "Pending")
+    if not _can_decide_record(record, current_user):
+        message = (
+            "Only L2 Assistant Managers/Managers can complete first approval."
+            if record_status == "Pending"
+            else "Only L1 HOD users can complete final approval."
+        )
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            return jsonify({"ok": False, "message": message}), 403
+        flash(message, "error")
+        return redirect(url_for("approvals.review_document", token=token))
+
     status = request.form.get("status", "")
     if status not in {"Approved", "Rejected", "First Approved"}:
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": "Please choose a valid approval action."}), 400
         flash("Please choose a valid approval action.", "error")
+        return redirect(url_for("approvals.review_document", token=token))
+    if record_status == "Pending" and status not in {"First Approved", "Rejected"}:
+        message = "L2 first approvers can first-approve or reject this request."
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            return jsonify({"ok": False, "message": message}), 400
+        flash(message, "error")
+        return redirect(url_for("approvals.review_document", token=token))
+    if record_status == "Pending Final Approval" and status not in {"Approved", "Rejected"}:
+        message = "L1 final approvers can approve or reject this request."
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            return jsonify({"ok": False, "message": message}), 400
+        flash(message, "error")
         return redirect(url_for("approvals.review_document", token=token))
 
     rejection_comment = request.form.get("rejection_comment", "").strip()
@@ -259,7 +278,7 @@ def update_decision(token):
             return jsonify({"ok": False, "message": message}), 400
         flash(message, "error")
         return redirect(url_for("approvals.review_document", token=token))
-    if status == "First Approved" and record.get("category") == "master_records" and not selected_recipients:
+    if status == "First Approved" and not selected_recipients:
         message = "Please add selected recipients or department heads before sending to final approval."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": message}), 400
@@ -268,8 +287,6 @@ def update_decision(token):
 
     decision_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
-    # Log the approval decision
-    current_user = AuthService.get_current_user()
     updated_record, error = DocumentService.update_approval_status(
         record["id"],
         status,
@@ -297,6 +314,29 @@ def update_decision(token):
     message = f"Document marked as {effective_status}."
     if status == "First Approved":
         message = "First approval accepted. Document moved to final approval."
+        final_approvers = UserStoreService.get_users_by_qms_level("L1")
+        final_approver_emails = [user.get("email") for user in final_approvers if user.get("email")]
+        if not final_approver_emails and current_app.config["APPROVAL_RECIPIENT"]:
+            final_approver_emails = [current_app.config["APPROVAL_RECIPIENT"]]
+        review_url = url_for("approvals.review_document", token=token, _external=True)
+        final_sent, final_error = MailService.send_document_approval_request(
+            final_approver_emails,
+            review_url,
+            updated_record,
+        )
+        NotificationService.notify_qms_level(
+            "L1",
+            "Final approval required",
+            f'{updated_record.get("original_file_name", updated_record["file_name"])} is pending final HOD approval.',
+            link_url=url_for("approvals.review_document", token=token),
+            notification_type="warning",
+        )
+        if final_sent:
+            for recipient in final_approver_emails:
+                SystemLogService.log_approval_email(recipient, updated_record["file_name"])
+        else:
+            message = f"First approval accepted, but final approver email failed: {final_error}"
+            flash_category = "warning"
 
     if uploader_email and status != "First Approved":
         uploader_sent, uploader_error = MailService.send_approval_decision_notification(
@@ -319,14 +359,14 @@ def update_decision(token):
             notification_type="warning" if status == "Rejected" else "success",
         )
 
-    if status == "Approved" and record.get("category") == "master_records":
+    if status == "Approved":
         recipients = [
             item.strip()
             for item in (updated_record.get("selected_recipients") or "").replace(";", ",").split(",")
             if item.strip() and "@" in item
         ]
         if recipients:
-            selected_sent, selected_error = MailService.send_master_records_final_notification(
+            selected_sent, selected_error = MailService.send_final_shared_notification(
                 recipients,
                 updated_record,
                 decision_time,
@@ -356,68 +396,9 @@ def update_decision(token):
 @approval_bp.route("/approvals/bulk-decision", methods=["POST"])
 def bulk_update_decision():
     if not AuthService.is_logged_in():
-        return jsonify({"ok": False, "message": "Please sign in as an admin."}), 401
+        return jsonify({"ok": False, "message": "Please sign in."}), 401
 
-    access_redir = _require_admin()
-    if access_redir:
-        return access_redir
-
-    status = request.form.get("status", "").strip()
-    raw_ids = request.form.getlist("doc_ids")
-    rejection_comment = request.form.get("rejection_comment", "").strip()
-    if status not in {"Approved", "Rejected"}:
-        return jsonify({"ok": False, "message": "Choose Approved or Rejected for the bulk action."}), 400
-    if not raw_ids:
-        return jsonify({"ok": False, "message": "Select at least one pending document first."}), 400
-    if status == "Rejected" and not rejection_comment:
-        return jsonify({"ok": False, "message": "Please add rejection comments for the selected documents."}), 400
-
-    records = DocumentService.get_documents_by_ids(raw_ids)
-    pending_records = [record for record in records if record.get("approval_status") == "Pending"]
-    if not pending_records:
-        return jsonify({"ok": False, "message": "Only pending documents can be updated in bulk."}), 400
-
-    current_user = AuthService.get_current_user()
-    updated_records, error = DocumentService.bulk_update_approval_status(
-        [record["id"] for record in pending_records],
-        status,
-        rejection_comment=rejection_comment,
-        decided_by=current_user.get("name", "Approver"),
-    )
-    if error:
-        return jsonify({"ok": False, "message": error}), 400
-
-    for updated_record in updated_records:
-        SystemLogService.log_approval_decision(
-            current_user.get("email", current_app.config["APPROVAL_RECIPIENT"]),
-            updated_record["file_name"],
-            status,
-            current_user.get("name", "Approver"),
-        )
-        uploader_email = updated_record.get("uploader_email", "")
-        if uploader_email:
-            MailService.send_approval_decision_notification(
-                uploader_email,
-                updated_record,
-                status,
-                updated_record.get("approval_updated_at"),
-                rejection_comment=rejection_comment,
-            )
-            NotificationService.create_notification(
-                uploader_email,
-                f"Document {status}",
-                rejection_comment if status == "Rejected" and rejection_comment else f'{updated_record["original_file_name"] or updated_record["file_name"]} was {status.lower()}.',
-                link_url=url_for("dashboard.view_document", doc_id=updated_record["id"]),
-                notification_type="warning" if status == "Rejected" else "success",
-            )
-
-    return jsonify(
-        {
-            "ok": True,
-            "status": status,
-            "updated_ids": [record["id"] for record in updated_records],
-            "count": len(updated_records),
-            "rejection_comment": rejection_comment,
-            "message": f'{len(updated_records)} document(s) marked as {status}.',
-        }
-    )
+    return jsonify({
+        "ok": False,
+        "message": "Bulk decisions are disabled because approvals require L2 first review, recipient selection, and L1 final review.",
+    }), 400

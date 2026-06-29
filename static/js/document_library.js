@@ -389,30 +389,11 @@ function renderQms() {
   const groups = CATEGORY_DATA.document_groups || {};
 
   // Non-admin users are locked to their assigned QMS level — skip the picker
-  const lockedLevel = (!IS_ADMIN && USER_QMS_LEVEL) ? USER_QMS_LEVEL : null;
+  const lockedLevel = USER_QMS_LEVEL || 'L4';
 
   if (!selectedPrimary) {
-    // If locked, auto-select their level immediately
-    if (lockedLevel) {
-      selectedPrimary = lockedLevel;
-      renderQms();
-      return;
-    }
-    // Admin: show level picker
-    const el = setRoot();
-    el.appendChild(createStepBar(['Select Access Level', 'Select Document Type', 'Browse Files'], 0));
-    const panel = createHeader('QMS', CATEGORY_DATA.description || '');
-    panel.appendChild(createOptionGrid(Object.entries(levels).map(([key, value]) => ({
-      key,
-      label: value.label,
-      description: value.description,
-      meta: value.approver ? 'Approver for uploaded QMS documents' : value.access,
-    })), key => {
-      selectedPrimary = key;
-      selectedSecondary = '';
-      render();
-    }));
-    el.appendChild(panel);
+    selectedPrimary = lockedLevel;
+    renderQms();
     return;
   }
 
@@ -432,12 +413,7 @@ function renderQms() {
     }));
 
     const el = setRoot();
-    // Show level badge for non-admin so they know which level they have
-    const stepLabels = lockedLevel
-      ? ['Browse Files']
-      : ['Select Access Level', 'Select Document Type', 'Browse Files'];
-    const activeStep = lockedLevel ? 0 : 1;
-    el.appendChild(createStepBar(stepLabels, activeStep));
+    el.appendChild(createStepBar(['Select Document Type', 'Browse Files'], 0));
 
     // Level info banner
     const banner = document.createElement('div');
@@ -455,8 +431,8 @@ function renderQms() {
     const panel = createHeader(
       level.label,
       level.description || '',
-      lockedLevel ? null : '\u2190 Change level',
-      lockedLevel ? null : () => { selectedPrimary = ''; render(); }
+      null,
+      null
     );
     panel.appendChild(createOptionGrid(allowedGroups, key => {
       selectedSecondary = key;
@@ -468,8 +444,8 @@ function renderQms() {
 
   const group = groups[selectedSecondary];
   renderFilesView(
-    lockedLevel ? ['Browse Files'] : ['Select Access Level', 'Select Document Type', 'Browse Files'],
-    lockedLevel ? 0 : 2,
+    ['Select Document Type', 'Browse Files'],
+    1,
     group?.label || selectedSecondary,
     `${level.label}: ${level.can_edit ? 'view, edit, delete, and approve.' : 'view-only.'}`,
     group?.files || [],

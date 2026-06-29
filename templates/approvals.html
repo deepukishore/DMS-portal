@@ -16,7 +16,7 @@
   <div>
     <p class="eyebrow">Approval Queue</p>
     <h1 class="page-title">Pending Items</h1>
-    <p class="page-sub">Live approval queue. Only admins can approve or reject documents.</p>
+    <p class="page-sub">Live approval queue. L2 users handle first approval, and L1 HOD users handle final approval.</p>
   </div>
   <div class="page-actions">
     <a href="{{ url_for('approvals.export_records', status=selected_status, search=search) }}" class="btn-outline btn-sm">
@@ -62,27 +62,6 @@
   </form>
 </section>
 
-{% if is_admin_user %}
-<section class="surface-panel">
-  <div class="panel-head">
-    <div>
-      <h2 class="section-title">Bulk Actions</h2>
-      <p class="section-sub">Select pending documents below, then approve or reject them together.</p>
-    </div>
-  </div>
-  <form id="bulk-approval-form">
-    <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.75rem">
-      <span class="text-dim" style="font-size:.8rem"><strong id="bulk-selected-count">0</strong> selected</span>
-      <textarea name="rejection_comment" id="bulk-rejection-comment" rows="2"
-        placeholder="Rejection comment (required when rejecting)"
-        style="flex:1;min-width:200px;background:var(--bg-2);border:1px solid var(--border);color:var(--text);border-radius:var(--radius-sm);padding:.5rem .75rem;font-size:.8rem;font-family:inherit;resize:none;outline:none"></textarea>
-      <button type="button" class="btn-primary btn-sm" data-bulk-status="Approved">Bulk Approve</button>
-      <button type="button" class="btn-outline btn-sm" data-bulk-status="Rejected">Bulk Reject</button>
-    </div>
-  </form>
-</section>
-{% endif %}
-
 <section class="surface-panel">
   <div class="panel-head">
     <div>
@@ -125,7 +104,6 @@
     <table class="data-table">
       <thead>
         <tr>
-          {% if is_admin_user %}<th style="width:44px"><input type="checkbox" id="bulk-select-all" /></th>{% endif %}
           <th>Date</th>
           <th>File</th>
           <th>Plant</th>
@@ -139,9 +117,6 @@
         {% if page_records %}
           {% for r in page_records %}
           <tr data-doc-id="{{ r.id }}">
-            {% if is_admin_user %}
-              <td>{% if r.approval_status == 'Pending' %}<input type="checkbox" class="bulk-doc-checkbox" value="{{ r.id }}" />{% endif %}</td>
-            {% endif %}
             <td class="mono text-dim">{{ r.uploaded_at }}</td>
             <td>
               <div class="file-block">
@@ -162,42 +137,10 @@
           </tr>
           {% endfor %}
         {% else %}
-          <tr><td colspan="{% if is_admin_user %}8{% else %}7{% endif %}" class="empty-state">No records found.</td></tr>
+          <tr><td colspan="7" class="empty-state">No records found.</td></tr>
         {% endif %}
       </tbody>
     </table>
   </div>
 </section>
-{% endblock %}
-
-{% block scripts %}
-<script>
-  const bulkForm        = document.getElementById('bulk-approval-form');
-  const bulkSelectAll   = document.getElementById('bulk-select-all');
-  const bulkCheckboxes  = Array.from(document.querySelectorAll('.bulk-doc-checkbox'));
-  const bulkCount       = document.getElementById('bulk-selected-count');
-  const bulkComment     = document.getElementById('bulk-rejection-comment');
-
-  function updateCount() { if (bulkCount) bulkCount.textContent = bulkCheckboxes.filter(c=>c.checked).length; }
-  bulkSelectAll?.addEventListener('change', () => { bulkCheckboxes.forEach(c => c.checked = bulkSelectAll.checked); updateCount(); });
-  bulkCheckboxes.forEach(c => c.addEventListener('change', updateCount));
-
-  bulkForm?.querySelectorAll('[data-bulk-status]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const status = btn.dataset.bulkStatus;
-      const ids    = bulkCheckboxes.filter(c=>c.checked).map(c=>c.value);
-      if (!ids.length) { alert('Select at least one pending document first.'); return; }
-      if (status === 'Rejected' && !bulkComment.value.trim()) { alert('Please add rejection comments.'); return; }
-      const fd = new FormData();
-      fd.set('status', status);
-      fd.set('rejection_comment', bulkComment.value.trim());
-      ids.forEach(id => fd.append('doc_ids', id));
-      fetch('{{ url_for("approvals.bulk_update_decision") }}', {
-        method:'POST', headers:{'X-Requested-With':'XMLHttpRequest'}, body:fd
-      }).then(r=>r.json()).then(d=>{ if(d.ok) window.location.reload(); else alert(d.message); })
-        .catch(()=>alert('Bulk action failed.'));
-    });
-  });
-  updateCount();
-</script>
 {% endblock %}

@@ -21,7 +21,7 @@
         <div>
           <p class="eyebrow">Approval Request</p>
           <h1 class="page-title">{{ record.file_name }}</h1>
-          <p class="page-sub">Review the document preview here. Only admins can mark it Approved or Rejected.</p>
+          <p class="page-sub">L2 users complete first approval, then L1 HOD users complete final approval or rejection.</p>
         </div>
         <span class="status-pill status-{{ record.approval_status | lower }}" id="review-status-pill">{{ record.approval_status }}</span>
       </section>
@@ -186,18 +186,26 @@
             <div class="panel-head">
               <div>
                 <h2 class="section-title">Decision</h2>
-                <p class="section-sub">Only admins can submit the final action for this review request.</p>
+                <p class="section-sub">
+                  {% if record.approval_status == 'Pending' %}
+                    L2 Assistant Managers/Managers complete first approval and select sharing recipients.
+                  {% elif record.approval_status == 'Pending Final Approval' %}
+                    L1 HOD users complete final approval or rejection.
+                  {% else %}
+                    This review request already has a final decision.
+                  {% endif %}
+                </p>
               </div>
             </div>
 
             {% if can_decide %}
               <form method="POST" action="{{ url_for('approvals.update_decision', token=token) }}" class="review-actions review-actions-stacked" id="approval-form" data-doc-id="{{ record.id }}">
-                {% if record.category == 'master_records' and record.approval_status == 'Pending' %}
+                {% if record.approval_status == 'Pending' %}
                 <label style="display:flex;flex-direction:column;gap:.4rem;">
-                  <span class="section-sub">Selected people or department heads for the final approval mail trigger.</span>
+                  <span class="section-sub">Selected people or department heads who should receive the file after final approval.</span>
                   <textarea name="selected_recipients" id="selected-recipients-input" rows="3" placeholder="Enter email addresses separated by commas">{{ record.selected_recipients or '' }}</textarea>
                 </label>
-                {% elif record.category == 'master_records' and record.selected_recipients %}
+                {% elif record.selected_recipients %}
                 <div class="alert alert-info">
                   <span>Selected final notification recipients: {{ record.selected_recipients }}</span>
                 </div>
@@ -206,13 +214,13 @@
                   <span class="section-sub">Rejection comments are required when rejecting.</span>
                   <textarea name="rejection_comment" id="rejection-comment-input" rows="4" placeholder="Tell the uploader exactly what needs to be fixed...">{{ record.rejection_comment or '' }}</textarea>
                 </label>
-                {% if record.category == 'master_records' and record.approval_status == 'Pending' %}
+                {% if record.approval_status == 'Pending' %}
                 <button type="submit" name="status" value="First Approved" class="btn-decision btn-approve">
                   First Approver Accept
                 </button>
                 {% else %}
                 <button type="submit" name="status" value="Approved" class="btn-decision btn-approve {% if record.approval_status == 'Approved' %}is-active{% endif %}">
-                  {% if record.category == 'master_records' and record.approval_status == 'Pending Final Approval' %}Final Approver Accept{% else %}Approve{% endif %}
+                  {% if record.approval_status == 'Pending Final Approval' %}Final Approver Accept{% else %}Approve{% endif %}
                 </button>
                 {% endif %}
                 <button type="submit" name="status" value="Rejected" class="btn-decision btn-reject {% if record.approval_status == 'Rejected' %}is-active{% endif %}">
@@ -221,7 +229,15 @@
               </form>
             {% else %}
               <div class="alert alert-info">
-                <span>You can view this request, but only admins can approve or reject it.</span>
+                <span>
+                  {% if record.approval_status == 'Pending' %}
+                    You can view this request, but only L2 Assistant Managers/Managers can complete first approval.
+                  {% elif record.approval_status == 'Pending Final Approval' %}
+                    You can view this request, but only L1 HOD users can complete final approval.
+                  {% else %}
+                    This request has already been reviewed.
+                  {% endif %}
+                </span>
               </div>
             {% endif %}
           </section>

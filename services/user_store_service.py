@@ -118,6 +118,15 @@ class UserStoreService:
         return [dict(row) for row in rows]
 
     @staticmethod
+    def get_users_by_qms_level(qms_level):
+        with UserStoreService._connect() as connection:
+            rows = connection.execute(
+                "SELECT * FROM users WHERE qms_level = ? ORDER BY name ASC",
+                (qms_level,),
+            ).fetchall()
+        return [dict(row) for row in rows]
+
+    @staticmethod
     def get_admin_users():
         return UserStoreService.get_users_by_role("Admin")
 

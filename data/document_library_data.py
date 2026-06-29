@@ -81,8 +81,8 @@ QMS_DOCUMENT_GROUPS = {
 
 QMS_LEVELS = {
     "L1": {
-        "label": "L1 - Approver",
-        "description": "Top level QMS approver with access to every QMS document and edit/delete control.",
+        "label": "L1 - HOD / Final Approver",
+        "description": "HOD level users with access to every QMS document and final approval responsibility.",
         "access": "All QMS files",
         "can_edit": True,
         "can_delete": True,
@@ -90,12 +90,12 @@ QMS_LEVELS = {
         "groups": list(QMS_DOCUMENT_GROUPS.keys()),
     },
     "L2": {
-        "label": "L2 - Full Viewer",
-        "description": "Can view all QMS files, but cannot edit or delete documents.",
+        "label": "L2 - Assistant Manager / Manager",
+        "description": "First approvers who review uploaded documents, select sharing recipients, and send them to L1 for final approval.",
         "access": "All QMS files",
         "can_edit": False,
         "can_delete": False,
-        "approver": False,
+        "approver": True,
         "groups": list(QMS_DOCUMENT_GROUPS.keys()),
     },
     "L3": {
@@ -228,12 +228,12 @@ LIBRARY_DATA = {
         },
     },
     "master_records": {
-        "description": "Master records organized by plant and department with a two-stage approval note.",
+        "description": "Master records organized by plant and department with L2 first approval and L1 final approval.",
         "plants": MASTER_RECORD_PLANTS,
         "approval_flow": [
-            "First approver reviews and accepts the file.",
-            "First approver selects recipients or department heads for notification.",
-            "Final approver confirms and accepts the file.",
+            "L2 Assistant Manager/Manager reviews and accepts the file.",
+            "The L2 first approver selects recipients or department heads for notification.",
+            "L1 HOD reviews the file and approves or rejects the final request.",
             "Mail notification is sent to the selected people for new and revised documents.",
         ],
     },

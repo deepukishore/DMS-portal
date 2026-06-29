@@ -354,7 +354,9 @@ class DocumentService:
         new_version = (doc.get('current_version') or 1) + 1
 
         cursor.execute('''UPDATE documents SET file_name=?, original_file_name=?, pdf_file_name=?,
-            current_version=?, approval_status=?, approval_updated_at=NULL, revision_number=?, rejection_comment=?, decision_by=? WHERE id=?''',
+            current_version=?, approval_status=?, approval_updated_at=NULL, revision_number=?,
+            rejection_comment=?, decision_by=?, selected_recipients=NULL, first_approver=NULL,
+            first_approved_at=NULL, final_approver=NULL, final_approved_at=NULL WHERE id=?''',
             (unique_name, filename, pdf_name, new_version, 'Pending', revision_number, "", "", int(doc_id))
         )
         cursor.execute('''INSERT INTO document_versions

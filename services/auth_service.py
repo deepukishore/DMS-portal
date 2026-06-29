@@ -100,5 +100,21 @@ class AuthService:
         return session.get('user_qms_level', 'L4')
 
     @staticmethod
+    def is_qms_first_approver(user=None):
+        if user is None:
+            user = AuthService.get_current_user()
+        if not user:
+            return False
+        return user.get("qms_level") == "L2"
+
+    @staticmethod
+    def is_qms_final_approver(user=None):
+        if user is None:
+            user = AuthService.get_current_user()
+        if not user:
+            return False
+        return user.get("qms_level") == "L1" or user.get("role") == "Admin"
+
+    @staticmethod
     def get_visible_department(user=None):
         return ""

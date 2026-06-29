@@ -40,6 +40,17 @@ class NotificationService:
             )
 
     @staticmethod
+    def notify_qms_level(qms_level, title, message, link_url="", notification_type="info"):
+        for user in UserStoreService.get_users_by_qms_level(qms_level):
+            NotificationService.create_notification(
+                user["email"],
+                title,
+                message,
+                link_url=link_url,
+                notification_type=notification_type,
+            )
+
+    @staticmethod
     def get_recent_for_user(user_email, limit=8):
         conn = get_connection()
         cursor = conn.cursor()
@@ -87,6 +98,19 @@ class NotificationService:
         cursor = conn.cursor()
         cursor.execute(
             'UPDATE notifications SET is_read = 1 WHERE user_email = ? AND is_read = 0',
+            (user_email,),
+        )
+        conn.commit()
+        affected = cursor.rowcount
+        conn.close()
+        return affected
+
+    @staticmethod
+    def clear_all(user_email):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            'DELETE FROM notifications WHERE user_email = ?',
             (user_email,),
         )
         conn.commit()

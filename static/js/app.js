@@ -80,6 +80,7 @@ const notificationWrap = document.getElementById('notification-wrap');
 const notificationToggle = document.getElementById('notification-toggle');
 const notificationPanel = document.getElementById('notification-panel');
 const notificationMarkAll = document.getElementById('notification-mark-all');
+const notificationClearAll = document.getElementById('notification-clear-all');
 
 function getNotificationBadge() {
   return document.getElementById('notification-badge');
@@ -124,6 +125,27 @@ notificationMarkAll?.addEventListener('click', async () => {
     setNotificationBadgeCount(0);
   } catch (error) {
     console.error('Notification mark-all error:', error);
+  }
+});
+
+notificationClearAll?.addEventListener('click', async () => {
+  try {
+    const response = await fetch(window.APP_SHORTCUTS.clearAllNotifications, {
+      method: 'POST',
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.message || 'Notification clear failed.');
+    }
+
+    const list = document.querySelector('.notification-list');
+    if (list) {
+      list.innerHTML = '<div class="notification-empty">No notifications yet.</div>';
+    }
+    setNotificationBadgeCount(0);
+  } catch (error) {
+    console.error('Notification clear-all error:', error);
   }
 });
 

@@ -365,6 +365,13 @@ html[data-theme="light"] .btn-theme .theme-moon {
   gap: .75rem;
   margin-bottom: .8rem;
 }
+.notification-head-actions {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 .notification-list {
   display: flex;
   flex-direction: column;

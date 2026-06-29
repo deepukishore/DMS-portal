@@ -32,6 +32,7 @@ const deptSelect = document.getElementById('department-select');
 
 const ALLOWED_EXTS = ['.pdf', '.docx', '.doc', '.xlsx', '.xls', '.pptx', '.ppt'];
 const LIBRARY_DATA = window.LIBRARY_DATA || {};
+const USER_QMS_LEVEL = window.USER_QMS_LEVEL || 'L4';
 
 let currentPathState = {
   valid: false,
@@ -222,13 +223,16 @@ function configureLibraryCategory() {
   if (!category || !data) return;
 
   if (data.levels && data.document_groups) {
-    showField(libraryPrimWrap, true, libraryPrimSelect);
+    showField(libraryPrimWrap, false, libraryPrimSelect);
+    const level = data.levels[USER_QMS_LEVEL] || data.levels.L4;
+    const groups = level?.groups || [];
+    showSecondary(true, 'Document type');
     setOptions(
-      libraryPrimSelect,
-      'Select QMS level',
-      Object.entries(data.levels).map(([value, level]) => ({ value, label: level.label || value }))
+      librarySubSelect,
+      'Select document type',
+      groups.map(key => ({ value: key, label: data.document_groups[key]?.label || key }))
     );
-    setPathState(false, `${categoryLabel(category)} / Select QMS level / Select document type`, '', 'Select QMS level and document type.');
+    setPathState(false, `${categoryLabel(category)} / ${level?.label || USER_QMS_LEVEL} / Select document type`, '', 'Select document type.');
     return;
   }
 
@@ -262,7 +266,7 @@ function configureLibraryCategory() {
 function configureLibraryPrimary() {
   const category = libraryCatSelect.value;
   const data = LIBRARY_DATA[category];
-  const primary = libraryPrimSelect.value;
+  const primary = data.levels && data.document_groups ? USER_QMS_LEVEL : libraryPrimSelect.value;
 
   showSecondary(false);
   if (!data || !primary) {
@@ -356,12 +360,14 @@ function updateLibraryPath() {
   if (data.levels && data.document_groups) {
     const secondary = librarySubSelect.value;
     if (!secondary) {
-      setPathState(false, `${categoryLabel(category)} / ${selectedOptionText(libraryPrimSelect)} / Select document type`, '', 'Select document type.');
+      const level = data.levels[USER_QMS_LEVEL] || data.levels.L4;
+      setPathState(false, `${categoryLabel(category)} / ${level?.label || USER_QMS_LEVEL} / Select document type`, '', 'Select document type.');
       return;
     }
+    const level = data.levels[USER_QMS_LEVEL] || data.levels.L4;
     setPathState(
       true,
-      `${categoryLabel(category)} / ${selectedOptionText(libraryPrimSelect)} / ${selectedOptionText(librarySubSelect)}`,
+      `${categoryLabel(category)} / ${level?.label || USER_QMS_LEVEL} / ${selectedOptionText(librarySubSelect)}`,
       `${primary}:${secondary}`
     );
     return;

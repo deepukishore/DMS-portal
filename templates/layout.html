@@ -40,7 +40,10 @@
             <div class="notification-panel" id="notification-panel" hidden>
               <div class="notification-head">
                 <strong>Notifications</strong>
-                <button type="button" class="link-btn" id="notification-mark-all">Mark all read</button>
+                <div class="notification-head-actions">
+                  <button type="button" class="link-btn" id="notification-mark-all">Mark all read</button>
+                  <button type="button" class="link-btn" id="notification-clear-all">Clear all</button>
+                </div>
               </div>
               <div class="notification-list">
                 {% if notifications %}
@@ -116,7 +119,8 @@
       upload: "{{ url_for('upload.index') }}",
       approvals: "{{ url_for('approvals.index') }}",
       markNotificationReadBase: "{{ url_for('notifications.mark_read', notification_id=0)[:-1] }}",
-      markAllNotificationsRead: "{{ url_for('notifications.mark_all_read') }}"
+      markAllNotificationsRead: "{{ url_for('notifications.mark_all_read') }}",
+      clearAllNotifications: "{{ url_for('notifications.clear_all') }}"
     };
     window.SHOW_WELCOME = {{ (show_welcome | default(false)) | tojson }};
   </script>

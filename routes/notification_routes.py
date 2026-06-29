@@ -30,3 +30,13 @@ def mark_all_read():
 
     updated = NotificationService.mark_all_read(session["user_email"])
     return jsonify({"ok": True, "updated": updated})
+
+
+@notification_bp.route("/notifications/clear-all", methods=["POST"])
+def clear_all():
+    redir = _require_login()
+    if redir:
+        return jsonify({"ok": False, "message": "Unauthorized"}), 401
+
+    deleted = NotificationService.clear_all(session["user_email"])
+    return jsonify({"ok": True, "deleted": deleted})
