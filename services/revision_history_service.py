@@ -6,6 +6,71 @@ class RevisionHistoryService:
     """Manages document revision history tracking."""
 
     @staticmethod
+    def _version_rows(plant=None, department=None, document_id=None, file_name=None):
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        query = '''
+            SELECT
+                v.id,
+                v.document_id,
+                v.version_number,
+                v.file_name,
+                v.original_file_name,
+                v.uploaded_by,
+                v.user_id,
+                v.uploaded_at,
+                v.change_summary,
+                v.revision_number,
+                d.plant,
+                d.department
+            FROM document_versions v
+            LEFT JOIN documents d ON d.id = v.document_id
+            WHERE 1=1
+        '''
+        params = []
+        if plant:
+            query += ' AND d.plant = ?'
+            params.append(plant)
+        if department:
+            query += ' AND d.department = ?'
+            params.append(department)
+        if document_id:
+            query += ' AND v.document_id = ?'
+            params.append(int(document_id))
+        if file_name:
+            query += ' AND (v.file_name = ? OR v.original_file_name = ?)'
+            params.extend([file_name, file_name])
+        query += ' ORDER BY v.document_id ASC, v.version_number ASC, v.uploaded_at ASC'
+
+        rows = [dict(row) for row in cursor.execute(query, params).fetchall()]
+        conn.close()
+
+        previous_by_doc = {}
+        revisions = []
+        for row in rows:
+            previous_file_name = previous_by_doc.get(row.get("document_id"))
+            previous_by_doc[row.get("document_id")] = row.get("file_name")
+            revision_number = row.get("revision_number") or f'v{row.get("version_number", "")}'
+            revisions.append({
+                "id": f'version-{row["id"]}',
+                "document_id": row.get("document_id"),
+                "file_name": row.get("file_name"),
+                "revision_number": revision_number,
+                "revised_by": row.get("uploaded_by") or "Unknown",
+                "user_id": row.get("user_id") or "",
+                "plant": row.get("plant"),
+                "department": row.get("department"),
+                "revision_date": row.get("uploaded_at"),
+                "change_summary": row.get("change_summary") or (
+                    "Initial upload" if row.get("version_number") == 1 else f'Version {row.get("version_number")} uploaded'
+                ),
+                "previous_file_name": previous_file_name,
+                "source": "document_versions",
+            })
+        return revisions
+
+    @staticmethod
     def add_revision(file_name, revision_number, revised_by, user_id, plant=None, department=None, change_summary=None, previous_file_name=None, document_id=None):
         """
         Add a new revision entry.
@@ -75,8 +140,32 @@ class RevisionHistoryService:
         cursor.execute(query, params)
         revisions = [dict(row) for row in cursor.fetchall()]
         conn.close()
-        
-        return revisions
+
+        for revision in revisions:
+            revision["source"] = "revision_history"
+
+        existing_keys = {
+            (
+                revision.get("document_id"),
+                revision.get("file_name"),
+                revision.get("revision_number"),
+            )
+            for revision in revisions
+        }
+        for version_revision in RevisionHistoryService._version_rows(plant=plant, department=department):
+            key = (
+                version_revision.get("document_id"),
+                version_revision.get("file_name"),
+                version_revision.get("revision_number"),
+            )
+            if key not in existing_keys:
+                revisions.append(version_revision)
+
+        return sorted(
+            revisions,
+            key=lambda revision: (revision.get("revision_date") or "", str(revision.get("id") or "")),
+            reverse=True,
+        )
 
     @staticmethod
     def get_revisions_for_document(file_name):
@@ -91,11 +180,53 @@ class RevisionHistoryService:
         """
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM revision_history WHERE file_name = ? ORDER BY revision_date DESC', (file_name,))
+        cursor.execute(
+            '''
+            SELECT DISTINCT document_id
+            FROM document_versions
+            WHERE file_name = ? OR original_file_name = ?
+            ''',
+            (file_name, file_name),
+        )
+        doc_ids = [row["document_id"] for row in cursor.fetchall()]
+
+        cursor.execute(
+            '''
+            SELECT * FROM revision_history
+            WHERE file_name = ? OR previous_file_name = ?
+            ORDER BY revision_date DESC
+            ''',
+            (file_name, file_name),
+        )
         revisions = [dict(row) for row in cursor.fetchall()]
         conn.close()
-        
-        return revisions
+
+        for revision in revisions:
+            revision["source"] = "revision_history"
+
+        existing_keys = {
+            (
+                revision.get("document_id"),
+                revision.get("file_name"),
+                revision.get("revision_number"),
+            )
+            for revision in revisions
+        }
+        for doc_id in doc_ids:
+            for version_revision in RevisionHistoryService._version_rows(document_id=doc_id):
+                key = (
+                    version_revision.get("document_id"),
+                    version_revision.get("file_name"),
+                    version_revision.get("revision_number"),
+                )
+                if key not in existing_keys:
+                    revisions.append(version_revision)
+
+        return sorted(
+            revisions,
+            key=lambda revision: (revision.get("revision_date") or "", str(revision.get("id") or "")),
+            reverse=True,
+        )
 
     @staticmethod
     def get_latest_revision_for_file(file_name):

@@ -206,9 +206,6 @@ function createFileGrid(files, permissions) {
     : files;
 
   const container = document.createElement('div');
-  if (totalCount > currentPageSize) {
-    container.appendChild(createPaginationBar(totalCount));
-  }
 
   const grid = document.createElement('div');
   grid.className = 'asset-file-grid';
@@ -254,7 +251,11 @@ function createFileGrid(files, permissions) {
 
     grid.appendChild(card);
   });
-  return grid;
+  container.appendChild(grid);
+  if (totalCount > currentPageSize) {
+    container.appendChild(createPaginationBar(totalCount));
+  }
+  return container;
 }
 
 function renderFilesView(stepLabels, activeIndex, title, subtitle, files, backLabel, onBack, permissions) {

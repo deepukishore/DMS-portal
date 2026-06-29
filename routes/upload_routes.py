@@ -268,6 +268,18 @@ def update_document(doc_id):
         updated_doc['file_name'], updated_doc['plant'], updated_doc['department']
     )
 
+    RevisionHistoryService.add_revision(
+        document_id=updated_doc.get("id"),
+        file_name=updated_doc["file_name"],
+        revision_number=revision_number,
+        revised_by=session["user_name"],
+        user_id=session["user_id"],
+        plant=updated_doc.get("plant"),
+        department=updated_doc.get("department"),
+        change_summary=change_summary,
+        previous_file_name=updated_doc.get("previous_file_name"),
+    )
+
     # Send approval email for new version
     token = DocumentService.generate_review_token(
         updated_doc['id'],

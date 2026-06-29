@@ -368,6 +368,8 @@ class DocumentService:
         conn.commit()
         cursor.execute('SELECT * FROM documents WHERE id = ?', (int(doc_id),))
         updated = DocumentService._normalize_record(dict(cursor.fetchone()))
+        updated["previous_file_name"] = doc.get("file_name", "")
+        updated["previous_revision_number"] = doc.get("revision_number", "")
         conn.close()
         return updated, None
 

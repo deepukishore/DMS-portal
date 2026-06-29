@@ -39,7 +39,11 @@
 <!-- Pagination bar -->
 <div class="pg-bar">
   <span class="pg-info">
-    Showing {{ ((page-1)*page_size)+1 }}–{{ [page*page_size, total_revisions]|min }} of {{ total_revisions }}
+    {% if total_revisions %}
+      Showing {{ ((page-1)*page_size)+1 }}–{{ [page*page_size, total_revisions]|min }} of {{ total_revisions }}
+    {% else %}
+      No revisions found
+    {% endif %}
   </span>
   <div class="pg-controls">
     <form method="GET" action="{{ url_for('revision_history.index') }}" class="pg-size-form">
