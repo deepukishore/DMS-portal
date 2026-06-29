@@ -76,8 +76,6 @@ def index():
 
         uploaded_count = 0
         email_failures = []
-        is_revision = request.form.get("is_revision") == "on"
-        change_summary = request.form.get("change_summary", "").strip() if is_revision else None
 
         saved_files = []
         for uploaded_file in files:
@@ -126,19 +124,6 @@ def index():
                 plant,
                 department,
             )
-
-            if is_revision and revision_number:
-                RevisionHistoryService.add_revision(
-                    document_id=record.get("id"),
-                    file_name=record["file_name"],
-                    revision_number=revision_number,
-                    revised_by=session["user_name"],
-                    user_id=session["user_id"],
-                    plant=plant,
-                    department=department,
-                    change_summary=change_summary,
-                    previous_file_name=None,
-                )
 
             NotificationService.create_notification(
                 session["user_email"],

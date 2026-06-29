@@ -51,6 +51,9 @@ class RevisionHistoryService:
         for row in rows:
             previous_file_name = previous_by_doc.get(row.get("document_id"))
             previous_by_doc[row.get("document_id")] = row.get("file_name")
+            if (row.get("version_number") or 1) <= 1:
+                continue
+
             revision_number = row.get("revision_number") or f'v{row.get("version_number", "")}'
             revisions.append({
                 "id": f'version-{row["id"]}',
@@ -62,9 +65,7 @@ class RevisionHistoryService:
                 "plant": row.get("plant"),
                 "department": row.get("department"),
                 "revision_date": row.get("uploaded_at"),
-                "change_summary": row.get("change_summary") or (
-                    "Initial upload" if row.get("version_number") == 1 else f'Version {row.get("version_number")} uploaded'
-                ),
+                "change_summary": row.get("change_summary") or f'Version {row.get("version_number")} uploaded',
                 "previous_file_name": previous_file_name,
                 "source": "document_versions",
             })
@@ -125,7 +126,11 @@ class RevisionHistoryService:
         conn = get_connection()
         cursor = conn.cursor()
         
-        query = 'SELECT * FROM revision_history WHERE 1=1'
+        query = '''
+            SELECT * FROM revision_history
+            WHERE previous_file_name IS NOT NULL
+              AND TRIM(previous_file_name) != ''
+        '''
         params = []
         
         if plant:
@@ -193,7 +198,9 @@ class RevisionHistoryService:
         cursor.execute(
             '''
             SELECT * FROM revision_history
-            WHERE file_name = ? OR previous_file_name = ?
+            WHERE (file_name = ? OR previous_file_name = ?)
+              AND previous_file_name IS NOT NULL
+              AND TRIM(previous_file_name) != ''
             ORDER BY revision_date DESC
             ''',
             (file_name, file_name),
