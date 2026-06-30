@@ -7,6 +7,16 @@ class CategoryDocumentService:
     """Provides access to documents organized by category and sub-category."""
 
     @staticmethod
+    def _plant_filter(query, params, plant):
+        if plant == "P2&3 - Guduvachery Plants":
+            query += " AND cd.plant IN (?, ?)"
+            params.extend(["P2 - Guduvachery Plant", "P3 - Guduvachery Plant"])
+        elif plant:
+            query += " AND cd.plant = ?"
+            params.append(plant)
+        return query
+
+    @staticmethod
     def get_plants_for_category(category, sub_type=''):
         conn = get_connection()
         cursor = conn.cursor()
@@ -40,26 +50,64 @@ class CategoryDocumentService:
         return sorted({normalize_department(row) for row in rows})
 
     @staticmethod
-    def get_files_for_category(category, plant='', department='', sub_type='', sub_category=''):
+    def get_files_for_category(category, plant='', department='', sub_type='', sub_category='', approved_only=True):
         sub_type = sub_type or sub_category
         department = normalize_department(department) if department else department
         conn = get_connection()
         cursor = conn.cursor()
-        query = 'SELECT file_name FROM category_documents WHERE category = ?'
+        query = '''
+            SELECT DISTINCT cd.file_name
+            FROM category_documents cd
+            LEFT JOIN documents d ON d.file_name = cd.file_name
+            WHERE cd.category = ?
+        '''
         params = [category]
-        if plant:
-            query += ' AND plant = ?'
-            params.append(plant)
+        query = CategoryDocumentService._plant_filter(query, params, plant)
         if department:
-            query += ' AND department = ?'
+            query += ' AND cd.department = ?'
             params.append(department)
         if sub_type:
-            query += ' AND sub_category = ?'
+            query += ' AND cd.sub_category = ?'
             params.append(sub_type)
-        query += ' ORDER BY uploaded_at DESC'
+        if approved_only:
+            query += " AND COALESCE(d.approval_status, cd.approval_status) = 'Approved'"
+        query += ' ORDER BY cd.uploaded_at DESC'
         rows = [row['file_name'] for row in cursor.execute(query, params).fetchall()]
         conn.close()
         return rows
+
+    @staticmethod
+    def get_file_records_for_category(category, department='', approved_only=True):
+        department = normalize_department(department) if department else department
+        conn = get_connection()
+        cursor = conn.cursor()
+        query = '''
+            SELECT DISTINCT cd.category, cd.sub_category, cd.plant, cd.department, cd.file_name, cd.uploaded_at
+            FROM category_documents cd
+            LEFT JOIN documents d ON d.file_name = cd.file_name
+            WHERE cd.category = ?
+        '''
+        params = [category]
+        if department:
+            query += ' AND cd.department = ?'
+            params.append(department)
+        if approved_only:
+            query += " AND COALESCE(d.approval_status, cd.approval_status) = 'Approved'"
+        query += ' ORDER BY cd.uploaded_at DESC'
+        rows = [dict(row) for row in cursor.execute(query, params).fetchall()]
+        conn.close()
+        return rows
+
+    @staticmethod
+    def sync_status_for_file(file_name, approval_status):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            'UPDATE category_documents SET approval_status = ? WHERE file_name = ?',
+            (approval_status, file_name),
+        )
+        conn.commit()
+        conn.close()
 
     @staticmethod
     def save_category_document(category, plant, department, file_name, uploaded_by, user_id,

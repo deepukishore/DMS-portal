@@ -1,9 +1,85 @@
 from copy import deepcopy
 
 from data.document_library_data import CATEGORY_ALIASES, LIBRARY_CATEGORIES, LIBRARY_DATA
+from services.category_document_service import CategoryDocumentService
 
 
 class DocumentLibraryService:
+    @staticmethod
+    def _append_unique(files, file_name):
+        if file_name and file_name not in files:
+            files.append(file_name)
+
+    @staticmethod
+    def _merge_uploaded_files(category_key, data, access_department=""):
+        uploaded = CategoryDocumentService.get_file_records_for_category(
+            category_key,
+            department=access_department,
+            approved_only=True,
+        )
+        if not uploaded:
+            return data
+
+        if category_key == "qms":
+            groups = data.get("document_groups", {})
+            for record in uploaded:
+                sub_category = record.get("sub_category") or ""
+                group_key = sub_category.split(":")[-1] if sub_category else ""
+                if group_key in groups:
+                    DocumentLibraryService._append_unique(
+                        groups[group_key].setdefault("files", []),
+                        record.get("file_name"),
+                    )
+            return data
+
+        if "primary_options" in data:
+            options = data.get("primary_options", {})
+            for record in uploaded:
+                sub_category = record.get("sub_category") or ""
+                parts = sub_category.split(":", 1)
+                primary = parts[0] if parts else ""
+                secondary = parts[1] if len(parts) > 1 else ""
+                folder = options.get(primary)
+                if not folder:
+                    continue
+                if "customers" in folder:
+                    customer = secondary
+                    if customer:
+                        DocumentLibraryService._append_unique(
+                            folder.setdefault("customers", {}).setdefault(customer, []),
+                            record.get("file_name"),
+                        )
+                elif "secondary_options" in folder:
+                    secondary_folder = folder.get("secondary_options", {}).get(secondary)
+                    if secondary_folder is not None:
+                        DocumentLibraryService._append_unique(
+                            secondary_folder.setdefault("files", []),
+                            record.get("file_name"),
+                        )
+                else:
+                    DocumentLibraryService._append_unique(
+                        folder.setdefault("files", []),
+                        record.get("file_name"),
+                    )
+            return data
+
+        if "customers" in data:
+            customers = data.setdefault("customers", {})
+            for record in uploaded:
+                customer = record.get("sub_category") or ""
+                if customer:
+                    DocumentLibraryService._append_unique(
+                        customers.setdefault(customer, []),
+                        record.get("file_name"),
+                    )
+            return data
+
+        if "files" in data:
+            files = data.setdefault("files", [])
+            for record in uploaded:
+                DocumentLibraryService._append_unique(files, record.get("file_name"))
+        return data
+
     @staticmethod
     def get_categories():
         return deepcopy(LIBRARY_CATEGORIES)
@@ -29,10 +105,10 @@ class DocumentLibraryService:
     @staticmethod
     def get_category_data(category_key, access_department=""):
         data = deepcopy(LIBRARY_DATA.get(category_key, {}))
+        data = DocumentLibraryService._merge_uploaded_files(category_key, data, access_department=access_department)
         if not access_department or not data:
             return data
         # Filter uploaded files within the category data to only those matching the department
-        from services.category_document_service import CategoryDocumentService
         def _filter_files(files):
             if not files:
                 return files

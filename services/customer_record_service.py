@@ -32,12 +32,20 @@ class CustomerRecordService:
         cursor = conn.cursor()
         if access_department:
             cursor.execute(
-                'SELECT file_name FROM documents WHERE customer = ? AND department = ? ORDER BY uploaded_at DESC',
+                '''
+                SELECT file_name FROM documents
+                WHERE customer = ? AND department = ? AND approval_status = 'Approved'
+                ORDER BY uploaded_at DESC
+                ''',
                 (customer_name, access_department),
             )
         else:
             cursor.execute(
-                'SELECT file_name FROM documents WHERE customer = ? ORDER BY uploaded_at DESC',
+                '''
+                SELECT file_name FROM documents
+                WHERE customer = ? AND approval_status = 'Approved'
+                ORDER BY uploaded_at DESC
+                ''',
                 (customer_name,),
             )
         db_files = [row['file_name'] for row in cursor.fetchall()]

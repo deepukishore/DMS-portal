@@ -420,6 +420,11 @@ class DocumentService:
         
         cursor.execute('SELECT * FROM documents WHERE id = ?', (int(doc_id),))
         record = DocumentService._normalize_record(dict(cursor.fetchone()))
+        cursor.execute(
+            'UPDATE category_documents SET approval_status = ? WHERE file_name = ?',
+            (record.get("approval_status", status), record.get("file_name", "")),
+        )
+        conn.commit()
         conn.close()
         return record, None
 

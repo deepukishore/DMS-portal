@@ -584,7 +584,7 @@ async function logAndView(fileName) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ file_name: fileName, category: CATEGORY_KEY }),
   });
-  alert(`Viewing: ${fileName}\n\nFile viewer would open here.`);
+  window.location.href = `/document-view?file=${encodeURIComponent(fileName)}`;
 }
 
 function render() {

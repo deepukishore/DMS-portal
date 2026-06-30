@@ -351,12 +351,6 @@ function updateLibraryPath() {
     return;
   }
 
-  const primary = libraryPrimSelect.value;
-  if (!primary) {
-    setPathState(false, `${categoryLabel(category)} / Select folder`, '', 'Select folder.');
-    return;
-  }
-
   if (data.levels && data.document_groups) {
     const secondary = librarySubSelect.value;
     if (!secondary) {
@@ -370,6 +364,12 @@ function updateLibraryPath() {
       `${categoryLabel(category)} / ${level?.label || USER_QMS_LEVEL} / ${selectedOptionText(librarySubSelect)}`,
       `${primary}:${secondary}`
     );
+    return;
+  }
+
+  const primary = libraryPrimSelect.value;
+  if (!primary) {
+    setPathState(false, `${categoryLabel(category)} / Select folder`, '', 'Select folder.');
     return;
   }
 

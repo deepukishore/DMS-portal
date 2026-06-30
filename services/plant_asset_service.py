@@ -34,6 +34,7 @@ class PlantAssetService:
                 SELECT file_name FROM documents 
                 WHERE plant IN ('P2 - Guduvachery Plant', 'P3 - Guduvachery Plant') 
                 AND department = ? 
+                AND approval_status = 'Approved'
                 ORDER BY uploaded_at DESC
             ''', (effective_department,))
             db_files = [row['file_name'] for row in cursor.fetchall()]
@@ -42,7 +43,11 @@ class PlantAssetService:
             # Get files from database documents
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute('SELECT file_name FROM documents WHERE plant = ? AND department = ? ORDER BY uploaded_at DESC', 
+            cursor.execute('''
+                SELECT file_name FROM documents
+                WHERE plant = ? AND department = ? AND approval_status = 'Approved'
+                ORDER BY uploaded_at DESC
+            ''',
                           (plant_label, effective_department))
             db_files = [row['file_name'] for row in cursor.fetchall()]
             conn.close()
