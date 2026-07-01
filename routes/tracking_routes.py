@@ -36,8 +36,7 @@ def index():
 
     if scope == "mine" and user_email:
         records = [r for r in records if r.get("uploader_email") == user_email]
-    if status:
-        records = [r for r in records if (r.get("approval_status") or "Pending") == status]
+    records = DocumentService.filter_by_status(records, status)
 
     trackers = ApprovalTrackingService.build_trackers(records)
     summary = ApprovalTrackingService.summarize(trackers)

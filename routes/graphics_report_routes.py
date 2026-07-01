@@ -17,6 +17,16 @@ def _require_login():
     return None
 
 
+def _add_status_count(bucket, record):
+    status = record.get("approval_status") or "Pending"
+    if DocumentService.is_pending_status(status):
+        bucket["pending"] += 1
+        return
+    status_key = str(status).strip().lower()
+    if status_key in bucket:
+        bucket[status_key] += 1
+
+
 def _get_statistics():
     visible_department = AuthService.get_visible_department()
     records = DocumentService.get_all_documents(access_department=visible_department)
@@ -31,7 +41,7 @@ def _get_statistics():
 
     total     = len(records)
     approved  = sum(1 for r in records if r.get("approval_status") == "Approved")
-    pending   = sum(1 for r in records if r.get("approval_status") == "Pending")
+    pending   = DocumentService.count_pending(records)
     rejected  = sum(1 for r in records if r.get("approval_status") == "Rejected")
 
     this_month = 0
@@ -52,9 +62,7 @@ def _get_statistics():
         plant = r.get("plant", "Unknown")
         s = plant_stats.setdefault(plant, {"total": 0, "approved": 0, "pending": 0, "rejected": 0})
         s["total"] += 1
-        status = str(r.get("approval_status", "Pending") or "Pending").strip().lower()
-        if status in s:
-            s[status] += 1
+        _add_status_count(s, r)
 
     # Per-customer stats
     customer_stats = {}
@@ -62,9 +70,7 @@ def _get_statistics():
         cust = r.get("customer", "Unknown")
         s = customer_stats.setdefault(cust, {"total": 0, "approved": 0, "pending": 0, "rejected": 0})
         s["total"] += 1
-        status = str(r.get("approval_status", "Pending") or "Pending").strip().lower()
-        if status in s:
-            s[status] += 1
+        _add_status_count(s, r)
 
     # Per-department stats
     dept_stats = {}
@@ -72,9 +78,7 @@ def _get_statistics():
         dept = r.get("department", "Unknown")
         s = dept_stats.setdefault(dept, {"total": 0, "approved": 0, "pending": 0, "rejected": 0})
         s["total"] += 1
-        status = str(r.get("approval_status", "Pending") or "Pending").strip().lower()
-        if status in s:
-            s[status] += 1
+        _add_status_count(s, r)
 
     return {
         "overall": {

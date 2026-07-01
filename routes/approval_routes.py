@@ -91,8 +91,7 @@ def index():
         search=search,
         access_department=AuthService.get_visible_department(),
     )
-    if status:
-        records = [r for r in records if r.get("approval_status", "Pending") == status]
+    records = DocumentService.filter_by_status(records, status)
 
     total = len(records)
     import math
@@ -110,6 +109,7 @@ def index():
         page_size=page_size,
         page_count=page_count,
         total_records=total,
+        pending_statuses=DocumentService.PENDING_APPROVAL_STATUSES,
     )
 
 
@@ -125,8 +125,7 @@ def export_records():
         search=search,
         access_department=AuthService.get_visible_department(),
     )
-    if status:
-        records = [record for record in records if record.get("approval_status", "Pending") == status]
+    records = DocumentService.filter_by_status(records, status)
 
     buffer = StringIO()
     writer = csv.writer(buffer)

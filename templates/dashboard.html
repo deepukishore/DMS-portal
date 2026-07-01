@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-{% set pending_count = records | selectattr('approval_status', 'equalto', 'Pending') | list | length %}
+{% set pending_count = records | selectattr('approval_status', 'in', pending_statuses) | list | length %}
 {% set approved_count = records | selectattr('approval_status', 'equalto', 'Approved') | list | length %}
 {% set rejected_count = records | selectattr('approval_status', 'equalto', 'Rejected') | list | length %}
 
@@ -343,4 +343,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 {% endblock %}
-

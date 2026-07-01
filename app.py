@@ -66,7 +66,7 @@ def create_app():
         visible_department = AuthService.get_visible_department(current_user)
         try:
             all_docs = DocumentService.get_all_documents(access_department=visible_department)
-            pending_count = sum(1 for d in all_docs if d.get('approval_status') == 'Pending')
+            pending_count = DocumentService.count_pending(all_docs)
         except Exception:
             pending_count = 0
         user_email = (current_user or {}).get("email", "")

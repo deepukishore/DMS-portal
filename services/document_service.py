@@ -14,6 +14,30 @@ from services.pdf_conversion_service import convert_to_pdf, is_allowed_file
 class DocumentService:
     """Manages document records used across dashboard and approvals."""
 
+    PENDING_APPROVAL_STATUSES = {"Pending", "Pending Final Approval"}
+
+    @staticmethod
+    def is_pending_status(status):
+        return (status or "Pending") in DocumentService.PENDING_APPROVAL_STATUSES
+
+    @staticmethod
+    def count_pending(records):
+        return sum(1 for record in records if DocumentService.is_pending_status(record.get("approval_status")))
+
+    @staticmethod
+    def filter_by_status(records, status):
+        if not status:
+            return records
+        if status == "Pending":
+            return [
+                record for record in records
+                if DocumentService.is_pending_status(record.get("approval_status"))
+            ]
+        return [
+            record for record in records
+            if (record.get("approval_status") or "Pending") == status
+        ]
+
     @staticmethod
     def _sorted(records):
         return sorted(

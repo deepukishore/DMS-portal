@@ -62,8 +62,8 @@
     </div>
     <select name="status">
       <option value="">All statuses</option>
-      <option value="Pending" {% if selected_status=='Pending' %}selected{% endif %}>Pending</option>
-      <option value="Pending Final Approval" {% if selected_status=='Pending Final Approval' %}selected{% endif %}>Pending Final Approval</option>
+      <option value="Pending" {% if selected_status=='Pending' %}selected{% endif %}>Pending / Final Pending</option>
+      <option value="Pending Final Approval" {% if selected_status=='Pending Final Approval' %}selected{% endif %}>Pending Final Approval only</option>
       <option value="Approved" {% if selected_status=='Approved' %}selected{% endif %}>Approved</option>
       <option value="Rejected" {% if selected_status=='Rejected' %}selected{% endif %}>Rejected</option>
     </select>

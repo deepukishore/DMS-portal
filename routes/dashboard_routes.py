@@ -78,7 +78,7 @@ def index():
     page = min(max(page, 1), page_count)
     page_records = records[(page - 1) * page_size: page * page_size] if total_records else []
 
-    pending_count = sum(1 for r in records if r.get('approval_status') == 'Pending')
+    pending_count = DocumentService.count_pending(records)
     
     # Pop the one-time welcome flag set on login
     show_welcome = session.pop('show_welcome', False)
@@ -106,6 +106,7 @@ def index():
         can_manage_documents=AuthService.has_high_level_access(),
         can_access_admin_sections=AuthService.has_high_level_access(),
         pending_count=pending_count,
+        pending_statuses=DocumentService.PENDING_APPROVAL_STATUSES,
         recently_viewed=recently_viewed,
         bookmarks=bookmarks,
         show_welcome=show_welcome,
