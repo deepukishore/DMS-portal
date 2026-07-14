@@ -41,8 +41,6 @@ const PRESELECT_SECONDARY = "{{ preselected_secondary }}";
 const VIEW_URL = "{{ url_for('document_library.view_file') }}";
 const MASTER_DEPT_URL = "{{ url_for('document_library.master_record_departments') }}";
 const MASTER_FILE_URL = "{{ url_for('document_library.master_record_files') }}";
-const USER_QMS_LEVEL = "{{ user_qms_level }}";
-const IS_ADMIN = {{ 'true' if is_admin else 'false' }};
 </script>
 <script src="{{ url_for('static', filename='js/document_library.js') }}"></script>
 {% endblock %}

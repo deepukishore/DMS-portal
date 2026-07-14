@@ -123,3 +123,26 @@ class DocumentLibraryService:
         if "files" in data:
             data["files"] = _filter_files(data["files"])
         return data
+
+    @staticmethod
+    def get_client_category_data(category_key, qms_level="", access_department=""):
+        data = DocumentLibraryService.get_category_data(
+            category_key,
+            access_department=access_department,
+        )
+
+        if category_key == "qms":
+            levels = data.pop("levels", {})
+            scope = levels.get(qms_level, levels.get("L4", {}))
+            data["scope"] = {
+                "groups": list(scope.get("groups", [])),
+                "can_edit": bool(scope.get("can_edit")),
+                "can_delete": bool(scope.get("can_delete")),
+            }
+            data["description"] = "Browse quality management documents by category."
+
+        if category_key == "master_records":
+            data["description"] = "Master records organized by plant and department."
+            data.pop("approval_flow", None)
+
+        return data

@@ -241,9 +241,9 @@ def update_decision(token):
     record_status = record.get("approval_status", "Pending")
     if not _can_decide_record(record, current_user):
         message = (
-            "Only L2 Assistant Managers/Managers can complete first approval."
+            "Only a designated first-stage reviewer can complete this approval."
             if record_status == "Pending"
-            else "Only L1 HOD users can complete final approval."
+            else "Only a designated final reviewer can complete this approval."
         )
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": message}), 403
@@ -257,13 +257,13 @@ def update_decision(token):
         flash("Please choose a valid approval action.", "error")
         return redirect(url_for("approvals.review_document", token=token))
     if record_status == "Pending" and status not in {"First Approved", "Rejected"}:
-        message = "L2 first approvers can first-approve or reject this request."
+        message = "A designated first-stage reviewer must approve or reject this request."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": message}), 400
         flash(message, "error")
         return redirect(url_for("approvals.review_document", token=token))
     if record_status == "Pending Final Approval" and status not in {"Approved", "Rejected"}:
-        message = "L1 final approvers can approve or reject this request."
+        message = "A designated final reviewer must approve or reject this request."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": message}), 400
         flash(message, "error")
@@ -326,7 +326,7 @@ def update_decision(token):
         NotificationService.notify_qms_level(
             "L1",
             "Final approval required",
-            f'{updated_record.get("original_file_name", updated_record["file_name"])} is pending final HOD approval.',
+            f'{updated_record.get("original_file_name", updated_record["file_name"])} is pending final approval.',
             link_url=url_for("approvals.review_document", token=token),
             notification_type="warning",
         )
@@ -399,5 +399,5 @@ def bulk_update_decision():
 
     return jsonify({
         "ok": False,
-        "message": "Bulk decisions are disabled because approvals require L2 first review, recipient selection, and L1 final review.",
+        "message": "Bulk decisions are disabled because approvals require first-stage review, recipient selection, and final review.",
     }), 400

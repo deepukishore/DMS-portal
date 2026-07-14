@@ -19,6 +19,9 @@ document.getElementById('theme-toggle')?.addEventListener('click', () => {
   const html = document.documentElement;
   const currentTheme = html.getAttribute('data-theme');
   const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  const body = document.body;
+
+  body?.classList.add('theme-switching');
   
   if (newTheme === 'light') {
     html.setAttribute('data-theme', 'light');
@@ -27,6 +30,7 @@ document.getElementById('theme-toggle')?.addEventListener('click', () => {
   }
   
   localStorage.setItem('theme', newTheme);
+  window.setTimeout(() => body?.classList.remove('theme-switching'), 360);
 });
 
 const shell = document.querySelector('.shell');
@@ -309,4 +313,111 @@ function initializeWelcomeModal() {
   modal.addEventListener('click', (e) => { if (e.target === modal) modal.hidden = true; });
 }
 
-document.addEventListener('DOMContentLoaded', initializeWelcomeModal);
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+function animateStatValue(element) {
+  if (!element || element.dataset.countAnimated === '1') return;
+
+  const rawValue = element.textContent.trim();
+  const normalizedValue = rawValue.replace(/,/g, '');
+  if (!/^-?\d+$/.test(normalizedValue)) return;
+
+  element.dataset.countAnimated = '1';
+  if (reducedMotionQuery.matches) return;
+
+  const target = Number(normalizedValue);
+  const duration = 650;
+  const startedAt = performance.now();
+  const formatter = new Intl.NumberFormat();
+  element.classList.add('is-counting');
+
+  function updateValue(now) {
+    const progress = Math.min((now - startedAt) / duration, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    element.textContent = formatter.format(Math.round(target * easedProgress));
+
+    if (progress < 1) {
+      window.requestAnimationFrame(updateValue);
+      return;
+    }
+
+    element.textContent = rawValue;
+    element.classList.remove('is-counting');
+  }
+
+  window.requestAnimationFrame(updateValue);
+}
+
+function initializeMotionEffects() {
+  if (reducedMotionQuery.matches || !('IntersectionObserver' in window)) return;
+
+  const revealSelector = [
+    '.stat-card',
+    '.quick-action-card',
+    '.chart-card',
+    '.tracker-card',
+    '.proc-type-card',
+    '.asset-file-card',
+    '.plant-card',
+    '.customer-card',
+    '.category-card',
+    '.about-feature-card',
+    '.dl-gallery-card',
+    '.mr-dept-folder',
+    '.upload-step-card',
+    '.review-card'
+  ].join(', ');
+
+  document.documentElement.classList.add('motion-enabled');
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      entry.target.classList.add('is-visible');
+      entry.target.querySelectorAll('.stat-value').forEach(animateStatValue);
+      revealObserver.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+
+  function decorateMotionElements(scope = document) {
+    scope.querySelectorAll(revealSelector).forEach((element, index) => {
+      if (element.dataset.motionReady === '1') return;
+
+      element.dataset.motionReady = '1';
+      element.classList.add('motion-reveal');
+      element.style.setProperty('--reveal-delay', `${(index % 6) * 55}ms`);
+      revealObserver.observe(element);
+    });
+
+    scope.querySelectorAll('.stat-value').forEach((element) => {
+      if (!element.closest(revealSelector)) animateStatValue(element);
+    });
+  }
+
+  decorateMotionElements();
+
+  const dynamicLibrary = document.getElementById('library-content');
+  if (dynamicLibrary && 'MutationObserver' in window) {
+    const libraryObserver = new MutationObserver(() => decorateMotionElements(dynamicLibrary));
+    libraryObserver.observe(dynamicLibrary, { childList: true, subtree: true });
+  }
+}
+
+function initializeScrollEffects() {
+  const content = document.querySelector('.content');
+  if (!content) return;
+
+  const updateScrollState = () => {
+    document.body.classList.toggle('content-scrolled', content.scrollTop > 8);
+  };
+
+  content.addEventListener('scroll', updateScrollState, { passive: true });
+  updateScrollState();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initializeWelcomeModal();
+  initializeMotionEffects();
+  initializeScrollEffects();
+});

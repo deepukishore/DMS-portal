@@ -265,7 +265,6 @@
 {% block scripts %}
 <script>
   window.LIBRARY_DATA = {{ library_data|tojson }};
-  window.USER_QMS_LEVEL = "{{ user_qms_level }}";
 </script>
 <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
 {% endblock %}

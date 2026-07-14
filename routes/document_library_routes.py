@@ -38,11 +38,13 @@ def index(category_key=None):
         categories=categories,
         active_category=active_category,
         category_key=resolved_key,
-        category_data=DocumentLibraryService.get_category_data(resolved_key, access_department=access_department),
+        category_data=DocumentLibraryService.get_client_category_data(
+            resolved_key,
+            qms_level=AuthService.get_qms_level(),
+            access_department=access_department,
+        ),
         preselected_primary=preselected_primary,
         preselected_secondary=preselected_secondary,
-        user_qms_level=AuthService.get_qms_level(),
-        is_admin=AuthService.is_admin(),
     )
 
 

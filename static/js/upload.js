@@ -32,7 +32,6 @@ const deptSelect = document.getElementById('department-select');
 
 const ALLOWED_EXTS = ['.pdf', '.docx', '.doc', '.xlsx', '.xls', '.pptx', '.ppt'];
 const LIBRARY_DATA = window.LIBRARY_DATA || {};
-const USER_QMS_LEVEL = window.USER_QMS_LEVEL || 'L4';
 
 let currentPathState = {
   valid: false,
@@ -222,17 +221,16 @@ function configureLibraryCategory() {
   const data = LIBRARY_DATA[category];
   if (!category || !data) return;
 
-  if (data.levels && data.document_groups) {
+  if (data.scope && data.document_groups) {
     showField(libraryPrimWrap, false, libraryPrimSelect);
-    const level = data.levels[USER_QMS_LEVEL] || data.levels.L4;
-    const groups = level?.groups || [];
+    const groups = data.scope.groups || [];
     showSecondary(true, 'Document type');
     setOptions(
       librarySubSelect,
       'Select document type',
       groups.map(key => ({ value: key, label: data.document_groups[key]?.label || key }))
     );
-    setPathState(false, `${categoryLabel(category)} / ${level?.label || USER_QMS_LEVEL} / Select document type`, '', 'Select document type.');
+    setPathState(false, `${categoryLabel(category)} / Select document type`, '', 'Select document type.');
     return;
   }
 
@@ -266,7 +264,7 @@ function configureLibraryCategory() {
 function configureLibraryPrimary() {
   const category = libraryCatSelect.value;
   const data = LIBRARY_DATA[category];
-  const primary = data.levels && data.document_groups ? USER_QMS_LEVEL : libraryPrimSelect.value;
+  const primary = libraryPrimSelect.value;
 
   showSecondary(false);
   if (!data || !primary) {
@@ -274,9 +272,8 @@ function configureLibraryPrimary() {
     return;
   }
 
-  if (data.levels && data.document_groups) {
-    const level = data.levels[primary];
-    const groups = level?.groups || [];
+  if (data.scope && data.document_groups) {
+    const groups = data.scope.groups || [];
     showSecondary(true, 'Document type');
     setOptions(
       librarySubSelect,
@@ -336,7 +333,7 @@ function updateLibraryPath() {
     return;
   }
 
-  if (data.files && !data.primary_options && !data.customers && !data.levels) {
+  if (data.files && !data.primary_options && !data.customers && !data.scope) {
     setPathState(true, categoryLabel(category), category);
     return;
   }
@@ -351,18 +348,16 @@ function updateLibraryPath() {
     return;
   }
 
-  if (data.levels && data.document_groups) {
+  if (data.scope && data.document_groups) {
     const secondary = librarySubSelect.value;
     if (!secondary) {
-      const level = data.levels[USER_QMS_LEVEL] || data.levels.L4;
-      setPathState(false, `${categoryLabel(category)} / ${level?.label || USER_QMS_LEVEL} / Select document type`, '', 'Select document type.');
+      setPathState(false, `${categoryLabel(category)} / Select document type`, '', 'Select document type.');
       return;
     }
-    const level = data.levels[USER_QMS_LEVEL] || data.levels.L4;
     setPathState(
       true,
-      `${categoryLabel(category)} / ${level?.label || USER_QMS_LEVEL} / ${selectedOptionText(librarySubSelect)}`,
-      `${primary}:${secondary}`
+      `${categoryLabel(category)} / ${selectedOptionText(librarySubSelect)}`,
+      secondary
     );
     return;
   }

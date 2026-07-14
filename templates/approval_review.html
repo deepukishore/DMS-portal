@@ -31,7 +31,7 @@
         <div>
           <p class="eyebrow">Approval Request</p>
           <h1 class="page-title">{{ record.file_name }}</h1>
-          <p class="page-sub">L2 users complete first approval, then L1 HOD users complete final approval or rejection.</p>
+          <p class="page-sub">Documents move through first-stage review and final approval or rejection.</p>
         </div>
         <span class="status-pill status-{{ record.approval_status | lower }}" id="review-status-pill">{{ record.approval_status }}</span>
       </section>
@@ -198,9 +198,9 @@
                 <h2 class="section-title">Decision</h2>
                 <p class="section-sub">
                   {% if record.approval_status == 'Pending' %}
-                    L2 Assistant Managers/Managers complete first approval and select sharing recipients.
+                    The designated first-stage reviewer completes the initial review and selects sharing recipients.
                   {% elif record.approval_status == 'Pending Final Approval' %}
-                    L1 HOD users complete final approval or rejection.
+                    The designated final reviewer completes approval or rejection.
                   {% else %}
                     This review request already has a final decision.
                   {% endif %}
@@ -226,11 +226,11 @@
                 </label>
                 {% if record.approval_status == 'Pending' %}
                 <button type="submit" name="status" value="First Approved" class="btn-decision btn-approve">
-                  First Approver Accept
+                  Approve first stage
                 </button>
                 {% else %}
                 <button type="submit" name="status" value="Approved" class="btn-decision btn-approve {% if record.approval_status == 'Approved' %}is-active{% endif %}">
-                  {% if record.approval_status == 'Pending Final Approval' %}Final Approver Accept{% else %}Approve{% endif %}
+                  {% if record.approval_status == 'Pending Final Approval' %}Approve final stage{% else %}Approve{% endif %}
                 </button>
                 {% endif %}
                 <button type="submit" name="status" value="Rejected" class="btn-decision btn-reject {% if record.approval_status == 'Rejected' %}is-active{% endif %}">
@@ -241,9 +241,9 @@
               <div class="alert alert-info">
                 <span>
                   {% if record.approval_status == 'Pending' %}
-                    You can view this request, but only L2 Assistant Managers/Managers can complete first approval.
+                    You can view this request, but only the designated first-stage reviewer can decide it.
                   {% elif record.approval_status == 'Pending Final Approval' %}
-                    You can view this request, but only L1 HOD users can complete final approval.
+                    You can view this request, but only the designated final reviewer can decide it.
                   {% else %}
                     This request has already been reviewed.
                   {% endif %}

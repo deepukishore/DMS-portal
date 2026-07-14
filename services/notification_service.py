@@ -65,6 +65,11 @@ class NotificationService:
         )
         rows = [dict(row) for row in cursor.fetchall()]
         conn.close()
+        for row in rows:
+            row["message"] = row.get("message", "").replace(
+                "final HOD approval",
+                "final approval",
+            )
         return rows
 
     @staticmethod

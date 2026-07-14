@@ -73,6 +73,8 @@ def index():
         ).strip()
         if not library_subcategory:
             return _upload_error("Please select the exact Document Library folder path before uploading.")
+        if category == "qms" and ":" not in library_subcategory:
+            library_subcategory = f"{AuthService.get_qms_level()}:{library_subcategory}"
 
         uploaded_count = 0
         email_failures = []
@@ -200,7 +202,14 @@ def index():
     # Pass document library categories and data for optional library uploads
     categories = DocumentLibraryService.get_categories()
     # Build a mapping of category_key -> data for the client to use when selecting subcategories
-    library_data = {c['key']: DocumentLibraryService.get_category_data(c['key']) for c in categories}
+    library_data = {
+        category['key']: DocumentLibraryService.get_client_category_data(
+            category['key'],
+            qms_level=AuthService.get_qms_level(),
+            access_department=AuthService.get_visible_department(),
+        )
+        for category in categories
+    }
 
     return render_template(
         "upload.html",
@@ -208,7 +217,6 @@ def index():
         current_user=current_user,
         library_categories=categories,
         library_data=library_data,
-        user_qms_level=AuthService.get_qms_level(),
         PLANTS=PLANTS,
         DEPARTMENTS=DEPARTMENTS,
     )

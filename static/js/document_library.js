@@ -126,7 +126,6 @@ function createHeader(title, subtitle, backLabel, onBack) {
   header.className = 'asset-panel-header';
   header.innerHTML = `
     <div>
-      <p class="eyebrow">Selected View</p>
       <h2>${title}</h2>
     </div>`;
 
@@ -386,52 +385,22 @@ function renderCustomerFolderCategory(title) {
 }
 
 function renderQms() {
-  const levels = CATEGORY_DATA.levels || {};
+  const scope = CATEGORY_DATA.scope || {};
   const groups = CATEGORY_DATA.document_groups || {};
 
-  // Non-admin users are locked to their assigned QMS level — skip the picker
-  const lockedLevel = USER_QMS_LEVEL || 'L4';
-
-  if (!selectedPrimary) {
-    selectedPrimary = lockedLevel;
-    renderQms();
-    return;
-  }
-
-  // If user somehow selected a level they don't have access to, block it
-  if (lockedLevel && selectedPrimary !== lockedLevel) {
-    selectedPrimary = lockedLevel;
-  }
-
-  const level = levels[selectedPrimary];
-  if (!level) { selectedPrimary = ''; render(); return; }
-
   if (!selectedSecondary) {
-    const allowedGroups = (level.groups || []).map(key => ({
+    const allowedGroups = (scope.groups || []).map(key => ({
       key,
       label: groups[key]?.label || key,
-      description: `${level.label} access: ${level.access}`,
+      description: `Browse ${groups[key]?.label || 'documents'}.`,
     }));
 
     const el = setRoot();
     el.appendChild(createStepBar(['Select Document Type', 'Browse Files'], 0));
 
-    // Level info banner
-    const banner = document.createElement('div');
-    banner.className = 'surface-panel';
-    banner.style.marginBottom = '1rem';
-    banner.style.padding = '.75rem 1rem';
-    banner.innerHTML = `
-      <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
-        <span style="background:rgba(240,165,0,.12);color:var(--accent);font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:.8rem;padding:.2rem .6rem;border-radius:4px">${level.label}</span>
-        <span style="font-size:.8rem;color:var(--text-sub)">${level.access}</span>
-        ${ level.can_edit ? '<span style="font-size:.75rem;color:var(--green);background:rgba(34,197,94,.1);padding:.15rem .5rem;border-radius:4px">Edit &amp; Delete enabled</span>' : '' }
-      </div>`;
-    el.appendChild(banner);
-
     const panel = createHeader(
-      level.label,
-      level.description || '',
+      'Quality Documents',
+      'Choose a document type to browse available files.',
       null,
       null
     );
@@ -448,11 +417,11 @@ function renderQms() {
     ['Select Document Type', 'Browse Files'],
     1,
     group?.label || selectedSecondary,
-    `${level.label}: ${level.can_edit ? 'view, edit, delete, and approve.' : 'view-only.'}`,
+    `Documents available in ${group?.label || 'this category'}.`,
     group?.files || [],
     '\u2190 Change document type',
     () => { selectedSecondary = ''; render(); },
-    level
+    scope
   );
 }
 
@@ -463,12 +432,6 @@ function renderMasterRecords() {
     const el = setRoot();
     el.appendChild(createStepBar(['Select Plant', 'Select Department', 'Browse Files'], 0));
     const panel = createHeader('Master Records', CATEGORY_DATA.description || '');
-
-    const flow = document.createElement('div');
-    flow.className = 'file-view-placeholder';
-    flow.style.marginBottom = '1rem';
-    flow.innerHTML = `<p>${(CATEGORY_DATA.approval_flow || []).join(' ')}</p>`;
-    panel.appendChild(flow);
 
     const grid = document.createElement('div');
     grid.className = 'plant-card-grid';
