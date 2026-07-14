@@ -72,7 +72,7 @@ COMPANY = {
 
 TRACK_MY_DOCS = {
     "name": "Track My Docs",
-    "tagline": "A document management and approval tracking portal for Smart DMS.",
+    "tagline": "A document management and approval tracking portal for ZF Rane Automotive India PVT LTD, SGD.",
     "description": (
         "Track My Docs helps teams upload, review, approve, browse, and audit "
         "documents across plants, departments, customers, and controlled "

@@ -283,6 +283,9 @@ document.addEventListener('keydown', (event) => {
   if (isTypingTarget(event.target)) {
     return;
   }
+  if (!window.APP_SHORTCUTS) {
+    return;
+  }
 
   const key = event.key.toLowerCase();
   if (key === 'd') {

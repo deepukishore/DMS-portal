@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}Smart DMS{% endblock %}</title>
+  <title>{% block title %}Document Management System{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" />
 </head>
-<body>
+<body class="app-body">
   <div class="shell">
     {% include 'components/sidebar.html' %}
     <button type="button" class="sidebar-backdrop" id="sidebar-backdrop" aria-label="Close navigation"></button>
@@ -22,6 +22,10 @@
               <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </button>
+          <a href="{{ url_for('dashboard.index') }}" class="topbar-product" aria-label="Document Management System home">
+            <span class="topbar-product-mark">DMS</span>
+            <span>ZF Rane · SGD</span>
+          </a>
           <div class="breadcrumb">
             {% block breadcrumb %}{% endblock %}
           </div>
@@ -84,7 +88,7 @@
         </div>
       </header>
 
-      <main class="content">
+      <main class="content" id="main-content">
 
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}

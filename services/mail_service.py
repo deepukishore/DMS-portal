@@ -10,7 +10,7 @@ class MailService:
     def send_password_reset(to_email, reset_url):
         try:
             msg = Message(
-                subject="Smart DMS Password Reset",
+                subject="Document Management System Password Reset",
                 recipients=[to_email],
                 body=(
                     "Click the link below to reset your password:\n\n"
@@ -128,7 +128,7 @@ class MailService:
                 f"Status: {status}\n"
                 f"Updated at: {decision_made_at or record.get('approval_updated_at', 'N/A')}\n\n"
                 f"{comment_block}\n"
-                f"You can view your document in the Smart DMS dashboard."
+                f"You can view your document in the Document Management System dashboard."
             )
             rejection_html = ""
             if status == "Rejected" and rejection_comment:
@@ -150,7 +150,7 @@ class MailService:
                   <tr><td><strong>Updated at</strong></td><td>{decision_made_at or record.get('approval_updated_at', 'N/A')}</td></tr>
                   {rejection_html}
                 </table>
-                <p style="margin-top:16px;color:#6e7681;">You can view your document in the Smart DMS dashboard.</p>
+                <p style="margin-top:16px;color:#6e7681;">You can view your document in the Document Management System dashboard.</p>
             """
             mail.send(msg)
             return True, None
