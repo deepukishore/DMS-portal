@@ -4131,15 +4131,6 @@ html[data-theme="light"] {
   line-height: 1.25;
 }
 .app-body .brand-text strong { display: block; color: var(--accent); }
-.brand-company {
-  max-width: 205px;
-  color: var(--text-dim);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: .57rem;
-  line-height: 1.45;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
 .app-body .sidebar-nav {
   padding: .35rem 0 .75rem;
   scrollbar-width: thin;
