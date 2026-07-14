@@ -3,40 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login · Smart DMS</title>
+  <title>Sign in | Document Management System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" />
 </head>
-<body class="auth-body">
+<body class="auth-body auth-login">
   <button id="theme-toggle" class="btn-theme-auth" title="Toggle dark/light mode" aria-label="Toggle theme">
     <svg class="theme-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     <svg class="theme-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   </button>
   <div class="auth-grid">
-    <!-- Left panel -->
-    <div class="auth-panel-left">
-      <div class="auth-brand">
-        <svg width="36" height="36" viewBox="0 0 28 28" fill="none">
-          <rect width="28" height="28" rx="6" fill="#f0a500"/>
-          <rect x="6" y="6" width="6" height="6" fill="#0f1117"/>
-          <rect x="16" y="6" width="6" height="6" fill="#0f1117"/>
-          <rect x="6" y="16" width="6" height="6" fill="#0f1117"/>
-          <rect x="16" y="16" width="6" height="6" fill="#0f1117"/>
-        </svg>
-        <span>Smart<strong>DMS</strong></span>
+    <section class="auth-panel-left" aria-labelledby="system-title">
+      <div class="login-brand-lockup">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="ZF Rane" class="login-company-logo" />
+        <span class="login-location">ZRAISGD</span>
       </div>
-      <div class="auth-hero-text">
-        <h1>Industry 4.0<br/>Document Control</h1>
-        <p>Secure, traceable document management for your manufacturing plants and customer records.</p>
+
+      <div class="login-hero-copy">
+        <p class="login-eyebrow">Secure. Controlled. Traceable.</p>
+        <h1 id="system-title">Document<br />Management System</h1>
+        <p class="login-company-name">ZF Rane Automotive India PVT LTD, SGD</p>
+        <p class="login-description">A single, reliable workspace for controlled documents, approvals, revisions, and records.</p>
       </div>
+
+      <div class="login-document-art" aria-hidden="true">
+        <span class="document-sheet document-sheet-back"></span>
+        <span class="document-sheet document-sheet-middle"></span>
+        <span class="document-sheet document-sheet-front"><i></i><i></i><i></i><i></i></span>
+        <span class="document-status-mark">&#10003;</span>
       </div>
+
+      <p class="login-panel-footer">Internal document portal</p>
+    </section>
 
     <!-- Right panel -->
     <div class="auth-panel-right">
       <div class="auth-card">
+        <div class="auth-card-kicker">Employee access</div>
         <h2>Sign in</h2>
-        <p class="auth-sub">Enter your credentials to access the portal.</p>
+        <p class="auth-sub">Use your GENID or registered email to continue.</p>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}{% for cat, msg in messages %}
@@ -46,12 +52,12 @@
 
         <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
           <input type="hidden" name="next" value="{{ next_url }}" />
-          <label>GENID or Email
+          <label>GENID or email
             <input type="text" name="email" required placeholder="e.g. EMP001 or you@example.com" autocomplete="email" />
           </label>
           <label>Password
             <div class="password-field-wrapper">
-              <input type="password" name="password" required placeholder="••••••••" autocomplete="current-password" />
+              <input type="password" name="password" required placeholder="Enter your password" autocomplete="current-password" />
               <label class="password-toggle-label">
                 <input type="checkbox" class="password-toggle-checkbox" />
                 <span>Show password</span>
@@ -61,13 +67,12 @@
           <div class="auth-row">
             <button type="button" class="link-btn" onclick="document.getElementById('forgot-modal').classList.add('open')">Forgot password?</button>
           </div>
-          <button type="submit" class="btn-primary btn-full">Sign in</button>
+          <button type="submit" class="btn-primary btn-full auth-submit">Sign in <span aria-hidden="true">&#8594;</span></button>
         </form>
 
         <div class="auth-divider"><span>New here?</span></div>
         <a href="{{ url_for('auth.register') }}" class="btn-outline btn-full">Create an account</a>
 
-        <p class="auth-demo">Demo: <code>diva@example.com</code> / <code>Pass@12345</code> (Admin · L1) &nbsp;|&nbsp; <code>l2user@example.com</code> / <code>L2@12345</code> &nbsp;|&nbsp; <code>l3user@example.com</code> / <code>L3@12345</code> &nbsp;|&nbsp; <code>l4user@example.com</code> / <code>L4@12345</code></p>
       </div>
     </div>
   </div>
