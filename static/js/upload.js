@@ -20,6 +20,9 @@ const libraryCatSelect = document.getElementById('library-category-select');
 const librarySubSelect = document.getElementById('library-subcategory-select');
 const librarySubWrapper = document.getElementById('library-sub-wrapper');
 const librarySecondaryRow = document.getElementById('library-secondary-row');
+const libraryTertiaryRow = document.getElementById('library-tertiary-row');
+const libraryTertiaryWrapper = document.getElementById('library-tertiary-wrapper');
+const libraryTertiarySelect = document.getElementById('library-tertiary-select');
 const libraryPrimWrap = document.getElementById('library-primary-wrapper');
 const libraryPrimSelect = document.getElementById('library-primary-select');
 const librarySubHidden = document.getElementById('library-subcategory-hidden');
@@ -119,6 +122,19 @@ function showSecondary(visible, label = 'Subfolder') {
   }
 }
 
+function showTertiary(visible, label = 'Subfolder') {
+  if (libraryTertiaryRow) libraryTertiaryRow.style.display = visible ? 'flex' : 'none';
+  if (libraryTertiaryWrapper) {
+    const marker = libraryTertiaryWrapper.querySelector('#library-tertiary-required');
+    libraryTertiaryWrapper.childNodes[0].textContent = `${label} `;
+    if (marker) libraryTertiaryWrapper.insertBefore(marker, libraryTertiaryWrapper.childNodes[1] || null);
+  }
+  if (libraryTertiarySelect) {
+    libraryTertiarySelect.style.display = visible ? 'block' : 'none';
+    setRequired(libraryTertiarySelect, visible);
+  }
+}
+
 function setPathState(valid, display, value, missing = '') {
   currentPathState = { valid, display, value, missing };
   if (librarySubHidden) librarySubHidden.value = valid ? value : '';
@@ -210,8 +226,10 @@ function updateInternalUI() {
 function resetLibraryFields() {
   showField(libraryPrimWrap, false, libraryPrimSelect);
   showSecondary(false);
+  showTertiary(false);
   if (libraryPrimSelect) setOptions(libraryPrimSelect, 'Select folder', []);
   if (librarySubSelect) setOptions(librarySubSelect, 'Select subfolder', []);
+  if (libraryTertiarySelect) setOptions(libraryTertiarySelect, 'Select subfolder', []);
   setPathState(false, 'No library path selected', '', 'Select a library category.');
 }
 
@@ -267,6 +285,7 @@ function configureLibraryPrimary() {
   const primary = libraryPrimSelect.value;
 
   showSecondary(false);
+  showTertiary(false);
   if (!data || !primary) {
     configureLibraryCategory();
     return;
@@ -313,6 +332,37 @@ function configureLibraryPrimary() {
   setPathState(true, `${categoryLabel(category)} / ${folder.label || primary}`, primary);
 }
 
+function configureLibrarySecondary() {
+  showTertiary(false);
+  const category = libraryCatSelect.value;
+  const data = LIBRARY_DATA[category];
+
+  if (data?.scope && data.document_groups) {
+    const groupKey = librarySubSelect.value;
+    const group = data.document_groups[groupKey];
+    if (group?.secondary_options) {
+      showTertiary(true, 'Business Procedure folder');
+      setOptions(
+        libraryTertiarySelect,
+        'Select Business Procedure folder',
+        Object.entries(group.secondary_options).map(([value, folder]) => ({
+          value,
+          label: folder.label || value,
+        }))
+      );
+      setPathState(
+        false,
+        `${categoryLabel(category)} / ${group.label || groupKey} / Select subfolder`,
+        '',
+        'Select a Business Procedures subfolder.'
+      );
+      return;
+    }
+  }
+
+  updateLibraryPath();
+}
+
 function updateLibraryPath() {
   if (getUploadTarget() !== 'library') return;
   const category = libraryCatSelect.value;
@@ -352,6 +402,26 @@ function updateLibraryPath() {
     const secondary = librarySubSelect.value;
     if (!secondary) {
       setPathState(false, `${categoryLabel(category)} / Select document type`, '', 'Select document type.');
+      return;
+    }
+    const group = data.document_groups[secondary];
+    if (group?.secondary_options) {
+      const tertiary = libraryTertiarySelect.value;
+      if (!tertiary) {
+        setPathState(
+          false,
+          `${categoryLabel(category)} / ${group.label || secondary} / Select subfolder`,
+          '',
+          'Select a Business Procedures subfolder.'
+        );
+        return;
+      }
+      const subfolder = group.secondary_options[tertiary];
+      setPathState(
+        true,
+        `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder?.label || tertiary}`,
+        `${secondary}:${tertiary}`
+      );
       return;
     }
     setPathState(
@@ -458,7 +528,8 @@ function showSuccessPopup(message, redirectUrl) {
 internalCheckbox.addEventListener('change', updateInternalUI);
 libraryCatSelect?.addEventListener('change', configureLibraryCategory);
 libraryPrimSelect?.addEventListener('change', configureLibraryPrimary);
-librarySubSelect?.addEventListener('change', updateLibraryPath);
+librarySubSelect?.addEventListener('change', configureLibrarySecondary);
+libraryTertiarySelect?.addEventListener('change', updateLibraryPath);
 plantSelect?.addEventListener('change', updateLibraryPath);
 deptSelect?.addEventListener('change', updateLibraryPath);
 

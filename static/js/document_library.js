@@ -544,6 +544,8 @@ function renderQms() {
     );
     panel.appendChild(createOptionGrid(allowedGroups, key => {
       selectedSecondary = key;
+      selectedPrimary = '';
+      currentPage = 1;
       render();
     }));
     el.appendChild(panel);
@@ -551,6 +553,65 @@ function renderQms() {
   }
 
   const group = groups[selectedSecondary];
+  if (!group) {
+    selectedPrimary = '';
+    selectedSecondary = '';
+    render();
+    return;
+  }
+
+  if (group.secondary_options) {
+    const subfolders = group.secondary_options;
+    if (!selectedPrimary) {
+      const options = Object.entries(subfolders).map(([key, folder]) => ({
+        key,
+        label: folder.label || key,
+        description: folder.description || '',
+      }));
+      const el = setRoot();
+      el.appendChild(createStepBar(['Select Document Type', 'Select Subfolder', 'Browse Files'], 1));
+      const panel = createHeader(
+        group.label || selectedSecondary,
+        'Choose a subfolder to browse its documents.',
+        'Change document type',
+        () => {
+          selectedPrimary = '';
+          selectedSecondary = '';
+          render();
+        }
+      );
+      panel.appendChild(createOptionGrid(options, key => {
+        selectedPrimary = key;
+        currentPage = 1;
+        render();
+      }));
+      el.appendChild(panel);
+      return;
+    }
+
+    const subfolder = subfolders[selectedPrimary];
+    if (!subfolder) {
+      selectedPrimary = '';
+      render();
+      return;
+    }
+
+    renderFilesView(
+      ['Select Document Type', 'Select Subfolder', 'Browse Files'],
+      2,
+      subfolder.label || selectedPrimary,
+      subfolder.description || `Documents available in ${subfolder.label || 'this subfolder'}.`,
+      subfolder.files || [],
+      'Change subfolder',
+      () => {
+        selectedPrimary = '';
+        render();
+      },
+      scope
+    );
+    return;
+  }
+
   renderFilesView(
     ['Select Document Type', 'Browse Files'],
     1,
@@ -558,7 +619,7 @@ function renderQms() {
     `Documents available in ${group?.label || 'this category'}.`,
     group?.files || [],
     '\u2190 Change document type',
-    () => { selectedSecondary = ''; render(); },
+    () => { selectedPrimary = ''; selectedSecondary = ''; render(); },
     scope
   );
 }
@@ -676,7 +737,12 @@ function render() {
     return;
   }
 
-  if (CATEGORY_KEY === 'csr' || CATEGORY_KEY === 'awards_certifications' || CATEGORY_KEY === 'audit_nc') {
+  if (
+    CATEGORY_KEY === 'csr'
+    || CATEGORY_KEY === 'core_tools_manuals'
+    || CATEGORY_KEY === 'awards_certifications'
+    || CATEGORY_KEY === 'audit_nc'
+  ) {
     renderPrimaryFolderCategory(CATEGORY_DATA.primary_options?.[selectedPrimary]?.label || document.querySelector('.horiz-tab.active .horiz-tab-label')?.textContent || 'Document Library');
     return;
   }

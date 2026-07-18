@@ -17,7 +17,7 @@ LIBRARY_CATEGORIES = [
 CATEGORY_ALIASES = {
     "procedures": {"key": "qms"},
     "cq_manuals": {"key": "qms", "primary": "L1"},
-    "business_procedures": {"key": "qms", "primary": "L2"},
+    "business_procedures": {"key": "qms", "secondary": "business_procedures"},
     "standard_manuals": {"key": "csr"},
     "std_manual": {"key": "csr"},
     "core_tool_manuals": {"key": "core_tools_manuals"},
@@ -38,11 +38,32 @@ QMS_DOCUMENT_GROUPS = {
     },
     "business_procedures": {
         "label": "Business Procedures",
-        "files": [
-            "business_planning_procedure.pdf",
-            "document_control_procedure.pdf",
-            "risk_and_opportunity_procedure.docx",
-        ],
+        "secondary_options": {
+            "bp_cp": {
+                "label": "BP - CP",
+                "description": "Business procedure CP documents.",
+                "files": [
+                    "bp_cp_business_planning_procedure.pdf",
+                    "bp_cp_document_control_procedure.docx",
+                ],
+            },
+            "bp_mp": {
+                "label": "BP - MP",
+                "description": "Business procedure MP documents.",
+                "files": [
+                    "bp_mp_management_review_procedure.pdf",
+                    "bp_mp_process_monitoring_procedure.xlsx",
+                ],
+            },
+            "bp_sp": {
+                "label": "BP - SP",
+                "description": "Business procedure SP documents.",
+                "files": [
+                    "bp_sp_risk_and_opportunity_procedure.docx",
+                    "bp_sp_support_process_procedure.pdf",
+                ],
+            },
+        },
     },
     "sops": {
         "label": "SOPs",
@@ -183,14 +204,65 @@ LIBRARY_DATA = {
         },
     },
     "core_tools_manuals": {
-        "description": "Core tools manuals and reference documents.",
-        "files": [
-            "apqp_manual.pdf",
-            "ppap_submission_manual.pdf",
-            "fmea_reference_manual.pdf",
-            "msa_reference_manual.pdf",
-            "spc_reference_manual.pdf",
-        ],
+        "description": "Core tools manuals and reference documents organized by tool.",
+        "primary_options": {
+            "ppap": {
+                "label": "PPAP - Production Part Approval Process",
+                "description": "Production Part Approval Process manuals and submission references.",
+                "files": [
+                    "ppap_production_part_approval_process_manual.pdf",
+                    "ppap_submission_requirements.xlsx",
+                ],
+            },
+            "msa": {
+                "label": "MSA - Measurement Systems Analysis",
+                "description": "Measurement Systems Analysis manuals and study templates.",
+                "files": [
+                    "msa_measurement_systems_analysis_manual.pdf",
+                    "msa_gauge_rr_study_template.xlsx",
+                ],
+            },
+            "fmea": {
+                "label": "FMEA - Failure Mode and Effects Analysis",
+                "description": "Failure Mode and Effects Analysis manuals and worksheets.",
+                "files": [
+                    "fmea_failure_mode_effects_analysis_manual.pdf",
+                    "fmea_analysis_worksheet.xlsx",
+                ],
+            },
+            "apqp": {
+                "label": "APQP - Advanced Product Quality Planning",
+                "description": "Advanced Product Quality Planning manuals and trackers.",
+                "files": [
+                    "apqp_advanced_product_quality_planning_manual.pdf",
+                    "apqp_project_tracker.xlsx",
+                ],
+            },
+            "spc": {
+                "label": "SPC - Statistical Process Control",
+                "description": "Statistical Process Control manuals and reference documents.",
+                "files": [
+                    "spc_statistical_process_control_manual.pdf",
+                    "spc_control_chart_reference.xlsx",
+                ],
+            },
+            "cp": {
+                "label": "CP - Control Plan",
+                "description": "Control Plan manuals, formats, and reference documents.",
+                "files": [
+                    "cp_control_plan_manual.pdf",
+                    "cp_control_plan_template.xlsx",
+                ],
+            },
+            "iatf_manual": {
+                "label": "IATF Manual",
+                "description": "IATF quality management system manual and references.",
+                "files": [
+                    "iatf_16949_manual.pdf",
+                    "iatf_requirements_reference.pdf",
+                ],
+            },
+        },
     },
     "customer_score_card": {
         "description": "Customer score cards organized by customer.",

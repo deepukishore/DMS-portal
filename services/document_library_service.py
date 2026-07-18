@@ -22,6 +22,23 @@ class DocumentLibraryService:
         return plant
 
     @staticmethod
+    def _core_tool_folder_for_file(file_name):
+        normalized = (file_name or "").lower().replace("-", "_").replace(" ", "_")
+        folder_markers = (
+            ("ppap", "ppap"),
+            ("msa", "msa"),
+            ("fmea", "fmea"),
+            ("apqp", "apqp"),
+            ("spc", "spc"),
+            ("control_plan", "cp"),
+            ("iatf", "iatf_manual"),
+        )
+        for marker, folder_key in folder_markers:
+            if marker in normalized:
+                return folder_key
+        return "iatf_manual"
+
+    @staticmethod
     def _order_customer_mappings(node):
         if not isinstance(node, dict):
             return node
@@ -50,10 +67,27 @@ class DocumentLibraryService:
             groups = data.get("document_groups", {})
             for record in uploaded:
                 sub_category = record.get("sub_category") or ""
-                group_key = sub_category.split(":")[-1] if sub_category else ""
-                if group_key in groups:
+                path_parts = [part for part in sub_category.split(":") if part]
+                if path_parts and path_parts[0] in {"L1", "L2", "L3", "L4"}:
+                    path_parts = path_parts[1:]
+                group_key = path_parts[0] if path_parts else ""
+                subfolder_key = path_parts[1] if len(path_parts) > 1 else ""
+                group = groups.get(group_key)
+                if not group:
+                    continue
+                if "secondary_options" in group:
+                    subfolders = group.get("secondary_options", {})
+                    subfolder = subfolders.get(subfolder_key)
+                    if subfolder is None and group_key == "business_procedures":
+                        subfolder = subfolders.get("bp_cp")
+                    if subfolder is not None:
+                        DocumentLibraryService._append_unique(
+                            subfolder.setdefault("files", []),
+                            record.get("file_name"),
+                        )
+                else:
                     DocumentLibraryService._append_unique(
-                        groups[group_key].setdefault("files", []),
+                        group.setdefault("files", []),
                         record.get("file_name"),
                     )
             return data
@@ -74,6 +108,10 @@ class DocumentLibraryService:
                     if primary in legacy_primary:
                         primary = legacy_primary[primary]
                         secondary = secondary or "ncs"
+                if category_key == "core_tools_manuals" and primary not in options:
+                    primary = DocumentLibraryService._core_tool_folder_for_file(
+                        record.get("file_name")
+                    )
                 folder = options.get(primary)
                 if not folder:
                     continue

@@ -27,6 +27,15 @@ def _upload_error(message, redirect_endpoint="upload.index", status_code=400):
     return redirect(url_for(redirect_endpoint))
 
 
+def _normalize_library_subcategory(category, library_subcategory):
+    if category != "qms":
+        return library_subcategory
+    qms_path_root = library_subcategory.split(":", 1)[0]
+    if qms_path_root in {"L1", "L2", "L3", "L4"}:
+        return library_subcategory
+    return f"{AuthService.get_qms_level()}:{library_subcategory}"
+
+
 @upload_bp.route("/upload", methods=["GET", "POST"])
 def index():
     redir = _require_login()
@@ -73,8 +82,10 @@ def index():
         ).strip()
         if not library_subcategory:
             return _upload_error("Please select the exact Document Library folder path before uploading.")
-        if category == "qms" and ":" not in library_subcategory:
-            library_subcategory = f"{AuthService.get_qms_level()}:{library_subcategory}"
+        library_subcategory = _normalize_library_subcategory(
+            category,
+            library_subcategory,
+        )
 
         uploaded_count = 0
         email_failures = []
