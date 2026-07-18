@@ -239,6 +239,11 @@ function configureLibraryCategory() {
   const data = LIBRARY_DATA[category];
   if (!category || !data) return;
 
+  if (category === 'master_records') {
+    updateLibraryPath();
+    return;
+  }
+
   if (data.scope && data.document_groups) {
     showField(libraryPrimWrap, false, libraryPrimSelect);
     const groups = data.scope.groups || [];
