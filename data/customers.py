@@ -1,13 +1,13 @@
 OFFICIAL_CUSTOMERS = [
-    "AL - Ashok Leyland",
     "TML - Tata Motors Limited",
+    "AL - Ashok Leyland",
     "M&M - Mahindra and Mahindra",
-    "FML - Force Motors Limited",
-    "SML ISUZU",
-    "Switch Mobility",
     "VECV - Volvo Eicher Commercial Vehicles",
     "DICV - Daimler India Commercial Vehicles",
+    "FML - Force Motors Limited",
     "Renault Nissan",
+    "SML ISUZU",
+    "Switch Mobility",
 ]
 
 
@@ -62,3 +62,23 @@ def normalize_customer_keys(mapping):
         normalize_customer(customer): value
         for customer, value in mapping.items()
     }
+
+
+def sort_customers(customers):
+    """Return unique customer names in the official business order."""
+    order = {customer: index for index, customer in enumerate(OFFICIAL_CUSTOMERS)}
+    normalized = []
+    seen = set()
+    for customer in customers:
+        customer_name = normalize_customer(customer)
+        if not customer_name or customer_name in seen:
+            continue
+        normalized.append(customer_name)
+        seen.add(customer_name)
+    return sorted(
+        normalized,
+        key=lambda customer: (
+            order.get(customer, len(order)),
+            customer.casefold(),
+        ),
+    )

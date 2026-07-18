@@ -167,6 +167,43 @@ function createOptionGrid(options, onSelect) {
   return grid;
 }
 
+function createPlantGrid(plants, onSelect) {
+  const grid = document.createElement('div');
+  grid.className = 'plant-card-grid';
+  plants.forEach(plant => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'plant-card';
+    card.innerHTML = `
+      <div class="plant-card-id">${plant.id || 'PLANT'}</div>
+      <div class="plant-card-info">
+        <strong>${plant.label}</strong>
+        <small>${plant.location || 'Open plant folder'}</small>
+      </div>
+      <div class="plant-card-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>`;
+    card.addEventListener('click', () => onSelect(plant.label));
+    grid.appendChild(card);
+  });
+  return grid;
+}
+
+function plantOptionsFor(plantFiles) {
+  const labels = Object.keys(plantFiles || {});
+  const configured = (CATEGORY_DATA.plant_options || [])
+    .filter(plant => labels.includes(plant.label));
+  const configuredLabels = new Set(configured.map(plant => plant.label));
+  const additional = labels
+    .filter(label => !configuredLabels.has(label))
+    .map(label => ({
+      id: label.split(' - ')[0] || 'PLANT',
+      label,
+      location: '',
+    }));
+  return [...configured, ...additional];
+}
+
 function createCustomerGrid(customers, onSelect) {
   const grid = document.createElement('div');
   grid.className = 'customer-card-grid';
@@ -301,6 +338,8 @@ function renderPrimaryFolderCategory(title) {
   const selected = options[selectedPrimary];
   if (!selected) {
     selectedPrimary = '';
+    selectedSecondary = '';
+    selectedPlant = '';
     render();
     return;
   }
@@ -316,6 +355,7 @@ function renderPrimaryFolderCategory(title) {
         'Change folder',
         () => {
           selectedPrimary = '';
+          selectedSecondary = '';
           render();
         }
       );
@@ -342,6 +382,102 @@ function renderPrimaryFolderCategory(title) {
     return;
   }
 
+  if (selected.secondary_options) {
+    const secondaryOptions = Object.entries(selected.secondary_options).map(([key, value]) => ({
+      key,
+      label: value.label || key,
+      description: value.description || '',
+    }));
+    const stepLabels = ['Select Audit Type', 'Select Folder', 'Select Plant', 'Browse Files'];
+
+    if (!selectedSecondary) {
+      const el = setRoot();
+      el.appendChild(createStepBar(stepLabels, 1));
+      const panel = createHeader(
+        selected.label,
+        selected.description || 'Select a folder to continue.',
+        'Change audit type',
+        () => {
+          selectedPrimary = '';
+          selectedSecondary = '';
+          selectedPlant = '';
+          render();
+        }
+      );
+      panel.appendChild(createOptionGrid(secondaryOptions, key => {
+        selectedSecondary = key;
+        selectedPlant = '';
+        currentPage = 1;
+        render();
+      }));
+      el.appendChild(panel);
+      return;
+    }
+
+    const secondaryFolder = selected.secondary_options[selectedSecondary];
+    if (!secondaryFolder) {
+      selectedSecondary = '';
+      selectedPlant = '';
+      render();
+      return;
+    }
+
+    if (secondaryFolder.plants) {
+      if (!selectedPlant) {
+        const el = setRoot();
+        el.appendChild(createStepBar(stepLabels, 2));
+        const panel = createHeader(
+          `${selected.label} / ${secondaryFolder.label || selectedSecondary}`,
+          secondaryFolder.description || 'Select a plant to view its documents.',
+          'Change folder',
+          () => {
+            selectedSecondary = '';
+            selectedPlant = '';
+            render();
+          }
+        );
+        panel.appendChild(createPlantGrid(
+          plantOptionsFor(secondaryFolder.plants),
+          plant => {
+            selectedPlant = plant;
+            currentPage = 1;
+            render();
+          }
+        ));
+        el.appendChild(panel);
+        return;
+      }
+
+      renderFilesView(
+        stepLabels,
+        3,
+        `${secondaryFolder.label || selectedSecondary} / ${selectedPlant}`,
+        `${selected.label} documents for ${selectedPlant}.`,
+        secondaryFolder.plants[selectedPlant] || [],
+        'Change plant',
+        () => {
+          selectedPlant = '';
+          render();
+        }
+      );
+      return;
+    }
+
+    renderFilesView(
+      ['Select Audit Type', 'Select Folder', 'Browse Files'],
+      2,
+      secondaryFolder.label || selectedSecondary,
+      secondaryFolder.description || '',
+      secondaryFolder.files || [],
+      'Change folder',
+      () => {
+        selectedSecondary = '';
+        render();
+      }
+    );
+    return;
+  }
+
   renderFilesView(
     ['Select Folder', 'Browse Files'],
     1,
@@ -351,6 +487,8 @@ function renderPrimaryFolderCategory(title) {
     'Change folder',
     () => {
       selectedPrimary = '';
+      selectedSecondary = '';
+      selectedPlant = '';
       render();
     }
   );
@@ -433,29 +571,11 @@ function renderMasterRecords() {
     el.appendChild(createStepBar(['Select Plant', 'Select Department', 'Browse Files'], 0));
     const panel = createHeader('Master Records', CATEGORY_DATA.description || '');
 
-    const grid = document.createElement('div');
-    grid.className = 'plant-card-grid';
-    plants.forEach(plant => {
-      const card = document.createElement('button');
-      card.type = 'button';
-      card.className = 'plant-card';
-      card.innerHTML = `
-        <div class="plant-card-id">${plant.id}</div>
-        <div class="plant-card-info">
-          <strong>${plant.label}</strong>
-          <small>${plant.location || ''}</small>
-        </div>
-        <div class="plant-card-arrow">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </div>`;
-      card.addEventListener('click', () => {
-        selectedPlant = plant.label;
-        selectedDept = '';
-        render();
-      });
-      grid.appendChild(card);
-    });
-    panel.appendChild(grid);
+    panel.appendChild(createPlantGrid(plants, plant => {
+      selectedPlant = plant;
+      selectedDept = '';
+      render();
+    }));
     el.appendChild(panel);
     return;
   }

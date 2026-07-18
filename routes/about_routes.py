@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
+from data.customers import OFFICIAL_CUSTOMERS
 from services.auth_service import AuthService
 
 about_bp = Blueprint('about', __name__)
@@ -41,11 +42,7 @@ COMPANY = {
         {"id": "P3", "name": "Guduvachery Plant",  "location": "Guduvachery, Tamil Nadu",    "division": "SGD + OSD", "products": "Steering assemblies, Safety systems"},
         {"id": "P4", "name": "Uttarakhand Plant",  "location": "Rudrapur, Uttarakhand",      "division": "SGD",       "products": "Hydraulic power steering systems"},
     ],
-    "customers": [
-        "Hyundai Motor India", "Tata Motors", "Ashok Leyland", "TVS Motor Company",
-        "Maruti Suzuki", "Kia India", "Mahindra & Mahindra", "Volvo",
-        "Renault-Nissan", "SML Isuzu", "Escorts Kubota",
-    ],
+    "customers": list(OFFICIAL_CUSTOMERS),
     "certifications": [
         {"icon": "✅", "text": "IATF 16949 : 2016 — Automotive Quality Management System"},
         {"icon": "✅", "text": "ISO 14001 : 2015 — Environmental Management System"},

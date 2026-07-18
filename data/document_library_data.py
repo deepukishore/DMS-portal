@@ -1,5 +1,5 @@
 from data.customers import OFFICIAL_CUSTOMERS
-from data.mock_data import MASTER_RECORD_PLANTS
+from data.mock_data import MASTER_RECORD_PLANTS, PLANTS
 
 
 LIBRARY_CATEGORIES = [
@@ -9,7 +9,7 @@ LIBRARY_CATEGORIES = [
     {"key": "customer_score_card", "label": "Customer Score Card", "icon": "S"},
     {"key": "eohms", "label": "EOHMS", "icon": "E"},
     {"key": "awards_certifications", "label": "Awards and Certifications", "icon": "A"},
-    {"key": "audit_nc", "label": "Audit NC", "icon": "N"},
+    {"key": "audit_nc", "label": "IATF Audit", "icon": "I"},
     {"key": "master_records", "label": "Master Records", "icon": "M"},
 ]
 
@@ -76,6 +76,14 @@ QMS_DOCUMENT_GROUPS = {
             "corrective_action_status_report.pdf",
         ],
     },
+    "sanction_interpretation": {
+        "label": "Sanction Interpretation",
+        "files": [
+            "sanction_interpretation_guideline.pdf",
+            "sanction_interpretation_register.xlsx",
+            "sanction_interpretation_review_form.docx",
+        ],
+    },
 }
 
 
@@ -129,7 +137,18 @@ def _customer_file_map(prefix, suffix):
     }
 
 
+def _audit_plant_file_map(audit_scope, document_type):
+    return {
+        plant["label"]: [
+            f"{plant['id'].lower().replace('&', 'and')}_{audit_scope}_{document_type}.pdf",
+            f"{plant['id'].lower().replace('&', 'and')}_{audit_scope}_{document_type}_register.xlsx",
+        ]
+        for plant in PLANTS
+    }
+
+
 CSR_CUSTOMER_MANUALS = _customer_file_map("csr_manual", "requirements")
+CSR_CUSTOMER_INITIATIVES = _customer_file_map("customer_initiative", "summary")
 CUSTOMER_SCORE_CARDS = _customer_file_map("score_card", "monthly_summary")
 
 
@@ -155,6 +174,11 @@ LIBRARY_DATA = {
                 "label": "Customer Manual",
                 "description": "Select a customer to view related manuals.",
                 "customers": CSR_CUSTOMER_MANUALS,
+            },
+            "customer_initiatives": {
+                "label": "Customer Initiatives",
+                "description": "Select a customer to view initiative documents and supporting records.",
+                "customers": CSR_CUSTOMER_INITIATIVES,
             },
         },
     },
@@ -205,25 +229,40 @@ LIBRARY_DATA = {
         },
     },
     "audit_nc": {
-        "description": "Audit non-conformance records.",
+        "description": "IATF internal and external audit records organized by document type and plant.",
+        "plant_options": PLANTS,
         "primary_options": {
-            "iatf_external_audits": {
-                "label": "IATF External Audits",
-                "description": "External IATF audit NC files and closure evidence.",
-                "files": [
-                    "iatf_external_audit_nc_register.xlsx",
-                    "external_audit_closure_evidence.pdf",
-                    "external_audit_corrective_action_plan.docx",
-                ],
+            "internal_audit": {
+                "label": "Internal Audit",
+                "description": "Internal IATF audit non-conformances and reports.",
+                "secondary_options": {
+                    "ncs": {
+                        "label": "NCs",
+                        "description": "Select a plant to view internal audit non-conformance documents.",
+                        "plants": _audit_plant_file_map("internal_audit", "ncs"),
+                    },
+                    "reports": {
+                        "label": "Reports",
+                        "description": "Select a plant to view internal audit reports.",
+                        "plants": _audit_plant_file_map("internal_audit", "reports"),
+                    },
+                },
             },
-            "iatf_internal_audits": {
-                "label": "IATF Internal Audits",
-                "description": "Internal IATF audit NC files and closure evidence.",
-                "files": [
-                    "iatf_internal_audit_nc_register.xlsx",
-                    "internal_audit_observation_report.pdf",
-                    "internal_audit_corrective_action_plan.docx",
-                ],
+            "external_audit": {
+                "label": "External Audit",
+                "description": "External IATF audit non-conformances and reports.",
+                "secondary_options": {
+                    "ncs": {
+                        "label": "NCs",
+                        "description": "Select a plant to view external audit non-conformance documents.",
+                        "plants": _audit_plant_file_map("external_audit", "ncs"),
+                    },
+                    "reports": {
+                        "label": "Reports",
+                        "description": "Select a plant to view external audit reports.",
+                        "plants": _audit_plant_file_map("external_audit", "reports"),
+                    },
+                },
             },
         },
     },

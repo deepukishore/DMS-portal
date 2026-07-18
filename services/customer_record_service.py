@@ -1,4 +1,4 @@
-from data.customers import OFFICIAL_CUSTOMERS, normalize_customer
+from data.customers import OFFICIAL_CUSTOMERS, normalize_customer, sort_customers
 from data.mock_data import CUSTOMER_RECORDS
 from database import get_connection
 
@@ -17,7 +17,9 @@ class CustomerRecordService:
             'SELECT DISTINCT customer FROM documents WHERE department = ? ORDER BY customer ASC',
             (access_department,),
         )
-        customers = [normalize_customer(row['customer']) for row in cursor.fetchall() if row['customer']]
+        customers = sort_customers(
+            row['customer'] for row in cursor.fetchall() if row['customer']
+        )
         conn.close()
         return customers or list(OFFICIAL_CUSTOMERS)
 

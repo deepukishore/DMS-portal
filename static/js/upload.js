@@ -369,16 +369,50 @@ function updateLibraryPath() {
   }
 
   const folder = data.primary_options?.[primary];
-  if (folder?.customers || folder?.secondary_options) {
+  if (folder?.customers) {
     const secondary = librarySubSelect.value;
     if (!secondary) {
-      const label = folder.customers ? 'customer' : 'subfolder';
-      setPathState(false, `${categoryLabel(category)} / ${folder.label || primary} / Select ${label}`, '', `Select ${label}.`);
+      setPathState(false, `${categoryLabel(category)} / ${folder.label || primary} / Select customer`, '', 'Select customer.');
       return;
     }
     setPathState(
       true,
       `${categoryLabel(category)} / ${folder.label || primary} / ${selectedOptionText(librarySubSelect)}`,
+      `${primary}:${secondary}`
+    );
+    return;
+  }
+
+  if (folder?.secondary_options) {
+    const secondary = librarySubSelect.value;
+    if (!secondary) {
+      setPathState(false, `${categoryLabel(category)} / ${folder.label || primary} / Select subfolder`, '', 'Select subfolder.');
+      return;
+    }
+
+    const secondaryFolder = folder.secondary_options[secondary];
+    if (secondaryFolder?.plants) {
+      const plant = plantSelect.value;
+      if (!plant) {
+        setPathState(
+          false,
+          `${categoryLabel(category)} / ${folder.label || primary} / ${selectedOptionText(librarySubSelect)} / Select plant`,
+          '',
+          'Select the plant for this IATF Audit document.'
+        );
+        return;
+      }
+      setPathState(
+        true,
+        `${categoryLabel(category)} / ${folder.label || primary} / ${secondaryFolder.label || secondary} / ${plant}`,
+        `${primary}:${secondary}:${plant}`
+      );
+      return;
+    }
+
+    setPathState(
+      true,
+      `${categoryLabel(category)} / ${folder.label || primary} / ${secondaryFolder?.label || secondary}`,
       `${primary}:${secondary}`
     );
     return;

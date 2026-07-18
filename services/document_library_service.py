@@ -1,5 +1,6 @@
 from copy import deepcopy
 
+from data.customers import sort_customers
 from data.document_library_data import CATEGORY_ALIASES, LIBRARY_CATEGORIES, LIBRARY_DATA
 from services.category_document_service import CategoryDocumentService
 
@@ -9,6 +10,31 @@ class DocumentLibraryService:
     def _append_unique(files, file_name):
         if file_name and file_name not in files:
             files.append(file_name)
+
+    @staticmethod
+    def _plant_folder_key(plants, plant):
+        if plant in plants:
+            return plant
+        if plant in {"P2 - Guduvachery Plant", "P3 - Guduvachery Plant"}:
+            combined = "P2&3 - Guduvachery Plants"
+            if combined in plants:
+                return combined
+        return plant
+
+    @staticmethod
+    def _order_customer_mappings(node):
+        if not isinstance(node, dict):
+            return node
+        customers = node.get("customers")
+        if isinstance(customers, dict):
+            node["customers"] = {
+                customer: customers[customer]
+                for customer in sort_customers(customers.keys())
+            }
+        for value in node.values():
+            if isinstance(value, dict):
+                DocumentLibraryService._order_customer_mappings(value)
+        return node
 
     @staticmethod
     def _merge_uploaded_files(category_key, data, access_department=""):
@@ -36,9 +62,18 @@ class DocumentLibraryService:
             options = data.get("primary_options", {})
             for record in uploaded:
                 sub_category = record.get("sub_category") or ""
-                parts = sub_category.split(":", 1)
+                parts = sub_category.split(":")
                 primary = parts[0] if parts else ""
                 secondary = parts[1] if len(parts) > 1 else ""
+                tertiary = ":".join(parts[2:]) if len(parts) > 2 else ""
+                if category_key == "audit_nc":
+                    legacy_primary = {
+                        "iatf_internal_audits": "internal_audit",
+                        "iatf_external_audits": "external_audit",
+                    }
+                    if primary in legacy_primary:
+                        primary = legacy_primary[primary]
+                        secondary = secondary or "ncs"
                 folder = options.get(primary)
                 if not folder:
                     continue
@@ -52,10 +87,20 @@ class DocumentLibraryService:
                 elif "secondary_options" in folder:
                     secondary_folder = folder.get("secondary_options", {}).get(secondary)
                     if secondary_folder is not None:
-                        DocumentLibraryService._append_unique(
-                            secondary_folder.setdefault("files", []),
-                            record.get("file_name"),
-                        )
+                        if "plants" in secondary_folder:
+                            plants = secondary_folder.setdefault("plants", {})
+                            plant = tertiary or record.get("plant") or ""
+                            plant = DocumentLibraryService._plant_folder_key(plants, plant)
+                            if plant:
+                                DocumentLibraryService._append_unique(
+                                    plants.setdefault(plant, []),
+                                    record.get("file_name"),
+                                )
+                        else:
+                            DocumentLibraryService._append_unique(
+                                secondary_folder.setdefault("files", []),
+                                record.get("file_name"),
+                            )
                 else:
                     DocumentLibraryService._append_unique(
                         folder.setdefault("files", []),
@@ -106,6 +151,7 @@ class DocumentLibraryService:
     def get_category_data(category_key, access_department=""):
         data = deepcopy(LIBRARY_DATA.get(category_key, {}))
         data = DocumentLibraryService._merge_uploaded_files(category_key, data, access_department=access_department)
+        data = DocumentLibraryService._order_customer_mappings(data)
         if not access_department or not data:
             return data
         # Filter uploaded files within the category data to only those matching the department
