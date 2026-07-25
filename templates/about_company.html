@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% from 'components/customer_brand.html' import badge with context %}
 
 {% block title %}About Company | Document Management System{% endblock %}
 
@@ -102,7 +103,7 @@
   <p style="font-size:.8rem;color:var(--text-dim);margin-bottom:1rem;">ZF Rane is a preferred OEM partner for major Indian and global automotive manufacturers.</p>
   <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
     {% for c in company.customers %}
-    <span style="background:var(--bg-3);border:1px solid var(--border);border-radius:99px;padding:.3rem .85rem;font-size:.78rem;color:var(--text-sub);">{{ c }}</span>
+    {{ badge(c) }}
     {% endfor %}
   </div>
 </div>

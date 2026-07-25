@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% from 'components/customer_brand.html' import badge with context %}
 {% block title %}Approvals | Document Management System{% endblock %}
 
 {% block breadcrumb %}
@@ -132,7 +133,7 @@
             </td>
             <td><span class="plant-badge">{{ r.plant }}</span></td>
             <td>{{ r.department }}</td>
-            <td>{{ r.customer }}</td>
+            <td>{{ badge(r.customer, true) }}</td>
             <td><span class="status-pill status-{{ r.approval_status|lower }}">{{ r.approval_status }}</span></td>
             <td><a href="{{ url_for('approvals.review_document', token=r.review_token) }}" class="btn-outline btn-sm">Review</a></td>
           </tr>

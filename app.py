@@ -6,6 +6,7 @@ from database import init_db
 from services.auth_service import AuthService
 from services.password_reset_service import PasswordResetService
 from services.user_store_service import UserStoreService
+from data.customers import CUSTOMER_BRANDS
 from routes.auth_routes import auth_bp
 from routes.dashboard_routes import dashboard_bp
 from routes.upload_routes import upload_bp
@@ -83,6 +84,7 @@ def create_app():
             "pending_count": pending_count,
             "notifications": notifications,
             "notification_unread_count": notification_unread_count,
+            "customer_brands": CUSTOMER_BRANDS,
         }
 
     return app

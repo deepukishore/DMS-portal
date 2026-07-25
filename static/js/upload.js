@@ -275,6 +275,8 @@ function configureLibraryCategory() {
       'Select customer',
       Object.keys(data.customers).map(customer => ({ value: customer, label: customer }))
     );
+    librarySubSelect.dataset.customerSelect = '';
+    window.CustomerBrand?.bindSelect(librarySubSelect);
     setPathState(false, `${categoryLabel(category)} / Select customer`, '', 'Select customer folder.');
     return;
   }
@@ -318,6 +320,8 @@ function configureLibraryPrimary() {
       'Select customer',
       Object.keys(folder.customers).map(customer => ({ value: customer, label: customer }))
     );
+    librarySubSelect.dataset.customerSelect = '';
+    window.CustomerBrand?.bindSelect(librarySubSelect);
     setPathState(false, `${categoryLabel(category)} / ${folder.label || primary} / Select customer`, '', 'Select customer folder.');
     return;
   }

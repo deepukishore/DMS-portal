@@ -127,7 +127,9 @@
       clearAllNotifications: "{{ url_for('notifications.clear_all') }}"
     };
     window.SHOW_WELCOME = {{ (show_welcome | default(false)) | tojson }};
+    window.CUSTOMER_BRANDS = {{ customer_brands | tojson }};
   </script>
+  <script src="{{ url_for('static', filename='js/customer_branding.js') }}"></script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   {% block scripts %}{% endblock %}
 </body>

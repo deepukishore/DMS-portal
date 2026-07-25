@@ -6,6 +6,7 @@ function selectCustomer(card, customerName) {
   selectedCustomer = customerName;
 
   document.getElementById('selected-customer-label').textContent = customerName;
+  window.CustomerBrand?.mountBanner('#selected-customer-banner', customerName);
   document.getElementById('customer-grid').style.display = 'none';
   document.getElementById('asset-panel').style.display = 'block';
 
@@ -15,6 +16,7 @@ function selectCustomer(card, customerName) {
 function resetCustomer() {
   document.getElementById('customer-grid').style.display = 'grid';
   document.getElementById('asset-panel').style.display = 'none';
+  document.getElementById('selected-customer-banner').replaceChildren();
   selectedCustomer = '';
 }
 

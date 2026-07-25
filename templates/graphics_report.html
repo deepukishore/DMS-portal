@@ -141,6 +141,7 @@
         <h2>Customer-wise Documents</h2>
         <p class="chart-subtitle">Documents by customer</p>
       </div>
+      <div class="customer-chart-brand-legend" id="customer-chart-brand-legend" aria-label="Customer brands"></div>
       <div class="chart-wrapper">
         <canvas id="customerChart"></canvas>
       </div>
@@ -265,6 +266,10 @@ new Chart(document.getElementById('plantChart'), {
 
 // ── Chart 3: Customer-wise horizontal bar ─────────────────────
 const custEntries = Object.entries(stats.customer).sort((a, b) => b[1].total - a[1].total);
+const customerBrandLegend = document.getElementById('customer-chart-brand-legend');
+custEntries.forEach(([customerName]) => {
+  customerBrandLegend?.appendChild(window.CustomerBrand.createBadge(customerName, true));
+});
 new Chart(document.getElementById('customerChart'), {
   type: 'bar',
   data: {

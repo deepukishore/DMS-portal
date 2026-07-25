@@ -1,3 +1,4 @@
+{% from 'components/customer_brand.html' import badge with context %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,7 +172,7 @@
               </div>
               <div class="review-meta-item">
                 <span>Customer</span>
-                <strong>{{ record.customer }}</strong>
+                <strong>{{ badge(record.customer, true) }}</strong>
               </div>
               <div class="review-meta-item">
                 <span>Uploaded on</span>
@@ -272,6 +273,8 @@
     {% endif %}
   </main>
   
+  <script>window.CUSTOMER_BRANDS = {{ customer_brands | tojson }};</script>
+  <script src="{{ url_for('static', filename='js/customer_branding.js') }}"></script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script>
     const approvalForm = document.getElementById('approval-form');

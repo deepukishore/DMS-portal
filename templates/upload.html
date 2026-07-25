@@ -118,7 +118,7 @@
           </label>
           <div id="customer-field-wrap">
             <label>Customer <span class="field-required" id="customer-required-star">*</span>
-              <select name="customer" id="customer-select" required>
+              <select name="customer" id="customer-select" data-customer-select required>
                 <option value="">Select customer</option>
                 {% for customer in customers %}
                   <option value="{{ customer }}">{{ customer }}</option>

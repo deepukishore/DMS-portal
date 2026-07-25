@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% from 'components/customer_brand.html' import logo with context %}
 
 {% block title %}Customer Records | Document Management System{% endblock %}
 
@@ -19,8 +20,8 @@
 
 <div class="customer-card-grid" id="customer-grid">
   {% for customer in customers %}
-  <div class="customer-card" onclick="selectCustomer(this, '{{ customer }}')">
-    <div class="customer-avatar">{{ customer[0] }}</div>
+  <div class="customer-card" data-customer-name="{{ customer }}" onclick='selectCustomer(this, {{ customer | tojson }})'>
+    {{ logo(customer) }}
     <div class="customer-info">
       <strong>{{ customer }}</strong>
       <small>Click to view documents</small>
@@ -33,6 +34,7 @@
 </div>
 
 <div class="asset-panel" id="asset-panel" style="display:none">
+  <div id="selected-customer-banner"></div>
   <div class="asset-panel-header">
     <div>
       <p class="eyebrow">Selected Customer</p>

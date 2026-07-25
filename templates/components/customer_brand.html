@@ -1,0 +1,17 @@
+{% macro logo(customer, variant='card') -%}
+  {% set brand = customer_brands.get(customer) %}
+  <span class="customer-logo customer-logo-{{ variant }}{% if not brand %} customer-logo-fallback{% endif %}">
+    {% if brand %}
+      <img src="{{ url_for('static', filename=brand.logo) }}" alt="{{ brand.display_name }} logo" loading="lazy" />
+    {% else %}
+      <span aria-hidden="true">{{ customer[0] if customer else '?' }}</span>
+    {% endif %}
+  </span>
+{%- endmacro %}
+
+{% macro badge(customer, compact=false) -%}
+  <span class="customer-brand-badge{% if compact %} is-compact{% endif %}" data-customer-name="{{ customer }}">
+    {{ logo(customer, 'inline') }}
+    <span class="customer-brand-name">{{ customer }}</span>
+  </span>
+{%- endmacro %}

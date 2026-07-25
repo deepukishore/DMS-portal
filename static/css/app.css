@@ -1094,6 +1094,199 @@ label input:focus, label select:focus { border-color: var(--accent); }
 .customer-info strong { display: block; font-size: .88rem; font-weight: 600; }
 .customer-info small { color: var(--text-dim); font-size: .72rem; }
 
+/* Customer brand artwork */
+.customer-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(14, 31, 52, .12);
+  border-radius: 8px;
+}
+
+.customer-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.customer-logo-card {
+  width: 76px;
+  height: 52px;
+}
+
+.customer-logo-inline {
+  width: 46px;
+  height: 30px;
+  border-radius: 6px;
+}
+
+.customer-logo-fallback {
+  background: rgba(88, 166, 255, .15);
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.customer-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  max-width: 100%;
+  padding: .3rem .65rem .3rem .35rem;
+  color: var(--text-sub);
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: .78rem;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+
+.customer-brand-badge.is-compact {
+  gap: .4rem;
+  padding: .2rem .5rem .2rem .25rem;
+  border-radius: 9px;
+}
+
+.customer-brand-badge.is-compact .customer-logo-inline {
+  width: 38px;
+  height: 25px;
+}
+
+.customer-brand-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.customer-select-brand {
+  margin-top: .45rem;
+}
+
+.customer-select-brand[hidden] {
+  display: none;
+}
+
+.customer-chart-brand-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  padding: 0 1rem .85rem;
+}
+
+.customer-banner {
+  position: relative;
+  isolation: isolate;
+  min-height: 164px;
+  margin: 1.25rem 1.5rem;
+  padding: 1.35rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem;
+  overflow: hidden;
+  color: #132238;
+  background:
+    radial-gradient(circle at 88% 20%, rgba(41, 168, 223, .18), transparent 33%),
+    linear-gradient(135deg, #fff 0%, #f3f8fc 100%);
+  border: 1px solid rgba(20, 50, 80, .13);
+  border-radius: 13px;
+  box-shadow: 0 10px 28px rgba(8, 24, 42, .09);
+}
+
+.customer-banner::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -42px;
+  bottom: -78px;
+  width: 220px;
+  height: 220px;
+  border: 34px solid rgba(25, 113, 174, .08);
+  border-radius: 50%;
+}
+
+.customer-banner > img {
+  display: block;
+  width: min(62%, 520px);
+  height: 112px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.customer-banner-caption {
+  min-width: 185px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .35rem;
+  text-align: right;
+}
+
+.customer-banner-caption span {
+  color: #62748a;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.customer-banner-caption strong {
+  max-width: 260px;
+  font-size: .95rem;
+  line-height: 1.3;
+}
+
+.customer-banner-red {
+  color: #fff;
+  background: #ff292e;
+  border-color: rgba(255, 255, 255, .28);
+}
+
+.customer-banner-red::after {
+  border-color: rgba(255, 255, 255, .1);
+}
+
+.customer-banner-red .customer-banner-caption span {
+  color: rgba(255, 255, 255, .75);
+}
+
+#selected-customer-banner:empty {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .customer-banner {
+    min-height: 190px;
+    margin: 1rem;
+    padding: 1.2rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: .8rem;
+  }
+
+  .customer-banner > img {
+    width: 100%;
+    height: 100px;
+    object-position: center;
+  }
+
+  .customer-banner-caption {
+    min-width: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .customer-logo-card {
+    width: 66px;
+    height: 48px;
+  }
+}
+
 /* ─── Asset panel ────────────────────────────────────────────────────────── */
 .asset-panel {
   background: var(--bg-2);

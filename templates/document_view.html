@@ -1,3 +1,4 @@
+{% from 'components/customer_brand.html' import badge with context %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -162,7 +163,7 @@
             </div>
             <div class="review-meta-item">
               <span>Customer</span>
-              <strong>{{ record.customer or 'N/A' }}</strong>
+              <strong>{{ badge(record.customer, true) if record.customer else 'N/A' }}</strong>
             </div>
             <div class="review-meta-item">
               <span>Uploaded on</span>
@@ -210,6 +211,8 @@
     </section>
   </main>
 
+  <script>window.CUSTOMER_BRANDS = {{ customer_brands | tojson }};</script>
+  <script src="{{ url_for('static', filename='js/customer_branding.js') }}"></script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script>
     // Bookmark functionality

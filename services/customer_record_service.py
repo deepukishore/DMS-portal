@@ -1,4 +1,9 @@
-from data.customers import OFFICIAL_CUSTOMERS, normalize_customer, sort_customers
+from data.customers import (
+    OFFICIAL_CUSTOMERS,
+    customer_query_values,
+    normalize_customer,
+    sort_customers,
+)
 from data.mock_data import CUSTOMER_RECORDS
 from database import get_connection
 
@@ -30,25 +35,27 @@ class CustomerRecordService:
     @staticmethod
     def get_files_for_customer(customer_name, access_department=""):
         customer_name = normalize_customer(customer_name)
+        customer_values = customer_query_values(customer_name)
+        placeholders = ",".join("?" for _ in customer_values)
         conn = get_connection()
         cursor = conn.cursor()
         if access_department:
             cursor.execute(
-                '''
+                f'''
                 SELECT file_name FROM documents
-                WHERE customer = ? AND department = ? AND approval_status = 'Approved'
+                WHERE customer IN ({placeholders}) AND department = ? AND approval_status = 'Approved'
                 ORDER BY uploaded_at DESC
                 ''',
-                (customer_name, access_department),
+                (*customer_values, access_department),
             )
         else:
             cursor.execute(
-                '''
+                f'''
                 SELECT file_name FROM documents
-                WHERE customer = ? AND approval_status = 'Approved'
+                WHERE customer IN ({placeholders}) AND approval_status = 'Approved'
                 ORDER BY uploaded_at DESC
                 ''',
-                (customer_name,),
+                customer_values,
             )
         db_files = [row['file_name'] for row in cursor.fetchall()]
         conn.close()
@@ -60,12 +67,20 @@ class CustomerRecordService:
     @staticmethod
     def customer_exists(customer_name, access_department=""):
         customer_name = normalize_customer(customer_name)
+        customer_values = customer_query_values(customer_name)
+        placeholders = ",".join("?" for _ in customer_values)
         conn = get_connection()
         cursor = conn.cursor()
         if access_department:
-            cursor.execute('SELECT COUNT(*) as count FROM documents WHERE customer = ? AND department = ?', (customer_name, access_department))
+            cursor.execute(
+                f'SELECT COUNT(*) as count FROM documents WHERE customer IN ({placeholders}) AND department = ?',
+                (*customer_values, access_department),
+            )
         else:
-            cursor.execute('SELECT COUNT(*) as count FROM documents WHERE customer = ?', (customer_name,))
+            cursor.execute(
+                f'SELECT COUNT(*) as count FROM documents WHERE customer IN ({placeholders})',
+                customer_values,
+            )
         count = cursor.fetchone()['count']
         conn.close()
         

@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% from 'components/customer_brand.html' import badge with context %}
 
 {% block title %}Dashboard | Document Management System{% endblock %}
 
@@ -134,7 +135,7 @@
         <option value="{{ d }}" {% if selected_dept == d %}selected{% endif %}>{{ d }}</option>
       {% endfor %}
     </select>
-    <select name="customer">
+    <select name="customer" data-customer-select>
       <option value="">All customers</option>
       {% for customer in customers %}
         <option value="{{ customer }}" {% if selected_customer == customer %}selected{% endif %}>{{ customer }}</option>
@@ -215,7 +216,7 @@
             </td>
             <td><span class="plant-badge">{{ r.plant }}</span></td>
             <td>{{ r.department }}</td>
-            <td>{{ r.customer }}</td>
+            <td>{{ badge(r.customer, true) }}</td>
             <td>
               <div class="file-block">
                 <div class="mono file-cell">

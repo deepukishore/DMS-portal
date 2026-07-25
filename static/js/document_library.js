@@ -211,8 +211,8 @@ function createCustomerGrid(customers, onSelect) {
     const card = document.createElement('button');
     card.type = 'button';
     card.className = 'customer-card';
+    card.dataset.customerName = customer;
     card.innerHTML = `
-      <div class="customer-avatar">${customer.charAt(0)}</div>
       <div class="customer-info">
         <strong>${customer}</strong>
         <small>Open customer folder</small>
@@ -220,6 +220,7 @@ function createCustomerGrid(customers, onSelect) {
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
       </div>`;
+    card.prepend(window.CustomerBrand?.createLogo(customer, 'card') || document.createTextNode(''));
     card.addEventListener('click', () => onSelect(customer));
     grid.appendChild(card);
   });
@@ -298,6 +299,8 @@ function renderFilesView(stepLabels, activeIndex, title, subtitle, files, backLa
   const el = setRoot();
   el.appendChild(createStepBar(stepLabels, activeIndex));
   const panel = createHeader(title, subtitle, backLabel, onBack);
+  const customerBanner = window.CustomerBrand?.createBanner(title);
+  if (customerBanner) panel.prepend(customerBanner);
   panel.appendChild(createFileGrid(files, permissions));
   el.appendChild(panel);
 }

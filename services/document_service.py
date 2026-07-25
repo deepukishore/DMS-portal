@@ -5,7 +5,7 @@ from datetime import datetime
 from itsdangerous import URLSafeSerializer
 from werkzeug.utils import secure_filename
 
-from data.customers import normalize_customer
+from data.customers import customer_query_values, normalize_customer
 from data.departments import normalize_department
 from database import get_connection
 from services.pdf_conversion_service import convert_to_pdf, is_allowed_file
@@ -168,8 +168,10 @@ class DocumentService:
             query += ' AND department = ?'
             params.append(effective_department)
         if customer:
-            query += ' AND customer = ?'
-            params.append(customer)
+            customer_values = customer_query_values(customer)
+            placeholders = ','.join('?' for _ in customer_values)
+            query += f' AND customer IN ({placeholders})'
+            params.extend(customer_values)
         
         cursor.execute(query, params)
         records = [dict(row) for row in cursor.fetchall()]
