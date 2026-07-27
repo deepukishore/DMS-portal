@@ -9,7 +9,8 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero-panel">
+<div class="profile-page">
+<section class="hero-panel profile-hero">
   <div class="hero-copy">
     <p class="eyebrow">User Profile</p>
     <h1 class="page-title">My Profile</h1>
@@ -25,7 +26,7 @@
         {% endif %}
       </div>
       <form method="POST" action="{{ url_for('profile.upload_avatar') }}" enctype="multipart/form-data">
-        <label class="btn-outline btn-sm" style="cursor:pointer; margin-top:.5rem;">
+        <label class="btn-outline btn-sm profile-photo-action">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           Upload Photo
           <input type="file" name="avatar" accept="image/*" style="display:none" onchange="this.closest('form').submit()" />
@@ -57,8 +58,8 @@
   </div>
 </section>
 
-<div class="upload-grid">
-  <section class="surface-panel">
+<div class="profile-layout">
+  <section class="surface-panel profile-details-card">
     <div class="panel-head">
       <div>
         <h2 class="section-title">Profile Information</h2>
@@ -67,81 +68,73 @@
     </div>
 
     <form method="POST" action="{{ url_for('profile.update_profile') }}" class="profile-info">
-      <div class="form-row">
-        <label>Full Name
+      <div class="profile-fields-grid">
+        <label class="profile-field">Full Name
           <input type="text" value="{{ current_user.name }}" readonly class="readonly-field" />
         </label>
-        <label>Email
+        <label class="profile-field">Email
           <input type="text" value="{{ current_user.email }}" readonly class="readonly-field" />
         </label>
-      </div>
-      <div class="form-row">
-        <label>Employee ID / GENID
+        <label class="profile-field">Employee ID / GENID
           <input type="text" value="{{ current_user.emp_id }}" readonly class="readonly-field" />
         </label>
-      </div>
-      <div class="form-row">
-        <label>Plant
-          <input type="text" value="{{ current_user.plant }}" readonly class="readonly-field" />
-        </label>
-        <label>Department
-          <input type="text" value="{{ current_user.department }}" readonly class="readonly-field" />
-        </label>
-      </div>
-      <div class="form-row">
-        <label>Role
+        <label class="profile-field">Role
           <input type="text" value="{{ current_user.role }}" readonly class="readonly-field" />
         </label>
-        <label>Mobile Number
-          <input type="text" name="mobile" value="{{ current_user.mobile or session.get('user_mobile', '') }}" placeholder="Enter mobile number" />
+        <label class="profile-field">Plant
+          <input type="text" value="{{ current_user.plant }}" readonly class="readonly-field" />
+        </label>
+        <label class="profile-field">Department
+          <input type="text" value="{{ current_user.department }}" readonly class="readonly-field" />
+        </label>
+        <label class="profile-field">Mobile Number
+          <input type="tel" name="mobile" value="{{ current_user.mobile or session.get('user_mobile', '') }}" placeholder="Enter mobile number" autocomplete="tel" />
         </label>
       </div>
-      <div class="upload-actions" style="display:flex; justify-content:flex-end; margin-top:1rem; gap:.75rem;">
+      <div class="profile-form-actions">
         <button type="submit" class="btn-primary">Save Mobile Number</button>
       </div>
     </form>
 
-    <div class="panel-head" style="margin-top: 2rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
+    <section class="profile-password-section">
+      <div class="profile-section-head">
         <div>
           <h2 class="section-title">Change Password</h2>
           <p class="section-sub">Update your account password.</p>
         </div>
-        <button type="button" id="toggle-password-form" class="btn-outline" onclick="togglePasswordForm()">
+        <button type="button" id="toggle-password-form" class="btn-outline" aria-controls="password-form" aria-expanded="false" onclick="togglePasswordForm()">
           Show Form
         </button>
       </div>
-    </div>
 
-    <form method="POST" action="{{ url_for('profile.update_password') }}" class="upload-form" id="password-form" style="display: none;">
-      <div class="form-row">
-        <label>Current Password
-          <input type="password" name="current_password" required />
-        </label>
-      </div>
-      <div class="form-row">
-        <label>New Password
-          <input type="password" name="new_password" required minlength="8" />
-        </label>
-        <label>Confirm New Password
-          <input type="password" name="confirm_password" required minlength="8" />
-        </label>
-      </div>
-      <div class="upload-actions" style="display: flex; gap: 1rem; align-items: center; justify-content: space-between;">
-        <label class="password-toggle-label">
-          <input type="checkbox" id="toggle-all-passwords" />
-          <span>Show passwords</span>
-        </label>
-        <div style="display: flex; gap: 0.5rem;">
-          <button type="submit" class="btn-primary">Update Password</button>
-          <button type="button" class="btn-outline" onclick="togglePasswordForm()">Cancel</button>
+      <form method="POST" action="{{ url_for('profile.update_password') }}" class="profile-password-form" id="password-form" hidden>
+        <div class="profile-password-grid">
+          <label class="profile-field">Current Password
+            <input type="password" name="current_password" required />
+          </label>
+          <label class="profile-field">New Password
+            <input type="password" name="new_password" required minlength="8" />
+          </label>
+          <label class="profile-field">Confirm New Password
+            <input type="password" name="confirm_password" required minlength="8" />
+          </label>
         </div>
-      </div>
-    </form>
+        <div class="profile-password-actions">
+          <label class="password-toggle-label">
+            <input type="checkbox" id="toggle-all-passwords" />
+            <span>Show passwords</span>
+          </label>
+          <div class="profile-password-buttons">
+            <button type="submit" class="btn-primary">Update Password</button>
+            <button type="button" class="btn-outline" onclick="togglePasswordForm()">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </section>
   </section>
 
-  <aside class="stack-panel">
-    <section class="surface-panel">
+  <aside class="profile-activity-column">
+    <section class="surface-panel profile-activity-card">
       <div class="panel-head">
         <div>
           <h2 class="section-title">My Activity Logs</h2>
@@ -149,7 +142,7 @@
         </div>
       </div>
 
-      <div class="log-table-wrapper" style="max-height: 600px; overflow-y: auto;">
+      <div class="log-table-wrapper profile-log-table">
         {% if user_logs %}
           <table class="log-table">
             <thead>
@@ -178,6 +171,7 @@
     </section>
   </aside>
 </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
@@ -185,16 +179,27 @@
 function togglePasswordForm() {
   const form = document.getElementById('password-form');
   const btn = document.getElementById('toggle-password-form');
-  
-  if (form.style.display === 'none') {
-    form.style.display = 'block';
+
+  if (form.hidden) {
+    form.hidden = false;
     btn.textContent = 'Hide Form';
+    btn.setAttribute('aria-expanded', 'true');
   } else {
-    form.style.display = 'none';
+    form.hidden = true;
     btn.textContent = 'Show Form';
+    btn.setAttribute('aria-expanded', 'false');
     // Clear the form on hide
-    form.querySelectorAll('input').forEach(input => input.value = '');
+    form.reset();
+    form.querySelectorAll('input[type="text"]').forEach((input) => {
+      input.type = 'password';
+    });
   }
 }
+
+document.getElementById('toggle-all-passwords')?.addEventListener('change', function () {
+  document.querySelectorAll('#password-form input[type="password"]').forEach((input) => {
+    input.type = this.checked ? 'text' : 'password';
+  });
+});
 </script>
 {% endblock %}

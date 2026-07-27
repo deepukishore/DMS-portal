@@ -2162,8 +2162,209 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 .profile-info {
   display: flex;
   flex-direction: column;
-  gap: .75rem;
-  margin-bottom: 1.5rem;
+  gap: 1.25rem;
+}
+
+.profile-page {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.profile-hero {
+  align-items: center;
+  gap: 2rem;
+}
+
+.profile-hero .hero-copy {
+  flex: 1 1 320px;
+}
+
+.profile-photo-action {
+  cursor: pointer;
+  margin-top: .25rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(320px, .85fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.profile-details-card,
+.profile-activity-card {
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.profile-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+.profile-field {
+  display: flex;
+  min-width: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: .4rem;
+}
+
+.profile-field input {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.profile-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: .15rem;
+}
+
+.profile-password-section {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-2);
+}
+
+.profile-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.profile-section-head .section-title {
+  position: relative;
+  padding-left: .75rem;
+}
+
+.profile-section-head .section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .15em;
+  width: 3px;
+  height: 1em;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+.profile-password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-2);
+}
+
+.profile-password-form[hidden] {
+  display: none;
+}
+
+.profile-password-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+.profile-password-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.profile-password-actions .password-toggle-label {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.profile-password-buttons {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+}
+
+.profile-activity-column {
+  min-width: 0;
+}
+
+.profile-log-table {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+@media (max-width: 1180px) {
+  .profile-hero {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .profile-hero-identity {
+    width: 100%;
+  }
+
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-log-table {
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 820px) {
+  .profile-hero {
+    align-items: flex-start;
+  }
+
+  .profile-hero-identity {
+    width: 100%;
+  }
+
+  .profile-fields-grid,
+  .profile-password-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .profile-hero-identity {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .profile-avatar-block {
+    align-items: flex-start;
+  }
+
+  .profile-section-head,
+  .profile-password-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .profile-section-head .btn-outline,
+  .profile-form-actions .btn-primary,
+  .profile-password-buttons,
+  .profile-password-buttons > * {
+    width: 100%;
+  }
+
+  .profile-password-buttons {
+    flex-direction: column;
+  }
 }
 
 .log-table-wrapper {
