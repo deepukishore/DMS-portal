@@ -138,14 +138,15 @@ function createHeader(title, subtitle, backLabel, onBack) {
     header.appendChild(button);
   }
 
-  const sub = document.createElement('p');
-  sub.className = 'section-sub';
-  sub.style.marginTop = '.75rem';
-  sub.style.marginBottom = '1rem';
-  sub.textContent = subtitle || '';
-
   panel.appendChild(header);
-  panel.appendChild(sub);
+  if (subtitle) {
+    const sub = document.createElement('p');
+    sub.className = 'section-sub';
+    sub.style.marginTop = '.75rem';
+    sub.style.marginBottom = '1rem';
+    sub.textContent = subtitle;
+    panel.appendChild(sub);
+  }
   return panel;
 }
 
@@ -298,8 +299,8 @@ function createFileGrid(files, permissions) {
 function renderFilesView(stepLabels, activeIndex, title, subtitle, files, backLabel, onBack, permissions) {
   const el = setRoot();
   el.appendChild(createStepBar(stepLabels, activeIndex));
-  const panel = createHeader(title, subtitle, backLabel, onBack);
   const customerBanner = window.CustomerBrand?.createBanner(title);
+  const panel = createHeader(title, customerBanner ? '' : subtitle, backLabel, onBack);
   if (customerBanner) panel.prepend(customerBanner);
   panel.appendChild(createFileGrid(files, permissions));
   el.appendChild(panel);
@@ -374,7 +375,7 @@ function renderPrimaryFolderCategory(title) {
       ['Select Folder', 'Select Customer', 'Browse Files'],
       2,
       selectedSecondary,
-      `All documents related to ${selectedSecondary} are shown below.`,
+      '',
       selected.customers[selectedSecondary] || [],
       'Change customer',
       () => {
@@ -515,7 +516,7 @@ function renderCustomerFolderCategory(title) {
     ['Select Customer', 'Browse Files'],
     1,
     selectedPrimary,
-    `All score card files related to ${selectedPrimary} are shown below.`,
+    '',
     CATEGORY_DATA.customers[selectedPrimary] || [],
     'Change customer',
     () => {

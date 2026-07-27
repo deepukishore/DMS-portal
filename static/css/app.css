@@ -1212,33 +1212,10 @@ label input:focus, label select:focus { border-color: var(--accent); }
 
 .customer-banner > img {
   display: block;
-  width: min(62%, 520px);
+  width: min(78%, 680px);
   height: 112px;
   object-fit: contain;
   object-position: left center;
-}
-
-.customer-banner-caption {
-  min-width: 185px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: .35rem;
-  text-align: right;
-}
-
-.customer-banner-caption span {
-  color: #62748a;
-  font-size: .68rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.customer-banner-caption strong {
-  max-width: 260px;
-  font-size: .95rem;
-  line-height: 1.3;
 }
 
 .customer-banner-red {
@@ -1249,10 +1226,6 @@ label input:focus, label select:focus { border-color: var(--accent); }
 
 .customer-banner-red::after {
   border-color: rgba(255, 255, 255, .1);
-}
-
-.customer-banner-red .customer-banner-caption span {
-  color: rgba(255, 255, 255, .75);
 }
 
 #selected-customer-banner:empty {
@@ -1273,12 +1246,6 @@ label input:focus, label select:focus { border-color: var(--accent); }
     width: 100%;
     height: 100px;
     object-position: center;
-  }
-
-  .customer-banner-caption {
-    min-width: 0;
-    align-items: center;
-    text-align: center;
   }
 
   .customer-logo-card {

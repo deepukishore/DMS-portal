@@ -58,14 +58,7 @@
     image.src = logoUrl(customerName);
     image.alt = `${brand.display_name || customerName} logo`;
 
-    const caption = document.createElement('div');
-    caption.className = 'customer-banner-caption';
-    const eyebrow = document.createElement('span');
-    eyebrow.textContent = 'Customer folder';
-    const title = document.createElement('strong');
-    title.textContent = customerName;
-    caption.append(eyebrow, title);
-    banner.append(image, caption);
+    banner.appendChild(image);
     return banner;
   }
 
