@@ -39,6 +39,21 @@ def _sqlite_rows(database_path, table_name):
         connection.close()
 
 
+def _user_rows():
+    """Merge central and legacy user stores, preferring richer legacy profiles."""
+    users_by_email = {
+        row["email"]: row
+        for row in _sqlite_rows(Config.SQLITE_DB_PATH, "users")
+    }
+    users_by_email.update(
+        {
+            row["email"]: row
+            for row in _sqlite_rows(Config.USER_DB_PATH, "users")
+        }
+    )
+    return list(users_by_email.values())
+
+
 def _destination_columns(cursor, table_name):
     cursor.execute(f"SHOW COLUMNS FROM {table_name}")
     return [row["Field"] for row in cursor.fetchall()]
@@ -85,12 +100,11 @@ def migrate(replace=False):
 
         copied = {}
         for table_name in TABLES:
-            source_path = (
-                Config.USER_DB_PATH
-                if table_name == "users" and os.path.exists(Config.USER_DB_PATH)
-                else Config.SQLITE_DB_PATH
+            rows = (
+                _user_rows()
+                if table_name == "users"
+                else _sqlite_rows(Config.SQLITE_DB_PATH, table_name)
             )
-            rows = _sqlite_rows(source_path, table_name)
             copied[table_name] = _upsert_rows(cursor, table_name, rows)
 
         destination.commit()

@@ -17,6 +17,7 @@ ENV/
 # Uploads
 uploads/*
 !uploads/.gitkeep
+tmp/*.log
 
 # IDE
 .vscode/
