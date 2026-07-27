@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from config import Config
 from extensions import mail
-from database import init_db
+from database import configure_database, init_db
 from services.auth_service import AuthService
 from services.password_reset_service import PasswordResetService
 from services.user_store_service import UserStoreService
@@ -31,6 +31,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+    configure_database(app.config)
     init_db()
 
     mail.init_app(app)

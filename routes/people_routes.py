@@ -13,4 +13,12 @@ def index():
         return redirect(url_for("dashboard.index"))
 
     users = UserStoreService.get_all_users()
-    return render_template("people.html", users=users)
+    level_counts = {
+        level: sum(1 for user in users if user.get("qms_level", "L4") == level)
+        for level in ("L1", "L2", "L3", "L4")
+    }
+    return render_template(
+        "people.html",
+        users=users,
+        level_counts=level_counts,
+    )

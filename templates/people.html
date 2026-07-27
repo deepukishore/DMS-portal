@@ -9,76 +9,166 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero-panel">
-  <div class="hero-copy">
-    <p class="eyebrow">Admin · Directory</p>
-    <h1 class="page-title">People</h1>
-    <p class="page-sub">All registered users across plants and departments &mdash; {{ users|length }} total.</p>
-  </div>
-</section>
-
-<section class="surface-panel">
-  <div class="panel-head">
-    <div>
-      <h2 class="section-title">User Directory</h2>
-      <p class="section-sub">Search and browse all user profiles.</p>
+<div class="people-page">
+  <section class="hero-panel people-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Admin · Directory</p>
+      <h1 class="page-title">People and Access Levels</h1>
+      <p class="page-sub">Review every registered user, their QMS level, and approval permissions from one directory.</p>
     </div>
-    <input type="text" id="people-search" placeholder="Search by name, email, role…"
-           style="background:var(--bg-2);border:1px solid var(--border);color:var(--text);border-radius:var(--radius-sm);padding:.5rem .75rem;font-size:.85rem;outline:none;max-width:280px;transition:border-color .15s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" />
-  </div>
+    <div class="people-total">
+      <strong>{{ users|length }}</strong>
+      <span>Registered users</span>
+    </div>
+  </section>
 
-  <div class="log-table-wrapper">
-    <table class="log-table" id="people-table">
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Employee ID</th>
-          <th>Email</th>
-          <th>Plant</th>
-          <th>Department</th>
-          <th>Role</th>
-          <th>Joined</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for user in users %}
-        <tr>
-          <td>
-            <div style="display:flex;align-items:center;gap:.6rem;">
-              {% if user.avatar %}
-                <img src="{{ url_for('static', filename='avatars/' + user.avatar) }}"
-                     style="width:32px;height:32px;border-radius:50%;object-fit:cover;" alt="" />
-              {% else %}
-                <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff;">
-                  {{ user.name[0]|upper }}
+  <section class="people-level-summary" aria-label="Users by QMS level">
+    {% for level in ('L1', 'L2', 'L3', 'L4') %}
+      <article class="people-level-card people-level-{{ level|lower }}">
+        <div>
+          <span class="people-level-label">{{ level }}</span>
+          <p>
+            {% if level == 'L1' %}Final approval
+            {% elif level == 'L2' %}First approval
+            {% elif level == 'L3' %}Procedure access
+            {% else %}Standard access
+            {% endif %}
+          </p>
+        </div>
+        <strong>{{ level_counts[level] }}</strong>
+      </article>
+    {% endfor %}
+  </section>
+
+  <section class="surface-panel people-directory">
+    <div class="panel-head people-directory-head">
+      <div>
+        <h2 class="section-title">User Directory</h2>
+        <p class="section-sub"><span id="people-visible-count">{{ users|length }}</span> users shown with their assigned access.</p>
+      </div>
+      <div class="people-filters">
+        <label class="people-filter-field">
+          <span class="sr-only">Filter by QMS level</span>
+          <select id="people-level-filter" aria-label="Filter by QMS level">
+            <option value="">All QMS levels</option>
+            <option value="L1">L1 · Final approval</option>
+            <option value="L2">L2 · First approval</option>
+            <option value="L3">L3 · Procedure access</option>
+            <option value="L4">L4 · Standard access</option>
+          </select>
+        </label>
+        <label class="people-search-field">
+          <span class="sr-only">Search users</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="search" id="people-search" placeholder="Search name, email, plant…" autocomplete="off" />
+        </label>
+      </div>
+    </div>
+
+    <div class="log-table-wrapper people-table-wrapper">
+      <table class="log-table people-table" id="people-table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Employee ID</th>
+            <th>Email / Mobile</th>
+            <th>Plant</th>
+            <th>Department</th>
+            <th>Role</th>
+            <th>QMS Level</th>
+            <th>Approval Access</th>
+            <th>Joined</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          {% set level = user.qms_level or 'L4' %}
+          <tr data-qms-level="{{ level }}">
+            <td>
+              <div class="people-user-cell">
+                {% if user.avatar %}
+                  <img src="{{ url_for('static', filename='avatars/' + user.avatar) }}" class="people-avatar" alt="" />
+                {% else %}
+                  <div class="people-avatar people-avatar-placeholder" aria-hidden="true">
+                    {{ user.name[0]|upper }}
+                  </div>
+                {% endif %}
+                <div>
+                  <strong>{{ user.name }}</strong>
+                  <small>{{ user.user_id }}</small>
                 </div>
-              {% endif %}
-              <span>{{ user.name }}</span>
-            </div>
-          </td>
-          <td>{{ user.emp_id or '—' }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.plant or '—' }}</td>
-          <td>{{ user.department or '—' }}</td>
-          <td>
-            <span class="badge badge-{{ user.role|lower }}">{{ user.role }}</span>
-          </td>
-          <td>{{ user.created_at[:10] if user.created_at else '—' }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</section>
+              </div>
+            </td>
+            <td class="people-nowrap">{{ user.emp_id or '—' }}</td>
+            <td>
+              <div class="people-contact">
+                <span>{{ user.email }}</span>
+                <small>{{ user.mobile or 'No mobile number' }}</small>
+              </div>
+            </td>
+            <td>{{ user.plant or '—' }}</td>
+            <td>{{ user.department or '—' }}</td>
+            <td>
+              <span class="badge badge-{{ user.role|lower }}">{{ user.role }}</span>
+            </td>
+            <td>
+              <span class="qms-level-badge qms-level-{{ level|lower }}">{{ level }}</span>
+            </td>
+            <td>
+              <span class="people-access people-access-{{ level|lower }}">
+                {% if level == 'L1' %}
+                  Final approver
+                {% elif level == 'L2' %}
+                  First approver
+                {% elif level == 'L3' %}
+                  Procedure viewer
+                {% else %}
+                  Standard user
+                {% endif %}
+              </span>
+            </td>
+            <td class="people-nowrap">{{ user.created_at[:10] if user.created_at else '—' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="people-empty" id="people-empty" hidden>
+        No users match the selected filters.
+      </div>
+    </div>
+  </section>
+</div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-document.getElementById('people-search').addEventListener('input', function () {
-  const q = this.value.toLowerCase();
-  document.querySelectorAll('#people-table tbody tr').forEach(row => {
-    row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+const peopleSearch = document.getElementById('people-search');
+const peopleLevelFilter = document.getElementById('people-level-filter');
+const peopleRows = [...document.querySelectorAll('#people-table tbody tr')];
+const peopleVisibleCount = document.getElementById('people-visible-count');
+const peopleEmpty = document.getElementById('people-empty');
+
+function filterPeople() {
+  const query = peopleSearch.value.trim().toLowerCase();
+  const level = peopleLevelFilter.value;
+  let visible = 0;
+
+  peopleRows.forEach((row) => {
+    const matchesQuery = !query || row.textContent.toLowerCase().includes(query);
+    const matchesLevel = !level || row.dataset.qmsLevel === level;
+    const show = matchesQuery && matchesLevel;
+    row.hidden = !show;
+    if (show) visible += 1;
   });
-});
+
+  peopleVisibleCount.textContent = visible;
+  peopleEmpty.hidden = visible !== 0;
+}
+
+peopleSearch.addEventListener('input', filterPeople);
+peopleLevelFilter.addEventListener('change', filterPeople);
 </script>
 {% endblock %}

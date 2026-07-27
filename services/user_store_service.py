@@ -2,67 +2,84 @@ import os
 import sqlite3
 from datetime import datetime
 
+from database import get_connection
 from data.departments import LEGACY_DEPARTMENT_MAP, normalize_department
 from data.mock_data import USERS
 
 
 class UserStoreService:
-    """Persists user profiles and credentials in a small SQLite database."""
+    """Persists profiles and credentials in the portal's central database."""
 
-    _db_path = None
+    _legacy_db_path = None
 
     @staticmethod
     def init_app(app):
-        UserStoreService._db_path = app.config["USER_DB_PATH"]
-        os.makedirs(os.path.dirname(UserStoreService._db_path), exist_ok=True)
-        UserStoreService._ensure_schema()
+        UserStoreService._legacy_db_path = app.config.get("USER_DB_PATH")
+        UserStoreService._migrate_legacy_users()
         UserStoreService._migrate_departments()
         UserStoreService._seed_users()
 
     @staticmethod
     def _connect():
-        connection = sqlite3.connect(UserStoreService._db_path)
-        connection.row_factory = sqlite3.Row
-        return connection
+        return get_connection()
 
     @staticmethod
-    def _ensure_schema():
+    def _migrate_legacy_users():
+        """Copy users from the former standalone SQLite user store once."""
+        legacy_path = UserStoreService._legacy_db_path
+        if not legacy_path or not os.path.exists(legacy_path):
+            return
+
+        legacy_connection = sqlite3.connect(legacy_path)
+        legacy_connection.row_factory = sqlite3.Row
+        try:
+            table = legacy_connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'users'"
+            ).fetchone()
+            if not table:
+                return
+            legacy_users = legacy_connection.execute("SELECT * FROM users").fetchall()
+        finally:
+            legacy_connection.close()
+
         with UserStoreService._connect() as connection:
-            connection.execute(
-                """
-                CREATE TABLE IF NOT EXISTS users (
-                    email TEXT PRIMARY KEY,
-                    name TEXT NOT NULL,
-                    user_id TEXT NOT NULL UNIQUE,
-                    emp_id TEXT,
-                    plant TEXT,
-                    department TEXT,
-                    mobile TEXT,
-                    role TEXT NOT NULL DEFAULT 'User',
-                    password_hash TEXT NOT NULL,
-                    created_at TEXT NOT NULL
+            for legacy_user in legacy_users:
+                user = dict(legacy_user)
+                existing = connection.execute(
+                    "SELECT email FROM users WHERE email = ?",
+                    (user["email"],),
+                ).fetchone()
+                if existing:
+                    continue
+                connection.execute(
+                    """
+                    INSERT INTO users (
+                        email, name, user_id, emp_id, plant, department, mobile,
+                        role, password_hash, created_at, avatar, qms_level
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        user["email"],
+                        user["name"],
+                        user["user_id"],
+                        user.get("emp_id", ""),
+                        user.get("plant", ""),
+                        normalize_department(user.get("department", "")),
+                        user.get("mobile", ""),
+                        user.get("role", "User"),
+                        user["password_hash"],
+                        user.get("created_at") or datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        user.get("avatar"),
+                        user.get("qms_level", "L4"),
+                    ),
                 )
-                """
-            )
-            # Add mobile and avatar columns if they don't exist (migration)
-            try:
-                connection.execute("ALTER TABLE users ADD COLUMN mobile TEXT")
-            except Exception:
-                pass
-            try:
-                connection.execute("ALTER TABLE users ADD COLUMN avatar TEXT")
-            except Exception:
-                pass
-            try:
-                connection.execute("ALTER TABLE users ADD COLUMN qms_level TEXT NOT NULL DEFAULT 'L4'")
-            except Exception:
-                pass
             connection.commit()
 
     @staticmethod
     def _seed_users():
         with UserStoreService._connect() as connection:
-            count = connection.execute("SELECT COUNT(*) FROM users").fetchone()[0]
+            count_row = connection.execute("SELECT COUNT(*) AS count FROM users").fetchone()
+            count = count_row["count"]
             if count:
                 return
 
@@ -143,7 +160,17 @@ class UserStoreService:
         return UserStoreService.get_user_by_email(email) is not None
 
     @staticmethod
-    def create_user(name, email, password_hash, emp_id="", plant="", department="", mobile="", role="User"):
+    def create_user(
+        name,
+        email,
+        password_hash,
+        emp_id="",
+        plant="",
+        department="",
+        mobile="",
+        role="User",
+        qms_level="L4",
+    ):
         user_id = UserStoreService._next_user_id()
         created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -151,8 +178,9 @@ class UserStoreService:
             connection.execute(
                 """
                 INSERT INTO users (
-                    email, name, user_id, emp_id, plant, department, mobile, role, password_hash, created_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    email, name, user_id, emp_id, plant, department, mobile,
+                    role, password_hash, created_at, qms_level
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     email,
@@ -165,6 +193,7 @@ class UserStoreService:
                     role,
                     password_hash,
                     created_at,
+                    qms_level,
                 ),
             )
             connection.commit()

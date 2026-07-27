@@ -1,12 +1,28 @@
 import os
 
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY', 'smart-dms-secret-key-change-in-production')
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
     UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
     USER_DB_PATH = os.path.join(BASE_DIR, 'data', 'smart_dms_users.sqlite3')
+    SQLITE_DB_PATH = os.path.join(BASE_DIR, 'smart_dms.db')
     MAX_CONTENT_LENGTH = 100 * 1024 * 1024  # 100 MB
+
+    # Use DATABASE_ENGINE=mysql after setting the MySQL credentials below.
+    # SQLite remains available as a local fallback and as the migration source.
+    DATABASE_ENGINE = os.environ.get('DATABASE_ENGINE', 'sqlite').strip().lower()
+    MYSQL_HOST = os.environ.get('MYSQL_HOST', '127.0.0.1')
+    MYSQL_PORT = int(os.environ.get('MYSQL_PORT', 3306))
+    MYSQL_USER = os.environ.get('MYSQL_USER', 'root')
+    MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', '')
+    MYSQL_DATABASE = os.environ.get('MYSQL_DATABASE', 'smart_dms')
+    MYSQL_CHARSET = os.environ.get('MYSQL_CHARSET', 'utf8mb4')
 
     MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
     MAIL_PORT = int(os.environ.get('MAIL_PORT', 587))

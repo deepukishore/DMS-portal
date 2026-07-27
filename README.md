@@ -569,8 +569,14 @@ All variables are optional — defaults work for local development.
 | `SECRET_KEY` | `smart-dms-secret-key-change-in-production` | Flask session signing |
 | `REVIEW_TOKEN_SALT` | `smart-dms-approval-review` | Approval token signing |
 | `UPLOAD_FOLDER` | `uploads/` | Local file storage folder |
-| `USER_DB_PATH` | `data/smart_dms_users.sqlite3` | Path to user credentials DB |
+| `USER_DB_PATH` | `data/smart_dms_users.sqlite3` | Legacy user database used as a migration source |
 | `MAX_CONTENT_LENGTH` | `100 * 1024 * 1024` | Max upload size per request |
+| `DATABASE_ENGINE` | `sqlite` | Set to `mysql` to use the centralized MySQL database |
+| `MYSQL_HOST` | `127.0.0.1` | MySQL server hostname |
+| `MYSQL_PORT` | `3306` | MySQL server port |
+| `MYSQL_USER` | `root` | MySQL account used by the portal |
+| `MYSQL_PASSWORD` | *(empty)* | MySQL account password |
+| `MYSQL_DATABASE` | `smart_dms` | Database containing all portal records |
 | `MAIL_SERVER` | `smtp.gmail.com` | SMTP host |
 | `MAIL_PORT` | `587` | SMTP port |
 | `MAIL_USE_TLS` | `true` | Enable TLS |
@@ -582,6 +588,22 @@ All variables are optional — defaults work for local development.
 | `FINAL_APPROVAL_RECIPIENT` | `chefashokanna@gmail.com` | Email address that receives final-stage approval requests |
 
 If mail is not configured, password reset links are printed to the terminal.
+
+### MySQL setup and migration
+
+Copy `.env.example` to `.env`, enter the MySQL username and password, and keep
+`DATABASE_ENGINE=mysql`. The application creates the configured schema and all
+required tables when the MySQL account has database-creation permission.
+
+To copy all existing SQLite records—including users, QMS levels, documents,
+approval history, notifications, revisions, bookmarks, and system logs—run:
+
+```powershell
+python migrate_to_mysql.py
+```
+
+Use `python migrate_to_mysql.py --replace` only when the destination tables
+should be cleared before importing the SQLite records.
 
 ---
 
@@ -595,6 +617,8 @@ A companion operational guide is available in [STANDARD_OPERATING_PROCEDURE.md](
 |---------|---------|----------|
 | Flask | 3.1.3 | Web framework |
 | Flask-Mail | 0.10.0 | Email delivery |
+| PyMySQL | 1.x | MySQL database connection |
+| python-dotenv | 1.x | Local environment configuration |
 | itsdangerous | 2.2.0 | Signed tokens (sessions, review links, password reset) |
 | Werkzeug | 3.1.8 | Password hashing, file utilities |
 | python-docx | 1.2.0 | Read DOCX files for PDF conversion |

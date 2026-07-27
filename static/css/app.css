@@ -2367,6 +2367,297 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   }
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.people-page {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.people-hero {
+  align-items: center;
+}
+
+.people-total {
+  display: flex;
+  min-width: 150px;
+  padding: 1rem 1.2rem;
+  flex-direction: column;
+  align-items: flex-end;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+}
+
+.people-total strong {
+  color: var(--accent);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.people-total span {
+  margin-top: .35rem;
+  color: var(--text-sub);
+  font-size: .74rem;
+}
+
+.people-level-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .85rem;
+  margin-bottom: 1.25rem;
+}
+
+.people-level-card {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+}
+
+.people-level-card p {
+  margin-top: .25rem;
+  color: var(--text-sub);
+  font-size: .72rem;
+}
+
+.people-level-card > strong {
+  color: var(--text);
+  font-size: 1.45rem;
+}
+
+.people-level-label {
+  color: var(--accent);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.people-level-l1 { border-left-color: var(--green); }
+.people-level-l2 { border-left-color: var(--yellow); }
+.people-level-l3 { border-left-color: var(--blue); }
+.people-level-l4 { border-left-color: var(--text-dim); }
+
+.people-directory {
+  min-width: 0;
+}
+
+.people-directory-head {
+  align-items: center;
+}
+
+.people-filters {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .65rem;
+  flex-wrap: wrap;
+}
+
+.people-filter-field,
+.people-search-field {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: .5rem;
+}
+
+.people-filter-field select,
+.people-search-field {
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-2);
+  color: var(--text);
+}
+
+.people-filter-field select {
+  min-width: 180px;
+  padding: .5rem .7rem;
+  outline: none;
+}
+
+.people-search-field {
+  width: min(300px, 100%);
+  padding: 0 .7rem;
+}
+
+.people-search-field svg {
+  flex-shrink: 0;
+  color: var(--text-dim);
+}
+
+.people-search-field input {
+  width: 100%;
+  min-width: 0;
+  padding: .5rem 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+}
+
+.people-filter-field select:focus,
+.people-search-field:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 102, 153, .1);
+}
+
+.people-table-wrapper {
+  position: relative;
+}
+
+.people-table {
+  min-width: 1380px;
+}
+
+.people-table td {
+  max-width: 230px;
+}
+
+.people-user-cell {
+  display: flex;
+  min-width: 180px;
+  align-items: center;
+  gap: .65rem;
+}
+
+.people-user-cell strong,
+.people-contact span {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.people-user-cell small,
+.people-contact small {
+  display: block;
+  margin-top: .15rem;
+  color: var(--text-dim);
+  font-size: .7rem;
+}
+
+.people-avatar {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.people-avatar-placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: #fff;
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.people-contact {
+  min-width: 210px;
+}
+
+.people-nowrap {
+  white-space: nowrap;
+}
+
+.qms-level-badge,
+.people-access {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  border-radius: 999px;
+  font-size: .69rem;
+  font-weight: 700;
+}
+
+.qms-level-badge {
+  justify-content: center;
+  min-width: 38px;
+  padding: .28rem .5rem;
+  border: 1px solid currentColor;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.people-access {
+  padding: .3rem .62rem;
+  background: var(--bg-3);
+  color: var(--text-sub);
+}
+
+.qms-level-l1 { color: var(--green); }
+.qms-level-l2 { color: var(--yellow); }
+.qms-level-l3 { color: var(--blue); }
+.qms-level-l4 { color: var(--text-dim); }
+
+.people-access-l1 { color: var(--green); }
+.people-access-l2 { color: var(--yellow); }
+.people-access-l3 { color: var(--blue); }
+
+.people-empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--text-sub);
+  font-size: .82rem;
+}
+
+@media (max-width: 1050px) {
+  .people-level-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .people-directory-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .people-filters {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  .people-hero {
+    align-items: stretch;
+  }
+
+  .people-total {
+    align-items: flex-start;
+  }
+
+  .people-level-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .people-filters,
+  .people-filter-field,
+  .people-filter-field select,
+  .people-search-field {
+    width: 100%;
+  }
+}
+
 .log-table-wrapper {
   overflow-x: auto;
   border: 1px solid var(--border);

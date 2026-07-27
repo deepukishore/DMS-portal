@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from database import get_connection
 
 
@@ -20,10 +20,15 @@ class DocumentTrackingService:
             count = cursor.fetchone()['cnt']
             if count >= 10:
                 cursor.execute(
-                    '''DELETE FROM recently_viewed WHERE id IN 
-                    (SELECT id FROM recently_viewed WHERE user_email = ? ORDER BY viewed_at ASC LIMIT 1)''',
+                    'SELECT id FROM recently_viewed WHERE user_email = ? ORDER BY viewed_at ASC LIMIT 1',
                     (user_email,)
                 )
+                oldest = cursor.fetchone()
+                if oldest:
+                    cursor.execute(
+                        'DELETE FROM recently_viewed WHERE id = ?',
+                        (oldest['id'],),
+                    )
             
             # Remove existing entry for this document if it exists
             cursor.execute(
@@ -148,10 +153,11 @@ class DocumentTrackingService:
         cursor = conn.cursor()
         
         try:
+            cutoff = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d %H:%M:%S")
             query = '''SELECT DATE(uploaded_at) as date, COUNT(*) as count
                    FROM documents
-                   WHERE uploaded_at >= datetime('now', '-' || ? || ' days')'''
-            params = [days]
+                   WHERE uploaded_at >= ?'''
+            params = [cutoff]
             if access_department:
                 query += ' AND department = ?'
                 params.append(access_department)
@@ -180,9 +186,16 @@ class DocumentTrackingService:
             total = cursor.fetchone()['total']
             
             # This month
-            month_query = '''SELECT COUNT(*) as this_month FROM documents 
-                   WHERE strftime('%Y-%m', uploaded_at) = strftime('%Y-%m', 'now')'''
-            month_params = []
+            month_start = datetime.now().replace(
+                day=1,
+                hour=0,
+                minute=0,
+                second=0,
+                microsecond=0,
+            ).strftime("%Y-%m-%d %H:%M:%S")
+            month_query = '''SELECT COUNT(*) as this_month FROM documents
+                   WHERE uploaded_at >= ?'''
+            month_params = [month_start]
             if access_department:
                 month_query += ' AND department = ?'
                 month_params.append(access_department)
@@ -190,9 +203,10 @@ class DocumentTrackingService:
             this_month = cursor.fetchone()['this_month']
             
             # This week
-            week_query = '''SELECT COUNT(*) as this_week FROM documents 
-                   WHERE uploaded_at >= datetime('now', '-7 days')'''
-            week_params = []
+            week_start = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S")
+            week_query = '''SELECT COUNT(*) as this_week FROM documents
+                   WHERE uploaded_at >= ?'''
+            week_params = [week_start]
             if access_department:
                 week_query += ' AND department = ?'
                 week_params.append(access_department)
