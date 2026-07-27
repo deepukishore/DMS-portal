@@ -26,7 +26,6 @@ from services.mail_service import MailService
 from services.document_preview_service import DocumentPreviewService
 from services.notification_service import NotificationService
 from services.system_log_service import SystemLogService
-from services.user_store_service import UserStoreService
 
 approval_bp = Blueprint("approvals", __name__)
 
@@ -313,10 +312,7 @@ def update_decision(token):
     message = f"Document marked as {effective_status}."
     if status == "First Approved":
         message = "First approval accepted. Document moved to final approval."
-        final_approvers = UserStoreService.get_users_by_qms_level("L1")
-        final_approver_emails = [user.get("email") for user in final_approvers if user.get("email")]
-        if not final_approver_emails and current_app.config["APPROVAL_RECIPIENT"]:
-            final_approver_emails = [current_app.config["APPROVAL_RECIPIENT"]]
+        final_approver_emails = [current_app.config["FINAL_APPROVAL_RECIPIENT"]]
         review_url = url_for("approvals.review_document", token=token, _external=True)
         final_sent, final_error = MailService.send_document_approval_request(
             final_approver_emails,

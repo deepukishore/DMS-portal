@@ -16,5 +16,15 @@ class Config:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', 'sjhd dofp hzof qpou')
     MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER', 'deepu004.dk@gmail.com')
 
-    APPROVAL_RECIPIENT = os.environ.get('APPROVAL_RECIPIENT', 'anithaashok2000@gmail.com')
+    FIRST_APPROVAL_RECIPIENT = os.environ.get(
+        'FIRST_APPROVAL_RECIPIENT',
+        'anithaashok2000@gmail.com',
+    )
+    FINAL_APPROVAL_RECIPIENT = os.environ.get(
+        'FINAL_APPROVAL_RECIPIENT',
+        'chefashokanna@gmail.com',
+    )
+    # Retained for compatibility with code that uses the original setting as a
+    # generic approval-email fallback.
+    APPROVAL_RECIPIENT = FIRST_APPROVAL_RECIPIENT
     REVIEW_TOKEN_SALT = os.environ.get('REVIEW_TOKEN_SALT', 'smart-dms-approval-review')

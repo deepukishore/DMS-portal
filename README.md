@@ -577,7 +577,8 @@ All variables are optional — defaults work for local development.
 | `MAIL_USERNAME` | `deepu004.dk@gmail.com` | SMTP username |
 | `MAIL_PASSWORD` | `sjhd dofp hzof qpou` | SMTP password |
 | `MAIL_DEFAULT_SENDER` | `deepu004.dk@gmail.com` | From address |
-| `APPROVAL_RECIPIENT` | `anithaashok2000@gmail.com` | Email address that receives approval requests |
+| `FIRST_APPROVAL_RECIPIENT` | `anithaashok2000@gmail.com` | Email address that receives first-stage approval requests |
+| `FINAL_APPROVAL_RECIPIENT` | `chefashokanna@gmail.com` | Email address that receives final-stage approval requests |
 
 If mail is not configured, password reset links are printed to the terminal.
 

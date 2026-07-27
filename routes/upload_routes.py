@@ -9,7 +9,6 @@ from services.mail_service import MailService
 from services.notification_service import NotificationService
 from services.system_log_service import SystemLogService
 from services.revision_history_service import RevisionHistoryService
-from services.user_store_service import UserStoreService
 
 upload_bp = Blueprint("upload", __name__)
 
@@ -160,10 +159,7 @@ def index():
                 current_app.config["REVIEW_TOKEN_SALT"],
             )
             review_url = url_for("approvals.review_document", token=token, _external=True)
-            first_approvers = UserStoreService.get_users_by_qms_level("L2")
-            first_approver_emails = [user.get("email") for user in first_approvers if user.get("email")]
-            if not first_approver_emails and current_app.config["APPROVAL_RECIPIENT"]:
-                first_approver_emails = [current_app.config["APPROVAL_RECIPIENT"]]
+            first_approver_emails = [current_app.config["FIRST_APPROVAL_RECIPIENT"]]
             sent, mail_error = MailService.send_document_approval_request(
                 first_approver_emails,
                 review_url,
@@ -291,10 +287,7 @@ def update_document(doc_id):
         current_app.config['REVIEW_TOKEN_SALT'],
     )
     review_url = url_for('approvals.review_document', token=token, _external=True)
-    first_approvers = UserStoreService.get_users_by_qms_level("L2")
-    first_approver_emails = [user.get("email") for user in first_approvers if user.get("email")]
-    if not first_approver_emails and current_app.config["APPROVAL_RECIPIENT"]:
-        first_approver_emails = [current_app.config["APPROVAL_RECIPIENT"]]
+    first_approver_emails = [current_app.config["FIRST_APPROVAL_RECIPIENT"]]
     MailService.send_document_approval_request(
         first_approver_emails,
         review_url,

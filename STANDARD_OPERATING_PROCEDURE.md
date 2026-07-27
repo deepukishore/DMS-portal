@@ -131,7 +131,7 @@ Before using the portal:
 
 ### 9.2 Approval email not delivered
 
-- Confirm `APPROVAL_RECIPIENT`, `MAIL_SERVER`, `MAIL_USERNAME`, and `MAIL_PASSWORD` are configured correctly.
+- Confirm `FIRST_APPROVAL_RECIPIENT`, `FINAL_APPROVAL_RECIPIENT`, `MAIL_SERVER`, `MAIL_USERNAME`, and `MAIL_PASSWORD` are configured correctly.
 - Check spam/junk folder.
 - Review the application console output for SMTP errors.
 
