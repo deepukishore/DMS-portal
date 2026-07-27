@@ -138,6 +138,18 @@ USERS = {
         "role": "Approver",
         "qms_level": "L1",
     },
+    "chefashokanna@gmail.com": {
+        "name": "Chef Ashok",
+        "user_id": "U307",
+        "emp_id": "EMP307",
+        "email": "chefashokanna@gmail.com",
+        "plant": "P1 - Trichy Plant",
+        "department": "QAD - Quality Assurance Department",
+        "mobile": "9876543210",
+        "password_hash": generate_password_hash("Pass@12345"),
+        "role": "Approver",
+        "qms_level": "L1",
+    },
     "l2user@example.com": {
         "name": "L2 Full Viewer",
         "user_id": "U302",

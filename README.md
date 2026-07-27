@@ -63,6 +63,7 @@ Open **http://localhost:5001**
 | Role | Email | Password |
 |------|-------|----------|
 | Admin | `diva@example.com` | `Pass@12345` |
+| L1 final approver | `chefashokanna@gmail.com` | `Pass@12345` |
 | Manager (P2) | `arun@example.com` | `Prod@12345` |
 | Approver (P3) | `sneha@example.com` | `Eng@12345` |
 | User (P4) | `rahul@example.com` | `Safe@12345` |

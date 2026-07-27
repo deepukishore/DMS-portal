@@ -71,8 +71,9 @@ class UserStoreService:
                 connection.execute(
                     """
                     INSERT INTO users (
-                        email, name, user_id, emp_id, plant, department, role, password_hash, created_at, qms_level
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        email, name, user_id, emp_id, plant, department, mobile,
+                        role, password_hash, created_at, qms_level
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         email,
@@ -81,6 +82,7 @@ class UserStoreService:
                         user.get("emp_id", ""),
                         user.get("plant", ""),
                         normalize_department(user.get("department", "")),
+                        user.get("mobile", ""),
                         user.get("role", "User"),
                         user["password_hash"],
                         now,
