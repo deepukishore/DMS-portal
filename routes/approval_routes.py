@@ -173,7 +173,10 @@ def review_document(token):
     if not record:
         return render_template("approval_review.html", invalid_link=True), 404
 
-    file_path = DocumentService.get_file_path(record, current_app.config["UPLOAD_FOLDER"])
+    file_path = DocumentService.get_preview_file_path(
+        record,
+        current_app.config["UPLOAD_FOLDER"],
+    )
     file_exists = os.path.exists(file_path)
     review_file_url = url_for("approvals.review_file", token=token)
     preview = (
@@ -204,7 +207,10 @@ def review_file(token):
     if not record:
         abort(404)
 
-    file_path = DocumentService.get_file_path(record, current_app.config["UPLOAD_FOLDER"])
+    file_path = DocumentService.get_preview_file_path(
+        record,
+        current_app.config["UPLOAD_FOLDER"],
+    )
     if not os.path.exists(file_path):
         abort(404)
     if not DocumentPreviewService.can_stream_inline(file_path):

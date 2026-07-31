@@ -13,12 +13,15 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph, Table, TableStyle
 
+from approval_flow_images import build_all as build_approval_flow_images
+
 
 ROOT = Path(r"C:\Users\deepu\OneDrive\Desktop\Rane\dms_portal_copy")
 CURRENT_SCREENSHOTS = ROOT / "tmp" / "dms_manual" / "current_screenshots"
 SCREENSHOTS = CURRENT_SCREENSHOTS
 ASSETS = ROOT / "tmp" / "dms_manual" / "manual_assets"
-OUTPUT = ROOT / "output" / "pdf" / "DMS_Portal_User_Manual_Clear.pdf"
+ATTACHED_UPDATE = ROOT / "tmp" / "pdfs" / "attached_update"
+OUTPUT = ROOT / "output" / "pdf" / "DMS_Portal_User_Manual_Updated.pdf"
 LOGO = ROOT / "static" / "images" / "logo.jpg"
 
 ASSETS.mkdir(parents=True, exist_ok=True)
@@ -30,7 +33,7 @@ RIGHT = 38
 CONTENT_W = W - LEFT - RIGHT
 CONTENT_TOP = H - 108
 CONTENT_BOTTOM = 42
-TOTAL_PAGES = 24
+TOTAL_PAGES = 27
 
 NAVY = colors.HexColor("#0B356B")
 BLUE = colors.HexColor("#0877B9")
@@ -167,6 +170,16 @@ revision_focus = crop_image("11_revision_history.png", "revision_focus.png", (25
 archive_focus = crop_image("17_archive.png", "archive_focus.png", (255, 58, 1238, 478))
 log_focus = crop_image("12_system_log.png", "log_focus.png", (255, 58, 1238, 478))
 notifications_top = crop_image("23_notifications_open.png", "notifications_top.png", (255, 45, 1238, 478))
+register_top_focus = crop_path(
+    ATTACHED_UPDATE / "02_register_top_match.png",
+    "register_top_focus.png",
+    (1090, 45, 1695, 827),
+)
+register_bottom_focus = crop_path(
+    ATTACHED_UPDATE / "02_register_full.png",
+    "register_bottom_focus.png",
+    (1090, 430, 1695, 1080),
+)
 login_safe = sanitize_image(
     "01_login.png",
     "login_safe.png",
@@ -192,6 +205,10 @@ profile_safe = sanitize_image(
 )
 people_focus = crop_path(people_safe, "people_focus.png", (255, 58, 1238, 478))
 profile_focus = crop_path(profile_safe, "profile_focus.png", (255, 58, 1238, 478))
+approval_flow_assets = build_approval_flow_images(ASSETS)
+approval_request_walkthrough = approval_flow_assets["approval_request"]
+first_stage_decision = approval_flow_assets["first_stage"]
+final_stage_notifications = approval_flow_assets["final_stage"]
 
 
 def para(c, text, x, y_top, width, style=BODY):
@@ -342,8 +359,8 @@ def header(c, page_num, section, title, color=NAVY):
     c.setFillColor(INK)
     c.setFont(FONT, 6.5)
     c.drawString(meta_x + 5, meta_y + 23, "Document: DMS-UM-001")
-    c.drawString(meta_x + 119, meta_y + 23, "Revision: 1.0")
-    c.drawString(meta_x + 5, meta_y + 6, "Effective: 29-Jul-2026")
+    c.drawString(meta_x + 119, meta_y + 23, "Revision: 1.2")
+    c.drawString(meta_x + 5, meta_y + 6, "Effective: 31-Jul-2026")
     c.drawString(meta_x + 119, meta_y + 6, f"Page: {page_num} of {TOTAL_PAGES}")
 
     c.setFillColor(color)
@@ -411,8 +428,8 @@ def cover_page(c):
     c.drawString(LEFT + 402, card_y + 43, "OWNER")
     c.setFont(FONT, 9)
     c.drawString(LEFT + 14, card_y + 22, "DMS-UM-001")
-    c.drawString(LEFT + 160, card_y + 22, "1.0")
-    c.drawString(LEFT + 262, card_y + 22, "29-Jul-2026")
+    c.drawString(LEFT + 160, card_y + 22, "1.2")
+    c.drawString(LEFT + 262, card_y + 22, "31-Jul-2026")
     c.drawString(LEFT + 402, card_y + 22, "DMS Team")
 
     image_panel(c, dashboard_top, LEFT, card_y - 22, CONTENT_W, 290)
@@ -427,13 +444,13 @@ def cover_page(c):
 
 
 def document_control_page(c):
-    y = start_page(c, 2, "1.0", "Document Control and Contents", "Use the latest controlled copy available in the portal.")
+    y = start_page(c, 2, "1.2", "Document Control and Contents", "Use the latest controlled copy available in the portal.")
     control = [
         [Paragraph("Field", TABLE_HEAD), Paragraph("Value", TABLE_HEAD), Paragraph("Field", TABLE_HEAD), Paragraph("Value", TABLE_HEAD)],
         [Paragraph("Document title", TABLE_TEXT), Paragraph("Smart DMS Portal User Manual", TABLE_TEXT), Paragraph("Document number", TABLE_TEXT), Paragraph("DMS-UM-001", TABLE_TEXT)],
-        [Paragraph("Revision", TABLE_TEXT), Paragraph("1.0", TABLE_TEXT), Paragraph("Effective date", TABLE_TEXT), Paragraph("29-Jul-2026", TABLE_TEXT)],
+        [Paragraph("Revision", TABLE_TEXT), Paragraph("1.2", TABLE_TEXT), Paragraph("Effective date", TABLE_TEXT), Paragraph("31-Jul-2026", TABLE_TEXT)],
         [Paragraph("Prepared for", TABLE_TEXT), Paragraph("ZF Rane Automotive India PVT LTD - SGD", TABLE_TEXT), Paragraph("Classification", TABLE_TEXT), Paragraph("Internal user guide", TABLE_TEXT)],
-        [Paragraph("System", TABLE_TEXT), Paragraph("Smart DMS v2.0.0", TABLE_TEXT), Paragraph("Source", TABLE_TEXT), Paragraph("Portal UI, project SOP and reference deck", TABLE_TEXT)],
+        [Paragraph("System", TABLE_TEXT), Paragraph("Smart DMS v2.0.0", TABLE_TEXT), Paragraph("Source", TABLE_TEXT), Paragraph("Portal UI, supplied workflow screenshots, project SOP and reference deck", TABLE_TEXT)],
     ]
     y = table_at(c, control, LEFT, y, [86, 174, 86, 173]) - 15
     y = para(c, "<b>Contents</b>", LEFT, y, CONTENT_W, PANEL_TITLE) - 7
@@ -443,11 +460,11 @@ def document_control_page(c):
         ("3", "End-to-end process overview", "4"),
         ("4", "Login and account access", "5-6"),
         ("5", "Dashboard and document submission", "7-9"),
-        ("6", "Approvals and status tracking", "10-13"),
-        ("7", "Document library and repositories", "14-16"),
-        ("8", "Reports and revision control", "17-18"),
-        ("9", "Archive, audit and people administration", "19-21"),
-        ("10", "Notifications, profile, logout and troubleshooting", "22-24"),
+        ("6", "Approvals and status tracking", "10-16"),
+        ("7", "Document library and repositories", "17-19"),
+        ("8", "Reports and revision control", "20-21"),
+        ("9", "Archive, audit and people administration", "22-24"),
+        ("10", "Notifications, profile, logout and troubleshooting", "25-27"),
     ]
     col1 = contents[:5]
     col2 = contents[5:]
@@ -580,7 +597,7 @@ def process_overview_page(c):
 
 def login_page(c):
     y = start_page(c, 5, "4.1", "Login to the Portal", "Use the portal URL supplied by your DMS administrator.", NAVY)
-    y = image_panel(c, CURRENT_SCREENSHOTS / "01_login.png", LEFT, y, CONTENT_W, 340, "Figure 1 - Current Smart DMS login page") - 10
+    y = image_panel(c, ATTACHED_UPDATE / "01_login_attached_match.png", LEFT, y, CONTENT_W, 340, "Figure 1 - Current Smart DMS login page") - 10
     steps = [
         ("Open the Smart DMS portal", "Use a supported browser and the approved internal URL."),
         ("Enter your identity", "Use your registered email address or employee GENID."),
@@ -594,7 +611,12 @@ def login_page(c):
 
 def register_page(c):
     y = start_page(c, 6, "4.2", "Register and Reset Password", "New accounts start with the User role and standard QMS access.", BLUE)
-    y = image_panel(c, CURRENT_SCREENSHOTS / "01_login.png", LEFT, y, CONTENT_W, 336, "Figure 2 - Create account and Forgot password entry points on the current login page") - 10
+    gap = 10
+    panel_w = (CONTENT_W - gap) / 2
+    y_top = y
+    y_left = image_panel(c, register_top_focus, LEFT, y_top, panel_w, 292, "Create account: identity and organization fields")
+    y_right = image_panel(c, register_bottom_focus, LEFT + panel_w + gap, y_top, panel_w, 292, "Password confirmation and submission controls")
+    y = min(y_left, y_right) - 10
     steps = [
         ("Open Create account", "From the login page, select Create account."),
         ("Complete identity fields", "Enter full name, optional employee ID, plant, official department and a unique email."),
@@ -670,7 +692,7 @@ def review_workspace_page(c):
     y = image_panel(c, review_top, LEFT, y, CONTENT_W, 345, "Figure 7 - Approval review workspace with preview and document details") - 10
     steps = [
         ("Confirm document identity", "Check file name, document number, revision, plant, department, customer and category."),
-        ("Inspect the preview", "Open or download the source file when an inline preview is unavailable."),
+        ("Inspect the preview", "Office documents use a generated PDF viewing copy. Use Open file in new tab when a larger view is required."),
         ("Check revision context", "Read the revision summary and compare with the previous approved version when applicable."),
         ("Confirm the current stage", "Pending requires L2 action. Pending Final Approval requires L1 or Admin action."),
         ("Record a clear decision", "Follow the correct stage procedure on the next page."),
@@ -680,8 +702,98 @@ def review_workspace_page(c):
     end_page(c)
 
 
+def approval_request_walkthrough_page(c):
+    y = start_page(c, 12, "6.3", "Open the Approval Request", "The approval email and review page provide the same document context.", BLUE)
+    y = image_panel(
+        c,
+        approval_request_walkthrough,
+        LEFT,
+        y,
+        CONTENT_W,
+        320,
+        "Approval request example - preview, status and document details",
+    ) - 10
+    steps = [
+        ("Open the email action", "Select Review document only from an expected approval request."),
+        ("Confirm the status", "The first reviewer acts while the status is Pending."),
+        ("Verify the converted preview", "Office files are shown through their generated PDF viewing copy."),
+        ("Cross-check metadata", "Confirm document number, revision, category, uploader, plant, department and customer."),
+    ]
+    y = step_list(c, steps, LEFT, y, CONTENT_W, BLUE, compact=True)
+    callout(
+        c,
+        "Email safety",
+        "Confirm the sender and document context before opening a review link. Report unexpected or duplicate requests.",
+        LEFT,
+        y,
+        CONTENT_W,
+        "warning",
+    )
+    end_page(c)
+
+
+def first_stage_walkthrough_page(c):
+    y = start_page(c, 13, "6.4", "Complete First-Stage Approval", "The designated L2 reviewer verifies the document and selects final recipients.", GREEN)
+    y = image_panel(
+        c,
+        first_stage_decision,
+        LEFT,
+        y,
+        CONTENT_W,
+        320,
+        "First-stage request, decision controls and successful handoff",
+    ) - 10
+    steps = [
+        ("Review the initial email", "Check that the request status is Pending and open the review page."),
+        ("Select final recipients", "Enter the approved people or department heads who should receive the final document."),
+        ("Approve or reject", "Choose Approve first stage, or add specific correction comments before rejecting."),
+        ("Confirm the handoff", "A successful first approval changes the item to Pending Final Approval."),
+    ]
+    y = step_list(c, steps, LEFT, y, CONTENT_W, GREEN, compact=True)
+    callout(
+        c,
+        "Recipient check",
+        "Verify recipient addresses before approval. Final sharing uses the recipients selected at this stage.",
+        LEFT,
+        y,
+        CONTENT_W,
+        "note",
+    )
+    end_page(c)
+
+
+def final_stage_walkthrough_page(c):
+    y = start_page(c, 14, "6.5", "Complete Final Approval and Sharing", "The L1 or Admin reviewer makes the final controlled-document decision.", NAVY)
+    y = image_panel(
+        c,
+        final_stage_notifications,
+        LEFT,
+        y,
+        CONTENT_W,
+        320,
+        "Final approval request, confirmation and shared-document notification",
+    ) - 10
+    steps = [
+        ("Open the final request", "Confirm the status is Pending Final Approval."),
+        ("Perform the final review", "Recheck the file, metadata, revision, first-stage decision and selected recipients."),
+        ("Approve or reject", "Approve to publish and notify, or reject with mandatory correction comments."),
+        ("Confirm communication", "The uploader is notified and approved recipients receive the final sharing email."),
+    ]
+    y = step_list(c, steps, LEFT, y, CONTENT_W, NAVY, compact=True)
+    callout(
+        c,
+        "Completion evidence",
+        "Use Track Approvals and System Log for workflow evidence; email is a notification and not the system of record.",
+        LEFT,
+        y,
+        CONTENT_W,
+        "tip",
+    )
+    end_page(c)
+
+
 def decision_page(c):
-    y = start_page(c, 12, "6.3", "Complete the Two-Stage Approval", "Approval responsibility is assigned by QMS level, independent of general role.", GREEN)
+    y = start_page(c, 15, "6.6", "Complete the Two-Stage Approval", "Approval responsibility is assigned by QMS level, independent of general role.", GREEN)
     panel_gap = 14
     panel_w = (CONTENT_W - panel_gap) / 2
     panels = [
@@ -692,7 +804,7 @@ def decision_page(c):
             [
                 "Verify document accuracy and library placement.",
                 "Choose the recipients or department heads who should receive the final approved document.",
-                "Select First Approve to move the item to Pending Final Approval.",
+                "Select Approve first stage to move the item to Pending Final Approval.",
                 "Or select Reject and enter a clear correction comment.",
             ],
         ),
@@ -741,7 +853,7 @@ def decision_page(c):
 
 
 def tracking_page(c):
-    y = start_page(c, 13, "6.4", "Track Approval Progress", "The timeline shows the current stage and completed workflow events.", TEAL)
+    y = start_page(c, 16, "6.7", "Track Approval Progress", "The timeline shows the current stage and completed workflow events.", TEAL)
     y = image_panel(c, tracking_top, LEFT, y, CONTENT_W, 382, "Figure 8 - Track Approvals summary and document timelines") - 10
     steps = [
         ("Start with My submissions", "Standard users see documents they uploaded."),
@@ -756,7 +868,7 @@ def tracking_page(c):
 
 
 def library_page(c):
-    y = start_page(c, 14, "7.1", "Browse the Document Library", "The library organizes controlled content by category and access hierarchy.", BLUE)
+    y = start_page(c, 17, "7.1", "Browse the Document Library", "The library organizes controlled content by category and access hierarchy.", BLUE)
     y = image_panel(c, library_focus, LEFT, y, CONTENT_W, 345, "Figure 9 - Document Library category browser") - 10
     steps = [
         ("Open Document Library", "Use the left navigation menu."),
@@ -771,7 +883,7 @@ def library_page(c):
 
 
 def procedures_page(c):
-    y = start_page(c, 15, "7.2", "Open Procedures and Standard Manuals", "Category cards provide a shorter route to frequently used controlled documents.", ORANGE)
+    y = start_page(c, 18, "7.2", "Open Procedures and Standard Manuals", "Category cards provide a shorter route to frequently used controlled documents.", ORANGE)
     gap = 14
     image_w = (CONTENT_W - gap) / 2
     y1 = image_panel(c, procedures_focus, LEFT, y, image_w, 220, "Figure 10 - Procedure category cards")
@@ -789,7 +901,7 @@ def procedures_page(c):
 
 
 def repositories_page(c):
-    y = start_page(c, 16, "7.3", "Use Plant and Customer Repositories", "Use these views when the retrieval question begins with a plant, department or customer.", TEAL)
+    y = start_page(c, 19, "7.3", "Use Plant and Customer Repositories", "Use these views when the retrieval question begins with a plant, department or customer.", TEAL)
     gap = 14
     image_w = (CONTENT_W - gap) / 2
     y1 = image_panel(c, master_focus, LEFT, y, image_w, 215, "Figure 12 - Plant-based Master Records")
@@ -807,7 +919,7 @@ def repositories_page(c):
 
 
 def reports_page(c):
-    y = start_page(c, 17, "8.1", "Read the Graphics Report", "Charts summarize approval health, ownership and upload activity.", PINK)
+    y = start_page(c, 20, "8.1", "Read the Graphics Report", "Charts summarize approval health, ownership and upload activity.", PINK)
     y = image_panel(c, report_top, LEFT, y, CONTENT_W, 385, "Figure 14 - Graphics Report summary cards and charts") - 10
     steps = [
         ("Review KPI cards", "Check total, approved, pending, rejected and recent upload counts."),
@@ -821,7 +933,7 @@ def reports_page(c):
 
 
 def revisions_page(c):
-    y = start_page(c, 18, "8.2", "Review Revision History", "Revision History records what changed, who changed it and where the document belongs.", PURPLE)
+    y = start_page(c, 21, "8.2", "Review Revision History", "Revision History records what changed, who changed it and where the document belongs.", PURPLE)
     y = image_panel(c, revision_focus, LEFT, y, CONTENT_W, 344, "Figure 15 - Revision History list and filters") - 10
     steps = [
         ("Filter the history", "Select plant and department, then apply the filter."),
@@ -836,7 +948,7 @@ def revisions_page(c):
 
 
 def archive_page(c):
-    y = start_page(c, 19, "9.1", "Manage Archived Documents", "Archive is restricted to Admin, Manager, Supervisor and Approver roles.", ORANGE)
+    y = start_page(c, 22, "9.1", "Manage Archived Documents", "Archive is restricted to Admin, Manager, Supervisor and Approver roles.", ORANGE)
     y = image_panel(c, archive_focus, LEFT, y, CONTENT_W, 370, "Figure 16 - Archive list with retained document metadata") - 10
     steps = [
         ("Understand soft delete", "Removing a document from the dashboard moves its record to Archive instead of immediately erasing it."),
@@ -850,7 +962,7 @@ def archive_page(c):
 
 
 def system_log_page(c):
-    y = start_page(c, 20, "9.2", "Use the System Log for Audit", "System Log is available to high-level roles and records significant user actions.", NAVY)
+    y = start_page(c, 23, "9.2", "Use the System Log for Audit", "System Log is available to high-level roles and records significant user actions.", NAVY)
     y = image_panel(c, log_focus, LEFT, y, CONTENT_W, 356, "Figure 17 - System Log with action filters") - 10
     steps = [
         ("Choose an action filter", "Filter login, logout, upload, view, delete, approval, rejection, email and password events."),
@@ -864,7 +976,7 @@ def system_log_page(c):
 
 
 def people_page(c):
-    y = start_page(c, 21, "9.3", "Review People and Access Assignments", "The People page is restricted to Admin users.", BLUE)
+    y = start_page(c, 24, "9.3", "Review People and Access Assignments", "The People page is restricted to Admin users.", BLUE)
     y = image_panel(c, people_focus, LEFT, y, CONTENT_W, 430, "Figure 18 - People directory; sample personal details obscured") - 10
     steps = [
         ("Review level counts", "Confirm the number of L1, L2, L3 and L4 users."),
@@ -878,7 +990,7 @@ def people_page(c):
 
 
 def notifications_page(c):
-    y = start_page(c, 22, "10.1", "Use In-Portal Notifications", "Notifications highlight uploads, required approvals, decisions and other events.", TEAL)
+    y = start_page(c, 25, "10.1", "Use In-Portal Notifications", "Notifications highlight uploads, required approvals, decisions and other events.", TEAL)
     y = image_panel(c, notifications_top, LEFT, y, CONTENT_W, 368, "Figure 19 - Notification panel opened from the top bar") - 10
     steps = [
         ("Open the bell icon", "The badge shows unread notifications."),
@@ -892,7 +1004,7 @@ def notifications_page(c):
 
 
 def profile_logout_page(c):
-    y = start_page(c, 23, "10.2", "Maintain Your Profile and Sign Out", "Keep personal details secure and end the session when work is complete.", GREEN)
+    y = start_page(c, 26, "10.2", "Maintain Your Profile and Sign Out", "Keep personal details secure and end the session when work is complete.", GREEN)
     y = image_panel(c, profile_focus, LEFT, y, CONTENT_W, 365, "Figure 20 - Profile and activity page; sample personal details obscured") - 10
     steps = [
         ("Review account details", "Confirm name, employee ID, plant, department, role and QMS level."),
@@ -907,7 +1019,7 @@ def profile_logout_page(c):
 
 
 def quick_reference_page(c):
-    y = start_page(c, 24, "10.3", "Best Practices and Troubleshooting", "Use this page as a quick operating checklist.", ORANGE)
+    y = start_page(c, 27, "10.3", "Best Practices and Troubleshooting", "Use this page as a quick operating checklist.", ORANGE)
     gap = 14
     panel_w = (CONTENT_W - gap) / 2
     panels = [
@@ -959,7 +1071,7 @@ def quick_reference_page(c):
         [Paragraph("Upload blocked", TABLE_TEXT), Paragraph("File type/size and all required metadata/path fields.", TABLE_TEXT), Paragraph("Correct the field marked in the form and retry.", TABLE_TEXT)],
         [Paragraph("Cannot approve", TABLE_TEXT), Paragraph("Document stage and your QMS level.", TABLE_TEXT), Paragraph("L2 handles Pending; L1/Admin handles Pending Final Approval.", TABLE_TEXT)],
         [Paragraph("Document not found", TABLE_TEXT), Paragraph("Filters, QMS access and library path.", TABLE_TEXT), Paragraph("Reset filters, browse the correct category, then contact owner.", TABLE_TEXT)],
-        [Paragraph("Preview unavailable", TABLE_TEXT), Paragraph("File format and browser support.", TABLE_TEXT), Paragraph("Use the authorized download/open action.", TABLE_TEXT)],
+        [Paragraph("Preview unavailable", TABLE_TEXT), Paragraph("Generated viewing copy and browser support.", TABLE_TEXT), Paragraph("Use Open file in new tab; report repeated conversion failures.", TABLE_TEXT)],
         [Paragraph("Email not received", TABLE_TEXT), Paragraph("Notification panel and Track Approvals.", TABLE_TEXT), Paragraph("Continue in portal and report repeated email failures.", TABLE_TEXT)],
     ]
     y = table_at(c, troubleshooting, LEFT, y, [112, 194, 213]) - 12
@@ -996,6 +1108,9 @@ def build():
     upload_path_page(pdf)
     pending_items_page(pdf)
     review_workspace_page(pdf)
+    approval_request_walkthrough_page(pdf)
+    first_stage_walkthrough_page(pdf)
+    final_stage_walkthrough_page(pdf)
     decision_page(pdf)
     tracking_page(pdf)
     library_page(pdf)

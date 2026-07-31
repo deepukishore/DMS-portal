@@ -486,6 +486,24 @@ class DocumentService:
         return os.path.join(upload_folder, record["file_name"])
 
     @staticmethod
+    def get_preview_file_path(record, upload_folder):
+        """Return the converted viewing copy when available, then the source file."""
+        candidate_names = [
+            record.get("pdf_file_name"),
+            record.get("file_name"),
+        ]
+
+        for file_name in candidate_names:
+            if not file_name:
+                continue
+            file_path = os.path.join(upload_folder, file_name)
+            if os.path.isfile(file_path):
+                return file_path
+
+        fallback_name = next((name for name in candidate_names if name), "")
+        return os.path.join(upload_folder, fallback_name)
+
+    @staticmethod
     def delete_archived_record(archive_index):
         """Permanently delete an archived record from the archive."""
         conn = get_connection()

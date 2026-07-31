@@ -212,13 +212,15 @@ def view_document(doc_id):
     else:
         is_bookmarked = False
 
-    # Always serve the PDF version for viewing
-    pdf_name = document.get('pdf_file_name') or document.get('file_name')
-    pdf_path = os.path.join(current_app.config["UPLOAD_FOLDER"], pdf_name)
-    file_exists = os.path.exists(pdf_path)
+    # Prefer the generated PDF viewing copy, with the original as a fallback.
+    preview_path = DocumentService.get_preview_file_path(
+        document,
+        current_app.config["UPLOAD_FOLDER"],
+    )
+    file_exists = os.path.exists(preview_path)
     view_file_url = url_for("dashboard.view_file", doc_id=doc_id)
     preview = (
-        DocumentPreviewService.build_preview(pdf_path, view_file_url)
+        DocumentPreviewService.build_preview(preview_path, view_file_url)
         if file_exists
         else {"mode": "missing"}
     )
@@ -271,14 +273,20 @@ def view_file(doc_id):
     if not document:
         abort(404)
 
-    # Always serve PDF for viewing
-    pdf_name = document.get('pdf_file_name') or document.get('file_name')
-    file_path = os.path.join(current_app.config["UPLOAD_FOLDER"], pdf_name)
+    file_path = DocumentService.get_preview_file_path(
+        document,
+        current_app.config["UPLOAD_FOLDER"],
+    )
     if not os.path.exists(file_path):
         abort(404)
 
-    response = send_file(file_path, mimetype='application/pdf', as_attachment=False)
-    response.headers["Content-Disposition"] = "inline"
+    if not DocumentPreviewService.can_stream_inline(file_path):
+        abort(404)
+
+    mime_type, _ = mimetypes.guess_type(file_path)
+    mime_type = mime_type or "application/octet-stream"
+    response = send_file(file_path, mimetype=mime_type, as_attachment=False)
+    response.headers["Content-Disposition"] = f'inline; filename="{os.path.basename(file_path)}"'
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     return response
