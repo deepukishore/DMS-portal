@@ -42,6 +42,53 @@
   </div>
 </section>
 
+<section aria-labelledby="plant-folders-heading" class="dashboard-plant-section">
+  <div class="dashboard-section-heading">
+    <div>
+      <p class="eyebrow">Plant document folders</p>
+      <h2 id="plant-folders-heading">Browse files by plant and department</h2>
+    </div>
+    <p>Select a plant, open a department folder, and choose the required file.</p>
+  </div>
+
+  <div class="dashboard-plant-browser"
+       id="dashboard-plant-browser"
+       data-department-url="{{ url_for('plant_assets.get_departments') }}"
+       data-file-url="{{ url_for('plant_assets.get_files') }}"
+       data-view-url="{{ url_for('plant_assets.view_file') }}">
+    <div class="dashboard-plant-buttons" id="dashboard-plant-buttons">
+      {% for plant_item in plants %}
+        <button type="button" class="dashboard-plant-button" data-plant="{{ plant_item.label }}">
+          <span class="dashboard-plant-code">{{ plant_item.id }}</span>
+          <span class="dashboard-plant-copy">
+            <strong>{{ plant_item.label }}</strong>
+            <small>{{ plant_item.location }}</small>
+          </span>
+          <span class="dashboard-plant-total">
+            <strong>{{ plant_count_map.get(plant_item.label, 0) }}</strong>
+            <small>documents</small>
+          </span>
+          <span class="dashboard-plant-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+      {% endfor %}
+    </div>
+
+    <div class="dashboard-folder-panel" id="dashboard-folder-panel" hidden>
+      <div class="dashboard-folder-toolbar">
+        <button type="button" class="dashboard-folder-back" id="dashboard-folder-back">&larr; All plants</button>
+        <div>
+          <p class="dashboard-folder-kicker" id="dashboard-folder-kicker">Departments</p>
+          <h3 id="dashboard-folder-title">Select a department</h3>
+          <p id="dashboard-folder-description">Open a department folder to see its approved documents.</p>
+        </div>
+      </div>
+      <div class="dashboard-department-folders" id="dashboard-department-folders"></div>
+      <div class="dashboard-plant-files" id="dashboard-plant-files" hidden></div>
+      <p class="dashboard-folder-status" id="dashboard-folder-status" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
 <section aria-labelledby="quick-actions-heading">
   <div class="dashboard-section-heading">
     <div>
@@ -164,53 +211,6 @@
         <div class="dashboard-empty-note"><span aria-hidden="true">□</span><strong>No recent documents</strong><p>Documents you open will appear here for quick access.</p></div>
       {% endif %}
     </article>
-  </div>
-</section>
-
-<section aria-labelledby="plant-folders-heading" class="dashboard-plant-section">
-  <div class="dashboard-section-heading">
-    <div>
-      <p class="eyebrow">Plant document folders</p>
-      <h2 id="plant-folders-heading">Browse files by plant and department</h2>
-    </div>
-    <p>Select a plant, open a department folder, and choose the required file.</p>
-  </div>
-
-  <div class="dashboard-plant-browser"
-       id="dashboard-plant-browser"
-       data-department-url="{{ url_for('plant_assets.get_departments') }}"
-       data-file-url="{{ url_for('plant_assets.get_files') }}"
-       data-view-url="{{ url_for('plant_assets.view_file') }}">
-    <div class="dashboard-plant-buttons" id="dashboard-plant-buttons">
-      {% for plant_item in plants %}
-        <button type="button" class="dashboard-plant-button" data-plant="{{ plant_item.label }}">
-          <span class="dashboard-plant-code">{{ plant_item.id }}</span>
-          <span class="dashboard-plant-copy">
-            <strong>{{ plant_item.label }}</strong>
-            <small>{{ plant_item.location }}</small>
-          </span>
-          <span class="dashboard-plant-total">
-            <strong>{{ plant_count_map.get(plant_item.label, 0) }}</strong>
-            <small>documents</small>
-          </span>
-          <span class="dashboard-plant-arrow" aria-hidden="true">&rarr;</span>
-        </button>
-      {% endfor %}
-    </div>
-
-    <div class="dashboard-folder-panel" id="dashboard-folder-panel" hidden>
-      <div class="dashboard-folder-toolbar">
-        <button type="button" class="dashboard-folder-back" id="dashboard-folder-back">&larr; All plants</button>
-        <div>
-          <p class="dashboard-folder-kicker" id="dashboard-folder-kicker">Departments</p>
-          <h3 id="dashboard-folder-title">Select a department</h3>
-          <p id="dashboard-folder-description">Open a department folder to see its approved documents.</p>
-        </div>
-      </div>
-      <div class="dashboard-department-folders" id="dashboard-department-folders"></div>
-      <div class="dashboard-plant-files" id="dashboard-plant-files" hidden></div>
-      <p class="dashboard-folder-status" id="dashboard-folder-status" role="status" aria-live="polite"></p>
-    </div>
   </div>
 </section>
 
