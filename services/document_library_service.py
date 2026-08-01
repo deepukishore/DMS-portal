@@ -1,3 +1,4 @@
+import re
 from copy import deepcopy
 
 from data.customers import sort_customers
@@ -6,6 +7,25 @@ from services.category_document_service import CategoryDocumentService
 
 
 class DocumentLibraryService:
+    _DOCUMENT_FILE_PATTERN = re.compile(
+        r"\.(pdf|docx?|xlsx?|pptx?)$",
+        re.IGNORECASE,
+    )
+
+    @staticmethod
+    def _collect_document_files(node, files=None):
+        """Collect unique file names without counting labels or descriptions."""
+        files = files if files is not None else set()
+        if isinstance(node, dict):
+            for value in node.values():
+                DocumentLibraryService._collect_document_files(value, files)
+        elif isinstance(node, (list, tuple, set)):
+            for value in node:
+                DocumentLibraryService._collect_document_files(value, files)
+        elif isinstance(node, str) and DocumentLibraryService._DOCUMENT_FILE_PATTERN.search(node.strip()):
+            files.add(node.strip())
+        return files
+
     @staticmethod
     def _append_unique(files, file_name):
         if file_name and file_name not in files:
@@ -166,6 +186,44 @@ class DocumentLibraryService:
     @staticmethod
     def get_categories():
         return deepcopy(LIBRARY_CATEGORIES)
+
+    @staticmethod
+    def get_dashboard_statistics(qms_level="", access_department=""):
+        """Return access-aware file counts for each document-library category."""
+        statistics = []
+        for category in DocumentLibraryService.get_categories():
+            category_key = category["key"]
+            if category_key == "master_records":
+                from services.plant_asset_service import PlantAssetService
+
+                file_count = PlantAssetService.get_available_file_count(
+                    access_department=access_department,
+                )
+            else:
+                data = DocumentLibraryService.get_client_category_data(
+                    category_key,
+                    qms_level=qms_level,
+                    access_department=access_department,
+                )
+
+                if category_key == "qms":
+                    allowed_groups = set(data.get("scope", {}).get("groups", []))
+                    data["document_groups"] = {
+                        key: value
+                        for key, value in data.get("document_groups", {}).items()
+                        if key in allowed_groups
+                    }
+
+                file_count = len(DocumentLibraryService._collect_document_files(data))
+            statistics.append(
+                {
+                    "key": category_key,
+                    "label": category["label"],
+                    "icon": category["icon"],
+                    "count": file_count,
+                }
+            )
+        return statistics
 
     @staticmethod
     def resolve_category(category_key):

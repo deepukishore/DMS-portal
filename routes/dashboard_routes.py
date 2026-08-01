@@ -3,6 +3,8 @@ import mimetypes
 import os
 from io import StringIO
 import json
+from collections import Counter
+from datetime import datetime, timedelta
 
 from flask import Blueprint, Response, flash, redirect, render_template, request, send_file, session, url_for, abort, current_app, jsonify
 
@@ -12,8 +14,67 @@ from services.document_service import DocumentService
 from services.system_log_service import SystemLogService
 from services.document_preview_service import DocumentPreviewService
 from services.document_tracking_service import DocumentTrackingService
+from services.document_library_service import DocumentLibraryService
 
 dashboard_bp = Blueprint("dashboard", __name__)
+
+
+def _record_status_counts(records):
+    """Return consistent dashboard totals for the accessible record set."""
+    return {
+        "total": len(records),
+        "pending": DocumentService.count_pending(records),
+        "approved": sum(
+            1 for record in records
+            if record.get("approval_status") == "Approved"
+        ),
+        "rejected": sum(
+            1 for record in records
+            if record.get("approval_status") == "Rejected"
+        ),
+    }
+
+
+def _count_by(records, field):
+    """Build a stable, highest-count-first breakdown for dashboard navigation."""
+    counts = Counter(
+        (record.get(field) or "Not assigned").strip()
+        for record in records
+    )
+    return [
+        {"label": label, "count": count}
+        for label, count in sorted(
+            counts.items(),
+            key=lambda item: (-item[1], item[0].lower()),
+        )
+    ]
+
+
+def _daily_upload_trend(records, days=14):
+    """Return a gap-free daily upload series suitable for the dashboard chart."""
+    today = datetime.now().date()
+    first_day = today - timedelta(days=days - 1)
+    daily_counts = Counter()
+
+    for record in records:
+        uploaded_at = str(record.get("uploaded_at") or "").strip()
+        if len(uploaded_at) < 10:
+            continue
+        try:
+            uploaded_day = datetime.strptime(uploaded_at[:10], "%Y-%m-%d").date()
+        except ValueError:
+            continue
+        if first_day <= uploaded_day <= today:
+            daily_counts[uploaded_day.isoformat()] += 1
+
+    return [
+        {
+            "date": (first_day + timedelta(days=offset)).isoformat(),
+            "label": (first_day + timedelta(days=offset)).strftime("%d %b"),
+            "count": daily_counts[(first_day + timedelta(days=offset)).isoformat()],
+        }
+        for offset in range(days)
+    ]
 
 
 def _require_login():
@@ -33,6 +94,7 @@ def index():
     plant = request.args.get("plant", "")
     department = request.args.get("department", "")
     customer = request.args.get("customer", "")
+    status = request.args.get("status", "")
     page = request.args.get("page", "1")
     page_size = request.args.get("page_size", "10")
 
@@ -50,11 +112,16 @@ def index():
     # Get all documents from database
     all_records = DocumentService.get_all_documents("", "", "", "", access_department=visible_department)
     
-    # Use mock data only if database is completely empty
+    # Use mock data only if database is completely empty.
+    overview_records = all_records
     if not all_records:
-        records = DASHBOARD_RECORDS
+        overview_records = list(DASHBOARD_RECORDS)
         if visible_department:
-            records = [r for r in records if r.get('department') == visible_department]
+            overview_records = [
+                record for record in overview_records
+                if record.get("department") == visible_department
+            ]
+        records = list(overview_records)
         if search:
             search_lower = search.lower()
             records = [r for r in records if 
@@ -63,6 +130,10 @@ def index():
                 search_lower in r.get('plant', '').lower() or
                 search_lower in r.get('department', '').lower() or
                 search_lower in r.get('customer', '').lower() or
+                search_lower in r.get('document_number', '').lower() or
+                search_lower in r.get('revision_number', '').lower() or
+                search_lower in r.get('category', '').lower() or
+                search_lower in r.get('uploaded_at', '').lower() or
                 search_lower in r.get('approval_status', '').lower()]
         if plant:
             records = [r for r in records if r.get('plant') == plant]
@@ -73,18 +144,35 @@ def index():
     else:
         records = DocumentService.get_all_documents(search, plant, department, customer, access_department=visible_department)
 
+    if status:
+        records = DocumentService.filter_by_status(records, status)
+
     total_records = len(records)
     page_count = max(1, (total_records + page_size - 1) // page_size)
     page = min(max(page, 1), page_count)
     page_records = records[(page - 1) * page_size: page * page_size] if total_records else []
 
-    pending_count = DocumentService.count_pending(records)
+    dashboard_overview = _record_status_counts(overview_records)
+    plant_counts = _count_by(overview_records, "plant")
+    department_counts = _count_by(overview_records, "department")
+    daily_trend = _daily_upload_trend(overview_records)
+    library_stats = DocumentLibraryService.get_dashboard_statistics(
+        qms_level=AuthService.get_qms_level(),
+        access_department=visible_department,
+    )
+    library_total = sum(item["count"] for item in library_stats)
     
     # Pop the one-time welcome flag set on login
     show_welcome = session.pop('show_welcome', False)
     
     # Get user data for recently viewed and bookmarks
     user_email = session.get('user_email', '')
+    dashboard_user = AuthService.get_current_user() or {
+        "name": session.get("user_name", "User"),
+        "role": session.get("user_role", "User"),
+        "qms_level": session.get("user_qms_level", "L4"),
+        "plant": session.get("user_plant", ""),
+    }
     recently_viewed = DocumentTrackingService.get_recently_viewed(user_email, limit=5, access_department=visible_department) if user_email else []
     bookmarks = DocumentTrackingService.get_bookmarks(user_email, access_department=visible_department) if user_email else []
 
@@ -103,10 +191,18 @@ def index():
         selected_plant=plant,
         selected_dept=department,
         selected_customer=customer,
+        selected_status=status,
         can_manage_documents=AuthService.has_high_level_access(),
         can_access_admin_sections=AuthService.has_high_level_access(),
-        pending_count=pending_count,
+        pending_count=dashboard_overview["pending"],
         pending_statuses=DocumentService.PENDING_APPROVAL_STATUSES,
+        dashboard_overview=dashboard_overview,
+        plant_counts=plant_counts,
+        department_counts=department_counts,
+        daily_trend=daily_trend,
+        library_stats=library_stats,
+        library_total=library_total,
+        dashboard_user=dashboard_user,
         recently_viewed=recently_viewed,
         bookmarks=bookmarks,
         show_welcome=show_welcome,
@@ -126,6 +222,10 @@ def export_documents():
         request.args.get("department", ""),
         request.args.get("customer", ""),
         access_department=visible_department,
+    )
+    records = DocumentService.filter_by_status(
+        records,
+        request.args.get("status", ""),
     )
 
     buffer = StringIO()

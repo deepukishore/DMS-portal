@@ -11,6 +11,39 @@ class PlantAssetService:
         return list(MASTER_RECORD_PLANTS)
 
     @staticmethod
+    def get_available_file_count(access_department=""):
+        """Count unique approved master-record files in a single database query."""
+        access_department = (
+            normalize_department(access_department)
+            if access_department
+            else ""
+        )
+        conn = get_connection()
+        cursor = conn.cursor()
+        query = """
+            SELECT COUNT(DISTINCT file_name) AS file_count
+            FROM documents
+            WHERE approval_status = 'Approved'
+        """
+        params = []
+        if access_department:
+            query += " AND department = ?"
+            params.append(access_department)
+        row = cursor.execute(query, params).fetchone()
+        conn.close()
+        file_count = int(row["file_count"] or 0)
+        if file_count:
+            return file_count
+
+        mock_files = set()
+        for plant_assets in PLANT_ASSETS.values():
+            for department, files in plant_assets.items():
+                if access_department and normalize_department(department) != access_department:
+                    continue
+                mock_files.update(files)
+        return len(mock_files)
+
+    @staticmethod
     def get_departments_for_plant(plant_label, access_department=""):
         # If access is restricted to a single department, return only that
         if access_department:

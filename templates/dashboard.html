@@ -10,111 +10,240 @@
 {% endblock %}
 
 {% block content %}
-{% set pending_count = records | selectattr('approval_status', 'in', pending_statuses) | list | length %}
-{% set approved_count = records | selectattr('approval_status', 'equalto', 'Approved') | list | length %}
-{% set rejected_count = records | selectattr('approval_status', 'equalto', 'Rejected') | list | length %}
-
-<section class="hero-panel">
-  <div class="hero-copy">
-    <p class="eyebrow">Document Control</p>
-    <h1 class="page-title">Master Dashboard</h1>
-    <p class="page-sub">Track uploaded documents across plants, departments, customers, and approval stages from one place.</p>
+<section class="dashboard-welcome-panel">
+  <div class="dashboard-welcome-copy">
+    <p class="eyebrow">Your document workspace</p>
+    <h1 class="page-title">Welcome, {{ dashboard_user.name or 'User' }}</h1>
+    <p class="page-sub">Find documents, start work, and monitor approvals from one clear dashboard.</p>
+    <div class="dashboard-user-context" aria-label="Your access details">
+      <span>{{ dashboard_user.role or 'User' }}</span>
+      <span>{{ dashboard_user.qms_level or 'L4' }} access</span>
+      {% if dashboard_user.plant %}<span>{{ dashboard_user.plant }}</span>{% endif %}
+    </div>
   </div>
-  <div class="page-actions">
-    <a href="{{ url_for('dashboard.export_documents', search=search, plant=selected_plant, department=selected_dept, customer=selected_customer) }}" class="btn-outline">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Export CSV
-    </a>
+  <div class="dashboard-welcome-actions">
+    <a href="#dashboard-search" class="btn-outline">Search documents</a>
     <a href="{{ url_for('upload.index') }}" class="btn-primary">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Upload
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Upload document
     </a>
   </div>
 </section>
 
-<section class="stats-grid">
-  <article class="stat-card">
-    <span class="stat-label">Visible Records</span>
-    <strong class="stat-value">{{ records | length }}</strong>
-    <p class="stat-foot">Current filtered result set</p>
-  </article>
-  <article class="stat-card stat-card-pending">
-    <span class="stat-label">Pending</span>
-    <strong class="stat-value">{{ pending_count }}</strong>
-    <p class="stat-foot">Awaiting approval action</p>
-  </article>
-  <article class="stat-card stat-card-approved">
-    <span class="stat-label">Approved</span>
-    <strong class="stat-value">{{ approved_count }}</strong>
-    <p class="stat-foot">Ready for downstream use</p>
-  </article>
-  <article class="stat-card stat-card-rejected">
-    <span class="stat-label">Rejected</span>
-    <strong class="stat-value">{{ rejected_count }}</strong>
-    <p class="stat-foot">Needs correction or resubmission</p>
-  </article>
+<section aria-labelledby="overview-heading">
+  <div class="dashboard-section-heading">
+    <div>
+      <p class="eyebrow">At a glance</p>
+      <h2 id="overview-heading">Document overview</h2>
+    </div>
+    <p>Click a card to open the matching documents.</p>
+  </div>
+  <div class="dashboard-metrics-grid">
+    <a class="dashboard-metric dashboard-metric-total" href="{{ url_for('dashboard.index', _anchor='documents') }}">
+      <span class="dashboard-metric-icon" aria-hidden="true">▦</span>
+      <span><small>All accessible documents</small><strong>{{ dashboard_overview.total }}</strong><em>Open complete list</em></span>
+      <b aria-hidden="true">→</b>
+    </a>
+    <a class="dashboard-metric dashboard-metric-pending" href="{{ url_for('dashboard.index', status='Pending', _anchor='documents') }}">
+      <span class="dashboard-metric-icon" aria-hidden="true">◷</span>
+      <span><small>Waiting for approval</small><strong>{{ dashboard_overview.pending }}</strong><em>Review pending work</em></span>
+      <b aria-hidden="true">→</b>
+    </a>
+    <a class="dashboard-metric dashboard-metric-approved" href="{{ url_for('dashboard.index', status='Approved', _anchor='documents') }}">
+      <span class="dashboard-metric-icon" aria-hidden="true">✓</span>
+      <span><small>Approved documents</small><strong>{{ dashboard_overview.approved }}</strong><em>View published records</em></span>
+      <b aria-hidden="true">→</b>
+    </a>
+    <a class="dashboard-metric dashboard-metric-rejected" href="{{ url_for('dashboard.index', status='Rejected', _anchor='documents') }}">
+      <span class="dashboard-metric-icon" aria-hidden="true">!</span>
+      <span><small>Returned for correction</small><strong>{{ dashboard_overview.rejected }}</strong><em>View rejected records</em></span>
+      <b aria-hidden="true">→</b>
+    </a>
+  </div>
 </section>
 
-<section class="quick-actions-grid">
-  <a href="{{ url_for('upload.index') }}" class="quick-action-card">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+<section aria-labelledby="quick-actions-heading">
+  <div class="dashboard-section-heading">
     <div>
-      <strong>Upload Documents</strong>
-      <p>Submit files for approval</p>
+      <p class="eyebrow">Shortcuts</p>
+      <h2 id="quick-actions-heading">What would you like to do?</h2>
     </div>
-  </a>
-  <a href="{{ url_for('approvals.index') }}" class="quick-action-card">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-    <div>
-      <strong>Pending Items</strong>
-      <p>{{ pending_count }} document(s) awaiting review</p>
-    </div>
-  </a>
-  <a href="{{ url_for('document_library.index') }}" class="quick-action-card">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-    <div>
-      <strong>Document Library</strong>
-      <p>Browse all document categories</p>
-    </div>
-  </a>
-  <a href="{{ url_for('graphics_report.index') }}" class="quick-action-card">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-    <div>
-      <strong>Graphics Report</strong>
-      <p>Document stats and charts</p>
-    </div>
-  </a>
-</section>
-
-<!-- Recently Viewed -->
-<section class="dashboard-insights-grid">
-  <article class="surface-panel">
-    <div class="panel-head">
-      <h2 class="section-title">Recently Viewed</h2>
-      <p class="section-sub">Last 5 documents you opened</p>
-    </div>
-    {% if recently_viewed %}
-      <ul class="recently-viewed-list">
-        {% for doc in recently_viewed %}
-          <li class="recently-viewed-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            <a href="{{ url_for('dashboard.view_document', doc_id=doc.id) }}" class="recent-doc-link" title="{{ doc.file_name }}">{{ doc.file_name[:40] }}</a>
-            <span class="recently-viewed-time" title="{{ doc.viewed_at }}">Viewed</span>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="text-dim" style="text-align: center; padding: 1.5rem 0;">No recently viewed documents yet.</p>
+    <p>Common tasks are one click away.</p>
+  </div>
+  <div class="dashboard-command-grid">
+    {% set actions = [
+      ('upload.index', 'upload', 'Upload documents', 'Add files and send them for approval'),
+      ('approvals.index', 'approve', 'Pending items', 'Review documents waiting for a decision'),
+      ('document_library.index', 'library', 'Document library', 'Browse controlled folders and records'),
+      ('tracking.index', 'track', 'Track approvals', 'Follow every stage of your submissions'),
+      ('graphics_report.index', 'report', 'Reports and trends', 'See document performance and analytics'),
+      ('revision_history.index', 'history', 'Revision history', 'Check previous versions and changes')
+    ] %}
+    {% for endpoint, icon, label, help_text in actions %}
+      <a href="{{ url_for(endpoint) }}" class="dashboard-command-card">
+        <span class="dashboard-command-icon dashboard-command-icon-{{ icon }}" aria-hidden="true">
+          {% if icon == 'upload' %}↑{% elif icon == 'approve' %}✓{% elif icon == 'library' %}▱{% elif icon == 'track' %}↝{% elif icon == 'report' %}▥{% else %}↺{% endif %}
+        </span>
+        <span><strong>{{ label }}</strong><small>{{ help_text }}</small></span>
+        <b aria-hidden="true">→</b>
+      </a>
+    {% endfor %}
+    {% if can_access_admin_sections %}
+      <a href="{{ url_for('archive.index') }}" class="dashboard-command-card">
+        <span class="dashboard-command-icon dashboard-command-icon-archive" aria-hidden="true">▣</span>
+        <span><strong>Archive</strong><small>Review soft-deleted documents</small></span><b aria-hidden="true">→</b>
+      </a>
+      <a href="{{ url_for('system_log.index') }}" class="dashboard-command-card">
+        <span class="dashboard-command-icon dashboard-command-icon-log" aria-hidden="true">≣</span>
+        <span><strong>System log</strong><small>Open the full activity audit trail</small></span><b aria-hidden="true">→</b>
+      </a>
     {% endif %}
-  </article>
+    {% if is_admin_user %}
+      <a href="{{ url_for('people.index') }}" class="dashboard-command-card">
+        <span class="dashboard-command-icon dashboard-command-icon-people" aria-hidden="true">◎</span>
+        <span><strong>People and access</strong><small>View users, roles, and QMS levels</small></span><b aria-hidden="true">→</b>
+      </a>
+    {% endif %}
+  </div>
 </section>
 
-<section class="surface-panel">
+<section aria-labelledby="library-stats-heading" class="dashboard-library-section">
+  <div class="dashboard-section-heading dashboard-library-heading">
+    <div>
+      <p class="eyebrow">Library coverage</p>
+      <h2 id="library-stats-heading">Document Library statistics</h2>
+    </div>
+    <div class="dashboard-library-totals" aria-label="Document Library totals">
+      <span><strong>{{ library_total }}</strong> available files</span>
+      <span><strong>{{ library_stats | length }}</strong> library areas</span>
+      <a href="{{ url_for('document_library.index') }}">Open library →</a>
+    </div>
+  </div>
+  <div class="dashboard-library-stats-grid">
+    {% set max_library_count = (library_stats | map(attribute='count') | max) if library_stats else 1 %}
+    {% for item in library_stats %}
+      <a href="{{ url_for('document_library.index', category_key=item.key) }}"
+         class="dashboard-library-stat"
+         aria-label="Open {{ item.label }}, {{ item.count }} available files">
+        <span class="dashboard-library-stat-icon" aria-hidden="true">{{ item.icon }}</span>
+        <span class="dashboard-library-stat-copy">
+          <small>{{ item.label }}</small>
+          <strong>{{ item.count }}</strong>
+          <em>available file{{ '' if item.count == 1 else 's' }}</em>
+          <span class="dashboard-library-stat-bar" aria-hidden="true">
+            <i style="width: {{ (item.count * 100 / max_library_count) | round(1) }}%"></i>
+          </span>
+        </span>
+        <b aria-hidden="true">→</b>
+      </a>
+    {% else %}
+      <p class="dashboard-empty-copy">No library statistics are available yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section aria-labelledby="activity-heading">
+  <div class="dashboard-section-heading">
+    <div>
+      <p class="eyebrow">Activity</p>
+      <h2 id="activity-heading">Daily document trend</h2>
+    </div>
+    <p>Uploads during the last 14 days. Select a point to open that day.</p>
+  </div>
+  <div class="dashboard-activity-grid">
+    <article class="dashboard-analytics-panel dashboard-trend-panel">
+      <div class="dashboard-panel-title">
+        <div><strong>Daily uploads</strong><span>Documents added per day</span></div>
+        <a href="{{ url_for('graphics_report.index') }}">Open full report →</a>
+      </div>
+      <div class="dashboard-trend-chart" id="dashboard-trend-chart"
+           data-points='{{ daily_trend | tojson }}'
+           data-base-url="{{ url_for('dashboard.index') }}"
+           role="img" aria-label="Daily document upload trend for the last 14 days">
+        <svg viewBox="0 0 900 280" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <p class="dashboard-chart-empty" hidden>No uploads were recorded in this period.</p>
+      </div>
+    </article>
+    <article class="dashboard-analytics-panel dashboard-recent-panel">
+      <div class="dashboard-panel-title">
+        <div><strong>Recently viewed</strong><span>Your last five opened documents</span></div>
+      </div>
+      {% if recently_viewed %}
+        <ul class="dashboard-recent-list">
+          {% for doc in recently_viewed %}
+            <li>
+              <a href="{{ url_for('dashboard.view_document', doc_id=doc.id) }}" title="{{ doc.file_name }}">
+                <span class="dashboard-file-icon" aria-hidden="true">□</span>
+                <span><strong>{{ doc.file_name }}</strong><small>Open document</small></span>
+                <b aria-hidden="true">→</b>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="dashboard-empty-note"><span aria-hidden="true">□</span><strong>No recent documents</strong><p>Documents you open will appear here for quick access.</p></div>
+      {% endif %}
+    </article>
+  </div>
+</section>
+
+<section aria-labelledby="breakdown-heading">
+  <div class="dashboard-section-heading">
+    <div>
+      <p class="eyebrow">Explore documents</p>
+      <h2 id="breakdown-heading">Browse by location or team</h2>
+    </div>
+    <p>Select any row to open its filtered document list.</p>
+  </div>
+  <div class="dashboard-breakdown-grid">
+    <article class="dashboard-analytics-panel">
+      <div class="dashboard-panel-title">
+        <div><strong>Plant-wise documents</strong><span>{{ plant_counts | length }} plant locations</span></div>
+        <a href="{{ url_for('document_library.index', category_key='master_records') }}">Browse folders →</a>
+      </div>
+      <div class="dashboard-breakdown-list">
+        {% set max_plant_count = (plant_counts | map(attribute='count') | max) if plant_counts else 1 %}
+        {% for item in plant_counts %}
+          <a href="{{ url_for('dashboard.index', plant=item.label, _anchor='documents') }}" class="dashboard-breakdown-row">
+            <span class="dashboard-breakdown-rank">{{ loop.index }}</span>
+            <span class="dashboard-breakdown-main"><strong>{{ item.label }}</strong><span><i style="width: {{ (item.count * 100 / max_plant_count) | round(1) }}%"></i></span></span>
+            <span class="dashboard-breakdown-count"><strong>{{ item.count }}</strong><small>documents</small></span>
+            <b aria-hidden="true">→</b>
+          </a>
+        {% else %}
+          <p class="dashboard-empty-copy">No plant data is available yet.</p>
+        {% endfor %}
+      </div>
+    </article>
+    <article class="dashboard-analytics-panel">
+      <div class="dashboard-panel-title">
+        <div><strong>Department-wise documents</strong><span>{{ department_counts | length }} departments</span></div>
+        <a href="{{ url_for('graphics_report.index') }}">Compare report →</a>
+      </div>
+      <div class="dashboard-breakdown-list">
+        {% set max_department_count = (department_counts | map(attribute='count') | max) if department_counts else 1 %}
+        {% for item in department_counts %}
+          <a href="{{ url_for('dashboard.index', department=item.label, _anchor='documents') }}" class="dashboard-breakdown-row">
+            <span class="dashboard-breakdown-rank">{{ loop.index }}</span>
+            <span class="dashboard-breakdown-main"><strong>{{ item.label }}</strong><span><i style="width: {{ (item.count * 100 / max_department_count) | round(1) }}%"></i></span></span>
+            <span class="dashboard-breakdown-count"><strong>{{ item.count }}</strong><small>documents</small></span>
+            <b aria-hidden="true">→</b>
+          </a>
+        {% else %}
+          <p class="dashboard-empty-copy">No department data is available yet.</p>
+        {% endfor %}
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="surface-panel dashboard-search-panel" id="dashboard-search">
   <div class="panel-head">
     <div>
-      <h2 class="section-title">Filters</h2>
-      <p class="section-sub">Use one search bar for file names, uploaders, customers, departments, document numbers, revision numbers, categories, and date ranges like 2026-05-01 to 2026-05-31.</p>
+      <h2 class="section-title">Find a document</h2>
+      <p class="section-sub">Search by file, uploader, document number, category, customer, department, or date. Use filters to narrow the list.</p>
     </div>
+    <a href="{{ url_for('dashboard.export_documents', search=search, plant=selected_plant, department=selected_dept, customer=selected_customer, status=selected_status) }}" class="btn-outline">Export current view</a>
   </div>
 
   <form method="GET" action="{{ url_for('dashboard.index') }}" class="filter-bar">
@@ -141,12 +270,18 @@
         <option value="{{ customer }}" {% if selected_customer == customer %}selected{% endif %}>{{ customer }}</option>
       {% endfor %}
     </select>
+    <select name="status" aria-label="Approval status">
+      <option value="">All statuses</option>
+      {% for value in ['Pending', 'Approved', 'Rejected'] %}
+        <option value="{{ value }}" {% if selected_status == value %}selected{% endif %}>{{ value }}</option>
+      {% endfor %}
+    </select>
     <button type="submit" class="btn-primary">Apply</button>
     <a href="{{ url_for('dashboard.index') }}" class="btn-outline">Reset</a>
   </form>
 </section>
 
-<section class="surface-panel">
+<section class="surface-panel dashboard-documents-panel" id="documents">
   <div class="panel-head">
     <div>
       <h2 class="section-title">Documents</h2>
@@ -164,6 +299,7 @@
         <input type="hidden" name="plant"      value="{{ selected_plant }}" />
         <input type="hidden" name="department" value="{{ selected_dept }}" />
         <input type="hidden" name="customer"   value="{{ selected_customer }}" />
+        <input type="hidden" name="status"     value="{{ selected_status }}" />
         <input type="hidden" name="page"       value="1" />
         <label class="pg-size-label">Per page
           <select name="page_size" onchange="this.form.submit()" class="pg-size-select">
@@ -175,12 +311,12 @@
       </form>
       <span class="pg-pages">Page {{ page }} of {{ page_count }}</span>
       {% if page > 1 %}
-        <a href="{{ url_for('dashboard.index', search=search, plant=selected_plant, department=selected_dept, customer=selected_customer, page=page-1, page_size=page_size) }}" class="btn-outline btn-sm">← Prev</a>
+        <a href="{{ url_for('dashboard.index', search=search, plant=selected_plant, department=selected_dept, customer=selected_customer, status=selected_status, page=page-1, page_size=page_size, _anchor='documents') }}" class="btn-outline btn-sm">← Prev</a>
       {% else %}
         <button class="btn-outline btn-sm" disabled>← Prev</button>
       {% endif %}
       {% if page < page_count %}
-        <a href="{{ url_for('dashboard.index', search=search, plant=selected_plant, department=selected_dept, customer=selected_customer, page=page+1, page_size=page_size) }}" class="btn-outline btn-sm">Next →</a>
+        <a href="{{ url_for('dashboard.index', search=search, plant=selected_plant, department=selected_dept, customer=selected_customer, status=selected_status, page=page+1, page_size=page_size, _anchor='documents') }}" class="btn-outline btn-sm">Next →</a>
       {% else %}
         <button class="btn-outline btn-sm" disabled>Next →</button>
       {% endif %}
@@ -296,6 +432,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js', v='20260801-2') }}"></script>
 <script>
 function openEditModal(docId, fileName, version) {
   document.getElementById('edit-modal-desc').textContent =
