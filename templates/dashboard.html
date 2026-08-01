@@ -10,26 +10,6 @@
 {% endblock %}
 
 {% block content %}
-<section class="dashboard-welcome-panel">
-  <div class="dashboard-welcome-copy">
-    <p class="eyebrow">Your document workspace</p>
-    <h1 class="page-title">Welcome, {{ dashboard_user.name or 'User' }}</h1>
-    <p class="page-sub">Find documents, start work, and monitor approvals from one clear dashboard.</p>
-    <div class="dashboard-user-context" aria-label="Your access details">
-      <span>{{ dashboard_user.role or 'User' }}</span>
-      <span>{{ dashboard_user.qms_level or 'L4' }} access</span>
-      {% if dashboard_user.plant %}<span>{{ dashboard_user.plant }}</span>{% endif %}
-    </div>
-  </div>
-  <div class="dashboard-welcome-actions">
-    <a href="#dashboard-search" class="btn-outline">Search documents</a>
-    <a href="{{ url_for('upload.index') }}" class="btn-primary">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Upload document
-    </a>
-  </div>
-</section>
-
 <section aria-labelledby="overview-heading">
   <div class="dashboard-section-heading">
     <div>

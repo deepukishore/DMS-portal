@@ -167,12 +167,6 @@ def index():
     
     # Get user data for recently viewed and bookmarks
     user_email = session.get('user_email', '')
-    dashboard_user = AuthService.get_current_user() or {
-        "name": session.get("user_name", "User"),
-        "role": session.get("user_role", "User"),
-        "qms_level": session.get("user_qms_level", "L4"),
-        "plant": session.get("user_plant", ""),
-    }
     recently_viewed = DocumentTrackingService.get_recently_viewed(user_email, limit=5, access_department=visible_department) if user_email else []
     bookmarks = DocumentTrackingService.get_bookmarks(user_email, access_department=visible_department) if user_email else []
 
@@ -202,7 +196,6 @@ def index():
         daily_trend=daily_trend,
         library_stats=library_stats,
         library_total=library_total,
-        dashboard_user=dashboard_user,
         recently_viewed=recently_viewed,
         bookmarks=bookmarks,
         show_welcome=show_welcome,
