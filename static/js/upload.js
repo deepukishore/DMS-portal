@@ -350,10 +350,11 @@ function configureLibrarySecondary() {
     const groupKey = librarySubSelect.value;
     const group = data.document_groups[groupKey];
     if (group?.secondary_options) {
-      showTertiary(true, 'Business Procedure folder');
+      const isAuditFolder = groupKey === 'iatf_audit';
+      showTertiary(true, isAuditFolder ? 'IATF Audit folder' : 'Business Procedure folder');
       setOptions(
         libraryTertiarySelect,
-        'Select Business Procedure folder',
+        isAuditFolder ? 'Select IATF Audit folder' : 'Select Business Procedure folder',
         Object.entries(group.secondary_options).map(([value, folder]) => ({
           value,
           label: folder.label || value,
@@ -363,7 +364,7 @@ function configureLibrarySecondary() {
         false,
         `${categoryLabel(category)} / ${group.label || groupKey} / Select subfolder`,
         '',
-        'Select a Business Procedures subfolder.'
+        isAuditFolder ? 'Select an IATF Audit folder.' : 'Select a Business Procedures subfolder.'
       );
       return;
     }
@@ -421,11 +422,29 @@ function updateLibraryPath() {
           false,
           `${categoryLabel(category)} / ${group.label || secondary} / Select subfolder`,
           '',
-          'Select a Business Procedures subfolder.'
+          secondary === 'iatf_audit' ? 'Select an IATF Audit folder.' : 'Select a Business Procedures subfolder.'
         );
         return;
       }
       const subfolder = group.secondary_options[tertiary];
+      if (subfolder?.plants) {
+        const plant = plantSelect.value;
+        if (!plant) {
+          setPathState(
+            false,
+            `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder.label || tertiary} / Select plant`,
+            '',
+            'Select the plant for this IATF Audit document.'
+          );
+          return;
+        }
+        setPathState(
+          true,
+          `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder.label || tertiary} / ${plant}`,
+          `${secondary}:${tertiary}:${plant}`
+        );
+        return;
+      }
       setPathState(
         true,
         `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder?.label || tertiary}`,

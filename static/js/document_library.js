@@ -600,6 +600,52 @@ function renderQms() {
       return;
     }
 
+    if (subfolder.plants) {
+      const stepLabels = ['Select Document Type', 'Select Audit Folder', 'Select Plant', 'Browse Files'];
+      if (!selectedPlant) {
+        const el = setRoot();
+        el.appendChild(createStepBar(stepLabels, 2));
+        const panel = createHeader(
+          subfolder.label || selectedPrimary,
+          subfolder.description || 'Select a plant to browse IATF Audit documents.',
+          'Change audit folder',
+          () => {
+            selectedPrimary = '';
+            selectedPlant = '';
+            render();
+          }
+        );
+        panel.appendChild(createPlantGrid(
+          Object.keys(subfolder.plants).map(label => {
+            const plant = (CATEGORY_DATA.plant_options || []).find(item => item.label === label);
+            return plant || { id: label.split(' ')[0], label, location: '' };
+          }),
+          plant => {
+            selectedPlant = plant;
+            currentPage = 1;
+            render();
+          }
+        ));
+        el.appendChild(panel);
+        return;
+      }
+
+      renderFilesView(
+        stepLabels,
+        3,
+        `${subfolder.label || selectedPrimary} / ${selectedPlant}`,
+        `IATF Audit documents for ${selectedPlant}.`,
+        subfolder.plants[selectedPlant] || [],
+        'Change plant',
+        () => {
+          selectedPlant = '';
+          render();
+        },
+        scope
+      );
+      return;
+    }
+
     renderFilesView(
       ['Select Document Type', 'Select Subfolder', 'Browse Files'],
       2,

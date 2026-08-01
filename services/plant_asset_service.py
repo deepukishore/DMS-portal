@@ -89,7 +89,11 @@ class PlantAssetService:
         if not db_files:
             if plant_label == "P2&3 - Guduvachery Plants":
                 return []
-            return PLANT_ASSETS.get(plant_label, {}).get(effective_department, [])
+            plant_files = PLANT_ASSETS.get(plant_label, {})
+            for folder_department, files in plant_files.items():
+                if normalize_department(folder_department) == effective_department:
+                    return files
+            return []
         return db_files
 
     @staticmethod

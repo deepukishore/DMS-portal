@@ -9,8 +9,6 @@ LIBRARY_CATEGORIES = [
     {"key": "customer_score_card", "label": "Customer Score Card", "icon": "S"},
     {"key": "eohms", "label": "EOHMS", "icon": "E"},
     {"key": "awards_certifications", "label": "Awards and Certifications", "icon": "A"},
-    {"key": "audit_nc", "label": "IATF Audit", "icon": "I"},
-    {"key": "master_records", "label": "Master Records", "icon": "M"},
 ]
 
 
@@ -24,7 +22,21 @@ CATEGORY_ALIASES = {
     "awards": {"key": "awards_certifications", "primary": "awards"},
     "certifications": {"key": "awards_certifications", "primary": "certifications"},
     "certification": {"key": "awards_certifications", "primary": "certifications"},
+    # Keep old bookmarks working while presenting IATF Audit inside QMS.
+    "audit_nc": {"key": "qms", "secondary": "iatf_audit"},
+    # The legacy Master Records library view is replaced by dashboard plant folders.
+    "master_records": {"key": "qms"},
 }
+
+
+def _audit_plant_file_map(audit_scope, document_type):
+    return {
+        plant["label"]: [
+            f"{plant['id'].lower().replace('&', 'and')}_{audit_scope}_{document_type}.pdf",
+            f"{plant['id'].lower().replace('&', 'and')}_{audit_scope}_{document_type}_register.xlsx",
+        ]
+        for plant in PLANTS
+    }
 
 
 QMS_DOCUMENT_GROUPS = {
@@ -105,6 +117,32 @@ QMS_DOCUMENT_GROUPS = {
             "sanction_interpretation_review_form.docx",
         ],
     },
+    "iatf_audit": {
+        "label": "IATF Audit",
+        "description": "Internal and external IATF audit records organized by plant.",
+        "secondary_options": {
+            "internal_audit_ncs": {
+                "label": "Internal Audit - NCs",
+                "description": "Internal audit non-conformance documents by plant.",
+                "plants": _audit_plant_file_map("internal_audit", "ncs"),
+            },
+            "internal_audit_reports": {
+                "label": "Internal Audit - Reports",
+                "description": "Internal audit reports by plant.",
+                "plants": _audit_plant_file_map("internal_audit", "reports"),
+            },
+            "external_audit_ncs": {
+                "label": "External Audit - NCs",
+                "description": "External audit non-conformance documents by plant.",
+                "plants": _audit_plant_file_map("external_audit", "ncs"),
+            },
+            "external_audit_reports": {
+                "label": "External Audit - Reports",
+                "description": "External audit reports by plant.",
+                "plants": _audit_plant_file_map("external_audit", "reports"),
+            },
+        },
+    },
 }
 
 
@@ -158,16 +196,6 @@ def _customer_file_map(prefix, suffix):
     }
 
 
-def _audit_plant_file_map(audit_scope, document_type):
-    return {
-        plant["label"]: [
-            f"{plant['id'].lower().replace('&', 'and')}_{audit_scope}_{document_type}.pdf",
-            f"{plant['id'].lower().replace('&', 'and')}_{audit_scope}_{document_type}_register.xlsx",
-        ]
-        for plant in PLANTS
-    }
-
-
 CSR_CUSTOMER_MANUALS = _customer_file_map("csr_manual", "requirements")
 CSR_CUSTOMER_INITIATIVES = _customer_file_map("customer_initiative", "summary")
 CUSTOMER_SCORE_CARDS = _customer_file_map("score_card", "monthly_summary")
@@ -178,6 +206,7 @@ LIBRARY_DATA = {
         "description": "Quality Management System documents organized by L1 to L4 access hierarchy.",
         "levels": QMS_LEVELS,
         "document_groups": QMS_DOCUMENT_GROUPS,
+        "plant_options": PLANTS,
     },
     "csr": {
         "description": "Customer Specific Requirement documents.",

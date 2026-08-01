@@ -155,6 +155,7 @@ def index():
     dashboard_overview = _record_status_counts(overview_records)
     plant_counts = _count_by(overview_records, "plant")
     department_counts = _count_by(overview_records, "department")
+    plant_count_map = {item["label"]: item["count"] for item in plant_counts}
     daily_trend = _daily_upload_trend(overview_records)
     library_stats = DocumentLibraryService.get_dashboard_statistics(
         qms_level=AuthService.get_qms_level(),
@@ -192,6 +193,7 @@ def index():
         pending_statuses=DocumentService.PENDING_APPROVAL_STATUSES,
         dashboard_overview=dashboard_overview,
         plant_counts=plant_counts,
+        plant_count_map=plant_count_map,
         department_counts=department_counts,
         daily_trend=daily_trend,
         library_stats=library_stats,

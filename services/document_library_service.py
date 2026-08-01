@@ -80,8 +80,19 @@ class DocumentLibraryService:
             department=access_department,
             approved_only=True,
         )
+        if category_key == "qms":
+            # IATF Audit used to be a separate category. Merge those approved
+            # records into the new QMS/IATF Audit folders so nothing is lost.
+            legacy_audit_records = CategoryDocumentService.get_file_records_for_category(
+                "audit_nc",
+                department=access_department,
+                approved_only=True,
+            )
+        else:
+            legacy_audit_records = []
         if not uploaded:
-            return data
+            if not legacy_audit_records:
+                return data
 
         if category_key == "qms":
             groups = data.get("document_groups", {})
@@ -101,13 +112,55 @@ class DocumentLibraryService:
                     if subfolder is None and group_key == "business_procedures":
                         subfolder = subfolders.get("bp_cp")
                     if subfolder is not None:
-                        DocumentLibraryService._append_unique(
-                            subfolder.setdefault("files", []),
-                            record.get("file_name"),
-                        )
+                        if "plants" in subfolder:
+                            plant = path_parts[2] if len(path_parts) > 2 else record.get("plant") or ""
+                            plant = DocumentLibraryService._plant_folder_key(
+                                subfolder.setdefault("plants", {}),
+                                plant,
+                            )
+                            if plant:
+                                DocumentLibraryService._append_unique(
+                                    subfolder.setdefault("plants", {}).setdefault(plant, []),
+                                    record.get("file_name"),
+                                )
+                        else:
+                            DocumentLibraryService._append_unique(
+                                subfolder.setdefault("files", []),
+                                record.get("file_name"),
+                            )
                 else:
                     DocumentLibraryService._append_unique(
                         group.setdefault("files", []),
+                        record.get("file_name"),
+                    )
+
+            audit_group = groups.get("iatf_audit", {})
+            audit_folders = audit_group.get("secondary_options", {})
+            for record in legacy_audit_records:
+                parts = [part for part in (record.get("sub_category") or "").split(":") if part]
+                primary = parts[0] if parts else ""
+                secondary = parts[1] if len(parts) > 1 else "ncs"
+                primary = {
+                    "iatf_internal_audits": "internal_audit",
+                    "iatf_external_audits": "external_audit",
+                }.get(primary, primary)
+                folder_key = {
+                    ("internal_audit", "ncs"): "internal_audit_ncs",
+                    ("internal_audit", "reports"): "internal_audit_reports",
+                    ("external_audit", "ncs"): "external_audit_ncs",
+                    ("external_audit", "reports"): "external_audit_reports",
+                }.get((primary, secondary))
+                folder = audit_folders.get(folder_key) if folder_key else None
+                if not folder:
+                    continue
+                plant = parts[2] if len(parts) > 2 else record.get("plant") or ""
+                plant = DocumentLibraryService._plant_folder_key(
+                    folder.setdefault("plants", {}),
+                    plant,
+                )
+                if plant:
+                    DocumentLibraryService._append_unique(
+                        folder.setdefault("plants", {}).setdefault(plant, []),
                         record.get("file_name"),
                     )
             return data
