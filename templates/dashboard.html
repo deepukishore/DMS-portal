@@ -10,6 +10,42 @@
 {% endblock %}
 
 {% block content %}
+<section aria-labelledby="library-stats-heading" class="dashboard-library-section">
+  <div class="dashboard-section-heading dashboard-library-heading">
+    <div>
+      <p class="eyebrow">Library coverage</p>
+      <h2 id="library-stats-heading">Document Library statistics</h2>
+    </div>
+    <div class="dashboard-library-totals" aria-label="Document Library totals">
+      <span><strong>{{ plant_library_total }}</strong> plant-related documents</span>
+      <span><strong>{{ customer_library_total }}</strong> customer-related documents</span>
+      <span><strong>{{ library_stats | length }}</strong> library areas</span>
+      <a href="{{ url_for('document_library.index') }}">Open library →</a>
+    </div>
+  </div>
+  <div class="dashboard-library-stats-grid">
+    {% set max_library_count = (library_stats | map(attribute='count') | max) if library_stats else 1 %}
+    {% for item in library_stats %}
+      <a href="{{ url_for('document_library.index', category_key=item.key) }}"
+         class="dashboard-library-stat"
+         aria-label="Open {{ item.label }}, {{ item.count }} approved files">
+        <span class="dashboard-library-stat-icon" aria-hidden="true">{{ item.icon }}</span>
+        <span class="dashboard-library-stat-copy">
+          <small>{{ item.label }}</small>
+          <strong>{{ item.count }}</strong>
+          <em>available file{{ '' if item.count == 1 else 's' }}</em>
+          <span class="dashboard-library-stat-bar" aria-hidden="true">
+            <i style="width: {{ (item.count * 100 / max_library_count) | round(1) }}%"></i>
+          </span>
+        </span>
+        <b aria-hidden="true">→</b>
+      </a>
+    {% else %}
+      <p class="dashboard-empty-copy">No library statistics are available yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
 <section aria-labelledby="quick-actions-heading">
   <div class="dashboard-section-heading">
     <div>
@@ -52,42 +88,6 @@
         <span><strong>People and access</strong><small>View users, roles, and QMS levels</small></span><b aria-hidden="true">→</b>
       </a>
     {% endif %}
-  </div>
-</section>
-
-<section aria-labelledby="library-stats-heading" class="dashboard-library-section">
-  <div class="dashboard-section-heading dashboard-library-heading">
-    <div>
-      <p class="eyebrow">Library coverage</p>
-      <h2 id="library-stats-heading">Document Library statistics</h2>
-    </div>
-    <div class="dashboard-library-totals" aria-label="Document Library totals">
-      <span><strong>{{ plant_library_total }}</strong> plant-related documents</span>
-      <span><strong>{{ customer_library_total }}</strong> customer-related documents</span>
-      <span><strong>{{ library_stats | length }}</strong> library areas</span>
-      <a href="{{ url_for('document_library.index') }}">Open library →</a>
-    </div>
-  </div>
-  <div class="dashboard-library-stats-grid">
-    {% set max_library_count = (library_stats | map(attribute='count') | max) if library_stats else 1 %}
-    {% for item in library_stats %}
-      <a href="{{ url_for('document_library.index', category_key=item.key) }}"
-         class="dashboard-library-stat"
-         aria-label="Open {{ item.label }}, {{ item.count }} approved files">
-        <span class="dashboard-library-stat-icon" aria-hidden="true">{{ item.icon }}</span>
-        <span class="dashboard-library-stat-copy">
-          <small>{{ item.label }}</small>
-          <strong>{{ item.count }}</strong>
-          <em>available file{{ '' if item.count == 1 else 's' }}</em>
-          <span class="dashboard-library-stat-bar" aria-hidden="true">
-            <i style="width: {{ (item.count * 100 / max_library_count) | round(1) }}%"></i>
-          </span>
-        </span>
-        <b aria-hidden="true">→</b>
-      </a>
-    {% else %}
-      <p class="dashboard-empty-copy">No library statistics are available yet.</p>
-    {% endfor %}
   </div>
 </section>
 
