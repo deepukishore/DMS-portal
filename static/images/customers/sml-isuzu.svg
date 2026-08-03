@@ -1,7 +1,12 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" role="img" aria-labelledby="title">
-  <title id="title">SML Isuzu</title>
-  <rect width="420" height="100" fill="transparent"/>
-  <text x="16" y="52" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700" fill="#e31e24">SML</text>
-  <text x="168" y="52" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700" fill="#e31e24">ISUZU</text>
-  <rect x="12" y="58" width="396" height="8" rx="4" fill="#e31e24" opacity="0.15"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="sml-isuzu-title">
+  <title id="sml-isuzu-title">SML ISUZU</title>
+  <g fill="#f20d0d">
+    <path d="M20 143c0-16 12-25 33-25h80v26H48c-7 0-9 4-4 7l72 24c22 8 32 21 30 40-2 21-18 32-47 32H17v-26h86c8 0 10-5 4-8l-70-23c-19-6-28-21-17-47z"/>
+    <path d="M164 148c0-20 11-30 34-30h84c23 0 34 10 34 30v99h-38v-86c0-9-4-13-13-13h-9v99h-38v-99h-9c-8 0-12 4-12 13v86h-33z"/>
+    <path d="M341 118h38v87c0 10 4 16 14 16h88v26h-99c-27 0-41-14-41-42z"/>
+    <path d="M18 270h40v108H18z"/>
+    <path d="M84 270h105v25H90c-8 0-9 5-3 8l76 24c22 7 31 20 28 37-3 18-18 27-44 27H78v-25h75c7 0 9-4 3-7l-77-24c-20-7-29-20-25-38 4-18 14-27 30-27z"/>
+    <path d="M214 270h38v61c0 23 7 34 22 34h19c15 0 22-11 22-34v-61h38v68c0 37-17 53-57 53h-25c-40 0-57-16-57-53z"/>
+    <path d="M380 270h96c18 0 29 7 33 21 5 17-2 30-22 40l-60 30c-5 3-4 5 2 5h79v25h-94c-28 0-40-9-39-27 1-14 9-25 28-34l58-29c5-3 4-6-3-6h-78z"/>
+  </g>
 </svg>

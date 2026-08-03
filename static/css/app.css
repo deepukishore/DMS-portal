@@ -6544,6 +6544,10 @@ textarea:focus {
   transform: scale(1.01);
   transition: transform .4s cubic-bezier(.2, .75, .3, 1), filter .3s ease;
 }
+.customer-card[data-customer-name="M&M - Mahindra and Mahindra"] .customer-logo-card img {
+  padding: .8rem 1.35rem 4.35rem;
+  object-position: center 38%;
+}
 .customer-card[data-customer-name]:hover .customer-logo-card img {
   filter: saturate(1.08) contrast(1.04);
   transform: scale(1.075);

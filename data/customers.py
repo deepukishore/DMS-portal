@@ -22,7 +22,7 @@ CUSTOMER_BRANDS = {
     },
     "M&M - Mahindra and Mahindra": {
         "display_name": "Mahindra and Mahindra",
-        "logo": "images/customers/sml-mahindra.png",
+        "logo": "images/customers/mahindra.svg",
     },
     "VECV - Volvo Eicher Commercial Vehicles": {
         "display_name": "VE Commercial Vehicles",

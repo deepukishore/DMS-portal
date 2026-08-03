@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 807 421" role="img" aria-labelledby="mahindra-title">
+  <title id="mahindra-title">Mahindra</title>
+  <g fill="none" stroke="#f20d0d" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M198 102c35-63 159-93 302-86 109 5 190 40 205 90 18 62-62 109-188 119" stroke-width="38"/>
+    <path d="M507 32 270 188" stroke-width="30"/>
+    <path d="M525 35 340 211" stroke-width="30"/>
+    <path d="M547 38 430 230" stroke-width="30"/>
+    <path d="M248 175c-50-19-74-44-61-75" stroke-width="29"/>
+  </g>
+  <text x="0" y="406" fill="#6b6b6b" font-family="'Arial Black', Arial, Helvetica, sans-serif" font-size="148" font-weight="900">mahindra</text>
+</svg>
