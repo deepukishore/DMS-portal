@@ -21,6 +21,29 @@
   {% endif %}
 {% endmacro %}
 
+{% macro tracking_pager() %}
+{% if page_count > 1 %}
+<nav class="pg-bar tracking-pagination" aria-label="Track approvals pagination">
+  <span class="pg-info">
+    Showing {{ ((page - 1) * page_size) + 1 }}–{{ [page * page_size, total_records] | min }} of {{ total_records }} uploads
+  </span>
+  <div class="pg-controls">
+    <span class="pg-pages">Page {{ page }} of {{ page_count }}</span>
+    {% if page > 1 %}
+      <a href="{{ url_for('tracking.index', scope=scope, status=selected_status, search=search, page=page-1) }}" class="btn-outline btn-sm">← Previous</a>
+    {% else %}
+      <button type="button" class="btn-outline btn-sm" disabled>← Previous</button>
+    {% endif %}
+    {% if page < page_count %}
+      <a href="{{ url_for('tracking.index', scope=scope, status=selected_status, search=search, page=page+1) }}" class="btn-outline btn-sm">Next →</a>
+    {% else %}
+      <button type="button" class="btn-outline btn-sm" disabled>Next →</button>
+    {% endif %}
+  </div>
+</nav>
+{% endif %}
+{% endmacro %}
+
 {% block content %}
 <div class="page-header">
   <div>
@@ -81,6 +104,7 @@
 </section>
 
 {% if trackers %}
+{{ tracking_pager() }}
 <div class="tracker-list">
   {% for t in trackers %}
   {% set r = t.record %}
@@ -132,6 +156,7 @@
   </article>
   {% endfor %}
 </div>
+{{ tracking_pager() }}
 {% else %}
 <section class="surface-panel">
   <div class="empty-state" style="padding:3rem 1rem;text-align:center">
