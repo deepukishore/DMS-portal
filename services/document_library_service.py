@@ -103,6 +103,11 @@ class DocumentLibraryService:
                     path_parts = path_parts[1:]
                 group_key = path_parts[0] if path_parts else ""
                 subfolder_key = path_parts[1] if len(path_parts) > 1 else ""
+                # Plans used to be a top-level QMS folder. Keep previously
+                # uploaded files visible after moving it under IATF Audit.
+                if group_key == "plans":
+                    group_key = "iatf_audit"
+                    subfolder_key = "plans"
                 group = groups.get(group_key)
                 if not group:
                     continue
@@ -331,9 +336,20 @@ class DocumentLibraryService:
             scope = levels.get(qms_level, levels.get("L4", {}))
             data["scope"] = {
                 "groups": list(scope.get("groups", [])),
+                "subgroups": deepcopy(scope.get("subgroups", {})),
                 "can_edit": bool(scope.get("can_edit")),
                 "can_delete": bool(scope.get("can_delete")),
             }
+            for group_key, allowed_subgroups in scope.get("subgroups", {}).items():
+                group = data.get("document_groups", {}).get(group_key, {})
+                subfolders = group.get("secondary_options")
+                if subfolders is not None:
+                    allowed = set(allowed_subgroups)
+                    group["secondary_options"] = {
+                        key: value
+                        for key, value in subfolders.items()
+                        if key in allowed
+                    }
             data["description"] = "Browse quality management documents by category."
 
         if category_key == "plant_wise_records":

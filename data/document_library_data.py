@@ -86,16 +86,8 @@ QMS_DOCUMENT_GROUPS = {
             "sop_corrective_action.pdf",
         ],
     },
-    "plans": {
-        "label": "Plans",
-        "files": [
-            "quality_objective_plan.xlsx",
-            "internal_audit_plan.pdf",
-            "management_review_plan.docx",
-        ],
-    },
     "checklists": {
-        "label": "Checklists",
+        "label": "Records",
         "files": [
             "process_audit_checksheet.xlsx",
             "document_release_checksheet.pdf",
@@ -111,7 +103,7 @@ QMS_DOCUMENT_GROUPS = {
         ],
     },
     "sanction_interpretation": {
-        "label": "Sanction Interpretation",
+        "label": "IATF Sanction Interpretation",
         "files": [
             "sanction_interpretation_guideline.pdf",
             "sanction_interpretation_register.xlsx",
@@ -122,6 +114,15 @@ QMS_DOCUMENT_GROUPS = {
         "label": "IATF Audit",
         "description": "Internal and external IATF audit records organized by plant.",
         "secondary_options": {
+            "plans": {
+                "label": "Plans",
+                "description": "IATF audit plans and planning records.",
+                "files": [
+                    "quality_objective_plan.xlsx",
+                    "internal_audit_plan.pdf",
+                    "management_review_plan.docx",
+                ],
+            },
             "internal_audit_ncs": {
                 "label": "Internal Audit - NCs",
                 "description": "Internal audit non-conformance documents by plant.",
@@ -168,17 +169,18 @@ QMS_LEVELS = {
     },
     "L3": {
         "label": "L3 - Procedure Viewer",
-        "description": "Can view SOPs, plans, checklists, and other reports.",
-        "access": "SOPs, plans, checklists, and other reports",
+        "description": "Can view SOPs, IATF audit plans, records, and other reports.",
+        "access": "SOPs, IATF audit plans, records, and other reports",
         "can_edit": False,
         "can_delete": False,
         "approver": False,
-        "groups": ["sops", "plans", "checklists", "other_reports"],
+        "groups": ["sops", "iatf_audit", "checklists", "other_reports"],
+        "subgroups": {"iatf_audit": ["plans"]},
     },
     "L4": {
         "label": "L4 - Checksheet Viewer",
-        "description": "Can only view checksheets/checklists.",
-        "access": "Checklists and checksheets only",
+        "description": "Can only view records.",
+        "access": "Records only",
         "can_edit": False,
         "can_delete": False,
         "approver": False,
