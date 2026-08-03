@@ -6,7 +6,7 @@ OFFICIAL_CUSTOMERS = [
     "DICV - Daimler India Commercial Vehicles",
     "FML - Force Motors Limited",
     "Renault Nissan",
-    "SML Mahindra",
+    "SML ISUZU",
     "Switch Mobility",
 ]
 
@@ -36,9 +36,13 @@ CUSTOMER_BRANDS = {
         "display_name": "Force Motors",
         "logo": "images/customers/force-motors.svg",
     },
-    "SML Mahindra": {
-        "display_name": "SML Mahindra",
-        "logo": "images/customers/sml-mahindra.png",
+    "Renault Nissan": {
+        "display_name": "Renault Nissan",
+        "logo": "images/customers/renault-nissan.svg",
+    },
+    "SML ISUZU": {
+        "display_name": "SML ISUZU",
+        "logo": "images/customers/sml-isuzu.svg",
         "banner_tone": "red",
     },
     "Switch Mobility": {
@@ -61,12 +65,13 @@ LEGACY_CUSTOMER_MAP = {
     "Force Motors": "FML - Force Motors Limited",
     "Volvo Eicher Commercial Vehicles": "VECV - Volvo Eicher Commercial Vehicles",
     "Daimler India Commercial Vehicles": "DICV - Daimler India Commercial Vehicles",
+    "Renault-Nissan": "Renault Nissan",
     "AL - Ashok Leyland": "AL - Ashok Leyland",
     "TML - Tata Motors Limited": "TML - Tata Motors Limited",
     "M&M - Mahindra and Mahindra": "M&M - Mahindra and Mahindra",
     "FML - Force Motors Limited": "FML - Force Motors Limited",
-    "SML ISUZU": "SML Mahindra",
-    "SML Mahindra": "SML Mahindra",
+    "SML ISUZU": "SML ISUZU",
+    "SML Mahindra": "SML ISUZU",
     "Switch Mobility": "Switch Mobility",
     "VECV - Volvo Eicher Commercial Vehicles": "VECV - Volvo Eicher Commercial Vehicles",
     "DICV - Daimler India Commercial Vehicles": "DICV - Daimler India Commercial Vehicles",

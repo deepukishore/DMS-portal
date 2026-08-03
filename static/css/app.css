@@ -1046,6 +1046,8 @@ label input:focus, label select:focus { border-color: var(--accent); }
   border-left: 3px solid transparent;
   text-decoration: none;
   color: inherit;
+  overflow: hidden;
+  background-clip: padding-box;
 }
 .plant-card:hover, .customer-card:hover, .category-card:hover {
   border-color: var(--accent);
@@ -1107,6 +1109,7 @@ label input:focus, label select:focus { border-color: var(--accent); }
   background: #fff;
   border: 1px solid rgba(14, 31, 52, .12);
   border-radius: 8px;
+  background-clip: padding-box;
 }
 
 .customer-logo img {
@@ -1116,6 +1119,7 @@ label input:focus, label select:focus { border-color: var(--accent); }
   padding: 5px;
   object-fit: contain;
   object-position: center;
+  border-radius: inherit;
 }
 
 .customer-logo-card {
