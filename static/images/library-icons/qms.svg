@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">QMS checklist icon</title>
+  <defs>
+    <linearGradient id="blue" x1="49" y1="48" x2="202" y2="214" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#315f94"/>
+      <stop offset="1" stop-color="#00bde3"/>
+    </linearGradient>
+    <linearGradient id="aqua" x1="76" y1="110" x2="165" y2="189" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#04a8ff"/>
+      <stop offset="1" stop-color="#04cbd5"/>
+    </linearGradient>
+  </defs>
+  <rect x="58" y="62" width="132" height="146" rx="16" fill="#f9fbfd" stroke="#083d71" stroke-width="9"/>
+  <path d="M105 62c3-19 18-31 38-31s35 12 38 31h22c9 0 16 7 16 16v20H81V78c0-9 7-16 16-16h8Z" fill="#6a93bb" stroke="#083d71" stroke-width="9"/>
+  <path d="M122 72c0-12 9-22 21-22s21 10 21 22v9h34v12H102V81h20v-9Z" fill="#eef4f8"/>
+  <rect x="77" y="111" width="18" height="18" rx="2" fill="#f5f9fc" stroke="#b5cad9" stroke-width="5"/>
+  <rect x="78" y="147" width="26" height="26" rx="6" fill="url(#aqua)"/>
+  <path d="m85 158 11 11 24-31" fill="none" stroke="#083d71" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M111 119h58M116 149h51M116 164h33" fill="none" stroke="#b8cad7" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="137" cy="183" r="16" fill="#315f94" stroke="#083d71" stroke-width="5"/>
+  <circle cx="184" cy="170" r="16" fill="#08a9ef" stroke="#083d71" stroke-width="5"/>
+  <circle cx="205" cy="196" r="16" fill="#04bfd8" stroke="#083d71" stroke-width="5"/>
+  <path d="m151 178 21-12 20 22h-38m46-4-13 8" fill="none" stroke="#083d71" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

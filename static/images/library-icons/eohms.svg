@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">EOHMS shield icon</title>
+  <defs>
+    <linearGradient id="cyan" x1="63" y1="53" x2="205" y2="212" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#36c9e3"/>
+      <stop offset="1" stop-color="#1789cf"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="49" y1="139" x2="125" y2="194" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#aff4db"/>
+      <stop offset="1" stop-color="#2fc6d8"/>
+    </linearGradient>
+  </defs>
+  <path d="M128 39c35 16 58 17 77 19v70c0 47-33 72-77 90-44-18-77-43-77-90V58c19-2 42-3 77-19Z" fill="#dfeef6" stroke="#083d71" stroke-width="9" stroke-linejoin="round"/>
+  <rect x="92" y="43" width="72" height="31" rx="8" fill="#f7fbfe" stroke="#083d71" stroke-width="7"/>
+  <path d="M98 96h55M98 114h40M98 134h32" stroke="#b8cad8" stroke-width="7" stroke-linecap="round"/>
+  <rect x="76" y="93" width="14" height="14" rx="2" fill="#f4f8fb" stroke="#b8cad8" stroke-width="4"/>
+  <rect x="76" y="113" width="14" height="14" rx="2" fill="#f4f8fb" stroke="#b8cad8" stroke-width="4"/>
+  <circle cx="177" cy="150" r="35" fill="url(#cyan)" stroke="#083d71" stroke-width="8"/>
+  <path d="M166 131h22v14h14v22h-14v14h-22v-14h-14v-22h14v-14Z" fill="#d8fbff"/>
+  <path d="M46 172c34-42 67-44 92-19-14 33-45 47-92 19Z" fill="url(#leaf)" stroke="#083d71" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M63 168c22 3 42 12 58 27m-32-38-11 20m31-27-10 25" fill="none" stroke="#1b6e94" stroke-width="4" stroke-linecap="round"/>
+</svg>

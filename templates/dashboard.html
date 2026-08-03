@@ -29,7 +29,13 @@
       <a href="{{ url_for('document_library.index', category_key=item.key) }}"
          class="dashboard-library-stat"
          aria-label="Open {{ item.label }}, {{ item.count }} approved files">
-        <span class="dashboard-library-stat-icon" aria-hidden="true">{{ item.icon }}</span>
+        <span class="dashboard-library-stat-icon" aria-hidden="true">
+          {% if item.icon_image %}
+            <img src="{{ url_for('static', filename=item.icon_image) }}" alt="" class="library-category-icon-img" />
+          {% else %}
+            {{ item.icon }}
+          {% endif %}
+        </span>
         <span class="dashboard-library-stat-copy">
           <small>{{ item.label }}</small>
           <strong>{{ item.count }}</strong>

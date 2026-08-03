@@ -278,6 +278,7 @@ class DocumentLibraryService:
                     "key": category_key,
                     "label": category["label"],
                     "icon": category["icon"],
+                    "icon_image": category.get("icon_image", ""),
                     "count": file_count,
                 }
             )

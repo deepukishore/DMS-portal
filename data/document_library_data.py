@@ -3,13 +3,48 @@ from data.mock_data import MASTER_RECORD_PLANTS, PLANTS
 
 
 LIBRARY_CATEGORIES = [
-    {"key": "qms", "label": "QMS", "icon": "Q"},
-    {"key": "csr", "label": "CSR", "icon": "C"},
-    {"key": "core_tools_manuals", "label": "Core Tools Manuals", "icon": "T"},
-    {"key": "customer_score_card", "label": "Customer Score Card", "icon": "S"},
-    {"key": "eohms", "label": "EOHMS", "icon": "E"},
-    {"key": "awards_certifications", "label": "Awards and Certifications", "icon": "A"},
-    {"key": "plant_wise_records", "label": "Plant Wise Records", "icon": "P"},
+    {
+        "key": "qms",
+        "label": "QMS",
+        "icon": "Q",
+        "icon_image": "images/library-icons/qms.svg",
+    },
+    {
+        "key": "csr",
+        "label": "CSR",
+        "icon": "C",
+        "icon_image": "images/library-icons/csr.svg",
+    },
+    {
+        "key": "core_tools_manuals",
+        "label": "Core Tools Manuals",
+        "icon": "T",
+        "icon_image": "images/library-icons/core-tools-manuals.svg",
+    },
+    {
+        "key": "customer_score_card",
+        "label": "Customer Score Card",
+        "icon": "S",
+        "icon_image": "images/library-icons/customer-score-card.svg",
+    },
+    {
+        "key": "eohms",
+        "label": "EOHMS",
+        "icon": "E",
+        "icon_image": "images/library-icons/eohms.svg",
+    },
+    {
+        "key": "awards_certifications",
+        "label": "Awards and Certifications",
+        "icon": "A",
+        "icon_image": "images/library-icons/awards-certifications.svg",
+    },
+    {
+        "key": "plant_wise_records",
+        "label": "Plant Wise Documents",
+        "icon": "P",
+        "icon_image": "images/library-icons/plant-wise-documents.svg",
+    },
 ]
 
 

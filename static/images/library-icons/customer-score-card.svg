@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Customer score card icon</title>
+  <defs>
+    <linearGradient id="cyan" x1="52" y1="49" x2="202" y2="205" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#08a8ff"/>
+      <stop offset="1" stop-color="#09cbd6"/>
+    </linearGradient>
+  </defs>
+  <rect x="39" y="62" width="178" height="133" rx="18" fill="#f9fbfd" stroke="#083d71" stroke-width="9"/>
+  <path d="m76 92 11 22 24 3-17 17 4 24-22-11-22 11 4-24-17-17 24-3 11-22Z" fill="url(#cyan)" stroke="#083d71" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M123 126h66M123 147h43M123 169h54" stroke="#b8cad8" stroke-width="7" stroke-linecap="round"/>
+  <path d="M127 111h15v34h-15zm30-19h15v53h-15zm30-34h15v87h-15z" fill="url(#cyan)" opacity=".9"/>
+  <path d="M119 93c13-17 24-18 34-6 7 8 15 7 24-6l20-28m0 0h-16m16 0-1 16" fill="none" stroke="#11aaf0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M64 142h-16m16 22h-16m16 22h-16" stroke="#13bdf0" stroke-width="8" stroke-linecap="round"/>
+  <path d="m48 142 7 7 14-18m-21 33 7 7 14-18m-21 33 7 7 14-18" fill="none" stroke="#13bdf0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="176" cy="151" r="30" fill="#edf6fb" stroke="#b7cad8" stroke-width="6"/>
+  <circle cx="176" cy="141" r="13" fill="url(#cyan)" stroke="#083d71" stroke-width="5"/>
+  <path d="M151 178c4-17 14-25 25-25s22 8 26 25" fill="url(#cyan)" stroke="#083d71" stroke-width="5" stroke-linejoin="round"/>
+</svg>

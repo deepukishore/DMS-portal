@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Awards and certifications icon</title>
+  <defs>
+    <linearGradient id="cyan" x1="62" y1="69" x2="184" y2="207" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12a9ff"/>
+      <stop offset="1" stop-color="#09cbd6"/>
+    </linearGradient>
+  </defs>
+  <path d="M74 47h118c8 0 14 6 14 14v133l-33 32H74c-8 0-14-6-14-14V61c0-8 6-14 14-14Z" fill="#f9fbfd" stroke="#083d71" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M174 226v-28c0-5 4-9 9-9h23" fill="#d8e8f1" stroke="#083d71" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M91 84h88M91 106h67M122 138h55M122 160h44" stroke="#b8cad8" stroke-width="7" stroke-linecap="round"/>
+  <path d="m87 126 8 8 16-20" fill="none" stroke="#15bce8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m80 187-10 41 25-14 21 19 10-46" fill="#0d8ee3" stroke="#083d71" stroke-width="6" stroke-linejoin="round"/>
+  <path d="m120 188 14 43 17-22 27 9-14-45" fill="#11c7d8" stroke="#083d71" stroke-width="6" stroke-linejoin="round"/>
+  <circle cx="122" cy="166" r="41" fill="url(#cyan)" stroke="#083d71" stroke-width="8"/>
+  <circle cx="122" cy="166" r="29" fill="#eef8fd" opacity=".9"/>
+  <path d="m122 143 7 15 17 2-12 12 3 17-15-8-15 8 3-17-12-12 17-2 7-15Z" fill="#1aaee9"/>
+</svg>

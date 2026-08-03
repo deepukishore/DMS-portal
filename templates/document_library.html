@@ -26,7 +26,13 @@
   <a href="{{ url_for('document_library.index', category_key=cat.key) }}"
      class="horiz-tab {% if cat.key == active_category.key %}active{% endif %}"
      role="tab" aria-selected="{{ 'true' if cat.key == active_category.key else 'false' }}">
-    <span class="horiz-tab-icon">{{ cat.icon }}</span>
+    <span class="horiz-tab-icon" aria-hidden="true">
+      {% if cat.icon_image %}
+        <img src="{{ url_for('static', filename=cat.icon_image) }}" alt="" class="library-category-icon-img" />
+      {% else %}
+        {{ cat.icon }}
+      {% endif %}
+    </span>
     <span class="horiz-tab-label">{{ cat.label }}</span>
   </a>
   {% endfor %}

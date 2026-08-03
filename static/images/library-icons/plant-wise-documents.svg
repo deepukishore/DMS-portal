@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Plant wise documents icon</title>
+  <defs>
+    <linearGradient id="cyan" x1="47" y1="75" x2="203" y2="204" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#08a8ff"/>
+      <stop offset="1" stop-color="#09cbd6"/>
+    </linearGradient>
+  </defs>
+  <path d="M91 78h82c9 0 16 7 16 16v99H91V78Z" fill="#e9f4fa" stroke="#083d71" stroke-width="8"/>
+  <path d="M109 61h79c9 0 16 7 16 16v116h-95V61Z" fill="#5f86ad" stroke="#083d71" stroke-width="8"/>
+  <path d="M124 81h80v112h-80V81Z" fill="#f8fbfd" stroke="#083d71" stroke-width="7"/>
+  <rect x="138" y="103" width="18" height="18" rx="3" fill="#f4f8fb" stroke="#b8cad8" stroke-width="5"/>
+  <path d="m141 146 9 9 18-23" fill="none" stroke="#08bff0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M166 111h42M169 143h38M169 160h28M169 179h34" stroke="#b8cad8" stroke-width="7" stroke-linecap="round"/>
+  <path d="M42 122h21l24-18v38l34-24v75H42v-71Z" fill="#dfe9ef" stroke="#083d71" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M52 81h20l7 111H45L52 81Z" fill="#dfe9ef" stroke="#083d71" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M53 87h18l2 21H51l2-21Z" fill="url(#cyan)"/>
+  <path d="M58 136h13m13 0h13m13 0h13M67 163h20m16 0h20m15 0h20" stroke="#083d71" stroke-width="6" stroke-linecap="round"/>
+  <path d="M45 193h172" stroke="#083d71" stroke-width="8" stroke-linecap="round"/>
+  <path d="M65 119v-21c0-11 8-19 18-19 8 0 15 4 20 11 4-15 16-24 31-24 13 0 23 7 29 18" fill="none" stroke="#c9d8e2" stroke-width="7" stroke-linecap="round"/>
+</svg>

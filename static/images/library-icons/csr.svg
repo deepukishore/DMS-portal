@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Customer requirement icon</title>
+  <defs>
+    <linearGradient id="blue" x1="47" y1="37" x2="205" y2="218" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2e74af"/>
+      <stop offset="1" stop-color="#12bfd8"/>
+    </linearGradient>
+    <linearGradient id="aqua" x1="55" y1="156" x2="109" y2="210" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#315f94"/>
+      <stop offset="1" stop-color="#11c8df"/>
+    </linearGradient>
+  </defs>
+  <rect x="55" y="51" width="148" height="166" rx="18" fill="#f9fbfd" stroke="#083d71" stroke-width="9"/>
+  <path d="M101 51c4-20 20-31 39-31s35 11 39 31h22v34H79V51h22Z" fill="url(#blue)" stroke="#083d71" stroke-width="9"/>
+  <path d="M117 59c0-12 10-21 23-21s22 9 22 21v9h25v9H93v-9h24v-9Z" fill="#f0f6fa"/>
+  <rect x="79" y="103" width="20" height="20" rx="4" fill="#f4f8fb" stroke="#0b4778" stroke-width="5"/>
+  <rect x="79" y="136" width="20" height="20" rx="4" fill="#f4f8fb" stroke="#0b4778" stroke-width="5"/>
+  <path d="m84 112 8 8 18-23m-26 48 8 8 21-27" fill="none" stroke="#25bfd8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M117 111h68M119 125h42M117 145h61M119 159h42" fill="none" stroke="#b7cad8" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="88" cy="176" r="18" fill="#2e83bf" stroke="#083d71" stroke-width="6"/>
+  <path d="M51 212c6-22 20-32 37-32s31 10 38 32H51Z" fill="url(#aqua)" stroke="#083d71" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M172 141h12l4-15h17l4 15 11 5-8 13 5 12-14 7-8 11-11-11-15-2v-16l-10-11 13-8Z" fill="#5aa8d8" stroke="#083d71" stroke-width="6" stroke-linejoin="round"/>
+  <circle cx="196" cy="155" r="22" fill="#f8fbfd" stroke="#083d71" stroke-width="6"/>
+  <circle cx="196" cy="155" r="8" fill="#22c4df"/>
+  <path d="M196 133v12m0 20v12m-22-22h12m20 0h12" stroke="#9eb9cc" stroke-width="5" stroke-linecap="round"/>
+</svg>
