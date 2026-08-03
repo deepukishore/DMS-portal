@@ -738,6 +738,9 @@ html[data-theme="light"] .btn-theme .theme-moon {
   outline: none;
   transition: all .15s ease;
 }
+.filter-bar .search-wrap input {
+  padding-left: 2rem;
+}
 .filter-bar select:hover, .filter-bar input:hover, .search-wrap input:hover {
   border-color: var(--accent-dim);
 }
