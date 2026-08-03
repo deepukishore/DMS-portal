@@ -6305,6 +6305,15 @@ textarea:focus {
   margin-top: .2rem;
   padding: .15rem 0 .25rem;
 }
+.dashboard-content-section {
+  margin-bottom: 2rem;
+}
+.dashboard-content-section > .dashboard-section-heading {
+  margin-top: 0;
+}
+.dashboard-search-panel {
+  margin-bottom: 2rem;
+}
 .dashboard-library-heading { align-items: center; }
 .dashboard-library-totals {
   display: flex;
@@ -6619,6 +6628,8 @@ html[data-theme="light"] .customer-card[data-customer-name] .plant-card-arrow {
   .dashboard-library-totals { justify-content: flex-start; }
 }
 @media (max-width: 540px) {
+  .dashboard-content-section,
+  .dashboard-search-panel { margin-bottom: 1.5rem; }
   .dashboard-library-stats-grid { grid-template-columns: 1fr; }
   .dashboard-library-stat { min-height: 104px; }
   .dashboard-library-totals span,
