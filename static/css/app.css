@@ -6545,8 +6545,14 @@ textarea:focus {
   transition: transform .4s cubic-bezier(.2, .75, .3, 1), filter .3s ease;
 }
 .customer-card[data-customer-name="M&M - Mahindra and Mahindra"] .customer-logo-card img {
-  padding: .8rem 1.35rem 4.35rem;
-  object-position: center 38%;
+  padding: .55rem 1.1rem 4rem;
+  object-position: center 42%;
+}
+.customer-card[data-customer-name="SML ISUZU"] .customer-logo-card img {
+  padding: 1.15rem 5.25rem 4.55rem;
+}
+.customer-card[data-customer-name="Renault Nissan"] .customer-logo-card img {
+  padding: .75rem 8.1rem 4.35rem;
 }
 .customer-card[data-customer-name]:hover .customer-logo-card img {
   filter: saturate(1.08) contrast(1.04);

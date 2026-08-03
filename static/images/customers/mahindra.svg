@@ -1,11 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 807 421" role="img" aria-labelledby="mahindra-title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="mahindra-title">
   <title id="mahindra-title">Mahindra</title>
-  <g fill="none" stroke="#f20d0d" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M198 102c35-63 159-93 302-86 109 5 190 40 205 90 18 62-62 109-188 119" stroke-width="38"/>
-    <path d="M507 32 270 188" stroke-width="30"/>
-    <path d="M525 35 340 211" stroke-width="30"/>
-    <path d="M547 38 430 230" stroke-width="30"/>
-    <path d="M248 175c-50-19-74-44-61-75" stroke-width="29"/>
+  <rect width="600" height="600" fill="#fff"/>
+  <g fill="none" stroke="#df1e0a" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M154 236c37-74 151-105 264-96 92 7 153 44 164 96 13 66-57 116-174 122" stroke-width="36"/>
+    <path d="M399 155 208 287" stroke-width="32"/>
+    <path d="M417 159 264 307" stroke-width="32"/>
+    <path d="M441 165 340 322" stroke-width="32"/>
+    <path d="M200 279c-39-19-61-42-52-68" stroke-width="32"/>
   </g>
-  <text x="0" y="406" fill="#6b6b6b" font-family="'Arial Black', Arial, Helvetica, sans-serif" font-size="148" font-weight="900">mahindra</text>
+  <text x="31" y="448" fill="#747474" font-family="'Arial Black', Arial, Helvetica, sans-serif" font-size="94" font-weight="900">mahindra</text>
 </svg>

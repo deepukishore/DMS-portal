@@ -1,18 +1,9 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 160" role="img" aria-labelledby="title">
-  <title id="title">Renault Nissan</title>
-  <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#e6e6e6"/>
-      <stop offset="100%" stop-color="#a5a5a5"/>
-    </linearGradient>
-  </defs>
-  <rect width="500" height="160" fill="transparent"/>
-  <g transform="translate(40 20)">
-    <polygon points="80,0 160,80 80,160 0,80" fill="url(#grad)" stroke="#777" stroke-width="5"/>
-    <polygon points="80,15 145,80 80,145 15,80" fill="#fff"/>
-  </g>
-  <g transform="translate(220 40)">
-    <text x="0" y="38" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#111">Renault</text>
-    <text x="0" y="86" font-family="Arial, Helvetica, sans-serif" font-size="32" fill="#555">Nissan</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251 360" role="img" aria-labelledby="renault-title">
+  <title id="renault-title">Renault</title>
+  <rect width="251" height="360" fill="#fff"/>
+  <g fill="#231f20">
+    <path d="M125.5 0 251 180 125.5 360 0 180zm0 52L37 180l88.5 128L214 180z"/>
+    <path d="M125.5 73 194 180l-68.5 107L57 180zm0 54-34 53 34 53 34-53z" fill="#fff"/>
+    <path d="M125.5 52 37 180h20l68.5-107L194 180h20zm0 256L57 180H37l88.5 128L214 180h-20z"/>
   </g>
 </svg>
