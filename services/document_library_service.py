@@ -246,7 +246,7 @@ class DocumentLibraryService:
         statistics = []
         for category in DocumentLibraryService.get_categories():
             category_key = category["key"]
-            if category_key == "master_records":
+            if category_key == "plant_wise_records":
                 from services.plant_asset_service import PlantAssetService
 
                 file_count = PlantAssetService.get_available_file_count(
@@ -336,8 +336,7 @@ class DocumentLibraryService:
             }
             data["description"] = "Browse quality management documents by category."
 
-        if category_key == "master_records":
-            data["description"] = "Master records organized by plant and department."
-            data.pop("approval_flow", None)
+        if category_key == "plant_wise_records":
+            data["description"] = "Approved records organized by plant and department."
 
         return data

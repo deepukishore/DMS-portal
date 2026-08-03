@@ -50,6 +50,15 @@ def _count_by(records, field):
     ]
 
 
+def _count_approved_by(records, field):
+    """Count only approved documents for dashboard navigation summaries."""
+    approved_records = [
+        record for record in records
+        if (record.get("approval_status") or "") == "Approved"
+    ]
+    return _count_by(approved_records, field)
+
+
 def _daily_upload_trend(records, days=14):
     """Return a gap-free daily upload series suitable for the dashboard chart."""
     today = datetime.now().date()
@@ -153,7 +162,7 @@ def index():
     page_records = records[(page - 1) * page_size: page * page_size] if total_records else []
 
     dashboard_overview = _record_status_counts(overview_records)
-    plant_counts = _count_by(overview_records, "plant")
+    plant_counts = _count_approved_by(overview_records, "plant")
     department_counts = _count_by(overview_records, "department")
     plant_count_map = {item["label"]: item["count"] for item in plant_counts}
     daily_trend = _daily_upload_trend(overview_records)
@@ -162,6 +171,14 @@ def index():
         access_department=visible_department,
     )
     library_total = sum(item["count"] for item in library_stats)
+    plant_library_total = sum(
+        item["count"] for item in library_stats
+        if item["key"] in {"qms", "core_tools_manuals", "eohms", "awards_certifications"}
+    )
+    customer_library_total = sum(
+        item["count"] for item in library_stats
+        if item["key"] in {"csr", "customer_score_card"}
+    )
     
     # Pop the one-time welcome flag set on login
     show_welcome = session.pop('show_welcome', False)
@@ -198,6 +215,8 @@ def index():
         daily_trend=daily_trend,
         library_stats=library_stats,
         library_total=library_total,
+        plant_library_total=plant_library_total,
+        customer_library_total=customer_library_total,
         recently_viewed=recently_viewed,
         bookmarks=bookmarks,
         show_welcome=show_welcome,

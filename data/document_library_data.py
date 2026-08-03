@@ -9,6 +9,7 @@ LIBRARY_CATEGORIES = [
     {"key": "customer_score_card", "label": "Customer Score Card", "icon": "S"},
     {"key": "eohms", "label": "EOHMS", "icon": "E"},
     {"key": "awards_certifications", "label": "Awards and Certifications", "icon": "A"},
+    {"key": "plant_wise_records", "label": "Plant Wise Records", "icon": "P"},
 ]
 
 
@@ -24,8 +25,8 @@ CATEGORY_ALIASES = {
     "certification": {"key": "awards_certifications", "primary": "certifications"},
     # Keep old bookmarks working while presenting IATF Audit inside QMS.
     "audit_nc": {"key": "qms", "secondary": "iatf_audit"},
-    # The legacy Master Records library view is replaced by dashboard plant folders.
-    "master_records": {"key": "qms"},
+    # Keep old Master Records bookmarks working with the renamed library folder.
+    "master_records": {"key": "plant_wise_records"},
 }
 
 
@@ -367,14 +368,8 @@ LIBRARY_DATA = {
             },
         },
     },
-    "master_records": {
-        "description": "Master records organized by plant and department with L2 first approval and L1 final approval.",
+    "plant_wise_records": {
+        "description": "Approved records organized by plant and department.",
         "plants": MASTER_RECORD_PLANTS,
-        "approval_flow": [
-            "L2 Assistant Manager/Manager reviews and accepts the file.",
-            "The L2 first approver selects recipients or department heads for notification.",
-            "L1 HOD reviews the file and approves or rejects the final request.",
-            "Mail notification is sent to the selected people for new and revised documents.",
-        ],
     },
 }

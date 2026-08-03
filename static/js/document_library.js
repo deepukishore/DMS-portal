@@ -680,7 +680,7 @@ function renderMasterRecords() {
   if (!selectedPlant) {
     const el = setRoot();
     el.appendChild(createStepBar(['Select Plant', 'Select Department', 'Browse Files'], 0));
-    const panel = createHeader('Master Records', CATEGORY_DATA.description || '');
+    const panel = createHeader('Plant Wise Records', CATEGORY_DATA.description || '');
 
     panel.appendChild(createPlantGrid(plants, plant => {
       selectedPlant = plant;
@@ -755,7 +755,7 @@ async function renderFilesForMasterRecords() {
   el.appendChild(createStepBar(['Select Plant', 'Select Department', 'Browse Files'], 2));
   const panel = createHeader(
     `${selectedPlant} / ${selectedDept}`,
-    'Master record files for the selected plant and department.',
+    'Approved records for the selected plant and department.',
     '← Change department',
     () => {
       selectedDept = '';
@@ -802,7 +802,7 @@ function render() {
     return;
   }
 
-  if (CATEGORY_KEY === 'master_records') {
+  if (CATEGORY_KEY === 'plant_wise_records') {
     renderMasterRecords();
     return;
   }
