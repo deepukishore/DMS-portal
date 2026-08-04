@@ -441,3 +441,22 @@ def get_trend_data():
     trend_data = DocumentTrackingService.get_upload_trend_data(days, access_department=AuthService.get_visible_department())
     
     return jsonify(trend_data)
+
+@dashboard_bp.route('/api/preview-url')
+def get_preview_url():
+    redir = _require_login()
+    if redir:
+        return redir
+
+    file_name = request.args.get('file', '').strip()
+    if not file_name:
+        return jsonify({'url': ''})
+
+    document = DocumentService.get_document_by_file_name(
+        file_name,
+        access_department=AuthService.get_visible_department(),
+    )
+    if not document:
+        return jsonify({'url': ''})
+
+    return jsonify({'url': url_for('dashboard.view_file', doc_id=document['id'])})

@@ -308,9 +308,23 @@ function createFileGrid(files, permissions) {
     const card = document.createElement('div');
     card.className = 'asset-file-card';
 
-    const icon = document.createElement('span');
-    icon.className = 'asset-file-icon';
-    icon.textContent = fileIcon(fileName);
+    const isImage = ['png','jpg','jpeg','gif','webp'].includes(ext(fileName));
+    let icon;
+    if (isImage) {
+      icon = document.createElement('img');
+      icon.className = 'asset-file-thumb';
+      icon.alt = fileName;
+      icon.loading = 'lazy';
+      // fetch preview URL asynchronously
+      fetch(`/dashboard/api/preview-url?file=${encodeURIComponent(fileName)}`)
+        .then(r => r.json())
+        .then(d => { if (d.url) icon.src = d.url; else icon.src = '/static/images/file-placeholder.png'; })
+        .catch(() => { icon.src = '/static/images/file-placeholder.png'; });
+    } else {
+      icon = document.createElement('span');
+      icon.className = 'asset-file-icon';
+      icon.textContent = fileIcon(fileName);
+    }
 
     const name = document.createElement('span');
     name.className = 'asset-file-name';
