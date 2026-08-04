@@ -277,8 +277,10 @@ class DocumentLibraryService:
                 {
                     "key": category_key,
                     "label": category["label"],
+                    "dashboard_label": category.get("dashboard_label", category["label"]),
                     "icon": category["icon"],
                     "icon_image": category.get("icon_image", ""),
+                    "folder_image": category.get("folder_image", ""),
                     "count": file_count,
                 }
             )

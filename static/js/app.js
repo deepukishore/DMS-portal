@@ -308,9 +308,20 @@ function initializeWelcomeModal() {
   // Only show on first landing after login (server sets SHOW_WELCOME once)
   if (!window.SHOW_WELCOME) return;
   modal.hidden = false;
-  closeButton.addEventListener('click', () => { modal.hidden = true; });
+  let welcomeTimer = window.setTimeout(() => {
+    modal.hidden = true;
+    welcomeTimer = null;
+  }, 2800);
+  const closeWelcomeModal = () => {
+    modal.hidden = true;
+    if (welcomeTimer) {
+      window.clearTimeout(welcomeTimer);
+      welcomeTimer = null;
+    }
+  };
+  closeButton.addEventListener('click', closeWelcomeModal);
   // Also close on overlay click
-  modal.addEventListener('click', (e) => { if (e.target === modal) modal.hidden = true; });
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeWelcomeModal(); });
 }
 
 const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');

@@ -68,15 +68,16 @@
 
   <div class="about-features-grid">
     {% for category in library_categories %}
-    <a href="{{ url_for('document_library.index', category_key=category.key) }}" class="about-feature-card" style="text-decoration:none;color:inherit">
-      <div class="about-feature-icon">
-        {% if category.icon_image %}
-          <img src="{{ url_for('static', filename=category.icon_image) }}" alt="" class="library-category-icon-img" />
-        {% else %}
-          {{ category.icon }}
-        {% endif %}
-      </div>
-      <strong>{{ category.label }}</strong>
+    <a
+      href="{{ url_for('document_library.index', category_key=category.key) }}"
+      class="about-feature-card about-library-card {% if category.folder_image %}has-folder-art{% endif %}"
+      {% if category.folder_image %}
+      style="--folder-bg:url('{{ url_for('static', filename=category.folder_image) }}');text-decoration:none;color:inherit"
+      {% else %}
+      style="text-decoration:none;color:inherit"
+      {% endif %}
+    >
+      <strong>{{ category.dashboard_label or category.label }}</strong>
       <p>Open the {{ category.label }} controlled document area.</p>
     </a>
     {% endfor %}
