@@ -86,6 +86,52 @@ def index():
             library_subcategory,
         )
 
+        # Parse library_subcategory for explicit plant/department overrides.
+        # Accept formats like:
+        # - qms group formats: [Lx:]group[:subfolder][:plant][:department]
+        # - other categories: primary:secondary[:plant]
+        parts = [p for p in library_subcategory.split(":") if p]
+        if parts and parts[0] in {"L1", "L2", "L3", "L4"}:
+            parts = parts[1:]
+
+        try:
+            if category == 'qms' and parts:
+                qms_data = DocumentLibraryService.get_client_category_data(
+                    'qms', qms_level=AuthService.get_qms_level()
+                )
+                groups = set(qms_data.get('document_groups', {}).keys())
+                if parts[0] in groups:
+                    # parts may be [group, sub?, plant, department] or [group, plant, department]
+                    plant_candidate = None
+                    dept_candidate = None
+                    if len(parts) >= 4:
+                        plant_candidate = parts[2]
+                        dept_candidate = parts[3]
+                    elif len(parts) == 3:
+                        plant_candidate = parts[1]
+                        dept_candidate = parts[2]
+
+                    if plant_candidate:
+                        match = next((p['label'] for p in PLANTS if p['label'] == plant_candidate), None)
+                        if match:
+                            plant = match
+                    if dept_candidate:
+                        from data.departments import normalize_department
+
+                        nd = normalize_department(dept_candidate)
+                        if nd:
+                            department = nd
+
+            elif parts and len(parts) >= 3:
+                # Generic pattern: primary:secondary:plant => override plant
+                plant_candidate = parts[2]
+                match = next((p['label'] for p in PLANTS if p['label'] == plant_candidate), None)
+                if match:
+                    plant = match
+        except Exception:
+            # Fail softly — do not block upload due to parsing issues
+            pass
+
         uploaded_count = 0
         email_failures = []
 
