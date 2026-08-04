@@ -1,149 +1,85 @@
 {% extends 'layout.html' %}
-{% block title %}About | Document Management System{% endblock %}
+{% block title %}About DMS | Document Management System{% endblock %}
+
 {% block breadcrumb %}
   <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
   <span class="bc-sep">/</span>
-  <span class="bc-item bc-current">About</span>
+  <span class="bc-item bc-current">About DMS</span>
 {% endblock %}
+
 {% block content %}
 
 <section class="hero-panel">
   <div class="hero-copy">
-    <p class="eyebrow">ZF Rane Automotive India PVT LTD · SGD</p>
-    <h1 class="page-title">Your Document Control Hub</h1>
-    <p class="page-sub">
-      This manufacturing-grade Document Management System is built for
-      multi-plant operations. Everything from uploading a file to getting it
-      approved, archived, and audited happens here.
-    </p>
+    <p class="eyebrow">ZF Rane Automotive India PVT LTD - SGD</p>
+    <h1 class="page-title">{{ system.name }} Document Control Hub</h1>
+    <p class="page-sub">{{ system.description }}</p>
   </div>
 </section>
 
 <section class="surface-panel" style="margin-bottom:1.25rem">
   <div class="panel-head">
     <div>
-      <h2 class="section-title">How It Works - Quick Tour</h2>
-      <p class="section-sub">Follow these steps to get started as a new user.</p>
+      <h2 class="section-title">Current Workflow</h2>
+      <p class="section-sub">How documents move from upload to controlled library access.</p>
     </div>
   </div>
+
   <div class="about-tour-steps">
-
+    {% for step in system.workflow %}
     <div class="about-tour-step">
-      <div class="about-tour-num">1</div>
+      <div class="about-tour-num">{{ loop.index }}</div>
       <div class="about-tour-body">
-        <strong>Log in with your credentials</strong>
-        <p>Use your company email and password. First-time users can register from the login page. Your plant and department are set by your admin and auto-attach to every document you upload.</p>
+        <strong>{{ step.title }}</strong>
+        <p>{{ step.description }}</p>
       </div>
     </div>
-
-    <div class="about-tour-step">
-      <div class="about-tour-num">2</div>
-      <div class="about-tour-body">
-        <strong>Upload a document</strong>
-        <p>Go to <em>Upload Documents</em> in the sidebar. Drop a PDF, Word, Excel, or PowerPoint file. Select the customer (or mark it Internal). Hit Upload - the file is saved and an approval request email is sent automatically to the approver.</p>
-      </div>
-    </div>
-
-    <div class="about-tour-step">
-      <div class="about-tour-num">3</div>
-      <div class="about-tour-body">
-        <strong>Wait for approval</strong>
-        <p>Your document lands in <em>Pending items</em>. The admin approver receives an email with a review link, signs in, then approves or rejects the request. You get a notification email once a decision is made.</p>
-      </div>
-    </div>
-
-    <div class="about-tour-step">
-      <div class="about-tour-num">4</div>
-      <div class="about-tour-body">
-        <strong>Browse the Document Library</strong>
-        <p>All controlled documents live in the <em>Document Library</em>. Switch between tabs - Procedures, Std. Manual, CQ Manuals, Core Tool Manuals, Business Procedures, Awards, and Certifications. Each tab has its own browsing experience.</p>
-      </div>
-    </div>
-
-    <div class="about-tour-step">
-      <div class="about-tour-num">5</div>
-      <div class="about-tour-body">
-        <strong>Browse Plant Folders &amp; Customer Records</strong>
-        <p><em>Plant Folders</em> organizes documents by plant and department. <em>Customer Records</em> organizes them by customer and shows all matching files in one view. Both are read-only browsing views.</p>
-      </div>
-    </div>
-
-    <div class="about-tour-step">
-      <div class="about-tour-num">6</div>
-      <div class="about-tour-body">
-        <strong>Track revisions</strong>
-        <p>Every time a document is updated (Admin only), a new version is created and stored. The old version is never deleted. Visit <em>Revision History</em> to see the full version trail for any document.</p>
-      </div>
-    </div>
-
-    <div class="about-tour-step">
-      <div class="about-tour-num">7</div>
-      <div class="about-tour-body">
-        <strong>Admin tools</strong>
-        <p>Admins can delete documents (moved to Archive), restore archived files, view the full System Log (every login, upload, view, delete action), and update documents to create new versions.</p>
-      </div>
-    </div>
-
+    {% endfor %}
   </div>
 </section>
 
 <section class="surface-panel" style="margin-bottom:1.25rem">
   <div class="panel-head">
     <div>
-      <h2 class="section-title">Key Features</h2>
-      <p class="section-sub">Everything the system can do at a glance.</p>
+      <h2 class="section-title">Current Capabilities</h2>
+      <p class="section-sub">{{ system.tagline }}</p>
     </div>
   </div>
+
   <div class="about-features-grid">
-
+    {% for feature in system.features %}
     <div class="about-feature-card">
-      <div class="about-feature-icon">Upload</div>
-      <strong>Upload &amp; Approve</strong>
-      <p>Multi-file upload with drag-and-drop. Automatic approval email workflow on every submission.</p>
+      <div class="about-feature-icon">{{ feature.icon }}</div>
+      <strong>{{ feature.title }}</strong>
+      <p>{{ feature.description }}</p>
     </div>
+    {% endfor %}
+  </div>
+</section>
 
-    <div class="about-feature-card">
-      <div class="about-feature-icon">Library</div>
-      <strong>Document Library</strong>
-      <p>7 category tabs - Procedures, Std. Manual, CQ Manuals, Core Tool Manuals, Business Procedures, Awards, Certifications.</p>
+<section class="surface-panel" style="margin-bottom:1.25rem">
+  <div class="panel-head">
+    <div>
+      <h2 class="section-title">Document Library Areas</h2>
+      <p class="section-sub">The current category set shown in the live Document Library.</p>
     </div>
+    <a href="{{ url_for('document_library.index') }}" class="btn-outline btn-sm">Open Library</a>
+  </div>
 
-    <div class="about-feature-card">
-      <div class="about-feature-icon">Plants</div>
-      <strong>Plant Document Folders</strong>
-      <p>Browse documents plant-by-plant and department-by-department across all 4 manufacturing sites.</p>
-    </div>
-
-    <div class="about-feature-card">
-      <div class="about-feature-icon">Customers</div>
-      <strong>Customer Records</strong>
-      <p>Documents linked to official customers like AL - Ashok Leyland, TML - Tata Motors Limited, M&amp;M - Mahindra and Mahindra, and more - browsable customer-by-customer.</p>
-    </div>
-
-    <div class="about-feature-card">
-      <div class="about-feature-icon">Versions</div>
-      <strong>Version Control</strong>
-      <p>Every document update creates a new version. All previous versions are retained and traceable in Revision History.</p>
-    </div>
-
-    <div class="about-feature-card">
-      <div class="about-feature-icon">Reports</div>
-      <strong>Graphics Report</strong>
-      <p>Visual charts showing document counts by status (Approved / Pending / Rejected) across plants and departments.</p>
-    </div>
-
-    <div class="about-feature-card">
-      <div class="about-feature-icon">Archive</div>
-      <strong>Archive</strong>
-      <p>Deleted documents are soft-archived, not permanently removed. Admins can restore any archived document.</p>
-    </div>
-
-    <div class="about-feature-card">
-      <div class="about-feature-icon">Audit</div>
-      <strong>System Log</strong>
-      <p>Full audit trail of every action - login, logout, upload, view, delete, approval - filterable by action type.</p>
-    </div>
-
+  <div class="about-features-grid">
+    {% for category in library_categories %}
+    <a href="{{ url_for('document_library.index', category_key=category.key) }}" class="about-feature-card" style="text-decoration:none;color:inherit">
+      <div class="about-feature-icon">
+        {% if category.icon_image %}
+          <img src="{{ url_for('static', filename=category.icon_image) }}" alt="" class="library-category-icon-img" />
+        {% else %}
+          {{ category.icon }}
+        {% endif %}
+      </div>
+      <strong>{{ category.label }}</strong>
+      <p>Open the {{ category.label }} controlled document area.</p>
+    </a>
+    {% endfor %}
   </div>
 </section>
 
@@ -152,30 +88,34 @@
     <div class="panel-head">
       <div>
         <h2 class="section-title">Manufacturing Plants</h2>
-        <p class="section-sub">Four plants covered by this system.</p>
+        <p class="section-sub">Plants covered by this portal.</p>
       </div>
     </div>
+
     <div class="about-plants-grid">
+      {% for plant in system.supported_plants %}
+      {% set plant_id = plant.split(' - ')[0] %}
+      {% set plant_name = plant.split(' - ')[1] if ' - ' in plant else plant %}
       <div class="about-plant-card">
-        <span class="plant-badge">P1</span>
-        <strong>Trichy Plant</strong>
-        <p>Trichy, Tamil Nadu</p>
+        <span class="plant-badge">{{ plant_id }}</span>
+        <strong>{{ plant_name }}</strong>
+        <p>{{ plant }}</p>
       </div>
-      <div class="about-plant-card">
-        <span class="plant-badge">P2</span>
-        <strong>Guduvachery Plant</strong>
-        <p>Guduvachery, Tamil Nadu</p>
+      {% endfor %}
+    </div>
+
+    <div class="surface-panel info-card" style="margin-top:1.25rem;margin-bottom:0">
+      <div class="panel-head">
+        <div>
+          <h2 class="section-title">Why It Matters</h2>
+          <p class="section-sub">Operational benefits of the current version.</p>
+        </div>
       </div>
-      <div class="about-plant-card">
-        <span class="plant-badge">P3</span>
-        <strong>Guduvachery Plant</strong>
-        <p>Guduvachery, Tamil Nadu</p>
-      </div>
-      <div class="about-plant-card">
-        <span class="plant-badge">P4</span>
-        <strong>Uttarakhand Plant</strong>
-        <p>Uttarakhand</p>
-      </div>
+      <ul class="compact-list">
+        {% for benefit in system.key_benefits %}
+        <li>{{ benefit }}</li>
+        {% endfor %}
+      </ul>
     </div>
   </section>
 
@@ -184,26 +124,42 @@
       <div class="panel-head">
         <div>
           <h2 class="section-title">User Roles</h2>
-          <p class="section-sub">What each role can do.</p>
+          <p class="section-sub">Access is based on role and QMS level.</p>
         </div>
       </div>
       <ul class="compact-list">
-        <li><strong style="color:var(--accent)">Admin</strong> - full access: upload, approve or reject requests, delete, update versions, view system log, manage archive</li>
-        <li><strong style="color:var(--blue)">Manager / Approver</strong> - upload and view documents</li>
-        <li><strong style="color:var(--text)">User</strong> - upload and view documents; no delete or admin tools</li>
+        {% for role in system.roles %}
+        <li><strong style="color:var(--accent)">{{ role.name }}</strong> - {{ role.description }}</li>
+        {% endfor %}
       </ul>
     </section>
+
     <section class="surface-panel info-card">
       <div class="panel-head">
-        <div><h2 class="section-title">System Info</h2></div>
+        <div>
+          <h2 class="section-title">QMS Levels</h2>
+          <p class="section-sub">Current L1-L4 document-access model.</p>
+        </div>
       </div>
       <ul class="compact-list">
-        <li>Version: 2.0.0</li>
-        <li>Framework: Flask (Python)</li>
-        <li>Database: SQLite</li>
-        <li>File formats: PDF, Word, Excel, PowerPoint</li>
-        <li>All files viewed as PDF in-browser</li>
-        <li>Theme: Dark Industrial (toggle top-right)</li>
+        {% for level in system.qms_levels %}
+        <li>{{ level }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="surface-panel info-card">
+      <div class="panel-head">
+        <div>
+          <h2 class="section-title">System Info</h2>
+          <p class="section-sub">{{ system.release }}</p>
+        </div>
+      </div>
+      <ul class="compact-list">
+        <li>Version: {{ system.version }}</li>
+        {% for item in system.system_info %}
+        <li>{{ item }}</li>
+        {% endfor %}
       </ul>
     </section>
   </aside>
