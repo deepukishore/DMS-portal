@@ -72,7 +72,7 @@
       href="{{ url_for('document_library.index', category_key=category.key) }}"
       class="about-feature-card about-library-card {% if category.folder_image %}has-folder-art{% endif %}"
       {% if category.folder_image %}
-      style="--folder-bg:url('{{ url_for('static', filename=category.folder_image) }}');text-decoration:none;color:inherit"
+      style="--folder-bg:url('{{ url_for('static', filename=category.folder_image, v='20260804-2') }}');text-decoration:none;color:inherit"
       {% else %}
       style="text-decoration:none;color:inherit"
       {% endif %}

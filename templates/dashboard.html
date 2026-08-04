@@ -28,7 +28,7 @@
     {% for item in library_stats %}
       <a href="{{ url_for('document_library.index', category_key=item.key) }}"
          class="dashboard-library-stat {% if item.folder_image %}has-folder-art{% endif %}"
-         {% if item.folder_image %}style="--folder-bg:url('{{ url_for('static', filename=item.folder_image) }}')"{% endif %}
+         {% if item.folder_image %}style="--folder-bg:url('{{ url_for('static', filename=item.folder_image, v='20260804-2') }}')"{% endif %}
          aria-label="Open {{ item.dashboard_label or item.label }}, {{ item.count }} approved files">
         <span class="dashboard-library-stat-copy">
           <small>{{ item.dashboard_label or item.label }}</small>

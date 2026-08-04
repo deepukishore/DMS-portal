@@ -9,7 +9,7 @@ LIBRARY_CATEGORIES = [
         "dashboard_label": "QMS - Quality Management System",
         "icon": "Q",
         "icon_image": "images/library-icons/qms.svg",
-        "folder_image": "images/library-folders/qms.png",
+        "folder_image": "images/library-folders/qms.jpg",
     },
     {
         "key": "csr",
@@ -25,7 +25,7 @@ LIBRARY_CATEGORIES = [
         "dashboard_label": "Core Tools Manuals",
         "icon": "T",
         "icon_image": "images/library-icons/core-tools-manuals.svg",
-        "folder_image": "images/library-folders/core-tools-manuals.png",
+        "folder_image": "images/library-folders/core-tools-manuals.jpeg",
     },
     {
         "key": "customer_score_card",
@@ -33,7 +33,7 @@ LIBRARY_CATEGORIES = [
         "dashboard_label": "Customer Score Card",
         "icon": "S",
         "icon_image": "images/library-icons/customer-score-card.svg",
-        "folder_image": "images/library-folders/customer-score-card.png",
+        "folder_image": "images/library-folders/customer-score-card.jpg",
     },
     {
         "key": "eohms",
@@ -41,7 +41,7 @@ LIBRARY_CATEGORIES = [
         "dashboard_label": "EOHMS",
         "icon": "E",
         "icon_image": "images/library-icons/eohms.svg",
-        "folder_image": "images/library-folders/eohms.png",
+        "folder_image": "images/library-folders/eohms.jpg",
     },
     {
         "key": "awards_certifications",
