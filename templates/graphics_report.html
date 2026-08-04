@@ -179,6 +179,9 @@
         <p class="chart-subtitle">Counts per library category and subfolders</p>
       </div>
       <div class="chart-wrapper">
+        <div style="margin-bottom:1rem">
+          <canvas id="libraryChart" style="height:220px"></canvas>
+        </div>
         <div class="library-breakdown">
           {% for key, cat in library_stats.items() %}
             <div class="library-category">
@@ -387,6 +390,32 @@ if (trendData && trendData.length) {
     },
     options: {
       responsive: true, maintainAspectRatio: true,
+
+      // ── Document Library: Category totals ────────────────────────
+      const libraryStats = {{ library_stats|tojson }} || {};
+      const libEntries = Object.entries(libraryStats);
+      if (libEntries.length) {
+        const libLabels = libEntries.map(([k, v]) => v.label || k);
+        const libValues = libEntries.map(([k, v]) => v.total || 0);
+        new Chart(document.getElementById('libraryChart'), {
+          type: 'bar',
+          data: {
+            labels: libLabels,
+            datasets: [{ label: 'Documents', data: libValues, backgroundColor: C_BLUE, borderRadius: 6 }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: tooltipDefaults },
+            scales: {
+              x: { ticks: { color: scaleColor(), font: { size: 11 } }, grid: { display: false } },
+              y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 11 }, stepSize: 1 }, grid: { color: gridColor() } }
+            }
+          }
+        });
+      } else {
+        const libCtx = document.getElementById('libraryChart');
+        libCtx.parentElement.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem 0;font-size:.85rem">No library data available.</p>';
+      }
       plugins: { legend: { display: false }, tooltip: tooltipDefaults },
       scales: {
         x: { ticks: { color: scaleColor(), font: { size: 10 }, maxTicksLimit: 12 }, grid: { display: false } },

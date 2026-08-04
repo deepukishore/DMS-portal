@@ -368,6 +368,21 @@ function configureLibrarySecondary() {
       );
       return;
     }
+    // Handle groups that expose plant -> department folders (plant_departments)
+    if (group?.plant_departments) {
+      const plant = plantSelect?.value;
+      const dept = deptSelect?.value;
+      if (!plant) {
+        setPathState(false, `${categoryLabel(category)} / ${group.label || groupKey} / Select plant`, '', 'Select plant.');
+        return;
+      }
+      if (!dept) {
+        setPathState(false, `${categoryLabel(category)} / ${group.label || groupKey} / ${plant} / Select department`, '', 'Select department.');
+        return;
+      }
+      setPathState(true, `${categoryLabel(category)} / ${group.label || groupKey} / ${plant} / ${dept}`, `${groupKey}:${plant}:${dept}`);
+      return;
+    }
   }
 
   updateLibraryPath();
@@ -450,6 +465,21 @@ function updateLibraryPath() {
         `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder?.label || tertiary}`,
         `${secondary}:${tertiary}`
       );
+      return;
+    }
+    // Handle groups that expose plant -> department folders (plant_departments)
+    if (group?.plant_departments) {
+      const plant = plantSelect.value;
+      const dept = deptSelect.value;
+      if (!plant) {
+        setPathState(false, `${categoryLabel(category)} / ${group.label || secondary} / Select plant`, '', 'Select plant.');
+        return;
+      }
+      if (!dept) {
+        setPathState(false, `${categoryLabel(category)} / ${group.label || secondary} / ${plant} / Select department`, '', 'Select department.');
+        return;
+      }
+      setPathState(true, `${categoryLabel(category)} / ${group.label || secondary} / ${plant} / ${dept}`, `${secondary}:${plant}:${dept}`);
       return;
     }
     setPathState(
