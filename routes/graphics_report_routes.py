@@ -130,7 +130,7 @@ def index():
                 groups = data.get('document_groups', {})
                 for gk, gv in groups.items():
                     gcount = len(DocumentLibraryService._collect_document_files(gv))
-                    sub = {'total': gcount, 'subfolders': {}}
+                    sub = {'label': gv.get('label') or gk, 'total': gcount, 'subfolders': {}}
                     sec = gv.get('secondary_options') or gv.get('plant_departments') or {}
                     if sec:
                         for sk, sv in sec.items():

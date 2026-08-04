@@ -311,15 +311,28 @@ function createFileGrid(files, permissions) {
     const isImage = ['png','jpg','jpeg','gif','webp'].includes(ext(fileName));
     let icon;
     if (isImage) {
-      icon = document.createElement('img');
-      icon.className = 'asset-file-thumb';
-      icon.alt = fileName;
-      icon.loading = 'lazy';
-      // fetch preview URL asynchronously
-      fetch(`/dashboard/api/preview-url?file=${encodeURIComponent(fileName)}`)
+      const img = document.createElement('img');
+      img.className = 'asset-file-thumb';
+      img.alt = fileName;
+      img.loading = 'lazy';
+      icon = img;
+      const fallbackToIcon = () => {
+        const span = document.createElement('span');
+        span.className = 'asset-file-icon';
+        span.textContent = fileIcon(fileName);
+        if (img.parentNode) img.parentNode.replaceChild(span, img);
+        icon = span;
+      };
+      fetch(`/api/preview-url?file=${encodeURIComponent(fileName)}`)
         .then(r => r.json())
-        .then(d => { if (d.url) icon.src = d.url; else icon.src = '/static/images/file-placeholder.png'; })
-        .catch(() => { icon.src = '/static/images/file-placeholder.png'; });
+        .then(d => {
+          if (d.url) {
+            img.src = d.url;
+          } else {
+            fallbackToIcon();
+          }
+        })
+        .catch(fallbackToIcon);
     } else {
       icon = document.createElement('span');
       icon.className = 'asset-file-icon';

@@ -172,15 +172,15 @@
 </div>
 
   <!-- Document Library Breakdown -->
-  <div class="charts-grid" style="margin-top:2rem">
-    <div class="chart-card" style="grid-column:1/-1">
+  <div class="charts-grid library-report-grid" style="margin-top:2rem">
+    <div class="chart-card library-report-card" style="grid-column:1/-1">
       <div class="chart-header">
         <h2>Document Library — Category Breakdown</h2>
         <p class="chart-subtitle">Counts per library category and subfolders</p>
       </div>
-      <div class="chart-wrapper">
-        <div style="margin-bottom:1rem">
-          <canvas id="libraryChart" style="height:220px"></canvas>
+      <div class="library-report-body">
+        <div class="library-chart-panel">
+          <canvas id="libraryChart"></canvas>
         </div>
         <div class="library-breakdown">
           {% for key, cat in library_stats.items() %}
@@ -389,42 +389,44 @@ if (trendData && trendData.length) {
       }]
     },
     options: {
-      responsive: true, maintainAspectRatio: true,
-
-      // ── Document Library: Category totals ────────────────────────
-      const libraryStats = {{ library_stats|tojson }} || {};
-      const libEntries = Object.entries(libraryStats);
-      if (libEntries.length) {
-        const libLabels = libEntries.map(([k, v]) => v.label || k);
-        const libValues = libEntries.map(([k, v]) => v.total || 0);
-        new Chart(document.getElementById('libraryChart'), {
-          type: 'bar',
-          data: {
-            labels: libLabels,
-            datasets: [{ label: 'Documents', data: libValues, backgroundColor: C_BLUE, borderRadius: 6 }]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false }, tooltip: tooltipDefaults },
-            scales: {
-              x: { ticks: { color: scaleColor(), font: { size: 11 } }, grid: { display: false } },
-              y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 11 }, stepSize: 1 }, grid: { color: gridColor() } }
-            }
-          }
-        });
-      } else {
-        const libCtx = document.getElementById('libraryChart');
-        libCtx.parentElement.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem 0;font-size:.85rem">No library data available.</p>';
-      }
-      plugins: { legend: { display: false }, tooltip: tooltipDefaults },
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: legendDefaults, tooltip: tooltipDefaults },
       scales: {
-        x: { ticks: { color: scaleColor(), font: { size: 10 }, maxTicksLimit: 12 }, grid: { display: false } },
+        x: { ticks: { color: scaleColor(), font: { size: 10 } }, grid: { display: false } },
         y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1 }, grid: { color: gridColor() } }
       }
     }
   });
+
 } else {
   trendCtx.parentElement.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem 0;font-size:.85rem">No upload trend data available.</p>';
+}
+
+const libraryStats = {{ library_stats|tojson }} || {};
+const libEntries = Object.entries(libraryStats);
+if (libEntries.length) {
+  const libLabels = libEntries.map(([k, v]) => v.label || k);
+  const libValues = libEntries.map(([k, v]) => v.total || 0);
+  new Chart(document.getElementById('libraryChart'), {
+    type: 'bar',
+    data: {
+      labels: libLabels,
+      datasets: [{ label: 'Documents', data: libValues, backgroundColor: C_BLUE, borderRadius: 6 }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: tooltipDefaults },
+      scales: {
+        x: { ticks: { color: scaleColor(), font: { size: 11 } }, grid: { display: false } },
+        y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 11 }, stepSize: 1 }, grid: { color: gridColor() } }
+      }
+    }
+  });
+} else {
+  const libCtx = document.getElementById('libraryChart');
+  libCtx.parentElement.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem 0;font-size:.85rem">No library data available.</p>';
 }
 </script>
 {% endblock %}

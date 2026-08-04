@@ -221,6 +221,7 @@ function updateInternalUI() {
     customerSelect.setAttribute('required', 'required');
     customerReqStar.style.display = '';
   }
+  updateLibraryPath();
 }
 
 function resetLibraryFields() {
@@ -269,15 +270,8 @@ function configureLibraryCategory() {
   }
 
   if (data.customers) {
-    showSecondary(true, 'Customer');
-    setOptions(
-      librarySubSelect,
-      'Select customer',
-      Object.keys(data.customers).map(customer => ({ value: customer, label: customer }))
-    );
-    librarySubSelect.dataset.customerSelect = '';
-    window.CustomerBrand?.bindSelect(librarySubSelect);
-    setPathState(false, `${categoryLabel(category)} / Select customer`, '', 'Select customer folder.');
+    showSecondary(false);
+    updateLibraryPath();
     return;
   }
 
@@ -314,15 +308,8 @@ function configureLibraryPrimary() {
   if (!folder) return;
 
   if (folder.customers) {
-    showSecondary(true, 'Customer');
-    setOptions(
-      librarySubSelect,
-      'Select customer',
-      Object.keys(folder.customers).map(customer => ({ value: customer, label: customer }))
-    );
-    librarySubSelect.dataset.customerSelect = '';
-    window.CustomerBrand?.bindSelect(librarySubSelect);
-    setPathState(false, `${categoryLabel(category)} / ${folder.label || primary} / Select customer`, '', 'Select customer folder.');
+    showSecondary(false);
+    updateLibraryPath();
     return;
   }
 
@@ -414,9 +401,9 @@ function updateLibraryPath() {
   }
 
   if (data.customers) {
-    const customer = librarySubSelect.value;
+    const customer = customerSelect?.value;
     if (!customer) {
-      setPathState(false, `${categoryLabel(category)} / Select customer`, '', 'Select customer folder.');
+      setPathState(false, `${categoryLabel(category)} / Select customer`, '', 'Select a customer from the form above.');
       return;
     }
     setPathState(true, `${categoryLabel(category)} / ${customer}`, customer);
@@ -498,15 +485,15 @@ function updateLibraryPath() {
 
   const folder = data.primary_options?.[primary];
   if (folder?.customers) {
-    const secondary = librarySubSelect.value;
-    if (!secondary) {
-      setPathState(false, `${categoryLabel(category)} / ${folder.label || primary} / Select customer`, '', 'Select customer.');
+    const customer = customerSelect?.value;
+    if (!customer) {
+      setPathState(false, `${categoryLabel(category)} / ${folder.label || primary} / Select customer`, '', 'Select a customer from the form above.');
       return;
     }
     setPathState(
       true,
-      `${categoryLabel(category)} / ${folder.label || primary} / ${selectedOptionText(librarySubSelect)}`,
-      `${primary}:${secondary}`
+      `${categoryLabel(category)} / ${folder.label || primary} / ${customer}`,
+      `${primary}:${customer}`
     );
     return;
   }
@@ -588,6 +575,7 @@ libraryCatSelect?.addEventListener('change', configureLibraryCategory);
 libraryPrimSelect?.addEventListener('change', configureLibraryPrimary);
 librarySubSelect?.addEventListener('change', configureLibrarySecondary);
 libraryTertiarySelect?.addEventListener('change', updateLibraryPath);
+customerSelect?.addEventListener('change', updateLibraryPath);
 plantSelect?.addEventListener('change', updateLibraryPath);
 deptSelect?.addEventListener('change', updateLibraryPath);
 
