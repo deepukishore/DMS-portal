@@ -2,6 +2,7 @@ import re
 from copy import deepcopy
 
 from data.customers import sort_customers
+from data.departments import OFFICIAL_DEPARTMENTS
 from data.document_library_data import CATEGORY_ALIASES, LIBRARY_CATEGORIES, LIBRARY_DATA
 from services.category_document_service import CategoryDocumentService
 
@@ -371,6 +372,7 @@ class DocumentLibraryService:
                         for key, value in subfolders.items()
                         if key in allowed
                     }
+            data["departments"] = OFFICIAL_DEPARTMENTS
             data["description"] = "Browse quality management documents by category."
 
         if category_key == "plant_wise_records":

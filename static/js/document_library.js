@@ -256,6 +256,35 @@ function createDepartmentGrid(departments, onSelect) {
   return grid;
 }
 
+function createDepartmentGridForPlant(departmentList, plantDepartments, onSelect) {
+  const grid = document.createElement('div');
+  grid.className = 'customer-card-grid';
+  (departmentList || []).forEach(department => {
+    const departmentData = plantDepartments[department] || { label: department, files: [] };
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'customer-card';
+    const initials = (departmentData?.label || department)
+      .split(/\s+/)
+      .map(word => word[0])
+      .join('')
+      .slice(0, 2)
+      .toUpperCase();
+    card.innerHTML = `
+      <div class="customer-avatar" style="background:rgba(240,165,0,.12);color:var(--accent);font-size:.75rem;font-weight:700;font-family:'IBM Plex Mono',monospace">${initials}</div>
+      <div class="customer-info">
+        <strong>${departmentData.label}</strong>
+        <small>Open department folder</small>
+      </div>
+      <div class="plant-card-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>`;
+    card.addEventListener('click', () => onSelect(department));
+    grid.appendChild(card);
+  });
+  return grid;
+}
+
 function createFileGrid(files, permissions) {
   if (!files || files.length === 0) {
     const empty = document.createElement('div');
@@ -748,7 +777,7 @@ function renderQms() {
           render();
         }
       );
-      panel.appendChild(createDepartmentGrid(selectedPlantData.departments || {}, department => {
+      panel.appendChild(createDepartmentGridForPlant(CATEGORY_DATA.departments || [], selectedPlantData.departments || {}, department => {
         selectedDept = department;
         currentPage = 1;
         render();

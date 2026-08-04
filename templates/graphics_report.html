@@ -171,6 +171,41 @@
   </div>
 </div>
 
+  <!-- Document Library Breakdown -->
+  <div class="charts-grid" style="margin-top:2rem">
+    <div class="chart-card" style="grid-column:1/-1">
+      <div class="chart-header">
+        <h2>Document Library — Category Breakdown</h2>
+        <p class="chart-subtitle">Counts per library category and subfolders</p>
+      </div>
+      <div class="chart-wrapper">
+        <div class="library-breakdown">
+          {% for key, cat in library_stats.items() %}
+            <div class="library-category">
+              <h3>{{ cat.label }} <small style="color:var(--text-dim)">({{ cat.total }})</small></h3>
+              {% if cat.breakdown %}
+                <ul>
+                  {% for subkey, sub in cat.breakdown.items() %}
+                    <li>
+                      <strong>{{ sub.label or subkey }}</strong> — {{ sub.total }}
+                      {% if sub.subfolders %}
+                        <ul>
+                          {% for sk, sv in sub.subfolders.items() %}
+                            <li>{{ sv.label }} — {{ sv.total }}</li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
 <!-- Include Chart.js library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 

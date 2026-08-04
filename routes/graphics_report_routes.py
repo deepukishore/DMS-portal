@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from flask import Blueprint, render_template, redirect, url_for
 from services.auth_service import AuthService
 from services.document_service import DocumentService
+from services.document_library_service import DocumentLibraryService
 from services.document_tracking_service import DocumentTrackingService
 from data.mock_data import DASHBOARD_RECORDS, PLANTS
 from data.departments import OFFICIAL_DEPARTMENTS
@@ -112,9 +113,52 @@ def index():
         days=90, access_department=visible_department
     )
 
+    # Document library statistics and breakdown per category / subfolder
+    def _collect_library_breakdown():
+        breakdown = {}
+        qms_level = AuthService.get_qms_level() if hasattr(AuthService, 'get_qms_level') else ''
+        categories = DocumentLibraryService.get_categories()
+        for cat in categories:
+            key = cat.get('key')
+            label = cat.get('label')
+            data = DocumentLibraryService.get_client_category_data(key, qms_level=qms_level, access_department=visible_department)
+            total = len(DocumentLibraryService._collect_document_files(data))
+            entry = {'label': label, 'total': total, 'breakdown': {}}
+
+            # QMS: show groups and subfolders
+            if key == 'qms':
+                groups = data.get('document_groups', {})
+                for gk, gv in groups.items():
+                    gcount = len(DocumentLibraryService._collect_document_files(gv))
+                    sub = {'total': gcount, 'subfolders': {}}
+                    sec = gv.get('secondary_options') or gv.get('plant_departments') or {}
+                    if sec:
+                        for sk, sv in sec.items():
+                            scount = len(DocumentLibraryService._collect_document_files(sv))
+                            sub['subfolders'][sk] = {'label': sv.get('label') or sk, 'total': scount}
+                    entry['breakdown'][gk] = sub
+
+            # primary_options style categories (CSR, Core tools, Awards)
+            elif 'primary_options' in data:
+                opts = data.get('primary_options', {})
+                for pk, pv in opts.items():
+                    pcount = len(DocumentLibraryService._collect_document_files(pv))
+                    entry['breakdown'][pk] = {'label': pv.get('label') or pk, 'total': pcount}
+
+            # flat categories with files only
+            else:
+                # no extra breakdown
+                pass
+
+            breakdown[key] = entry
+        return breakdown
+
+    library_stats = _collect_library_breakdown()
+
     return render_template(
         "graphics_report.html",
         stats=stats,
         trend_data=trend_data,
+        library_stats=library_stats,
         can_manage_documents=AuthService.has_high_level_access(),
     )
