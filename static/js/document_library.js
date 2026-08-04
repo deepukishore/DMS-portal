@@ -228,6 +228,34 @@ function createCustomerGrid(customers, onSelect) {
   return grid;
 }
 
+function createDepartmentGrid(departments, onSelect) {
+  const grid = document.createElement('div');
+  grid.className = 'customer-card-grid';
+  Object.entries(departments || {}).forEach(([department, departmentData]) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'customer-card';
+    const initials = (departmentData?.label || department)
+      .split(/\s+/)
+      .map(word => word[0])
+      .join('')
+      .slice(0, 2)
+      .toUpperCase();
+    card.innerHTML = `
+      <div class="customer-avatar" style="background:rgba(240,165,0,.12);color:var(--accent);font-size:.75rem;font-weight:700;font-family:'IBM Plex Mono',monospace">${initials}</div>
+      <div class="customer-info">
+        <strong>${departmentData?.label || department}</strong>
+        <small>Open department folder</small>
+      </div>
+      <div class="plant-card-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>`;
+    card.addEventListener('click', () => onSelect(department));
+    grid.appendChild(card);
+  });
+  return grid;
+}
+
 function createFileGrid(files, permissions) {
   if (!files || files.length === 0) {
     const empty = document.createElement('div');
@@ -549,6 +577,8 @@ function renderQms() {
     panel.appendChild(createOptionGrid(allowedGroups, key => {
       selectedSecondary = key;
       selectedPrimary = '';
+      selectedPlant = '';
+      selectedDept = '';
       currentPage = 1;
       render();
     }));
@@ -655,6 +685,88 @@ function renderQms() {
       'Change subfolder',
       () => {
         selectedPrimary = '';
+        render();
+      },
+      scope
+    );
+    return;
+  }
+
+  if (group.plant_departments) {
+    const plantDepartments = group.plant_departments;
+    const stepLabels = ['Select Document Type', 'Select Plant', 'Select Department', 'Browse Files'];
+
+    if (!selectedPlant) {
+      const el = setRoot();
+      el.appendChild(createStepBar(stepLabels, 1));
+      const panel = createHeader(
+        group.label || selectedSecondary,
+        'Choose a plant to browse department folders.',
+        'Change document type',
+        () => {
+          selectedPrimary = '';
+          selectedSecondary = '';
+          selectedPlant = '';
+          selectedDept = '';
+          render();
+        }
+      );
+      panel.appendChild(createPlantGrid(
+        Object.keys(plantDepartments).map(label => {
+          const plant = (CATEGORY_DATA.plant_options || []).find(item => item.label === label);
+          return plant || { id: label.split(' ')[0], label, location: '' };
+        }),
+        plant => {
+          selectedPlant = plant;
+          selectedDept = '';
+          currentPage = 1;
+          render();
+        }
+      ));
+      el.appendChild(panel);
+      return;
+    }
+
+    const selectedPlantData = plantDepartments[selectedPlant];
+    if (!selectedPlantData) {
+      selectedPlant = '';
+      selectedDept = '';
+      render();
+      return;
+    }
+
+    if (!selectedDept) {
+      const el = setRoot();
+      el.appendChild(createStepBar(stepLabels, 2));
+      const panel = createHeader(
+        `${group.label || selectedSecondary} / ${selectedPlant}`,
+        'Choose a department to browse its documents.',
+        '← Change plant',
+        () => {
+          selectedPlant = '';
+          selectedDept = '';
+          render();
+        }
+      );
+      panel.appendChild(createDepartmentGrid(selectedPlantData.departments || {}, department => {
+        selectedDept = department;
+        currentPage = 1;
+        render();
+      }));
+      el.appendChild(panel);
+      return;
+    }
+
+    const departmentData = (selectedPlantData.departments || {})[selectedDept];
+    renderFilesView(
+      stepLabels,
+      3,
+      `${group.label || selectedSecondary} / ${selectedPlant} / ${selectedDept}`,
+      `${selectedDept} documents for ${selectedPlant}.`,
+      departmentData?.files || [],
+      '← Change department',
+      () => {
+        selectedDept = '';
         render();
       },
       scope
@@ -799,11 +911,6 @@ function render() {
 
   if (CATEGORY_KEY === 'customer_score_card') {
     renderCustomerFolderCategory('Customer Score Card');
-    return;
-  }
-
-  if (CATEGORY_KEY === 'plant_wise_records') {
-    renderMasterRecords();
     return;
   }
 

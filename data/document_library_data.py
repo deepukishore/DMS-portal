@@ -51,14 +51,6 @@ LIBRARY_CATEGORIES = [
         "icon_image": "images/library-icons/awards-certifications.svg",
         "folder_image": "images/library-folders/awards-certifications.png",
     },
-    {
-        "key": "plant_wise_records",
-        "label": "Plant Wise Documents",
-        "dashboard_label": "Plant Wise Documents",
-        "icon": "P",
-        "icon_image": "images/library-icons/plant-wise-documents.svg",
-        "folder_image": "images/library-folders/plant-wise-documents.png",
-    },
 ]
 
 
@@ -74,8 +66,8 @@ CATEGORY_ALIASES = {
     "certification": {"key": "awards_certifications", "primary": "certifications"},
     # Keep old bookmarks working while presenting IATF Audit inside QMS.
     "audit_nc": {"key": "qms", "secondary": "iatf_audit"},
-    # Keep old Master Records bookmarks working with the renamed library folder.
-    "master_records": {"key": "plant_wise_records"},
+    # Keep older bookmarks routed to the main QMS library when the standalone plant-wise view is removed.
+    "master_records": {"key": "qms"},
 }
 
 
@@ -129,19 +121,149 @@ QMS_DOCUMENT_GROUPS = {
     },
     "sops": {
         "label": "SOPs",
-        "files": [
-            "sop_document_control.pdf",
-            "sop_non_conforming_output.docx",
-            "sop_corrective_action.pdf",
-        ],
+        "plant_departments": {
+            "P1 - Trichy Plant": {
+                "label": "P1 - Trichy Plant",
+                "departments": {
+                    "QAD - Quality Assurance Department": {
+                        "files": [
+                            "p1_sop_quality_manual.pdf",
+                            "p1_sop_control_sheet.xlsx",
+                        ],
+                    },
+                    "PED - Product Engineering Department": {
+                        "files": [
+                            "p1_sop_process_engineering.pdf",
+                            "p1_sop_change_management.docx",
+                        ],
+                    },
+                },
+            },
+            "P2 - Guduvachery Plant": {
+                "label": "P2 - Guduvachery Plant",
+                "departments": {
+                    "MFG - Manufacturing": {
+                        "files": [
+                            "p2_sop_line_startup.pdf",
+                            "p2_sop_machine_changeover.docx",
+                        ],
+                    },
+                    "PLE - Plant Engineering": {
+                        "files": [
+                            "p2_sop_maintenance_plan.pdf",
+                            "p2_sop_tooling_check.xlsx",
+                        ],
+                    },
+                },
+            },
+            "P3 - Guduvachery Plant": {
+                "label": "P3 - Guduvachery Plant",
+                "departments": {
+                    "MMD - Material Management Department": {
+                        "files": [
+                            "p3_sop_material_issue.pdf",
+                            "p3_sop_store_dispatch.xlsx",
+                        ],
+                    },
+                    "HRD - Human Resources Department": {
+                        "files": [
+                            "p3_sop_training_record.pdf",
+                            "p3_sop_induction_checklist.docx",
+                        ],
+                    },
+                },
+            },
+            "P4 - Uttarakhand Plant": {
+                "label": "P4 - Uttarakhand Plant",
+                "departments": {
+                    "MED - Manufacturing Engineering Department": {
+                        "files": [
+                            "p4_sop_process_monitoring.pdf",
+                            "p4_sop_quality_alert.xlsx",
+                        ],
+                    },
+                    "PMD - Product Management Department": {
+                        "files": [
+                            "p4_sop_product_release.pdf",
+                            "p4_sop_customer_response.docx",
+                        ],
+                    },
+                },
+            },
+        },
     },
     "checklists": {
         "label": "Records",
-        "files": [
-            "process_audit_checksheet.xlsx",
-            "document_release_checksheet.pdf",
-            "sop_compliance_checksheet.xlsx",
-        ],
+        "plant_departments": {
+            "P1 - Trichy Plant": {
+                "label": "P1 - Trichy Plant",
+                "departments": {
+                    "QAD - Quality Assurance Department": {
+                        "files": [
+                            "p1_record_audit_checksheet.xlsx",
+                            "p1_record_release_checksheet.pdf",
+                        ],
+                    },
+                    "PED - Product Engineering Department": {
+                        "files": [
+                            "p1_record_engineering_change.xlsx",
+                            "p1_record_validation_report.pdf",
+                        ],
+                    },
+                },
+            },
+            "P2 - Guduvachery Plant": {
+                "label": "P2 - Guduvachery Plant",
+                "departments": {
+                    "MFG - Manufacturing": {
+                        "files": [
+                            "p2_record_shift_report.xlsx",
+                            "p2_record_closure_checksheet.pdf",
+                        ],
+                    },
+                    "PLE - Plant Engineering": {
+                        "files": [
+                            "p2_record_maintenance_record.xlsx",
+                            "p2_record_breakdown_report.pdf",
+                        ],
+                    },
+                },
+            },
+            "P3 - Guduvachery Plant": {
+                "label": "P3 - Guduvachery Plant",
+                "departments": {
+                    "MMD - Material Management Department": {
+                        "files": [
+                            "p3_record_store_receipt.xlsx",
+                            "p3_record_material_inspection.pdf",
+                        ],
+                    },
+                    "HRD - Human Resources Department": {
+                        "files": [
+                            "p3_record_training_attendance.xlsx",
+                            "p3_record_induction_form.pdf",
+                        ],
+                    },
+                },
+            },
+            "P4 - Uttarakhand Plant": {
+                "label": "P4 - Uttarakhand Plant",
+                "departments": {
+                    "MED - Manufacturing Engineering Department": {
+                        "files": [
+                            "p4_record_process_monitor.xlsx",
+                            "p4_record_nonconformance_report.pdf",
+                        ],
+                    },
+                    "PMD - Product Management Department": {
+                        "files": [
+                            "p4_record_customer_feedback.xlsx",
+                            "p4_record_release_summary.pdf",
+                        ],
+                    },
+                },
+            },
+        },
     },
     "other_reports": {
         "label": "Other Reports",

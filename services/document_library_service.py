@@ -133,6 +133,24 @@ class DocumentLibraryService:
                                 subfolder.setdefault("files", []),
                                 record.get("file_name"),
                             )
+                elif "plant_departments" in group:
+                    plant = path_parts[2] if len(path_parts) > 2 else record.get("plant") or ""
+                    plant = DocumentLibraryService._plant_folder_key(
+                        group.setdefault("plant_departments", {}),
+                        plant,
+                    )
+                    if plant:
+                        plant_entry = group.setdefault("plant_departments", {}).setdefault(
+                            plant,
+                            {"label": plant, "departments": {}},
+                        )
+                        department = path_parts[3] if len(path_parts) > 3 else record.get("department") or "General"
+                        departments = plant_entry.setdefault("departments", {})
+                        dept_entry = departments.setdefault(department, {"files": []})
+                        DocumentLibraryService._append_unique(
+                            dept_entry.setdefault("files", []),
+                            record.get("file_name"),
+                        )
                 else:
                     DocumentLibraryService._append_unique(
                         group.setdefault("files", []),

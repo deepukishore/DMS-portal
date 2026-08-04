@@ -98,7 +98,7 @@ TRACK_MY_DOCS = {
         {
             "icon": "Library",
             "title": "Current document library",
-            "description": "Browse QMS, CSR, Core Tools Manuals, Customer Score Cards, EOHMS, Awards and Certifications, and Plant Wise Documents.",
+            "description": "Browse QMS, CSR, Core Tools Manuals, Customer Score Cards, EOHMS, and Awards and Certifications.",
         },
         {
             "icon": "Track",
