@@ -94,9 +94,19 @@
     {% endif %}
   </div>
 
-  <div class="charts-grid">
+  <section class="report-carousel" data-report-carousel aria-label="Graphics report chart carousel">
+    <div class="report-carousel-actions">
+      <button type="button" class="report-carousel-btn" data-carousel-prev aria-label="Previous graph" title="Previous graph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button type="button" class="report-carousel-btn" data-carousel-next aria-label="Next graph" title="Next graph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <div class="report-carousel-viewport">
+      <div class="report-carousel-track">
     <!-- Chart 1: Overall Status Distribution -->
-    <div class="chart-card">
+    <div class="chart-card report-slide">
       <div class="chart-header">
         <h2>Overall Documents</h2>
         <p class="chart-subtitle">Document status distribution</p>
@@ -125,7 +135,7 @@
     </div>
 
     <!-- Chart 2: Plant-wise -->
-    <div class="chart-card">
+    <div class="chart-card report-slide">
       <div class="chart-header">
         <h2>Plant-wise Documents</h2>
         <p class="chart-subtitle">Documents by plant location</p>
@@ -136,7 +146,7 @@
     </div>
 
     <!-- Chart 3: Customer-wise -->
-    <div class="chart-card">
+    <div class="chart-card report-slide">
       <div class="chart-header">
         <h2>Customer-wise Documents</h2>
         <p class="chart-subtitle">Documents by customer</p>
@@ -148,7 +158,7 @@
     </div>
 
     <!-- Chart 4: Department-wise -->
-    <div class="chart-card">
+    <div class="chart-card report-slide">
       <div class="chart-header">
         <h2>Department-wise Documents</h2>
         <p class="chart-subtitle">Documents by department</p>
@@ -159,7 +169,7 @@
     </div>
 
     <!-- Chart 5: Upload Trend -->
-    <div class="chart-card" style="grid-column:1/-1">
+    <div class="chart-card report-slide">
       <div class="chart-header">
         <h2>Upload Trend</h2>
         <p class="chart-subtitle">Documents uploaded in the last 90 days</p>
@@ -168,12 +178,8 @@
         <canvas id="uploadTrendChart"></canvas>
       </div>
     </div>
-  </div>
-</div>
-
-  <!-- Document Library Breakdown -->
-  <div class="charts-grid library-report-grid" style="margin-top:2rem">
-    <div class="chart-card library-report-card" style="grid-column:1/-1">
+    <!-- Document Library Breakdown -->
+    <div class="chart-card report-slide library-report-card">
       <div class="chart-header">
         <h2>Document Library — Category Breakdown</h2>
         <p class="chart-subtitle">Counts per library category and subfolders</p>
@@ -207,7 +213,10 @@
         </div>
       </div>
     </div>
-  </div>
+      </div>
+    </div>
+  </section>
+</div>
 
 <!-- Include Chart.js library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
@@ -498,5 +507,66 @@ if (libEntries.length) {
   const libCtx = document.getElementById('libraryChart');
   libCtx.parentElement.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem 0;font-size:.85rem">No library data available.</p>';
 }
+
+(function initReportCarousel() {
+  const carousel = document.querySelector('[data-report-carousel]');
+  if (!carousel) return;
+
+  const track = carousel.querySelector('.report-carousel-track');
+  const slides = Array.from(carousel.querySelectorAll('.report-slide'));
+  const prevButton = carousel.querySelector('[data-carousel-prev]');
+  const nextButton = carousel.querySelector('[data-carousel-next]');
+  if (!track || slides.length <= 1) return;
+
+  let currentIndex = 0;
+  let autoTimer = null;
+  const chartIds = ['overallChart', 'plantChart', 'customerChart', 'departmentChart', 'uploadTrendChart', 'libraryChart'];
+
+  function resizeCharts() {
+    window.requestAnimationFrame(() => {
+      chartIds.forEach(id => {
+        const canvas = document.getElementById(id);
+        const chart = canvas && window.Chart?.getChart ? Chart.getChart(canvas) : null;
+        chart?.resize();
+      });
+    });
+  }
+
+  function goToSlide(index) {
+    currentIndex = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    resizeCharts();
+  }
+
+  function stopAuto() {
+    if (autoTimer) window.clearInterval(autoTimer);
+    autoTimer = null;
+  }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = window.setInterval(() => goToSlide(currentIndex + 1), 5000);
+  }
+
+  prevButton?.addEventListener('click', () => {
+    goToSlide(currentIndex - 1);
+    startAuto();
+  });
+  nextButton?.addEventListener('click', () => {
+    goToSlide(currentIndex + 1);
+    startAuto();
+  });
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+  carousel.addEventListener('focusin', stopAuto);
+  carousel.addEventListener('focusout', startAuto);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAuto();
+    else startAuto();
+  });
+
+  goToSlide(0);
+  startAuto();
+})();
 </script>
 {% endblock %}

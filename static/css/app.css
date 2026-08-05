@@ -2866,6 +2866,67 @@ select:disabled {
   margin-bottom: 2rem;
 }
 
+.report-carousel {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.report-carousel-viewport {
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.report-carousel-track {
+  display: flex;
+  transition: transform .55s cubic-bezier(.22, .75, .2, 1);
+  will-change: transform;
+}
+
+.chart-card.report-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  min-height: 520px;
+  box-sizing: border-box;
+}
+
+.report-carousel-actions {
+  position: absolute;
+  top: 50%;
+  left: .85rem;
+  right: .85rem;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.report-carousel-btn {
+  pointer-events: auto;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: rgb(25, 114, 255);
+  background: rgba(255, 255, 255, .95);
+  border: 1px solid rgba(25, 114, 255, .22);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, .14);
+  cursor: pointer;
+  transition: color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.report-carousel-btn:hover,
+.report-carousel-btn:focus-visible {
+  color: #fff;
+  background: rgb(25, 114, 255);
+  border-color: rgb(25, 114, 255);
+  box-shadow: 0 14px 28px rgba(25, 114, 255, .24);
+  outline: none;
+  transform: translateY(-1px);
+}
+
 /* Chart Card */
 .chart-card {
   background: var(--bg-2);
@@ -3124,6 +3185,21 @@ select:disabled {
 @media (max-width: 768px) {
   .charts-grid {
     grid-template-columns: 1fr;
+  }
+
+  .chart-card.report-slide {
+    min-height: 500px;
+    padding: 1.1rem;
+  }
+
+  .report-carousel-actions {
+    left: .35rem;
+    right: .35rem;
+  }
+
+  .report-carousel-btn {
+    width: 36px;
+    height: 36px;
   }
 
   .dashboard-insights-grid {
