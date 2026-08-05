@@ -443,12 +443,12 @@ if (libEntries.length) {
             generateLabels(chart) {
               const labels = chart.data.labels || [];
               const dataset = chart.data.datasets[0] || {};
-              const colors = dataset.backgroundColor || [];
               return labels.map((label, index) => ({
                 text: `${index + 1}. ${label} (${dataset.data[index] || 0})`,
                 fillStyle: 'rgba(0, 0, 0, 0)',
                 strokeStyle: 'rgba(0, 0, 0, 0)',
                 lineWidth: 0,
+                pointStyle: 'line',
                 hidden: !chart.getDataVisibility(index),
                 index,
               }));
