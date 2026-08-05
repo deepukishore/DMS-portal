@@ -408,19 +408,8 @@ const libEntries = Object.entries(libraryStats);
 if (libEntries.length) {
   const libLabels = libEntries.map(([k, v]) => v.label || k);
   const libValues = libEntries.map(([k, v]) => v.total || 0);
-  const libraryPalette = [
-    '#2563eb',
-    '#00a676',
-    '#8b5cf6',
-    '#f59e0b',
-    '#0891b2',
-    '#d946ef',
-    '#65a30d',
-    '#0d9488',
-    '#7c3aed',
-    '#eab308',
-  ];
-  const libColors = libLabels.map((_, index) => libraryPalette[index % libraryPalette.length]);
+  const libraryColor = 'rgb(25, 114, 255)';
+  const libColors = libLabels.map(() => libraryColor);
   new Chart(document.getElementById('libraryChart'), {
     type: 'bar',
     data: {
@@ -431,9 +420,11 @@ if (libEntries.length) {
         backgroundColor: libColors,
         borderColor: libColors,
         borderWidth: 1,
-        borderRadius: 8,
-        borderSkipped: false,
-        maxBarThickness: 76,
+        borderRadius: { topLeft: 7, topRight: 7, bottomLeft: 0, bottomRight: 0 },
+        borderSkipped: 'bottom',
+        categoryPercentage: 0.68,
+        barPercentage: 0.72,
+        maxBarThickness: 68,
       }]
     },
     options: {
@@ -454,10 +445,10 @@ if (libEntries.length) {
               const dataset = chart.data.datasets[0] || {};
               const colors = dataset.backgroundColor || [];
               return labels.map((label, index) => ({
-                text: `${label} (${dataset.data[index] || 0})`,
-                fillStyle: colors[index],
-                strokeStyle: colors[index],
-                lineWidth: 1,
+                text: `${index + 1}. ${label} (${dataset.data[index] || 0})`,
+                fillStyle: 'rgba(0, 0, 0, 0)',
+                strokeStyle: 'rgba(0, 0, 0, 0)',
+                lineWidth: 0,
                 hidden: !chart.getDataVisibility(index),
                 index,
               }));
@@ -481,10 +472,17 @@ if (libEntries.length) {
           },
         },
       },
+      layout: {
+        padding: { top: 10, right: 12, left: 4, bottom: 0 },
+      },
       scales: {
         x: {
           ticks: {
-            display: false,
+            color: '#5f7488',
+            font: { size: 11, weight: '700' },
+            callback(value, index) {
+              return index + 1;
+            },
           },
           grid: { display: false, drawBorder: false },
         },
