@@ -408,19 +408,91 @@ const libEntries = Object.entries(libraryStats);
 if (libEntries.length) {
   const libLabels = libEntries.map(([k, v]) => v.label || k);
   const libValues = libEntries.map(([k, v]) => v.total || 0);
+  const libraryPalette = [
+    '#2563eb',
+    '#00a676',
+    '#8b5cf6',
+    '#f59e0b',
+    '#0891b2',
+    '#d946ef',
+    '#65a30d',
+    '#0d9488',
+    '#7c3aed',
+    '#eab308',
+  ];
+  const libColors = libLabels.map((_, index) => libraryPalette[index % libraryPalette.length]);
   new Chart(document.getElementById('libraryChart'), {
     type: 'bar',
     data: {
       labels: libLabels,
-      datasets: [{ label: 'Documents', data: libValues, backgroundColor: C_BLUE, borderRadius: 6 }]
+      datasets: [{
+        label: 'Documents',
+        data: libValues,
+        backgroundColor: libColors,
+        borderColor: libColors,
+        borderWidth: 1,
+        borderRadius: 8,
+        borderSkipped: false,
+        maxBarThickness: 76,
+      }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { display: false }, tooltip: tooltipDefaults },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'rectRounded',
+            padding: 14,
+            color: '#52677c',
+            font: { size: 11, weight: '600' },
+            generateLabels(chart) {
+              const labels = chart.data.labels || [];
+              const dataset = chart.data.datasets[0] || {};
+              const colors = dataset.backgroundColor || [];
+              return labels.map((label, index) => ({
+                text: `${label} (${dataset.data[index] || 0})`,
+                fillStyle: colors[index],
+                strokeStyle: colors[index],
+                lineWidth: 1,
+                hidden: !chart.getDataVisibility(index),
+                index,
+              }));
+            },
+          },
+          onClick(event, legendItem, legend) {
+            legend.chart.toggleDataVisibility(legendItem.index);
+            legend.chart.update();
+          },
+        },
+        tooltip: {
+          ...tooltipDefaults,
+          backgroundColor: 'rgba(33, 104, 141, 0.95)',
+          titleColor: '#f7fcff',
+          bodyColor: '#e5f6fb',
+          borderColor: 'rgba(34, 198, 214, 0.38)',
+          callbacks: {
+            label(ctx) {
+              return ` Documents: ${ctx.parsed.y}`;
+            },
+          },
+        },
+      },
       scales: {
-        x: { ticks: { color: scaleColor(), font: { size: 11 } }, grid: { display: false } },
-        y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 11 }, stepSize: 1 }, grid: { color: gridColor() } }
+        x: {
+          ticks: {
+            display: false,
+          },
+          grid: { display: false, drawBorder: false },
+        },
+        y: {
+          beginAtZero: true,
+          ticks: { color: '#5f7488', font: { size: 11 }, precision: 0 },
+          grid: { color: 'rgba(77, 148, 168, 0.16)' },
+        }
       }
     }
   });
