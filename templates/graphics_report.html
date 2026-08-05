@@ -444,7 +444,7 @@ if (libEntries.length) {
               const labels = chart.data.labels || [];
               const dataset = chart.data.datasets[0] || {};
               return labels.map((label, index) => ({
-                text: `${index + 1}. ${label} (${dataset.data[index] || 0})`,
+                text: `${index + 1}. ${label}`,
                 fillStyle: 'rgba(0, 0, 0, 0)',
                 strokeStyle: 'rgba(0, 0, 0, 0)',
                 lineWidth: 0,
