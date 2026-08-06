@@ -120,50 +120,6 @@
     </div>
   </section>
 
-  <aside class="stack-panel">
-    <section class="surface-panel info-card">
-      <div class="panel-head">
-        <div>
-          <h2 class="section-title">User Roles</h2>
-          <p class="section-sub">Access is based on role and QMS level.</p>
-        </div>
-      </div>
-      <ul class="compact-list">
-        {% for role in system.roles %}
-        <li><strong style="color:var(--accent)">{{ role.name }}</strong> - {{ role.description }}</li>
-        {% endfor %}
-      </ul>
-    </section>
-
-    <section class="surface-panel info-card">
-      <div class="panel-head">
-        <div>
-          <h2 class="section-title">QMS Levels</h2>
-          <p class="section-sub">Current L1-L4 document-access model.</p>
-        </div>
-      </div>
-      <ul class="compact-list">
-        {% for level in system.qms_levels %}
-        <li>{{ level }}</li>
-        {% endfor %}
-      </ul>
-    </section>
-
-    <section class="surface-panel info-card">
-      <div class="panel-head">
-        <div>
-          <h2 class="section-title">System Info</h2>
-          <p class="section-sub">{{ system.release }}</p>
-        </div>
-      </div>
-      <ul class="compact-list">
-        <li>Version: {{ system.version }}</li>
-        {% for item in system.system_info %}
-        <li>{{ item }}</li>
-        {% endfor %}
-      </ul>
-    </section>
-  </aside>
 </div>
 
 {% endblock %}
