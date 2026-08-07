@@ -36,8 +36,8 @@ class DocumentLibraryService:
     def _plant_folder_key(plants, plant):
         if plant in plants:
             return plant
-        if plant in {"P2 - Guduvachery Plant", "P3 - Guduvachery Plant"}:
-            combined = "P2&3 - Guduvachery Plants"
+        if plant in {"P2 - Guduvanchery Plant", "P3 - Guduvanchery Plant"}:
+            combined = "P2&3 - Guduvanchery Plants"
             if combined in plants:
                 return combined
         return plant
@@ -118,7 +118,26 @@ class DocumentLibraryService:
                     if subfolder is None and group_key == "business_procedures":
                         subfolder = subfolders.get("bp_cp")
                     if subfolder is not None:
-                        if "plants" in subfolder:
+                        if "secondary_options" in subfolder:
+                            nested_key = path_parts[2] if len(path_parts) > 2 else ""
+                            nested_folder = subfolder.get("secondary_options", {}).get(nested_key)
+                            if nested_folder and "plants" in nested_folder:
+                                plant = path_parts[3] if len(path_parts) > 3 else record.get("plant") or ""
+                                plant = DocumentLibraryService._plant_folder_key(
+                                    nested_folder.setdefault("plants", {}),
+                                    plant,
+                                )
+                                if plant:
+                                    DocumentLibraryService._append_unique(
+                                        nested_folder.setdefault("plants", {}).setdefault(plant, []),
+                                        record.get("file_name"),
+                                    )
+                            elif nested_folder is not None:
+                                DocumentLibraryService._append_unique(
+                                    nested_folder.setdefault("files", []),
+                                    record.get("file_name"),
+                                )
+                        elif "plants" in subfolder:
                             plant = path_parts[2] if len(path_parts) > 2 else record.get("plant") or ""
                             plant = DocumentLibraryService._plant_folder_key(
                                 subfolder.setdefault("plants", {}),

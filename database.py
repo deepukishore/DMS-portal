@@ -589,6 +589,32 @@ def _migrate_customers(cursor):
         )
 
 
+def _migrate_plants(cursor):
+    """Correct the Guduvanchery spelling in existing persisted records."""
+    table_names = [
+        "users",
+        "documents",
+        "archive",
+        "revision_history",
+        "category_documents",
+    ]
+    replacements = {
+        "P2 - Guduvachery Plant": "P2 - Guduvanchery Plant",
+        "P3 - Guduvachery Plant": "P3 - Guduvanchery Plant",
+        "P2&3 - Guduvachery Plants": "P2&3 - Guduvanchery Plants",
+    }
+    for old_value, new_value in replacements.items():
+        for table_name in table_names:
+            cursor.execute(
+                f"UPDATE {table_name} SET plant = ? WHERE plant = ?",
+                (new_value, old_value),
+            )
+    cursor.execute(
+        "UPDATE system_logs SET details = REPLACE(details, ?, ?) WHERE details LIKE ?",
+        ("Guduvachery", "Guduvanchery", "%Guduvachery%"),
+    )
+
+
 def init_db():
     """Create and update the selected database schema."""
     if is_mysql():
@@ -602,6 +628,7 @@ def init_db():
         _ensure_required_columns(cursor)
         _migrate_departments(cursor)
         _migrate_customers(cursor)
+        _migrate_plants(cursor)
         connection.commit()
     except Exception:
         connection.rollback()

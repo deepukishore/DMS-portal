@@ -14,7 +14,7 @@ from services.pdf_conversion_service import convert_to_pdf, is_allowed_file
 class DocumentService:
     """Manages document records used across dashboard and approvals."""
 
-    PENDING_APPROVAL_STATUSES = {"Pending", "Pending Final Approval"}
+    PENDING_APPROVAL_STATUSES = {"Pending", "Pending Final Approval", "Hold"}
 
     @staticmethod
     def is_pending_status(status):
@@ -430,7 +430,13 @@ class DocumentService:
                              WHERE id = ?''',
                 ("Pending Final Approval", updated_at, "", decided_by, selected_recipients.strip(), decided_by, updated_at, int(doc_id))
             )
-        elif status == "Approved" and existing.get("approval_status") == "Pending Final Approval":
+        elif status == "Approved" and (
+            existing.get("approval_status") == "Pending Final Approval"
+            or (
+                existing.get("approval_status") == "Hold"
+                and existing.get("first_approved_at")
+            )
+        ):
             cursor.execute('''UPDATE documents
                              SET approval_status = ?, approval_updated_at = ?, rejection_comment = ?,
                                  decision_by = ?, final_approver = ?, final_approved_at = ?

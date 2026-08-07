@@ -101,15 +101,21 @@ def index():
                 )
                 groups = set(qms_data.get('document_groups', {}).keys())
                 if parts[0] in groups:
-                    # parts may be [group, sub?, plant, department] or [group, plant, department]
-                    plant_candidate = None
+                    # Find explicit plant values at any supported nesting depth.
+                    # Examples include group:plant:department,
+                    # group:audit-folder:plant, and
+                    # group:auditors-list:list-type:plant.
+                    plant_labels = {item['label'] for item in PLANTS}
+                    plant_candidate = next(
+                        (part for part in reversed(parts[1:]) if part in plant_labels),
+                        None,
+                    )
                     dept_candidate = None
-                    if len(parts) >= 4:
-                        plant_candidate = parts[2]
-                        dept_candidate = parts[3]
-                    elif len(parts) == 3:
-                        plant_candidate = parts[1]
-                        dept_candidate = parts[2]
+                    group_data = qms_data.get('document_groups', {}).get(parts[0], {})
+                    if group_data.get('plant_departments') and plant_candidate in parts:
+                        plant_index = parts.index(plant_candidate)
+                        if len(parts) > plant_index + 1:
+                            dept_candidate = parts[plant_index + 1]
 
                     if plant_candidate:
                         match = next((p['label'] for p in PLANTS if p['label'] == plant_candidate), None)

@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block title %}Upload Documents | Document Management System{% endblock %}
+{% block body_class %}upload-page-body{% endblock %}
 
 {% block breadcrumb %}
   <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
@@ -9,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
+<div class="page-header upload-page-header">
   <div>
     <p class="eyebrow">New Submission</p>
     <h1 class="page-title">Upload Documents</h1>
@@ -19,12 +20,12 @@
 
 <div class="upload-grid">
   <section class="surface-panel">
-    <form method="POST" action="{{ url_for('upload.index') }}" enctype="multipart/form-data" id="upload-form" class="upload-form">
+    <form method="POST" action="{{ url_for('upload.index') }}" enctype="multipart/form-data" id="upload-form" class="upload-form upload-form-fit">
       <input type="hidden" name="upload_target" value="library" />
 
       <!-- ── Step 1: Where to upload ─────────────────────────────── -->
       <!-- ── Step 2: Pick files ──────────────────────────────────── -->
-      <div class="upload-step-card">
+      <div class="upload-step-card upload-file-step">
         <div class="upload-step-header">
           <span class="upload-step-badge">1</span>
           <div>
@@ -54,7 +55,7 @@
       </div>
 
       <!-- ── Step 3: Document details ───────────────────────────── -->
-      <div class="upload-step-card">
+      <div class="upload-step-card upload-details-step">
         <div class="upload-step-header">
           <span class="upload-step-badge">2</span>
           <div>
@@ -64,6 +65,9 @@
         </div>
 
         <input type="hidden" name="doc_type" id="doc_type_input" value="external" />
+
+        <div class="upload-details-fields">
+          <div class="upload-details-meta">
 
         <!-- Uploader info (read-only) -->
         <div class="upload-info-row">
@@ -137,8 +141,10 @@
           </label>
         </div>
 
+          </div>
+
         <!-- Library path picker -->
-        <div id="library-meta">
+        <div id="library-meta" class="upload-library-meta">
           <div class="library-path-card">
             <div class="library-path-head">
               <div>
@@ -151,7 +157,7 @@
             <p class="field-hint" style="margin-top:.5rem;">Only the library fields shown for the selected category are required.</p>
           </div>
 
-          <div class="form-row">
+          <div class="form-row library-category-row">
             <label>Category <span class="field-required">*</span>
               <select name="category" id="library-category-select">
                 <option value="">Select a category</option>
@@ -183,12 +189,21 @@
             </label>
           </div>
 
+          <div class="form-row" id="library-quaternary-row" style="display:none;">
+            <label id="library-quaternary-wrapper">List <span class="field-required" id="library-quaternary-required">*</span>
+              <select id="library-quaternary-select" style="display:none;">
+                <option value="">Select list</option>
+              </select>
+            </label>
+          </div>
+
           <input type="hidden" name="library_subcategory_hidden" id="library-subcategory-hidden" value="" />
+        </div>
         </div>
       </div>
 
       <!-- ── Step 4: Revision notes (optional) ─────────────────── -->
-      <div class="upload-step-card">
+      <div class="upload-step-card upload-revision-step">
         <div class="upload-step-header">
           <span class="upload-step-badge" style="background:var(--bg-3);color:var(--text-sub);border:1px solid var(--border);">3</span>
           <div>
@@ -210,7 +225,7 @@
       </div>
 
       <!-- ── Submit ─────────────────────────────────────────────── -->
-      <div class="upload-submit-row">
+      <div class="upload-submit-row upload-submit-fit">
         <button type="submit" class="btn-primary btn-upload-submit" id="submit-btn" disabled>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           Submit for Approval
@@ -274,5 +289,5 @@
 <script>
   window.LIBRARY_DATA = {{ library_data|tojson }};
 </script>
-<script src="{{ url_for('static', filename='js/upload.js', v='20260801-2') }}"></script>
+<script src="{{ url_for('static', filename='js/upload.js', v='20260807-1') }}"></script>
 {% endblock %}

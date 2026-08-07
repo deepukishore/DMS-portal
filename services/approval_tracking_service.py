@@ -27,6 +27,11 @@ class ApprovalTrackingService:
             "badge": "rejected",
             "tone": "rejected",
         },
+        "Hold": {
+            "label": "On hold",
+            "badge": "hold",
+            "tone": "hold",
+        },
     }
 
     @staticmethod
@@ -47,12 +52,13 @@ class ApprovalTrackingService:
         uploader = record.get("name") or "Uploader"
 
         is_rejected = status == "Rejected"
+        is_held = status == "Hold"
         rejected_after_first = is_rejected and bool(first_at)
 
         def first_state():
-            if status in ("Approved", "Pending Final Approval"):
+            if status in ("Approved", "Pending Final Approval") or (is_held and first_at):
                 return "complete"
-            if status == "Pending":
+            if status == "Pending" or is_held:
                 return "active"
             if is_rejected:
                 return "complete" if rejected_after_first else "rejected"
@@ -61,7 +67,7 @@ class ApprovalTrackingService:
         def final_state():
             if status == "Approved":
                 return "complete"
-            if status == "Pending Final Approval":
+            if status == "Pending Final Approval" or (is_held and first_at):
                 return "active"
             if is_rejected:
                 return "rejected" if rejected_after_first else "pending"
@@ -125,6 +131,16 @@ class ApprovalTrackingService:
                 "actor": record.get("decision_by") or "",
                 "time": updated_at,
                 "state": "rejected",
+            }
+        elif is_held:
+            hold_index = 3 if first_at else 2
+            steps[hold_index] = {
+                **steps[hold_index],
+                "title": "Approval On Hold",
+                "desc": "The approver paused this request for later review.",
+                "actor": record.get("decision_by") or "",
+                "time": updated_at,
+                "state": "active",
             }
 
         completed = sum(1 for step in steps if step["state"] == "complete")

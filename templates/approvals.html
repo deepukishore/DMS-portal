@@ -9,7 +9,8 @@
 {% endblock %}
 
 {% block content %}
-{% set pending_count  = records | selectattr('approval_status','in',pending_statuses)  | list | length %}
+{% set pending_count  = records | rejectattr('approval_status','in',['Approved','Rejected','Hold']) | list | length %}
+{% set hold_count     = records | selectattr('approval_status','equalto','Hold') | list | length %}
 {% set approved_count = records | selectattr('approval_status','equalto','Approved') | list | length %}
 {% set rejected_count = records | selectattr('approval_status','equalto','Rejected') | list | length %}
 
@@ -27,7 +28,7 @@
   </div>
 </div>
 
-<div class="stats-grid stats-grid-compact" style="margin-bottom:1.5rem">
+<div class="stats-grid stats-grid-compact approval-stats-grid" style="margin-bottom:1.5rem">
   <article class="stat-card stat-card-pending">
     <span class="stat-label">Pending</span>
     <strong class="stat-value">{{ pending_count }}</strong>
@@ -43,6 +44,11 @@
     <strong class="stat-value">{{ rejected_count }}</strong>
     <p class="stat-foot">Returned to uploader</p>
   </article>
+  <article class="stat-card stat-card-hold">
+    <span class="stat-label">Hold</span>
+    <strong class="stat-value">{{ hold_count }}</strong>
+    <p class="stat-foot">Paused for later review</p>
+  </article>
 </div>
 
 <section class="surface-panel">
@@ -56,6 +62,7 @@
       <option value="">All statuses</option>
       <option value="Pending"  {% if selected_status=='Pending'  %}selected{% endif %}>Pending / Final Pending</option>
       <option value="Pending Final Approval" {% if selected_status=='Pending Final Approval' %}selected{% endif %}>Pending Final Approval only</option>
+      <option value="Hold" {% if selected_status=='Hold' %}selected{% endif %}>Hold</option>
       <option value="Approved" {% if selected_status=='Approved' %}selected{% endif %}>Approved</option>
       <option value="Rejected" {% if selected_status=='Rejected' %}selected{% endif %}>Rejected</option>
     </select>
@@ -131,7 +138,7 @@
                 </div>
               </div>
             </td>
-            <td><span class="plant-badge">{{ r.plant }}</span></td>
+            <td><span class="plant-badge" title="{{ r.plant }}">{{ r.plant }}</span></td>
             <td>{{ r.department }}</td>
             <td>{{ badge(r.customer, true) }}</td>
             <td><span class="status-pill status-{{ r.approval_status|lower }}">{{ r.approval_status }}</span></td>

@@ -1,66 +1,89 @@
 {% extends 'layout.html' %}
-{% block title %}Document Library | Document Management System{% endblock %}
+{% block title %}{{ 'Document Library' if is_overview else active_category.label }} | Document Management System{% endblock %}
 
 {% block breadcrumb %}
   <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
   <span class="bc-sep">/</span>
-  <span class="bc-item bc-current">Document Library</span>
+  {% if is_overview %}
+    <span class="bc-item bc-current">Document Library</span>
+  {% else %}
+    <span class="bc-item"><a href="{{ url_for('document_library.index') }}">Document Library</a></span>
+    <span class="bc-sep">/</span>
+    <span class="bc-item bc-current">{{ active_category.label }}</span>
+  {% endif %}
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
   <div>
     <p class="eyebrow">Document Library</p>
-    <h1 class="page-title">Document Library</h1>
-    <p class="page-sub">Browse controlled documents by category and source.</p>
-  </div>
-  <div class="page-actions">
-    <button type="button" class="btn-outline" id="document-library-back">
-      ← Back
-    </button>
-  </div>
-</div>
-
-<nav class="horiz-tab-bar" role="tablist">
-  {% for cat in categories %}
-  <a href="{{ url_for('document_library.index', category_key=cat.key) }}"
-     class="horiz-tab {% if cat.key == active_category.key %}active{% endif %}"
-     role="tab" aria-selected="{{ 'true' if cat.key == active_category.key else 'false' }}">
-    <span class="horiz-tab-icon" aria-hidden="true">
-      {% if cat.folder_image %}
-        <img src="{{ url_for('static', filename=cat.folder_image, v='20260804-2') }}" alt="" class="library-folder-tab-img" onerror="this.parentElement.textContent='{{ cat.icon }}'" />
-      {% elif cat.icon_image %}
-        <img src="{{ url_for('static', filename=cat.icon_image) }}" alt="" class="library-category-icon-img" />
+    <h1 class="page-title">{{ 'Document Library' if is_overview else active_category.label }}</h1>
+    <p class="page-sub">
+      {% if is_overview %}
+        Select a folder to open its documents on a separate page.
       {% else %}
-        {{ cat.icon }}
+        {{ active_category.description or 'Browse the controlled documents available in this folder.' }}
       {% endif %}
-    </span>
-    <span class="horiz-tab-label">{{ cat.label }}</span>
-  </a>
-  {% endfor %}
-</nav>
-
-<div class="doc-library-body" id="library-content">
-  <div class="file-view-placeholder"><p>Loading…</p></div>
+    </p>
+  </div>
+  {% if not is_overview %}
+    <div class="page-actions">
+      <a href="{{ url_for('document_library.index') }}" class="btn-outline library-all-folders-btn">
+        <span aria-hidden="true">&#8592;</span> All folders
+      </a>
+    </div>
+  {% endif %}
 </div>
+
+{% if is_overview %}
+  <section class="surface-panel library-overview-panel" aria-labelledby="library-folders-title">
+    <div class="panel-head library-overview-heading">
+      <div>
+        <h2 class="section-title" id="library-folders-title">Library folders</h2>
+        <p class="section-sub">Each folder opens as a full page with its own navigation and document view.</p>
+      </div>
+    </div>
+    <div class="dashboard-library-stats-grid library-overview-grid">
+      {% for cat in categories %}
+        <a href="{{ url_for('document_library.index', category_key=cat.key) }}"
+           class="dashboard-library-stat library-overview-card {% if cat.folder_image %}has-folder-art{% endif %}"
+           {% if cat.folder_image %}style="--folder-bg:url('{{ url_for('static', filename=cat.folder_image, v='20260804-2') }}')"{% endif %}
+           aria-label="Open {{ cat.dashboard_label or cat.label }} on a separate page, {{ cat.count }} available files">
+          <span class="dashboard-library-stat-copy">
+            <small>{{ cat.dashboard_label or cat.label }}</small>
+            <strong>{{ cat.count }}</strong>
+            <em>available file{{ '' if cat.count == 1 else 's' }}</em>
+            <span class="dashboard-library-stat-bar" aria-hidden="true"><i style="width:100%"></i></span>
+          </span>
+          <b aria-hidden="true">&#8594;</b>
+        </a>
+      {% else %}
+        <div class="empty-state"><p>No Document Library folders are available.</p></div>
+      {% endfor %}
+    </div>
+  </section>
+{% else %}
+  <div class="doc-library-body library-category-page" id="library-content" data-category-label="{{ active_category.label }}">
+    <div class="file-view-placeholder"><p>Loading&hellip;</p></div>
+  </div>
+{% endif %}
 {% endblock %}
 
 {% block scripts %}
+{% if not is_overview %}
 <script>
 const CATEGORY_KEY = "{{ category_key }}";
+const ACTIVE_CATEGORY_LABEL = {{ active_category.label | tojson }};
 const CATEGORY_DATA = {{ category_data | tojson }};
 const PRESELECT_PRIMARY = "{{ preselected_primary }}";
 const PRESELECT_SECONDARY = "{{ preselected_secondary }}";
+const PRESELECT_TERTIARY = "{{ preselected_tertiary }}";
+const PRESELECT_PLANT = "{{ preselected_plant }}";
+const PRESELECT_DEPARTMENT = "{{ preselected_department }}";
 const VIEW_URL = "{{ url_for('document_library.view_file') }}";
 const MASTER_DEPT_URL = "{{ url_for('document_library.master_record_departments') }}";
 const MASTER_FILE_URL = "{{ url_for('document_library.master_record_files') }}";
-document.getElementById('document-library-back')?.addEventListener('click', () => {
-  if (window.history.length > 1) {
-    window.history.back();
-    return;
-  }
-  window.location.href = "{{ url_for('dashboard.index') }}";
-});
 </script>
-<script src="{{ url_for('static', filename='js/document_library.js', v='20260803-1') }}"></script>
+<script src="{{ url_for('static', filename='js/document_library.js', v='20260807-2') }}"></script>
+{% endif %}
 {% endblock %}

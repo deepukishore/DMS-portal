@@ -1,10 +1,34 @@
 let selectedPrimary = PRESELECT_PRIMARY || '';
 let selectedSecondary = PRESELECT_SECONDARY || '';
-let selectedPlant = '';
-let selectedDept = '';
+let selectedTertiary = PRESELECT_TERTIARY || '';
+let selectedPlant = PRESELECT_PLANT || '';
+let selectedDept = PRESELECT_DEPARTMENT || '';
 let currentPage = 1;
 let currentPageSize = 20;
 const PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
+
+function navigateToCurrentSelection() {
+  const url = new URL(window.location.href);
+  const state = {
+    primary: selectedPrimary,
+    secondary: selectedSecondary,
+    tertiary: selectedTertiary,
+    plant: selectedPlant,
+    department: selectedDept,
+  };
+  Object.entries(state).forEach(([key, value]) => {
+    if (value) url.searchParams.set(key, value);
+    else url.searchParams.delete(key);
+  });
+  const destination = `${url.pathname}${url.search}`;
+  const current = `${window.location.pathname}${window.location.search}`;
+  if (destination !== current) window.location.assign(destination);
+}
+
+function runAndNavigate(callback, value) {
+  callback(value);
+  navigateToCurrentSelection();
+}
 
 const FILE_ICONS = {
   pdf: 'PDF',
@@ -134,7 +158,7 @@ function createHeader(title, subtitle, backLabel, onBack) {
     button.className = 'btn-outline btn-sm';
     button.type = 'button';
     button.textContent = backLabel;
-    button.addEventListener('click', onBack);
+    button.addEventListener('click', () => runAndNavigate(onBack));
     header.appendChild(button);
   }
 
@@ -162,7 +186,7 @@ function createOptionGrid(options, onSelect) {
       <p class="proc-type-desc">${option.description || ''}</p>
       ${option.meta ? `<p class="proc-type-desc"><strong>${option.meta}</strong></p>` : ''}
       <span class="proc-type-cta">Browse documents</span>`;
-    card.addEventListener('click', () => onSelect(option.key));
+    card.addEventListener('click', () => runAndNavigate(onSelect, option.key));
     grid.appendChild(card);
   });
   return grid;
@@ -184,7 +208,7 @@ function createPlantGrid(plants, onSelect) {
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
       </div>`;
-    card.addEventListener('click', () => onSelect(plant.label));
+    card.addEventListener('click', () => runAndNavigate(onSelect, plant.label));
     grid.appendChild(card);
   });
   return grid;
@@ -222,7 +246,7 @@ function createCustomerGrid(customers, onSelect) {
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
       </div>`;
     card.prepend(window.CustomerBrand?.createLogo(customer, 'card') || document.createTextNode(''));
-    card.addEventListener('click', () => onSelect(customer));
+    card.addEventListener('click', () => runAndNavigate(onSelect, customer));
     grid.appendChild(card);
   });
   return grid;
@@ -250,7 +274,7 @@ function createDepartmentGrid(departments, onSelect) {
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
       </div>`;
-    card.addEventListener('click', () => onSelect(department));
+    card.addEventListener('click', () => runAndNavigate(onSelect, department));
     grid.appendChild(card);
   });
   return grid;
@@ -279,7 +303,7 @@ function createDepartmentGridForPlant(departmentList, plantDepartments, onSelect
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
       </div>`;
-    card.addEventListener('click', () => onSelect(department));
+    card.addEventListener('click', () => runAndNavigate(onSelect, department));
     grid.appendChild(card);
   });
   return grid;
@@ -633,6 +657,7 @@ function renderQms() {
     panel.appendChild(createOptionGrid(allowedGroups, key => {
       selectedSecondary = key;
       selectedPrimary = '';
+      selectedTertiary = '';
       selectedPlant = '';
       selectedDept = '';
       currentPage = 1;
@@ -646,6 +671,7 @@ function renderQms() {
   if (!group) {
     selectedPrimary = '';
     selectedSecondary = '';
+    selectedTertiary = '';
     render();
     return;
   }
@@ -667,11 +693,14 @@ function renderQms() {
         () => {
           selectedPrimary = '';
           selectedSecondary = '';
+          selectedTertiary = '';
           render();
         }
       );
       panel.appendChild(createOptionGrid(options, key => {
         selectedPrimary = key;
+        selectedTertiary = '';
+        selectedPlant = '';
         currentPage = 1;
         render();
       }));
@@ -682,7 +711,90 @@ function renderQms() {
     const subfolder = subfolders[selectedPrimary];
     if (!subfolder) {
       selectedPrimary = '';
+      selectedTertiary = '';
       render();
+      return;
+    }
+
+    if (subfolder.secondary_options) {
+      const nestedFolders = subfolder.secondary_options;
+      const stepLabels = ['Select Document Type', 'Select Audit Folder', 'Select List', 'Select Plant', 'Browse Files'];
+
+      if (!selectedTertiary) {
+        const options = Object.entries(nestedFolders).map(([key, folder]) => ({
+          key,
+          label: folder.label || key,
+          description: folder.description || '',
+        }));
+        const el = setRoot();
+        el.appendChild(createStepBar(stepLabels, 2));
+        const panel = createHeader(
+          subfolder.label || selectedPrimary,
+          subfolder.description || 'Choose a list to continue.',
+          'Change audit folder',
+          () => {
+            selectedPrimary = '';
+            selectedTertiary = '';
+            selectedPlant = '';
+            render();
+          }
+        );
+        panel.appendChild(createOptionGrid(options, key => {
+          selectedTertiary = key;
+          selectedPlant = '';
+          currentPage = 1;
+          render();
+        }));
+        el.appendChild(panel);
+        return;
+      }
+
+      const nestedFolder = nestedFolders[selectedTertiary];
+      if (!nestedFolder) {
+        selectedTertiary = '';
+        selectedPlant = '';
+        render();
+        return;
+      }
+
+      if (!selectedPlant) {
+        const el = setRoot();
+        el.appendChild(createStepBar(stepLabels, 3));
+        const panel = createHeader(
+          nestedFolder.label || selectedTertiary,
+          nestedFolder.description || 'Select a plant to open its PDF.',
+          'Change list',
+          () => {
+            selectedTertiary = '';
+            selectedPlant = '';
+            render();
+          }
+        );
+        panel.appendChild(createPlantGrid(
+          plantOptionsFor(nestedFolder.plants || {}),
+          plant => {
+            selectedPlant = plant;
+            currentPage = 1;
+            render();
+          }
+        ));
+        el.appendChild(panel);
+        return;
+      }
+
+      renderFilesView(
+        stepLabels,
+        4,
+        `${nestedFolder.label || selectedTertiary} / ${selectedPlant}`,
+        `PDF files for ${selectedPlant}.`,
+        nestedFolder.plants?.[selectedPlant] || [],
+        'Change plant',
+        () => {
+          selectedPlant = '';
+          render();
+        },
+        scope
+      );
       return;
     }
 
@@ -697,6 +809,7 @@ function renderQms() {
           'Change audit folder',
           () => {
             selectedPrimary = '';
+            selectedTertiary = '';
             selectedPlant = '';
             render();
           }
@@ -741,6 +854,7 @@ function renderQms() {
       'Change subfolder',
       () => {
         selectedPrimary = '';
+        selectedTertiary = '';
         render();
       },
       scope
@@ -837,7 +951,7 @@ function renderQms() {
     `Documents available in ${group?.label || 'this category'}.`,
     group?.files || [],
     '\u2190 Change document type',
-    () => { selectedPrimary = ''; selectedSecondary = ''; render(); },
+    () => { selectedPrimary = ''; selectedSecondary = ''; selectedTertiary = ''; render(); },
     scope
   );
 }
@@ -912,7 +1026,7 @@ async function renderDepartmentsForMasterRecords() {
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
       </div>`;
-    card.addEventListener('click', () => { selectedDept = dept; render(); });
+    card.addEventListener('click', () => runAndNavigate(() => { selectedDept = dept; render(); }));
     grid.appendChild(card);
   });
   panel.appendChild(grid);
@@ -961,7 +1075,7 @@ function render() {
     || CATEGORY_KEY === 'awards_certifications'
     || CATEGORY_KEY === 'audit_nc'
   ) {
-    renderPrimaryFolderCategory(CATEGORY_DATA.primary_options?.[selectedPrimary]?.label || document.querySelector('.horiz-tab.active .horiz-tab-label')?.textContent || 'Document Library');
+    renderPrimaryFolderCategory(CATEGORY_DATA.primary_options?.[selectedPrimary]?.label || ACTIVE_CATEGORY_LABEL || 'Document Library');
     return;
   }
 
@@ -971,7 +1085,7 @@ function render() {
   }
 
   if (CATEGORY_DATA.files) {
-    const title = document.querySelector('.horiz-tab.active .horiz-tab-label')?.textContent || 'Documents';
+    const title = ACTIVE_CATEGORY_LABEL || 'Documents';
     renderFlatFiles(title);
   }
 }

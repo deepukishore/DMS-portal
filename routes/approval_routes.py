@@ -43,6 +43,10 @@ def _can_decide_record(record, user=None):
         return AuthService.is_qms_first_approver(user)
     if status == "Pending Final Approval":
         return AuthService.is_qms_final_approver(user)
+    if status == "Hold":
+        if record.get("first_approved_at"):
+            return AuthService.is_qms_final_approver(user)
+        return AuthService.is_qms_first_approver(user)
     return False
 
 
@@ -247,7 +251,9 @@ def update_decision(token):
     if not _can_decide_record(record, current_user):
         message = (
             "Only a designated first-stage reviewer can complete this approval."
-            if record_status == "Pending"
+            if record_status == "Pending" or (
+                record_status == "Hold" and not record.get("first_approved_at")
+            )
             else "Only a designated final reviewer can complete this approval."
         )
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
@@ -256,19 +262,25 @@ def update_decision(token):
         return redirect(url_for("approvals.review_document", token=token))
 
     status = request.form.get("status", "")
-    if status not in {"Approved", "Rejected", "First Approved"}:
+    if status not in {"Approved", "Rejected", "First Approved", "Hold"}:
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": "Please choose a valid approval action."}), 400
         flash("Please choose a valid approval action.", "error")
         return redirect(url_for("approvals.review_document", token=token))
-    if record_status == "Pending" and status not in {"First Approved", "Rejected"}:
-        message = "A designated first-stage reviewer must approve or reject this request."
+    is_first_stage = record_status == "Pending" or (
+        record_status == "Hold" and not record.get("first_approved_at")
+    )
+    is_final_stage = record_status == "Pending Final Approval" or (
+        record_status == "Hold" and bool(record.get("first_approved_at"))
+    )
+    if is_first_stage and status not in {"First Approved", "Rejected", "Hold"}:
+        message = "A designated first-stage reviewer must approve, reject, or hold this request."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": message}), 400
         flash(message, "error")
         return redirect(url_for("approvals.review_document", token=token))
-    if record_status == "Pending Final Approval" and status not in {"Approved", "Rejected"}:
-        message = "A designated final reviewer must approve or reject this request."
+    if is_final_stage and status not in {"Approved", "Rejected", "Hold"}:
+        message = "A designated final reviewer must approve, reject, or hold this request."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": message}), 400
         flash(message, "error")
@@ -352,12 +364,18 @@ def update_decision(token):
             flash_category = "warning"
         else:
             message = f"Document marked as {status}. Uploader notified via email."
+        notification_message = (
+            f'{updated_record["original_file_name"] or updated_record["file_name"]} was placed on hold.'
+            if status == "Hold"
+            else rejection_comment if status == "Rejected" and rejection_comment
+            else f'{updated_record["original_file_name"] or updated_record["file_name"]} was {status.lower()}.'
+        )
         NotificationService.create_notification(
             uploader_email,
             f"Document {status}",
-            rejection_comment if status == "Rejected" and rejection_comment else f'{updated_record["original_file_name"] or updated_record["file_name"]} was {status.lower()}.',
+            notification_message,
             link_url=url_for("dashboard.view_document", doc_id=updated_record["id"]),
-            notification_type="warning" if status == "Rejected" else "success",
+            notification_type="warning" if status in {"Rejected", "Hold"} else "success",
         )
 
     if status == "Approved":

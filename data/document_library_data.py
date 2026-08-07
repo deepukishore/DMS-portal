@@ -5,16 +5,16 @@ from data.mock_data import MASTER_RECORD_PLANTS, PLANTS
 LIBRARY_CATEGORIES = [
     {
         "key": "qms",
-        "label": "QMS",
-        "dashboard_label": "QMS - Quality Management System",
+        "label": "Quality Management System",
+        "dashboard_label": "Quality Management System",
         "icon": "Q",
         "icon_image": "images/library-icons/qms.svg",
         "folder_image": "images/library-folders/qms.jpg",
     },
     {
         "key": "csr",
-        "label": "CSR",
-        "dashboard_label": "CSR - Customer Specific Requirement",
+        "label": "Customer Specific Requirements",
+        "dashboard_label": "Customer Specific Requirements",
         "icon": "C",
         "icon_image": "images/library-icons/csr.svg",
         "folder_image": "images/library-folders/csr.png",
@@ -37,8 +37,8 @@ LIBRARY_CATEGORIES = [
     },
     {
         "key": "eohms",
-        "label": "EOHMS",
-        "dashboard_label": "EOHMS",
+        "label": "Environment, Occupational Health and Safety Management System",
+        "dashboard_label": "Environment, Occupational Health and Safety Management System",
         "icon": "E",
         "icon_image": "images/library-icons/eohms.svg",
         "folder_image": "images/library-folders/eohms.jpg",
@@ -76,6 +76,15 @@ def _audit_plant_file_map(audit_scope, document_type):
         plant["label"]: [
             f"{plant['id'].lower().replace('&', 'and')}_{audit_scope}_{document_type}.pdf",
             f"{plant['id'].lower().replace('&', 'and')}_{audit_scope}_{document_type}_register.xlsx",
+        ]
+        for plant in PLANTS
+    }
+
+
+def _auditor_plant_pdf_map(auditor_type):
+    return {
+        plant["label"]: [
+            f"{plant['id'].lower().replace('&', 'and')}_{auditor_type}_list.pdf",
         ]
         for plant in PLANTS
     }
@@ -139,8 +148,8 @@ QMS_DOCUMENT_GROUPS = {
                     },
                 },
             },
-            "P2 - Guduvachery Plant": {
-                "label": "P2 - Guduvachery Plant",
+            "P2 - Guduvanchery Plant": {
+                "label": "P2 - Guduvanchery Plant",
                 "departments": {
                     "MFG - Manufacturing": {
                         "files": [
@@ -156,8 +165,8 @@ QMS_DOCUMENT_GROUPS = {
                     },
                 },
             },
-            "P3 - Guduvachery Plant": {
-                "label": "P3 - Guduvachery Plant",
+            "P3 - Guduvanchery Plant": {
+                "label": "P3 - Guduvanchery Plant",
                 "departments": {
                     "MMD - Material Management Department": {
                         "files": [
@@ -212,8 +221,8 @@ QMS_DOCUMENT_GROUPS = {
                     },
                 },
             },
-            "P2 - Guduvachery Plant": {
-                "label": "P2 - Guduvachery Plant",
+            "P2 - Guduvanchery Plant": {
+                "label": "P2 - Guduvanchery Plant",
                 "departments": {
                     "MFG - Manufacturing": {
                         "files": [
@@ -229,8 +238,8 @@ QMS_DOCUMENT_GROUPS = {
                     },
                 },
             },
-            "P3 - Guduvachery Plant": {
-                "label": "P3 - Guduvachery Plant",
+            "P3 - Guduvanchery Plant": {
+                "label": "P3 - Guduvanchery Plant",
                 "departments": {
                     "MMD - Material Management Department": {
                         "files": [
@@ -266,7 +275,7 @@ QMS_DOCUMENT_GROUPS = {
         },
     },
     "other_reports": {
-        "label": "Other Reports",
+        "label": "IATF Standards",
         "files": [
             "monthly_qms_performance_report.pdf",
             "customer_complaint_trend_report.xlsx",
@@ -282,8 +291,8 @@ QMS_DOCUMENT_GROUPS = {
         ],
     },
     "iatf_audit": {
-        "label": "IATF Audit",
-        "description": "Internal and external IATF audit records organized by plant.",
+        "label": "IATF Audit Reports",
+        "description": "IATF audit reports and auditor lists organized by folder and plant.",
         "secondary_options": {
             "plans": {
                 "label": "Plans",
@@ -314,6 +323,22 @@ QMS_DOCUMENT_GROUPS = {
                 "description": "External audit reports by plant.",
                 "plants": _audit_plant_file_map("external_audit", "reports"),
             },
+            "auditors_list": {
+                "label": "Auditors List",
+                "description": "Select an auditor list, then select a plant to open its PDF.",
+                "secondary_options": {
+                    "supplier_auditor_list": {
+                        "label": "Supplier Auditor List",
+                        "description": "Supplier auditor list PDF organized by plant.",
+                        "plants": _auditor_plant_pdf_map("supplier_auditor"),
+                    },
+                    "internal_auditor_list": {
+                        "label": "Internal Auditor List",
+                        "description": "Internal auditor list PDF organized by plant.",
+                        "plants": _auditor_plant_pdf_map("internal_auditor"),
+                    },
+                },
+            },
         },
     },
 }
@@ -340,8 +365,8 @@ QMS_LEVELS = {
     },
     "L3": {
         "label": "L3 - Procedure Viewer",
-        "description": "Can view SOPs, IATF audit plans, records, and other reports.",
-        "access": "SOPs, IATF audit plans, records, and other reports",
+        "description": "Can view SOPs, IATF audit plans, records, and IATF standards.",
+        "access": "SOPs, IATF audit plans, records, and IATF standards",
         "can_edit": False,
         "can_delete": False,
         "approver": False,

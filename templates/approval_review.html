@@ -5,17 +5,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document Review | Document Management System</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260801-8') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260807-6') }}" />
 </head>
 <body class="review-body">
   <main class="review-shell">
     <header class="review-brandbar">
-      <a href="{{ url_for('dashboard.index') }}" class="review-brand-link">
-        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="ZF Rane" />
-        <span>Document Management System <small>SGD</small></span>
-      </a>
+      <div class="review-brandbar-left">
+        <button type="button" class="btn-page-back" onclick="goToPreviousPage('{{ url_for('approvals.index') }}')" aria-label="Go to previous page">&#8592; Previous</button>
+        <a href="{{ url_for('dashboard.index') }}" class="review-brand-link">
+          <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="ZF Rane" />
+          <span>Document Management System <small>SGD</small></span>
+        </a>
+      </div>
       <button id="theme-toggle" class="btn-theme" title="Toggle dark/light mode" aria-label="Toggle theme">
         <svg class="theme-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/></svg>
         <svg class="theme-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -198,9 +199,9 @@
               <div>
                 <h2 class="section-title">Decision</h2>
                 <p class="section-sub">
-                  {% if record.approval_status == 'Pending' %}
+                  {% if record.approval_status == 'Pending' or (record.approval_status == 'Hold' and not record.first_approved_at) %}
                     The designated first-stage reviewer completes the initial review and selects sharing recipients.
-                  {% elif record.approval_status == 'Pending Final Approval' %}
+                  {% elif record.approval_status == 'Pending Final Approval' or (record.approval_status == 'Hold' and record.first_approved_at) %}
                     The designated final reviewer completes approval or rejection.
                   {% else %}
                     This review request already has a final decision.
@@ -211,7 +212,7 @@
 
             {% if can_decide %}
               <form method="POST" action="{{ url_for('approvals.update_decision', token=token) }}" class="review-actions review-actions-stacked" id="approval-form" data-doc-id="{{ record.id }}">
-                {% if record.approval_status == 'Pending' %}
+                {% if record.approval_status == 'Pending' or (record.approval_status == 'Hold' and not record.first_approved_at) %}
                 <label style="display:flex;flex-direction:column;gap:.4rem;">
                   <span class="section-sub">Selected people or department heads who should receive the file after final approval.</span>
                   <textarea name="selected_recipients" id="selected-recipients-input" rows="3" placeholder="Enter email addresses separated by commas">{{ record.selected_recipients or '' }}</textarea>
@@ -225,7 +226,7 @@
                   <span class="section-sub">Rejection comments are required when rejecting.</span>
                   <textarea name="rejection_comment" id="rejection-comment-input" rows="4" placeholder="Tell the uploader exactly what needs to be fixed...">{{ record.rejection_comment or '' }}</textarea>
                 </label>
-                {% if record.approval_status == 'Pending' %}
+                {% if record.approval_status == 'Pending' or (record.approval_status == 'Hold' and not record.first_approved_at) %}
                 <button type="submit" name="status" value="First Approved" class="btn-decision btn-approve">
                   Approve first stage
                 </button>
@@ -237,13 +238,16 @@
                 <button type="submit" name="status" value="Rejected" class="btn-decision btn-reject {% if record.approval_status == 'Rejected' %}is-active{% endif %}">
                   Reject
                 </button>
+                <button type="submit" name="status" value="Hold" class="btn-decision btn-hold {% if record.approval_status == 'Hold' %}is-active{% endif %}">
+                  Hold for later
+                </button>
               </form>
             {% else %}
               <div class="alert alert-info">
                 <span>
-                  {% if record.approval_status == 'Pending' %}
+                  {% if record.approval_status == 'Pending' or (record.approval_status == 'Hold' and not record.first_approved_at) %}
                     You can view this request, but only the designated first-stage reviewer can decide it.
-                  {% elif record.approval_status == 'Pending Final Approval' %}
+                  {% elif record.approval_status == 'Pending Final Approval' or (record.approval_status == 'Hold' and record.first_approved_at) %}
                     You can view this request, but only the designated final reviewer can decide it.
                   {% else %}
                     This request has already been reviewed.
@@ -253,21 +257,6 @@
             {% endif %}
           </section>
 
-          <section class="review-card">
-            <div class="panel-head">
-              <div>
-                <h2 class="section-title">Navigation</h2>
-                <p class="section-sub">Return to previous page.</p>
-              </div>
-            </div>
-
-            <div class="review-actions review-actions-stacked">
-              <button onclick="window.history.back()" class="btn-outline" style="border: none; cursor: pointer; width: 100%;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-                Back to Previous Page
-              </button>
-            </div>
-          </section>
         </aside>
       </section>
     {% endif %}
@@ -275,7 +264,7 @@
   
   <script>window.CUSTOMER_BRANDS = {{ customer_brands | tojson }};</script>
   <script src="{{ url_for('static', filename='js/customer_branding.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js', v='20260807-1') }}"></script>
   <script>
     const approvalForm = document.getElementById('approval-form');
     const reviewStatusPill = document.getElementById('review-status-pill');
@@ -344,7 +333,7 @@
         const submitter = e.submitter;
         const status = submitter?.value;
         if (!status) {
-          alert('Please choose Approved or Rejected.');
+          alert('Please choose Approve, Reject, or Hold.');
           return;
         }
         if (status === 'Rejected' && !rejectionCommentInput?.value.trim()) {

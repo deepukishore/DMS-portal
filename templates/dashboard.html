@@ -10,6 +10,11 @@
 {% endblock %}
 
 {% block content %}
+{% set dashboard_category_names = {
+  'qms': 'Quality Management System',
+  'csr': 'Customer Specific Requirements',
+  'eohms': 'Environment, Occupational Health and Safety Management System'
+} %}
 <section aria-labelledby="library-stats-heading" class="dashboard-content-section dashboard-library-section">
   <div class="dashboard-section-heading dashboard-library-heading">
     <div>
@@ -85,7 +90,7 @@
     {% if is_admin_user %}
       <a href="{{ url_for('people.index') }}" class="dashboard-command-card">
         <span class="dashboard-command-icon dashboard-command-icon-people" aria-hidden="true">◎</span>
-        <span><strong>People and access</strong><small>View users, roles, and QMS levels</small></span><b aria-hidden="true">→</b>
+        <span><strong>People and access</strong><small>View users, roles, and quality access levels</small></span><b aria-hidden="true">→</b>
       </a>
     {% endif %}
   </div>
@@ -171,7 +176,7 @@
     </select>
     <select name="status" aria-label="Approval status">
       <option value="">All statuses</option>
-      {% for value in ['Pending', 'Approved', 'Rejected'] %}
+      {% for value in ['Pending', 'Hold', 'Approved', 'Rejected'] %}
         <option value="{{ value }}" {% if selected_status == value %}selected{% endif %}>{{ value }}</option>
       {% endfor %}
     </select>
@@ -223,19 +228,18 @@
   </div>
 
   <div class="table-wrap table-wrap-rich">
-    <table class="data-table">
+    <table class="data-table dashboard-document-table">
       <thead>
         <tr>
-          <th style="width: 50px;">​#</th>
-          <th style="width: 160px;">Uploaded By</th>
-          <th style="width: 140px;">Plant</th>
-          <th style="width: 160px;">Department</th>
-          <th style="width: 140px;">Customer</th>
-          <th style="width: 25%;">File</th>
-          <th style="width: 140px;">Uploaded</th>
-          <th style="width: 60px; text-align: center;">Ver.</th>
-          <th style="width: 120px; text-align: center;">Status</th>
-          <th style="width: 120px; text-align: center;">Actions</th>
+          <th class="col-serial">S No.</th>
+          <th class="col-file">File Name</th>
+          <th class="col-uploader">Uploaded by</th>
+          <th class="col-plant">Plant</th>
+          <th class="col-department">Dept</th>
+          <th class="col-date">Date</th>
+          <th class="col-status">Status</th>
+          <th class="col-revision">Rev no.</th>
+          <th class="col-action">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -244,30 +248,27 @@
           <tr data-doc-id="{{ r.id }}">
             <td class="mono text-dim">{{ ((page - 1) * page_size) + loop.index }}</td>
             <td>
+              <div class="file-block">
+                <div class="file-cell">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <strong title="{{ r.file_name }}">{{ r.file_name }}</strong>
+                </div>
+                <div class="text-dim dashboard-file-meta">{{ r.document_number or 'No document number' }}{% if r.category %} | {{ dashboard_category_names.get(r.category, r.category) }}{% endif %}</div>
+              </div>
+            </td>
+            <td>
               <div class="person-stack">
                 <strong>{{ r.name }}</strong>
                 <span class="mono text-dim">{{ r.user_id }}</span>
               </div>
             </td>
-            <td><span class="plant-badge">{{ r.plant }}</span></td>
+            <td><span class="plant-badge" title="{{ r.plant }}">{{ r.plant }}</span></td>
             <td>{{ r.department }}</td>
-            <td>{{ badge(r.customer, true) }}</td>
-            <td>
-              <div class="file-block">
-                <div class="mono file-cell">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  {{ r.file_name }}
-                </div>
-                <div class="text-dim" style="font-size:.72rem;margin-top:.25rem;">
-                  {{ r.document_number or 'No doc number' }} | {{ r.revision_number or 'No revision' }} | {{ r.category or 'No category' }}
-                </div>
-              </div>
-            </td>
             <td class="mono text-dim">{{ r.uploaded_at }}</td>
-            <td class="mono text-dim" style="text-align:center">v{{ r.current_version or 1 }}</td>
             <td>
               <span class="status-pill status-{{ r.approval_status | lower }}" data-approval-status>{{ r.approval_status }}</span>
             </td>
+            <td class="text-dim">{{ r.revision_number or 'Rev.00' }}</td>
             <td class="action-cell">
               <button class="btn-icon btn-bookmark" data-doc-id="{{ r.id }}" title="Add to bookmarks" onclick="toggleBookmark(event, {{ r.id }})">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="bookmark-icon"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
@@ -292,7 +293,7 @@
           </tr>
           {% endfor %}
         {% else %}
-          <tr><td colspan="10" class="empty-state">No documents found for the selected filters.</td></tr>
+          <tr><td colspan="9" class="empty-state">No documents found for the selected filters.</td></tr>
         {% endif %}
       </tbody>
     </table>

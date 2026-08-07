@@ -8,9 +8,9 @@ class CategoryDocumentService:
 
     @staticmethod
     def _plant_filter(query, params, plant):
-        if plant == "P2&3 - Guduvachery Plants":
+        if plant == "P2&3 - Guduvanchery Plants":
             query += " AND cd.plant IN (?, ?)"
-            params.extend(["P2 - Guduvachery Plant", "P3 - Guduvachery Plant"])
+            params.extend(["P2 - Guduvanchery Plant", "P3 - Guduvanchery Plant"])
         elif plant:
             query += " AND cd.plant = ?"
             params.append(plant)

@@ -32,7 +32,7 @@ USERS = {
         "user_id": "U014",
         "emp_id": "EMP014",
         "email": "arun@example.com",
-        "plant": "P2 - Guduvachery Plant",
+        "plant": "P2 - Guduvanchery Plant",
         "department": "Production",
         "password_hash": generate_password_hash("Prod@12345"),
         "role": "Manager",
@@ -43,7 +43,7 @@ USERS = {
         "user_id": "U203",
         "emp_id": "EMP203",
         "email": "sneha@example.com",
-        "plant": "P3 - Guduvachery Plant",
+        "plant": "P3 - Guduvanchery Plant",
         "department": "Engineering",
         "password_hash": generate_password_hash("Eng@12345"),
         "role": "Approver",
@@ -76,7 +76,7 @@ USERS = {
         "user_id": "U055",
         "emp_id": "EMP055",
         "email": "karthik@example.com",
-        "plant": "P2 - Guduvachery Plant",
+        "plant": "P2 - Guduvanchery Plant",
         "department": "Maintenance",
         "password_hash": generate_password_hash("Maint@12345"),
         "role": "User",
@@ -109,7 +109,7 @@ USERS = {
         "user_id": "U045",
         "emp_id": "EMP045",
         "email": "meera@example.com",
-        "plant": "P3 - Guduvachery Plant",
+        "plant": "P3 - Guduvanchery Plant",
         "department": "Operations",
         "password_hash": generate_password_hash("Ops@12345"),
         "role": "Manager",
@@ -120,7 +120,7 @@ USERS = {
         "user_id": "U091",
         "emp_id": "EMP091",
         "email": "rajesh@example.com",
-        "plant": "P2 - Guduvachery Plant",
+        "plant": "P2 - Guduvanchery Plant",
         "department": "Stores",
         "password_hash": generate_password_hash("Stores@12345"),
         "role": "User",
@@ -155,7 +155,7 @@ USERS = {
         "user_id": "U302",
         "emp_id": "EMP302",
         "email": "l2user@example.com",
-        "plant": "P2 - Guduvachery Plant",
+        "plant": "P2 - Guduvanchery Plant",
         "department": "MED - Manufacturing Engineering Department",
         "password_hash": generate_password_hash("L2@12345"),
         "role": "Manager",
@@ -166,7 +166,7 @@ USERS = {
         "user_id": "U303",
         "emp_id": "EMP303",
         "email": "l3user@example.com",
-        "plant": "P3 - Guduvachery Plant",
+        "plant": "P3 - Guduvanchery Plant",
         "department": "PED - Product Engineering Department",
         "password_hash": generate_password_hash("L3@12345"),
         "role": "User",
@@ -188,14 +188,14 @@ USERS = {
 
 PLANTS = [
     {"id": "P1", "label": "P1 - Trichy Plant", "location": "Trichy, Tamil Nadu"},
-    {"id": "P2", "label": "P2 - Guduvachery Plant", "location": "Guduvachery, Tamil Nadu"},
-    {"id": "P3", "label": "P3 - Guduvachery Plant", "location": "Guduvachery, Tamil Nadu"},
+    {"id": "P2", "label": "P2 - Guduvanchery Plant", "location": "Guduvanchery, Tamil Nadu"},
+    {"id": "P3", "label": "P3 - Guduvanchery Plant", "location": "Guduvanchery, Tamil Nadu"},
     {"id": "P4", "label": "P4 - Uttarakhand Plant", "location": "Uttarakhand"},
 ]
 
 MASTER_RECORD_PLANTS = [
     {"id": "P1", "label": "P1 - Trichy Plant", "location": "Trichy, Tamil Nadu"},
-    {"id": "P2&3", "label": "P2&3 - Guduvachery Plants", "location": "Guduvachery, Tamil Nadu"},
+    {"id": "P2&3", "label": "P2&3 - Guduvanchery Plants", "location": "Guduvanchery, Tamil Nadu"},
     {"id": "P4", "label": "P4 - Uttarakhand Plant", "location": "Uttarakhand"},
 ]
 
@@ -263,7 +263,7 @@ DASHBOARD_RECORDS = [
         "name": "Arun Kumar",
         "user_id": "U014",
         "uploader_email": "arun@example.com",
-        "plant": "P2 - Guduvachery Plant",
+        "plant": "P2 - Guduvanchery Plant",
         "department": "Production",
         "customer": "Tata Motors",
         "file_name": "assembly_line_report.xlsx",
@@ -275,7 +275,7 @@ DASHBOARD_RECORDS = [
         "name": "Sneha Patel",
         "user_id": "U203",
         "uploader_email": "sneha@example.com",
-        "plant": "P3 - Guduvachery Plant",
+        "plant": "P3 - Guduvanchery Plant",
         "department": "Engineering",
         "customer": "Hyundai Motors",
         "file_name": "cad_revision_summary.pdf",
@@ -311,7 +311,7 @@ DASHBOARD_RECORDS = [
         "name": "Karthik S",
         "user_id": "U055",
         "uploader_email": "karthik@example.com",
-        "plant": "P2 - Guduvachery Plant",
+        "plant": "P2 - Guduvanchery Plant",
         "department": "Maintenance",
         "customer": "Internal",
         "file_name": "preventive_maintenance_log.pdf",
@@ -343,7 +343,7 @@ ARCHIVE_RECORDS = [
     {
         "timestamp": "2026-04-19 17:04",
         "file_name": "line_status_legacy.xlsx",
-        "plant": "P2 - Guduvachery Plant",
+        "plant": "P2 - Guduvanchery Plant",
         "department": "Production",
     },
     {
@@ -374,7 +374,7 @@ PLANT_ASSETS = {
         ],
         "Safety": ["safety_induction_manual.pdf", "fire_drill_record.xlsx"],
     },
-    "P2 - Guduvachery Plant": {
+    "P2 - Guduvanchery Plant": {
         "Production": [
             "assembly_line_report.pdf",
             "daily_shift_plan.xlsx",
@@ -391,7 +391,7 @@ PLANT_ASSETS = {
         ],
         "Engineering": ["p2_fixture_drawing.pdf", "p2_tooling_revision.xlsx"],
     },
-    "P3 - Guduvachery Plant": {
+    "P3 - Guduvanchery Plant": {
         "R&D": [
             "prototype_notes.docx",
             "test_bench_results.pdf",
@@ -520,7 +520,7 @@ UPLOAD_LOGS = [
         "user_name": "Arun Kumar",
         "user_id": "U014",
         "file_name": "assembly_line_daily_report.xlsx",
-        "plant": "P2 - Guduvachery Plant",
+        "plant": "P2 - Guduvanchery Plant",
         "department": "Production",
         "status": "Success",
     },

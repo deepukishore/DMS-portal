@@ -16,8 +16,8 @@ TRACK_MY_DOCS = {
     "release": "Current portal build",
     "supported_plants": [
         "P1 - Trichy Plant",
-        "P2 - Guduvachery Plant",
-        "P3 - Guduvachery Plant",
+        "P2 - Guduvanchery Plant",
+        "P3 - Guduvanchery Plant",
         "P4 - Uttarakhand Plant",
     ],
     "features": [

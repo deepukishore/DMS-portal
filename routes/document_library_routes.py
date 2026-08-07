@@ -22,12 +22,29 @@ def index(category_key=None):
         return redir
 
     access_department = AuthService.get_visible_department()
+    categories = DocumentLibraryService.get_categories()
+
+    # The root URL is a true library landing page. Category links below use
+    # normal anchors, so opening a folder loads its own dedicated page instead
+    # of swapping content inside the landing page.
+    if category_key is None:
+        return render_template(
+            "document_library.html",
+            is_overview=True,
+            categories=DocumentLibraryService.get_dashboard_statistics(
+                qms_level=AuthService.get_qms_level(),
+                access_department=access_department,
+            ),
+        )
+
     resolved_key, default_primary, default_secondary = (
         DocumentLibraryService.resolve_category(category_key)
     )
     preselected_primary = request.args.get("primary", default_primary)
     preselected_secondary = request.args.get("secondary", default_secondary)
-    categories = DocumentLibraryService.get_categories()
+    preselected_tertiary = request.args.get("tertiary", "")
+    preselected_plant = request.args.get("plant", "")
+    preselected_department = request.args.get("department", "")
     active_category = next(
         (category for category in categories if category["key"] == resolved_key),
         categories[0],
@@ -35,6 +52,7 @@ def index(category_key=None):
 
     return render_template(
         "document_library.html",
+        is_overview=False,
         categories=categories,
         active_category=active_category,
         category_key=resolved_key,
@@ -45,6 +63,9 @@ def index(category_key=None):
         ),
         preselected_primary=preselected_primary,
         preselected_secondary=preselected_secondary,
+        preselected_tertiary=preselected_tertiary,
+        preselected_plant=preselected_plant,
+        preselected_department=preselected_department,
     )
 
 

@@ -1,3 +1,18 @@
+function goToPreviousPage(fallbackUrl = '/dashboard') {
+  try {
+    const referrer = document.referrer ? new URL(document.referrer) : null;
+    if (referrer && referrer.origin === window.location.origin && window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+  } catch (error) {
+    // Use the known-safe fallback when the referrer cannot be parsed.
+  }
+  window.location.href = fallbackUrl;
+}
+
+window.goToPreviousPage = goToPreviousPage;
+
 // Initialize theme from localStorage or system preference (default to light mode)
 function initializeTheme() {
   const savedTheme = localStorage.getItem('theme');

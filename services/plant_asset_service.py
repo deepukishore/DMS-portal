@@ -60,12 +60,12 @@ class PlantAssetService:
             return []
         effective_department = access_department or department
         # Handle P2&3 grouping: query both P2 and P3 plants
-        if plant_label == "P2&3 - Guduvachery Plants":
+        if plant_label == "P2&3 - Guduvanchery Plants":
             conn = get_connection()
             cursor = conn.cursor()
             cursor.execute('''
                 SELECT file_name FROM documents 
-                WHERE plant IN ('P2 - Guduvachery Plant', 'P3 - Guduvachery Plant') 
+                WHERE plant IN ('P2 - Guduvanchery Plant', 'P3 - Guduvanchery Plant')
                 AND department = ? 
                 AND approval_status = 'Approved'
                 ORDER BY uploaded_at DESC
@@ -87,7 +87,7 @@ class PlantAssetService:
         
         # Fallback to mock data if no database records
         if not db_files:
-            if plant_label == "P2&3 - Guduvachery Plants":
+            if plant_label == "P2&3 - Guduvanchery Plants":
                 return []
             plant_files = PLANT_ASSETS.get(plant_label, {})
             for folder_department, files in plant_files.items():

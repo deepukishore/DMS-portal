@@ -23,6 +23,9 @@ const librarySecondaryRow = document.getElementById('library-secondary-row');
 const libraryTertiaryRow = document.getElementById('library-tertiary-row');
 const libraryTertiaryWrapper = document.getElementById('library-tertiary-wrapper');
 const libraryTertiarySelect = document.getElementById('library-tertiary-select');
+const libraryQuaternaryRow = document.getElementById('library-quaternary-row');
+const libraryQuaternaryWrapper = document.getElementById('library-quaternary-wrapper');
+const libraryQuaternarySelect = document.getElementById('library-quaternary-select');
 const libraryPrimWrap = document.getElementById('library-primary-wrapper');
 const libraryPrimSelect = document.getElementById('library-primary-select');
 const librarySubHidden = document.getElementById('library-subcategory-hidden');
@@ -135,6 +138,19 @@ function showTertiary(visible, label = 'Subfolder') {
   }
 }
 
+function showQuaternary(visible, label = 'List') {
+  if (libraryQuaternaryRow) libraryQuaternaryRow.style.display = visible ? 'flex' : 'none';
+  if (libraryQuaternaryWrapper) {
+    const marker = libraryQuaternaryWrapper.querySelector('#library-quaternary-required');
+    libraryQuaternaryWrapper.childNodes[0].textContent = `${label} `;
+    if (marker) libraryQuaternaryWrapper.insertBefore(marker, libraryQuaternaryWrapper.childNodes[1] || null);
+  }
+  if (libraryQuaternarySelect) {
+    libraryQuaternarySelect.style.display = visible ? 'block' : 'none';
+    setRequired(libraryQuaternarySelect, visible);
+  }
+}
+
 function setPathState(valid, display, value, missing = '') {
   currentPathState = { valid, display, value, missing };
   if (librarySubHidden) librarySubHidden.value = valid ? value : '';
@@ -228,9 +244,11 @@ function resetLibraryFields() {
   showField(libraryPrimWrap, false, libraryPrimSelect);
   showSecondary(false);
   showTertiary(false);
+  showQuaternary(false);
   if (libraryPrimSelect) setOptions(libraryPrimSelect, 'Select folder', []);
   if (librarySubSelect) setOptions(librarySubSelect, 'Select subfolder', []);
   if (libraryTertiarySelect) setOptions(libraryTertiarySelect, 'Select subfolder', []);
+  if (libraryQuaternarySelect) setOptions(libraryQuaternarySelect, 'Select list', []);
   setPathState(false, 'No library path selected', '', 'Select a library category.');
 }
 
@@ -287,6 +305,7 @@ function configureLibraryPrimary() {
 
   showSecondary(false);
   showTertiary(false);
+  showQuaternary(false);
   if (!data || !primary) {
     configureLibraryCategory();
     return;
@@ -330,6 +349,7 @@ function configureLibraryPrimary() {
 
 function configureLibrarySecondary() {
   showTertiary(false);
+  showQuaternary(false);
   const category = libraryCatSelect.value;
   const data = LIBRARY_DATA[category];
 
@@ -372,6 +392,29 @@ function configureLibrarySecondary() {
     }
   }
 
+  updateLibraryPath();
+}
+
+function configureLibraryTertiary() {
+  showQuaternary(false);
+  const category = libraryCatSelect.value;
+  const data = LIBRARY_DATA[category];
+  if (data?.scope && data.document_groups) {
+    const groupKey = librarySubSelect.value;
+    const tertiaryKey = libraryTertiarySelect.value;
+    const subfolder = data.document_groups[groupKey]?.secondary_options?.[tertiaryKey];
+    if (subfolder?.secondary_options) {
+      showQuaternary(true, 'Auditor list');
+      setOptions(
+        libraryQuaternarySelect,
+        'Select auditor list',
+        Object.entries(subfolder.secondary_options).map(([value, folder]) => ({
+          value,
+          label: folder.label || value,
+        }))
+      );
+    }
+  }
   updateLibraryPath();
 }
 
@@ -429,6 +472,35 @@ function updateLibraryPath() {
         return;
       }
       const subfolder = group.secondary_options[tertiary];
+      if (subfolder?.secondary_options) {
+        const quaternary = libraryQuaternarySelect.value;
+        if (!quaternary) {
+          setPathState(
+            false,
+            `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder.label || tertiary} / Select auditor list`,
+            '',
+            'Select Supplier Auditor List or Internal Auditor List.'
+          );
+          return;
+        }
+        const nestedFolder = subfolder.secondary_options[quaternary];
+        const plant = plantSelect.value;
+        if (nestedFolder?.plants && !plant) {
+          setPathState(
+            false,
+            `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder.label || tertiary} / ${nestedFolder.label || quaternary} / Select plant`,
+            '',
+            'Select the plant for this auditor list.'
+          );
+          return;
+        }
+        setPathState(
+          true,
+          `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder.label || tertiary} / ${nestedFolder?.label || quaternary}${plant ? ` / ${plant}` : ''}`,
+          `${secondary}:${tertiary}:${quaternary}${plant ? `:${plant}` : ''}`
+        );
+        return;
+      }
       if (subfolder?.plants) {
         const plant = plantSelect.value;
         if (!plant) {
@@ -574,7 +646,8 @@ internalCheckbox.addEventListener('change', updateInternalUI);
 libraryCatSelect?.addEventListener('change', configureLibraryCategory);
 libraryPrimSelect?.addEventListener('change', configureLibraryPrimary);
 librarySubSelect?.addEventListener('change', configureLibrarySecondary);
-libraryTertiarySelect?.addEventListener('change', updateLibraryPath);
+libraryTertiarySelect?.addEventListener('change', configureLibraryTertiary);
+libraryQuaternarySelect?.addEventListener('change', updateLibraryPath);
 customerSelect?.addEventListener('change', updateLibraryPath);
 plantSelect?.addEventListener('change', updateLibraryPath);
 deptSelect?.addEventListener('change', updateLibraryPath);

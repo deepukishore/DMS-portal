@@ -104,8 +104,12 @@ class MailService:
     def send_approval_decision_notification(to_email, record, status, decision_made_at=None, rejection_comment=""):
         """Send notification to uploader about approval decision."""
         try:
-            status_color = "#3fb950" if status == "Approved" else "#f85149"
-            status_bg = "rgba(63,185,80,.15)" if status == "Approved" else "rgba(248,81,73,.15)"
+            if status == "Approved":
+                status_color, status_bg = "#3fb950", "rgba(63,185,80,.15)"
+            elif status == "Hold":
+                status_color, status_bg = "#d29922", "rgba(210,153,34,.15)"
+            else:
+                status_color, status_bg = "#f85149", "rgba(248,81,73,.15)"
             rejection_comment = (rejection_comment or "").strip()
             comment_block = ""
             if status == "Rejected" and rejection_comment:
