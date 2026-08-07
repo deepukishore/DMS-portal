@@ -7203,7 +7203,7 @@ html[data-theme="light"] .customer-card[data-customer-name] .plant-card-arrow {
 }
 
 /* 2026-08-07 usability update ------------------------------------------ */
-html { font-size: 16px; }
+html { font-size: 14px; }
 body,
 body * {
   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
