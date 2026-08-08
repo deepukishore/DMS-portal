@@ -4464,6 +4464,82 @@ select:disabled {
 .about-tour-body em { color: var(--accent); font-style: normal; font-weight: 500; }
 
 /* ── About page — feature cards ──────────────────────────────── */
+.about-company-section .panel-head { margin-bottom: 1rem; }
+.about-company-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+  gap: 1.25rem;
+  align-items: stretch;
+  margin-bottom: 1.25rem;
+}
+.about-company-copy {
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg-3);
+}
+.about-company-copy h3 {
+  margin: 0 0 .25rem;
+  color: var(--text);
+  font-size: 1rem;
+}
+.about-company-copy p {
+  margin: 0;
+  color: var(--text-sub);
+  font-size: .8rem;
+  line-height: 1.7;
+}
+.about-company-copy .about-company-formerly {
+  margin-bottom: .75rem;
+  color: var(--text-dim);
+  font-size: .72rem;
+}
+.about-company-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+  margin: 0;
+}
+.about-company-fact {
+  padding: .8rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-3);
+}
+.about-company-fact dt {
+  margin-bottom: .25rem;
+  color: var(--text-dim);
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+.about-company-fact dd {
+  margin: 0;
+  color: var(--text);
+  font-size: .78rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.about-company-highlights { margin-bottom: 1rem; }
+.about-company-label {
+  color: var(--accent);
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.about-company-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem .55rem;
+  align-items: center;
+  color: var(--text-dim);
+  font-size: .72rem;
+}
+.about-company-sources a { color: var(--accent); }
+
 .about-features-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -4649,11 +4725,13 @@ select:disabled {
 
 /* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 900px) {
+  .about-company-intro { grid-template-columns: 1fr; }
   .about-features-grid { grid-template-columns: repeat(2, 1fr); }
   .dl-gallery-grid     { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
   .dl-dept-card-grid   { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 }
 @media (max-width: 600px) {
+  .about-company-facts { grid-template-columns: 1fr; }
   .about-features-grid { grid-template-columns: 1fr; }
 }
 

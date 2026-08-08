@@ -4,6 +4,72 @@ from services.auth_service import AuthService
 
 about_bp = Blueprint('about', __name__)
 
+COMPANY = {
+    "name": "ZF Rane Automotive India Private Limited",
+    "formerly": "Formerly Rane TRW Steering Systems Private Limited",
+    "overview": (
+        "ZF Rane Automotive India Private Limited is a joint venture between "
+        "Rane Group and ZF Group, Germany. The company designs, develops, and "
+        "manufactures advanced steering gear systems for passenger and "
+        "commercial vehicles, serving leading automotive manufacturers in "
+        "India and global markets."
+    ),
+    "profile": [
+        {"label": "Founded", "value": "1987"},
+        {"label": "Headquarters", "value": "Chennai, India"},
+        {"label": "Industry", "value": "Motor Vehicle Manufacturing"},
+        {"label": "Company size", "value": "1,001-5,000 employees"},
+    ],
+    "highlights": [
+        {
+            "label": "Vision",
+            "title": "Technology leadership",
+            "description": (
+                "To be a preferred provider of advanced steering system "
+                "solutions through technology leadership and operational "
+                "excellence."
+            ),
+        },
+        {
+            "label": "Products",
+            "title": "Advanced steering systems",
+            "description": (
+                "Hydraulic and electric power steering systems engineered for "
+                "evolving safety, performance, efficiency, and regulatory "
+                "requirements."
+            ),
+        },
+        {
+            "label": "Engineering",
+            "title": "In-house development and validation",
+            "description": (
+                "Complete-system design, application engineering, 3D "
+                "modelling, simulation, FE analysis, CFD, and comprehensive "
+                "strength, environmental, noise, fatigue, and durability testing."
+            ),
+        },
+        {
+            "label": "Manufacturing",
+            "title": "Four facilities",
+            "description": (
+                "A manufacturing footprint spanning four facilities across "
+                "Trichy, Chennai, and Pantnagar supports production capacity "
+                "and supply reliability."
+            ),
+        },
+    ],
+    "sources": [
+        {
+            "label": "Rane Group company profile",
+            "url": "https://ranegroup.com/group-companies/zf-rane-automotive-india-private-limited/",
+        },
+        {
+            "label": "ZF Rane on LinkedIn",
+            "url": "https://www.linkedin.com/company/zrai/about/",
+        },
+    ],
+}
+
 TRACK_MY_DOCS = {
     "name": "Smart DMS",
     "tagline": "Current document management and approval tracking portal for ZF Rane Automotive India PVT LTD, SGD.",
@@ -121,6 +187,7 @@ def index():
         return redirect(url_for('auth.login'))
     return render_template(
         'about.html',
+        company=COMPANY,
         system=TRACK_MY_DOCS,
         library_categories=DocumentLibraryService.get_categories(),
     )

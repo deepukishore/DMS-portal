@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
-{% block title %}About DMS | Document Management System{% endblock %}
+{% block title %}About | Document Management System{% endblock %}
 
 {% block breadcrumb %}
   <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
   <span class="bc-sep">/</span>
-  <span class="bc-item bc-current">About DMS</span>
+  <span class="bc-item bc-current">About</span>
 {% endblock %}
 
 {% block content %}
@@ -14,6 +14,50 @@
     <p class="eyebrow">ZF Rane Automotive India PVT LTD - SGD</p>
     <h1 class="page-title">{{ system.name }} Document Control Hub</h1>
     <p class="page-sub">{{ system.description }}</p>
+  </div>
+</section>
+
+<section class="surface-panel about-company-section" style="margin-bottom:1.25rem">
+  <div class="panel-head">
+    <div>
+      <p class="eyebrow">Company Profile</p>
+      <h2 class="section-title">About the Company</h2>
+      <p class="section-sub">{{ company.name }}</p>
+    </div>
+  </div>
+
+  <div class="about-company-intro">
+    <div class="about-company-copy">
+      <h3>{{ company.name }}</h3>
+      <p class="about-company-formerly">{{ company.formerly }}</p>
+      <p>{{ company.overview }}</p>
+    </div>
+
+    <dl class="about-company-facts" aria-label="Company facts">
+      {% for item in company.profile %}
+      <div class="about-company-fact">
+        <dt>{{ item.label }}</dt>
+        <dd>{{ item.value }}</dd>
+      </div>
+      {% endfor %}
+    </dl>
+  </div>
+
+  <div class="about-features-grid about-company-highlights">
+    {% for highlight in company.highlights %}
+    <article class="about-feature-card">
+      <span class="about-company-label">{{ highlight.label }}</span>
+      <strong>{{ highlight.title }}</strong>
+      <p>{{ highlight.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+
+  <div class="about-company-sources">
+    <span>Learn more:</span>
+    {% for source in company.sources %}
+    <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.label }}</a>{% if not loop.last %}<span aria-hidden="true">&middot;</span>{% endif %}
+    {% endfor %}
   </div>
 </section>
 
