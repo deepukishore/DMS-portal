@@ -1,0 +1,1190 @@
+{"kind":"deck","id":"pr/pxdmwp","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master","placeholders":[{"name":"title","type":"title"},{"name":"body","type":"body"},{"name":"footer","type":"footer","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal"},{"name":"dateTime","type":"dateTime","textPreview":"Smart DMS v2.0.0"},{"name":"slideNumber","type":"slideNumber","textPreview":"‹#›"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Title Slide","type":"obj","placeholders":[{"name":"title","type":"title"},{"name":"subtitle","type":"subtitle"},{"name":"footer","type":"footer","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal"},{"name":"dateTime","type":"dateTime","textPreview":"Smart DMS v2.0.0"},{"name":"slideNumber","type":"slideNumber","textPreview":"‹#›"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout2.xml","name":"Title and Content","type":"obj","placeholders":[{"name":"title","type":"title"},{"name":"body","type":"body"},{"name":"footer","type":"footer","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal"},{"name":"dateTime","type":"dateTime","textPreview":"Smart DMS v2.0.0"},{"name":"slideNumber","type":"slideNumber","textPreview":"‹#›"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout3.xml","name":"Two Content","type":"obj","placeholders":[{"name":"title","type":"title"},{"name":"holder 3"},{"name":"holder 4"},{"name":"footer","type":"footer","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal"},{"name":"dateTime","type":"dateTime","textPreview":"Smart DMS v2.0.0"},{"name":"slideNumber","type":"slideNumber","textPreview":"‹#›"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout4.xml","name":"Title Only","type":"obj","placeholders":[{"name":"title","type":"title"},{"name":"footer","type":"footer","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal"},{"name":"dateTime","type":"dateTime","textPreview":"Smart DMS v2.0.0"},{"name":"slideNumber","type":"slideNumber","textPreview":"‹#›"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout5.xml","name":"Blank","type":"obj","placeholders":[{"name":"footer","type":"footer","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal"},{"name":"dateTime","type":"dateTime","textPreview":"Smart DMS v2.0.0"},{"name":"slideNumber","type":"slideNumber","textPreview":"‹#›"}]}
+{"kind":"slide","id":"sl/ta00ha","slide":1,"title":"CONTROLLED DOCUMENT","textShapes":5}
+{"kind":"textbox","id":"sh/1krqlcfu","slide":1,"name":"object 2","text":"CONTROLLED DOCUMENT","textPreview":"CONTROLLED DOCUMENT","textChars":19,"textLines":1,"bbox":[49.33,169.33,176,18.67]}
+{"kind":"textbox","id":"sh/0jips7yp","slide":1,"name":"object 3","placeholder":"title","text":"SMART DMS PORTAL","textPreview":"SMART DMS PORTAL","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/rup8f2hs","slide":1,"name":"object 4","text":"USER MANUAL\nDocument submission, approval, access, reporting and audit","textPreview":"USER MANUAL | Document submission, approval, access, reporting and audit","textChars":70,"textLines":2,"bbox":[49.33,254.67,431.4,75.2]}
+{"kind":"shape","id":"sh/qtg7mxg7","slide":1,"name":"object 5","bbox":[50.67,364,692.4,85.33]}
+{"kind":"shape","id":"sh/bqt8rmxc","slide":1,"name":"object 8","bbox":[54.67,482.67,692.4,295.87]}
+{"kind":"shape","id":"sh/apk7yhgr","slide":1,"name":"object 9","bbox":[50.67,478.67,692.4,295.87]}
+{"kind":"shape","id":"sh/kfmpcvux","slide":1,"name":"object 10","bbox":[50.67,478.67,692.4,295.87]}
+{"kind":"shape","id":"sh/ytk7alcr","slide":1,"name":"object 12","bbox":[50.67,1026.52,692.4,6.67]}
+{"kind":"textbox","id":"sh/zed83qdc","slide":1,"name":"object 13","text":"ZF Rane Automotive India PVT LTD - SGD","textPreview":"ZF Rane Automotive India PVT LTD - SGD","textChars":38,"textLines":1,"bbox":[49.33,1045.19,240.73,17.07]}
+{"kind":"textbox","id":"sh/cr2p8bu1","slide":1,"name":"object 14","text":"Internal use only","textPreview":"Internal use only","textChars":17,"textLines":1,"bbox":[663.43,1046.52,81,15.47]}
+{"kind":"table","id":"tb/m943qto7","slide":1,"name":"object 6","rows":2,"cols":4,"preview":"DOCUMENT NUMBER | REVISION | EFFECTIVE DATE | OWNER","bbox":[66,382.34,584.73,40.13]}
+{"kind":"image","id":"im/l87eh0ja","slide":1,"name":"object 11","bbox":[53.79,480,686.13,293.16]}
+{"kind":"notes","id":"nt/ta00ha","slide":1,"text":""}
+{"kind":"slide","id":"sl/593645","slide":2,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":38}
+{"kind":"textbox","id":"sh/h8fu1gfi","slide":2,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/614b2hwv","slide":2,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/t4vaxwfm","slide":2,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/s3mt4re1","slide":2,"name":"object 7","text":"1.2","textPreview":"1.2","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/jetsrmxk","slide":2,"name":"object 8","text":"Document Control and Contents","textPreview":"Document Control and Contents","textChars":29,"textLines":1,"bbox":[118.67,90.67,310.47,26.67]}
+{"kind":"shape","id":"sh/idkbyhwz","slide":2,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/srmd4vyd","slide":2,"name":"object 10","text":"Use the latest controlled copy available in the portal.","textPreview":"Use the latest controlled copy available in the portal.","textChars":55,"textLines":1,"bbox":[49.33,142.67,255.53,15.8]}
+{"kind":"textbox","id":"sh/6p4v2lgn","slide":2,"name":"object 12","text":"Contents","textPreview":"Contents","textChars":8,"textLines":1,"bbox":[49.33,332.8,60.47,18.67]}
+{"kind":"shape","id":"sh/knmt0byh","slide":2,"name":"object 14","bbox":[50.67,367.47,333.33,48]}
+{"kind":"shape","id":"sh/5ovu9gz2","slide":2,"name":"object 15","bbox":[60,376.8,29.33,29.33]}
+{"kind":"textbox","id":"sh/il4by1gb","slide":2,"name":"object 16","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[70.55,383.47,8.27,14.67]}
+{"kind":"textbox","id":"sh/jmdc76hw","slide":2,"name":"object 17","text":"Document control and contents","textPreview":"Document control and contents","textChars":29,"textLines":1,"bbox":[96,390.4,146.67,15.2]}
+{"kind":"textbox","id":"sh/4j6dcfyl","slide":2,"name":"object 18","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[360.73,382.13,8.6,15.47]}
+{"kind":"shape","id":"sh/dobm9g3e","slide":2,"name":"object 20","bbox":[50.67,428.8,333.33,48]}
+{"kind":"shape","id":"sh/c32lgbmt","slide":2,"name":"object 21","bbox":[60,438.13,29.33,29.33]}
+{"kind":"textbox","id":"sh/r2tk76l8","slide":2,"name":"object 22","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[70.55,444.8,8.27,14.67]}
+{"kind":"textbox","id":"sh/q103e14n","slide":2,"name":"object 23","text":"Purpose, scope and access levels","textPreview":"Purpose, scope and access levels","textChars":32,"textLines":1,"bbox":[96,451.73,159.93,15.2]}
+{"kind":"textbox","id":"sh/p0r25w32","slide":2,"name":"object 24","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[360.73,443.47,8.6,15.47]}
+{"kind":"shape","id":"sh/3y9k36lw","slide":2,"name":"object 26","bbox":[50.67,490.13,333.33,48]}
+{"kind":"shape","id":"sh/2x03a14b","slide":2,"name":"object 27","bbox":[60,499.47,29.33,29.33]}
+{"kind":"textbox","id":"sh/hwr21wn6","slide":2,"name":"object 28","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[70.55,506.13,8.27,14.67]}
+{"kind":"textbox","id":"sh/gvil8rml","slide":2,"name":"object 29","text":"End-to-end process overview","textPreview":"End-to-end process overview","textChars":27,"textLines":1,"bbox":[96,513.07,137.4,15.2]}
+{"kind":"textbox","id":"sh/61wj2xk3","slide":2,"name":"object 30","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[360.73,504.8,8.6,15.47]}
+{"kind":"shape","id":"sh/s3y14729","slide":2,"name":"object 32","bbox":[50.67,551.47,333.33,48]}
+{"kind":"shape","id":"sh/t47idsju","slide":2,"name":"object 33","bbox":[60,560.8,29.33,29.33]}
+{"kind":"textbox","id":"sh/idwzydk7","slide":2,"name":"object 34","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[70.55,567.47,8.27,14.67]}
+{"kind":"textbox","id":"sh/jy507ils","slide":2,"name":"object 35","text":"Login and account access","textPreview":"Login and account access","textChars":24,"textLines":1,"bbox":[96,574.4,122.93,15.2]}
+{"kind":"textbox","id":"sh/kzeh0n2d","slide":2,"name":"object 36","text":"5-6","textPreview":"5-6","textChars":3,"textLines":1,"bbox":[351.25,566.13,18.13,15.47]}
+{"kind":"shape","id":"sh/a9czadkb","slide":2,"name":"object 38","bbox":[50.67,612.8,333.33,48]}
+{"kind":"shape","id":"sh/val03ilg","slide":2,"name":"object 39","bbox":[60,622.13,29.33,29.33]}
+{"kind":"textbox","id":"sh/nm5wfe5c","slide":2,"name":"object 40","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[70.55,628.8,8.27,14.67]}
+{"kind":"textbox","id":"sh/21wf69or","slide":2,"name":"object 41","text":"Dashboard and document submission","textPreview":"Dashboard and document submission","textChars":33,"textLines":1,"bbox":[96,635.73,177.27,15.2]}
+{"kind":"textbox","id":"sh/po7ehoni","slide":2,"name":"object 42","text":"7-9","textPreview":"7-9","textChars":3,"textLines":1,"bbox":[351.25,627.47,18.13,15.47]}
+{"kind":"shape","id":"sh/fy5wbe5g","slide":2,"name":"object 44","bbox":[401.33,367.47,333.33,48]}
+{"kind":"shape","id":"sh/exwf29ov","slide":2,"name":"object 45","bbox":[410.67,376.8,29.33,29.33]}
+{"kind":"textbox","id":"sh/10ned4n6","slide":2,"name":"object 46","text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[421.22,383.47,8.27,14.67]}
+{"kind":"textbox","id":"sh/0zex4z61","slide":2,"name":"object 47","text":"Approvals and status tracking","textPreview":"Approvals and status tracking","textChars":29,"textLines":1,"bbox":[446.67,390.4,139.13,15.2]}
+{"kind":"textbox","id":"sh/rulw7u54","slide":2,"name":"object 48","text":"10-16","textPreview":"10-16","textChars":5,"textLines":1,"bbox":[690.05,382.13,30,15.47]}
+{"kind":"shape","id":"sh/gzat8vmh","slide":2,"name":"object 50","bbox":[401.33,428.8,333.33,48]}
+{"kind":"shape","id":"sh/h0juh032","slide":2,"name":"object 51","bbox":[410.67,438.13,29.33,29.33]}
+{"kind":"textbox","id":"sh/uxsb6l4b","slide":2,"name":"object 52","text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[421.22,444.8,8.27,14.67]}
+{"kind":"textbox","id":"sh/vy1cfqlw","slide":2,"name":"object 53","text":"Document library and repositories","textPreview":"Document library and repositories","textChars":33,"textLines":1,"bbox":[446.67,451.73,158.2,15.2]}
+{"kind":"textbox","id":"sh/43atcfmt","slide":2,"name":"object 54","text":"17-19","textPreview":"17-19","textChars":5,"textLines":1,"bbox":[690.05,443.47,30,15.47]}
+{"kind":"shape","id":"sh/i1sba54n","slide":2,"name":"object 56","bbox":[401.33,490.13,333.33,48]}
+{"kind":"shape","id":"sh/321cjal8","slide":2,"name":"object 57","bbox":[410.67,499.47,29.33,29.33]}
+{"kind":"textbox","id":"sh/k7qt0bm9","slide":2,"name":"object 58","text":"8","textPreview":"8","textChars":1,"textLines":1,"bbox":[421.22,506.13,8.27,14.67]}
+{"kind":"textbox","id":"sh/l8za9g3u","slide":2,"name":"object 59","text":"Reports and revision control","textPreview":"Reports and revision control","textChars":28,"textLines":1,"bbox":[446.67,513.07,132.2,15.2]}
+{"kind":"textbox","id":"sh/1s7ih8bm","slide":2,"name":"object 60","text":"20-21","textPreview":"20-21","textChars":5,"textLines":1,"bbox":[690.05,504.8,30,15.47]}
+{"kind":"shape","id":"sh/fqp0fytg","slide":2,"name":"object 62","bbox":[401.33,551.47,333.33,48]}
+{"kind":"shape","id":"sh/epgzmtsv","slide":2,"name":"object 63","bbox":[410.67,560.8,29.33,29.33]}
+{"kind":"textbox","id":"sh/9grilsbi","slide":2,"name":"object 64","text":"9","textPreview":"9","textChars":1,"textLines":1,"bbox":[421.22,567.47,8.27,14.67]}
+{"kind":"textbox","id":"sh/ofy1snax","slide":2,"name":"object 65","text":"Archive, audit and people administration","textPreview":"Archive, audit and people administration","textChars":40,"textLines":1,"bbox":[446.67,574.4,187.73,15.2]}
+{"kind":"textbox","id":"sh/nep0jitc","slide":2,"name":"object 66","text":"22-24","textPreview":"22-24","textChars":5,"textLines":1,"bbox":[690.05,566.13,30,15.47]}
+{"kind":"shape","id":"sh/xkripsbe","slide":2,"name":"object 68","bbox":[401.33,612.8,333.33,48]}
+{"kind":"shape","id":"sh/wji1wna9","slide":2,"name":"object 69","bbox":[410.67,622.13,29.33,29.33]}
+{"kind":"textbox","id":"sh/upcfqp8r","slide":2,"name":"object 70","text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[418.44,628.8,13.8,14.67]}
+{"kind":"textbox","id":"sh/vqlgju9w","slide":2,"name":"object 71","text":"Notifications, profile, logout and troubleshooting","textPreview":"Notifications, profile, logout and troubleshooting","textChars":50,"textLines":1,"bbox":[446.67,635.73,221.8,15.2]}
+{"kind":"textbox","id":"sh/gruxszqh","slide":2,"name":"object 72","text":"25-27","textPreview":"25-27","textChars":5,"textLines":1,"bbox":[690.05,627.47,30,15.47]}
+{"kind":"shape","id":"sh/itcfu98n","slide":2,"name":"object 74","bbox":[50.67,686.13,692.4,68.8]}
+{"kind":"shape","id":"sh/3ulgnu98","slide":2,"name":"object 75","bbox":[50.67,686.13,692.4,68.8]}
+{"kind":"shape","id":"sh/4vuxwzqt","slide":2,"name":"object 76","bbox":[50.67,686.13,6.67,68.8]}
+{"kind":"textbox","id":"sh/5w3yp4re","slide":2,"name":"object 77","text":"Controlled-copy rule\nScreenshots are representative of the current portal. Field availability and administrative actions may vary by role, QMS level and configured library category.","textPreview":"Controlled-copy rule | Screenshots are representative of the current portal. Field availability and administrative actions may vary by ro...","textChars":181,"textLines":2,"bbox":[57.17,692.51,681.8,49.2]}
+{"kind":"textbox","id":"sh/qxwfy98j","slide":2,"name":"object 78","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/ry5gre94","slide":2,"name":"object 79","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/s7ql4vi5","slide":2,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,304,46.67]}
+{"kind":"table","id":"tb/t8zmdgzq","slide":2,"name":"object 11","rows":5,"cols":4,"preview":"Field | Value | Field | Value","bbox":[50.33,168.73,692,144.87]}
+{"kind":"notes","id":"nt/593645","slide":2,"text":""}
+{"kind":"slide","id":"sl/6t5ldx","slide":3,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":9}
+{"kind":"textbox","id":"sh/of6tsbih","slide":3,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/bixcnq18","slide":3,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/wj6twvit","slide":3,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/xkfupgje","slide":3,"name":"object 7","text":"2.0","textPreview":"2.0","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/qlkbih0j","slide":3,"name":"object 8","text":"Purpose, Scope and Access Levels","textPreview":"Purpose, Scope and Access Levels","textChars":32,"textLines":1,"bbox":[118.67,90.67,338.4,26.67]}
+{"kind":"shape","id":"sh/rmtsbm14","slide":3,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/jm94v6hg","slide":3,"name":"object 10","text":"This manual enables users to complete routine DMS work safely and consistently.","textPreview":"This manual enables users to complete routine DMS work safely and consistently.","textChars":79,"textLines":1,"bbox":[49.33,142.67,398.93,15.8]}
+{"kind":"shape","id":"sh/58b6xgz6","slide":3,"name":"object 12","bbox":[50.67,179.79,338.2,115.31]}
+{"kind":"shape","id":"sh/kni54byl","slide":3,"name":"object 13","bbox":[50.67,179.79,338.2,115.31]}
+{"kind":"shape","id":"sh/vi94r6h4","slide":3,"name":"object 14","bbox":[50.67,179.79,6.67,115.31]}
+{"kind":"textbox","id":"sh/ah0ny10j","slide":3,"name":"object 15","text":"Purpose\nTo digitally centralize, control, and secure organizational documents through a standardized approval and version management system.","textPreview":"Purpose | To digitally centralize, control, and secure organizational documents through a standardized approval and version management sy...","textChars":140,"textLines":2,"bbox":[63.97,179.73,318.25,99.02]}
+{"kind":"shape","id":"sh/wji50ryp","slide":3,"name":"object 17","bbox":[404.85,179.79,338.2,115.04]}
+{"kind":"shape","id":"sh/nep4nmh8","slide":3,"name":"object 18","bbox":[404.85,179.79,338.2,115.04]}
+{"kind":"shape","id":"sh/mdgnuh0n","slide":3,"name":"object 19","bbox":[404.85,179.79,6.67,115.04]}
+{"kind":"textbox","id":"sh/qpwn6hkf","slide":3,"name":"object 20","text":"Scope\nCovers the complete document lifecycle—including creation, approval, storage, retrieval, revision, archival, and audit traceability—for all quality and organizational documents across the enterprise.","textPreview":"Scope | Covers the complete document lifecycle—including creation, approval, storage, retrieval, revision, archival, and audit traceabili...","textChars":205,"textLines":2,"bbox":[422.82,178.98,319.52,109.86]}
+{"kind":"shape","id":"sh/dc76hwj6","slide":3,"name":"object 23","bbox":[50.67,543.73,692.4,54.4]}
+{"kind":"shape","id":"sh/ydgna1kb","slide":3,"name":"object 24","bbox":[50.67,543.73,692.4,54.4]}
+{"kind":"shape","id":"sh/zepojm1w","slide":3,"name":"object 25","bbox":[50.67,543.73,6.67,54.4]}
+{"kind":"textbox","id":"sh/0fypcr2h","slide":3,"name":"object 26","text":"Key distinction\nRole controls administrative pages. QMS level controls document visibility and who can complete each approval stage.","textPreview":"Key distinction | Role controls administrative pages. QMS level controls document visibility and who can complete each approval stage.","textChars":132,"textLines":2,"bbox":[57.33,550.11,681.67,34.8]}
+{"kind":"textbox","id":"sh/lg76lwj2","slide":3,"name":"object 27","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/mh07e1kn","slide":3,"name":"object 28","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/kre1s3qd","slide":3,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,304,46.67]}
+{"kind":"table","id":"tb/axcz29ov","slide":3,"name":"object 21","rows":7,"cols":3,"preview":"Level / role | Primary access | Approval responsibility","bbox":[50.33,302.07,692,223.8]}
+{"kind":"notes","id":"nt/6t5ldx","slide":3,"text":""}
+{"kind":"slide","id":"sl/6oy5wt","slide":4,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":33}
+{"kind":"textbox","id":"sh/za1svqxo","slide":4,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/8fut8ve5","slide":4,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/7elczqxk","slide":4,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/mdcb6lwf","slide":4,"name":"object 7","text":"3.0","textPreview":"3.0","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/pkzapwfm","slide":4,"name":"object 8","text":"End-to-End Process Overview","textPreview":"End-to-End Process Overview","textChars":27,"textLines":1,"bbox":[118.67,90.67,288.33,26.67]}
+{"kind":"shape","id":"sh/ojqtwre1","slide":4,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/qlw3ixsn","slide":4,"name":"object 10","text":"The workflow below reflects the current two-stage approval design.","textPreview":"The workflow below reflects the current two-stage approval design.","textChars":66,"textLines":1,"bbox":[49.33,142.67,326,15.8]}
+{"kind":"shape","id":"sh/c7elk7at","slide":4,"name":"object 12","bbox":[50.67,169.07,220.13,154.67]}
+{"kind":"shape","id":"sh/d8nmtcre","slide":4,"name":"object 13","bbox":[50.67,169.07,220.13,154.67]}
+{"kind":"shape","id":"sh/y9g3mhsj","slide":4,"name":"object 14","bbox":[50.67,169.07,220.13,36]}
+{"kind":"textbox","id":"sh/0bylorap","slide":4,"name":"object 16","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[73.22,179.07,8.27,14.67]}
+{"kind":"textbox","id":"sh/lc7mxcra","slide":4,"name":"object 17","text":"Email or GENID","textPreview":"Email or GENID","textChars":14,"textLines":1,"bbox":[65.33,225.07,80.47,15.8]}
+{"kind":"shape","id":"sh/nep4zm9g","slide":4,"name":"object 19","bbox":[273.46,246.4,9.33,0]}
+{"kind":"shape","id":"sh/ji9knmpo","slide":4,"name":"object 20","bbox":[284.12,242.4,4,8]}
+{"kind":"shape","id":"sh/ih03eho3","slide":4,"name":"object 21","bbox":[286.79,169.07,220.13,154.67]}
+{"kind":"shape","id":"sh/5kr2pw7e","slide":4,"name":"object 22","bbox":[286.79,169.07,220.13,154.67]}
+{"kind":"shape","id":"sh/kjilgr6t","slide":4,"name":"object 23","bbox":[286.79,169.07,220.13,36]}
+{"kind":"textbox","id":"sh/adg3ahor","slide":4,"name":"object 25","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[309.34,179.07,8.27,14.67]}
+{"kind":"textbox","id":"sh/xgr2lw7i","slide":4,"name":"object 26","text":"Sign in\tChoose upload","textPreview":"Sign in\tChoose upload","textChars":21,"textLines":1,"bbox":[96,178.4,325.47,17.07]}
+{"kind":"textbox","id":"sh/wfylcr6x","slide":4,"name":"object 27","text":"Open Upload Documents","textPreview":"Open Upload Documents","textChars":21,"textLines":1,"bbox":[301.46,225.07,125.47,15.8]}
+{"kind":"shape","id":"sh/m9gj6xov","slide":4,"name":"object 29","bbox":[509.58,246.4,9.33,0]}
+{"kind":"shape","id":"sh/cfuhg3md","slide":4,"name":"object 30","bbox":[520.24,242.4,4,8]}
+{"kind":"shape","id":"sh/dg3ip8ny","slide":4,"name":"object 31","bbox":[522.91,169.07,220.13,154.67]}
+{"kind":"shape","id":"sh/qtczed4n","slide":4,"name":"object 32","bbox":[522.91,169.07,220.13,154.67]}
+{"kind":"shape","id":"sh/bul0ny58","slide":4,"name":"object 33","bbox":[522.91,169.07,220.13,36]}
+{"kind":"textbox","id":"sh/lknitsna","slide":4,"name":"object 35","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[545.46,179.07,8.27,14.67]}
+{"kind":"textbox","id":"sh/yhwzid4j","slide":4,"name":"object 36","text":"Select files","textPreview":"Select files","textChars":12,"textLines":1,"bbox":[568.24,178.4,65.4,17.07]}
+{"kind":"textbox","id":"sh/zi50ri54","slide":4,"name":"object 37","text":"Approved Office/PDF formats","textPreview":"Approved Office/PDF formats","textChars":27,"textLines":1,"bbox":[537.58,225.07,145.47,15.8]}
+{"kind":"shape","id":"sh/hojihonq","slide":4,"name":"object 39","bbox":[50.67,347.73,220.13,154.67]}
+{"kind":"shape","id":"sh/twfixsrm","slide":4,"name":"object 40","bbox":[50.67,347.73,220.13,154.67]}
+{"kind":"shape","id":"sh/8v614nq1","slide":4,"name":"object 41","bbox":[50.67,347.73,220.13,36]}
+{"kind":"textbox","id":"sh/6toz2d8v","slide":4,"name":"object 43","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[73.22,357.73,8.27,14.67]}
+{"kind":"textbox","id":"sh/lsfit8ra","slide":4,"name":"object 44","text":"Add metadata","textPreview":"Add metadata","textChars":12,"textLines":1,"bbox":[96,357.07,82.07,17.07]}
+{"kind":"textbox","id":"sh/kr6h03qp","slide":4,"name":"object 45","text":"Number, revision, plant, path","textPreview":"Number, revision, plant, path","textChars":29,"textLines":1,"bbox":[65.33,403.73,142.47,15.8]}
+{"kind":"shape","id":"sh/yp4zytsz","slide":4,"name":"object 47","bbox":[273.46,425.07,9.33,0]}
+{"kind":"shape","id":"sh/xovip8re","slide":4,"name":"object 48","bbox":[284.12,421.07,4,8]}
+{"kind":"shape","id":"sh/wnmhw3at","slide":4,"name":"object 49","bbox":[286.79,347.73,220.13,154.67]}
+{"kind":"shape","id":"sh/2h07a5kf","slide":4,"name":"object 50","bbox":[286.79,347.73,220.13,154.67]}
+{"kind":"shape","id":"sh/3i9ojal0","slide":4,"name":"object 51","bbox":[286.79,347.73,220.13,36]}
+{"kind":"textbox","id":"sh/pkr6lk3q","slide":4,"name":"object 53","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[309.34,357.73,8.27,14.67]}
+{"kind":"textbox","id":"sh/etgn6543","slide":4,"name":"object 54","text":"Submit","textPreview":"Submit","textChars":6,"textLines":1,"bbox":[332.12,357.07,43.33,17.07]}
+{"kind":"textbox","id":"sh/fupofqlo","slide":4,"name":"object 55","text":"Status becomes Pending","textPreview":"Status becomes Pending","textChars":22,"textLines":1,"bbox":[301.46,403.73,124.27,15.8]}
+{"kind":"shape","id":"sh/1wr6h03u","slide":4,"name":"object 57","bbox":[509.58,425.07,9.33,0]}
+{"kind":"shape","id":"sh/6pgn2l47","slide":4,"name":"object 58","bbox":[520.24,421.07,4,8]}
+{"kind":"shape","id":"sh/rqpobqls","slide":4,"name":"object 59","bbox":[522.91,347.73,220.13,154.67]}
+{"kind":"shape","id":"sh/vul4jm1k","slide":4,"name":"object 60","bbox":[522.91,347.73,220.13,154.67]}
+{"kind":"shape","id":"sh/utc3ahkz","slide":4,"name":"object 61","bbox":[522.91,347.73,220.13,36]}
+{"kind":"textbox","id":"sh/wvulcr25","slide":4,"name":"object 63","text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[545.46,357.73,8.27,14.67]}
+{"kind":"textbox","id":"sh/jy54nm1g","slide":4,"name":"object 64","text":"L2 review","textPreview":"L2 review","textChars":9,"textLines":1,"bbox":[568.24,357.07,57.4,17.07]}
+{"kind":"textbox","id":"sh/ixw3e10v","slide":4,"name":"object 65","text":"Select recipients and first approve","textPreview":"Select recipients and first approve","textChars":35,"textLines":1,"bbox":[537.58,403.73,167.4,15.8]}
+{"kind":"shape","id":"sh/4zelgri1","slide":4,"name":"object 67","bbox":[50.67,526.4,220.13,154.67]}
+{"kind":"shape","id":"sh/z21kb21c","slide":4,"name":"object 68","bbox":[50.67,526.4,220.13,154.67]}
+{"kind":"shape","id":"sh/y1s32xkr","slide":4,"name":"object 69","bbox":[50.67,526.4,220.13,36]}
+{"kind":"textbox","id":"sh/p8zil8za","slide":4,"name":"object 71","text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[73.22,536.4,8.27,14.67]}
+{"kind":"textbox","id":"sh/258jat0j","slide":4,"name":"object 72","text":"L1 review","textPreview":"L1 review","textChars":9,"textLines":1,"bbox":[96,535.73,57.4,17.07]}
+{"kind":"textbox","id":"sh/36h0jyh4","slide":4,"name":"object 73","text":"Final approve or reject","textPreview":"Final approve or reject","textChars":23,"textLines":1,"bbox":[65.33,582.4,111.47,15.8]}
+{"kind":"shape","id":"sh/14fihozy","slide":4,"name":"object 75","bbox":[273.46,603.73,9.33,0]}
+{"kind":"shape","id":"sh/ehoz6t0n","slide":4,"name":"object 76","bbox":[284.12,599.73,4,8]}
+{"kind":"shape","id":"sh/f2x0fyh8","slide":4,"name":"object 77","bbox":[286.79,526.4,220.13,154.67]}
+{"kind":"shape","id":"sh/kza1knyx","slide":4,"name":"object 78","bbox":[286.79,526.4,220.13,154.67]}
+{"kind":"shape","id":"sh/l0jitszi","slide":4,"name":"object 79","bbox":[286.79,526.4,220.13,36]}
+{"kind":"textbox","id":"sh/8fudkzq1","slide":4,"name":"object 81","text":"8","textPreview":"8","textChars":1,"textLines":1,"bbox":[309.34,536.4,8.27,14.67]}
+{"kind":"textbox","id":"sh/7elwbu9g","slide":4,"name":"object 82","text":"Use and report","textPreview":"Use and report","textChars":14,"textLines":1,"bbox":[332.12,535.73,87.4,17.07]}
+{"kind":"textbox","id":"sh/6dcvip8b","slide":4,"name":"object 83","text":"View, download, track, analyze","textPreview":"View, download, track, analyze","textChars":30,"textLines":1,"bbox":[301.46,582.4,152.8,15.8]}
+{"kind":"shape","id":"sh/g3exozqd","slide":4,"name":"object 85","bbox":[509.58,603.73,9.33,0]}
+{"kind":"shape","id":"sh/v2lwfu9s","slide":4,"name":"object 86","bbox":[520.24,599.73,4,8]}
+{"kind":"shape","id":"sh/uhcvmp87","slide":4,"name":"object 87","bbox":[522.91,526.4,220.13,154.67]}
+{"kind":"shape","id":"sh/x8je5kre","slide":4,"name":"object 88","bbox":[522.91,526.4,220.13,154.67]}
+{"kind":"shape","id":"sh/w7adcfqt","slide":4,"name":"object 89","bbox":[522.91,526.4,220.13,36]}
+{"kind":"textbox","id":"sh/nehsf6pc","slide":4,"name":"object 91","text":"9","textPreview":"9","textChars":1,"textLines":1,"bbox":[545.46,536.4,8.27,14.67]}
+{"kind":"textbox","id":"sh/ofqtob6x","slide":4,"name":"object 92","text":"Retain and audit","textPreview":"Retain and audit","textChars":16,"textLines":1,"bbox":[568.24,535.73,96.07,17.07]}
+{"kind":"textbox","id":"sh/9gzuhg7i","slide":4,"name":"object 93","text":"Revise, archive, restore/log","textPreview":"Revise, archive, restore/log","textChars":28,"textLines":1,"bbox":[537.58,582.4,135.2,15.8]}
+{"kind":"shape","id":"sh/bihcjqp8","slide":4,"name":"object 95","bbox":[50.67,701.07,692.4,68.8]}
+{"kind":"shape","id":"sh/wjqtsv6t","slide":4,"name":"object 96","bbox":[50.67,701.07,692.4,68.8]}
+{"kind":"shape","id":"sh/xkjul07e","slide":4,"name":"object 97","bbox":[50.67,701.07,6.67,68.8]}
+{"kind":"textbox","id":"sh/qlobe1oj","slide":4,"name":"object 98","text":"Status path\nPending -> Pending Final Approval -> Approved. A rejection can occur at either approval stage and must include comments so the uploader knows what to correct.","textPreview":"Status path | Pending -> Pending Final Approval -> Approved. A rejection can occur at either approval stage and must include comments so ...","textChars":170,"textLines":2,"bbox":[57,707.44,682,49.2]}
+{"kind":"textbox","id":"sh/rmxs7mp4","slide":4,"name":"object 99","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/kf2lc76d","slide":4,"name":"object 100","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/k3mhk7ex","slide":4,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,304,46.67]}
+{"kind":"image","id":"im/juxkr6lc","slide":4,"name":"object 15","bbox":[65.33,175.07,24,24]}
+{"kind":"image","id":"im/ito3i14r","slide":4,"name":"object 24","bbox":[301.46,175.07,24,24]}
+{"kind":"image","id":"im/t0z2x03e","slide":4,"name":"object 34","bbox":[537.58,175.07,24,24]}
+{"kind":"image","id":"im/szqlov2t","slide":4,"name":"object 42","bbox":[65.33,353.73,24,24]}
+{"kind":"image","id":"im/7yxkvqlo","slide":4,"name":"object 52","bbox":[301.46,353.73,24,24]}
+{"kind":"image","id":"im/6xo3ml43","slide":4,"name":"object 62","bbox":[537.58,353.73,24,24]}
+{"kind":"image","id":"im/94v2lw3a","slide":4,"name":"object 70","bbox":[65.33,532.4,24,24]}
+{"kind":"image","id":"im/83m1crmp","slide":4,"name":"object 80","bbox":[301.46,532.4,24,24]}
+{"kind":"image","id":"im/ex0r6tgb","slide":4,"name":"object 90","bbox":[537.58,532.4,24,24]}
+{"kind":"notes","id":"nt/6oy5wt","slide":4,"text":""}
+{"kind":"slide","id":"sl/cxesuf","slide":5,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":16}
+{"kind":"textbox","id":"sh/x4jqp8jq","slide":5,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/mx87at03","slide":5,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/90zqloje","slide":5,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/8zqpcjit","slide":5,"name":"object 7","text":"4.1","textPreview":"4.1","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/7u18vi1s","slide":5,"name":"object 8","text":"Login to the Portal","textPreview":"Login to the Portal","textChars":19,"textLines":1,"bbox":[118.67,90.67,179.33,26.67]}
+{"kind":"shape","id":"sh/6ts7md07","slide":5,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/gryt4bqh","slide":5,"name":"object 10","text":"Use the portal URL supplied by your DMS administrator.","textPreview":"Use the portal URL supplied by your DMS administrator.","textChars":54,"textLines":1,"bbox":[49.33,142.67,274.93,15.8]}
+{"kind":"shape","id":"sh/u5gb2l8b","slide":5,"name":"object 12","bbox":[54.67,173.07,692.4,298.27]}
+{"kind":"shape","id":"sh/f6pcbq9w","slide":5,"name":"object 13","bbox":[50.67,169.07,692.4,298.27]}
+{"kind":"shape","id":"sh/83yt0bq5","slide":5,"name":"object 14","bbox":[50.67,169.07,692.4,298.27]}
+{"kind":"textbox","id":"sh/61wby18z","slide":5,"name":"object 16","text":"Figure 1 - Current Smart DMS login page","textPreview":"Figure 1 - Current Smart DMS login page","textChars":39,"textLines":1,"bbox":[303.15,472.62,187.4,14.87]}
+{"kind":"shape","id":"sh/kzetwrq9","slide":5,"name":"object 18","bbox":[50.67,499.56,692.4,42.4]}
+{"kind":"shape","id":"sh/l0nu5wru","slide":5,"name":"object 19","bbox":[50.67,499.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/0jm1k3yl","slide":5,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,511.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/zid0byx0","slide":5,"name":"object 22","text":"Open the Smart DMS portal\nUse a supported browser and the approved internal URL.","textPreview":"Open the Smart DMS portal | Use a supported browser and the approved internal URL.","textChars":80,"textLines":2,"bbox":[88,502.98,262.93,32.4]}
+{"kind":"shape","id":"sh/dgvi9ofa","slide":5,"name":"object 24","bbox":[50.67,549.96,692.4,42.4]}
+{"kind":"shape","id":"sh/cfm1gjyp","slide":5,"name":"object 25","bbox":[50.67,549.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/qd4je9gj","slide":5,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,562.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/xcz2lsfe","slide":5,"name":"object 28","text":"Enter your identity\nUse your registered email address or employee GENID.","textPreview":"Enter your identity | Use your registered email address or employee GENID.","textChars":72,"textLines":2,"bbox":[88,553.38,256.6,32.4]}
+{"kind":"shape","id":"sh/ux0fm5wb","slide":5,"name":"object 30","bbox":[50.67,600.36,692.4,42.4]}
+{"kind":"shape","id":"sh/fy9gfadw","slide":5,"name":"object 31","bbox":[50.67,600.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/hkryhkv2","slide":5,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,612.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/6tgfi5wf","slide":5,"name":"object 34","text":"Enter your password\nPasswords are case-sensitive. Do not share credentials.","textPreview":"Enter your password | Passwords are case-sensitive. Do not share credentials.","textChars":75,"textLines":2,"bbox":[88,603.78,258.33,32.4]}
+{"kind":"shape","id":"sh/svixkfe5","slide":5,"name":"object 36","bbox":[50.67,650.76,692.4,42.4]}
+{"kind":"shape","id":"sh/twrydkvq","slide":5,"name":"object 37","bbox":[50.67,650.76,692.4,42.4]}
+{"kind":"textbox","id":"sh/rqtgnud4","slide":5,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,662.89,9.4,17.07]}
+{"kind":"textbox","id":"sh/bi9cj6hk","slide":5,"name":"object 40","text":"Select Sign in\nSuccessful login opens the Master Dashboard. An audit event is recorded.","textPreview":"Select Sign in | Successful login opens the Master Dashboard. An audit event is recorded.","textChars":87,"textLines":2,"bbox":[88,654.18,340,32.4]}
+{"kind":"shape","id":"sh/xkrulgza","slide":5,"name":"object 42","bbox":[50.67,701.16,692.4,54.4]}
+{"kind":"shape","id":"sh/cjitcby5","slide":5,"name":"object 43","bbox":[50.67,701.16,692.4,54.4]}
+{"kind":"shape","id":"sh/nepcfmh8","slide":5,"name":"object 44","bbox":[50.67,701.16,6.67,54.4]}
+{"kind":"textbox","id":"sh/2dgb6h0n","slide":5,"name":"object 45","text":"Access problem?\nUse Forgot password for a registered email address or contact the DMS administrator if the account is not active.","textPreview":"Access problem? | Use Forgot password for a registered email address or contact the DMS administrator if the account is not active.","textChars":129,"textLines":2,"bbox":[57.17,707.53,681.8,34.8]}
+{"kind":"textbox","id":"sh/pgruhwze","slide":5,"name":"object 46","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/ofyt8rit","slide":5,"name":"object 47","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/cb6xgf6l","slide":5,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,304,46.67]}
+{"kind":"image","id":"im/1wvqdsv2","slide":5,"name":"object 15","bbox":[53.76,170.4,686.18,295.56]}
+{"kind":"image","id":"im/bqhc3mx4","slide":5,"name":"object 20","bbox":[60,508.76,24,24]}
+{"kind":"image","id":"im/q58bahwj","slide":5,"name":"object 26","bbox":[60,559.16,24,24]}
+{"kind":"image","id":"im/dszu5wfa","slide":5,"name":"object 32","bbox":[60,609.56,24,24]}
+{"kind":"image","id":"im/crqtcrep","slide":5,"name":"object 38","bbox":[60,659.96,24,24]}
+{"kind":"notes","id":"nt/cxesuf","slide":5,"text":""}
+{"kind":"slide","id":"sl/e4m4o6","slide":6,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":17}
+{"kind":"textbox","id":"sh/yhkfmtkz","slide":6,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/dgbeto3e","slide":6,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/qd0fi9kn","slide":6,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/betwrel8","slide":6,"name":"object 7","text":"4.2","textPreview":"4.2","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/wbmxwn2x","slide":6,"name":"object 8","text":"Register and Reset Password","textPreview":"Register and Reset Password","textChars":27,"textLines":1,"bbox":[118.67,90.67,283.93,26.67]}
+{"kind":"shape","id":"sh/xcvy5sji","slide":6,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/5czytsbe","slide":6,"name":"object 10","text":"New accounts start with the User role and standard QMS access.","textPreview":"New accounts start with the User role and standard QMS access.","textChars":62,"textLines":1,"bbox":[49.33,142.67,318.67,15.8]}
+{"kind":"textbox","id":"sh/jahgr2t8","slide":6,"name":"object 12","text":"Create account: identity and organization fields","textPreview":"Create account: identity and organization fields","textChars":48,"textLines":1,"bbox":[113.75,563.73,213.4,14.87]}
+{"kind":"textbox","id":"sh/x8zypsbi","slide":6,"name":"object 14","text":"Password confirmation and submission controls","textPreview":"Password confirmation and submission controls","textChars":45,"textLines":1,"bbox":[464.93,539.17,216.73,14.87]}
+{"kind":"shape","id":"sh/b6hgnitc","slide":6,"name":"object 16","bbox":[50.67,590.67,692.4,42.4]}
+{"kind":"shape","id":"sh/a5ofudsr","slide":6,"name":"object 17","bbox":[50.67,590.67,692.4,42.4]}
+{"kind":"textbox","id":"sh/g3ah8ra1","slide":6,"name":"object 19","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,602.8,9.4,17.07]}
+{"kind":"textbox","id":"sh/0j29kfmp","slide":6,"name":"object 20","text":"Open Create account\nFrom the login page, select Create account.","textPreview":"Open Create account | From the login page, select Create account.","textChars":63,"textLines":2,"bbox":[88,594.09,201.87,32.4]}
+{"kind":"shape","id":"sh/ehkrip4j","slide":6,"name":"object 22","bbox":[50.67,641.07,692.4,42.4]}
+{"kind":"shape","id":"sh/zitsrul4","slide":6,"name":"object 23","bbox":[50.67,641.07,692.4,42.4]}
+{"kind":"textbox","id":"sh/dwbapkny","slide":6,"name":"object 25","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,653.2,9.4,17.07]}
+{"kind":"textbox","id":"sh/qt0re547","slide":6,"name":"object 26","text":"Complete identity fields\nEnter full name, optional employee ID, plant, official department and a unique email.","textPreview":"Complete identity fields | Enter full name, optional employee ID, plant, official department and a unique email.","textChars":110,"textLines":2,"bbox":[88,644.49,383.93,32.4]}
+{"kind":"shape","id":"sh/4ri9cvmh","slide":6,"name":"object 28","bbox":[50.67,691.47,692.4,42.4]}
+{"kind":"shape","id":"sh/psral0nm","slide":6,"name":"object 29","bbox":[50.67,691.47,692.4,42.4]}
+{"kind":"textbox","id":"sh/6lgbmlo3","slide":6,"name":"object 31","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,703.6,9.4,17.07]}
+{"kind":"textbox","id":"sh/torax07u","slide":6,"name":"object 32","text":"Create a password\nUse at least 8 characters and enter the same value in Confirm password.","textPreview":"Create a password | Use at least 8 characters and enter the same value in Confirm password.","textChars":89,"textLines":2,"bbox":[88,694.89,334.27,32.4]}
+{"kind":"shape","id":"sh/fq9szapk","slide":6,"name":"object 34","bbox":[50.67,741.87,692.4,42.4]}
+{"kind":"shape","id":"sh/up0bq5of","slide":6,"name":"object 35","bbox":[50.67,741.87,692.4,42.4]}
+{"kind":"textbox","id":"sh/gritsf65","slide":6,"name":"object 37","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,754,9.4,17.07]}
+{"kind":"textbox","id":"sh/3u9s3apw","slide":6,"name":"object 38","text":"Submit the registration\nReturn to the login page after the success message. An administrator manages any elevated role or QMS-level assignment.","textPreview":"Submit the registration | Return to the login page after the success message. An administrator manages any elevated role or QMS-level ass...","textChars":143,"textLines":2,"bbox":[88,745.29,564.8,32.4]}
+{"kind":"shape","id":"sh/2x8v6twn","slide":6,"name":"object 40","bbox":[50.67,792.27,692.4,68.8]}
+{"kind":"shape","id":"sh/nyhczyx8","slide":6,"name":"object 41","bbox":[50.67,792.27,692.4,68.8]}
+{"kind":"shape","id":"sh/ozad83ed","slide":6,"name":"object 42","bbox":[50.67,792.27,6.67,68.8]}
+{"kind":"textbox","id":"sh/p0ju1ofy","slide":6,"name":"object 43","text":"Forgot password\nSelect Forgot password on the login page, submit the registered email and follow the time-limited reset link. Reset links expire after 1 hour.","textPreview":"Forgot password | Select Forgot password on the login page, submit the registered email and follow the time-limited reset link. Reset lin...","textChars":158,"textLines":2,"bbox":[57.17,798.64,681.8,49.2]}
+{"kind":"textbox","id":"sh/a1svatwj","slide":6,"name":"object 44","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/bm1c3yx4","slide":6,"name":"object 45","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/jitsnupo","slide":6,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,304,46.67]}
+{"kind":"image","id":"im/qxg3y1sb","slide":6,"name":"object 11","bbox":[69.49,168.73,305.54,393.67]}
+{"kind":"image","id":"im/14rmx0ry","slide":6,"name":"object 13","bbox":[403.18,168.73,343.85,369.1]}
+{"kind":"image","id":"im/03i54vad","slide":6,"name":"object 18","bbox":[60,599.87,24,24]}
+{"kind":"image","id":"im/y9sjyd8v","slide":6,"name":"object 24","bbox":[60,650.27,24,24]}
+{"kind":"image","id":"im/ja10ripg","slide":6,"name":"object 30","bbox":[60,700.67,24,24]}
+{"kind":"image","id":"im/kbu10nql","slide":6,"name":"object 36","bbox":[60,751.07,24,24]}
+{"kind":"notes","id":"nt/e4m4o6","slide":6,"text":""}
+{"kind":"slide","id":"sl/c8ofdm","slide":7,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":18}
+{"kind":"textbox","id":"sh/q1wb6p07","slide":7,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/5gnadkzm","slide":7,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/idwb250v","slide":7,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/3e5sbahg","slide":7,"name":"object 7","text":"5.1","textPreview":"5.1","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/obitgjy5","slide":7,"name":"object 8","text":"Use the Master Dashboard","textPreview":"Use the Master Dashboard","textChars":24,"textLines":1,"bbox":[118.67,90.67,255,26.67]}
+{"kind":"shape","id":"sh/pcrupozq","slide":7,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/5cn218jq","slide":7,"name":"object 10","text":"The dashboard is the main operational view for documents, filters and quick actions.","textPreview":"The dashboard is the main operational view for documents, filters and quick actions.","textChars":84,"textLines":1,"bbox":[49.33,142.67,409.27,15.8]}
+{"kind":"textbox","id":"sh/vmlkve18","slide":7,"name":"object 16","text":"Figure 3 - Dashboard summary, quick actions and filters","textPreview":"Figure 3 - Dashboard summary, quick actions and filters","textChars":55,"textLines":1,"bbox":[269.92,470.22,253.87,14.87]}
+{"kind":"shape","id":"sh/h47m9sji","slide":7,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/g3ylgnid","slide":7,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/1of6lwru","slide":7,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/elonah8j","slide":7,"name":"object 22","text":"Documents Summarty\nCheck total, pending, approved and archived document counts.","textPreview":"Documents Summarty | Check total, pending, approved and archived document counts.","textChars":79,"textLines":2,"bbox":[88,500.58,290.33,33.25]}
+{"kind":"shape","id":"sh/sjm58rqd","slide":7,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/dkvmhwry","slide":7,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/rid4fm9s","slide":7,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/4fm547q1","slide":7,"name":"object 28","text":"Use quick actions\nOpen Upload Documents, Pending Items, Document Library or Graphics Report.","textPreview":"Use quick actions | Open Upload Documents, Pending Items, Document Library or Graphics Report.","textChars":92,"textLines":2,"bbox":[88,550.98,368.47,32.4]}
+{"kind":"shape","id":"sh/7qton2to","slide":7,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/6pknexc3","slide":7,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/8r25g7a9","slide":7,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/vedormtk","slide":7,"name":"object 34","text":"Search and filter\nFilter by text, plant, department, customer and approval status.","textPreview":"Search and filter | Filter by text, plant, department, customer and approval status.","textChars":82,"textLines":2,"bbox":[88,601.38,287.47,32.4]}
+{"kind":"shape","id":"sh/hgv6tcbq","slide":7,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/gfmpkra5","slide":7,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/ih47mhsb","slide":7,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/2xwzep4j","slide":7,"name":"object 40","text":"Open a document\nUse row actions to view, download or bookmark. Deletion is restricted and moves the item to Archive.","textPreview":"Open a document | Use row actions to view, download or bookmark. Deletion is restricted and moves the item to Archive.","textChars":116,"textLines":2,"bbox":[88,651.78,462.6,32.4]}
+{"kind":"shape","id":"sh/ozehgzmp","slide":7,"name":"object 42","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"shape","id":"sh/p0ni94na","slide":7,"name":"object 43","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"textbox","id":"sh/b2p0bu5g","slide":7,"name":"object 45","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[67.33,710.89,9.4,17.07]}
+{"kind":"textbox","id":"sh/c3yhkzml","slide":7,"name":"object 46","text":"Export the current view\nUse CSV export when a filtered list is required for offline review.","textPreview":"Export the current view | Use CSV export when a filtered list is required for offline review.","textChars":91,"textLines":2,"bbox":[88,702.18,292.6,32.4]}
+{"kind":"shape","id":"sh/q5cz654b","slide":7,"name":"object 48","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/r6lgza5w","slide":7,"name":"object 49","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/tkr2587e","slide":7,"name":"object 50","bbox":[50.67,749.16,6.67,54.4]}
+{"kind":"textbox","id":"sh/8zilc36t","slide":7,"name":"object 51","text":"Good practice\nReset filters before concluding that a document is missing. Status and department filters can hide valid records.","textPreview":"Good practice | Reset filters before concluding that a document is missing. Status and department filters can hide valid records.","textChars":127,"textLines":2,"bbox":[57.17,755.53,681.8,34.8]}
+{"kind":"textbox","id":"sh/7y9k3ypo","slide":7,"name":"object 52","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/6x0jato3","slide":7,"name":"object 53","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/q1kfe5c3","slide":7,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,304,46.67]}
+{"kind":"image","id":"im/b654v2l8","slide":7,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/w7e5o7mt","slide":7,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/x87mxc3y","slide":7,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/y9gnqx4j","slide":7,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"image","id":"im/jap4z2l4","slide":7,"name":"object 44","bbox":[60,707.96,24,24]}
+{"kind":"image","id":"im/fepk721c","slide":7,"name":"Picture 54","bbox":[21.17,169.93,750.99,245.54]}
+{"kind":"image","id":"im/udg3eh0r","slide":7,"name":"Picture 56","bbox":[22.57,416.78,750.99,212.86]}
+{"kind":"notes","id":"nt/c8ofdm","slide":7,"text":""}
+{"kind":"slide","id":"sl/rc6hxm","slide":8,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":18}
+{"kind":"textbox","id":"sh/z2xobm1g","slide":8,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/czm5072p","slide":8,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/bydo7214","slide":8,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/ax4nyhkj","slide":8,"name":"object 7","text":"5.2","textPreview":"5.2","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/hwz6lgje","slide":8,"name":"object 8","text":"Upload Files and Enter Metadata","textPreview":"Upload Files and Enter Metadata","textChars":31,"textLines":1,"bbox":[118.67,90.67,311.67,26.67]}
+{"kind":"shape","id":"sh/wvqpcb2t","slide":8,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/a10ri5gf","slide":8,"name":"object 10","text":"Every upload is routed into the Document Library and sent for approval.","textPreview":"Every upload is routed into the Document Library and sent for approval.","textChars":71,"textLines":1,"bbox":[49.33,142.67,348.53,15.8]}
+{"kind":"shape","id":"sh/w329kfyl","slide":8,"name":"object 12","bbox":[54.67,173.07,692.4,295.87]}
+{"kind":"shape","id":"sh/x4bqdkz6","slide":8,"name":"object 13","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"shape","id":"sh/md0re50j","slide":8,"name":"object 14","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"textbox","id":"sh/8zi9gfy9","slide":8,"name":"object 16","text":"Figure 4 - File selection and the start of the upload form","textPreview":"Figure 4 - File selection and the start of the upload form","textChars":58,"textLines":1,"bbox":[271.04,470.22,251.67,14.87]}
+{"kind":"shape","id":"sh/69krq9gn","slide":8,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/7atsjuh8","slide":8,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/2dwn21gz","slide":8,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/pgn6dwfq","slide":8,"name":"object 22","text":"Select one or more files\nDrag files into the drop zone or choose Browse files.","textPreview":"Select one or more files | Drag files into the drop zone or choose Browse files.","textChars":78,"textLines":2,"bbox":[88,500.58,240.07,32.4]}
+{"kind":"shape","id":"sh/ri5of6xg","slide":8,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/qhwn61wb","slide":8,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/cje58be1","slide":8,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/z6poj6xs","slide":8,"name":"object 28","text":"Check format and size\nAccepted formats: PDF, DOC/DOCX, XLS/XLSX and PPT/PPTX. Maximum size is 100 MB per file.","textPreview":"Check format and size | Accepted formats: PDF, DOC/DOCX, XLS/XLSX and PPT/PPTX. Maximum size is 100 MB per file.","textChars":110,"textLines":2,"bbox":[88,550.98,452.87,32.4]}
+{"kind":"shape","id":"sh/wbi50vul","slide":8,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/xcrm9gvq","slide":8,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/vap47qd0","slide":8,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/87y5wbu9","slide":8,"name":"object 34","text":"Enter the document number\nUse the approved numbering convention, for example DOC-2026-001.","textPreview":"Enter the document number | Use the approved numbering convention, for example DOC-2026-001.","textChars":90,"textLines":2,"bbox":[88,601.38,322.27,32.4]}
+{"kind":"shape","id":"sh/mlgnu1c3","slide":8,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/nmp436do","slide":8,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/1k7m1wvy","slide":8,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/po329sbq","slide":8,"name":"object 40","text":"Confirm revision\nEnter the revision value. If left blank, the system uses Rev.00.","textPreview":"Confirm revision | Enter the revision value. If left blank, the system uses Rev.00.","textChars":81,"textLines":2,"bbox":[88,651.78,283.47,32.4]}
+{"kind":"shape","id":"sh/3mlk72tk","slide":8,"name":"object 42","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"shape","id":"sh/2lcjyxsz","slide":8,"name":"object 43","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"textbox","id":"sh/crul47a1","slide":8,"name":"object 45","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[67.33,710.89,9.4,17.07]}
+{"kind":"textbox","id":"sh/rqlkb2tg","slide":8,"name":"object 46","text":"Select ownership\nConfirm plant and department. Choose a customer or enable Internal Document.","textPreview":"Select ownership | Confirm plant and department. Choose a customer or enable Internal Document.","textChars":93,"textLines":2,"bbox":[88,702.18,368.53,32.4]}
+{"kind":"shape","id":"sh/twj218bi","slide":8,"name":"object 48","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/sva1snax","slide":8,"name":"object 49","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/ypo7mp4j","slide":8,"name":"object 50","bbox":[50.67,749.16,6.67,54.4]}
+{"kind":"textbox","id":"sh/jqx8fu54","slide":8,"name":"object 51","text":"Before upload\nRemove passwords from files intended for browser preview and confirm the file name does not expose confidential personal data.","textPreview":"Before upload | Remove passwords from files intended for browser preview and confirm the file name does not expose confidential personal ...","textChars":140,"textLines":2,"bbox":[57.17,755.53,681.8,34.8]}
+{"kind":"textbox","id":"sh/kr69ozm9","slide":8,"name":"object 52","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/lcfqhknu","slide":8,"name":"object 53","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/l47q1cze","slide":8,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,304,46.67]}
+{"kind":"image","id":"im/0fmlsvuh","slide":8,"name":"object 15","bbox":[53.79,170.4,686.13,293.16]}
+{"kind":"image","id":"im/zed4jadw","slide":8,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/ed43q5cb","slide":8,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/hkb29gvi","slide":8,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/gj2lgbux","slide":8,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"image","id":"im/8n6lwb2t","slide":8,"name":"object 44","bbox":[60,707.96,24,24]}
+{"kind":"notes","id":"nt/rc6hxm","slide":8,"text":""}
+{"kind":"slide","id":"sl/7s18u3","slide":9,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":18}
+{"kind":"textbox","id":"sh/kzylgjq9","slide":9,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/bupkju9s","slide":9,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/wvy1czqd","slide":9,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/xw72l4ry","slide":9,"name":"object 7","text":"5.3","textPreview":"5.3","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/m5wj6p8b","slide":9,"name":"object 8","text":"Choose the Library Path and Submit","textPreview":"Choose the Library Path and Submit","textChars":34,"textLines":1,"bbox":[118.67,90.67,348.27,26.67]}
+{"kind":"shape","id":"sh/n65kfu9w","slide":9,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/7ut0n2xg","slide":9,"name":"object 10","text":"The selected category and folder determine where users find the approved document.","textPreview":"The selected category and folder determine where users find the approved document.","textChars":82,"textLines":1,"bbox":[49.33,142.67,417.8,15.8]}
+{"kind":"shape","id":"sh/tgbipcfm","slide":9,"name":"object 12","bbox":[54.67,173.07,692.4,336.73]}
+{"kind":"shape","id":"sh/8v2hg7y1","slide":9,"name":"object 13","bbox":[50.67,169.07,692.4,336.73]}
+{"kind":"shape","id":"sh/vid0rmxs","slide":9,"name":"object 14","bbox":[50.67,169.07,692.4,336.73]}
+{"kind":"textbox","id":"sh/hkvitcfy","slide":9,"name":"object 16","text":"Figure 5 - Current upload workflow; continue down the form to set the library path and submit","textPreview":"Figure 5 - Current upload workflow; continue down the form to set the library path and submit","textChars":93,"textLines":1,"bbox":[187.4,511.08,418.93,14.87]}
+{"kind":"shape","id":"sh/bm90fixo","slide":9,"name":"object 18","bbox":[50.67,538.01,692.4,42.4]}
+{"kind":"shape","id":"sh/al0z6dg3","slide":9,"name":"object 19","bbox":[50.67,538.01,692.4,42.4]}
+{"kind":"textbox","id":"sh/fihknqhw","slide":9,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,550.14,9.4,17.07]}
+{"kind":"textbox","id":"sh/0jqlwvih","slide":9,"name":"object 22","text":"Select the category\nChoose the correct library category, such as QMS.","textPreview":"Select the category | Choose the correct library category, such as QMS.","textChars":69,"textLines":2,"bbox":[88,541.44,232.67,32.4]}
+{"kind":"shape","id":"sh/qdo3ql0f","slide":9,"name":"object 24","bbox":[50.67,588.41,692.4,42.4]}
+{"kind":"shape","id":"sh/rexkjqh0","slide":9,"name":"object 25","bbox":[50.67,588.41,692.4,42.4]}
+{"kind":"textbox","id":"sh/dgf2lgz6","slide":9,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,600.54,9.4,17.07]}
+{"kind":"textbox","id":"sh/ipo3m10j","slide":9,"name":"object 28","text":"Choose document type and folder\nComplete every path field until the path indicator shows the exact destination.","textPreview":"Choose document type and folder | Complete every path field until the path indicator shows the exact destination.","textChars":111,"textLines":2,"bbox":[88,591.84,354.27,32.4]}
+{"kind":"shape","id":"sh/l436l4j6","slide":9,"name":"object 30","bbox":[50.67,638.81,692.4,42.4]}
+{"kind":"shape","id":"sh/k3u5sz21","slide":9,"name":"object 31","bbox":[50.67,638.81,692.4,42.4]}
+{"kind":"textbox","id":"sh/y1cnq9kv","slide":9,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,650.94,9.4,17.07]}
+{"kind":"textbox","id":"sh/x036h4ja","slide":9,"name":"object 34","text":"Add a revision summary when needed\nEnable the summary option when replacing or revising an existing controlled document.","textPreview":"Add a revision summary when needed | Enable the summary option when replacing or revising an existing controlled document.","textChars":120,"textLines":2,"bbox":[88,642.24,399.87,32.4]}
+{"kind":"shape","id":"sh/be1ofu14","slide":9,"name":"object 36","bbox":[50.67,689.21,692.4,42.4]}
+{"kind":"shape","id":"sh/adsnmpkj","slide":9,"name":"object 37","bbox":[50.67,689.21,692.4,42.4]}
+{"kind":"textbox","id":"sh/oba5kf2t","slide":9,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,701.34,9.4,17.07]}
+{"kind":"textbox","id":"sh/of2xk32p","slide":9,"name":"object 40","text":"Review all details\nVerify file, document number, revision, plant, department, customer and library path.","textPreview":"Review all details | Verify file, document number, revision, plant, department, customer and library path.","textChars":104,"textLines":2,"bbox":[88,692.64,384.47,32.4]}
+{"kind":"shape","id":"sh/2dkfitkj","slide":9,"name":"object 42","bbox":[50.67,739.61,692.4,42.4]}
+{"kind":"shape","id":"sh/netwry14","slide":9,"name":"object 43","bbox":[50.67,739.61,692.4,42.4]}
+{"kind":"textbox","id":"sh/x4vex8j6","slide":9,"name":"object 45","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[67.33,751.74,9.4,17.07]}
+{"kind":"textbox","id":"sh/ahkfmt0v","slide":9,"name":"object 46","text":"Submit for approval\nThe document is stored with status Pending, the L2 reviewer is notified and the action is logged.","textPreview":"Submit for approval | The document is stored with status Pending, the L2 reviewer is notified and the action is logged.","textChars":117,"textLines":2,"bbox":[88,743.04,438.13,32.4]}
+{"kind":"shape","id":"sh/snidcz2h","slide":9,"name":"object 48","bbox":[50.67,790.01,692.4,68.8]}
+{"kind":"shape","id":"sh/d8rel4j2","slide":9,"name":"object 49","bbox":[50.67,790.01,692.4,68.8]}
+{"kind":"shape","id":"sh/v2h0rmlk","slide":9,"name":"object 50","bbox":[50.67,790.01,6.67,68.8]}
+{"kind":"textbox","id":"sh/u1ozihkz","slide":9,"name":"object 51","text":"Required path\nDo not submit against a broad category when a lower-level folder is required. Incorrect placement makes controlled documents difficult to retrieve.","textPreview":"Required path | Do not submit against a broad category when a lower-level folder is required. Incorrect placement makes controlled docume...","textChars":161,"textLines":2,"bbox":[57.17,796.38,681.8,49.2]}
+{"kind":"textbox","id":"sh/h4zitc3q","slide":9,"name":"object 52","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/w3qhk725","slide":9,"name":"object 53","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/47a947ad","slide":9,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/94f654zy","slide":9,"name":"object 15","bbox":[53.41,170.4,686.88,334.01]}
+{"kind":"image","id":"im/m1onu9g7","slide":9,"name":"object 20","bbox":[60,547.21,24,24]}
+{"kind":"image","id":"im/n2xo3uhs","slide":9,"name":"object 26","bbox":[60,597.61,24,24]}
+{"kind":"image","id":"im/w7qp0jyp","slide":9,"name":"object 32","bbox":[60,648.01,24,24]}
+{"kind":"image","id":"im/x8z69ozu","slide":9,"name":"object 38","bbox":[60,698.41,24,24]}
+{"kind":"image","id":"im/5ov6tore","slide":9,"name":"object 44","bbox":[60,748.81,24,24]}
+{"kind":"notes","id":"nt/7s18u3","slide":9,"text":""}
+{"kind":"slide","id":"sl/1e6mpc","slide":10,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":16}
+{"kind":"textbox","id":"sh/j2twbat4","slide":10,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/87mx8ful","slide":10,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/76tgfat0","slide":10,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/65kf6pcf","slide":10,"name":"object 7","text":"6.1","textPreview":"6.1","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/9cre50b2","slide":10,"name":"object 8","text":"Find Documents in Pending Items","textPreview":"Find Documents in Pending Items","textChars":31,"textLines":1,"bbox":[118.67,90.67,324.93,26.67]}
+{"kind":"shape","id":"sh/obixcvuh","slide":10,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/e5of61cn","slide":10,"name":"object 10","text":"All logged-in users can view the approval list; decision rights depend on QMS level.","textPreview":"All logged-in users can view the approval list; decision rights depend on QMS level.","textChars":84,"textLines":1,"bbox":[49.33,142.67,405,15.8]}
+{"kind":"shape","id":"sh/076x8rut","slide":10,"name":"object 12","bbox":[54.67,173.07,692.4,295.87]}
+{"kind":"shape","id":"sh/18zy1wby","slide":10,"name":"object 13","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"shape","id":"sh/298fa1cj","slide":10,"name":"object 14","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"textbox","id":"sh/obqxcbap","slide":10,"name":"object 16","text":"Figure 6 - Pending Items list with status filters and review actions","textPreview":"Figure 6 - Pending Items list with status filters and review actions","textChars":68,"textLines":1,"bbox":[250.21,470.22,293.33,14.87]}
+{"kind":"shape","id":"sh/ax8zelsv","slide":10,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/byhg7qtg","slide":10,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/61sf2l83","slide":10,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/t4jexgre","slide":10,"name":"object 22","text":"Choose a status tab\nView All, Pending, Pending Final Approval, Approved or Rejected items.","textPreview":"Choose a status tab | View All, Pending, Pending Final Approval, Approved or Rejected items.","textChars":90,"textLines":2,"bbox":[88,500.58,329.67,32.4]}
+{"kind":"shape","id":"sh/jyhwr69c","slide":10,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/yd8fy18r","slide":10,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/kzax0bqx","slide":10,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/bahwn69g","slide":10,"name":"object 28","text":"Search the list\nSearch by file name, document number or uploader.","textPreview":"Search the list | Search by file name, document number or uploader.","textChars":65,"textLines":2,"bbox":[88,550.98,239.53,32.4]}
+{"kind":"shape","id":"sh/0fmt476d","slide":10,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/1gfuxc7y","slide":10,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/fedcv2p8","slide":10,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/oj6d876p","slide":10,"name":"object 34","text":"Open Review\nInspect the file preview, metadata and current approval stage.","textPreview":"Open Review | Inspect the file preview, metadata and current approval stage.","textChars":74,"textLines":2,"bbox":[88,601.38,283.47,32.4]}
+{"kind":"shape","id":"sh/2hob6xoj","slide":10,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/nixcz2p4","slide":10,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/58bups7q","slide":10,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/x47m587a","slide":10,"name":"object 40","text":"Export when required\nDownload the filtered list as CSV for controlled reporting.","textPreview":"Export when required | Download the filtered list as CSV for controlled reporting.","textChars":80,"textLines":2,"bbox":[88,651.78,260.67,32.4]}
+{"kind":"shape","id":"sh/b2543ip4","slide":10,"name":"object 42","bbox":[50.67,698.76,692.4,54.4]}
+{"kind":"shape","id":"sh/a1w3udoj","slide":10,"name":"object 43","bbox":[50.67,698.76,692.4,54.4]}
+{"kind":"shape","id":"sh/90nm187y","slide":10,"name":"object 44","bbox":[50.67,698.76,6.67,54.4]}
+{"kind":"textbox","id":"sh/ofels36t","slide":10,"name":"object 45","text":"No bulk decisions\nApprovals must be reviewed individually because the workflow requires stage-specific review, recipient selection and comments.","textPreview":"No bulk decisions | Approvals must be reviewed individually because the workflow requires stage-specific review, recipient selection and ...","textChars":144,"textLines":2,"bbox":[57.17,705.13,681.8,34.8]}
+{"kind":"textbox","id":"sh/ne5kzyp8","slide":10,"name":"object 46","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/mdw3qton","slide":10,"name":"object 47","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/ahofy9sv","slide":10,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/vedc3mlg","slide":10,"name":"object 15","bbox":[53.79,170.4,686.13,293.16]}
+{"kind":"image","id":"im/dsjy9k3y","slide":10,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/crahgfmd","slide":10,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/rq1g7als","slide":10,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/q5sze547","slide":10,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"notes","id":"nt/1e6mpc","slide":10,"text":""}
+{"kind":"slide","id":"sl/rftvp7","slide":11,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":18}
+{"kind":"textbox","id":"sh/gbutoryt","slide":11,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/3y5cj6xk","slide":11,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/ozedsby5","slide":11,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/p0nulgfq","slide":11,"name":"object 7","text":"6.2","textPreview":"6.2","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/ihsbexgv","slide":11,"name":"object 8","text":"Review the Document Before Deciding","textPreview":"Review the Document Before Deciding","textChars":35,"textLines":1,"bbox":[118.67,90.67,369.47,26.67]}
+{"kind":"shape","id":"sh/j21c72xg","slide":11,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/vu5knytg","slide":11,"name":"object 10","text":"Review the file and metadata together before completing an approval action.","textPreview":"Review the file and metadata together before completing an approval action.","textChars":75,"textLines":1,"bbox":[49.33,142.67,372.2,15.8]}
+{"kind":"shape","id":"sh/hwn2p8b6","slide":11,"name":"object 12","bbox":[54.67,173.07,692.4,255.73]}
+{"kind":"shape","id":"sh/wvelw3u1","slide":11,"name":"object 13","bbox":[50.67,169.07,692.4,255.73]}
+{"kind":"shape","id":"sh/7qlkjet4","slide":11,"name":"object 14","bbox":[50.67,169.07,692.4,255.73]}
+{"kind":"textbox","id":"sh/9sn2loba","slide":11,"name":"object 16","text":"Figure 7 - Approval review workspace with preview and document details","textPreview":"Figure 7 - Approval review workspace with preview and document details","textChars":70,"textLines":1,"bbox":[231.9,430.13,329.93,14.87]}
+{"kind":"shape","id":"sh/zmlkfed8","slide":11,"name":"object 18","bbox":[50.67,457.06,692.4,42.4]}
+{"kind":"shape","id":"sh/y1cjm9cn","slide":11,"name":"object 19","bbox":[50.67,457.06,692.4,42.4]}
+{"kind":"textbox","id":"sh/ny147ex0","slide":11,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,469.2,9.4,17.07]}
+{"kind":"textbox","id":"sh/ozul0zel","slide":11,"name":"object 22","text":"Confirm document identity\nCheck file name, document number, revision, plant, department, customer and category.","textPreview":"Confirm document identity | Check file name, document number, revision, plant, department, customer and category.","textChars":111,"textLines":2,"bbox":[88,460.49,404.47,32.4]}
+{"kind":"shape","id":"sh/alc329wr","slide":11,"name":"object 24","bbox":[50.67,507.46,692.4,42.4]}
+{"kind":"shape","id":"sh/bml4bexc","slide":11,"name":"object 25","bbox":[50.67,507.46,692.4,42.4]}
+{"kind":"textbox","id":"sh/xo3mdof2","slide":11,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,519.6,9.4,17.07]}
+{"kind":"textbox","id":"sh/ypc36twn","slide":11,"name":"object 28","text":"Inspect the preview\nOffice documents use a generated PDF viewing copy. Use Open file in new tab when a larger view is required.","textPreview":"Inspect the preview | Office documents use a generated PDF viewing copy. Use Open file in new tab when a larger view is required.","textChars":127,"textLines":2,"bbox":[88,510.89,504.33,32.4]}
+{"kind":"shape","id":"sh/9k765sza","slide":11,"name":"object 30","bbox":[50.67,557.86,692.4,42.4]}
+{"kind":"shape","id":"sh/8jypwnyp","slide":11,"name":"object 31","bbox":[50.67,557.86,692.4,42.4]}
+{"kind":"textbox","id":"sh/mhwnudgz","slide":11,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,570,9.4,17.07]}
+{"kind":"textbox","id":"sh/ho769szm","slide":11,"name":"object 34","text":"Check revision context\nRead the revision summary and compare with the previous approved version when applicable.","textPreview":"Check revision context | Read the revision summary and compare with the previous approved version when applicable.","textChars":112,"textLines":2,"bbox":[88,561.29,431.27,32.4]}
+{"kind":"shape","id":"sh/vmpo72hg","slide":11,"name":"object 36","bbox":[50.67,608.26,692.4,42.4]}
+{"kind":"shape","id":"sh/ulg7yxgv","slide":11,"name":"object 37","bbox":[50.67,608.26,692.4,42.4]}
+{"kind":"textbox","id":"sh/4bip47yx","slide":11,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,620.4,9.4,17.07]}
+{"kind":"textbox","id":"sh/0729wbi5","slide":11,"name":"object 40","text":"Confirm the current stage\nPending requires L2 action. Pending Final Approval requires L1 or Admin action.","textPreview":"Confirm the current stage | Pending requires L2 action. Pending Final Approval requires L1 or Admin action.","textChars":105,"textLines":2,"bbox":[88,611.69,367.93,32.4]}
+{"kind":"shape","id":"sh/e5kru10f","slide":11,"name":"object 42","bbox":[50.67,658.66,692.4,42.4]}
+{"kind":"shape","id":"sh/f6t8361k","slide":11,"name":"object 43","bbox":[50.67,658.66,692.4,42.4]}
+{"kind":"textbox","id":"sh/d4bq1wju","slide":11,"name":"object 45","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[67.33,670.8,9.4,17.07]}
+{"kind":"textbox","id":"sh/qh0rq103","slide":11,"name":"object 46","text":"Record a clear decision\nFollow the correct stage procedure on the next page.","textPreview":"Record a clear decision | Follow the correct stage procedure on the next page.","textChars":76,"textLines":2,"bbox":[88,662.09,243,32.4]}
+{"kind":"shape","id":"sh/cfm94vid","slide":11,"name":"object 48","bbox":[50.67,709.06,692.4,54.4]}
+{"kind":"shape","id":"sh/x0vad0jy","slide":11,"name":"object 49","bbox":[50.67,709.06,692.4,54.4]}
+{"kind":"shape","id":"sh/7uhc3ul0","slide":11,"name":"object 50","bbox":[50.67,709.06,6.67,54.4]}
+{"kind":"textbox","id":"sh/m98bapkf","slide":11,"name":"object 51","text":"Review standard\nNever approve from the list view alone. Open the review page and verify the actual file content.","textPreview":"Review standard | Never approve from the list view alone. Open the review page and verify the actual file content.","textChars":112,"textLines":2,"bbox":[57.17,715.44,681.8,34.8]}
+{"kind":"textbox","id":"sh/9wzu5436","slide":11,"name":"object 52","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/8vqdcz2l","slide":11,"name":"object 53","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/4b69onyx","slide":11,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/x8ni9wbu","slide":11,"name":"object 15","bbox":[54.28,170.4,685.15,253.06]}
+{"kind":"image","id":"im/a5cjy1s3","slide":11,"name":"object 20","bbox":[60,466.26,24,24]}
+{"kind":"image","id":"im/b6l076to","slide":11,"name":"object 26","bbox":[60,516.66,24,24]}
+{"kind":"image","id":"im/sba1o7up","slide":11,"name":"object 32","bbox":[60,567.06,24,24]}
+{"kind":"image","id":"im/dcjixcba","slide":11,"name":"object 38","bbox":[60,617.46,24,24]}
+{"kind":"image","id":"im/tsby183e","slide":11,"name":"object 44","bbox":[60,667.86,24,24]}
+{"kind":"notes","id":"nt/rftvp7","slide":11,"text":""}
+{"kind":"slide","id":"sl/9xoh89","slide":12,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":16}
+{"kind":"textbox","id":"sh/mh4vixwj","slide":12,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/lgvu9sve","slide":12,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/ytkvedwn","slide":12,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/zutc7id8","slide":12,"name":"object 7","text":"6.3","textPreview":"6.3","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/cr2tc3eh","slide":12,"name":"object 8","text":"Open the Approval Request","textPreview":"Open the Approval Request","textChars":25,"textLines":1,"bbox":[118.67,90.67,266.07,26.67]}
+{"kind":"shape","id":"sh/xsbu58v2","slide":12,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/psf25sfa","slide":12,"name":"object 10","text":"The approval email and review page provide the same document context.","textPreview":"The approval email and review page provide the same document context.","textChars":69,"textLines":1,"bbox":[49.33,142.67,358.27,15.8]}
+{"kind":"textbox","id":"sh/3qxk3ixk","slide":12,"name":"object 12","text":"Approval request example - preview, status and document details","textPreview":"Approval request example - preview, status and document details","textChars":63,"textLines":1,"bbox":[248.79,546.55,296.13,14.87]}
+{"kind":"shape","id":"sh/14v21sfe","slide":12,"name":"object 14","bbox":[50.67,573.48,692.4,42.4]}
+{"kind":"shape","id":"sh/g3m1snet","slide":12,"name":"object 15","bbox":[50.67,573.48,692.4,42.4]}
+{"kind":"textbox","id":"sh/e14jqdwn","slide":12,"name":"object 17","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,585.61,9.4,17.07]}
+{"kind":"textbox","id":"sh/t0v2x8f2","slide":12,"name":"object 18","text":"Open the email action\nSelect Review document only from an expected approval request.","textPreview":"Open the email action | Select Review document only from an expected approval request.","textChars":84,"textLines":2,"bbox":[88,576.91,301.73,32.4]}
+{"kind":"shape","id":"sh/kjql43mt","slide":12,"name":"object 20","bbox":[50.67,623.88,692.4,42.4]}
+{"kind":"shape","id":"sh/l4z2d8ny","slide":12,"name":"object 21","bbox":[50.67,623.88,692.4,42.4]}
+{"kind":"textbox","id":"sh/jixkbi58","slide":12,"name":"object 23","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,636.01,9.4,17.07]}
+{"kind":"textbox","id":"sh/wf6103mh","slide":12,"name":"object 24","text":"Confirm the status\nThe first reviewer acts while the status is Pending.","textPreview":"Confirm the status | The first reviewer acts while the status is Pending.","textChars":71,"textLines":2,"bbox":[88,627.31,230.4,32.4]}
+{"kind":"shape","id":"sh/adojyt4b","slide":12,"name":"object 26","bbox":[50.67,674.28,692.4,42.4]}
+{"kind":"shape","id":"sh/bexk7y5w","slide":12,"name":"object 27","bbox":[50.67,674.28,692.4,42.4]}
+{"kind":"textbox","id":"sh/hcj2lsn6","slide":12,"name":"object 29","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,686.41,9.4,17.07]}
+{"kind":"textbox","id":"sh/r6l4bmpo","slide":12,"name":"object 30","text":"Verify the converted preview\nOffice files are shown through their generated PDF viewing copy.","textPreview":"Verify the converted preview | Office files are shown through their generated PDF viewing copy.","textChars":93,"textLines":2,"bbox":[88,677.71,298.33,32.4]}
+{"kind":"shape","id":"sh/d836dw7e","slide":12,"name":"object 32","bbox":[50.67,724.68,692.4,42.4]}
+{"kind":"shape","id":"sh/c7u54r6t","slide":12,"name":"object 33","bbox":[50.67,724.68,692.4,42.4]}
+{"kind":"textbox","id":"sh/e9cn61oz","slide":12,"name":"object 35","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,736.81,9.4,17.07]}
+{"kind":"textbox","id":"sh/1wn6hg7q","slide":12,"name":"object 36","text":"Cross-check metadata\nConfirm document number, revision, category, uploader, plant, department and customer.","textPreview":"Cross-check metadata | Confirm document number, revision, category, uploader, plant, department and customer.","textChars":107,"textLines":2,"bbox":[88,728.11,409.6,32.4]}
+{"kind":"shape","id":"sh/fy1432pg","slide":12,"name":"object 38","bbox":[50.67,775.08,692.4,54.4]}
+{"kind":"shape","id":"sh/udsnuhov","slide":12,"name":"object 39","bbox":[50.67,775.08,692.4,54.4]}
+{"kind":"shape","id":"sh/6hwnqhwr","slide":12,"name":"object 40","bbox":[50.67,775.08,6.67,54.4]}
+{"kind":"textbox","id":"sh/7i5ojmxc","slide":12,"name":"object 41","text":"Email safety\nConfirm the sender and document context before opening a review link. Report unexpected or duplicate requests.","textPreview":"Email safety | Confirm the sender and document context before opening a review link. Report unexpected or duplicate requests.","textChars":123,"textLines":2,"bbox":[57.17,781.45,681.8,34.8]}
+{"kind":"textbox","id":"sh/8je5s7eh","slide":12,"name":"object 42","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/tkn6lcf2","slide":12,"name":"object 43","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/9o3qpcz2","slide":12,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/kbuhsvep","slide":12,"name":"object 11","bbox":[50.33,168.73,696.7,376.48]}
+{"kind":"image","id":"im/zqlgzqdk","slide":12,"name":"object 16","bbox":[60,582.68,24,24]}
+{"kind":"image","id":"im/ypczqlwz","slide":12,"name":"object 22","bbox":[60,633.08,24,24]}
+{"kind":"image","id":"im/xo3yxgve","slide":12,"name":"object 28","bbox":[60,683.48,24,24]}
+{"kind":"image","id":"im/cnuhobet","slide":12,"name":"object 34","bbox":[60,733.88,24,24]}
+{"kind":"notes","id":"nt/9xoh89","slide":12,"text":""}
+{"kind":"slide","id":"sl/nn5bhv","slide":13,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":16}
+{"kind":"textbox","id":"sh/epkzylsv","slide":13,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/pgvyx0bi","slide":13,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/2dkz2ls7","slide":13,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/3etgvqts","slide":13,"name":"object 7","text":"6.4","textPreview":"6.4","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/4jixsbat","slide":13,"name":"object 8","text":"Complete First-Stage Approval","textPreview":"Complete First-Stage Approval","textChars":29,"textLines":1,"bbox":[118.67,90.67,296.07,26.67]}
+{"kind":"shape","id":"sh/5krylwbe","slide":13,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/1kre1szi","slide":13,"name":"object 10","text":"The designated L2 reviewer verifies the document and selects final recipients.","textPreview":"The designated L2 reviewer verifies the document and selects final recipients.","textChars":78,"textLines":1,"bbox":[49.33,142.67,378.87,15.8]}
+{"kind":"textbox","id":"sh/fipwzihc","slide":13,"name":"object 12","text":"First-stage request, decision controls and successful handoff","textPreview":"First-stage request, decision controls and successful handoff","textChars":61,"textLines":1,"bbox":[259.49,546.55,274.73,14.87]}
+{"kind":"shape","id":"sh/pory5cze","slide":13,"name":"object 14","bbox":[50.67,573.48,692.4,42.4]}
+{"kind":"shape","id":"sh/onixw7yt","slide":13,"name":"object 15","bbox":[50.67,573.48,692.4,42.4]}
+{"kind":"textbox","id":"sh/2l0fuxg3","slide":13,"name":"object 17","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,585.61,9.4,17.07]}
+{"kind":"textbox","id":"sh/dcby9czq","slide":13,"name":"object 18","text":"Review the initial email\nCheck that the request status is Pending and open the review page.","textPreview":"Review the initial email | Check that the request status is Pending and open the review page.","textChars":91,"textLines":2,"bbox":[88,576.91,310.87,32.4]}
+{"kind":"shape","id":"sh/w7a9sfad","slide":13,"name":"object 20","bbox":[50.67,623.88,692.4,42.4]}
+{"kind":"shape","id":"sh/h83qlkry","slide":13,"name":"object 21","bbox":[50.67,623.88,692.4,42.4]}
+{"kind":"textbox","id":"sh/v618ja9s","slide":13,"name":"object 23","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,636.01,9.4,17.07]}
+{"kind":"textbox","id":"sh/4vu9wzap","slide":13,"name":"object 24","text":"Select final recipients\nEnter the approved people or department heads who should receive the final document.","textPreview":"Select final recipients | Enter the approved people or department heads who should receive the final document.","textChars":108,"textLines":2,"bbox":[88,627.31,401.67,32.4]}
+{"kind":"shape","id":"sh/itcrupsj","slide":13,"name":"object 26","bbox":[50.67,674.28,692.4,42.4]}
+{"kind":"shape","id":"sh/jul8nu94","slide":13,"name":"object 27","bbox":[50.67,674.28,692.4,42.4]}
+{"kind":"textbox","id":"sh/l0zqd0bq","slide":13,"name":"object 29","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,686.41,9.4,17.07]}
+{"kind":"textbox","id":"sh/3upczyt8","slide":13,"name":"object 30","text":"Approve or reject\nChoose Approve first stage, or add specific correction comments before rejecting.","textPreview":"Approve or reject | Choose Approve first stage, or add specific correction comments before rejecting.","textChars":99,"textLines":2,"bbox":[88,677.71,373.07,32.4]}
+{"kind":"shape","id":"sh/pw7u18be","slide":13,"name":"object 32","bbox":[50.67,724.68,692.4,42.4]}
+{"kind":"shape","id":"sh/ovyts3ut","slide":13,"name":"object 33","bbox":[50.67,724.68,692.4,42.4]}
+{"kind":"textbox","id":"sh/epwbmtcr","slide":13,"name":"object 35","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,736.81,9.4,17.07]}
+{"kind":"textbox","id":"sh/1s7uxobi","slide":13,"name":"object 36","text":"Confirm the handoff\nA successful first approval changes the item to Pending Final Approval.","textPreview":"Confirm the handoff | A successful first approval changes the item to Pending Final Approval.","textChars":91,"textLines":2,"bbox":[88,728.11,326.27,32.4]}
+{"kind":"shape","id":"sh/r25sret0","slide":13,"name":"object 38","bbox":[50.67,775.08,692.4,54.4]}
+{"kind":"shape","id":"sh/61wbi9cv","slide":13,"name":"object 39","bbox":[50.67,775.08,692.4,54.4]}
+{"kind":"shape","id":"sh/m9gfmh8f","slide":13,"name":"object 40","bbox":[50.67,775.08,6.67,54.4]}
+{"kind":"textbox","id":"sh/7apwvmp0","slide":13,"name":"object 41","text":"Recipient check\nVerify recipient addresses before approval. Final sharing uses the recipients selected at this stage.","textPreview":"Recipient check | Verify recipient addresses before approval. Final sharing uses the recipients selected at this stage.","textChars":117,"textLines":2,"bbox":[57.17,781.45,681.8,34.8]}
+{"kind":"textbox","id":"sh/8vyxorq5","slide":13,"name":"object 42","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/9w7yxc7q","slide":13,"name":"object 43","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/9g3ipg76","slide":13,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/crqtkrat","slide":13,"name":"object 11","bbox":[50.33,168.73,696.7,376.48]}
+{"kind":"image","id":"im/bqhsbmt8","slide":13,"name":"object 16","bbox":[60,582.68,24,24]}
+{"kind":"image","id":"im/qp8bihsn","slide":13,"name":"object 22","bbox":[60,633.08,24,24]}
+{"kind":"image","id":"im/poza9cbi","slide":13,"name":"object 28","bbox":[60,683.48,24,24]}
+{"kind":"image","id":"im/onqtg7ax","slide":13,"name":"object 34","bbox":[60,733.88,24,24]}
+{"kind":"notes","id":"nt/nn5bhv","slide":13,"text":""}
+{"kind":"slide","id":"sl/j1rxq9","slide":14,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":16}
+{"kind":"textbox","id":"sh/694vmd03","slide":14,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/58bed8zi","slide":14,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/i5kvit0r","slide":14,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/j6twbyhc","slide":14,"name":"object 7","text":"6.5","textPreview":"6.5","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/w32dgji1","slide":14,"name":"object 8","text":"Complete Final Approval and Sharing","textPreview":"Complete Final Approval and Sharing","textChars":35,"textLines":1,"bbox":[118.67,90.67,359.4,26.67]}
+{"kind":"shape","id":"sh/x4be9ozm","slide":14,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/lwnyh4nq","slide":14,"name":"object 10","text":"The L1 or Admin reviewer makes the final controlled-document decision.","textPreview":"The L1 or Admin reviewer makes the final controlled-document decision.","textChars":70,"textLines":1,"bbox":[49.33,142.67,352.73,15.8]}
+{"kind":"textbox","id":"sh/ja5gfu5k","slide":14,"name":"object 12","text":"Final approval request, confirmation and shared-document notification","textPreview":"Final approval request, confirmation and shared-document notification","textChars":69,"textLines":1,"bbox":[238.64,546.55,316.47,14.87]}
+{"kind":"shape","id":"sh/x83ydkne","slide":14,"name":"object 14","bbox":[50.67,573.48,692.4,42.4]}
+{"kind":"shape","id":"sh/w7uxkf69","slide":14,"name":"object 15","bbox":[50.67,573.48,692.4,42.4]}
+{"kind":"textbox","id":"sh/a5cfipo3","slide":14,"name":"object 17","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,585.61,9.4,17.07]}
+{"kind":"textbox","id":"sh/943y9kni","slide":14,"name":"object 18","text":"Open the final request\nConfirm the status is Pending Final Approval.","textPreview":"Open the final request | Confirm the status is Pending Final Approval.","textChars":68,"textLines":2,"bbox":[88,576.91,208.13,32.4]}
+{"kind":"shape","id":"sh/0zypczi5","slide":14,"name":"object 20","bbox":[50.67,623.88,692.4,42.4]}
+{"kind":"shape","id":"sh/10rql4zq","slide":14,"name":"object 21","bbox":[50.67,623.88,692.4,42.4]}
+{"kind":"textbox","id":"sh/zyp8jehk","slide":14,"name":"object 23","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,636.01,9.4,17.07]}
+{"kind":"textbox","id":"sh/cvyp8zit","slide":14,"name":"object 24","text":"Perform the final review\nRecheck the file, metadata, revision, first-stage decision and selected recipients.","textPreview":"Perform the final review | Recheck the file, metadata, revision, first-stage decision and selected recipients.","textChars":108,"textLines":2,"bbox":[88,627.31,367.33,32.4]}
+{"kind":"shape","id":"sh/qtg76p03","slide":14,"name":"object 26","bbox":[50.67,674.28,692.4,42.4]}
+{"kind":"shape","id":"sh/rupofuho","slide":14,"name":"object 27","bbox":[50.67,674.28,692.4,42.4]}
+{"kind":"textbox","id":"sh/xsbqtozy","slide":14,"name":"object 29","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,686.41,9.4,17.07]}
+{"kind":"textbox","id":"sh/7mdsj210","slide":14,"name":"object 30","text":"Approve or reject\nApprove to publish and notify, or reject with mandatory correction comments.","textPreview":"Approve or reject | Approve to publish and notify, or reject with mandatory correction comments.","textChars":94,"textLines":2,"bbox":[88,677.71,351.33,32.4]}
+{"kind":"shape","id":"sh/tovalsj6","slide":14,"name":"object 32","bbox":[50.67,724.68,692.4,42.4]}
+{"kind":"shape","id":"sh/8nmtcn2l","slide":14,"name":"object 33","bbox":[50.67,724.68,692.4,42.4]}
+{"kind":"textbox","id":"sh/up4bexkb","slide":14,"name":"object 35","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,736.81,9.4,17.07]}
+{"kind":"textbox","id":"sh/hcfapcj2","slide":14,"name":"object 36","text":"Confirm communication\nThe uploader is notified and approved recipients receive the final sharing email.","textPreview":"Confirm communication | The uploader is notified and approved recipients receive the final sharing email.","textChars":103,"textLines":2,"bbox":[88,728.11,363.4,32.4]}
+{"kind":"shape","id":"sh/butsbi1s","slide":14,"name":"object 38","bbox":[50.67,775.08,692.4,54.4]}
+{"kind":"shape","id":"sh/atkr2dk7","slide":14,"name":"object 39","bbox":[50.67,775.08,692.4,54.4]}
+{"kind":"shape","id":"sh/2xobyds3","slide":14,"name":"object 40","bbox":[50.67,775.08,6.67,54.4]}
+{"kind":"textbox","id":"sh/nyxsrito","slide":14,"name":"object 41","text":"Completion evidence\nUse Track Approvals and System Log for workflow evidence; email is a notification and not the system of record.","textPreview":"Completion evidence | Use Track Approvals and System Log for workflow evidence; email is a notification and not the system of record.","textChars":131,"textLines":2,"bbox":[57.17,781.45,681.8,34.8]}
+{"kind":"textbox","id":"sh/oz6t0na9","slide":14,"name":"object 42","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/p0fat8ru","slide":14,"name":"object 43","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/d83al0jy","slide":14,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/wn2d4vid","slide":14,"name":"object 11","bbox":[50.33,168.73,696.7,376.48]}
+{"kind":"image","id":"im/vmtcbqhs","slide":14,"name":"object 16","bbox":[60,582.68,24,24]}
+{"kind":"image","id":"im/ulkv2l07","slide":14,"name":"object 22","bbox":[60,633.08,24,24]}
+{"kind":"image","id":"im/9kbu9gzm","slide":14,"name":"object 28","bbox":[60,683.48,24,24]}
+{"kind":"image","id":"im/8j2d0bi1","slide":14,"name":"object 34","bbox":[60,733.88,24,24]}
+{"kind":"notes","id":"nt/j1rxq9","slide":14,"text":""}
+{"kind":"slide","id":"sl/xxqg18","slide":15,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":25}
+{"kind":"textbox","id":"sh/2p0bax43","slide":15,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/dgra9cnq","slide":15,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/qd0beh4f","slide":15,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/re9s725k","slide":15,"name":"object 7","text":"6.6","textPreview":"6.6","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/0j2tkrmh","slide":15,"name":"object 8","text":"Complete the Two-Stage Approval","textPreview":"Complete the Two-Stage Approval","textChars":31,"textLines":1,"bbox":[118.67,90.67,328.27,26.67]}
+{"kind":"shape","id":"sh/1kbudwn2","slide":15,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/ds7qd8zu","slide":15,"name":"object 10","text":"Approval responsibility is assigned by QMS level, independent of general role.","textPreview":"Approval responsibility is assigned by QMS level, independent of general role.","textChars":78,"textLines":1,"bbox":[49.33,142.67,380.13,15.8]}
+{"kind":"shape","id":"sh/rqp8byho","slide":15,"name":"object 12","bbox":[50.67,182.4,336.87,333.33]}
+{"kind":"shape","id":"sh/q5grit03","slide":15,"name":"object 13","bbox":[50.67,182.4,336.87,333.33]}
+{"kind":"shape","id":"sh/1wrahszq","slide":15,"name":"object 14","bbox":[50.67,182.4,336.87,42.67]}
+{"kind":"textbox","id":"sh/0vi9oni5","slide":15,"name":"object 15","text":"L2 - First-stage review","textPreview":"L2 - First-stage review","textChars":23,"textLines":1,"bbox":[65.33,195.73,143.47,18.67]}
+{"kind":"textbox","id":"sh/etgrmd0z","slide":15,"name":"object 17","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[69.4,251.07,7.87,13.87]}
+{"kind":"textbox","id":"sh/h0nq5ozm","slide":15,"name":"object 18","text":"Verify document accuracy and library placement.","textPreview":"Verify document accuracy and library placement.","textChars":47,"textLines":1,"bbox":[90.67,247.73,239.07,15.8]}
+{"kind":"textbox","id":"sh/8ji9sjqx","slide":15,"name":"object 20","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[69.4,278.8,7.87,13.87]}
+{"kind":"textbox","id":"sh/tkrq1o7i","slide":15,"name":"object 21","text":"Choose the recipients or department heads who should receive the final approved document.","textPreview":"Choose the recipients or department heads who should receive the final approved document.","textChars":89,"textLines":1,"bbox":[90.67,274.19,270.73,31.47]}
+{"kind":"textbox","id":"sh/7i98zepc","slide":15,"name":"object 23","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[69.4,320.93,7.87,13.87]}
+{"kind":"textbox","id":"sh/g7i9w3qt","slide":15,"name":"object 24","text":"Select Approve first stage to move the item to Pending Final Approval.","textPreview":"Select Approve first stage to move the item to Pending Final Approval.","textChars":70,"textLines":1,"bbox":[90.67,316.32,266.47,31.47]}
+{"kind":"textbox","id":"sh/u50rut8n","slide":15,"name":"object 26","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[69.4,363.07,7.87,13.87]}
+{"kind":"textbox","id":"sh/v69s3yp8","slide":15,"name":"object 27","text":"Or select Reject and enter a clear correction comment.","textPreview":"Or select Reject and enter a clear correction comment.","textChars":54,"textLines":1,"bbox":[90.67,359.73,267.67,15.8]}
+{"kind":"shape","id":"sh/5cba987a","slide":15,"name":"object 29","bbox":[406.18,182.4,336.87,333.33]}
+{"kind":"shape","id":"sh/zixkf6d4","slide":15,"name":"object 30","bbox":[406.18,182.4,336.87,333.33]}
+{"kind":"shape","id":"sh/eho3m1wj","slide":15,"name":"object 31","bbox":[406.18,182.4,336.87,42.67]}
+{"kind":"textbox","id":"sh/1kfmhgvu","slide":15,"name":"object 32","text":"L1 - Final review","textPreview":"L1 - Final review","textChars":17,"textLines":1,"bbox":[420.85,195.73,106.47,18.67]}
+{"kind":"textbox","id":"sh/rexkbmds","slide":15,"name":"object 34","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[424.92,251.07,7.87,13.87]}
+{"kind":"textbox","id":"sh/qdo3i1w7","slide":15,"name":"object 35","text":"Confirm the L2 review and selected recipients.","textPreview":"Confirm the L2 review and selected recipients.","textChars":46,"textLines":1,"bbox":[446.18,247.73,226.93,15.8]}
+{"kind":"textbox","id":"sh/cf6lkred","slide":15,"name":"object 37","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[424.92,278.8,7.87,13.87]}
+{"kind":"textbox","id":"sh/bah4nqdw","slide":15,"name":"object 38","text":"Verify the final content, revision and controlled-document location.","textPreview":"Verify the final content, revision and controlled-document location.","textChars":68,"textLines":1,"bbox":[446.18,274.19,278,31.47]}
+{"kind":"textbox","id":"sh/ixo7ipsv","slide":15,"name":"object 40","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[424.92,320.93,7.87,13.87]}
+{"kind":"textbox","id":"sh/jyxobutg","slide":15,"name":"object 41","text":"Select Approve to publish the final status and notify stakeholders.","textPreview":"Select Approve to publish the final status and notify stakeholders.","textChars":67,"textLines":1,"bbox":[446.18,316.32,250.67,31.47]}
+{"kind":"textbox","id":"sh/5kz6dkb6","slide":15,"name":"object 43","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[424.92,363.07,7.87,13.87]}
+{"kind":"textbox","id":"sh/ato7e5sj","slide":15,"name":"object 44","text":"Or select Reject and enter a mandatory rejection comment.","textPreview":"Or select Reject and enter a mandatory rejection comment.","textChars":57,"textLines":1,"bbox":[446.18,358.45,237.87,31.47]}
+{"kind":"shape","id":"sh/hwf69kba","slide":15,"name":"object 47","bbox":[50.67,693.07,692.4,54.4]}
+{"kind":"shape","id":"sh/ep87q9s3","slide":15,"name":"object 48","bbox":[50.67,693.07,692.4,54.4]}
+{"kind":"shape","id":"sh/fq18je9o","slide":15,"name":"object 49","bbox":[50.67,693.07,6.67,54.4]}
+{"kind":"textbox","id":"sh/pk3a98bq","slide":15,"name":"object 50","text":"Mandatory rejection comments\nState what is wrong, where it occurs and what the uploader must change. Avoid comments such as 'incorrect' without detail.","textPreview":"Mandatory rejection comments | State what is wrong, where it occurs and what the uploader must change. Avoid comments such as 'incorrect'...","textChars":151,"textLines":2,"bbox":[57.17,699.44,681.8,34.8]}
+{"kind":"textbox","id":"sh/oju9g3u5","slide":15,"name":"object 51","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/3ils7ydk","slide":15,"name":"object 52","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/t0rupsze","slide":15,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"table","id":"tb/lc3qpofy","slide":15,"name":"object 45","rows":5,"cols":3,"preview":"Status | Meaning | Next action","bbox":[50.33,544.73,700.67,131.93]}
+{"kind":"image","id":"im/upsvy9wf","slide":15,"name":"object 16","bbox":[62.67,247.73,21.33,21.33]}
+{"kind":"image","id":"im/fq1wred0","slide":15,"name":"object 19","bbox":[62.67,275.47,21.33,21.33]}
+{"kind":"image","id":"im/grud0jel","slide":15,"name":"object 22","bbox":[62.67,317.6,21.33,21.33]}
+{"kind":"image","id":"im/hs3etov6","slide":15,"name":"object 25","bbox":[62.67,359.73,21.33,21.33]}
+{"kind":"image","id":"im/6lsvu9wj","slide":15,"name":"object 33","bbox":[418.18,247.73,21.33,21.33]}
+{"kind":"image","id":"im/7m1wnex4","slide":15,"name":"object 36","bbox":[418.18,275.47,21.33,21.33]}
+{"kind":"image","id":"im/bqxsvadw","slide":15,"name":"object 39","bbox":[418.18,317.6,21.33,21.33]}
+{"kind":"image","id":"im/apob25cb","slide":15,"name":"object 42","bbox":[418.18,359.73,21.33,21.33]}
+{"kind":"notes","id":"nt/xxqg18","slide":15,"text":""}
+{"kind":"slide","id":"sl/lum6pl","slide":16,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":18}
+{"kind":"textbox","id":"sh/lcjq5o7y","slide":16,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/6ds7etoj","slide":16,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/tgjq9o7a","slide":16,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/8fapgj6p","slide":16,"name":"object 7","text":"6.7","textPreview":"6.7","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/vil8byp0","slide":16,"name":"object 8","text":"Track Approval Progress","textPreview":"Track Approval Progress","textChars":23,"textLines":1,"bbox":[118.67,90.67,240.6,26.67]}
+{"kind":"shape","id":"sh/uhs7itof","slide":16,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/0765gzal","slide":16,"name":"object 10","text":"The timeline shows the current stage and completed workflow events.","textPreview":"The timeline shows the current stage and completed workflow events.","textChars":67,"textLines":1,"bbox":[49.33,142.67,340,15.8]}
+{"kind":"shape","id":"sh/e5one9sf","slide":16,"name":"object 12","bbox":[54.67,173.07,692.4,295.87]}
+{"kind":"shape","id":"sh/z6x47et0","slide":16,"name":"object 13","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"shape","id":"sh/obq5kjax","slide":16,"name":"object 14","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"textbox","id":"sh/m98ni9sr","slide":16,"name":"object 16","text":"Figure 8 - Track Approvals summary and document timelines","textPreview":"Figure 8 - Track Approvals summary and document timelines","textChars":57,"textLines":1,"bbox":[258.66,470.22,276.4,14.87]}
+{"kind":"shape","id":"sh/wza5ojat","slide":16,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/x0j6hobe","slide":16,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/4v658j2x","slide":16,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/jux4zelc","slide":16,"name":"object 22","text":"Start with My submissions\nStandard users see documents they uploaded.","textPreview":"Start with My submissions | Standard users see documents they uploaded.","textChars":69,"textLines":2,"bbox":[88,500.58,215,32.4]}
+{"kind":"shape","id":"sh/tkf6583e","slide":16,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/sj65c329","slide":16,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/6honatk3","slide":16,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/9ovmt43a","slide":16,"name":"object 28","text":"Use All documents when authorized\nHigh-level users can switch scope to review all records.","textPreview":"Use All documents when authorized | High-level users can switch scope to review all records.","textChars":90,"textLines":2,"bbox":[88,550.98,254.33,32.4]}
+{"kind":"shape","id":"sh/ehgbelwb","slide":16,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/zi9sn6xw","slide":16,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/1krupgf2","slide":16,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/ml0bilwn","slide":16,"name":"object 34","text":"Filter by status or search\nNarrow the list to pending, approved or rejected documents.","textPreview":"Filter by status or search | Narrow the list to pending, approved or rejected documents.","textChars":86,"textLines":2,"bbox":[88,601.38,274.93,32.4]}
+{"kind":"shape","id":"sh/onitkved","slide":16,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/9orut0fy","slide":16,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/3qpsfmxo","slide":16,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/jmh8jips","slide":16,"name":"object 40","text":"Read the timeline\nEach marker shows submission, first approval, final approval or rejection.","textPreview":"Read the timeline | Each marker shows submission, first approval, final approval or rejection.","textChars":92,"textLines":2,"bbox":[88,651.78,334.8,32.4]}
+{"kind":"shape","id":"sh/58zqls7i","slide":16,"name":"object 42","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"shape","id":"sh/4nq9cnqx","slide":16,"name":"object 43","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"textbox","id":"sh/698rex83","slide":16,"name":"object 45","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[67.33,710.89,9.4,17.07]}
+{"kind":"textbox","id":"sh/tczqps7u","slide":16,"name":"object 46","text":"Open the source record\nUse the linked document or review action when follow-up is required.","textPreview":"Open the source record | Use the linked document or review action when follow-up is required.","textChars":91,"textLines":2,"bbox":[88,702.18,315.4,32.4]}
+{"kind":"shape","id":"sh/fe1sr2pk","slide":16,"name":"object 48","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/ed8rixof","slide":16,"name":"object 49","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/cjap87md","slide":16,"name":"object 50","bbox":[50.67,749.16,6.67,54.4]}
+{"kind":"textbox","id":"sh/dkjq1cny","slide":16,"name":"object 51","text":"Status interpretation\nA green timeline is complete. A red marker identifies rejection. A neutral future marker means that stage has not yet occurred.","textPreview":"Status interpretation | A green timeline is complete. A red marker identifies rejection. A neutral future marker means that stage has not...","textChars":149,"textLines":2,"bbox":[57.17,755.53,681.8,34.8]}
+{"kind":"textbox","id":"sh/qhs76x47","slide":16,"name":"object 52","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/bi18z25s","slide":16,"name":"object 53","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/budovulk","slide":16,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/y5wzi5sv","slide":16,"name":"object 15","bbox":[53.79,170.4,686.13,293.16]}
+{"kind":"image","id":"im/58nidkbm","slide":16,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/k7ehkfa1","slide":16,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/32p0nutk","slide":16,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/21gju9sz","slide":16,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"image","id":"im/y94b2xgj","slide":16,"name":"object 44","bbox":[60,707.96,24,24]}
+{"kind":"notes","id":"nt/lum6pl","slide":16,"text":""}
+{"kind":"slide","id":"sl/gpwl34","slide":17,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":18}
+{"kind":"textbox","id":"sh/wnal43e9","slide":17,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/ny1k7yxs","slide":17,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/ozal0jed","slide":17,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/90j29ofy","slide":17,"name":"object 7","text":"7.1","textPreview":"7.1","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/6tc3adwb","slide":17,"name":"object 8","text":"Browse the Document Library","textPreview":"Browse the Document Library","textChars":27,"textLines":1,"bbox":[118.67,90.67,287.2,26.67]}
+{"kind":"shape","id":"sh/7ul4jixw","slide":17,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/z65kzedk","slide":17,"name":"object 10","text":"The library organizes controlled content by category and access hierarchy.","textPreview":"The library organizes controlled content by category and access hierarchy.","textChars":74,"textLines":1,"bbox":[49.33,142.67,363.07,15.8]}
+{"kind":"shape","id":"sh/1s721ova","slide":17,"name":"object 12","bbox":[54.67,173.07,692.4,295.87]}
+{"kind":"shape","id":"sh/0ry18ju5","slide":17,"name":"object 13","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"shape","id":"sh/nupk3ydg","slide":17,"name":"object 14","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"textbox","id":"sh/9w7258vm","slide":17,"name":"object 16","text":"Figure 9 - Document Library category browser","textPreview":"Figure 9 - Document Library category browser","textChars":44,"textLines":1,"bbox":[292.17,470.22,209.4,14.87]}
+{"kind":"shape","id":"sh/by9k7yds","slide":17,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/axgjedc7","slide":17,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/7ut4z2x0","slide":17,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/8v2587el","slide":17,"name":"object 22","text":"Open Document Library\nUse the left navigation menu.","textPreview":"Open Document Library | Use the left navigation menu.","textChars":51,"textLines":2,"bbox":[88,500.58,135.67,32.4]}
+{"kind":"shape","id":"sh/yp032xw3","slide":17,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/jqt4v2xo","slide":17,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/lsbmxcfu","slide":17,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/il4nehwn","slide":17,"name":"object 28","text":"Choose a category\nSelect QMS, Customer Procedures, Standard Manuals, Awards and other configured categories.","textPreview":"Choose a category | Select QMS, Customer Procedures, Standard Manuals, Awards and other configured categories.","textChars":108,"textLines":2,"bbox":[88,550.98,442.13,32.4]}
+{"kind":"shape","id":"sh/dszytk3m","slide":17,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/crqhkf21","slide":17,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/qp8zi5kv","slide":17,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/pozypk3a","slide":17,"name":"object 34","text":"Drill into the hierarchy\nChoose the required QMS level, document group, plant, department or subfolder.","textPreview":"Drill into the hierarchy | Choose the required QMS level, document group, plant, department or subfolder.","textChars":103,"textLines":2,"bbox":[88,601.38,371.4,32.4]}
+{"kind":"shape","id":"sh/3mhgnal4","slide":17,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/21ofe5kz","slide":17,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/8jahsz29","slide":17,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/wrexwfyd","slide":17,"name":"object 40","text":"Open the file\nView inline when supported or download the approved source file.","textPreview":"Open the file | View inline when supported or download the approved source file.","textChars":78,"textLines":2,"bbox":[88,651.78,301.73,32.4]}
+{"kind":"shape","id":"sh/upwfu5gn","slide":17,"name":"object 42","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"shape","id":"sh/vq5g3ah8","slide":17,"name":"object 43","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"textbox","id":"sh/5g7y9kfa","slide":17,"name":"object 45","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[67.33,710.89,9.4,17.07]}
+{"kind":"textbox","id":"sh/itgfy5gj","slide":17,"name":"object 46","text":"Use your access level correctly\nL3 is limited to procedure-related groups; L4 is limited to checklists and checksheets.","textPreview":"Use your access level correctly | L3 is limited to procedure-related groups; L4 is limited to checklists and checksheets.","textChars":119,"textLines":2,"bbox":[88,702.18,387.87,32.4]}
+{"kind":"shape","id":"sh/sjih4zyl","slide":17,"name":"object 48","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/tkryd4f6","slide":17,"name":"object 49","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/net03yh8","slide":17,"name":"object 50","bbox":[50.67,749.16,6.67,54.4]}
+{"kind":"textbox","id":"sh/2dkjat03","slide":17,"name":"object 51","text":"Controlled use\nUse the document from the library instead of a locally saved copy when the latest revision is required.","textPreview":"Controlled use | Use the document from the library instead of a locally saved copy when the latest revision is required.","textChars":118,"textLines":2,"bbox":[57.17,755.53,681.8,34.8]}
+{"kind":"textbox","id":"sh/pgbi5oze","slide":17,"name":"object 52","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/of21c3it","slide":17,"name":"object 53","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/knad4zep","slide":17,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/h8jehojm","slide":17,"name":"object 15","bbox":[53.79,170.4,686.13,293.16]}
+{"kind":"image","id":"im/ulsfmtkv","slide":17,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/vm1wfy1g","slide":17,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/4buxs32d","slide":17,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/5c3el8jy","slide":17,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"image","id":"im/dwf6p47q","slide":17,"name":"object 44","bbox":[60,707.96,24,24]}
+{"kind":"notes","id":"nt/gpwl34","slide":17,"text":""}
+{"kind":"slide","id":"sl/uaxs95","slide":18,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":17}
+{"kind":"textbox","id":"sh/2xw7idwb","slide":18,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/do7qxsfy","slide":18,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/qlg7mdwn","slide":18,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/bmp8vix8","slide":18,"name":"object 7","text":"7.2","textPreview":"7.2","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/0rypsnep","slide":18,"name":"object 8","text":"Open Procedures and Standard Manuals","textPreview":"Open Procedures and Standard Manuals","textChars":36,"textLines":1,"bbox":[118.67,90.67,388.33,26.67]}
+{"kind":"shape","id":"sh/lsrq1sfa","slide":18,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/x8byxwje","slide":18,"name":"object 10","text":"Category cards provide a shorter route to frequently used controlled documents.","textPreview":"Category cards provide a shorter route to frequently used controlled documents.","textChars":79,"textLines":1,"bbox":[49.33,142.67,389.8,15.8]}
+{"kind":"shape","id":"sh/b6tgvm18","slide":18,"name":"object 12","bbox":[54.67,173.07,336.87,98.67]}
+{"kind":"shape","id":"sh/a5kf2hkn","slide":18,"name":"object 13","bbox":[50.67,169.07,336.87,98.67]}
+{"kind":"shape","id":"sh/lwvy1gja","slide":18,"name":"object 14","bbox":[50.67,169.07,336.87,98.67]}
+{"kind":"textbox","id":"sh/judgz61k","slide":18,"name":"object 16","text":"Figure 10 - Procedure category cards","textPreview":"Figure 10 - Procedure category cards","textChars":36,"textLines":1,"bbox":[133.84,273.06,170.53,14.87]}
+{"kind":"shape","id":"sh/10rypcj6","slide":18,"name":"object 18","bbox":[410.18,173.07,336.87,98.67]}
+{"kind":"shape","id":"sh/0zixw72l","slide":18,"name":"object 19","bbox":[406.18,169.07,336.87,98.67]}
+{"kind":"shape","id":"sh/sjmhc7ah","slide":18,"name":"object 20","bbox":[406.18,169.07,336.87,98.67]}
+{"kind":"textbox","id":"sh/qh4zahsb","slide":18,"name":"object 22","text":"Figure 11 - Standard Manual category cards","textPreview":"Figure 11 - Standard Manual category cards","textChars":42,"textLines":1,"bbox":[474.14,273.06,201,14.87]}
+{"kind":"shape","id":"sh/0n6hgrat","slide":18,"name":"object 24","bbox":[50.67,302.66,692.4,42.4]}
+{"kind":"shape","id":"sh/1ofypwry","slide":18,"name":"object 25","bbox":[50.67,302.66,692.4,42.4]}
+{"kind":"textbox","id":"sh/fmdgnmt8","slide":18,"name":"object 27","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,314.8,9.4,17.07]}
+{"kind":"textbox","id":"sh/ob6hkrap","slide":18,"name":"object 28","text":"Select the entry card\nOpen the required procedure or manual family.","textPreview":"Select the entry card | Open the required procedure or manual family.","textChars":67,"textLines":2,"bbox":[88,306.09,215.53,32.4]}
+{"kind":"shape","id":"sh/z6hkjqtc","slide":18,"name":"object 30","bbox":[50.67,353.06,692.4,42.4]}
+{"kind":"shape","id":"sh/y58ja5cr","slide":18,"name":"object 31","bbox":[50.67,353.06,692.4,42.4]}
+{"kind":"textbox","id":"sh/k7a1cvux","slide":18,"name":"object 33","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,365.2,9.4,17.07]}
+{"kind":"textbox","id":"sh/bih0fqdg","slide":18,"name":"object 34","text":"Choose plant and department where shown\nUse the repository hierarchy to reach the correct controlled location.","textPreview":"Choose plant and department where shown | Use the repository hierarchy to reach the correct controlled location.","textChars":110,"textLines":2,"bbox":[88,356.49,310.87,32.4]}
+{"kind":"shape","id":"sh/x4z2h0v6","slide":18,"name":"object 36","bbox":[50.67,403.46,692.4,42.4]}
+{"kind":"shape","id":"sh/c3q18vu1","slide":18,"name":"object 37","bbox":[50.67,403.46,692.4,42.4]}
+{"kind":"textbox","id":"sh/udsjipcz","slide":18,"name":"object 39","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,415.6,9.4,17.07]}
+{"kind":"textbox","id":"sh/2lsn698j","slide":18,"name":"object 40","text":"Select the document\nOpen the approved file and confirm its revision before use.","textPreview":"Select the document | Open the approved file and confirm its revision before use.","textChars":79,"textLines":2,"bbox":[88,406.89,268.67,32.4]}
+{"kind":"shape","id":"sh/4na58jq9","slide":18,"name":"object 42","bbox":[50.67,453.86,692.4,42.4]}
+{"kind":"shape","id":"sh/poj6horu","slide":18,"name":"object 43","bbox":[50.67,453.86,692.4,42.4]}
+{"kind":"textbox","id":"sh/fih4bu9s","slide":18,"name":"object 45","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,466,9.4,17.07]}
+{"kind":"textbox","id":"sh/gjq54zqd","slide":18,"name":"object 46","text":"Return through breadcrumbs\nUse the page breadcrumb or category browser to move back without losing context.","textPreview":"Return through breadcrumbs | Use the page breadcrumb or category browser to move back without losing context.","textChars":107,"textLines":2,"bbox":[88,457.29,382.73,32.4]}
+{"kind":"shape","id":"sh/edcnet8b","slide":18,"name":"object 48","bbox":[50.67,504.26,692.4,54.4]}
+{"kind":"shape","id":"sh/zelony9w","slide":18,"name":"object 49","bbox":[50.67,504.26,692.4,54.4]}
+{"kind":"shape","id":"sh/98nqdsbe","slide":18,"name":"object 50","bbox":[50.67,504.26,6.67,54.4]}
+{"kind":"textbox","id":"sh/o7epknat","slide":18,"name":"object 51","text":"If a card is empty\nConfirm your QMS access level and selected plant/department. Then contact the document owner if the file is still unavailable.","textPreview":"If a card is empty | Confirm your QMS access level and selected plant/department. Then contact the document owner if the file is still un...","textChars":145,"textLines":2,"bbox":[57.17,510.64,681.8,34.8]}
+{"kind":"textbox","id":"sh/n658bit8","slide":18,"name":"object 52","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/m5w7ixsn","slide":18,"name":"object 53","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/upkr2hsr","slide":18,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/fy1kvmdg","slide":18,"name":"object 15","bbox":[55.22,170.4,327.75,96]}
+{"kind":"image","id":"im/gza1ore1","slide":18,"name":"object 21","bbox":[410.74,170.4,327.75,96]}
+{"kind":"image","id":"im/10j2xwvm","slide":18,"name":"object 26","bbox":[60,311.86,24,24]}
+{"kind":"image","id":"im/ytc3y1wf","slide":18,"name":"object 32","bbox":[60,362.26,24,24]}
+{"kind":"image","id":"im/zulk76dk","slide":18,"name":"object 38","bbox":[60,412.66,24,24]}
+{"kind":"image","id":"im/vydgzydc","slide":18,"name":"object 44","bbox":[60,463.06,24,24]}
+{"kind":"notes","id":"nt/uaxs95","slide":18,"text":""}
+{"kind":"slide","id":"sl/fyz298","slide":19,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":17}
+{"kind":"textbox","id":"sh/pojytw7q","slide":19,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/qpsf218b","slide":19,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/dsjyxw7m","slide":19,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/crax4bq1","slide":19,"name":"object 7","text":"7.3","textPreview":"7.3","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/7uhwj29c","slide":19,"name":"object 8","text":"Use Plant and Customer Repositories","textPreview":"Use Plant and Customer Repositories","textChars":35,"textLines":1,"bbox":[118.67,90.67,360.53,26.67]}
+{"kind":"shape","id":"sh/6tofqx8r","slide":19,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/4redk72p","slide":19,"name":"object 10","text":"Use these views when the retrieval question begins with a plant, department or customer.","textPreview":"Use these views when the retrieval question begins with a plant, department or customer.","textChars":88,"textLines":1,"bbox":[49.33,142.67,434.8,15.8]}
+{"kind":"shape","id":"sh/ipwvixkj","slide":19,"name":"object 12","bbox":[54.67,173.07,336.87,98.67]}
+{"kind":"shape","id":"sh/3q5cr214","slide":19,"name":"object 13","bbox":[50.67,169.07,336.87,98.67]}
+{"kind":"shape","id":"sh/sfydo72l","slide":19,"name":"object 14","bbox":[50.67,169.07,336.87,98.67]}
+{"kind":"textbox","id":"sh/qdgvmxkv","slide":19,"name":"object 16","text":"Figure 12 - Plant-based Master Records","textPreview":"Figure 12 - Plant-based Master Records","textChars":38,"textLines":1,"bbox":[127.64,273.06,182.93,14.87]}
+{"kind":"shape","id":"sh/8judcn2h","slide":19,"name":"object 18","bbox":[410.18,173.07,336.87,98.67]}
+{"kind":"shape","id":"sh/tk3ul832","slide":19,"name":"object 19","bbox":[406.18,169.07,336.87,98.67]}
+{"kind":"shape","id":"sh/94b2tkre","slide":19,"name":"object 20","bbox":[406.18,169.07,336.87,98.67]}
+{"kind":"textbox","id":"sh/n2tkra9o","slide":19,"name":"object 22","text":"Figure 13 - Customer Records","textPreview":"Figure 13 - Customer Records","textChars":28,"textLines":1,"bbox":[505.13,273.06,139,14.87]}
+{"kind":"shape","id":"sh/x8v2xkrq","slide":19,"name":"object 24","bbox":[50.67,302.66,692.4,42.4]}
+{"kind":"shape","id":"sh/w7m14fq5","slide":19,"name":"object 25","bbox":[50.67,302.66,692.4,42.4]}
+{"kind":"textbox","id":"sh/a54j258z","slide":19,"name":"object 27","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,314.8,9.4,17.07]}
+{"kind":"textbox","id":"sh/lwf214rm","slide":19,"name":"object 28","text":"Master Records\nChoose a plant, then a department, and open the required controlled record.","textPreview":"Master Records | Choose a plant, then a department, and open the required controlled record.","textChars":90,"textLines":2,"bbox":[88,306.09,349.13,32.4]}
+{"kind":"shape","id":"sh/ihgz21oj","slide":19,"name":"object 30","bbox":[50.67,353.06,692.4,42.4]}
+{"kind":"shape","id":"sh/3ipgvmp4","slide":19,"name":"object 31","bbox":[50.67,353.06,692.4,42.4]}
+{"kind":"textbox","id":"sh/547yxw7a","slide":19,"name":"object 33","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,365.2,9.4,17.07]}
+{"kind":"textbox","id":"sh/q50zq1ov","slide":19,"name":"object 34","text":"Customer Records\nChoose the customer card, review the available files and open the required record.","textPreview":"Customer Records | Choose the customer card, review the available files and open the required record.","textChars":99,"textLines":2,"bbox":[88,356.49,378.2,32.4]}
+{"kind":"shape","id":"sh/c7ihsb61","slide":19,"name":"object 36","bbox":[50.67,403.46,692.4,42.4]}
+{"kind":"shape","id":"sh/d8ri1g76","slide":19,"name":"object 37","bbox":[50.67,403.46,692.4,42.4]}
+{"kind":"textbox","id":"sh/za9036pc","slide":19,"name":"object 39","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,415.6,9.4,17.07]}
+{"kind":"textbox","id":"sh/nq5gn6hg","slide":19,"name":"object 40","text":"Confirm context\nCheck the plant, department, customer, document number and revision before use.","textPreview":"Confirm context | Check the plant, department, customer, document number and revision before use.","textChars":95,"textLines":2,"bbox":[88,406.89,380.47,32.4]}
+{"kind":"shape","id":"sh/9s7ypgzm","slide":19,"name":"object 42","bbox":[50.67,453.86,692.4,42.4]}
+{"kind":"shape","id":"sh/8rehgby1","slide":19,"name":"object 43","bbox":[50.67,453.86,692.4,42.4]}
+{"kind":"textbox","id":"sh/atgzilg7","slide":19,"name":"object 45","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,466,9.4,17.07]}
+{"kind":"textbox","id":"sh/xw7it0zi","slide":19,"name":"object 46","text":"View only\nThese repository pages are for retrieval. Use Upload Documents to submit new controlled files.","textPreview":"View only | These repository pages are for retrieval. Use Upload Documents to submit new controlled files.","textChars":104,"textLines":2,"bbox":[88,457.29,433.53,32.4]}
+{"kind":"shape","id":"sh/rylgfmh8","slide":19,"name":"object 48","bbox":[50.67,504.26,692.4,54.4]}
+{"kind":"shape","id":"sh/qxcz6hgn","slide":19,"name":"object 49","bbox":[50.67,504.26,692.4,54.4]}
+{"kind":"shape","id":"sh/g3adgnel","slide":19,"name":"object 50","bbox":[50.67,504.26,6.67,54.4]}
+{"kind":"textbox","id":"sh/h4jepsf6","slide":19,"name":"object 51","text":"Search strategy\nUse the dashboard for broad metadata search; use repository pages for structured browsing by ownership.","textPreview":"Search strategy | Use the dashboard for broad metadata search; use repository pages for structured browsing by ownership.","textChars":119,"textLines":2,"bbox":[57.17,510.64,681.8,34.8]}
+{"kind":"textbox","id":"sh/u1svedwf","slide":19,"name":"object 52","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/f21wnix0","slide":19,"name":"object 53","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/n6x032hs","slide":19,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/ut0z2dcv","slide":19,"name":"object 15","bbox":[55.22,170.4,327.75,96]}
+{"kind":"image","id":"im/hgbixsvm","slide":19,"name":"object 21","bbox":[410.74,170.4,327.75,96]}
+{"kind":"image","id":"im/gf2h4nu1","slide":19,"name":"object 26","bbox":[60,311.86,24,24]}
+{"kind":"image","id":"im/fad07mtk","slide":19,"name":"object 32","bbox":[60,362.26,24,24]}
+{"kind":"image","id":"im/ep4zehcz","slide":19,"name":"object 38","bbox":[60,412.66,24,24]}
+{"kind":"image","id":"im/ah8bm50j","slide":19,"name":"object 44","bbox":[60,463.06,24,24]}
+{"kind":"notes","id":"nt/fyz298","slide":19,"text":""}
+{"kind":"slide","id":"sl/ef9g9l","slide":20,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":16}
+{"kind":"textbox","id":"sh/7yd03ipc","slide":20,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/g3610n6t","slide":20,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/v2x072p8","slide":20,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/u1ojyxon","slide":20,"name":"object 7","text":"8.1","textPreview":"8.1","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/x8bix87a","slide":20,"name":"object 8","text":"Read the Graphics Report","textPreview":"Read the Graphics Report","textChars":24,"textLines":1,"bbox":[118.67,90.67,249.4,26.67]}
+{"kind":"shape","id":"sh/c72ho36p","slide":20,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/upkni1on","slide":20,"name":"object 10","text":"Charts summarize approval health, ownership and upload activity.","textPreview":"Charts summarize approval health, ownership and upload activity.","textChars":64,"textLines":1,"bbox":[49.33,142.67,321.73,15.8]}
+{"kind":"shape","id":"sh/gr25kb6t","slide":20,"name":"object 12","bbox":[54.67,173.07,692.4,295.87]}
+{"kind":"shape","id":"sh/hsbmdgne","slide":20,"name":"object 13","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"shape","id":"sh/it4nm1oz","slide":20,"name":"object 14","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"textbox","id":"sh/4fm5ob65","slide":20,"name":"object 16","text":"Figure 14 - Graphics Report summary cards and charts","textPreview":"Figure 14 - Graphics Report summary cards and charts","textChars":52,"textLines":1,"bbox":[271.62,470.22,250.47,14.87]}
+{"kind":"shape","id":"sh/qh4nqlov","slide":20,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/rid4jq5g","slide":20,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/2lo3elk3","slide":20,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/pofm903u","slide":20,"name":"object 22","text":"Review KPI cards\nCheck total, approved, pending, rejected and recent upload counts.","textPreview":"Review KPI cards | Check total, approved, pending, rejected and recent upload counts.","textChars":83,"textLines":2,"bbox":[88,500.58,308.07,32.4]}
+{"kind":"shape","id":"sh/fid43qlc","slide":20,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/eh43alk7","slide":20,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/0jmlcb2x","slide":20,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/rud4z6lg","slide":20,"name":"object 28","text":"Read status distribution\nUse the doughnut chart to identify approval backlog and rejection volume.","textPreview":"Read status distribution | Use the doughnut chart to identify approval backlog and rejection volume.","textChars":98,"textLines":2,"bbox":[88,550.98,337.13,32.4]}
+{"kind":"shape","id":"sh/wzi1g7it","slide":20,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/h0ri9cje","slide":20,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/vy907218","slide":20,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/4n21k7ip","slide":20,"name":"object 34","text":"Compare ownership\nUse plant, customer and department charts to locate concentration or imbalance.","textPreview":"Compare ownership | Use plant, customer and department charts to locate concentration or imbalance.","textChars":97,"textLines":2,"bbox":[88,601.38,370.2,32.4]}
+{"kind":"shape","id":"sh/i1kjih0z","slide":20,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/jmt0bm14","slide":20,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/ls7i1sj6","slide":20,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/dojahsja","slide":20,"name":"object 40","text":"Review upload trend\nUse the time-series chart to identify peaks and changes in submission volume.","textPreview":"Review upload trend | Use the time-series chart to identify peaks and changes in submission volume.","textChars":97,"textLines":2,"bbox":[88,651.78,359.33,32.4]}
+{"kind":"shape","id":"sh/rm1sfi1k","slide":20,"name":"object 42","bbox":[50.67,698.76,692.4,54.4]}
+{"kind":"shape","id":"sh/qlsb6d0z","slide":20,"name":"object 43","bbox":[50.67,698.76,692.4,54.4]}
+{"kind":"shape","id":"sh/5kjad8je","slide":20,"name":"object 44","bbox":[50.67,698.76,6.67,54.4]}
+{"kind":"textbox","id":"sh/4ja943it","slide":20,"name":"object 45","text":"Reporting caution\nCharts reflect the current database and active filters. Use exported lists or System Log for record-level audit evidence.","textPreview":"Reporting caution | Charts reflect the current database and active filters. Use exported lists or System Log for record-level audit evide...","textChars":139,"textLines":2,"bbox":[57.17,705.13,681.8,34.8]}
+{"kind":"textbox","id":"sh/3y1sbi18","slide":20,"name":"object 46","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/ix8r2d0n","slide":20,"name":"object 47","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/6dk7mh43","slide":20,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/7e9cj69k","slide":20,"name":"object 15","bbox":[53.79,170.4,686.13,293.16]}
+{"kind":"image","id":"im/p8zepob2","slide":20,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/o7qxwjuh","slide":20,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/n6xwnetw","slide":20,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/25ofu9cb","slide":20,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"notes","id":"nt/ef9g9l","slide":20,"text":""}
+{"kind":"slide","id":"sl/m1rf75","slide":21,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":18}
+{"kind":"textbox","id":"sh/b6hkval0","slide":21,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/0va1sfmh","slide":21,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/zuhkzalw","slide":21,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/y98jq54b","slide":21,"name":"object 7","text":"8.2","textPreview":"8.2","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/90j2543y","slide":21,"name":"object 8","text":"Review Revision History","textPreview":"Review Revision History","textChars":23,"textLines":1,"bbox":[118.67,90.67,235,26.67]}
+{"kind":"shape","id":"sh/8za1wz2d","slide":21,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/a147a183","slide":21,"name":"object 10","text":"Revision History records what changed, who changed it and where the document belongs.","textPreview":"Revision History records what changed, who changed it and where the document belongs.","textChars":85,"textLines":1,"bbox":[49.33,142.67,439.67,15.8]}
+{"kind":"shape","id":"sh/w36pcbq9","slide":21,"name":"object 12","bbox":[54.67,173.07,692.4,295.87]}
+{"kind":"shape","id":"sh/x4fq5wru","slide":21,"name":"object 13","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"shape","id":"sh/y5o7e18z","slide":21,"name":"object 14","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"textbox","id":"sh/kr6pgbq5","slide":21,"name":"object 16","text":"Figure 15 - Revision History list and filters","textPreview":"Figure 15 - Revision History list and filters","textChars":45,"textLines":1,"bbox":[302.03,470.22,189.67,14.87]}
+{"kind":"shape","id":"sh/e9k72h8v","slide":21,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/zutovm9g","slide":21,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/id0nadon","slide":21,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/50rm587e","slide":21,"name":"object 22","text":"Filter the history\nSelect plant and department, then apply the filter.","textPreview":"Filter the history | Select plant and department, then apply the filter.","textChars":70,"textLines":2,"bbox":[88,500.58,226.4,32.4]}
+{"kind":"shape","id":"sh/vap4zypc","slide":21,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/u9g36tor","slide":21,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/gbyl836h","slide":21,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/f6t4b2pg","slide":21,"name":"object 28","text":"Identify the document\nUse file name, document number and revision number.","textPreview":"Identify the document | Use file name, document number and revision number.","textChars":73,"textLines":2,"bbox":[88,550.98,252.67,32.4]}
+{"kind":"shape","id":"sh/wbu1czmd","slide":21,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/xc3254ny","slide":21,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/bqlk3u5s","slide":21,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/kfe1gzm9","slide":21,"name":"object 34","text":"Review ownership\nConfirm the person, plant, department and revision date.","textPreview":"Review ownership | Confirm the person, plant, department and revision date.","textChars":73,"textLines":2,"bbox":[88,601.38,259.53,32.4]}
+{"kind":"shape","id":"sh/ydwjep4j","slide":21,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/je5k7u54","slide":21,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/tk72don6","slide":21,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/tgvad0nu","slide":21,"name":"object 40","text":"Read the change summary\nUse the recorded summary to understand what changed between revisions.","textPreview":"Read the change summary | Use the recorded summary to understand what changed between revisions.","textChars":94,"textLines":2,"bbox":[88,651.78,346.8,32.4]}
+{"kind":"shape","id":"sh/7edsba54","slide":21,"name":"object 42","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"shape","id":"sh/6d4b254j","slide":21,"name":"object 43","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"textbox","id":"sh/kbmt0vmd","slide":21,"name":"object 45","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[67.33,710.89,9.4,17.07]}
+{"kind":"textbox","id":"sh/jads7q5s","slide":21,"name":"object 46","text":"Open the current approved file\nUse the Document Library for the controlled version currently in force.","textPreview":"Open the current approved file | Use the Document Library for the controlled version currently in force.","textChars":102,"textLines":2,"bbox":[88,702.18,318.8,32.4]}
+{"kind":"shape","id":"sh/p8zul4n2","slide":21,"name":"object 48","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/476tczmh","slide":21,"name":"object 49","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/md076hkz","slide":21,"name":"object 50","bbox":[50.67,749.16,6.67,54.4]}
+{"kind":"textbox","id":"sh/ne98zmlk","slide":21,"name":"object 51","text":"Revision discipline\nUse a meaningful summary such as 'Updated torque specification in Section 4' rather than 'new version'.","textPreview":"Revision discipline | Use a meaningful summary such as 'Updated torque specification in Section 4' rather than 'new version'.","textChars":123,"textLines":2,"bbox":[57.17,755.53,681.8,34.8]}
+{"kind":"textbox","id":"sh/8fip8r25","slide":21,"name":"object 52","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/9grq1w3q","slide":21,"name":"object 53","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/xk3itg3u","slide":21,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/4zul8ryh","slide":21,"name":"object 15","bbox":[53.79,170.4,686.13,293.16]}
+{"kind":"image","id":"im/jylkzmhw","slide":21,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/ixc36hgb","slide":21,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/pw7mdgz6","slide":21,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/ovylkvy1","slide":21,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"image","id":"im/8bqxwja9","slide":21,"name":"object 44","bbox":[60,707.96,24,24]}
+{"kind":"notes","id":"nt/m1rf75","slide":21,"text":""}
+{"kind":"slide","id":"sl/nzm5hm","slide":22,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":16}
+{"kind":"textbox","id":"sh/a1cbqx0r","slide":22,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/5snu5cze","slide":22,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/ipwbux03","slide":22,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/jq5c32ho","slide":22,"name":"object 7","text":"9.1","textPreview":"9.1","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/svyd0ri5","slide":22,"name":"object 8","text":"Manage Archived Documents","textPreview":"Manage Archived Documents","textChars":25,"textLines":1,"bbox":[118.67,90.67,282.8,26.67]}
+{"kind":"shape","id":"sh/tw7u9wzq","slide":22,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/hwz2h8zm","slide":22,"name":"object 10","text":"Archive is restricted to Admin, Manager, Supervisor and Approver roles.","textPreview":"Archive is restricted to Admin, Manager, Supervisor and Approver roles.","textChars":71,"textLines":1,"bbox":[49.33,142.67,350.27,15.8]}
+{"kind":"shape","id":"sh/fuhkfyhw","slide":22,"name":"object 12","bbox":[54.67,173.07,692.4,295.87]}
+{"kind":"shape","id":"sh/ut8j6t0b","slide":22,"name":"object 13","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"shape","id":"sh/pkj2l8zy","slide":22,"name":"object 14","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"textbox","id":"sh/3y1kjihs","slide":22,"name":"object 16","text":"Figure 16 - Archive list with retained document metadata","textPreview":"Figure 16 - Archive list with retained document metadata","textChars":56,"textLines":1,"bbox":[268.79,470.22,256.13,14.87]}
+{"kind":"shape","id":"sh/54f29oje","slide":22,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/k3610jit","slide":22,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/xk3u5svm","slide":22,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/ahcbadcv","slide":22,"name":"object 22","text":"Understand soft delete\nRemoving a document from the dashboard moves its record to Archive instead of immediately erasing it.","textPreview":"Understand soft delete | Removing a document from the dashboard moves its record to Archive instead of immediately erasing it.","textChars":124,"textLines":2,"bbox":[88,500.58,476.33,32.4]}
+{"kind":"shape","id":"sh/knutgnud","slide":22,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/5o3u9svi","slide":22,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/jmlc7ids","slide":22,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/sbetk7u9","slide":22,"name":"object 28","text":"Locate the archived item\nUse the list, pagination and record metadata.","textPreview":"Locate the archived item | Use the list, pagination and record metadata.","textChars":70,"textLines":2,"bbox":[88,550.98,207,32.4]}
+{"kind":"shape","id":"sh/36pw36xw","slide":22,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/25gfa1wb","slide":22,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/47yxcbeh","slide":22,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/fipwzmx0","slide":22,"name":"object 34","text":"Retain for audit\nKeep archived records when the retention period or investigation is still active.","textPreview":"Retain for audit | Keep archived records when the retention period or investigation is still active.","textChars":98,"textLines":2,"bbox":[88,601.38,356.53,32.4]}
+{"kind":"shape","id":"sh/hk7e1wfq","slide":22,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/gjyx8rel","slide":22,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/yd0filwj","slide":22,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/mlgz65s3","slide":22,"name":"object 40","text":"Permanently delete only when authorized\nPermanent deletion removes the archived record and is logged.","textPreview":"Permanently delete only when authorized | Permanent deletion removes the archived record and is logged.","textChars":101,"textLines":2,"bbox":[88,651.78,291.47,32.4]}
+{"kind":"shape","id":"sh/8ni18fat","slide":22,"name":"object 42","bbox":[50.67,698.76,692.4,54.4]}
+{"kind":"shape","id":"sh/9orihkbe","slide":22,"name":"object 43","bbox":[50.67,698.76,692.4,54.4]}
+{"kind":"shape","id":"sh/yxgz25sr","slide":22,"name":"object 44","bbox":[50.67,698.76,6.67,54.4]}
+{"kind":"textbox","id":"sh/zip0batc","slide":22,"name":"object 45","text":"Destructive action\nConfirm retention requirements and the exact document before permanent deletion. This action cannot be reversed through the portal.","textPreview":"Destructive action | Confirm retention requirements and the exact document before permanent deletion. This action cannot be reversed thro...","textChars":150,"textLines":2,"bbox":[57.17,705.13,681.8,34.8]}
+{"kind":"textbox","id":"sh/kjyh4fax","slide":22,"name":"object 46","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/lk7idkbi","slide":22,"name":"object 47","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/lcritsje","slide":22,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/83i94nup","slide":22,"name":"object 15","bbox":[53.79,170.4,686.13,293.16]}
+{"kind":"image","id":"im/y9g7etsn","slide":22,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/zapo7y98","slide":22,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/0vypgjat","slide":22,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/lw769ory","slide":22,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"notes","id":"nt/nzm5hm","slide":22,"text":""}
+{"kind":"slide","id":"sl/zoowbv","slide":23,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":16}
+{"kind":"textbox","id":"sh/qxo3e1gn","slide":23,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/1oz2dgfa","slide":23,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/e183i1gz","slide":23,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/f2hkb6xk","slide":23,"name":"object 7","text":"9.2","textPreview":"9.2","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/oralovy1","slide":23,"name":"object 8","text":"Use the System Log for Audit","textPreview":"Use the System Log for Audit","textChars":28,"textLines":1,"bbox":[118.67,90.67,282.73,26.67]}
+{"kind":"shape","id":"sh/9sj2hgfm","slide":23,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/547up43q","slide":23,"name":"object 10","text":"System Log is available to high-level roles and records significant user actions.","textPreview":"System Log is available to high-level roles and records significant user actions.","textChars":81,"textLines":1,"bbox":[49.33,142.67,383.73,15.8]}
+{"kind":"shape","id":"sh/j2pcnel0","slide":23,"name":"object 12","bbox":[54.67,173.07,692.4,295.87]}
+{"kind":"shape","id":"sh/i1gvu9kf","slide":23,"name":"object 13","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"shape","id":"sh/tsrutoj2","slide":23,"name":"object 14","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"textbox","id":"sh/7qpcrelw","slide":23,"name":"object 16","text":"Figure 17 - System Log with action filters","textPreview":"Figure 17 - System Log with action filters","textChars":42,"textLines":1,"bbox":[304,470.22,185.73,14.87]}
+{"kind":"shape","id":"sh/9wnuhk3i","slide":23,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/8vetoz2d","slide":23,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/lsbmtofq","slide":23,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/yp03itwf","slide":23,"name":"object 22","text":"Choose an action filter\nFilter login, logout, upload, view, delete, approval, rejection, email and password events.","textPreview":"Choose an action filter | Filter login, logout, upload, view, delete, approval, rejection, email and password events.","textChars":115,"textLines":2,"bbox":[88,500.58,402.73,32.4]}
+{"kind":"shape","id":"sh/8v2lo3eh","slide":23,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/9wbmx8f2","slide":23,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/nut4vyxw","slide":23,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/wjmls3ed","slide":23,"name":"object 28","text":"Review who and when\nConfirm timestamp, user name, employee ID or email and action type.","textPreview":"Review who and when | Confirm timestamp, user name, employee ID or email and action type.","textChars":87,"textLines":2,"bbox":[88,550.98,321.13,32.4]}
+{"kind":"shape","id":"sh/7exor2h0","slide":23,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/6do7ixgf","slide":23,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/sf6pk7yl","slide":23,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/jqxon2h4","slide":23,"name":"object 34","text":"Read the details\nUse the details field to identify the affected document or activity.","textPreview":"Read the details | Use the details field to identify the affected document or activity.","textChars":85,"textLines":2,"bbox":[88,601.38,292.6,32.4]}
+{"kind":"shape","id":"sh/5cf6pcza","slide":23,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/kb6pg7yp","slide":23,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/2l87q1gn","slide":23,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/qtorelc7","slide":23,"name":"object 40","text":"Preserve audit context\nCapture the filtered result or export supporting records according to local audit practice.","textPreview":"Preserve audit context | Capture the filtered result or export supporting records according to local audit practice.","textChars":114,"textLines":2,"bbox":[88,651.78,398.73,32.4]}
+{"kind":"shape","id":"sh/cvqtgvux","slide":23,"name":"object 42","bbox":[50.67,698.76,692.4,54.4]}
+{"kind":"shape","id":"sh/dwzap0vi","slide":23,"name":"object 43","bbox":[50.67,698.76,692.4,54.4]}
+{"kind":"shape","id":"sh/2poralcv","slide":23,"name":"object 44","bbox":[50.67,698.76,6.67,54.4]}
+{"kind":"textbox","id":"sh/3qxsj6dg","slide":23,"name":"object 45","text":"Audit principle\nUse System Log as the activity trail; use Revision History for version changes and Track Approvals for workflow progress.","textPreview":"Audit principle | Use System Log as the activity trail; use Revision History for version changes and Track Approvals for workflow progress.","textChars":137,"textLines":2,"bbox":[57.17,705.13,681.8,34.8]}
+{"kind":"textbox","id":"sh/or69cbu1","slide":23,"name":"object 46","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/psfalgvm","slide":23,"name":"object 47","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/d0zetcvu","slide":23,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/oza1kfid","slide":23,"name":"object 15","bbox":[53.79,170.4,686.13,293.16]}
+{"kind":"image","id":"im/65kfehgv","slide":23,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/76tgnmxg","slide":23,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/s72xg7y1","slide":23,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/t8vypcfm","slide":23,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"notes","id":"nt/zoowbv","slide":23,"text":""}
+{"kind":"slide","id":"sl/zu1sge","slide":24,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":16}
+{"kind":"textbox","id":"sh/md83edwb","slide":24,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/xkjmdsfy","slide":24,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/ah83ixw7","slide":24,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/vih4b2xs","slide":24,"name":"object 7","text":"9.3","textPreview":"9.3","textChars":3,"textLines":1,"bbox":[69.92,96.67,17.53,15.47]}
+{"kind":"textbox","id":"sh/k7alo7e9","slide":24,"name":"object 8","text":"Review People and Access Assignments","textPreview":"Review People and Access Assignments","textChars":36,"textLines":1,"bbox":[118.67,90.67,390.6,26.67]}
+{"kind":"shape","id":"sh/58jmhcfu","slide":24,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/hkzmdkfy","slide":24,"name":"object 10","text":"The People page is restricted to Admin users.","textPreview":"The People page is restricted to Admin users.","textChars":45,"textLines":1,"bbox":[49.33,142.67,223.93,15.8]}
+{"kind":"shape","id":"sh/vixkbax8","slide":24,"name":"object 12","bbox":[54.67,173.07,692.4,295.87]}
+{"kind":"shape","id":"sh/uho3i5wn","slide":24,"name":"object 13","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"shape","id":"sh/5ozmh4fa","slide":24,"name":"object 14","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"textbox","id":"sh/3mh4fux4","slide":24,"name":"object 16","text":"Figure 18 - People directory; sample personal details obscured","textPreview":"Figure 18 - People directory; sample personal details obscured","textChars":62,"textLines":1,"bbox":[254.7,470.22,284.33,14.87]}
+{"kind":"shape","id":"sh/lsf250fq","slide":24,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/krmlcvyl","slide":24,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/dwzml0nm","slide":24,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/q983q5ob","slide":24,"name":"object 22","text":"Review level counts\nConfirm the number of L1, L2, L3 and L4 users.","textPreview":"Review level counts | Confirm the number of L1, L2, L3 and L4 users.","textChars":66,"textLines":2,"bbox":[88,500.58,218.4,32.4]}
+{"kind":"shape","id":"sh/0zalwf6d","slide":24,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/l0jmpkny","slide":24,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/zy14na5s","slide":24,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/83al0fm9","slide":24,"name":"object 28","text":"Search or filter\nFilter by name, email, employee ID, department, role or QMS level.","textPreview":"Search or filter | Filter by name, email, employee ID, department, role or QMS level.","textChars":83,"textLines":2,"bbox":[88,550.98,306.8,32.4]}
+{"kind":"shape","id":"sh/jy5ozepw","slide":24,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/ixw7q98r","slide":24,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/4zepsjqh","slide":24,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/vulovep0","slide":24,"name":"object 34","text":"Verify assignments\nEnsure L1 and L2 approvers are current and aligned with the approved responsibility matrix.","textPreview":"Verify assignments | Ensure L1 and L2 approvers are current and aligned with the approved responsibility matrix.","textChars":110,"textLines":2,"bbox":[88,601.38,420.47,32.4]}
+{"kind":"shape","id":"sh/hwn6xo76","slide":24,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/wvu5ojql","slide":24,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/epg7ydoz","slide":24,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/2dwrmx43","slide":24,"name":"object 40","text":"Correct access through the approved admin process\nDo not share accounts or use another user's approval privileges.","textPreview":"Correct access through the approved admin process | Do not share accounts or use another user's approval privileges.","textChars":114,"textLines":2,"bbox":[88,651.78,295.73,32.4]}
+{"kind":"shape","id":"sh/oze9o7m9","slide":24,"name":"object 42","bbox":[50.67,698.76,692.4,68.8]}
+{"kind":"shape","id":"sh/p0naxc3e","slide":24,"name":"object 43","bbox":[50.67,698.76,692.4,68.8]}
+{"kind":"shape","id":"sh/e9crix4r","slide":24,"name":"object 44","bbox":[50.67,698.76,6.67,68.8]}
+{"kind":"textbox","id":"sh/falsrilc","slide":24,"name":"object 45","text":"Least privilege\nAssign only the role and QMS level required for the user's current responsibility. Review access when a person changes role or department.","textPreview":"Least privilege | Assign only the role and QMS level required for the user's current responsibility. Review access when a person changes ...","textChars":154,"textLines":2,"bbox":[57.17,705.13,681.8,49.2]}
+{"kind":"textbox","id":"sh/0be9knmx","slide":24,"name":"object 46","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/1cnats3i","slide":24,"name":"object 47","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/58v2lkbm","slide":24,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/4vy94vyh","slide":24,"name":"object 15","bbox":[53.79,170.4,686.13,293.16]}
+{"kind":"image","id":"im/upcfyxs3","slide":24,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/vqlgr29o","slide":24,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/wrux07at","slide":24,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/hc3ytcre","slide":24,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"notes","id":"nt/zu1sge","slide":24,"text":""}
+{"kind":"slide","id":"sl/5ehu1a","slide":25,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":16}
+{"kind":"textbox","id":"sh/gjmlgbm1","slide":25,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/36d4b65c","slide":25,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/47mlkbmx","slide":25,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/p8fmdgni","slide":25,"name":"object 7","text":"10.1","textPreview":"10.1","textChars":4,"textLines":1,"bbox":[66.95,96.67,23.47,15.47]}
+{"kind":"textbox","id":"sh/q9o3ml43","slide":25,"name":"object 8","text":"Use In-Portal Notifications","textPreview":"Use In-Portal Notifications","textChars":27,"textLines":1,"bbox":[118.67,90.67,252.73,26.67]}
+{"kind":"shape","id":"sh/rax4fq5o","slide":25,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/7a94vudg","slide":25,"name":"object 10","text":"Notifications highlight uploads, required approvals, decisions and other events.","textPreview":"Notifications highlight uploads, required approvals, decisions and other events.","textChars":80,"textLines":1,"bbox":[49.33,142.67,383.13,15.8]}
+{"kind":"shape","id":"sh/twbmxkv6","slide":25,"name":"object 12","bbox":[54.67,173.07,692.4,305]}
+{"kind":"shape","id":"sh/8bil4zu1","slide":25,"name":"object 13","bbox":[50.67,169.07,692.4,305]}
+{"kind":"shape","id":"sh/j694rad4","slide":25,"name":"object 14","bbox":[50.67,169.07,692.4,305]}
+{"kind":"textbox","id":"sh/l8rmtkva","slide":25,"name":"object 16","text":"Figure 19 - Notification panel opened from the top bar","textPreview":"Figure 19 - Notification panel opened from the top bar","textChars":54,"textLines":1,"bbox":[275.25,479.38,243.2,14.87]}
+{"kind":"shape","id":"sh/32t43edo","slide":25,"name":"object 18","bbox":[50.67,506.31,692.4,42.4]}
+{"kind":"shape","id":"sh/i1k3a9c3","slide":25,"name":"object 19","bbox":[50.67,506.31,692.4,42.4]}
+{"kind":"textbox","id":"sh/zahgr21s","slide":25,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,518.45,9.4,17.07]}
+{"kind":"textbox","id":"sh/0bqxk7id","slide":25,"name":"object 22","text":"Open the bell icon\nThe badge shows unread notifications.","textPreview":"Open the bell icon | The badge shows unread notifications.","textChars":56,"textLines":2,"bbox":[88,509.74,178.47,32.4]}
+{"kind":"shape","id":"sh/mx8fmh0j","slide":25,"name":"object 24","bbox":[50.67,556.71,692.4,42.4]}
+{"kind":"shape","id":"sh/nyhgvm14","slide":25,"name":"object 25","bbox":[50.67,556.71,692.4,42.4]}
+{"kind":"textbox","id":"sh/90jyxcju","slide":25,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,568.85,9.4,17.07]}
+{"kind":"textbox","id":"sh/21ofad0f","slide":25,"name":"object 28","text":"Select a notification\nUse the linked item to open the related document or approval.","textPreview":"Select a notification | Use the linked item to open the related document or approval.","textChars":83,"textLines":2,"bbox":[88,560.14,283.47,32.4]}
+{"kind":"shape","id":"sh/5w3ipg3i","slide":25,"name":"object 30","bbox":[50.67,607.11,692.4,42.4]}
+{"kind":"shape","id":"sh/kvu1wb2x","slide":25,"name":"object 31","bbox":[50.67,607.11,692.4,42.4]}
+{"kind":"textbox","id":"sh/itcjulkr","slide":25,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,619.25,9.4,17.07]}
+{"kind":"textbox","id":"sh/t0nit03e","slide":25,"name":"object 34","text":"Mark items as read\nClear individual notifications or use Mark all read.","textPreview":"Mark items as read | Clear individual notifications or use Mark all read.","textChars":71,"textLines":2,"bbox":[88,610.54,226.4,32.4]}
+{"kind":"shape","id":"sh/7yl0rql8","slide":25,"name":"object 36","bbox":[50.67,657.51,692.4,42.4]}
+{"kind":"shape","id":"sh/6xcjylkn","slide":25,"name":"object 37","bbox":[50.67,657.51,692.4,42.4]}
+{"kind":"textbox","id":"sh/83ahor2p","slide":25,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,669.65,9.4,17.07]}
+{"kind":"textbox","id":"sh/cjilwzmd","slide":25,"name":"object 40","text":"Use email as a secondary channel\nApproval and decision emails supplement the in-portal notification; the portal remains the source of truth.","textPreview":"Use email as a secondary channel | Approval and decision emails supplement the in-portal notification; the portal remains the source of t...","textChars":140,"textLines":2,"bbox":[88,660.94,477.53,32.4]}
+{"kind":"shape","id":"sh/qhg3u947","slide":25,"name":"object 42","bbox":[50.67,707.91,692.4,54.4]}
+{"kind":"shape","id":"sh/ri94ne5s","slide":25,"name":"object 43","bbox":[50.67,707.91,692.4,54.4]}
+{"kind":"shape","id":"sh/4vylszm1","slide":25,"name":"object 44","bbox":[50.67,707.91,6.67,54.4]}
+{"kind":"textbox","id":"sh/pw7ml4nm","slide":25,"name":"object 45","text":"If email is delayed\nCheck the notification panel and Track Approvals. Report repeated email failures to the DMS administrator.","textPreview":"If email is delayed | Check the notification panel and Track Approvals. Report repeated email failures to the DMS administrator.","textChars":126,"textLines":2,"bbox":[57.17,714.29,681.8,34.8]}
+{"kind":"textbox","id":"sh/2tg3qp4v","slide":25,"name":"object 46","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/3upkju5g","slide":25,"name":"object 47","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/jupcbqx0","slide":25,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/29szqpsf","slide":25,"name":"object 15","bbox":[53.69,170.4,686.31,302.31]}
+{"kind":"image","id":"im/sfqd0vqd","slide":25,"name":"object 20","bbox":[60,515.51,24,24]}
+{"kind":"image","id":"im/tgzet0ri","slide":25,"name":"object 26","bbox":[60,565.91,24,24]}
+{"kind":"image","id":"im/6dovy587","slide":25,"name":"object 32","bbox":[60,616.31,24,24]}
+{"kind":"image","id":"im/rehwrq9s","slide":25,"name":"object 38","bbox":[60,666.71,24,24]}
+{"kind":"notes","id":"nt/5ehu1a","slide":25,"text":""}
+{"kind":"slide","id":"sl/127owr","slide":26,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":18}
+{"kind":"textbox","id":"sh/don2l8bm","slide":26,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/epw3edc7","slide":26,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/1s72psbi","slide":26,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/0rylgnud","slide":26,"name":"object 7","text":"10.2","textPreview":"10.2","textChars":4,"textLines":1,"bbox":[66.95,96.67,23.47,15.47]}
+{"kind":"textbox","id":"sh/fulkbyt8","slide":26,"name":"object 8","text":"Maintain Your Profile and Sign Out","textPreview":"Maintain Your Profile and Sign Out","textChars":34,"textLines":1,"bbox":[118.67,90.67,332.73,26.67]}
+{"kind":"shape","id":"sh/utcj2tc3","slide":26,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/g365gz6p","slide":26,"name":"object 10","text":"Keep personal details secure and end the session when work is complete.","textPreview":"Keep personal details secure and end the session when work is complete.","textChars":71,"textLines":1,"bbox":[49.33,142.67,361.27,15.8]}
+{"kind":"shape","id":"sh/u1one9oj","slide":26,"name":"object 12","bbox":[54.67,173.07,692.4,295.87]}
+{"kind":"shape","id":"sh/f2xone54","slide":26,"name":"object 13","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"shape","id":"sh/47qpkj6l","slide":26,"name":"object 14","bbox":[50.67,169.07,692.4,295.87]}
+{"kind":"textbox","id":"sh/25o7i9ov","slide":26,"name":"object 16","text":"Figure 20 - Profile and activity page; sample personal details obscured","textPreview":"Figure 20 - Profile and activity page; sample personal details obscured","textChars":71,"textLines":1,"bbox":[237.52,470.22,318.67,14.87]}
+{"kind":"shape","id":"sh/kbm58f6h","slide":26,"name":"object 18","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"shape","id":"sh/5cv6hkn2","slide":26,"name":"object 19","bbox":[50.67,497.16,692.4,42.4]}
+{"kind":"textbox","id":"sh/0relcby5","slide":26,"name":"object 21","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,509.29,9.4,17.07]}
+{"kind":"textbox","id":"sh/zq5436hk","slide":26,"name":"object 22","text":"Review account details\nConfirm name, employee ID, plant, department, role and QMS level.","textPreview":"Review account details | Confirm name, employee ID, plant, department, role and QMS level.","textChars":88,"textLines":2,"bbox":[88,500.58,312,32.4]}
+{"kind":"shape","id":"sh/9w7m90f2","slide":26,"name":"object 24","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"shape","id":"sh/8vylgvyh","slide":26,"name":"object 25","bbox":[50.67,547.56,692.4,42.4]}
+{"kind":"textbox","id":"sh/mtw3elgb","slide":26,"name":"object 27","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[67.33,559.69,9.4,17.07]}
+{"kind":"textbox","id":"sh/h07md0fy","slide":26,"name":"object 28","text":"Update the profile image if required\nUse an approved JPG, PNG, GIF or WebP image.","textPreview":"Update the profile image if required | Use an approved JPG, PNG, GIF or WebP image.","textChars":81,"textLines":2,"bbox":[88,550.98,230.93,32.4]}
+{"kind":"shape","id":"sh/e5sjexwv","slide":26,"name":"object 30","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"shape","id":"sh/f61072xg","slide":26,"name":"object 31","bbox":[50.67,597.96,692.4,42.4]}
+{"kind":"textbox","id":"sh/18ji9cfm","slide":26,"name":"object 33","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[67.33,610.09,9.4,17.07]}
+{"kind":"textbox","id":"sh/29sjixw7","slide":26,"name":"object 34","text":"Change password securely\nEnter the current password, then a new password of at least 8 characters.","textPreview":"Change password securely | Enter the current password, then a new password of at least 8 characters.","textChars":98,"textLines":2,"bbox":[88,601.38,338.27,32.4]}
+{"kind":"shape","id":"sh/oba1k7ex","slide":26,"name":"object 36","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"shape","id":"sh/pw32dcvi","slide":26,"name":"object 37","bbox":[50.67,648.36,692.4,42.4]}
+{"kind":"textbox","id":"sh/bylkfmdo","slide":26,"name":"object 39","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[67.33,660.49,9.4,17.07]}
+{"kind":"textbox","id":"sh/zixsji1g","slide":26,"name":"object 40","text":"Review My Activity\nUse the personal activity list to identify unexpected access or actions.","textPreview":"Review My Activity | Use the personal activity list to identify unexpected access or actions.","textChars":91,"textLines":2,"bbox":[88,651.78,317.73,32.4]}
+{"kind":"shape","id":"sh/lkfalsjm","slide":26,"name":"object 42","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"shape","id":"sh/0j69cn21","slide":26,"name":"object 43","bbox":[50.67,698.76,692.4,42.4]}
+{"kind":"textbox","id":"sh/ml8rexk7","slide":26,"name":"object 45","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[67.33,710.89,9.4,17.07]}
+{"kind":"textbox","id":"sh/98zapsji","slide":26,"name":"object 46","text":"Sign out\nSelect Sign out in the top-right corner. The session is cleared and the login page reopens.","textPreview":"Sign out | Select Sign out in the top-right corner. The session is cleared and the login page reopens.","textChars":100,"textLines":2,"bbox":[88,702.18,410.2,32.4]}
+{"kind":"shape","id":"sh/3adsby18","slide":26,"name":"object 48","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/2p4r2tkn","slide":26,"name":"object 49","bbox":[50.67,749.16,692.4,54.4]}
+{"kind":"shape","id":"sh/sv2pczil","slide":26,"name":"object 50","bbox":[50.67,749.16,6.67,54.4]}
+{"kind":"textbox","id":"sh/tgb6l4z6","slide":26,"name":"object 51","text":"Shared workstation rule\nAlways sign out before leaving the workstation. Closing only the browser tab may not be sufficient on a shared device.","textPreview":"Shared workstation rule | Always sign out before leaving the workstation. Closing only the browser tab may not be sufficient on a shared ...","textChars":142,"textLines":2,"bbox":[57.17,755.53,681.8,34.8]}
+{"kind":"textbox","id":"sh/6t07ap0f","slide":26,"name":"object 52","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/rutojuh0","slide":26,"name":"object 53","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"table","id":"tb/rqpw3q5w","slide":26,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"image","id":"im/y58fmxs7","slide":26,"name":"object 15","bbox":[53.79,170.4,686.13,293.16]}
+{"kind":"image","id":"im/l8zexcby","slide":26,"name":"object 20","bbox":[60,506.36,24,24]}
+{"kind":"image","id":"im/k7qxo7ad","slide":26,"name":"object 26","bbox":[60,556.76,24,24]}
+{"kind":"image","id":"im/b2xwr2tw","slide":26,"name":"object 32","bbox":[60,607.16,24,24]}
+{"kind":"image","id":"im/ahofixsb","slide":26,"name":"object 38","bbox":[60,657.56,24,24]}
+{"kind":"image","id":"im/edofuxw3","slide":26,"name":"object 44","bbox":[60,707.96,24,24]}
+{"kind":"notes","id":"nt/127owr","slide":26,"text":""}
+{"kind":"slide","id":"sl/u2jnay","slide":27,"title":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textShapes":12}
+{"kind":"textbox","id":"sh/ix432twb","slide":27,"name":"object 2","text":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textPreview":"ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual","textChars":67,"textLines":1,"bbox":[177.33,16.48,175.53,34.67]}
+{"kind":"shape","id":"sh/tof218vy","slide":27,"name":"object 5","bbox":[0,81.33,793.73,45.33]}
+{"kind":"shape","id":"sh/61o36dw7","slide":27,"name":"object 6","bbox":[50.67,90.67,56,26.67]}
+{"kind":"textbox","id":"sh/72xkzids","slide":27,"name":"object 7","text":"10.3","textPreview":"10.3","textChars":4,"textLines":1,"bbox":[66.95,96.67,23.47,15.47]}
+{"kind":"textbox","id":"sh/gr6lcnu9","slide":27,"name":"object 8","text":"Best Practices and Troubleshooting","textPreview":"Best Practices and Troubleshooting","textChars":34,"textLines":1,"bbox":[118.67,90.67,345,26.67]}
+{"kind":"shape","id":"sh/hsfm5svu","slide":27,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
+{"kind":"textbox","id":"sh/9oridgfy","slide":27,"name":"object 10","text":"Use this page as a quick operating checklist.","textPreview":"Use this page as a quick operating checklist.","textChars":45,"textLines":1,"bbox":[49.33,142.67,218.47,15.8]}
+{"kind":"shape","id":"sh/nm90b6x8","slide":27,"name":"object 12","bbox":[50.67,182.4,336.87,233.33]}
+{"kind":"shape","id":"sh/ml0zi1gn","slide":27,"name":"object 13","bbox":[50.67,182.4,336.87,233.33]}
+{"kind":"shape","id":"sh/xsbih0fa","slide":27,"name":"object 14","bbox":[50.67,182.4,336.87,38.67]}
+{"kind":"textbox","id":"sh/wr2hovyp","slide":27,"name":"object 15","text":"Before submission","textPreview":"Before submission","textChars":17,"textLines":1,"bbox":[65.33,193.07,122.73,18.67]}
+{"kind":"textbox","id":"sh/2p4r6lsn","slide":27,"name":"object 22","text":"Use the approved document-number format.\nVerify revision, plant, department and customer. Choose the exact library path.\nAdd a specific revision summary. Open the final file before upload.","textPreview":"Use the approved document-number format. | Verify revision, plant, department and customer. Choose the exact library path. | Add a specif...","textChars":188,"textLines":3,"bbox":[84,245.07,234.87,105.4]}
+{"kind":"shape","id":"sh/cf69cvap","slide":27,"name":"object 24","bbox":[406.18,182.4,336.87,233.33]}
+{"kind":"shape","id":"sh/dgfal0ra","slide":27,"name":"object 25","bbox":[406.18,182.4,336.87,233.33]}
+{"kind":"shape","id":"sh/qd4ra5sj","slide":27,"name":"object 26","bbox":[406.18,182.4,336.87,38.67]}
+{"kind":"textbox","id":"sh/bed8jq94","slide":27,"name":"object 27","text":"Before approval","textPreview":"Before approval","textChars":15,"textLines":1,"bbox":[420.85,193.07,104.2,18.67]}
+{"kind":"textbox","id":"sh/nahcbutc","slide":27,"name":"object 34","text":"Review the actual file and metadata.\nConfirm the current approval stage. L2 selects final recipients.\nL1 completes the final decision. Rejection comments must be actionable.","textPreview":"Review the actual file and metadata. | Confirm the current approval stage. L2 selects final recipients. | L1 completes the final decision...","textChars":173,"textLines":3,"bbox":[439.52,245.07,199.6,105.4]}
+{"kind":"shape","id":"sh/8bqtkzux","slide":27,"name":"object 37","bbox":[50.67,682.4,692.4,68.8]}
+{"kind":"shape","id":"sh/76lcnytg","slide":27,"name":"object 38","bbox":[50.67,682.4,692.4,68.8]}
+{"kind":"shape","id":"sh/65svutcv","slide":27,"name":"object 39","bbox":[50.67,682.4,6.67,68.8]}
+{"kind":"textbox","id":"sh/edsfix8f","slide":27,"name":"object 40","text":"Support information to provide\nShare the page name, document number, time of issue, your role/QMS level and the exact error message. Do not send passwords or confidential file content in support messages.","textPreview":"Support information to provide | Share the page name, document number, time of issue, your role/QMS level and the exact error message. Do...","textChars":204,"textLines":2,"bbox":[57.17,688.77,681.8,49.2]}
+{"kind":"textbox","id":"sh/gfaxknql","slide":27,"name":"object 42","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/1gjyds7q","slide":27,"name":"object 43","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/fe1gbip0","slide":27,"name":"object 41","text":"End of controlled user manual","textPreview":"End of controlled user manual","textChars":29,"textLines":1,"bbox":[299.58,1045.19,194.6,18.67]}
+{"kind":"table","id":"tb/p47u1gre","slide":27,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,312.67,46.67]}
+{"kind":"table","id":"tb/j2ls32p4","slide":27,"name":"object 35","rows":7,"cols":3,"preview":"Issue | Check | Action","bbox":[50.33,442.07,700.67,223.8]}
+{"kind":"image","id":"im/c3mxkfu1","slide":27,"name":"object 17","bbox":[66.67,249.07,8,8]}
+{"kind":"image","id":"im/b2dwradg","slide":27,"name":"object 18","bbox":[66.67,271.47,8,8]}
+{"kind":"image","id":"im/a14fi5cv","slide":27,"name":"object 19","bbox":[66.67,293.87,8,8]}
+{"kind":"image","id":"im/l8fyxkvi","slide":27,"name":"object 20","bbox":[66.67,316.27,8,8]}
+{"kind":"image","id":"im/k76xofux","slide":27,"name":"object 21","bbox":[66.67,338.67,8,8]}
+{"kind":"image","id":"im/i1g32doj","slide":27,"name":"object 29","bbox":[422.18,249.07,8,8]}
+{"kind":"image","id":"im/j2pkvipo","slide":27,"name":"object 30","bbox":[422.18,271.47,8,8]}
+{"kind":"image","id":"im/k3yl4n69","slide":27,"name":"object 31","bbox":[422.18,293.87,8,8]}
+{"kind":"image","id":"im/5472xs7u","slide":27,"name":"object 32","bbox":[422.18,316.27,8,8]}
+{"kind":"image","id":"im/65g36xof","slide":27,"name":"object 33","bbox":[422.18,338.67,8,8]}
+{"kind":"notes","id":"nt/u2jnay","slide":27,"text":""}

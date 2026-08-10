@@ -1,0 +1,10 @@
+Slide 1: Replaced the cover screenshot and advanced controlled-document revision/date.
+Slide 2: Updated document-control metadata and source description.
+Slide 3: Updated L3/L4 access wording to the current QMS group model.
+Slide 7: Replaced legacy dashboard views and rewrote dashboard instructions for library coverage, shortcuts, daily trend, recently viewed, filters, pagination, row actions, and export.
+Slide 17: Replaced the tabbed legacy library screen with the current six-folder landing page and dedicated-page navigation.
+Slide 18: Replaced legacy Procedures/Standard Manuals content with the current QMS document-type workflow.
+Slide 19: Replaced legacy Master Records/Customer Records content with current Customer Specific Requirements and Core Tools folder workflows.
+Slide 7: Reduced the two inherited dashboard image frames vertically so all five numbered instructions are visible; page grid, margins and typography remain unchanged.
+Slides 10, 16 and 20-26: Refreshed data-bearing screenshots from the current local application. People and Profile personal-detail regions remain intentionally obscured.
+All pages: Updated revision to 1.3 and effective date to 10-Aug-2026. No layout, master, font, or color-system changes.

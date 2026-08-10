@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-08-10T07:19:32.358Z",
+  "workspace": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810",
+  "finalPptx": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\output\\pptx\\DMS_Portal_User_Manual_Updated_Rev1.3.pptx",
+  "starterPptx": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-starter.pptx",
+  "mapPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-frame-map.json",
+  "starterLayoutDir": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-starter-layout",
+  "finalLayoutDir": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\final-layout",
+  "editDir": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810",
+  "issueCount": 0,
+  "issues": []
+}

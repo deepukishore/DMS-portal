@@ -1,0 +1,4484 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/ofy9wn61",
+    "id": "ofy9wn61",
+    "slide": 3,
+    "layoutId": "/ppt/slideLayouts/slideLayout5.xml",
+    "layoutName": "Blank",
+    "layoutType": "obj",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 793.33,
+      "height": 1122.67
+    }
+  },
+  "theme": {
+    "colorSchemeName": "Office",
+    "colors": {
+      "accent1": "#4F81BD",
+      "accent2": "#C0504D",
+      "accent3": "#9BBB59",
+      "accent4": "#8064A2",
+      "accent5": "#4BACC6",
+      "accent6": "#F79646",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#1F497D",
+      "lt2": "#EEECE1",
+      "hlink": "#0000FF",
+      "folHlink": "#800080"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Arial",
+      "Arial MT",
+      "Calibri"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout5.xml",
+      "name": "Blank",
+      "type": "obj",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/2",
+          "id": "2",
+          "name": "Holder 2",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+          "textPreview": "Internal user guide - controlled copy when viewed in the DMS portal",
+          "resolvedTextStyle": {
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Internal"
+                },
+                {
+                  "index": 2,
+                  "text": " "
+                },
+                {
+                  "index": 3,
+                  "text": "user"
+                },
+                {
+                  "index": 4,
+                  "text": " "
+                },
+                {
+                  "index": 5,
+                  "text": "guide"
+                },
+                {
+                  "index": 6,
+                  "text": " "
+                },
+                {
+                  "index": 7,
+                  "text": "-"
+                },
+                {
+                  "index": 8,
+                  "text": " "
+                },
+                {
+                  "index": 9,
+                  "text": "controlled"
+                },
+                {
+                  "index": 10,
+                  "text": " "
+                },
+                {
+                  "index": 11,
+                  "text": "copy"
+                },
+                {
+                  "index": 12,
+                  "text": " "
+                },
+                {
+                  "index": 13,
+                  "text": "when"
+                },
+                {
+                  "index": 14,
+                  "text": " "
+                },
+                {
+                  "index": 15,
+                  "text": "viewed"
+                },
+                {
+                  "index": 16,
+                  "text": " "
+                },
+                {
+                  "index": 17,
+                  "text": "in"
+                },
+                {
+                  "index": 18,
+                  "text": " "
+                },
+                {
+                  "index": 19,
+                  "text": "the"
+                },
+                {
+                  "index": 20,
+                  "text": " "
+                },
+                {
+                  "index": 21,
+                  "text": "DMS"
+                },
+                {
+                  "index": 22,
+                  "text": " "
+                },
+                {
+                  "index": 23,
+                  "text": "portal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/3",
+          "id": "3",
+          "name": "Holder 3",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "text": "Smart DMS v2.0.0",
+          "textPreview": "Smart DMS v2.0.0",
+          "resolvedTextStyle": {
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Smart DMS v2.0.0",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Smart"
+                },
+                {
+                  "index": 2,
+                  "text": " "
+                },
+                {
+                  "index": 3,
+                  "text": "DMS"
+                },
+                {
+                  "index": 4,
+                  "text": " "
+                },
+                {
+                  "index": 5,
+                  "text": "v2.0.0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/4",
+          "id": "4",
+          "name": "Holder 4",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "text": "‹#›",
+          "textPreview": "‹#›",
+          "resolvedTextStyle": {
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "‹#›",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "‹#›"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundColor": "bg1",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "image",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/7",
+          "id": "7",
+          "name": "bg object 16",
+          "bbox": [
+            56.47,
+            20,
+            103.06,
+            42.67
+          ],
+          "contentType": "image/jpg",
+          "asset": {
+            "assetId": "/ppt/media/image1.jpg",
+            "contentType": "image/jpg",
+            "byteLength": 12671
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image1.jpg",
+            "contentType": "image/jpg",
+            "byteLength": 12671
+          }
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/2",
+          "id": "2",
+          "name": "Holder 2",
+          "bbox": [
+            49.33,
+            201.33,
+            420.47,
+            50.67
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/3",
+          "id": "3",
+          "name": "Holder 3",
+          "bbox": [
+            39.7,
+            258.21,
+            714.6,
+            740.96
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 4,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/4",
+          "id": "4",
+          "name": "Holder 4",
+          "bbox": [
+            49.33,
+            1087.77,
+            270.33,
+            12.67
+          ],
+          "geometry": "rect",
+          "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+          "textPreview": "Internal user guide - controlled copy when viewed in the DMS portal",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Internal"
+                },
+                {
+                  "index": 2,
+                  "text": " "
+                },
+                {
+                  "index": 3,
+                  "text": "user"
+                },
+                {
+                  "index": 4,
+                  "text": " "
+                },
+                {
+                  "index": 5,
+                  "text": "guide"
+                },
+                {
+                  "index": 6,
+                  "text": " "
+                },
+                {
+                  "index": 7,
+                  "text": "-"
+                },
+                {
+                  "index": 8,
+                  "text": " "
+                },
+                {
+                  "index": 9,
+                  "text": "controlled"
+                },
+                {
+                  "index": 10,
+                  "text": " "
+                },
+                {
+                  "index": 11,
+                  "text": "copy"
+                },
+                {
+                  "index": 12,
+                  "text": " "
+                },
+                {
+                  "index": 13,
+                  "text": "when"
+                },
+                {
+                  "index": 14,
+                  "text": " "
+                },
+                {
+                  "index": 15,
+                  "text": "viewed"
+                },
+                {
+                  "index": 16,
+                  "text": " "
+                },
+                {
+                  "index": 17,
+                  "text": "in"
+                },
+                {
+                  "index": 18,
+                  "text": " "
+                },
+                {
+                  "index": 19,
+                  "text": "the"
+                },
+                {
+                  "index": 20,
+                  "text": " "
+                },
+                {
+                  "index": 21,
+                  "text": "DMS"
+                },
+                {
+                  "index": 22,
+                  "text": " "
+                },
+                {
+                  "index": 23,
+                  "text": "portal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/5",
+          "id": "5",
+          "name": "Holder 5",
+          "bbox": [
+            668.72,
+            1087.77,
+            75.67,
+            12.67
+          ],
+          "geometry": "rect",
+          "text": "Smart DMS v2.0.0",
+          "textPreview": "Smart DMS v2.0.0",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Smart DMS v2.0.0",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Smart"
+                },
+                {
+                  "index": 2,
+                  "text": " "
+                },
+                {
+                  "index": 3,
+                  "text": "DMS"
+                },
+                {
+                  "index": 4,
+                  "text": " "
+                },
+                {
+                  "index": 5,
+                  "text": "v2.0.0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/6",
+          "id": "6",
+          "name": "Holder 6",
+          "bbox": [
+            571.68,
+            1044.08,
+            182.62,
+            56.13
+          ],
+          "geometry": "rect",
+          "text": "‹#›",
+          "textPreview": "‹#›",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "‹#›",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "‹#›"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cza94vmx",
+      "id": "2",
+      "name": "object 2",
+      "bbox": [
+        177.33,
+        16.48,
+        175.53,
+        34.67
+      ],
+      "geometry": "rect",
+      "text": "ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual",
+      "textPreview": "ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.27,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ZF Rane Automotive India PVT LTD - SGD Smart"
+          },
+          {
+            "index": 2,
+            "text": "DMS Portal User Manual"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual",
+          "lineSpacingPercent": 153800,
+          "runs": [
+            {
+              "index": 1,
+              "text": "ZF",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "Rane",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "Automotive",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "India",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "PVT",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "LTD",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "-",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "SGD",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 17,
+              "text": "Smart",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 19,
+              "text": "DMS",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 20,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 21,
+              "text": "Portal",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 22,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 23,
+              "text": "User",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 24,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 25,
+              "text": "Manual",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/w3ytcnmx",
+      "id": "29",
+      "name": "object 3",
+      "bbox": [
+        438.7,
+        17,
+        304,
+        46.66
+      ],
+      "text": "Document: DMS-UM-001 | Revision: 1.2\nEffective: 31-Jul-2026 | Page: 3 of 27",
+      "textPreview": "Document: DMS-UM-001 | Revision: 1.2 | Effective: 31-Jul-2026 | Page: 3 of 27",
+      "rows": 2,
+      "cols": 2,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            438.7,
+            17,
+            152,
+            23.33
+          ],
+          "text": "Document: DMS-UM-001",
+          "textPreview": "Document: DMS-UM-001",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Document: DMS-UM-001",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Document:",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "DMS-UM-",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": "001",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            590.7,
+            17,
+            152,
+            23.33
+          ],
+          "text": "Revision: 1.2",
+          "textPreview": "Revision: 1.2",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Revision: 1.2",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Revision:",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "1.2",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            438.7,
+            40.33,
+            152,
+            23.33
+          ],
+          "text": "Effective: 31-Jul-2026",
+          "textPreview": "Effective: 31-Jul-2026",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Effective: 31-Jul-2026",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Effective:",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "31-Jul-",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": "2026",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            590.7,
+            40.33,
+            152,
+            23.33
+          ],
+          "text": "Page: 3 of 27",
+          "textPreview": "Page: 3 of 27",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Page: 3 of 27",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Page:",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "3",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "of",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "27",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ah8rqlg",
+      "id": "5",
+      "name": "object 5",
+      "bbox": [
+        0,
+        81.33,
+        793.73,
+        45.33
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#008A95"
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/obq90bml",
+      "id": "6",
+      "name": "object 6",
+      "bbox": [
+        50.67,
+        90.67,
+        56,
+        26.67
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7B800"
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pcjqtg36",
+      "id": "7",
+      "name": "object 7",
+      "bbox": [
+        69.92,
+        96.67,
+        17.53,
+        15.47
+      ],
+      "geometry": "rect",
+      "text": "2.0",
+      "textPreview": "2.0",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2.0"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2.0",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "2.0",
+              "fontSize": 10.67,
+              "typeface": "Arial",
+              "color": "#0A346B",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m5cra54z",
+      "id": "8",
+      "name": "object 8",
+      "bbox": [
+        118.67,
+        90.67,
+        338.4,
+        26.67
+      ],
+      "geometry": "rect",
+      "text": "Purpose, Scope and Access Levels",
+      "textPreview": "Purpose, Scope and Access Levels",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Purpose, Scope and Access Levels"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Purpose, Scope and Access Levels",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Purpose,",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "Scope",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "and",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "Access",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 9,
+              "text": "Levels",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n6ls3alk",
+      "id": "9",
+      "name": "object 9",
+      "bbox": [
+        50.67,
+        1081.19,
+        692.4,
+        0
+      ],
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#C8D6E4",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n2l4fq98",
+      "id": "10",
+      "name": "object 10",
+      "bbox": [
+        49.33,
+        142.67,
+        398.93,
+        15.8
+      ],
+      "geometry": "rect",
+      "text": "This manual enables users to complete routine DMS work safely and consistently.",
+      "textPreview": "This manual enables users to complete routine DMS work safely and consistently.",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.6,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "This manual enables users to complete routine DMS work safely and consistently."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "This manual enables users to complete routine DMS work safely and consistently.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "This",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "manual",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "enables",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "users",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "to",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "complete",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "routine",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "DMS",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 17,
+              "text": "work",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 19,
+              "text": "safely",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 20,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 21,
+              "text": "and",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 22,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 23,
+              "text": "consistently.",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/943mhgre",
+      "id": "12",
+      "name": "object 12",
+      "bbox": [
+        50.67,
+        179.79,
+        338.2,
+        115.31
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4F6FB"
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/83ulovat",
+      "id": "13",
+      "name": "object 13",
+      "bbox": [
+        50.67,
+        179.79,
+        338.2,
+        115.31
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#0877B8",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v6l4jq94",
+      "id": "14",
+      "name": "object 14",
+      "bbox": [
+        50.67,
+        179.79,
+        6.67,
+        115.31
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#0877B8"
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a5c3ql8z",
+      "id": "15",
+      "name": "object 15",
+      "bbox": [
+        63.97,
+        179.73,
+        318.25,
+        99.02
+      ],
+      "geometry": "rect",
+      "text": "Purpose\nTo digitally centralize, control, and secure organizational documents through a standardized approval and version management system.",
+      "textPreview": "Purpose | To digitally centralize, control, and secure organizational documents through a standardized approval and version management sy...",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 3.2,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Purpose"
+          },
+          {
+            "index": 2,
+            "text": "To digitally centralize, control, and secure"
+          },
+          {
+            "index": 3,
+            "text": "organizational documents through a standardized"
+          },
+          {
+            "index": 4,
+            "text": "approval and version management system."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Purpose",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Purpose",
+              "fontSize": 14.67,
+              "typeface": "Arial MT",
+              "color": "#13213D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "To digitally centralize, control, and secure organizational documents through a standardized approval and version management system.",
+          "lineSpacingPercent": 112300,
+          "runs": [
+            {
+              "index": 1,
+              "text": "To digitally centralize, control, and secure organizational documents through a standardized approval and version management system.",
+              "fontSize": 14.67,
+              "typeface": "Arial MT",
+              "color": "#13213D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7ulsvqp",
+      "id": "17",
+      "name": "object 17",
+      "bbox": [
+        404.85,
+        179.79,
+        338.2,
+        115.04
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4F6FB"
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ja54na9g",
+      "id": "18",
+      "name": "object 18",
+      "bbox": [
+        404.85,
+        179.79,
+        338.2,
+        115.04
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#008A95",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/i9w3u58v",
+      "id": "19",
+      "name": "object 19",
+      "bbox": [
+        404.85,
+        179.79,
+        6.67,
+        115.04
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#008A95"
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e10f2twf",
+      "id": "20",
+      "name": "object 20",
+      "bbox": [
+        422.82,
+        178.98,
+        319.52,
+        109.86
+      ],
+      "geometry": "rect",
+      "text": "Scope\nCovers the complete document lifecycle—including creation, approval, storage, retrieval, revision, archival, and audit traceability—for all quality and organizational documents across the enterprise.",
+      "textPreview": "Scope | Covers the complete document lifecycle—including creation, approval, storage, retrieval, revision, archival, and audit traceabili...",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 3.2,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 5,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Scope"
+          },
+          {
+            "index": 2,
+            "text": "Covers the complete document lifecycle—including"
+          },
+          {
+            "index": 3,
+            "text": "creation, approval, storage, retrieval, revision,"
+          },
+          {
+            "index": 4,
+            "text": "archival, and audit traceability—for all quality and"
+          },
+          {
+            "index": 5,
+            "text": "organizational documents across the enterprise."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Scope",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Scope",
+              "fontSize": 14.67,
+              "typeface": "Arial MT",
+              "color": "#13213D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Covers the complete document lifecycle—including creation, approval, storage, retrieval, revision, archival, and audit traceability—for all quality and organizational documents across the enterprise.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Covers the complete document lifecycle—including creation, approval, storage, retrieval, revision, archival, and audit traceability—for all quality and organizational documents across the enterprise.",
+              "fontSize": 14.67
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 17,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/m9wrmtkv",
+      "id": "30",
+      "name": "object 21",
+      "bbox": [
+        50.33,
+        302.07,
+        692,
+        223.8
+      ],
+      "text": "Level / role | Primary access | Approval responsibility\nL1 - HOD / final approver | All QMS files; final review; edit/delete rights where configured. | Approve or reject after L2 review. Admin is treated as L1.\nL2 - Assistant Manager / Manager | All QMS files and first-stage review workspace. | Review, select recipients and send to L1; or reject with comments.\nL3 - Procedure viewer | SOPs, plans, checklists and other reports. | No approval decision.\nL4 - Checksheet viewer | Checklists and checksheets only. | No approval decision.\nHigh-level roles | Admin, Manager, Supervisor and Approver can access Archive and System Log. | Decision rights still follow QMS level.\nAdmin | Full system access including People directory. | Final approval capability and user oversight.",
+      "textPreview": "Level / role | Primary access | Approval responsibility | L1 - HOD / final approver | All QMS files; final review; edit/delete rights whe...",
+      "rows": 7,
+      "cols": 3,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            50.33,
+            302.07,
+            176,
+            26.33
+          ],
+          "text": "Level / role",
+          "textPreview": "Level / role",
+          "fillColor": "#0A346B",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Level / role",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Level",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                },
+                {
+                  "index": 3,
+                  "text": "/",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                },
+                {
+                  "index": 5,
+                  "text": "role",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            226.33,
+            302.07,
+            272,
+            26.33
+          ],
+          "text": "Primary access",
+          "textPreview": "Primary access",
+          "fillColor": "#0A346B",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Primary access",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Primary",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                },
+                {
+                  "index": 3,
+                  "text": "access",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 1,
+          "column": 3,
+          "bbox": [
+            498.33,
+            302.07,
+            244,
+            26.33
+          ],
+          "text": "Approval responsibility",
+          "textPreview": "Approval responsibility",
+          "fillColor": "#0A346B",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Approval responsibility",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Approval",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                },
+                {
+                  "index": 3,
+                  "text": "responsibility",
+                  "fontSize": 10,
+                  "typeface": "Arial",
+                  "color": "#FFFFFF",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            50.33,
+            328.4,
+            176,
+            39.47
+          ],
+          "text": "L1 - HOD / final approver",
+          "textPreview": "L1 - HOD / final approver",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "L1 - HOD / final approver",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "L1",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "-",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "HOD",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "/",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "final",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "approver",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            226.33,
+            328.4,
+            272,
+            39.47
+          ],
+          "text": "All QMS files; final review; edit/delete rights where configured.",
+          "textPreview": "All QMS files; final review; edit/delete rights where configured.",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "All QMS files; final review; edit/delete rights where configured.",
+              "lineSpacingPercent": 108900,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "All",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "QMS",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "files;",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "final",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "review;",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "edit/delete",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 12,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 13,
+                  "text": "rights",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 14,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 15,
+                  "text": "where configured.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 2,
+          "column": 3,
+          "bbox": [
+            498.33,
+            328.4,
+            244,
+            39.47
+          ],
+          "text": "Approve or reject after L2 review. Admin is treated as L1.",
+          "textPreview": "Approve or reject after L2 review. Admin is treated as L1.",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Approve or reject after L2 review. Admin is treated as L1.",
+              "lineSpacingPercent": 108900,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Approve",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "or",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "reject",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "after",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "L2",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "review.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 12,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 13,
+                  "text": "Admin",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 14,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 15,
+                  "text": "is",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 16,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 17,
+                  "text": "treated ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 18,
+                  "text": "as",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 19,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 20,
+                  "text": "L1.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            50.33,
+            367.87,
+            176,
+            39.47
+          ],
+          "text": "L2 - Assistant Manager / Manager",
+          "textPreview": "L2 - Assistant Manager / Manager",
+          "fillColor": "#F4F6FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "L2 - Assistant Manager / Manager",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "L2",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "-",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "Assistant",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "Manager",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "/",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "Manager",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            226.33,
+            367.87,
+            272,
+            39.47
+          ],
+          "text": "All QMS files and first-stage review workspace.",
+          "textPreview": "All QMS files and first-stage review workspace.",
+          "fillColor": "#F4F6FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "All QMS files and first-stage review workspace.",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "All",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "QMS",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "files",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "and",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "first-stage",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "review",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 12,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 13,
+                  "text": "workspace.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "row": 3,
+          "column": 3,
+          "bbox": [
+            498.33,
+            367.87,
+            244,
+            39.47
+          ],
+          "text": "Review, select recipients and send to L1; or reject with comments.",
+          "textPreview": "Review, select recipients and send to L1; or reject with comments.",
+          "fillColor": "#F4F6FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Review, select recipients and send to L1; or reject with comments.",
+              "lineSpacingPercent": 108900,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Review,",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "select",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "recipients",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "and",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "send",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "to",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 12,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 13,
+                  "text": "L1;",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 14,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 15,
+                  "text": "or",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 16,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 17,
+                  "text": "reject ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 18,
+                  "text": "with",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 19,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 20,
+                  "text": "comments.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "row": 4,
+          "column": 1,
+          "bbox": [
+            50.33,
+            407.33,
+            176,
+            26.33
+          ],
+          "text": "L3 - Procedure viewer",
+          "textPreview": "L3 - Procedure viewer",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "L3 - Procedure viewer",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "L3",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "-",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "Procedure",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "viewer",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "row": 4,
+          "column": 2,
+          "bbox": [
+            226.33,
+            407.33,
+            272,
+            26.33
+          ],
+          "text": "SOPs, plans, checklists and other reports.",
+          "textPreview": "SOPs, plans, checklists and other reports.",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "SOPs, plans, checklists and other reports.",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "SOPs,",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "plans,",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "checklists",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "and",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "other",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "reports.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 12,
+          "row": 4,
+          "column": 3,
+          "bbox": [
+            498.33,
+            407.33,
+            244,
+            26.33
+          ],
+          "text": "No approval decision.",
+          "textPreview": "No approval decision.",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "No approval decision.",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "No",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "approval",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "decision.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 13,
+          "row": 5,
+          "column": 1,
+          "bbox": [
+            50.33,
+            433.67,
+            176,
+            26.4
+          ],
+          "text": "L4 - Checksheet viewer",
+          "textPreview": "L4 - Checksheet viewer",
+          "fillColor": "#F4F6FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "L4 - Checksheet viewer",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "L4",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "-",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "Checksheet",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "viewer",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 14,
+          "row": 5,
+          "column": 2,
+          "bbox": [
+            226.33,
+            433.67,
+            272,
+            26.4
+          ],
+          "text": "Checklists and checksheets only.",
+          "textPreview": "Checklists and checksheets only.",
+          "fillColor": "#F4F6FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Checklists and checksheets only.",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Checklists",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "and",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "checksheets",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "only.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 15,
+          "row": 5,
+          "column": 3,
+          "bbox": [
+            498.33,
+            433.67,
+            244,
+            26.4
+          ],
+          "text": "No approval decision.",
+          "textPreview": "No approval decision.",
+          "fillColor": "#F4F6FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "No approval decision.",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "No",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "approval",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "decision.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 16,
+          "row": 6,
+          "column": 1,
+          "bbox": [
+            50.33,
+            460.07,
+            176,
+            39.4
+          ],
+          "text": "High-level roles",
+          "textPreview": "High-level roles",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "High-level roles",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "High-level",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "roles",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 17,
+          "row": 6,
+          "column": 2,
+          "bbox": [
+            226.33,
+            460.07,
+            272,
+            39.4
+          ],
+          "text": "Admin, Manager, Supervisor and Approver can access Archive and System Log.",
+          "textPreview": "Admin, Manager, Supervisor and Approver can access Archive and System Log.",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Admin, Manager, Supervisor and Approver can access Archive and System Log.",
+              "lineSpacingPercent": 108900,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Admin,",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "Manager,",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "Supervisor",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "and",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "Approver",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "can",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 12,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 13,
+                  "text": "access ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 14,
+                  "text": "Archive",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 15,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 16,
+                  "text": "and",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 17,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 18,
+                  "text": "System",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 19,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 20,
+                  "text": "Log.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 18,
+          "row": 6,
+          "column": 3,
+          "bbox": [
+            498.33,
+            460.07,
+            244,
+            39.4
+          ],
+          "text": "Decision rights still follow QMS level.",
+          "textPreview": "Decision rights still follow QMS level.",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Decision rights still follow QMS level.",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Decision",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "rights",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "still",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "follow",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "QMS",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "level.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 19,
+          "row": 7,
+          "column": 1,
+          "bbox": [
+            50.33,
+            499.47,
+            176,
+            26.4
+          ],
+          "text": "Admin",
+          "textPreview": "Admin",
+          "fillColor": "#F4F6FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Admin",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Admin",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 20,
+          "row": 7,
+          "column": 2,
+          "bbox": [
+            226.33,
+            499.47,
+            272,
+            26.4
+          ],
+          "text": "Full system access including People directory.",
+          "textPreview": "Full system access including People directory.",
+          "fillColor": "#F4F6FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Full system access including People directory.",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Full",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "system",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "access",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "including",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "People",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "directory.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 21,
+          "row": 7,
+          "column": 3,
+          "bbox": [
+            498.33,
+            499.47,
+            244,
+            26.4
+          ],
+          "text": "Final approval capability and user oversight.",
+          "textPreview": "Final approval capability and user oversight.",
+          "fillColor": "#F4F6FB",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Final approval capability and user oversight.",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Final",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "approval",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "capability",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "and",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 8,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 9,
+                  "text": "user",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 10,
+                  "text": " ",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 11,
+                  "text": "oversight.",
+                  "fontSize": 10,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/14ryd8fq",
+      "id": "23",
+      "name": "object 23",
+      "bbox": [
+        50.67,
+        543.73,
+        692.4,
+        54.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#FFF6DA"
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6d0fytg3",
+      "id": "24",
+      "name": "object 24",
+      "bbox": [
+        50.67,
+        543.73,
+        692.4,
+        54.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#D88300",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/re9g7yxo",
+      "id": "25",
+      "name": "object 25",
+      "bbox": [
+        50.67,
+        543.73,
+        6.67,
+        54.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#D88300"
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sfix03y9",
+      "id": "26",
+      "name": "object 26",
+      "bbox": [
+        57.33,
+        550.11,
+        681.67,
+        34.8
+      ],
+      "geometry": "rect",
+      "text": "Key distinction\nRole controls administrative pages. QMS level controls document visibility and who can complete each approval stage.",
+      "textPreview": "Key distinction | Role controls administrative pages. QMS level controls document visibility and who can complete each approval stage.",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 2.93,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Key distinction"
+          },
+          {
+            "index": 2,
+            "text": ""
+          },
+          {
+            "index": 3,
+            "text": "Role controls administrative pages. QMS level controls document visibility and who can complete each approval stage."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Key distinction",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Key ",
+              "fontSize": 13.33,
+              "typeface": "Arial",
+              "color": "#0A346B",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "distinction",
+              "fontSize": 13.33,
+              "typeface": "Arial",
+              "color": "#0A346B",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Role controls administrative pages. QMS level controls document visibility and who can complete each approval stage.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Role",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "controls",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "administrative",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "pages.",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "QMS",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "level",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "controls",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "document",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 17,
+              "text": "visibility",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 19,
+              "text": "and",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 20,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 21,
+              "text": "who",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 22,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 23,
+              "text": "can",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 24,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 25,
+              "text": "complete",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 26,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 27,
+              "text": "each",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 28,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 29,
+              "text": "approval",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 30,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 31,
+              "text": "stage.",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tgry9ofu",
+      "id": "27",
+      "name": "object 27",
+      "bbox": [
+        49.33,
+        1087.77,
+        270.33,
+        12.67
+      ],
+      "geometry": "rect",
+      "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+      "textPreview": "Internal user guide - controlled copy when viewed in the DMS portal",
+      "resolvedFontSize": 8.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 8.67,
+        "typeface": "Arial MT",
+        "color": "#596B82",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0.73,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Internal user guide - controlled copy when viewed in the DMS portal"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Internal"
+            },
+            {
+              "index": 2,
+              "text": " "
+            },
+            {
+              "index": 3,
+              "text": "user"
+            },
+            {
+              "index": 4,
+              "text": " "
+            },
+            {
+              "index": 5,
+              "text": "guide"
+            },
+            {
+              "index": 6,
+              "text": " "
+            },
+            {
+              "index": 7,
+              "text": "-"
+            },
+            {
+              "index": 8,
+              "text": " "
+            },
+            {
+              "index": 9,
+              "text": "controlled"
+            },
+            {
+              "index": 10,
+              "text": " "
+            },
+            {
+              "index": 11,
+              "text": "copy"
+            },
+            {
+              "index": 12,
+              "text": " "
+            },
+            {
+              "index": 13,
+              "text": "when"
+            },
+            {
+              "index": 14,
+              "text": " "
+            },
+            {
+              "index": 15,
+              "text": "viewed"
+            },
+            {
+              "index": 16,
+              "text": " "
+            },
+            {
+              "index": 17,
+              "text": "in"
+            },
+            {
+              "index": 18,
+              "text": " "
+            },
+            {
+              "index": 19,
+              "text": "the"
+            },
+            {
+              "index": 20,
+              "text": " "
+            },
+            {
+              "index": 21,
+              "text": "DMS"
+            },
+            {
+              "index": 22,
+              "text": " "
+            },
+            {
+              "index": 23,
+              "text": "portal"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a9kfadwn",
+      "id": "28",
+      "name": "object 28",
+      "bbox": [
+        668.72,
+        1087.77,
+        75.67,
+        12.67
+      ],
+      "geometry": "rect",
+      "text": "Smart DMS v2.0.0",
+      "textPreview": "Smart DMS v2.0.0",
+      "resolvedFontSize": 8.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 8.67,
+        "typeface": "Arial MT",
+        "color": "#596B82",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0.73,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Smart DMS v2.0.0"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Smart DMS v2.0.0",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Smart"
+            },
+            {
+              "index": 2,
+              "text": " "
+            },
+            {
+              "index": 3,
+              "text": "DMS"
+            },
+            {
+              "index": 4,
+              "text": " "
+            },
+            {
+              "index": 5,
+              "text": "v2.0.0"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

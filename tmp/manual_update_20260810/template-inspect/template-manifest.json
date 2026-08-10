@@ -1,0 +1,507 @@
+{
+  "sourcePptx": "C:\\Users\\deepu\\Downloads\\DMS_Portal_User_Manual_Updated.pptx",
+  "workspace": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810",
+  "outDir": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect",
+  "generatedAt": "2026-08-10T06:37:27.984Z",
+  "slideCount": 27,
+  "slideArtifacts": [
+    {
+      "slide": 1,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-01.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-01.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-01.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-01.layout.json"
+    },
+    {
+      "slide": 2,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-02.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-02.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-02.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-02.layout.json"
+    },
+    {
+      "slide": 3,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-03.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-03.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-03.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-03.layout.json"
+    },
+    {
+      "slide": 4,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-04.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-04.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-04.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-04.layout.json"
+    },
+    {
+      "slide": 5,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-05.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-05.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-05.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-05.layout.json"
+    },
+    {
+      "slide": 6,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-06.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-06.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-06.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-06.layout.json"
+    },
+    {
+      "slide": 7,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-07.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-07.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-07.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-07.layout.json"
+    },
+    {
+      "slide": 8,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-08.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-08.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-08.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-08.layout.json"
+    },
+    {
+      "slide": 9,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-09.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-09.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-09.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-09.layout.json"
+    },
+    {
+      "slide": 10,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-10.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-10.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-10.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-10.layout.json"
+    },
+    {
+      "slide": 11,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-11.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-11.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-11.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-11.layout.json"
+    },
+    {
+      "slide": 12,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-12.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-12.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-12.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-12.layout.json"
+    },
+    {
+      "slide": 13,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-13.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-13.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-13.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-13.layout.json"
+    },
+    {
+      "slide": 14,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-14.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-14.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-14.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-14.layout.json"
+    },
+    {
+      "slide": 15,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-15.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-15.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-15.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-15.layout.json"
+    },
+    {
+      "slide": 16,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-16.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-16.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-16.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-16.layout.json"
+    },
+    {
+      "slide": 17,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-17.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-17.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-17.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-17.layout.json"
+    },
+    {
+      "slide": 18,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-18.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-18.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-18.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-18.layout.json"
+    },
+    {
+      "slide": 19,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-19.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-19.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-19.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-19.layout.json"
+    },
+    {
+      "slide": 20,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-20.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-20.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-20.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-20.layout.json"
+    },
+    {
+      "slide": 21,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-21.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-21.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-21.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-21.layout.json"
+    },
+    {
+      "slide": 22,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-22.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-22.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-22.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-22.layout.json"
+    },
+    {
+      "slide": 23,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-23.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-23.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-23.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-23.layout.json"
+    },
+    {
+      "slide": 24,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-24.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-24.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-24.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-24.layout.json"
+    },
+    {
+      "slide": 25,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-25.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-25.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-25.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-25.layout.json"
+    },
+    {
+      "slide": 26,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-26.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-26.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-26.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-26.layout.json"
+    },
+    {
+      "slide": 27,
+      "previewPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\source-slides\\source-slide-27.png",
+      "previewRelativePath": "template-inspect/source-slides/source-slide-27.png",
+      "layoutPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\layouts\\source-slide-27.layout.json",
+      "layoutRelativePath": "template-inspect/layouts/source-slide-27.layout.json"
+    }
+  ],
+  "inspectPath": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\template-inspect.ndjson",
+  "inspectRelativePath": "template-inspect/template-inspect.ndjson",
+  "inspectTruncated": true,
+  "inspectMetadata": {
+    "revision": "bxj4b5",
+    "target": {
+      "id": "pr/15cm7e"
+    },
+    "kind": {
+      "requested": "slide,textbox,shape,image,table,chart",
+      "tokens": [
+        "slide",
+        "textbox",
+        "shape",
+        "image",
+        "table",
+        "chart"
+      ]
+    },
+    "include": {
+      "tokens": []
+    },
+    "exclude": {
+      "tokens": []
+    },
+    "notices": []
+  },
+  "extractedMedia": [
+    {
+      "entry": "ppt/media/image3.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image3.png",
+      "relativePath": "template-inspect/assets/ppt/media/image3.png",
+      "bytes": 1069
+    },
+    {
+      "entry": "ppt/media/image4.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image4.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image4.jpg",
+      "bytes": 105702
+    },
+    {
+      "entry": "ppt/media/image5.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image5.png",
+      "relativePath": "template-inspect/assets/ppt/media/image5.png",
+      "bytes": 1180
+    },
+    {
+      "entry": "ppt/media/image6.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image6.png",
+      "relativePath": "template-inspect/assets/ppt/media/image6.png",
+      "bytes": 37708
+    },
+    {
+      "entry": "ppt/media/image7.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image7.png",
+      "relativePath": "template-inspect/assets/ppt/media/image7.png",
+      "bytes": 37473
+    },
+    {
+      "entry": "ppt/media/image8.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image8.png",
+      "relativePath": "template-inspect/assets/ppt/media/image8.png",
+      "bytes": 1152
+    },
+    {
+      "entry": "ppt/media/image9.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image9.png",
+      "relativePath": "template-inspect/assets/ppt/media/image9.png",
+      "bytes": 1151
+    },
+    {
+      "entry": "ppt/media/image10.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image10.png",
+      "relativePath": "template-inspect/assets/ppt/media/image10.png",
+      "bytes": 795495
+    },
+    {
+      "entry": "ppt/media/image11.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image11.png",
+      "relativePath": "template-inspect/assets/ppt/media/image11.png",
+      "bytes": 114930
+    },
+    {
+      "entry": "ppt/media/image12.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image12.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image12.jpg",
+      "bytes": 55522
+    },
+    {
+      "entry": "ppt/media/image13.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image13.png",
+      "relativePath": "template-inspect/assets/ppt/media/image13.png",
+      "bytes": 1184
+    },
+    {
+      "entry": "ppt/media/image14.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image14.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image14.jpg",
+      "bytes": 66905
+    },
+    {
+      "entry": "ppt/media/image15.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image15.png",
+      "relativePath": "template-inspect/assets/ppt/media/image15.png",
+      "bytes": 1063
+    },
+    {
+      "entry": "ppt/media/image16.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image16.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image16.jpg",
+      "bytes": 46274
+    },
+    {
+      "entry": "ppt/media/image17.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image17.png",
+      "relativePath": "template-inspect/assets/ppt/media/image17.png",
+      "bytes": 1210
+    },
+    {
+      "entry": "ppt/media/image24.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image24.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image24.jpg",
+      "bytes": 45334
+    },
+    {
+      "entry": "ppt/media/image25.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image25.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image25.jpg",
+      "bytes": 39871
+    },
+    {
+      "entry": "ppt/media/image18.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image18.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image18.jpg",
+      "bytes": 78832
+    },
+    {
+      "entry": "ppt/media/image26.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image26.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image26.jpg",
+      "bytes": 28759
+    },
+    {
+      "entry": "ppt/media/image27.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image27.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image27.jpg",
+      "bytes": 30544
+    },
+    {
+      "entry": "ppt/media/image28.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image28.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image28.jpg",
+      "bytes": 23875
+    },
+    {
+      "entry": "ppt/media/image29.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image29.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image29.jpg",
+      "bytes": 27909
+    },
+    {
+      "entry": "ppt/media/image30.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image30.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image30.jpg",
+      "bytes": 44598
+    },
+    {
+      "entry": "ppt/media/image31.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image31.png",
+      "relativePath": "template-inspect/assets/ppt/media/image31.png",
+      "bytes": 1160
+    },
+    {
+      "entry": "ppt/media/image32.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image32.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image32.jpg",
+      "bytes": 43876
+    },
+    {
+      "entry": "ppt/media/image33.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image33.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image33.jpg",
+      "bytes": 41342
+    },
+    {
+      "entry": "ppt/media/image34.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image34.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image34.jpg",
+      "bytes": 48496
+    },
+    {
+      "entry": "ppt/media/image35.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image35.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image35.jpg",
+      "bytes": 46108
+    },
+    {
+      "entry": "ppt/media/image36.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image36.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image36.jpg",
+      "bytes": 67054
+    },
+    {
+      "entry": "ppt/media/image37.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image37.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image37.jpg",
+      "bytes": 39444
+    },
+    {
+      "entry": "ppt/media/image38.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image38.png",
+      "relativePath": "template-inspect/assets/ppt/media/image38.png",
+      "bytes": 468
+    },
+    {
+      "entry": "ppt/media/image39.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image39.png",
+      "relativePath": "template-inspect/assets/ppt/media/image39.png",
+      "bytes": 476
+    },
+    {
+      "entry": "ppt/media/image19.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image19.png",
+      "relativePath": "template-inspect/assets/ppt/media/image19.png",
+      "bytes": 75240
+    },
+    {
+      "entry": "ppt/media/image21.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image21.png",
+      "relativePath": "template-inspect/assets/ppt/media/image21.png",
+      "bytes": 107104
+    },
+    {
+      "entry": "ppt/media/image20.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image20.png",
+      "relativePath": "template-inspect/assets/ppt/media/image20.png",
+      "bytes": 93552
+    },
+    {
+      "entry": "ppt/media/image22.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image22.png",
+      "relativePath": "template-inspect/assets/ppt/media/image22.png",
+      "bytes": 1162
+    },
+    {
+      "entry": "ppt/media/image1.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image1.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image1.jpg",
+      "bytes": 12671
+    },
+    {
+      "entry": "ppt/media/image2.jpg",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image2.jpg",
+      "relativePath": "template-inspect/assets/ppt/media/image2.jpg",
+      "bytes": 63107
+    },
+    {
+      "entry": "ppt/media/image23.png",
+      "path": "C:\\Users\\deepu\\OneDrive\\Desktop\\Rane\\dms_portal_copy\\tmp\\manual_update_20260810\\template-inspect\\assets\\ppt\\media\\image23.png",
+      "relativePath": "template-inspect/assets/ppt/media/image23.png",
+      "bytes": 1114
+    }
+  ],
+  "fonts": [
+    "+mj-cs",
+    "+mj-ea",
+    "+mj-lt",
+    "+mn-cs",
+    "+mn-ea",
+    "+mn-lt",
+    "Angsana New",
+    "Arial",
+    "Arial MT",
+    "Calibri",
+    "Cordia New",
+    "DaunPenh",
+    "DokChampa",
+    "Estrangelo Edessa",
+    "Euphemia",
+    "Gautami",
+    "Iskoola Pota",
+    "Kalinga",
+    "Kartika",
+    "Latha",
+    "MV Boli",
+    "Mangal",
+    "Microsoft Himalaya",
+    "Microsoft Uighur",
+    "Microsoft Yi Baiti",
+    "Mongolian Baiti",
+    "MoolBoran",
+    "Nyala",
+    "Plantagenet Cherokee",
+    "Raavi",
+    "Shruti",
+    "Times New Roman",
+    "Tunga",
+    "Vrinda",
+    "宋体",
+    "新細明體",
+    "맑은 고딕",
+    "ＭＳ Ｐゴシック"
+  ],
+  "packageParts": {
+    "mediaCount": 39,
+    "slideXmlCount": 27,
+    "chartCount": 0,
+    "tableSlideCount": 27
+  }
+}
