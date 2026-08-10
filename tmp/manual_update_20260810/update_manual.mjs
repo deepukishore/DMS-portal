@@ -5,7 +5,8 @@ import { FileBlob, PresentationFile } from "@oai/artifact-tool";
 const workspace = "C:/Users/deepu/OneDrive/Desktop/Rane/dms_portal_copy/tmp/manual_update_20260810";
 const starterPath = `${workspace}/template-starter-legibility.pptx`;
 const screenshotDir = `${workspace}/current-screenshots`;
-const outputPptx = "C:/Users/deepu/OneDrive/Desktop/Rane/dms_portal_copy/output/pptx/DMS_Portal_User_Manual_Updated_Rev1.4.pptx";
+const registrationScreenshot = "C:/Users/deepu/OneDrive/Pictures/Screenshots/Screenshot 2026-08-10 143320.png";
+const outputPptx = "C:/Users/deepu/OneDrive/Desktop/Rane/dms_portal_copy/output/pptx/DMS_Portal_User_Manual_Updated_Rev1.5.pptx";
 const renderDir = `${workspace}/final-render`;
 const layoutDir = `${workspace}/final-layout`;
 
@@ -60,7 +61,8 @@ function mainTableRecord(slide) {
 }
 
 async function imageBytes(fileName) {
-  const bytes = await fs.readFile(`${screenshotDir}/${fileName}`);
+  const filePath = path.isAbsolute(fileName) ? fileName : `${screenshotDir}/${fileName}`;
+  const bytes = await fs.readFile(filePath);
   return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
 }
 
@@ -133,7 +135,7 @@ function expandStackedScreenshotFrames(slide, firstTop, secondTop) {
 // Controlled-document metadata on every page.
 const coverTable = presentation.resolve(recordsFor(1, "table")[0].id);
 coverTable.cells.set(1, 0, "DMS-UM-001");
-coverTable.cells.set(1, 1, "1.4");
+coverTable.cells.set(1, 1, "1.5");
 coverTable.cells.set(1, 2, "10-Aug-2026");
 coverTable.cells.set(1, 3, "DMS Team");
 coverTable.cells.set(0, 2, "EFFECTIVE");
@@ -141,13 +143,13 @@ coverTable.cells.set(0, 2, "EFFECTIVE");
 for (let slide = 2; slide <= 27; slide += 1) {
   const table = presentation.resolve(headerTableRecord(slide).id);
   table.cells.set(0, 0, "Document: DMS-UM-001");
-  table.cells.set(0, 1, "Revision: 1.4");
+  table.cells.set(0, 1, "Revision: 1.5");
   table.cells.set(1, 0, "Effective: 10-Aug-2026");
   table.cells.set(1, 1, `Page: ${slide} of 27`);
 }
 
 const controlTable = presentation.resolve(mainTableRecord(2).id);
-controlTable.cells.set(2, 1, "1.4");
+controlTable.cells.set(2, 1, "1.5");
 controlTable.cells.set(2, 2, "Effective");
 controlTable.cells.set(2, 3, "10-Aug-2026");
 controlTable.cells.set(
@@ -168,6 +170,39 @@ await replaceImageByRecord(
   "01_dashboard_library_coverage.png",
   "Current Smart DMS Master Dashboard",
 );
+
+// Slide 6: current registration page, shown as one full-width desktop view.
+replaceText(6, "Create account: identity and organization fields", "Figure 2 - Current employee registration page");
+replaceText(6, "Password confirmation and submission controls", "Full registration form visible in one screen without page scrolling");
+const registrationImages = recordsFor(6, "image")
+  .filter((record) => record.bbox[2] > 300)
+  .sort((a, b) => a.bbox[0] - b.bbox[0]);
+await replaceImageByRecord(registrationImages[0], registrationScreenshot, "Current employee registration page, left half");
+await replaceImageByRecord(registrationImages[1], registrationScreenshot, "Current employee registration page, right half");
+const registrationLeft = presentation.resolve(registrationImages[0].id);
+registrationLeft.frame = { left: 50.67, top: 168.73, width: 346.2, height: 299.2 };
+registrationLeft.fit = "cover";
+registrationLeft.crop = { left: 0, top: 0, right: 0.5, bottom: 0 };
+registrationLeft.geometry = "rect";
+registrationLeft.borderRadius = 0;
+const registrationRight = presentation.resolve(registrationImages[1].id);
+registrationRight.frame = { left: 396.87, top: 168.73, width: 346.2, height: 299.2 };
+registrationRight.fit = "cover";
+registrationRight.crop = { left: 0.5, top: 0, right: 0, bottom: 0 };
+registrationRight.geometry = "rect";
+registrationRight.borderRadius = 0;
+setRecordFrame(textRecord(6, "Create account: identity and organization fields"), {
+  left: 50.67,
+  top: 478,
+  width: 692.4,
+  height: 20,
+});
+setRecordFrame(textRecord(6, "Password confirmation and submission controls"), {
+  left: 50.67,
+  top: 502,
+  width: 692.4,
+  height: 20,
+});
 
 // Slide 7: current dashboard coverage, shortcuts, activity and search behavior.
 replaceText(7, "The dashboard is the main operational view for documents, filters and quick actions.", "The dashboard is shown in two complete views: library shortcuts first, then activity and search.");

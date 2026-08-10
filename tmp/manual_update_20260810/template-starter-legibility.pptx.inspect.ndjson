@@ -1,4 +1,4 @@
-{"kind":"deck","id":"pr/zpw56z","name":"Deck"}
+{"kind":"deck","id":"pr/95ay7u","name":"Deck"}
 {"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master","placeholders":[{"name":"title","type":"title"},{"name":"body","type":"body"},{"name":"footer","type":"footer","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal"},{"name":"dateTime","type":"dateTime","textPreview":"Smart DMS v2.0.0"},{"name":"slideNumber","type":"slideNumber","textPreview":"‹#›"}]}
 {"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Title Slide","type":"obj","placeholders":[{"name":"title","type":"title"},{"name":"subtitle","type":"subtitle"},{"name":"footer","type":"footer","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal"},{"name":"dateTime","type":"dateTime","textPreview":"Smart DMS v2.0.0"},{"name":"slideNumber","type":"slideNumber","textPreview":"‹#›"}]}
 {"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout2.xml","name":"Title and Content","type":"obj","placeholders":[{"name":"title","type":"title"},{"name":"body","type":"body"},{"name":"footer","type":"footer","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal"},{"name":"dateTime","type":"dateTime","textPreview":"Smart DMS v2.0.0"},{"name":"slideNumber","type":"slideNumber","textPreview":"‹#›"}]}
@@ -251,8 +251,8 @@
 {"kind":"textbox","id":"sh/oryp8fah","slide":6,"name":"object 8","text":"Register and Reset Password","textPreview":"Register and Reset Password","textChars":27,"textLines":1,"bbox":[118.67,90.67,283.93,26.67]}
 {"kind":"shape","id":"sh/pc76hkr2","slide":6,"name":"object 9","bbox":[50.67,1081.19,692.4,0]}
 {"kind":"textbox","id":"sh/h4bupgn6","slide":6,"name":"object 10","text":"New accounts start with the User role and standard QMS access.","textPreview":"New accounts start with the User role and standard QMS access.","textChars":62,"textLines":1,"bbox":[49.33,142.67,318.67,15.8]}
-{"kind":"textbox","id":"sh/v2tcn650","slide":6,"name":"object 12","text":"Create account: identity and organization fields","textPreview":"Create account: identity and organization fields","textChars":48,"textLines":1,"bbox":[113.75,563.73,213.4,14.87]}
-{"kind":"textbox","id":"sh/5svutgni","slide":6,"name":"object 14","text":"Password confirmation and submission controls","textPreview":"Password confirmation and submission controls","textChars":45,"textLines":1,"bbox":[464.93,539.17,216.73,14.87]}
+{"kind":"textbox","id":"sh/v2tcn650","slide":6,"name":"object 12","text":"Create account: identity and organization fields","textPreview":"Create account: identity and organization fields","textChars":48,"textLines":1,"bbox":[50.67,478,692.4,20]}
+{"kind":"textbox","id":"sh/5svutgni","slide":6,"name":"object 14","text":"Password confirmation and submission controls","textPreview":"Password confirmation and submission controls","textChars":45,"textLines":1,"bbox":[50.67,502,692.4,20]}
 {"kind":"shape","id":"sh/j6dcr65c","slide":6,"name":"object 16","bbox":[50.67,590.67,692.4,42.4]}
 {"kind":"shape","id":"sh/i54bylor","slide":6,"name":"object 17","bbox":[50.67,590.67,692.4,42.4]}
 {"kind":"textbox","id":"sh/svmt4v6t","slide":6,"name":"object 19","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[67.33,602.8,9.4,17.07]}
@@ -276,8 +276,8 @@
 {"kind":"textbox","id":"sh/ep0b6lg7","slide":6,"name":"object 44","placeholder":"footer","text":"Internal user guide - controlled copy when viewed in the DMS portal","textPreview":"Internal user guide - controlled copy when viewed in the DMS portal","textChars":67,"textLines":1,"bbox":[0,0,0,0]}
 {"kind":"textbox","id":"sh/fq9cfqxc","slide":6,"name":"object 45","placeholder":"dateTime","text":"Smart DMS v2.0.0","textPreview":"Smart DMS v2.0.0","textChars":16,"textLines":1,"bbox":[0,0,0,0]}
 {"kind":"table","id":"tb/vmtk7i9g","slide":6,"name":"object 3","rows":2,"cols":2,"preview":"Document: DMS-UM-001 | Revision: 1.2","bbox":[438.7,17,304,46.67]}
-{"kind":"image","id":"im/mlw3etoz","slide":6,"name":"object 11","bbox":[69.49,168.73,305.54,393.67]}
-{"kind":"image","id":"im/xs7mt8nm","slide":6,"name":"object 13","bbox":[403.18,168.73,343.85,369.1]}
+{"kind":"image","id":"im/mlw3etoz","slide":6,"name":"object 11","geometry":"rect","bbox":[50.67,168.73,346.2,299.2]}
+{"kind":"image","id":"im/xs7mt8nm","slide":6,"name":"object 13","geometry":"rect","bbox":[396.87,168.73,346.2,299.2]}
 {"kind":"image","id":"im/wrylk361","slide":6,"name":"object 18","bbox":[60,599.87,24,24]}
 {"kind":"image","id":"im/ul8ryl07","slide":6,"name":"object 24","bbox":[60,650.27,24,24]}
 {"kind":"image","id":"im/vmh8r6hs","slide":6,"name":"object 30","bbox":[60,700.67,24,24]}

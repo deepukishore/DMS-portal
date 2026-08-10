@@ -1,10 +1,11 @@
 Slide 1: Replaced the cover screenshot and advanced controlled-document revision/date.
 Slide 2: Updated document-control metadata and source description.
 Slide 3: Updated L3/L4 access wording to the current QMS group model.
+Slide 6: Replaced the two cropped registration images with the supplied 1919 x 830 current registration view. Reused the two inherited image objects as adjacent left/right halves so the screenshot renders as one clear full-width figure without overlap.
 Slide 7: Replaced legacy dashboard views and rewrote dashboard instructions for library coverage, shortcuts, daily trend, recently viewed, filters, pagination, row actions, and export.
 Slide 17: Replaced the tabbed legacy library screen with the current six-folder landing page and dedicated-page navigation.
 Slide 18: Replaced legacy Procedures/Standard Manuals content with the current QMS document-type workflow.
 Slide 19: Replaced legacy Master Records/Customer Records content with current Customer Specific Requirements and Core Tools folder workflows.
 Slides 7, 18 and 19: Enlarged and vertically stacked the inherited screenshot frames so every portal view is readable and no screenshots overlap. Numbered instructions remain below the images; page grid, margins, typography and inherited visual styling remain unchanged.
 Slides 10, 16 and 20-26: Refreshed data-bearing screenshots from the current local application. People and Profile personal-detail regions remain intentionally obscured.
-All pages: Updated revision to 1.4 and effective date to 10-Aug-2026. No master, font, or color-system changes.
+All pages: Updated revision to 1.5 and retained the effective date of 10-Aug-2026. No master, font, or color-system changes.

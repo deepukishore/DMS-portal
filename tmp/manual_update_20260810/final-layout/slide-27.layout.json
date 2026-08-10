@@ -822,8 +822,8 @@
         304,
         46.66
       ],
-      "text": "Document: DMS-UM-001 | Revision: 1.4\nEffective: 10-Aug-2026 | Page: 27 of 27",
-      "textPreview": "Document: DMS-UM-001 | Revision: 1.4 | Effective: 10-Aug-2026 | Page: 27 of 27",
+      "text": "Document: DMS-UM-001 | Revision: 1.5\nEffective: 10-Aug-2026 | Page: 27 of 27",
+      "textPreview": "Document: DMS-UM-001 | Revision: 1.5 | Effective: 10-Aug-2026 | Page: 27 of 27",
       "rows": 2,
       "cols": 2,
       "cells": [
@@ -866,17 +866,17 @@
             152,
             23.33
           ],
-          "text": "Revision: 1.4",
-          "textPreview": "Revision: 1.4",
+          "text": "Revision: 1.5",
+          "textPreview": "Revision: 1.5",
           "paragraphs": [
             {
               "index": 1,
-              "text": "Revision: 1.4",
+              "text": "Revision: 1.5",
               "lineSpacingPercent": 100000,
               "runs": [
                 {
                   "index": 1,
-                  "text": "Revision: 1.4",
+                  "text": "Revision: 1.5",
                   "fontSize": 8.67,
                   "typeface": "Arial MT",
                   "color": "#13213D"

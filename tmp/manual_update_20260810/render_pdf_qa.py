@@ -3,8 +3,8 @@ from pathlib import Path
 import fitz
 
 
-pdf_path = Path(r"C:\Users\deepu\OneDrive\Desktop\Rane\dms_portal_copy\output\pdf\DMS_Portal_User_Manual_Updated_Rev1.4.pdf")
-output_dir = Path(r"C:\Users\deepu\OneDrive\Desktop\Rane\dms_portal_copy\tmp\manual_update_20260810\pdf-render-rev1.4")
+pdf_path = Path(r"C:\Users\deepu\OneDrive\Desktop\Rane\dms_portal_copy\output\pdf\DMS_Portal_User_Manual_Updated_Rev1.5.pdf")
+output_dir = Path(r"C:\Users\deepu\OneDrive\Desktop\Rane\dms_portal_copy\tmp\manual_update_20260810\pdf-render-rev1.5")
 output_dir.mkdir(parents=True, exist_ok=True)
 
 document = fitz.open(pdf_path)

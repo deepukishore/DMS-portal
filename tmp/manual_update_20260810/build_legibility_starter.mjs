@@ -67,6 +67,36 @@ function expandStackedScreenshotFrames(slide, firstTop, secondTop) {
   }
 }
 
+// Slide 6: turn the two inherited portrait screenshot slots into one seamless,
+// full-width registration screenshot made from two adjacent cropped halves.
+const registrationScreens = recordsFor(6, "image")
+  .filter((record) => record.bbox[2] > 300)
+  .sort((a, b) => a.bbox[0] - b.bbox[0]);
+setRecordFrame(registrationScreens[0], { left: 50.67, top: 168.73, width: 346.2, height: 299.2 });
+setRecordFrame(registrationScreens[1], { left: 396.87, top: 168.73, width: 346.2, height: 299.2 });
+const registrationLeft = presentation.resolve(registrationScreens[0].id);
+registrationLeft.fit = "cover";
+registrationLeft.crop = { left: 0, top: 0, right: 0.5, bottom: 0 };
+registrationLeft.geometry = "rect";
+registrationLeft.borderRadius = 0;
+const registrationRight = presentation.resolve(registrationScreens[1].id);
+registrationRight.fit = "cover";
+registrationRight.crop = { left: 0.5, top: 0, right: 0, bottom: 0 };
+registrationRight.geometry = "rect";
+registrationRight.borderRadius = 0;
+setRecordFrame(textRecord(6, "Create account: identity and organization fields"), {
+  left: 50.67,
+  top: 478,
+  width: 692.4,
+  height: 20,
+});
+setRecordFrame(textRecord(6, "Password confirmation and submission controls"), {
+  left: 50.67,
+  top: 502,
+  width: 692.4,
+  height: 20,
+});
+
 const dashboardScreens = recordsFor(7, "image")
   .filter((record) => record.bbox[2] > 500)
   .sort((a, b) => a.bbox[1] - b.bbox[1]);

@@ -1529,12 +1529,23 @@
       "id": "47",
       "name": "object 11",
       "bbox": [
-        69.49,
+        50.67,
         168.73,
-        305.54,
-        393.67
+        346.2,
+        299.2
       ],
+      "geometry": "rect",
       "contentType": "image/png",
+      "imageCrop": {
+        "left": 0,
+        "top": 0,
+        "right": 0.5,
+        "bottom": 0
+      },
+      "imageFit": "cover",
+      "imageMask": {
+        "geometry": "rect"
+      },
       "asset": {
         "assetId": "/ppt/media/image3.png",
         "contentType": "image/png",
@@ -1554,10 +1565,10 @@
       "id": "12",
       "name": "object 12",
       "bbox": [
-        113.75,
-        563.73,
-        213.4,
-        14.87
+        50.67,
+        478,
+        692.4,
+        20
       ],
       "geometry": "rect",
       "text": "Create account: identity and organization fields",
@@ -1693,12 +1704,23 @@
       "id": "48",
       "name": "object 13",
       "bbox": [
-        403.18,
+        396.87,
         168.73,
-        343.85,
-        369.1
+        346.2,
+        299.2
       ],
+      "geometry": "rect",
       "contentType": "image/png",
+      "imageCrop": {
+        "left": 0.5,
+        "top": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "imageFit": "cover",
+      "imageMask": {
+        "geometry": "rect"
+      },
       "asset": {
         "assetId": "/ppt/media/image4.png",
         "contentType": "image/png",
@@ -1718,10 +1740,10 @@
       "id": "14",
       "name": "object 14",
       "bbox": [
-        464.93,
-        539.17,
-        216.73,
-        14.87
+        50.67,
+        502,
+        692.4,
+        20
       ],
       "geometry": "rect",
       "text": "Password confirmation and submission controls",
