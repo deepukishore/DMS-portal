@@ -1,3 +1,11 @@
+function plantCode(value) {
+  const text = String(value || '').trim();
+  const match = text.match(/^(P\d+(?:\s*&\s*\d+)?)\b/i);
+  return match ? match[1].replace(/\s+/g, '').toUpperCase() : text;
+}
+
+window.plantCode = plantCode;
+
 function goToPreviousPage(fallbackUrl = '/dashboard') {
   try {
     const referrer = document.referrer ? new URL(document.referrer) : null;

@@ -24,8 +24,8 @@
   <div class="plant-card" data-plant="{{ p.label }}" onclick="selectPlant(this, '{{ p.label }}')">
     <div class="plant-card-id">{{ p.id }}</div>
     <div class="plant-card-info">
-      <strong>{{ p.label }}</strong>
-      <small>{{ p.location }}</small>
+      <strong>{{ p.label | plant_code }}</strong>
+      <small>Open plant folder</small>
     </div>
     <div class="plant-card-arrow">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>

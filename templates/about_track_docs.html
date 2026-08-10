@@ -29,7 +29,7 @@
     <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Supported Plants</h3>
     <ul class="feature-check-list">
       {% for plant in system.supported_plants %}
-      <li><span class="check-mark" style="margin-right: 0.5rem;">+</span>{{ plant }}</li>
+      <li><span class="check-mark" style="margin-right: 0.5rem;">+</span>{{ plant | plant_code }}</li>
       {% endfor %}
     </ul>
   </div>

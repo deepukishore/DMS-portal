@@ -6,6 +6,7 @@ from database import configure_database, init_db
 from services.auth_service import AuthService
 from services.password_reset_service import PasswordResetService
 from services.user_store_service import UserStoreService
+from services.presentation_service import plant_code
 from data.customers import CUSTOMER_BRANDS
 from routes.auth_routes import auth_bp
 from routes.dashboard_routes import dashboard_bp
@@ -59,6 +60,7 @@ def create_app():
 
     # Expose Python builtins needed in templates
     app.jinja_env.globals.update(zip=zip)
+    app.jinja_env.filters["plant_code"] = plant_code
 
     @app.context_processor
     def inject_user_context():

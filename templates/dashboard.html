@@ -159,7 +159,7 @@
     <select name="plant">
       <option value="">All plants</option>
       {% for p in plants %}
-        <option value="{{ p.label }}" {% if selected_plant == p.label %}selected{% endif %}>{{ p.label }}</option>
+        <option value="{{ p.label }}" {% if selected_plant == p.label %}selected{% endif %}>{{ p.label | plant_code }}</option>
       {% endfor %}
     </select>
     <select name="department">
@@ -262,7 +262,7 @@
                 <span class="mono text-dim">{{ r.user_id }}</span>
               </div>
             </td>
-            <td><span class="plant-badge" title="{{ r.plant }}">{{ r.plant }}</span></td>
+            <td><span class="plant-badge" title="{{ r.plant | plant_code }}">{{ r.plant | plant_code }}</span></td>
             <td>{{ r.department }}</td>
             <td class="mono text-dim">{{ r.uploaded_at }}</td>
             <td>

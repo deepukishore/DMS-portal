@@ -118,7 +118,7 @@
           <h2 class="tracker-title">{{ r.file_name }}</h2>
           <p class="tracker-meta">
             {{ r.document_number or '—' }} · {{ r.revision_number or '—' }}
-            <span class="dot-sep">•</span> {{ r.plant }}
+            <span class="dot-sep">•</span> {{ r.plant | plant_code }}
             <span class="dot-sep">•</span> {{ r.department }}
             <span class="dot-sep">•</span> by {{ r.name }}
           </p>

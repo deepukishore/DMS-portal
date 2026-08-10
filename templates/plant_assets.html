@@ -20,11 +20,11 @@
 <div class="mr-plant-list" id="plant-list">
   {% for p in plants %}
   <div class="mr-plant-block" id="plant-block-{{ loop.index }}">
-    <div class="mr-plant-header" onclick="togglePlant(this, '{{ p.label }}', {{ loop.index }})">
+    <div class="mr-plant-header" data-plant="{{ p.label }}" onclick="togglePlant(this, '{{ p.label }}', {{ loop.index }})">
       <div class="mr-plant-id">{{ p.id }}</div>
       <div class="mr-plant-info">
-        <strong>{{ p.label }}</strong>
-        <span>{{ p.location }}</span>
+        <strong>{{ p.label | plant_code }}</strong>
+        <span>Plant folder</span>
       </div>
       <div class="mr-plant-meta" id="plant-meta-{{ loop.index }}">
         <span class="mr-dept-count" id="dept-count-{{ loop.index }}">Loading…</span>

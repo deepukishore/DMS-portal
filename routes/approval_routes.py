@@ -22,6 +22,7 @@ from flask import (
 
 from services.auth_service import AuthService
 from services.document_service import DocumentService
+from services.presentation_service import plant_code
 from services.mail_service import MailService
 from services.document_preview_service import DocumentPreviewService
 from services.notification_service import NotificationService
@@ -153,7 +154,7 @@ def export_records():
                 record.get("document_number", ""),
                 record.get("revision_number", ""),
                 record.get("category", ""),
-                record["plant"],
+                plant_code(record["plant"]),
                 record["department"],
                 record.get("customer", ""),
                 record.get("approval_status", "Pending"),

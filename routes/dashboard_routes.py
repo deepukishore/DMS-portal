@@ -11,6 +11,7 @@ from flask import Blueprint, Response, flash, redirect, render_template, request
 from data.mock_data import CUSTOMER_FILTERS, DEPARTMENTS, PLANTS, DASHBOARD_RECORDS
 from services.auth_service import AuthService
 from services.document_service import DocumentService
+from services.presentation_service import plant_code
 from services.system_log_service import SystemLogService
 from services.document_preview_service import DocumentPreviewService
 from services.document_tracking_service import DocumentTrackingService
@@ -264,7 +265,7 @@ def export_documents():
             [
                 record["name"],
                 record["user_id"],
-                record["plant"],
+                plant_code(record["plant"]),
                 record["department"],
                 record.get("customer", ""),
                 record.get("document_number", ""),

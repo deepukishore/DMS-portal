@@ -59,7 +59,7 @@
             <select name="plant" required>
               <option value="">Select plant</option>
               {% for plant in plants %}
-                <option value="{{ plant.label }}">{{ plant.label }}</option>
+                <option value="{{ plant.label }}">{{ plant.label | plant_code }}</option>
               {% endfor %}
             </select>
           </label>

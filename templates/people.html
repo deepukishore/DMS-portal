@@ -109,7 +109,7 @@
                 <small>{{ user.mobile or 'No mobile number' }}</small>
               </div>
             </td>
-            <td>{{ user.plant or '—' }}</td>
+            <td>{{ user.plant | plant_code if user.plant else '—' }}</td>
             <td>{{ user.department or '—' }}</td>
             <td>
               <span class="badge badge-{{ user.role|lower }}">{{ user.role }}</span>

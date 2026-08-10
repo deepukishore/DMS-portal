@@ -1,6 +1,7 @@
 from flask_mail import Message
 
 from extensions import mail
+from services.presentation_service import plant_code
 
 
 class MailService:
@@ -66,7 +67,7 @@ class MailService:
                 "A new document is waiting for approval.\n\n"
                 f"File: {record['file_name']}\n"
                 f"Uploaded by: {record['name']} ({record['user_id']})\n"
-                f"Plant: {record['plant']}\n"
+                f"Plant: {plant_code(record['plant'])}\n"
                 f"Department: {record['department']}\n"
                 f"Customer: {record['customer']}\n"
                 f"Document number: {record.get('document_number', 'N/A')}\n"
@@ -81,7 +82,7 @@ class MailService:
                 <table cellpadding="6" cellspacing="0" border="0">
                   <tr><td><strong>File</strong></td><td>{record['file_name']}</td></tr>
                   <tr><td><strong>Uploaded by</strong></td><td>{record['name']} ({record['user_id']})</td></tr>
-                  <tr><td><strong>Plant</strong></td><td>{record['plant']}</td></tr>
+                  <tr><td><strong>Plant</strong></td><td>{plant_code(record['plant'])}</td></tr>
                   <tr><td><strong>Department</strong></td><td>{record['department']}</td></tr>
                   <tr><td><strong>Customer</strong></td><td>{record['customer']}</td></tr>
                   <tr><td><strong>Document number</strong></td><td>{record.get('document_number', 'N/A')}</td></tr>
@@ -123,7 +124,7 @@ class MailService:
                 f"Your document has been {status.lower()}.\n\n"
                 f"File: {record['file_name']}\n"
                 f"Uploaded by: {record['name']} ({record['user_id']})\n"
-                f"Plant: {record['plant']}\n"
+                f"Plant: {plant_code(record['plant'])}\n"
                 f"Department: {record['department']}\n"
                 f"Customer: {record['customer']}\n"
                 f"Document number: {record.get('document_number', 'N/A')}\n"
@@ -144,7 +145,7 @@ class MailService:
                 <table cellpadding="6" cellspacing="0" border="0">
                   <tr><td><strong>File</strong></td><td>{record['file_name']}</td></tr>
                   <tr><td><strong>Uploaded by</strong></td><td>{record['name']} ({record['user_id']})</td></tr>
-                  <tr><td><strong>Plant</strong></td><td>{record['plant']}</td></tr>
+                  <tr><td><strong>Plant</strong></td><td>{plant_code(record['plant'])}</td></tr>
                   <tr><td><strong>Department</strong></td><td>{record['department']}</td></tr>
                   <tr><td><strong>Customer</strong></td><td>{record['customer']}</td></tr>
                   <tr><td><strong>Document number</strong></td><td>{record.get('document_number', 'N/A')}</td></tr>
@@ -176,7 +177,7 @@ class MailService:
             msg.body = (
                 "A Master Records document has received final approval.\n\n"
                 f"File: {record['file_name']}\n"
-                f"Plant: {record['plant']}\n"
+                f"Plant: {plant_code(record['plant'])}\n"
                 f"Department: {record['department']}\n"
                 f"Document number: {record.get('document_number', 'N/A')}\n"
                 f"Revision number: {record.get('revision_number', 'N/A')}\n"
@@ -188,7 +189,7 @@ class MailService:
                 <p>A Master Records document has received final approval.</p>
                 <table cellpadding="6" cellspacing="0" border="0">
                   <tr><td><strong>File</strong></td><td>{record['file_name']}</td></tr>
-                  <tr><td><strong>Plant</strong></td><td>{record['plant']}</td></tr>
+                  <tr><td><strong>Plant</strong></td><td>{plant_code(record['plant'])}</td></tr>
                   <tr><td><strong>Department</strong></td><td>{record['department']}</td></tr>
                   <tr><td><strong>Document number</strong></td><td>{record.get('document_number', 'N/A')}</td></tr>
                   <tr><td><strong>Revision number</strong></td><td>{record.get('revision_number', 'N/A')}</td></tr>
@@ -218,7 +219,7 @@ class MailService:
             msg.body = (
                 "A document has received final approval and has been shared with you.\n\n"
                 f"File: {record['file_name']}\n"
-                f"Plant: {record['plant']}\n"
+                f"Plant: {plant_code(record['plant'])}\n"
                 f"Department: {record['department']}\n"
                 f"Document number: {record.get('document_number', 'N/A')}\n"
                 f"Revision number: {record.get('revision_number', 'N/A')}\n"
@@ -230,7 +231,7 @@ class MailService:
                 <p>A document has received final approval and has been shared with you.</p>
                 <table cellpadding="6" cellspacing="0" border="0">
                   <tr><td><strong>File</strong></td><td>{record['file_name']}</td></tr>
-                  <tr><td><strong>Plant</strong></td><td>{record['plant']}</td></tr>
+                  <tr><td><strong>Plant</strong></td><td>{plant_code(record['plant'])}</td></tr>
                   <tr><td><strong>Department</strong></td><td>{record['department']}</td></tr>
                   <tr><td><strong>Document number</strong></td><td>{record.get('document_number', 'N/A')}</td></tr>
                   <tr><td><strong>Revision number</strong></td><td>{record.get('revision_number', 'N/A')}</td></tr>

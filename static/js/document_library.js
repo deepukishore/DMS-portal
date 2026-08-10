@@ -202,8 +202,8 @@ function createPlantGrid(plants, onSelect) {
     card.innerHTML = `
       <div class="plant-card-id">${plant.id || 'PLANT'}</div>
       <div class="plant-card-info">
-        <strong>${plant.label}</strong>
-        <small>${plant.location || 'Open plant folder'}</small>
+        <strong>${plantCode(plant.label)}</strong>
+        <small>Open plant folder</small>
       </div>
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>

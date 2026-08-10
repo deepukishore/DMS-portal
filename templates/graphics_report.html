@@ -294,7 +294,7 @@ const plantEntries = Object.entries(stats.plant);
 new Chart(document.getElementById('plantChart'), {
   type: 'bar',
   data: {
-    labels: plantEntries.map(([k]) => k.replace(/ Plant$/, '').replace(/ Plants$/, '')),
+    labels: plantEntries.map(([k]) => plantCode(k)),
     datasets: [
       { label: 'Approved', data: plantEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 4 },
       { label: 'Pending',  data: plantEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 4 },

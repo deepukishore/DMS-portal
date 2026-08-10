@@ -22,7 +22,7 @@
     <select name="plant">
       <option value="">All plants</option>
       {% for p in plants %}
-        <option value="{{ p.label }}" {% if plant_filter == p.label %}selected{% endif %}>{{ p.label }}</option>
+        <option value="{{ p.label }}" {% if plant_filter == p.label %}selected{% endif %}>{{ p.label | plant_code }}</option>
       {% endfor %}
     </select>
     <select name="department">
@@ -92,7 +92,7 @@
           <td class="mono" style="font-size:.75rem">{{ rev.file_name }}</td>
           <td><span class="status-pill" style="background:rgba(240,165,0,.12);color:var(--accent)">{{ rev.revision_number }}</span></td>
           <td>{{ rev.revised_by }}</td>
-          <td><span class="plant-badge">{{ rev.plant or '—' }}</span></td>
+          <td><span class="plant-badge">{{ rev.plant | plant_code if rev.plant else '—' }}</span></td>
           <td>{{ rev.department or '—' }}</td>
           <td class="text-dim" style="font-size:.78rem;max-width:260px">{{ rev.change_summary or '—' }}</td>
           <td class="mono text-dim" style="font-size:.72rem">{{ rev.previous_file_name or '—' }}</td>

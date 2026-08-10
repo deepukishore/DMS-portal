@@ -138,7 +138,7 @@
                 </div>
               </div>
             </td>
-            <td><span class="plant-badge" title="{{ r.plant }}">{{ r.plant }}</span></td>
+            <td><span class="plant-badge" title="{{ r.plant | plant_code }}">{{ r.plant | plant_code }}</span></td>
             <td>{{ r.department }}</td>
             <td>{{ badge(r.customer, true) }}</td>
             <td><span class="status-pill status-{{ r.approval_status|lower }}">{{ r.approval_status }}</span></td>

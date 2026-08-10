@@ -216,7 +216,7 @@
     };
 
     async function loadFiles(department) {
-      kicker.textContent = activePlant;
+      kicker.textContent = plantCode(activePlant);
       title.textContent = department;
       description.textContent = "Approved documents in this department folder.";
       departmentGrid.hidden = true;
@@ -250,7 +250,7 @@
       departmentGrid.replaceChildren();
       filesGrid.replaceChildren();
       kicker.textContent = "Departments";
-      title.textContent = plant;
+      title.textContent = plantCode(plant);
       description.textContent = "Open a department folder to see its approved documents.";
       backButton.textContent = "← All plants";
       backButton.dataset.mode = "plants";

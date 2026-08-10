@@ -5,7 +5,7 @@ let currentDept = '';
 // Auto-load department counts for all plants on page load
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.mr-plant-header').forEach((header, i) => {
-    const plantLabel = header.querySelector('.mr-plant-info strong').textContent;
+    const plantLabel = header.dataset.plant;
     fetchDeptCount(plantLabel, i + 1);
   });
 });
@@ -85,7 +85,7 @@ async function openDeptFiles(plantLabel, dept) {
   currentPlant = plantLabel;
   currentDept = dept;
 
-  document.getElementById('modal-plant-label').textContent = plantLabel;
+  document.getElementById('modal-plant-label').textContent = plantCode(plantLabel);
   document.getElementById('modal-dept-label').textContent = dept;
   const listEl = document.getElementById('modal-file-list');
   listEl.innerHTML = '<p style="color:var(--text-dim);font-size:.8rem">Loading files…</p>';

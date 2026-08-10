@@ -139,12 +139,10 @@
 
     <div class="about-plants-grid">
       {% for plant in system.supported_plants %}
-      {% set plant_id = plant.split(' - ')[0] %}
-      {% set plant_name = plant.split(' - ')[1] if ' - ' in plant else plant %}
       <div class="about-plant-card">
-        <span class="plant-badge">{{ plant_id }}</span>
-        <strong>{{ plant_name }}</strong>
-        <p>{{ plant }}</p>
+        <span class="plant-badge">{{ plant | plant_code }}</span>
+        <strong>{{ plant | plant_code }}</strong>
+        <p>Plant {{ plant | plant_code }}</p>
       </div>
       {% endfor %}
     </div>

@@ -82,7 +82,7 @@
           {% if current_user %}
           <div class="upload-info-chip">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-            <span>{{ current_user.plant or '—' }}</span>
+            <span>{{ current_user.plant | plant_code if current_user.plant else '—' }}</span>
           </div>
           <div class="upload-info-chip">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
@@ -105,7 +105,7 @@
             <select name="plant" id="plant-select">
               <option value="">Select plant</option>
               {% for p in PLANTS %}
-                <option value="{{ p.label }}" {% if current_user and current_user.plant == p.label %}selected{% endif %}>{{ p.label }}</option>
+                <option value="{{ p.label }}" {% if current_user and current_user.plant == p.label %}selected{% endif %}>{{ p.label | plant_code }}</option>
               {% endfor %}
             </select>
           </label>
