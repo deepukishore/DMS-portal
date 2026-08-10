@@ -3,9 +3,9 @@ import path from "node:path";
 import { FileBlob, PresentationFile } from "@oai/artifact-tool";
 
 const workspace = "C:/Users/deepu/OneDrive/Desktop/Rane/dms_portal_copy/tmp/manual_update_20260810";
-const starterPath = `${workspace}/template-starter.pptx`;
+const starterPath = `${workspace}/template-starter-legibility.pptx`;
 const screenshotDir = `${workspace}/current-screenshots`;
-const outputPptx = "C:/Users/deepu/OneDrive/Desktop/Rane/dms_portal_copy/output/pptx/DMS_Portal_User_Manual_Updated_Rev1.3.pptx";
+const outputPptx = "C:/Users/deepu/OneDrive/Desktop/Rane/dms_portal_copy/output/pptx/DMS_Portal_User_Manual_Updated_Rev1.4.pptx";
 const renderDir = `${workspace}/final-render`;
 const layoutDir = `${workspace}/final-layout`;
 
@@ -94,10 +94,46 @@ async function replaceImageByRecord(record, fileName, alt) {
   image.lockAspectRatio = oldLockAspectRatio;
 }
 
+function setRecordFrame(record, frame) {
+  const target = presentation.resolve(record.id);
+  if (record.kind === "image") target.frame = frame;
+  else target.position = frame;
+}
+
+function shiftRecordsVertically(slide, minTop, maxTop, delta) {
+  const movableKinds = new Set(["shape", "textbox", "image"]);
+  for (const record of records) {
+    if (record.slide !== slide || !movableKinds.has(record.kind) || !record.bbox) continue;
+    if (record.bbox[1] < minTop || record.bbox[1] >= maxTop) continue;
+    const target = presentation.resolve(record.id);
+    if (record.kind === "image") {
+      target.frame = { ...target.frame, top: record.bbox[1] + delta };
+    } else {
+      target.position = { ...target.position, top: record.bbox[1] + delta };
+    }
+  }
+}
+
+function expandStackedScreenshotFrames(slide, firstTop, secondTop) {
+  const frameShapes = recordsFor(slide, "shape")
+    .filter((record) => record.bbox[1] >= 165 && record.bbox[1] <= 178 && record.bbox[2] > 300)
+    .sort((a, b) => a.bbox[0] - b.bbox[0] || a.bbox[1] - b.bbox[1]);
+  if (frameShapes.length !== 6) {
+    throw new Error(`Expected six inherited screenshot frame shapes on slide ${slide}, found ${frameShapes.length}`);
+  }
+  for (const record of frameShapes) {
+    const isSecond = record.bbox[0] > 400;
+    const isShadow = record.bbox[0] > (isSecond ? 408 : 52);
+    const top = (isSecond ? secondTop : firstTop) + (isShadow ? 4 : 0);
+    const left = isShadow ? 54.67 : 50.67;
+    setRecordFrame(record, { left, top, width: 692.4, height: 250 });
+  }
+}
+
 // Controlled-document metadata on every page.
 const coverTable = presentation.resolve(recordsFor(1, "table")[0].id);
 coverTable.cells.set(1, 0, "DMS-UM-001");
-coverTable.cells.set(1, 1, "1.3");
+coverTable.cells.set(1, 1, "1.4");
 coverTable.cells.set(1, 2, "10-Aug-2026");
 coverTable.cells.set(1, 3, "DMS Team");
 coverTable.cells.set(0, 2, "EFFECTIVE");
@@ -105,13 +141,13 @@ coverTable.cells.set(0, 2, "EFFECTIVE");
 for (let slide = 2; slide <= 27; slide += 1) {
   const table = presentation.resolve(headerTableRecord(slide).id);
   table.cells.set(0, 0, "Document: DMS-UM-001");
-  table.cells.set(0, 1, "Revision: 1.3");
+  table.cells.set(0, 1, "Revision: 1.4");
   table.cells.set(1, 0, "Effective: 10-Aug-2026");
   table.cells.set(1, 1, `Page: ${slide} of 27`);
 }
 
 const controlTable = presentation.resolve(mainTableRecord(2).id);
-controlTable.cells.set(2, 1, "1.3");
+controlTable.cells.set(2, 1, "1.4");
 controlTable.cells.set(2, 2, "Effective");
 controlTable.cells.set(2, 3, "10-Aug-2026");
 controlTable.cells.set(
@@ -134,8 +170,8 @@ await replaceImageByRecord(
 );
 
 // Slide 7: current dashboard coverage, shortcuts, activity and search behavior.
-replaceText(7, "The dashboard is the main operational view for documents, filters and quick actions.", "The dashboard combines library coverage, quick navigation, recent activity and document search.");
-replaceText(7, "Figure 3 - Dashboard summary, quick actions and filters", "Figure 3 - Current library coverage, shortcuts, activity and recently viewed documents");
+replaceText(7, "The dashboard is the main operational view for documents, filters and quick actions.", "The dashboard is shown in two complete views: library shortcuts first, then activity and search.");
+replaceText(7, "Figure 3 - Dashboard summary, quick actions and filters", "Figure 3 - Dashboard overview (top) and activity/search (bottom)");
 replaceText(7, "Documents Summarty", "Review library coverage");
 replaceText(7, "Check total, pending, approved and archived document counts.", "Review 119 plant and 58 customer documents across six library areas.");
 replaceText(7, "Open Upload Documents, Pending Items, Document Library or Graphics Report.", "Open Uploads, Pending, Library, Approvals, Reports or Revision History.");
@@ -149,10 +185,18 @@ replaceText(7, "Reset filters before concluding that a document is missing. Stat
 const dashboardScreens = recordsFor(7, "image")
   .filter((record) => record.bbox[2] > 500)
   .sort((a, b) => a.bbox[1] - b.bbox[1]);
+const dashboardLayoutAlreadyExpanded = dashboardScreens[0].bbox[3] > 200;
 await replaceImageByRecord(dashboardScreens[0], "01_dashboard_library_coverage.png", "Dashboard library coverage and shortcuts");
 await replaceImageByRecord(dashboardScreens[1], "03_dashboard_activity.png", "Dashboard activity, recently viewed documents and search");
-presentation.resolve(dashboardScreens[0].id).frame = { left: 21.17, top: 169.93, width: 750.99, height: 142 };
-presentation.resolve(dashboardScreens[1].id).frame = { left: 21.17, top: 313.5, width: 750.99, height: 142 };
+setRecordFrame(dashboardScreens[0], { left: 21.17, top: 169.93, width: 750.99, height: 250 });
+setRecordFrame(dashboardScreens[1], { left: 21.17, top: 430, width: 750.99, height: 250 });
+setRecordFrame(textRecord(7, "Figure 3 - Dashboard summary, quick actions and filters"), {
+  left: 50.67,
+  top: 683,
+  width: 692.4,
+  height: 25.47,
+});
+if (!dashboardLayoutAlreadyExpanded) shiftRecordsVertically(7, 497, 850, 222);
 
 // Slide 17: current library landing page and folder behavior.
 replaceText(17, "The library organizes controlled content by category and access hierarchy.", "The library landing page shows six access-aware folders; each folder opens on a dedicated page.");
@@ -188,9 +232,26 @@ replaceText(18, "If a card is empty", "Access-aware navigation");
 replaceText(18, "Confirm your QMS access level and selected plant/department. Then contact the document owner if the file is still unavailable.", "L1/L2 see all QMS groups; L3 sees SOPs, audit plans, Records and IATF Standards; L4 sees Records only.");
 const qmsScreens = recordsFor(18, "image")
   .filter((record) => record.bbox[2] > 300)
-  .sort((a, b) => a.bbox[0] - b.bbox[0]);
+  .sort((a, b) => a.bbox[1] - b.bbox[1] || a.bbox[0] - b.bbox[0]);
+const qmsLayoutAlreadyExpanded = qmsScreens[0].bbox[2] > 600;
 await replaceImageByRecord(qmsScreens[0], "06_qms_document_types_top.png", "QMS document type selection page");
 await replaceImageByRecord(qmsScreens[1], "07_qms_document_types_all.png", "Complete QMS document group list");
+if (!qmsLayoutAlreadyExpanded) expandStackedScreenshotFrames(18, 169.07, 451.07);
+setRecordFrame(qmsScreens[0], { left: 55.22, top: 170.4, width: 683.28, height: 247.33 });
+setRecordFrame(qmsScreens[1], { left: 55.22, top: 452.4, width: 683.28, height: 247.33 });
+setRecordFrame(textRecord(18, "Figure 10 - Procedure category cards"), {
+  left: 50.67,
+  top: 421.5,
+  width: 692.4,
+  height: 25.47,
+});
+setRecordFrame(textRecord(18, "Figure 11 - Standard Manual category cards"), {
+  left: 50.67,
+  top: 703.5,
+  width: 692.4,
+  height: 25.47,
+});
+if (!qmsLayoutAlreadyExpanded) shiftRecordsVertically(18, 302, 600, 432);
 
 // Slide 19: current customer-logo folders and core-tool groups.
 replaceText(19, "Use Plant and Customer Repositories", "Browse Customer and Core Tools");
@@ -209,9 +270,26 @@ replaceText(19, "Search strategy", "Folder navigation");
 replaceText(19, "Use the dashboard for broad metadata search; use repository pages for structured browsing by ownership.", "Use the dashboard for broad metadata search and Document Library for controlled, structured browsing.");
 const libraryScreens = recordsFor(19, "image")
   .filter((record) => record.bbox[2] > 300)
-  .sort((a, b) => a.bbox[0] - b.bbox[0]);
+  .sort((a, b) => a.bbox[1] - b.bbox[1] || a.bbox[0] - b.bbox[0]);
+const libraryLayoutAlreadyExpanded = libraryScreens[0].bbox[2] > 600;
 await replaceImageByRecord(libraryScreens[0], "08_csr_customer_folders.png", "Customer Manual folders with customer logos");
 await replaceImageByRecord(libraryScreens[1], "10_core_tools_all.png", "Core Tools Manual groups");
+if (!libraryLayoutAlreadyExpanded) expandStackedScreenshotFrames(19, 169.07, 451.07);
+setRecordFrame(libraryScreens[0], { left: 55.22, top: 170.4, width: 683.28, height: 247.33 });
+setRecordFrame(libraryScreens[1], { left: 55.22, top: 452.4, width: 683.28, height: 247.33 });
+setRecordFrame(textRecord(19, "Figure 12 - Plant-based Master Records"), {
+  left: 50.67,
+  top: 421.5,
+  width: 692.4,
+  height: 25.47,
+});
+setRecordFrame(textRecord(19, "Figure 13 - Customer Records"), {
+  left: 50.67,
+  top: 703.5,
+  width: 692.4,
+  height: 25.47,
+});
+if (!libraryLayoutAlreadyExpanded) shiftRecordsVertically(19, 302, 600, 432);
 
 // Refresh every data-bearing administrative screenshot from the current local app.
 const currentPageImages = [

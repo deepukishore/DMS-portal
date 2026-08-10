@@ -822,8 +822,8 @@
         304,
         46.66
       ],
-      "text": "Document: DMS-UM-001 | Revision: 1.3\nEffective: 10-Aug-2026 | Page: 7 of 27",
-      "textPreview": "Document: DMS-UM-001 | Revision: 1.3 | Effective: 10-Aug-2026 | Page: 7 of 27",
+      "text": "Document: DMS-UM-001 | Revision: 1.4\nEffective: 10-Aug-2026 | Page: 7 of 27",
+      "textPreview": "Document: DMS-UM-001 | Revision: 1.4 | Effective: 10-Aug-2026 | Page: 7 of 27",
       "rows": 2,
       "cols": 2,
       "cells": [
@@ -866,17 +866,17 @@
             152,
             23.33
           ],
-          "text": "Revision: 1.3",
-          "textPreview": "Revision: 1.3",
+          "text": "Revision: 1.4",
+          "textPreview": "Revision: 1.4",
           "paragraphs": [
             {
               "index": 1,
-              "text": "Revision: 1.3",
+              "text": "Revision: 1.4",
               "lineSpacingPercent": 100000,
               "runs": [
                 {
                   "index": 1,
-                  "text": "Revision: 1.3",
+                  "text": "Revision: 1.4",
                   "fontSize": 8.67,
                   "typeface": "Arial MT",
                   "color": "#13213D"
@@ -1239,8 +1239,8 @@
         27.2
       ],
       "geometry": "rect",
-      "text": "The dashboard combines library coverage, quick navigation, recent activity and document search.",
-      "textPreview": "The dashboard combines library coverage, quick navigation, recent activity and document search.",
+      "text": "The dashboard is shown in two complete views: library shortcuts first, then activity and search.",
+      "textPreview": "The dashboard is shown in two complete views: library shortcuts first, then activity and search.",
       "resolvedFontSize": 18.67,
       "resolvedTextStyle": {
         "vertical": 1,
@@ -1260,7 +1260,7 @@
         "lines": [
           {
             "index": 1,
-            "text": "The dashboard combines library coverage, quick navigation, recent activity and document"
+            "text": "The dashboard is shown in two complete views: library shortcuts first, then activity and"
           },
           {
             "index": 2,
@@ -1271,12 +1271,12 @@
       "paragraphs": [
         {
           "index": 1,
-          "text": "The dashboard combines library coverage, quick navigation, recent activity and document search.",
+          "text": "The dashboard is shown in two complete views: library shortcuts first, then activity and search.",
           "lineSpacingPercent": 100000,
           "runs": [
             {
               "index": 1,
-              "text": "The dashboard combines library coverage, quick navigation, recent activity and document search.",
+              "text": "The dashboard is shown in two complete views: library shortcuts first, then activity and search.",
               "fontSize": 10.67,
               "typeface": "Arial MT",
               "color": "#596B82"
@@ -1295,14 +1295,14 @@
       "id": "16",
       "name": "object 16",
       "bbox": [
-        269.92,
-        470.22,
-        253.87,
+        50.67,
+        683,
+        692.4,
         25.47
       ],
       "geometry": "rect",
-      "text": "Figure 3 - Current library coverage, shortcuts, activity and recently viewed documents",
-      "textPreview": "Figure 3 - Current library coverage, shortcuts, activity and recently viewed documents",
+      "text": "Figure 3 - Dashboard overview (top) and activity/search (bottom)",
+      "textPreview": "Figure 3 - Dashboard overview (top) and activity/search (bottom)",
       "resolvedFontSize": 18.67,
       "resolvedTextStyle": {
         "vertical": 1,
@@ -1318,27 +1318,23 @@
         }
       },
       "textLayout": {
-        "lineCount": 2,
+        "lineCount": 1,
         "lines": [
           {
             "index": 1,
-            "text": "Figure 3 - Current library coverage, shortcuts, activity"
-          },
-          {
-            "index": 2,
-            "text": "and recently viewed documents"
+            "text": "Figure 3 - Dashboard overview (top) and activity/search (bottom)"
           }
         ]
       },
       "paragraphs": [
         {
           "index": 1,
-          "text": "Figure 3 - Current library coverage, shortcuts, activity and recently viewed documents",
+          "text": "Figure 3 - Dashboard overview (top) and activity/search (bottom)",
           "lineSpacingPercent": 100000,
           "runs": [
             {
               "index": 1,
-              "text": "Figure 3 - Current library coverage, shortcuts, activity and recently viewed documents",
+              "text": "Figure 3 - Dashboard overview (top) and activity/search (bottom)",
               "fontSize": 10,
               "typeface": "Arial",
               "color": "#596B82",
@@ -1359,7 +1355,7 @@
       "name": "object 18",
       "bbox": [
         50.67,
-        497.16,
+        719.16,
         692.4,
         42.4
       ],
@@ -1397,7 +1393,7 @@
       "name": "object 19",
       "bbox": [
         50.67,
-        497.16,
+        719.16,
         692.4,
         42.4
       ],
@@ -1436,7 +1432,7 @@
       "name": "object 20",
       "bbox": [
         60,
-        506.36,
+        728.36,
         24,
         24
       ],
@@ -1462,7 +1458,7 @@
       "name": "object 21",
       "bbox": [
         67.33,
-        509.29,
+        731.29,
         9.4,
         17.07
       ],
@@ -1521,7 +1517,7 @@
       "name": "object 22",
       "bbox": [
         88,
-        500.58,
+        722.58,
         290.33,
         33.25
       ],
@@ -1604,7 +1600,7 @@
       "name": "object 24",
       "bbox": [
         50.67,
-        547.56,
+        769.56,
         692.4,
         42.4
       ],
@@ -1642,7 +1638,7 @@
       "name": "object 25",
       "bbox": [
         50.67,
-        547.56,
+        769.56,
         692.4,
         42.4
       ],
@@ -1681,7 +1677,7 @@
       "name": "object 26",
       "bbox": [
         60,
-        556.76,
+        778.76,
         24,
         24
       ],
@@ -1707,7 +1703,7 @@
       "name": "object 27",
       "bbox": [
         67.33,
-        559.69,
+        781.69,
         9.4,
         17.07
       ],
@@ -1766,7 +1762,7 @@
       "name": "object 28",
       "bbox": [
         88,
-        550.98,
+        772.98,
         368.47,
         32.4
       ],
@@ -1857,7 +1853,7 @@
       "name": "object 30",
       "bbox": [
         50.67,
-        597.96,
+        819.96,
         692.4,
         42.4
       ],
@@ -1895,7 +1891,7 @@
       "name": "object 31",
       "bbox": [
         50.67,
-        597.96,
+        819.96,
         692.4,
         42.4
       ],
@@ -1934,7 +1930,7 @@
       "name": "object 32",
       "bbox": [
         60,
-        607.16,
+        829.16,
         24,
         24
       ],
@@ -1960,7 +1956,7 @@
       "name": "object 33",
       "bbox": [
         67.33,
-        610.09,
+        832.09,
         9.4,
         17.07
       ],
@@ -2019,7 +2015,7 @@
       "name": "object 34",
       "bbox": [
         88,
-        601.38,
+        823.38,
         287.47,
         32.4
       ],
@@ -2102,7 +2098,7 @@
       "name": "object 36",
       "bbox": [
         50.67,
-        648.36,
+        870.36,
         692.4,
         42.4
       ],
@@ -2140,7 +2136,7 @@
       "name": "object 37",
       "bbox": [
         50.67,
-        648.36,
+        870.36,
         692.4,
         42.4
       ],
@@ -2179,7 +2175,7 @@
       "name": "object 38",
       "bbox": [
         60,
-        657.56,
+        879.56,
         24,
         24
       ],
@@ -2205,7 +2201,7 @@
       "name": "object 39",
       "bbox": [
         67.33,
-        660.49,
+        882.49,
         9.4,
         17.07
       ],
@@ -2264,7 +2260,7 @@
       "name": "object 40",
       "bbox": [
         88,
-        651.78,
+        873.78,
         462.6,
         32.4
       ],
@@ -2347,7 +2343,7 @@
       "name": "object 42",
       "bbox": [
         50.67,
-        698.76,
+        920.76,
         692.4,
         42.4
       ],
@@ -2385,7 +2381,7 @@
       "name": "object 43",
       "bbox": [
         50.67,
-        698.76,
+        920.76,
         692.4,
         42.4
       ],
@@ -2424,7 +2420,7 @@
       "name": "object 44",
       "bbox": [
         60,
-        707.96,
+        929.96,
         24,
         24
       ],
@@ -2450,7 +2446,7 @@
       "name": "object 45",
       "bbox": [
         67.33,
-        710.89,
+        932.89,
         9.4,
         17.07
       ],
@@ -2509,7 +2505,7 @@
       "name": "object 46",
       "bbox": [
         88,
-        702.18,
+        924.18,
         292.6,
         32.4
       ],
@@ -2592,7 +2588,7 @@
       "name": "object 48",
       "bbox": [
         50.67,
-        749.16,
+        971.16,
         692.4,
         54.4
       ],
@@ -2630,7 +2626,7 @@
       "name": "object 49",
       "bbox": [
         50.67,
-        749.16,
+        971.16,
         692.4,
         54.4
       ],
@@ -2669,7 +2665,7 @@
       "name": "object 50",
       "bbox": [
         50.67,
-        749.16,
+        971.16,
         6.67,
         54.4
       ],
@@ -2707,7 +2703,7 @@
       "name": "object 51",
       "bbox": [
         57.17,
-        755.53,
+        977.53,
         681.8,
         34.8
       ],
@@ -3024,7 +3020,7 @@
         21.17,
         169.93,
         750.99,
-        142
+        250
       ],
       "alt": "Dashboard library coverage and shortcuts",
       "contentType": "image/png",
@@ -3049,9 +3045,9 @@
       "name": "Picture 56",
       "bbox": [
         21.17,
-        313.5,
+        430,
         750.99,
-        142
+        250
       ],
       "alt": "Dashboard activity, recently viewed documents and search",
       "contentType": "image/png",

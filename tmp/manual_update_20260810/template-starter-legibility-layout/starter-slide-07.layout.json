@@ -1,0 +1,4448 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/gnmp4jqx",
+    "id": "gnmp4jqx",
+    "slide": 7,
+    "layoutId": "/ppt/slideLayouts/slideLayout5.xml",
+    "layoutName": "Blank",
+    "layoutType": "obj",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 793.33,
+      "height": 1122.67
+    }
+  },
+  "theme": {
+    "colorSchemeName": "Office",
+    "colors": {
+      "accent1": "#4F81BD",
+      "accent2": "#C0504D",
+      "accent3": "#9BBB59",
+      "accent4": "#8064A2",
+      "accent5": "#4BACC6",
+      "accent6": "#F79646",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#1F497D",
+      "lt2": "#EEECE1",
+      "hlink": "#0000FF",
+      "folHlink": "#800080"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Arial",
+      "Arial MT",
+      "Calibri"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout5.xml",
+      "name": "Blank",
+      "type": "obj",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/2",
+          "id": "2",
+          "name": "Holder 2",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+          "textPreview": "Internal user guide - controlled copy when viewed in the DMS portal",
+          "resolvedTextStyle": {
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Internal"
+                },
+                {
+                  "index": 2,
+                  "text": " "
+                },
+                {
+                  "index": 3,
+                  "text": "user"
+                },
+                {
+                  "index": 4,
+                  "text": " "
+                },
+                {
+                  "index": 5,
+                  "text": "guide"
+                },
+                {
+                  "index": 6,
+                  "text": " "
+                },
+                {
+                  "index": 7,
+                  "text": "-"
+                },
+                {
+                  "index": 8,
+                  "text": " "
+                },
+                {
+                  "index": 9,
+                  "text": "controlled"
+                },
+                {
+                  "index": 10,
+                  "text": " "
+                },
+                {
+                  "index": 11,
+                  "text": "copy"
+                },
+                {
+                  "index": 12,
+                  "text": " "
+                },
+                {
+                  "index": 13,
+                  "text": "when"
+                },
+                {
+                  "index": 14,
+                  "text": " "
+                },
+                {
+                  "index": 15,
+                  "text": "viewed"
+                },
+                {
+                  "index": 16,
+                  "text": " "
+                },
+                {
+                  "index": 17,
+                  "text": "in"
+                },
+                {
+                  "index": 18,
+                  "text": " "
+                },
+                {
+                  "index": 19,
+                  "text": "the"
+                },
+                {
+                  "index": 20,
+                  "text": " "
+                },
+                {
+                  "index": 21,
+                  "text": "DMS"
+                },
+                {
+                  "index": 22,
+                  "text": " "
+                },
+                {
+                  "index": 23,
+                  "text": "portal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/3",
+          "id": "3",
+          "name": "Holder 3",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "text": "Smart DMS v2.0.0",
+          "textPreview": "Smart DMS v2.0.0",
+          "resolvedTextStyle": {
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Smart DMS v2.0.0",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Smart"
+                },
+                {
+                  "index": 2,
+                  "text": " "
+                },
+                {
+                  "index": 3,
+                  "text": "DMS"
+                },
+                {
+                  "index": 4,
+                  "text": " "
+                },
+                {
+                  "index": 5,
+                  "text": "v2.0.0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout5.xml/4",
+          "id": "4",
+          "name": "Holder 4",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "text": "‹#›",
+          "textPreview": "‹#›",
+          "resolvedTextStyle": {
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "‹#›",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "‹#›"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundColor": "bg1",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "image",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/7",
+          "id": "7",
+          "name": "bg object 16",
+          "bbox": [
+            56.47,
+            20,
+            103.06,
+            42.67
+          ],
+          "contentType": "image/jpeg",
+          "asset": {
+            "assetId": "/ppt/media/image.jpeg",
+            "contentType": "image/jpeg",
+            "byteLength": 12671
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image.jpeg",
+            "contentType": "image/jpeg",
+            "byteLength": 12671
+          }
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/2",
+          "id": "2",
+          "name": "Holder 2",
+          "bbox": [
+            49.33,
+            201.33,
+            420.47,
+            50.67
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/3",
+          "id": "3",
+          "name": "Holder 3",
+          "bbox": [
+            39.7,
+            258.21,
+            714.6,
+            740.96
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 4,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/4",
+          "id": "4",
+          "name": "Holder 4",
+          "bbox": [
+            49.33,
+            1087.77,
+            270.33,
+            12.67
+          ],
+          "geometry": "rect",
+          "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+          "textPreview": "Internal user guide - controlled copy when viewed in the DMS portal",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Internal"
+                },
+                {
+                  "index": 2,
+                  "text": " "
+                },
+                {
+                  "index": 3,
+                  "text": "user"
+                },
+                {
+                  "index": 4,
+                  "text": " "
+                },
+                {
+                  "index": 5,
+                  "text": "guide"
+                },
+                {
+                  "index": 6,
+                  "text": " "
+                },
+                {
+                  "index": 7,
+                  "text": "-"
+                },
+                {
+                  "index": 8,
+                  "text": " "
+                },
+                {
+                  "index": 9,
+                  "text": "controlled"
+                },
+                {
+                  "index": 10,
+                  "text": " "
+                },
+                {
+                  "index": 11,
+                  "text": "copy"
+                },
+                {
+                  "index": 12,
+                  "text": " "
+                },
+                {
+                  "index": 13,
+                  "text": "when"
+                },
+                {
+                  "index": 14,
+                  "text": " "
+                },
+                {
+                  "index": 15,
+                  "text": "viewed"
+                },
+                {
+                  "index": 16,
+                  "text": " "
+                },
+                {
+                  "index": 17,
+                  "text": "in"
+                },
+                {
+                  "index": 18,
+                  "text": " "
+                },
+                {
+                  "index": 19,
+                  "text": "the"
+                },
+                {
+                  "index": 20,
+                  "text": " "
+                },
+                {
+                  "index": 21,
+                  "text": "DMS"
+                },
+                {
+                  "index": 22,
+                  "text": " "
+                },
+                {
+                  "index": 23,
+                  "text": "portal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/5",
+          "id": "5",
+          "name": "Holder 5",
+          "bbox": [
+            668.72,
+            1087.77,
+            75.67,
+            12.67
+          ],
+          "geometry": "rect",
+          "text": "Smart DMS v2.0.0",
+          "textPreview": "Smart DMS v2.0.0",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Smart DMS v2.0.0",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Smart"
+                },
+                {
+                  "index": 2,
+                  "text": " "
+                },
+                {
+                  "index": 3,
+                  "text": "DMS"
+                },
+                {
+                  "index": 4,
+                  "text": " "
+                },
+                {
+                  "index": 5,
+                  "text": "v2.0.0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/6",
+          "id": "6",
+          "name": "Holder 6",
+          "bbox": [
+            571.68,
+            1044.08,
+            182.62,
+            56.13
+          ],
+          "geometry": "rect",
+          "text": "‹#›",
+          "textPreview": "‹#›",
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "‹#›",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "‹#›"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cb2tkvap",
+      "id": "2",
+      "name": "object 2",
+      "bbox": [
+        177.33,
+        16.48,
+        175.53,
+        34.67
+      ],
+      "geometry": "rect",
+      "text": "ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual",
+      "textPreview": "ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.27,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ZF Rane Automotive India PVT LTD - SGD Smart"
+          },
+          {
+            "index": 2,
+            "text": "DMS Portal User Manual"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ZF Rane Automotive India PVT LTD - SGD Smart DMS Portal User Manual",
+          "lineSpacingPercent": 153800,
+          "runs": [
+            {
+              "index": 1,
+              "text": "ZF",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "Rane",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "Automotive",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "India",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "PVT",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "LTD",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "-",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "SGD",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 17,
+              "text": "Smart",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 19,
+              "text": "DMS",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 20,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 21,
+              "text": "Portal",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 22,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 23,
+              "text": "User",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 24,
+              "text": " ",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 25,
+              "text": "Manual",
+              "fontSize": 8.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/sjmxkn6l",
+      "id": "54",
+      "name": "object 3",
+      "bbox": [
+        438.7,
+        17,
+        304,
+        46.66
+      ],
+      "text": "Document: DMS-UM-001 | Revision: 1.2\nEffective: 31-Jul-2026 | Page: 7 of 27",
+      "textPreview": "Document: DMS-UM-001 | Revision: 1.2 | Effective: 31-Jul-2026 | Page: 7 of 27",
+      "rows": 2,
+      "cols": 2,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            438.7,
+            17,
+            152,
+            23.33
+          ],
+          "text": "Document: DMS-UM-001",
+          "textPreview": "Document: DMS-UM-001",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Document: DMS-UM-001",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Document:",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "DMS-UM-",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": "001",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            590.7,
+            17,
+            152,
+            23.33
+          ],
+          "text": "Revision: 1.2",
+          "textPreview": "Revision: 1.2",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Revision: 1.2",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Revision:",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "1.2",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            438.7,
+            40.33,
+            152,
+            23.33
+          ],
+          "text": "Effective: 31-Jul-2026",
+          "textPreview": "Effective: 31-Jul-2026",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Effective: 31-Jul-2026",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Effective:",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "31-Jul-",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": "2026",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            590.7,
+            40.33,
+            152,
+            23.33
+          ],
+          "text": "Page: 7 of 27",
+          "textPreview": "Page: 7 of 27",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Page: 7 of 27",
+              "lineSpacingPercent": 100000,
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Page:",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 3,
+                  "text": "7",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 5,
+                  "text": "of",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 6,
+                  "text": " ",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                },
+                {
+                  "index": 7,
+                  "text": "27",
+                  "fontSize": 8.67,
+                  "typeface": "Arial MT",
+                  "color": "#13213D"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zedcfa9g",
+      "id": "5",
+      "name": "object 5",
+      "bbox": [
+        0,
+        81.33,
+        793.73,
+        45.33
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#008A95"
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kzmdova1",
+      "id": "6",
+      "name": "object 6",
+      "bbox": [
+        50.67,
+        90.67,
+        56,
+        26.67
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F7B800"
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0vuh0rm",
+      "id": "7",
+      "name": "object 7",
+      "bbox": [
+        69.92,
+        96.67,
+        17.53,
+        15.47
+      ],
+      "geometry": "rect",
+      "text": "5.1",
+      "textPreview": "5.1",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "5.1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "5.1",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "5.1",
+              "fontSize": 10.67,
+              "typeface": "Arial",
+              "color": "#0A346B",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eh0ba1sr",
+      "id": "8",
+      "name": "object 8",
+      "bbox": [
+        118.67,
+        90.67,
+        255,
+        26.67
+      ],
+      "geometry": "rect",
+      "text": "Use the Master Dashboard",
+      "textPreview": "Use the Master Dashboard",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Use the Master Dashboard"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Use the Master Dashboard",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Use",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "the",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "Master",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "Dashboard",
+              "fontSize": 20,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fi9c369c",
+      "id": "9",
+      "name": "object 9",
+      "bbox": [
+        50.67,
+        1081.19,
+        692.4,
+        0
+      ],
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#C8D6E4",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/baxkjqlk",
+      "id": "10",
+      "name": "object 10",
+      "bbox": [
+        49.33,
+        142.67,
+        409.27,
+        15.8
+      ],
+      "geometry": "rect",
+      "text": "The dashboard is the main operational view for documents, filters and quick actions.",
+      "textPreview": "The dashboard is the main operational view for documents, filters and quick actions.",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.6,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The dashboard is the main operational view for documents, filters and quick actions."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The dashboard is the main operational view for documents, filters and quick actions.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "The",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "dashboard",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "is",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "the",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "main",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "operational",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "view",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "for",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 17,
+              "text": "documents,",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 19,
+              "text": "filters",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 20,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 21,
+              "text": "and",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 22,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 23,
+              "text": "quick",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 24,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 25,
+              "text": "actions.",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p8fih03e",
+      "id": "16",
+      "name": "object 16",
+      "bbox": [
+        50.67,
+        683,
+        692.4,
+        25.47
+      ],
+      "geometry": "rect",
+      "text": "Figure 3 - Dashboard summary, quick actions and filters",
+      "textPreview": "Figure 3 - Dashboard summary, quick actions and filters",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.47,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Figure 3 - Dashboard summary, quick actions and filters"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Figure 3 - Dashboard summary, quick actions and filters",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Figure",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 3,
+              "text": "3",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 5,
+              "text": "-",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 7,
+              "text": "Dashboard",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 9,
+              "text": "summary,",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 11,
+              "text": "quick",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 13,
+              "text": "actions",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 15,
+              "text": "and",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            },
+            {
+              "index": 17,
+              "text": "filters",
+              "fontSize": 10,
+              "typeface": "Arial",
+              "color": "#596B82",
+              "italic": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/f2d0b6lc",
+      "id": "18",
+      "name": "object 18",
+      "bbox": [
+        50.67,
+        719.16,
+        692.4,
+        42.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4F6FB"
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eh4jil4r",
+      "id": "19",
+      "name": "object 19",
+      "bbox": [
+        50.67,
+        719.16,
+        692.4,
+        42.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#C8D6E4",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 12,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/l8zyhwba",
+      "id": "55",
+      "name": "object 20",
+      "bbox": [
+        60,
+        728.36,
+        24,
+        24
+      ],
+      "rotation": 0,
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 1151
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 1151
+      }
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jedkn654",
+      "id": "21",
+      "name": "object 21",
+      "bbox": [
+        67.33,
+        731.29,
+        9.4,
+        17.07
+      ],
+      "geometry": "rect",
+      "text": "1",
+      "textPreview": "1",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "1",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4fm1wb6p",
+      "id": "22",
+      "name": "object 22",
+      "bbox": [
+        88,
+        722.58,
+        290.33,
+        33.25
+      ],
+      "geometry": "rect",
+      "text": "Documents Summarty\nCheck total, pending, approved and archived document counts.",
+      "textPreview": "Documents Summarty | Check total, pending, approved and archived document counts.",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 3.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Documents Summarty"
+          },
+          {
+            "index": 2,
+            "text": ""
+          },
+          {
+            "index": 3,
+            "text": "Check total, pending, approved and archived document counts."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Documents Summarty",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Documents ",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "Summarty",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Check total, pending, approved and archived document counts.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Check",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "total,",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "pending,",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "approved",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "and",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "archived",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "document",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "counts.",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q143ylov",
+      "id": "24",
+      "name": "object 24",
+      "bbox": [
+        50.67,
+        769.56,
+        692.4,
+        42.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4F6FB"
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r2dkrq5g",
+      "id": "25",
+      "name": "object 25",
+      "bbox": [
+        50.67,
+        769.56,
+        692.4,
+        42.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#C8D6E4",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 17,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/y58z6hcj",
+      "id": "56",
+      "name": "object 26",
+      "bbox": [
+        60,
+        778.76,
+        24,
+        24
+      ],
+      "rotation": 0,
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 1151
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 1151
+      }
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4f2t0nm",
+      "id": "27",
+      "name": "object 27",
+      "bbox": [
+        67.33,
+        781.69,
+        9.4,
+        17.07
+      ],
+      "geometry": "rect",
+      "text": "2",
+      "textPreview": "2",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "2",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e5o32lor",
+      "id": "28",
+      "name": "object 28",
+      "bbox": [
+        88,
+        772.98,
+        368.47,
+        32.4
+      ],
+      "geometry": "rect",
+      "text": "Use quick actions\nOpen Upload Documents, Pending Items, Document Library or Graphics Report.",
+      "textPreview": "Use quick actions | Open Upload Documents, Pending Items, Document Library or Graphics Report.",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 3.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Use quick actions"
+          },
+          {
+            "index": 2,
+            "text": ""
+          },
+          {
+            "index": 3,
+            "text": "Open Upload Documents, Pending Items, Document Library or Graphics Report."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Use quick actions",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Use quick ",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "actions",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Open Upload Documents, Pending Items, Document Library or Graphics Report.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Open",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "Upload",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "Documents,",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "Pending",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "Items,",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "Document",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "Library",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "or",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 17,
+              "text": "Graphics",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 19,
+              "text": "Report.",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p0zmlk7u",
+      "id": "30",
+      "name": "object 30",
+      "bbox": [
+        50.67,
+        819.96,
+        692.4,
+        42.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4F6FB"
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ozq5szq9",
+      "id": "31",
+      "name": "object 31",
+      "bbox": [
+        50.67,
+        819.96,
+        692.4,
+        42.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#C8D6E4",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 22,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/z6hgfmt4",
+      "id": "57",
+      "name": "object 32",
+      "bbox": [
+        60,
+        829.16,
+        24,
+        24
+      ],
+      "rotation": 0,
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 1151
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 1151
+      }
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2x8nqp83",
+      "id": "33",
+      "name": "object 33",
+      "bbox": [
+        67.33,
+        832.09,
+        9.4,
+        17.07
+      ],
+      "geometry": "rect",
+      "text": "3",
+      "textPreview": "3",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "3"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "3",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "3",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x4j6p47q",
+      "id": "34",
+      "name": "object 34",
+      "bbox": [
+        88,
+        823.38,
+        287.47,
+        32.4
+      ],
+      "geometry": "rect",
+      "text": "Search and filter\nFilter by text, plant, department, customer and approval status.",
+      "textPreview": "Search and filter | Filter by text, plant, department, customer and approval status.",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 3.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Search and filter"
+          },
+          {
+            "index": 2,
+            "text": ""
+          },
+          {
+            "index": 3,
+            "text": "Filter by text, plant, department, customer and approval status."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Search and filter",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Search",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "and",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "filter",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Filter by text, plant, department, customer and approval status.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Filter",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "by",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "text,",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "plant,",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "department,",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "customer",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "and",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "approval",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 17,
+              "text": "status.",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b2h4nupk",
+      "id": "36",
+      "name": "object 36",
+      "bbox": [
+        50.67,
+        870.36,
+        692.4,
+        42.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4F6FB"
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a18nup8z",
+      "id": "37",
+      "name": "object 37",
+      "bbox": [
+        50.67,
+        870.36,
+        692.4,
+        42.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#C8D6E4",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 27,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/c3qh4rud",
+      "id": "58",
+      "name": "object 38",
+      "bbox": [
+        60,
+        879.56,
+        24,
+        24
+      ],
+      "rotation": 0,
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 1151
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 1151
+      }
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kra50jqh",
+      "id": "39",
+      "name": "object 39",
+      "bbox": [
+        67.33,
+        882.49,
+        9.4,
+        17.07
+      ],
+      "geometry": "rect",
+      "text": "4",
+      "textPreview": "4",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "4"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "4",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "4",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wneps3ap",
+      "id": "40",
+      "name": "object 40",
+      "bbox": [
+        88,
+        873.78,
+        462.6,
+        32.4
+      ],
+      "geometry": "rect",
+      "text": "Open a document\nUse row actions to view, download or bookmark. Deletion is restricted and moves the item to Archive.",
+      "textPreview": "Open a document | Use row actions to view, download or bookmark. Deletion is restricted and moves the item to Archive.",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 3.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Open a document"
+          },
+          {
+            "index": 2,
+            "text": ""
+          },
+          {
+            "index": 3,
+            "text": "Use row actions to view, download or bookmark. Deletion is restricted and moves the item to Archive."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Open a document",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Open a ",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "document",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Use row actions to view, download or bookmark. Deletion is restricted and moves the item to Archive.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Use",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "row",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "actions",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "to",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "view,",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "download",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "or",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "bookmark.",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 17,
+              "text": "Deletion",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 19,
+              "text": "is",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 20,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 21,
+              "text": "restricted",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 22,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 23,
+              "text": "and",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 24,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 25,
+              "text": "moves",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 26,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 27,
+              "text": "the",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 28,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 29,
+              "text": "item",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 30,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 31,
+              "text": "to",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 32,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 33,
+              "text": "Archive.",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ulc7qdsj",
+      "id": "42",
+      "name": "object 42",
+      "bbox": [
+        50.67,
+        920.76,
+        692.4,
+        42.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#F4F6FB"
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vm58zi94",
+      "id": "43",
+      "name": "object 43",
+      "bbox": [
+        50.67,
+        920.76,
+        692.4,
+        42.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#C8D6E4",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 32,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/d4zydcby",
+      "id": "59",
+      "name": "object 44",
+      "bbox": [
+        60,
+        929.96,
+        24,
+        24
+      ],
+      "rotation": 0,
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 1151
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image6.png",
+        "contentType": "image/png",
+        "byteLength": 1151
+      }
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9k3qx8ry",
+      "id": "45",
+      "name": "object 45",
+      "bbox": [
+        67.33,
+        932.89,
+        9.4,
+        17.07
+      ],
+      "geometry": "rect",
+      "text": "5",
+      "textPreview": "5",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 1.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "5"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "5",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "5",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mxc7mts7",
+      "id": "46",
+      "name": "object 46",
+      "bbox": [
+        88,
+        924.18,
+        292.6,
+        32.4
+      ],
+      "geometry": "rect",
+      "text": "Export the current view\nUse CSV export when a filtered list is required for offline review.",
+      "textPreview": "Export the current view | Use CSV export when a filtered list is required for offline review.",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 3.33,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Export the current view"
+          },
+          {
+            "index": 2,
+            "text": ""
+          },
+          {
+            "index": 3,
+            "text": "Use CSV export when a filtered list is required for offline review."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Export the current view",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Export the current ",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "view",
+              "fontSize": 11.33,
+              "typeface": "Arial",
+              "color": "#13213D",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Use CSV export when a filtered list is required for offline review.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Use",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "CSV",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "export",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "when",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "a",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "filtered",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "list",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "is",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 17,
+              "text": "required",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 19,
+              "text": "for",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 20,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 21,
+              "text": "offline",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 22,
+              "text": " ",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 23,
+              "text": "review.",
+              "fontSize": 10,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sfy907ah",
+      "id": "48",
+      "name": "object 48",
+      "bbox": [
+        50.67,
+        971.16,
+        692.4,
+        54.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#E9F6ED"
+    },
+    {
+      "order": 36,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tg7q9sr2",
+      "id": "49",
+      "name": "object 49",
+      "bbox": [
+        50.67,
+        971.16,
+        692.4,
+        54.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "lineColor": "#1A793A",
+      "lineWidth": 0.67
+    },
+    {
+      "order": 37,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/na9sz6tk",
+      "id": "50",
+      "name": "object 50",
+      "bbox": [
+        50.67,
+        971.16,
+        6.67,
+        54.4
+      ],
+      "rotation": 0,
+      "geometry": "custom",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#1A793A"
+    },
+    {
+      "order": 38,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/290bq1cz",
+      "id": "51",
+      "name": "object 51",
+      "bbox": [
+        57.17,
+        977.53,
+        681.8,
+        34.8
+      ],
+      "geometry": "rect",
+      "text": "Good practice\nReset filters before concluding that a document is missing. Status and department filters can hide valid records.",
+      "textPreview": "Good practice | Reset filters before concluding that a document is missing. Status and department filters can hide valid records.",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 18.67,
+        "typeface": "Calibri",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 2.93,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Good practice"
+          },
+          {
+            "index": 2,
+            "text": ""
+          },
+          {
+            "index": 3,
+            "text": "Reset filters before concluding that a document is missing. Status and department filters can hide valid records."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Good practice",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Good",
+              "fontSize": 13.33,
+              "typeface": "Arial",
+              "color": "#0A346B",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 13.33,
+              "typeface": "Arial",
+              "color": "#0A346B",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "practice",
+              "fontSize": 13.33,
+              "typeface": "Arial",
+              "color": "#0A346B",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Reset filters before concluding that a document is missing. Status and department filters can hide valid records.",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Reset",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 3,
+              "text": "filters",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 5,
+              "text": "before",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 7,
+              "text": "concluding",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 9,
+              "text": "that",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 11,
+              "text": "a",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 13,
+              "text": "document",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 15,
+              "text": "is",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 17,
+              "text": "missing.",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 19,
+              "text": "Status",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 20,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 21,
+              "text": "and",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 22,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 23,
+              "text": "department",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 24,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 25,
+              "text": "filters",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 26,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 27,
+              "text": "can",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 28,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 29,
+              "text": "hide",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 30,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 31,
+              "text": "valid",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 32,
+              "text": " ",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            },
+            {
+              "index": 33,
+              "text": "records.",
+              "fontSize": 10.67,
+              "typeface": "Arial MT",
+              "color": "#596B82"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 39,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pcra1wba",
+      "id": "52",
+      "name": "object 52",
+      "bbox": [
+        49.33,
+        1087.77,
+        270.33,
+        12.67
+      ],
+      "geometry": "rect",
+      "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+      "textPreview": "Internal user guide - controlled copy when viewed in the DMS portal",
+      "resolvedFontSize": 8.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 8.67,
+        "typeface": "Arial MT",
+        "color": "#596B82",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0.73,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Internal user guide - controlled copy when viewed in the DMS portal"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Internal user guide - controlled copy when viewed in the DMS portal",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Internal"
+            },
+            {
+              "index": 2,
+              "text": " "
+            },
+            {
+              "index": 3,
+              "text": "user"
+            },
+            {
+              "index": 4,
+              "text": " "
+            },
+            {
+              "index": 5,
+              "text": "guide"
+            },
+            {
+              "index": 6,
+              "text": " "
+            },
+            {
+              "index": 7,
+              "text": "-"
+            },
+            {
+              "index": 8,
+              "text": " "
+            },
+            {
+              "index": 9,
+              "text": "controlled"
+            },
+            {
+              "index": 10,
+              "text": " "
+            },
+            {
+              "index": 11,
+              "text": "copy"
+            },
+            {
+              "index": 12,
+              "text": " "
+            },
+            {
+              "index": 13,
+              "text": "when"
+            },
+            {
+              "index": 14,
+              "text": " "
+            },
+            {
+              "index": 15,
+              "text": "viewed"
+            },
+            {
+              "index": 16,
+              "text": " "
+            },
+            {
+              "index": 17,
+              "text": "in"
+            },
+            {
+              "index": 18,
+              "text": " "
+            },
+            {
+              "index": 19,
+              "text": "the"
+            },
+            {
+              "index": 20,
+              "text": " "
+            },
+            {
+              "index": 21,
+              "text": "DMS"
+            },
+            {
+              "index": 22,
+              "text": " "
+            },
+            {
+              "index": 23,
+              "text": "portal"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 40,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/obitsrup",
+      "id": "53",
+      "name": "object 53",
+      "bbox": [
+        668.72,
+        1087.77,
+        75.67,
+        12.67
+      ],
+      "geometry": "rect",
+      "text": "Smart DMS v2.0.0",
+      "textPreview": "Smart DMS v2.0.0",
+      "resolvedFontSize": 8.67,
+      "resolvedTextStyle": {
+        "vertical": 1,
+        "fontSize": 8.67,
+        "typeface": "Arial MT",
+        "color": "#596B82",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0.73,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Smart DMS v2.0.0"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Smart DMS v2.0.0",
+          "lineSpacingPercent": 100000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Smart"
+            },
+            {
+              "index": 2,
+              "text": " "
+            },
+            {
+              "index": 3,
+              "text": "DMS"
+            },
+            {
+              "index": 4,
+              "text": " "
+            },
+            {
+              "index": 5,
+              "text": "v2.0.0"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 41,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/to76lozq",
+      "id": "60",
+      "name": "Picture 54",
+      "bbox": [
+        21.17,
+        169.93,
+        750.99,
+        250
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image7.png",
+        "contentType": "image/png",
+        "byteLength": 795495
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image7.png",
+        "contentType": "image/png",
+        "byteLength": 795495
+      }
+    },
+    {
+      "order": 42,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/sny5sji5",
+      "id": "61",
+      "name": "Picture 56",
+      "bbox": [
+        21.17,
+        430,
+        750.99,
+        250
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image8.png",
+        "contentType": "image/png",
+        "byteLength": 114930
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image8.png",
+        "contentType": "image/png",
+        "byteLength": 114930
+      }
+    }
+  ],
+  "composeRuns": []
+}

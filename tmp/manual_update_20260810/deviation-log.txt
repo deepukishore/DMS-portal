@@ -5,6 +5,6 @@ Slide 7: Replaced legacy dashboard views and rewrote dashboard instructions for 
 Slide 17: Replaced the tabbed legacy library screen with the current six-folder landing page and dedicated-page navigation.
 Slide 18: Replaced legacy Procedures/Standard Manuals content with the current QMS document-type workflow.
 Slide 19: Replaced legacy Master Records/Customer Records content with current Customer Specific Requirements and Core Tools folder workflows.
-Slide 7: Reduced the two inherited dashboard image frames vertically so all five numbered instructions are visible; page grid, margins and typography remain unchanged.
+Slides 7, 18 and 19: Enlarged and vertically stacked the inherited screenshot frames so every portal view is readable and no screenshots overlap. Numbered instructions remain below the images; page grid, margins, typography and inherited visual styling remain unchanged.
 Slides 10, 16 and 20-26: Refreshed data-bearing screenshots from the current local application. People and Profile personal-detail regions remain intentionally obscured.
-All pages: Updated revision to 1.3 and effective date to 10-Aug-2026. No layout, master, font, or color-system changes.
+All pages: Updated revision to 1.4 and effective date to 10-Aug-2026. No master, font, or color-system changes.
