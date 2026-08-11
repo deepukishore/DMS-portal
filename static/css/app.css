@@ -2083,6 +2083,11 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   flex-direction: column;
   margin-top: 0;
 }
+.review-recipient-select {
+  width: 100%;
+  min-height: 44px;
+  cursor: pointer;
+}
 /* ─── Checkbox Wrapper ──────────────────────────────────────────────────── */
 .checkbox-wrapper {
   display: flex;

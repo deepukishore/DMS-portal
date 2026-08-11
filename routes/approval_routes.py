@@ -28,6 +28,7 @@ from services.document_preview_service import DocumentPreviewService
 from services.notification_service import NotificationService
 from services.revision_history_service import RevisionHistoryService
 from services.system_log_service import SystemLogService
+from services.user_store_service import UserStoreService
 
 approval_bp = Blueprint("approvals", __name__)
 
@@ -195,6 +196,15 @@ def review_document(token):
         if file_exists
         else {"mode": "missing"}
     )
+    recipient_users = [
+        {
+            "name": user.get("name", ""),
+            "email": (user.get("email") or "").strip(),
+            "department": user.get("department", ""),
+        }
+        for user in UserStoreService.get_all_users()
+        if (user.get("email") or "").strip()
+    ]
 
     return render_template(
         "approval_review.html",
@@ -204,6 +214,7 @@ def review_document(token):
         file_exists=file_exists,
         review_file_url=review_file_url,
         preview=preview,
+        recipient_users=recipient_users,
         can_decide=_can_decide_record(record),
         can_resubmit=(
             record.get("approval_status") == "Hold"
@@ -306,11 +317,23 @@ def update_decision(token):
         flash(message, "error")
         return redirect(url_for("approvals.review_document", token=token))
     if status == "First Approved" and not selected_recipients:
-        message = "Please add selected recipients or department heads before sending to final approval."
+        message = "Please select a recipient before sending the document to final approval."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": message}), 400
         flash(message, "error")
         return redirect(url_for("approvals.review_document", token=token))
+    if status == "First Approved":
+        directory_emails = {
+            (user.get("email") or "").strip().lower()
+            for user in UserStoreService.get_all_users()
+            if (user.get("email") or "").strip()
+        }
+        if selected_recipients.lower() not in directory_emails:
+            message = "Please select a valid recipient from the people directory."
+            if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+                return jsonify({"ok": False, "message": message}), 400
+            flash(message, "error")
+            return redirect(url_for("approvals.review_document", token=token))
 
     decision_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
