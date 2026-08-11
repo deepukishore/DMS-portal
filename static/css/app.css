@@ -7351,6 +7351,48 @@ body * {
 .btn-hold:hover,
 .btn-hold.is-active { background: rgba(245,158,11,.24); }
 
+.review-meta-item-wide { grid-column: 1 / -1; }
+.hold-correction-card { border-top: 3px solid #f59e0b; }
+.hold-request-box {
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  margin-bottom: 1rem;
+  padding: .85rem 1rem;
+  border: 1px solid rgba(245, 158, 11, .3);
+  border-radius: 10px;
+  background: rgba(245, 158, 11, .09);
+}
+.hold-request-box span {
+  color: var(--text-dim);
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.hold-resubmit-form label {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  color: var(--text-sub);
+  font-size: .82rem;
+  font-weight: 600;
+}
+.hold-resubmit-form input,
+.hold-resubmit-form textarea {
+  width: 100%;
+  padding: .7rem .8rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+}
+.hold-resubmit-form input:focus,
+.hold-resubmit-form textarea:focus {
+  border-color: var(--accent);
+  outline: 2px solid rgba(41, 168, 223, .15);
+}
+
 .dashboard-document-table { min-width: 1180px; }
 .dashboard-document-table .col-serial { width: 5%; }
 .dashboard-document-table .col-file { width: 22%; }

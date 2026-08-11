@@ -1,0 +1,1613 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/jetc3ut0",
+    "id": "jetc3ut0",
+    "slide": 11,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Custom Layout",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 793.67,
+      "height": 1122.5
+    }
+  },
+  "theme": {
+    "colorSchemeName": "Office Theme",
+    "colors": {
+      "accent1": "#5B9BD5",
+      "accent2": "#ED7D31",
+      "accent3": "#A5A5A5",
+      "accent4": "#FFC000",
+      "accent5": "#4472C4",
+      "accent6": "#70AD47",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#44546A",
+      "lt2": "#E7E6E6",
+      "hlink": "#0563C1",
+      "folHlink": "#954F72"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Arial"
+      },
+      "minorFont": {
+        "latinTypeface": "Arial"
+      }
+    },
+    "typefaces": [
+      "Arial",
+      "Verdana"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Custom Layout",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout1.xml/32",
+          "id": "32",
+          "name": "Google Shape;32;p16",
+          "bbox": [
+            366.47,
+            243.13,
+            264.53,
+            38.07
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "none",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "lineWidth": 0
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "backgroundColor": "lt1",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/10",
+          "id": "10",
+          "name": "Google Shape;10;p15",
+          "bbox": [
+            28.83,
+            28,
+            736,
+            1068
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle",
+            "wrap": "square",
+            "autoFit": "none",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "lineColor": "dk1",
+          "lineWidth": 5.33
+        },
+        {
+          "order": 2,
+          "kind": "image",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/31",
+          "id": "31",
+          "name": "Google Shape;11;p15",
+          "bbox": [
+            535.41,
+            41.97,
+            199,
+            82
+          ],
+          "contentType": "image/jpeg",
+          "imageCrop": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "asset": {
+            "assetId": "/ppt/media/image1.jpg",
+            "contentType": "image/jpeg",
+            "byteLength": 24778
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image1.jpg",
+            "contentType": "image/jpeg",
+            "byteLength": 24778
+          }
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/12",
+          "id": "12",
+          "name": "Google Shape;12;p15",
+          "bbox": [
+            49.74,
+            44.19,
+            580.17,
+            32.31
+          ],
+          "geometry": "rect",
+          "text": "ZF Rane Automotive India Private Limited",
+          "textPreview": "ZF Rane Automotive India Private Limited",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "ZF Rane Automotive India Private Limited",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "ZF Rane Automotive India Private Limited",
+                  "fontSize": 18.67,
+                  "typeface": "Verdana",
+                  "color": "dk1",
+                  "textTransform": "none"
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 4,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/13",
+          "id": "13",
+          "name": "Google Shape;13;p15",
+          "bbox": [
+            49.74,
+            73.3,
+            232.11,
+            32.31
+          ],
+          "geometry": "rect",
+          "text": "Steering Gear Division",
+          "textPreview": "Steering Gear Division",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Steering Gear Division",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Steering Gear Division",
+                  "fontSize": 18.67,
+                  "typeface": "Verdana",
+                  "color": "dk1"
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/14",
+          "id": "14",
+          "name": "Google Shape;14;p15",
+          "bbox": [
+            49.74,
+            102.4,
+            545.8,
+            35.54
+          ],
+          "geometry": "rect",
+          "text": "STANDARD OPERATING PROCEDURE ",
+          "textPreview": "STANDARD OPERATING PROCEDURE",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "STANDARD OPERATING PROCEDURE ",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "STANDARD OPERATING PROCEDURE ",
+                  "fontSize": 21.33,
+                  "typeface": "Verdana",
+                  "color": "#808080",
+                  "bold": true
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 6,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/15",
+          "id": "15",
+          "name": "Google Shape;15;p15",
+          "bbox": [
+            58.57,
+            138.94,
+            676.54,
+            0
+          ],
+          "geometry": "straightConnector1",
+          "lineColor": "#000000",
+          "lineWidth": 2.67
+        },
+        {
+          "order": 7,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/16",
+          "id": "16",
+          "name": "Google Shape;16;p15",
+          "bbox": [
+            58.57,
+            267.35,
+            676.54,
+            0
+          ],
+          "geometry": "straightConnector1",
+          "lineColor": "#000000",
+          "lineWidth": 2.67
+        },
+        {
+          "order": 8,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/17",
+          "id": "17",
+          "name": "Google Shape;17;p15",
+          "bbox": [
+            49.74,
+            139.79,
+            85.86,
+            27.47
+          ],
+          "geometry": "rect",
+          "text": "SUBJECT",
+          "textPreview": "SUBJECT",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "SUBJECT",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "SUBJECT",
+                  "fontSize": 14.67,
+                  "typeface": "Verdana",
+                  "color": "dk1"
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 9,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/18",
+          "id": "18",
+          "name": "Google Shape;18;p15",
+          "bbox": [
+            540.56,
+            141.13,
+            161.6,
+            25.85
+          ],
+          "geometry": "rect",
+          "text": "SOP No.   : IND 004 ",
+          "textPreview": "SOP No.   : IND 004",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "SOP No.   : IND 004 ",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "SOP No.   ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "#7F7F7F"
+                },
+                {
+                  "index": 2,
+                  "text": ": IND 004 ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "dk1"
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 10,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/19",
+          "id": "19",
+          "name": "Google Shape;19;p15",
+          "bbox": [
+            540.56,
+            163.14,
+            181.5,
+            0
+          ],
+          "geometry": "straightConnector1",
+          "lineColor": "dk1",
+          "lineWidth": 1
+        },
+        {
+          "order": 11,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/20",
+          "id": "20",
+          "name": "Google Shape;20;p15",
+          "bbox": [
+            540.56,
+            163.84,
+            194.41,
+            25.85
+          ],
+          "geometry": "rect",
+          "text": "Date        : 18-July-2026 ",
+          "textPreview": "Date        : 18-July-2026",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Date        : 18-July-2026 ",
+              "lineSpacingPercent": 100000,
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Date      ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "#7F7F7F"
+                },
+                {
+                  "index": 2,
+                  "text": "  : 18-July-2026 ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "dk1"
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 12,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/21",
+          "id": "21",
+          "name": "Google Shape;21;p15",
+          "bbox": [
+            540.56,
+            187.34,
+            181.5,
+            0
+          ],
+          "geometry": "straightConnector1",
+          "lineColor": "dk1",
+          "lineWidth": 1
+        },
+        {
+          "order": 13,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/22",
+          "id": "22",
+          "name": "Google Shape;22;p15",
+          "bbox": [
+            540.56,
+            212.75,
+            181.5,
+            0
+          ],
+          "geometry": "straightConnector1",
+          "lineColor": "dk1",
+          "lineWidth": 1
+        },
+        {
+          "order": 14,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/23",
+          "id": "23",
+          "name": "Google Shape;23;p15",
+          "bbox": [
+            28.83,
+            178.98,
+            511.73,
+            48.33
+          ],
+          "geometry": "rect",
+          "text": "DIGITALIZATION – PORTAL",
+          "textPreview": "DIGITALIZATION – PORTAL",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "DIGITALIZATION – PORTAL",
+              "lineSpacingPercent": 150000,
+              "resolvedTextStyle": {
+                "alignment": "center"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "DIGITALIZATION – PORTAL",
+                  "fontSize": 21.33,
+                  "typeface": "Verdana",
+                  "color": "dk1",
+                  "bold": true
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 15,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/24",
+          "id": "24",
+          "name": "Google Shape;24;p15",
+          "bbox": [
+            28.83,
+            1066.53,
+            208.45,
+            28.93
+          ],
+          "geometry": "rect",
+          "text": "Prepared by:  ",
+          "textPreview": "Prepared by:",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Prepared by:  ",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Prepared by: ",
+                  "fontSize": 16,
+                  "typeface": "Verdana",
+                  "color": "#808080",
+                  "bold": true,
+                  "italic": true
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 16,
+                  "typeface": "Verdana",
+                  "color": "#0000FF",
+                  "bold": true,
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 16,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/25",
+          "id": "25",
+          "name": "Google Shape;25;p15",
+          "bbox": [
+            582.37,
+            1066.53,
+            182.46,
+            29.08
+          ],
+          "geometry": "rect",
+          "text": "Approved by: SBG",
+          "textPreview": "Approved by: SBG",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Approved by: SBG",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Approved by:",
+                  "fontSize": 16,
+                  "typeface": "Verdana",
+                  "color": "#808080",
+                  "bold": true,
+                  "italic": true
+                },
+                {
+                  "index": 2,
+                  "text": " ",
+                  "fontSize": 16,
+                  "typeface": "Verdana",
+                  "color": "dk1",
+                  "bold": true,
+                  "italic": true
+                },
+                {
+                  "index": 3,
+                  "text": "SBG",
+                  "fontSize": 16,
+                  "typeface": "Verdana",
+                  "color": "#0000FF",
+                  "bold": true,
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 17,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/26",
+          "id": "26",
+          "name": "Google Shape;26;p15",
+          "bbox": [
+            540.56,
+            239.31,
+            181.5,
+            0
+          ],
+          "geometry": "straightConnector1",
+          "lineColor": "dk1",
+          "lineWidth": 1
+        },
+        {
+          "order": 18,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/27",
+          "id": "27",
+          "name": "Google Shape;27;p15",
+          "bbox": [
+            540.56,
+            244.43,
+            199.46,
+            15.38
+          ],
+          "geometry": "rect",
+          "text": "Rev Date  : 18-July-2026 ",
+          "textPreview": "Rev Date  : 18-July-2026",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle",
+            "wrap": "square",
+            "autoFit": "none",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Rev Date  : 18-July-2026 ",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Rev Date  ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "#7F7F7F"
+                },
+                {
+                  "index": 2,
+                  "text": ": 18-July-2026 ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "dk1"
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 19,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/28",
+          "id": "28",
+          "name": "Google Shape;28;p15",
+          "bbox": [
+            540.56,
+            219.16,
+            182.21,
+            15.73
+          ],
+          "geometry": "rect",
+          "text": "Rev No.    : 00 ",
+          "textPreview": "Rev No.    : 00",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle",
+            "wrap": "square",
+            "autoFit": "none",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Rev No.    : 00 ",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Rev No.    ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "#7F7F7F"
+                },
+                {
+                  "index": 2,
+                  "text": ": 00 ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "dk1"
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 20,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/29",
+          "id": "29",
+          "name": "Google Shape;29;p15",
+          "bbox": [
+            540.56,
+            192.74,
+            182.21,
+            15.73
+          ],
+          "geometry": "rect",
+          "text": "Page No   : 11 of 23",
+          "textPreview": "Page No   : 11 of 23",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle",
+            "wrap": "square",
+            "autoFit": "none",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Page No   : 11 of 23",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Page No   ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "#7F7F7F"
+                },
+                {
+                  "index": 2,
+                  "text": ": ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "dk1"
+                },
+                {
+                  "index": 3,
+                  "text": "11",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "dk1"
+                },
+                {
+                  "index": 4,
+                  "text": " ",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "dk1"
+                },
+                {
+                  "index": 5,
+                  "text": "of 23",
+                  "fontSize": 13.33,
+                  "typeface": "Verdana",
+                  "color": "dk1"
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        },
+        {
+          "order": 21,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/30",
+          "id": "30",
+          "name": "Google Shape;30;p15",
+          "bbox": [
+            148.95,
+            1067.55,
+            87.5,
+            29.08
+          ],
+          "geometry": "rect",
+          "text": "DK",
+          "textPreview": "DK",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            },
+            "useParagraphSpacing": true
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "DK",
+              "resolvedTextStyle": {
+                "alignment": "left"
+              },
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "DK",
+                  "fontSize": 16,
+                  "typeface": "Verdana",
+                  "color": "#0000FF",
+                  "bold": true,
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "lineWidth": 0
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7ih0r6h",
+      "id": "7",
+      "name": "TextBox 6",
+      "bbox": [
+        56.57,
+        269.17,
+        677.83,
+        29.36
+      ],
+      "geometry": "rect",
+      "text": "4.5 Development Phase:",
+      "textPreview": "4.5 Development Phase:",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Arial",
+        "color": "#000000",
+        "alignment": "left",
+        "textTransform": "none",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 1.92,
+          "bottom": 0,
+          "left": 1.92
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "4.5 Development Phase:"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "4.5 Development Phase:",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "4.5 ",
+              "typeface": "Verdana",
+              "color": "#000000",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "Development Phase:",
+              "typeface": "Verdana",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/61kzalof",
+      "id": "9",
+      "name": "TextBox 8",
+      "bbox": [
+        32.19,
+        300.7,
+        729.29,
+        63.94
+      ],
+      "geometry": "rect",
+      "text": "The purpose of this phase is to develop the portal according to the approved requirements and system design.",
+      "textPreview": "The purpose of this phase is to develop the portal according to the approved requirements and system design.",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Arial",
+        "color": "#000000",
+        "alignment": "left",
+        "textTransform": "none",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "vThe purpose of this phase is to develop the portal according to the approved"
+          },
+          {
+            "index": 2,
+            "text": "requirements and system design."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The purpose of this phase is to develop the portal according to the approved requirements and system design.",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "The purpose of this phase is to develop the portal according to the approved requirements and system design.",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9gza9sze",
+      "id": "11",
+      "name": "TextBox 10",
+      "bbox": [
+        32.19,
+        396.84,
+        729.29,
+        267.51
+      ],
+      "geometry": "rect",
+      "text": "Develop the login page, dashboard, menus, forms, reports, notifications, profile page, and administration pages. \nProvide clear navigation between pages and modules. \nDisplay modules based on the assigned user role. \nConfigure mandatory fields, dropdown lists, date fields, search options, status indicators, and file-upload controls. \nProvide clear validation and error messages. \nMaintain a consistent layout, font, page structure, and user interface. \nEnsure that the portal is readable and easy to operate.",
+      "textPreview": "Develop the login page, dashboard, menus, forms, reports, notifications, profile page, and administration pages.  | Provide clear navigat...",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Arial",
+        "color": "#000000",
+        "alignment": "left",
+        "textTransform": "none",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 9,
+        "lines": [
+          {
+            "index": 1,
+            "text": "❖Develop the login page, dashboard, menus, forms, reports, notifications, profile"
+          },
+          {
+            "index": 2,
+            "text": "page, and administration pages."
+          },
+          {
+            "index": 3,
+            "text": "❖Provide clear navigation between pages and modules."
+          },
+          {
+            "index": 4,
+            "text": "❖Display modules based on the assigned user role."
+          },
+          {
+            "index": 5,
+            "text": "❖Configure mandatory fields, dropdown lists, date fields, search options, status"
+          },
+          {
+            "index": 6,
+            "text": "indicators, and file-upload controls."
+          },
+          {
+            "index": 7,
+            "text": "❖Provide clear validation and error messages."
+          },
+          {
+            "index": 8,
+            "text": "❖Maintain a consistent layout, font, page structure, and user interface."
+          },
+          {
+            "index": 9,
+            "text": "❖Ensure that the portal is readable and easy to operate."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Develop the login page, dashboard, menus, forms, reports, notifications, profile page, and administration pages. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Develop the login page, dashboard, menus, forms, reports, notifications, profile page, and administration pages. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "Provide clear navigation between pages and modules. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Provide clear navigation between pages and modules. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "Display modules based on the assigned user role. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Display modules based on the assigned user role. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "Configure mandatory fields, dropdown lists, date fields, search options, status indicators, and file-upload controls. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Configure mandatory fields, dropdown lists, date fields, search options, status indicators, and file-upload controls. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "text": "Provide clear validation and error messages. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Provide clear validation and error messages. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "text": "Maintain a consistent layout, font, page structure, and user interface. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Maintain a consistent layout, font, page structure, and user interface. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "text": "Ensure that the portal is readable and easy to operate.",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ensure that the portal is readable and easy to operate.",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/98rytw72",
+      "id": "6",
+      "name": "TextBox 5",
+      "bbox": [
+        -1.31,
+        362.33,
+        396.8,
+        39.05
+      ],
+      "geometry": "rect",
+      "text": "4.5.1  Frontend Development:",
+      "textPreview": "4.5.1  Frontend Development:",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Arial",
+        "color": "#000000",
+        "alignment": "left",
+        "textTransform": "none",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "4.5.1  Frontend Development:"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "4.5.1  Frontend Development:",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "4.5.1  ",
+              "typeface": "Verdana",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "Frontend Development:",
+              "typeface": "Verdana",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/250zy18b",
+      "id": "5",
+      "name": "TextBox 4",
+      "bbox": [
+        32.19,
+        693.61,
+        729.29,
+        325.67
+      ],
+      "geometry": "rect",
+      "text": "The backend manages the system logic, user access, workflow, data processing, and communication with other systems.\nThe following activities shall be carried out:\n Develop user authentication and session management. \n Configure role-based access control. \n Develop functions for data creation, viewing, updating, submission, approval, rejection, revision, search, download, archive, and restoration. \n Develop workflow-processing functions. \n Configure notification and email-trigger functions. \n Develop file-upload, preview, download, and storage functions. \n Develop report-generation and dashboard-data functions. ",
+      "textPreview": "The backend manages the system logic, user access, workflow, data processing, and communication with other systems. | The following activ...",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Arial",
+        "color": "#000000",
+        "alignment": "left",
+        "textTransform": "none",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 11,
+        "lines": [
+          {
+            "index": 1,
+            "text": "vThe backend manages the system logic, user access, workflow, data"
+          },
+          {
+            "index": 2,
+            "text": "processing, and communication with other systems."
+          },
+          {
+            "index": 3,
+            "text": "vThe following activities shall be carried out:"
+          },
+          {
+            "index": 4,
+            "text": "• Develop user authentication and session management."
+          },
+          {
+            "index": 5,
+            "text": "• Configure role-based access control."
+          },
+          {
+            "index": 6,
+            "text": "• Develop functions for data creation, viewing, updating, submission, approval,"
+          },
+          {
+            "index": 7,
+            "text": "rejection, revision, search, download, archive, and restoration."
+          },
+          {
+            "index": 8,
+            "text": "• Develop workflow-processing functions."
+          },
+          {
+            "index": 9,
+            "text": "• Configure notification and email-trigger functions."
+          },
+          {
+            "index": 10,
+            "text": "• Develop file-upload, preview, download, and storage functions."
+          },
+          {
+            "index": 11,
+            "text": "• Develop report-generation and dashboard-data functions."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The backend manages the system logic, user access, workflow, data processing, and communication with other systems.",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "The backend manages the system logic, user access, workflow, data processing, and communication with other systems.",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "The following activities shall be carried out:",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "The following activities shall be carried out:",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": " Develop user authentication and session management. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": " Develop user authentication and session management. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": " Configure role-based access control. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": " Configure role-based access control. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "text": " Develop functions for data creation, viewing, updating, submission, approval, rejection, revision, search, download, archive, and restoration. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": " Develop functions for data creation, viewing, updating, submission, approval, rejection, revision, search, download, archive, and restoration. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "text": " Develop workflow-processing functions. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": " Develop workflow-processing functions. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "text": " Configure notification and email-trigger functions. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": " Configure notification and email-trigger functions. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "text": " Develop file-upload, preview, download, and storage functions. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": " Develop file-upload, preview, download, and storage functions. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "text": " Develop report-generation and dashboard-data functions. ",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": " Develop report-generation and dashboard-data functions. ",
+              "fontSize": 16,
+              "typeface": "Verdana"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ofqtgnyt",
+      "id": "10",
+      "name": "TextBox 9",
+      "bbox": [
+        -1.31,
+        658.3,
+        396.8,
+        39.05
+      ],
+      "geometry": "rect",
+      "text": "4.5.2  Backend Development:",
+      "textPreview": "4.5.2  Backend Development:",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Arial",
+        "color": "#000000",
+        "alignment": "left",
+        "textTransform": "none",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "4.5.2  Backend Development:"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "4.5.2  Backend Development:",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "4.5.2  ",
+              "fontSize": 18.67,
+              "typeface": "Verdana",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "Backend Development:",
+              "fontSize": 18.67,
+              "typeface": "Verdana",
+              "bold": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

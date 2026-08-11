@@ -67,12 +67,25 @@ class SystemLogService:
 
     @staticmethod
     def log_approval_decision(approver_email, file_name, status, approver_name="Approver"):
-        action = "APPROVED" if status == "Approved" else "REJECTED"
+        action = {
+            "Approved": "APPROVED",
+            "Pending Final Approval": "FIRST_APPROVED",
+            "Hold": "HOLD",
+        }.get(status, "REJECTED")
         SystemLogService._entry(
             approver_email,
             approver_name,
             action,
             f'{status} "{file_name}".',
+        )
+
+    @staticmethod
+    def log_hold_resubmission(user_email, user_name, file_name, correction_summary):
+        SystemLogService._entry(
+            user_email,
+            user_name,
+            "HOLD_RESUBMITTED",
+            f'Resubmitted corrected document "{file_name}": {correction_summary}',
         )
 
     @staticmethod

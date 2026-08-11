@@ -32,7 +32,7 @@
       <section class="review-topbar">
         <div>
           <p class="eyebrow">Approval Request</p>
-          <h1 class="page-title">{{ record.file_name }}</h1>
+          <h1 class="page-title">{{ record.original_file_name or record.file_name }}</h1>
           <p class="page-sub">Documents move through first-stage review and final approval or rejection.</p>
         </div>
         <span class="status-pill status-{{ record.approval_status | lower }}" id="review-status-pill">{{ record.approval_status }}</span>
@@ -187,22 +187,74 @@
                 <span>Updated at</span>
                 <strong id="review-updated-at">{{ record.approval_updated_at or 'Not updated yet' }}</strong>
               </div>
-              <div class="review-meta-item">
-                <span>Rejection comments</span>
-                <strong id="review-rejection-comment">{{ record.rejection_comment or 'No rejection comments yet' }}</strong>
+              {% if record.hold_comment %}
+              <div class="review-meta-item review-meta-item-wide">
+                <span>Corrections requested</span>
+                <strong id="review-hold-comment">{{ record.hold_comment }}</strong>
               </div>
+              {% endif %}
+              {% if record.resubmission_comment %}
+              <div class="review-meta-item review-meta-item-wide">
+                <span>Corrections made by uploader</span>
+                <strong>{{ record.resubmission_comment }}</strong>
+              </div>
+              {% endif %}
+              {% if record.rejection_comment and record.approval_status == 'Rejected' %}
+              <div class="review-meta-item review-meta-item-wide">
+                <span>Rejection comments</span>
+                <strong id="review-rejection-comment">{{ record.rejection_comment }}</strong>
+              </div>
+              {% endif %}
             </div>
           </section>
+
+          {% if record.approval_status == 'Hold' %}
+          <section class="review-card hold-correction-card">
+            <div class="panel-head">
+              <div>
+                <h2 class="section-title">Correction required</h2>
+                <p class="section-sub">The review is paused until the original uploader replaces the file.</p>
+              </div>
+            </div>
+            <div class="hold-request-box">
+              <span>Requested by {{ record.hold_by or record.decision_by or 'Reviewer' }}</span>
+              <strong>{{ record.hold_comment or record.rejection_comment }}</strong>
+            </div>
+            {% if can_resubmit %}
+            <form method="POST" action="{{ url_for('approvals.resubmit_held_document', token=token) }}" enctype="multipart/form-data" class="review-actions review-actions-stacked hold-resubmit-form">
+              <label>
+                <span>Corrected document</span>
+                <input type="file" name="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" required />
+              </label>
+              <label>
+                <span>Revision number</span>
+                <input type="text" name="revision_number" value="{{ record.revision_number or '' }}" placeholder="e.g. Rev.02" />
+              </label>
+              <label>
+                <span>Corrections made</span>
+                <textarea name="correction_summary" rows="4" required placeholder="Explain how each requested correction was completed..."></textarea>
+              </label>
+              <button type="submit" class="btn-primary">Upload correction and continue approval</button>
+            </form>
+            {% else %}
+            <div class="alert alert-info">
+              <span>Waiting for {{ record.name }} to upload the corrected document here.</span>
+            </div>
+            {% endif %}
+          </section>
+          {% endif %}
 
           <section class="review-card">
             <div class="panel-head">
               <div>
                 <h2 class="section-title">Decision</h2>
                 <p class="section-sub">
-                  {% if record.approval_status == 'Pending' or (record.approval_status == 'Hold' and not record.first_approved_at) %}
+                  {% if record.approval_status == 'Pending' %}
                     The designated first-stage reviewer completes the initial review and selects sharing recipients.
-                  {% elif record.approval_status == 'Pending Final Approval' or (record.approval_status == 'Hold' and record.first_approved_at) %}
+                  {% elif record.approval_status == 'Pending Final Approval' %}
                     The designated final reviewer completes approval or rejection.
+                  {% elif record.approval_status == 'Hold' %}
+                    A decision is unavailable until the uploader submits the corrected document.
                   {% else %}
                     This review request already has a final decision.
                   {% endif %}
@@ -212,7 +264,7 @@
 
             {% if can_decide %}
               <form method="POST" action="{{ url_for('approvals.update_decision', token=token) }}" class="review-actions review-actions-stacked" id="approval-form" data-doc-id="{{ record.id }}">
-                {% if record.approval_status == 'Pending' or (record.approval_status == 'Hold' and not record.first_approved_at) %}
+                {% if record.approval_status == 'Pending' %}
                 <label style="display:flex;flex-direction:column;gap:.4rem;">
                   <span class="section-sub">Selected people or department heads who should receive the file after final approval.</span>
                   <textarea name="selected_recipients" id="selected-recipients-input" rows="3" placeholder="Enter email addresses separated by commas">{{ record.selected_recipients or '' }}</textarea>
@@ -223,10 +275,10 @@
                 </div>
                 {% endif %}
                 <label style="display:flex;flex-direction:column;gap:.4rem;">
-                  <span class="section-sub">Rejection comments are required when rejecting.</span>
+                  <span class="section-sub">Comments are required when rejecting or placing the document on hold.</span>
                   <textarea name="rejection_comment" id="rejection-comment-input" rows="4" placeholder="Tell the uploader exactly what needs to be fixed...">{{ record.rejection_comment or '' }}</textarea>
                 </label>
-                {% if record.approval_status == 'Pending' or (record.approval_status == 'Hold' and not record.first_approved_at) %}
+                {% if record.approval_status == 'Pending' %}
                 <button type="submit" name="status" value="First Approved" class="btn-decision btn-approve">
                   Approve first stage
                 </button>
@@ -239,16 +291,18 @@
                   Reject
                 </button>
                 <button type="submit" name="status" value="Hold" class="btn-decision btn-hold {% if record.approval_status == 'Hold' %}is-active{% endif %}">
-                  Hold for later
+                  Request corrections
                 </button>
               </form>
             {% else %}
               <div class="alert alert-info">
                 <span>
-                  {% if record.approval_status == 'Pending' or (record.approval_status == 'Hold' and not record.first_approved_at) %}
+                  {% if record.approval_status == 'Pending' %}
                     You can view this request, but only the designated first-stage reviewer can decide it.
-                  {% elif record.approval_status == 'Pending Final Approval' or (record.approval_status == 'Hold' and record.first_approved_at) %}
+                  {% elif record.approval_status == 'Pending Final Approval' %}
                     You can view this request, but only the designated final reviewer can decide it.
+                  {% elif record.approval_status == 'Hold' %}
+                    This request is waiting for the original uploader to submit corrections.
                   {% else %}
                     This request has already been reviewed.
                   {% endif %}
@@ -336,8 +390,10 @@
           alert('Please choose Approve, Reject, or Hold.');
           return;
         }
-        if (status === 'Rejected' && !rejectionCommentInput?.value.trim()) {
-          alert('Please add rejection comments before rejecting this document.');
+        if ((status === 'Rejected' || status === 'Hold') && !rejectionCommentInput?.value.trim()) {
+          alert(status === 'Hold'
+            ? 'Please describe the corrections needed before placing this document on hold.'
+            : 'Please add rejection comments before rejecting this document.');
           return;
         }
 
@@ -360,6 +416,9 @@
           setReviewStatus(payload.status, payload.approval_updated_at, payload.rejection_comment);
           syncApprovalStatus(payload.doc_id, payload.status);
           showSuccessPopup(payload.message);
+          if (status === 'Hold') {
+            setTimeout(() => window.location.reload(), 900);
+          }
         })
         .catch(error => {
           console.error('Error:', error);

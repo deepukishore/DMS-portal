@@ -400,6 +400,116 @@ class DocumentService:
         return updated, None
 
     @staticmethod
+    def resubmit_held_document(
+        doc_id,
+        file,
+        user_name,
+        user_id,
+        user_email,
+        upload_folder,
+        correction_summary,
+        revision_number="",
+    ):
+        """Replace a held document and return it to the reviewer who placed the hold."""
+        filename = secure_filename(file.filename or "")
+        correction_summary = (correction_summary or "").strip()
+        if not filename:
+            return None, "Please select the corrected document."
+        if not is_allowed_file(filename):
+            return None, "File type not allowed. Accepted: PDF, Word, Excel, PowerPoint."
+        if not correction_summary:
+            return None, "Please describe the corrections that were made."
+
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM documents WHERE id = ?", (int(doc_id),))
+        row = cursor.fetchone()
+        if not row:
+            conn.close()
+            return None, "Document not found."
+        doc = dict(row)
+        if doc.get("approval_status") != "Hold":
+            conn.close()
+            return None, "Only a document currently on hold can be resubmitted."
+        if (doc.get("uploader_email") or "").strip().lower() != (user_email or "").strip().lower():
+            conn.close()
+            return None, "Only the original uploader can resubmit this document."
+
+        base, extension = os.path.splitext(filename)
+        timestamp = datetime.now()
+        file_stamp = timestamp.strftime("%Y%m%d%H%M%S%f")
+        unique_name = f"{base}_{file_stamp}{extension}"
+        orig_path = os.path.join(upload_folder, unique_name)
+        file.save(orig_path)
+
+        pdf_name = f"{base}_{file_stamp}.pdf"
+        pdf_path = os.path.join(upload_folder, pdf_name)
+        _, conv_err = convert_to_pdf(orig_path, pdf_path)
+        if conv_err:
+            pdf_name = unique_name
+
+        new_version = (doc.get("current_version") or 1) + 1
+        next_status = "Pending Final Approval" if doc.get("first_approved_at") else "Pending"
+        effective_revision = (revision_number or "").strip() or doc.get("revision_number", "")
+        updated_at = timestamp.strftime("%Y-%m-%d %H:%M:%S")
+
+        cursor.execute(
+            """UPDATE documents
+               SET file_name = ?, original_file_name = ?, pdf_file_name = ?,
+                   current_version = ?, approval_status = ?, approval_updated_at = ?,
+                   revision_number = ?, resubmission_comment = ?, resubmitted_at = ?,
+                   decision_by = ?
+               WHERE id = ?""",
+            (
+                unique_name,
+                filename,
+                pdf_name,
+                new_version,
+                next_status,
+                updated_at,
+                effective_revision,
+                correction_summary,
+                updated_at,
+                "",
+                int(doc_id),
+            ),
+        )
+        cursor.execute(
+            """INSERT INTO document_versions
+               (document_id, version_number, file_name, original_file_name, pdf_file_name,
+                uploaded_by, user_id, uploaded_at, change_summary, document_number,
+                revision_number, category)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (
+                int(doc_id),
+                new_version,
+                unique_name,
+                filename,
+                pdf_name,
+                user_email,
+                user_id,
+                updated_at,
+                correction_summary,
+                doc.get("document_number", ""),
+                effective_revision,
+                doc.get("category", ""),
+            ),
+        )
+        cursor.execute(
+            """UPDATE category_documents
+               SET file_name = ?, approval_status = ?, revision_number = ?
+               WHERE file_name = ?""",
+            (unique_name, next_status, effective_revision, doc.get("file_name", "")),
+        )
+        conn.commit()
+        cursor.execute("SELECT * FROM documents WHERE id = ?", (int(doc_id),))
+        updated = DocumentService._normalize_record(dict(cursor.fetchone()))
+        updated["previous_file_name"] = doc.get("file_name", "")
+        updated["previous_revision_number"] = doc.get("revision_number", "")
+        conn.close()
+        return updated, None
+
+    @staticmethod
     def get_versions(doc_id):
         conn = get_connection()
         cursor = conn.cursor()
@@ -420,9 +530,23 @@ class DocumentService:
             return None, "Document not found."
         existing = dict(existing_row)
         
-        normalized_comment = rejection_comment.strip() if status == "Rejected" else ""
+        normalized_comment = rejection_comment.strip() if status in {"Rejected", "Hold"} else ""
+        if status == "Hold" and not normalized_comment:
+            conn.close()
+            return None, "Please describe the corrections needed before placing the document on hold."
+        effective_recipients = selected_recipients.strip() or existing.get("selected_recipients") or ""
         updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        if status == "First Approved":
+        if status == "Hold":
+            cursor.execute('''UPDATE documents
+                             SET approval_status = ?, approval_updated_at = ?, rejection_comment = ?,
+                                 hold_comment = ?, hold_by = ?, held_at = ?,
+                                 resubmission_comment = ?, resubmitted_at = ?, decision_by = ?,
+                                 selected_recipients = ?
+                             WHERE id = ?''',
+                (status, updated_at, normalized_comment, normalized_comment, decided_by,
+                 updated_at, "", None, decided_by, effective_recipients, int(doc_id))
+            )
+        elif status == "First Approved":
             cursor.execute('''UPDATE documents
                              SET approval_status = ?, approval_updated_at = ?, rejection_comment = ?,
                                  decision_by = ?, selected_recipients = ?, first_approver = ?,

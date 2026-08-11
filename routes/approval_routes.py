@@ -26,6 +26,7 @@ from services.presentation_service import plant_code
 from services.mail_service import MailService
 from services.document_preview_service import DocumentPreviewService
 from services.notification_service import NotificationService
+from services.revision_history_service import RevisionHistoryService
 from services.system_log_service import SystemLogService
 
 approval_bp = Blueprint("approvals", __name__)
@@ -44,11 +45,16 @@ def _can_decide_record(record, user=None):
         return AuthService.is_qms_first_approver(user)
     if status == "Pending Final Approval":
         return AuthService.is_qms_final_approver(user)
-    if status == "Hold":
-        if record.get("first_approved_at"):
-            return AuthService.is_qms_final_approver(user)
-        return AuthService.is_qms_first_approver(user)
     return False
+
+
+def _is_original_uploader(record, user=None):
+    user = user or AuthService.get_current_user()
+    if not user:
+        return False
+    return (record.get("uploader_email") or "").strip().lower() == (
+        user.get("email") or ""
+    ).strip().lower()
 
 
 def _records_with_tokens(records):
@@ -199,6 +205,10 @@ def review_document(token):
         review_file_url=review_file_url,
         preview=preview,
         can_decide=_can_decide_record(record),
+        can_resubmit=(
+            record.get("approval_status") == "Hold"
+            and _is_original_uploader(record)
+        ),
     )
 
 
@@ -252,9 +262,7 @@ def update_decision(token):
     if not _can_decide_record(record, current_user):
         message = (
             "Only a designated first-stage reviewer can complete this approval."
-            if record_status == "Pending" or (
-                record_status == "Hold" and not record.get("first_approved_at")
-            )
+            if record_status == "Pending"
             else "Only a designated final reviewer can complete this approval."
         )
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
@@ -268,12 +276,8 @@ def update_decision(token):
             return jsonify({"ok": False, "message": "Please choose a valid approval action."}), 400
         flash("Please choose a valid approval action.", "error")
         return redirect(url_for("approvals.review_document", token=token))
-    is_first_stage = record_status == "Pending" or (
-        record_status == "Hold" and not record.get("first_approved_at")
-    )
-    is_final_stage = record_status == "Pending Final Approval" or (
-        record_status == "Hold" and bool(record.get("first_approved_at"))
-    )
+    is_first_stage = record_status == "Pending"
+    is_final_stage = record_status == "Pending Final Approval"
     if is_first_stage and status not in {"First Approved", "Rejected", "Hold"}:
         message = "A designated first-stage reviewer must approve, reject, or hold this request."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
@@ -291,6 +295,12 @@ def update_decision(token):
     selected_recipients = request.form.get("selected_recipients", "").strip()
     if status == "Rejected" and not rejection_comment:
         message = "Please add rejection comments so the uploader knows what to fix."
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            return jsonify({"ok": False, "message": message}), 400
+        flash(message, "error")
+        return redirect(url_for("approvals.review_document", token=token))
+    if status == "Hold" and not rejection_comment:
+        message = "Please describe the corrections needed before placing the document on hold."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": message}), 400
         flash(message, "error")
@@ -366,7 +376,7 @@ def update_decision(token):
         else:
             message = f"Document marked as {status}. Uploader notified via email."
         notification_message = (
-            f'{updated_record["original_file_name"] or updated_record["file_name"]} was placed on hold.'
+            rejection_comment
             if status == "Hold"
             else rejection_comment if status == "Rejected" and rejection_comment
             else f'{updated_record["original_file_name"] or updated_record["file_name"]} was {status.lower()}.'
@@ -375,7 +385,11 @@ def update_decision(token):
             uploader_email,
             f"Document {status}",
             notification_message,
-            link_url=url_for("dashboard.view_document", doc_id=updated_record["id"]),
+            link_url=(
+                url_for("approvals.review_document", token=token)
+                if status == "Hold"
+                else url_for("dashboard.view_document", doc_id=updated_record["id"])
+            ),
             notification_type="warning" if status in {"Rejected", "Hold"} else "success",
         )
 
@@ -410,6 +424,94 @@ def update_decision(token):
 
     flash(message, flash_category)
     
+    return redirect(url_for("approvals.review_document", token=token))
+
+
+@approval_bp.route("/approvals/review/<token>/resubmit", methods=["POST"])
+def resubmit_held_document(token):
+    redir = _require_login()
+    if redir:
+        return redir
+
+    record = _resolve_record_or_none(token)
+    if not record:
+        return render_template("approval_review.html", invalid_link=True), 404
+    current_user = AuthService.get_current_user()
+    if record.get("approval_status") != "Hold" or not _is_original_uploader(record, current_user):
+        flash("Only the original uploader can update a document that is on hold.", "error")
+        return redirect(url_for("approvals.review_document", token=token))
+
+    corrected_file = request.files.get("file")
+    correction_summary = request.form.get("correction_summary", "").strip()
+    revision_number = request.form.get("revision_number", "").strip()
+    if not corrected_file or not corrected_file.filename:
+        flash("Please select the corrected document.", "error")
+        return redirect(url_for("approvals.review_document", token=token))
+    if not correction_summary:
+        flash("Please describe the corrections that were made.", "error")
+        return redirect(url_for("approvals.review_document", token=token))
+
+    updated_record, error = DocumentService.resubmit_held_document(
+        record["id"],
+        corrected_file,
+        current_user.get("name", session.get("user_name", "Uploader")),
+        current_user.get("user_id", session.get("user_id", "")),
+        current_user.get("email", session.get("user_email", "")),
+        current_app.config["UPLOAD_FOLDER"],
+        correction_summary,
+        revision_number=revision_number,
+    )
+    if error:
+        flash(error, "error")
+        return redirect(url_for("approvals.review_document", token=token))
+
+    RevisionHistoryService.add_revision(
+        document_id=updated_record["id"],
+        file_name=updated_record["file_name"],
+        revision_number=updated_record.get("revision_number") or f'v{updated_record.get("current_version", "")}',
+        revised_by=current_user.get("name", "Uploader"),
+        user_id=current_user.get("user_id", ""),
+        plant=updated_record.get("plant"),
+        department=updated_record.get("department"),
+        change_summary=correction_summary,
+        previous_file_name=updated_record.get("previous_file_name"),
+    )
+    SystemLogService.log_hold_resubmission(
+        current_user.get("email", ""),
+        current_user.get("name", "Uploader"),
+        updated_record["file_name"],
+        correction_summary,
+    )
+
+    returning_to_final = updated_record.get("approval_status") == "Pending Final Approval"
+    reviewer_level = "L1" if returning_to_final else "L2"
+    reviewer_email = (
+        current_app.config["FINAL_APPROVAL_RECIPIENT"]
+        if returning_to_final
+        else current_app.config["FIRST_APPROVAL_RECIPIENT"]
+    )
+    review_url = url_for("approvals.review_document", token=token, _external=True)
+    sent, mail_error = MailService.send_document_approval_request(
+        [reviewer_email], review_url, updated_record
+    )
+    NotificationService.notify_qms_level(
+        reviewer_level,
+        "Held document corrected and resubmitted",
+        f'{updated_record.get("original_file_name", updated_record["file_name"])} was corrected and is ready for review.',
+        link_url=url_for("approvals.review_document", token=token),
+        notification_type="warning",
+    )
+    message = (
+        f'Document updated to version {updated_record.get("current_version")} and returned to '
+        f'{"final" if returning_to_final else "first-stage"} review.'
+    )
+    category = "success"
+    if not sent:
+        message += f" Reviewer email failed: {mail_error}"
+        category = "warning"
+    else:
+        SystemLogService.log_approval_email(reviewer_email, updated_record["file_name"])
+    flash(message, category)
     return redirect(url_for("approvals.review_document", token=token))
 
 

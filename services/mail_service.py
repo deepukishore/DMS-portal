@@ -112,16 +112,19 @@ class MailService:
             else:
                 status_color, status_bg = "#f85149", "rgba(248,81,73,.15)"
             rejection_comment = (rejection_comment or "").strip()
+            status_phrase = "placed on hold" if status == "Hold" else status.lower()
+            subject_status = "On Hold" if status == "Hold" else status
             comment_block = ""
-            if status == "Rejected" and rejection_comment:
-                comment_block = f"Rejection comments: {rejection_comment}\n"
+            if status in {"Rejected", "Hold"} and rejection_comment:
+                comment_label = "Corrections requested" if status == "Hold" else "Rejection comments"
+                comment_block = f"{comment_label}: {rejection_comment}\n"
             
             msg = Message(
-                subject=f"Document {status}: {record['file_name']}",
+                subject=f"Document {subject_status}: {record['file_name']}",
                 recipients=[to_email],
             )
             msg.body = (
-                f"Your document has been {status.lower()}.\n\n"
+                f"Your document has been {status_phrase}.\n\n"
                 f"File: {record['file_name']}\n"
                 f"Uploaded by: {record['name']} ({record['user_id']})\n"
                 f"Plant: {plant_code(record['plant'])}\n"
@@ -136,12 +139,13 @@ class MailService:
                 f"You can view your document in the Document Management System dashboard."
             )
             rejection_html = ""
-            if status == "Rejected" and rejection_comment:
+            if status in {"Rejected", "Hold"} and rejection_comment:
+                comment_label = "Corrections requested" if status == "Hold" else "Rejection comments"
                 rejection_html = f"""
-                  <tr><td><strong>Rejection comments</strong></td><td>{rejection_comment}</td></tr>
+                  <tr><td><strong>{comment_label}</strong></td><td>{rejection_comment}</td></tr>
                 """
             msg.html = f"""
-                <p>Your document has been <strong>{status.lower()}</strong>.</p>
+                <p>Your document has been <strong>{status_phrase}</strong>.</p>
                 <table cellpadding="6" cellspacing="0" border="0">
                   <tr><td><strong>File</strong></td><td>{record['file_name']}</td></tr>
                   <tr><td><strong>Uploaded by</strong></td><td>{record['name']} ({record['user_id']})</td></tr>

@@ -137,9 +137,11 @@ class ApprovalTrackingService:
             steps[hold_index] = {
                 **steps[hold_index],
                 "title": "Approval On Hold",
-                "desc": "The approver paused this request for later review.",
-                "actor": record.get("decision_by") or "",
-                "time": updated_at,
+                "desc": record.get("hold_comment")
+                or record.get("rejection_comment")
+                or "The approver requested corrections from the uploader.",
+                "actor": record.get("hold_by") or record.get("decision_by") or "",
+                "time": record.get("held_at") or updated_at,
                 "state": "active",
             }
 
