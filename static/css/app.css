@@ -2088,6 +2088,85 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   min-height: 44px;
   cursor: pointer;
 }
+
+/* Revision history keeps metadata readable without breaking words vertically. */
+.revision-history-table {
+  min-width: 1180px;
+  table-layout: fixed;
+}
+.revision-history-table .revision-col-date { width: 120px; }
+.revision-history-table .revision-col-file { width: 190px; }
+.revision-history-table .revision-col-number { width: 105px; }
+.revision-history-table .revision-col-person { width: 165px; }
+.revision-history-table .revision-col-plant { width: 74px; }
+.revision-history-table .revision-col-department { width: 205px; }
+.revision-history-table .revision-col-summary { width: 180px; }
+.revision-history-table .revision-col-previous { width: 190px; }
+.revision-history-table th,
+.revision-history-table td {
+  padding-left: .85rem;
+  padding-right: .85rem;
+}
+.revision-history-table td {
+  height: 68px;
+  vertical-align: middle;
+}
+.revision-date,
+.revision-person {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: .2rem;
+}
+.revision-date span,
+.revision-date small {
+  white-space: nowrap;
+}
+.revision-date span {
+  color: var(--text-sub);
+  font-size: .78rem;
+}
+.revision-date small,
+.revision-person small {
+  overflow: hidden;
+  color: var(--text-dim);
+  font-size: .7rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.revision-person strong {
+  overflow: hidden;
+  color: var(--text);
+  font-size: .8rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.revision-number-pill {
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--accent);
+  background: rgba(240,165,0,.12);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.revision-file-name,
+.revision-cell-text {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: .76rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.revision-file-name {
+  color: var(--text-sub);
+  font-weight: 600;
+}
+.revision-previous-file {
+  font-weight: 400;
+}
 /* ─── Checkbox Wrapper ──────────────────────────────────────────────────── */
 .checkbox-wrapper {
   display: flex;
@@ -7790,4 +7869,119 @@ body.app-body {
   .dashboard-library-stats-grid,
   .approval-stats-grid,
   .library-overview-grid { grid-template-columns: 1fr; }
+}
+
+/* Readable document and approval record tables ------------------------- */
+.approval-records-table {
+  min-width: 1110px;
+  table-layout: fixed;
+}
+.approval-records-table .approval-col-date { width: 120px; }
+.approval-records-table .approval-col-file { width: 260px; }
+.approval-records-table .approval-col-plant { width: 75px; }
+.approval-records-table .approval-col-department { width: 220px; }
+.approval-records-table .approval-col-customer { width: 165px; }
+.approval-records-table .approval-col-status { width: 175px; }
+.approval-records-table .approval-col-review { width: 95px; }
+.approval-records-table th,
+.approval-records-table td {
+  padding-right: .85rem;
+  padding-left: .85rem;
+  vertical-align: middle;
+}
+.approval-records-table td {
+  height: 68px;
+}
+.approval-records-table .file-block {
+  min-width: 0;
+  white-space: normal;
+}
+.approval-records-table .file-cell {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: .4rem;
+}
+.approval-records-table .file-cell svg {
+  flex: 0 0 auto;
+  color: var(--text-dim);
+}
+.approval-records-table .file-cell strong,
+.dashboard-document-table .file-cell strong {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text);
+  font-size: .8rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.record-file-meta,
+.dashboard-file-meta {
+  margin-top: .22rem;
+  overflow: hidden;
+  font-size: .7rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.record-date {
+  font-size: .78rem;
+  white-space: nowrap;
+}
+.record-cell-clamp {
+  display: -webkit-box;
+  overflow: hidden;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.approval-records-table .plant-badge,
+.dashboard-document-table .plant-badge {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+}
+.approval-records-table .status-pill,
+.dashboard-document-table .status-pill {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dashboard-document-table {
+  min-width: 1180px;
+  table-layout: fixed;
+}
+.dashboard-document-table .col-serial { width: 5%; }
+.dashboard-document-table .col-file { width: 22%; }
+.dashboard-document-table .col-uploader { width: 12%; }
+.dashboard-document-table .col-plant { width: 7%; }
+.dashboard-document-table .col-department { width: 18%; }
+.dashboard-document-table .col-date { width: 10%; }
+.dashboard-document-table .col-status { width: 10%; }
+.dashboard-document-table .col-revision { width: 7%; }
+.dashboard-document-table .col-action { width: 9%; }
+.dashboard-document-table th,
+.dashboard-document-table td {
+  padding-right: .7rem;
+  padding-left: .7rem;
+}
+.dashboard-document-table td {
+  height: 70px;
+}
+.dashboard-document-table td:nth-child(6),
+.dashboard-document-table td:nth-child(8) {
+  white-space: nowrap;
+}
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  flex-wrap: wrap;
+}
+.dashboard-document-table .action-cell > .table-actions > * {
+  margin: 0;
 }

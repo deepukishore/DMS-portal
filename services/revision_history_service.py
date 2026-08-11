@@ -1,9 +1,21 @@
 from database import get_connection
 from datetime import datetime
+import os
+import re
 
 
 class RevisionHistoryService:
     """Manages document revision history tracking."""
+
+    _STORAGE_TIMESTAMP_RE = re.compile(r"_(?:\d{14}|\d{20})$")
+
+    @staticmethod
+    def _display_file_name(file_name):
+        """Hide the timestamp added internally to stored upload filenames."""
+        if not file_name:
+            return ""
+        base, extension = os.path.splitext(str(file_name))
+        return RevisionHistoryService._STORAGE_TIMESTAMP_RE.sub("", base) + extension
 
     @staticmethod
     def _version_rows(plant=None, department=None, document_id=None, file_name=None):
@@ -59,6 +71,10 @@ class RevisionHistoryService:
                 "id": f'version-{row["id"]}',
                 "document_id": row.get("document_id"),
                 "file_name": row.get("file_name"),
+                "display_file_name": (
+                    row.get("original_file_name")
+                    or RevisionHistoryService._display_file_name(row.get("file_name"))
+                ),
                 "revision_number": revision_number,
                 "revised_by": row.get("uploaded_by") or "Unknown",
                 "user_id": row.get("user_id") or "",
@@ -165,6 +181,15 @@ class RevisionHistoryService:
             )
             if key not in existing_keys:
                 revisions.append(version_revision)
+
+        for revision in revisions:
+            revision.setdefault(
+                "display_file_name",
+                RevisionHistoryService._display_file_name(revision.get("file_name")),
+            )
+            revision["display_previous_file_name"] = RevisionHistoryService._display_file_name(
+                revision.get("previous_file_name")
+            )
 
         return sorted(
             revisions,

@@ -9,7 +9,7 @@ people_bp = Blueprint("people", __name__)
 def index():
     if not AuthService.is_logged_in():
         return redirect(url_for("auth.login"))
-    if not AuthService.is_admin():
+    if not AuthService.has_high_level_access():
         return redirect(url_for("dashboard.index"))
 
     users = UserStoreService.get_all_users()

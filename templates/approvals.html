@@ -109,8 +109,17 @@
     </div>
   </div>
 
-  <div class="table-wrap table-wrap-rich">
-    <table class="data-table">
+  <div class="table-wrap table-wrap-rich approval-records-wrap">
+    <table class="data-table approval-records-table">
+      <colgroup>
+        <col class="approval-col-date" />
+        <col class="approval-col-file" />
+        <col class="approval-col-plant" />
+        <col class="approval-col-department" />
+        <col class="approval-col-customer" />
+        <col class="approval-col-status" />
+        <col class="approval-col-review" />
+      </colgroup>
       <thead>
         <tr>
           <th>Date</th>
@@ -126,20 +135,20 @@
         {% if page_records %}
           {% for r in page_records %}
           <tr data-doc-id="{{ r.id }}">
-            <td class="mono text-dim">{{ r.uploaded_at }}</td>
+            <td class="record-date text-dim">{{ r.uploaded_at }}</td>
             <td>
               <div class="file-block">
-                <div class="mono file-cell">
+                <div class="file-cell">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  {{ r.file_name }}
+                  <strong title="{{ r.original_file_name or r.file_name }}">{{ r.original_file_name or r.file_name }}</strong>
                 </div>
-                <div class="text-dim" style="font-size:.72rem;margin-top:.2rem">
+                <div class="text-dim record-file-meta">
                   {{ r.document_number or '—' }} · {{ r.revision_number or '—' }}{% if r.category %} · {{ r.category }}{% endif %}
                 </div>
               </div>
             </td>
             <td><span class="plant-badge" title="{{ r.plant | plant_code }}">{{ r.plant | plant_code }}</span></td>
-            <td>{{ r.department }}</td>
+            <td><span class="record-cell-clamp" title="{{ r.department }}">{{ r.department }}</span></td>
             <td>{{ badge(r.customer, true) }}</td>
             <td><span class="status-pill status-{{ r.approval_status|lower }}">{{ r.approval_status }}</span></td>
             <td><a href="{{ url_for('approvals.review_document', token=r.review_token) }}" class="btn-outline btn-sm">Review</a></td>

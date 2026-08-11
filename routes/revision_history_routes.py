@@ -2,6 +2,7 @@ import math
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session
 from services.auth_service import AuthService
 from services.revision_history_service import RevisionHistoryService
+from services.user_store_service import UserStoreService
 from data.mock_data import MASTER_RECORD_PLANTS
 
 revision_history_bp = Blueprint('revision_history', __name__)
@@ -52,6 +53,29 @@ def index():
     page_count = max(1, math.ceil(total / page_size))
     page = min(page, page_count)
     page_revisions = all_revisions[(page - 1) * page_size: page * page_size]
+
+    directory_users = UserStoreService.get_all_users()
+    users_by_email = {
+        (user.get('email') or '').strip().lower(): user
+        for user in directory_users
+        if (user.get('email') or '').strip()
+    }
+    users_by_id = {
+        (user.get('user_id') or '').strip().lower(): user
+        for user in directory_users
+        if (user.get('user_id') or '').strip()
+    }
+    for revision in page_revisions:
+        revised_by = (revision.get('revised_by') or 'Unknown').strip()
+        user_id = (revision.get('user_id') or '').strip().lower()
+        user = users_by_email.get(revised_by.lower()) or users_by_id.get(user_id)
+        revision['display_revised_by'] = user.get('name') if user else revised_by
+        revision['reviser_email'] = user.get('email', '') if user else (
+            revised_by if '@' in revised_by else ''
+        )
+        date_parts = str(revision.get('revision_date') or '').split(' ', 1)
+        revision['display_date'] = date_parts[0] if date_parts else ''
+        revision['display_time'] = date_parts[1] if len(date_parts) > 1 else ''
 
     return render_template('revision_history.html',
         revisions=page_revisions,

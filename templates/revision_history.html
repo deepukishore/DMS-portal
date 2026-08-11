@@ -70,16 +70,26 @@
   </div>
 </div>
 
-<div class="table-wrap table-wrap-rich">
-  <table class="data-table">
+<div class="table-wrap table-wrap-rich revision-history-wrap">
+  <table class="data-table revision-history-table">
+    <colgroup>
+      <col class="revision-col-date" />
+      <col class="revision-col-file" />
+      <col class="revision-col-number" />
+      <col class="revision-col-person" />
+      <col class="revision-col-plant" />
+      <col class="revision-col-department" />
+      <col class="revision-col-summary" />
+      <col class="revision-col-previous" />
+    </colgroup>
     <thead>
       <tr>
-        <th style="width:140px">Date</th>
+        <th>Date</th>
         <th>File Name</th>
-        <th style="width:90px">Revision</th>
-        <th style="width:140px">Revised By</th>
-        <th style="width:160px">Plant</th>
-        <th style="width:180px">Department</th>
+        <th>Revision</th>
+        <th>Revised By</th>
+        <th>Plant</th>
+        <th>Department</th>
         <th>Change Summary</th>
         <th>Previous Version</th>
       </tr>
@@ -88,14 +98,26 @@
       {% if revisions %}
         {% for rev in revisions %}
         <tr>
-          <td class="mono text-dim">{{ rev.revision_date }}</td>
-          <td class="mono" style="font-size:.75rem">{{ rev.file_name }}</td>
-          <td><span class="status-pill" style="background:rgba(240,165,0,.12);color:var(--accent)">{{ rev.revision_number }}</span></td>
-          <td>{{ rev.revised_by }}</td>
-          <td><span class="plant-badge">{{ rev.plant | plant_code if rev.plant else '—' }}</span></td>
-          <td>{{ rev.department or '—' }}</td>
-          <td class="text-dim" style="font-size:.78rem;max-width:260px">{{ rev.change_summary or '—' }}</td>
-          <td class="mono text-dim" style="font-size:.72rem">{{ rev.previous_file_name or '—' }}</td>
+          <td>
+            <time class="revision-date" datetime="{{ rev.revision_date }}">
+              <span>{{ rev.display_date }}</span>
+              {% if rev.display_time %}<small>{{ rev.display_time }}</small>{% endif %}
+            </time>
+          </td>
+          <td>
+            <span class="revision-file-name" title="{{ rev.display_file_name or rev.file_name }}">{{ rev.display_file_name or rev.file_name }}</span>
+          </td>
+          <td><span class="status-pill revision-number-pill">{{ rev.revision_number }}</span></td>
+          <td>
+            <span class="revision-person">
+              <strong>{{ rev.display_revised_by }}</strong>
+              {% if rev.reviser_email %}<small title="{{ rev.reviser_email }}">{{ rev.reviser_email }}</small>{% endif %}
+            </span>
+          </td>
+          <td>{% if rev.plant %}<span class="plant-badge">{{ rev.plant | plant_code }}</span>{% else %}<span class="text-dim">—</span>{% endif %}</td>
+          <td><span class="revision-cell-text" title="{{ rev.department or '' }}">{{ rev.department or '—' }}</span></td>
+          <td><span class="revision-cell-text text-dim" title="{{ rev.change_summary or '' }}">{{ rev.change_summary or '—' }}</span></td>
+          <td><span class="revision-file-name revision-previous-file text-dim" title="{{ rev.display_previous_file_name or '' }}">{{ rev.display_previous_file_name or '—' }}</span></td>
         </tr>
         {% endfor %}
       {% else %}

@@ -87,7 +87,7 @@
         <span><strong>System log</strong><small>Open the full activity audit trail</small></span><b aria-hidden="true">→</b>
       </a>
     {% endif %}
-    {% if is_admin_user %}
+    {% if can_access_admin_sections %}
       <a href="{{ url_for('people.index') }}" class="dashboard-command-card">
         <span class="dashboard-command-icon dashboard-command-icon-people" aria-hidden="true">◎</span>
         <span><strong>People and access</strong><small>View users, roles, and quality access levels</small></span><b aria-hidden="true">→</b>
@@ -227,7 +227,7 @@
     </div>
   </div>
 
-  <div class="table-wrap table-wrap-rich">
+  <div class="table-wrap table-wrap-rich document-table-wrap">
     <table class="data-table dashboard-document-table">
       <thead>
         <tr>
@@ -251,7 +251,7 @@
               <div class="file-block">
                 <div class="file-cell">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  <strong title="{{ r.file_name }}">{{ r.file_name }}</strong>
+                  <strong title="{{ r.original_file_name or r.file_name }}">{{ r.original_file_name or r.file_name }}</strong>
                 </div>
                 <div class="text-dim dashboard-file-meta">{{ r.document_number or 'No document number' }}{% if r.category %} | {{ dashboard_category_names.get(r.category, r.category) }}{% endif %}</div>
               </div>
@@ -263,13 +263,13 @@
               </div>
             </td>
             <td><span class="plant-badge" title="{{ r.plant | plant_code }}">{{ r.plant | plant_code }}</span></td>
-            <td>{{ r.department }}</td>
+            <td><span class="record-cell-clamp" title="{{ r.department }}">{{ r.department }}</span></td>
             <td class="mono text-dim">{{ r.uploaded_at }}</td>
             <td>
               <span class="status-pill status-{{ r.approval_status | lower }}" data-approval-status>{{ r.approval_status }}</span>
             </td>
             <td class="text-dim">{{ r.revision_number or 'Rev.00' }}</td>
-            <td class="action-cell">
+            <td class="action-cell"><div class="table-actions">
               <button class="btn-icon btn-bookmark" data-doc-id="{{ r.id }}" title="Add to bookmarks" onclick="toggleBookmark(event, {{ r.id }})">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="bookmark-icon"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
               </button>
@@ -289,7 +289,7 @@
                   </button>
                 </form>
               {% endif %}
-            </td>
+            </div></td>
           </tr>
           {% endfor %}
         {% else %}
