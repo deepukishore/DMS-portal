@@ -9,6 +9,7 @@ from services.mail_service import MailService
 from services.notification_service import NotificationService
 from services.system_log_service import SystemLogService
 from services.revision_history_service import RevisionHistoryService
+from data.departments import normalize_department
 
 upload_bp = Blueprint("upload", __name__)
 
@@ -42,11 +43,22 @@ def index():
         return redir
 
     current_user = AuthService.get_current_user()
+    can_choose_upload_scope = AuthService.can_upload_across_scope(current_user)
+    profile_plant = (current_user or {}).get("plant", "")
+    profile_department = normalize_department((current_user or {}).get("department", ""))
 
     if request.method == "POST":
-        # Allow overriding plant/department from the form selects; fall back to profile values
-        plant = request.form.get('plant') or (current_user or {}).get("plant", "")
-        department = request.form.get('department') or (current_user or {}).get("department", "")
+        requested_plant = request.form.get('plant') or profile_plant
+        requested_department = normalize_department(request.form.get('department') or profile_department)
+        if not can_choose_upload_scope and (
+            requested_plant != profile_plant or requested_department != profile_department
+        ):
+            return _upload_error(
+                "You can upload only to your assigned plant and department.",
+                status_code=403,
+            )
+        plant = requested_plant if can_choose_upload_scope else profile_plant
+        department = requested_department if can_choose_upload_scope else profile_department
         customer = request.form.get("customer", "")
         document_number = request.form.get("document_number", "").strip()
         is_revision = request.form.get("is_revision") == "on"
@@ -123,8 +135,6 @@ def index():
                         if match:
                             plant = match
                     if dept_candidate:
-                        from data.departments import normalize_department
-
                         nd = normalize_department(dept_candidate)
                         if nd:
                             department = nd
@@ -138,6 +148,16 @@ def index():
         except Exception:
             # Fail softly — do not block upload due to parsing issues
             pass
+
+        # Validate again after resolving any plant/department encoded in the
+        # selected library folder path.
+        if not can_choose_upload_scope and (
+            plant != profile_plant or normalize_department(department) != profile_department
+        ):
+            return _upload_error(
+                "You can upload only to your assigned plant and department.",
+                status_code=403,
+            )
 
         uploaded_count = 0
         email_failures = []
@@ -279,6 +299,7 @@ def index():
         library_data=library_data,
         PLANTS=PLANTS,
         DEPARTMENTS=DEPARTMENTS,
+        can_choose_upload_scope=can_choose_upload_scope,
     )
 
 

@@ -102,7 +102,7 @@
 
         <div class="form-row">
           <label>Plant
-            <select name="plant" id="plant-select">
+            <select name="plant" id="plant-select" {% if not can_choose_upload_scope %}disabled aria-describedby="upload-scope-note"{% endif %}>
               <option value="">Select plant</option>
               {% for p in PLANTS %}
                 <option value="{{ p.label }}" {% if current_user and current_user.plant == p.label %}selected{% endif %}>{{ p.label | plant_code }}</option>
@@ -113,7 +113,7 @@
 
         <div class="form-row">
           <label>Department
-            <select name="department" id="department-select">
+            <select name="department" id="department-select" {% if not can_choose_upload_scope %}disabled aria-describedby="upload-scope-note"{% endif %}>
               <option value="">Select department</option>
               {% for d in DEPARTMENTS %}
                 <option value="{{ d }}" {% if current_user and current_user.department == d %}selected{% endif %}>{{ d }}</option>
@@ -131,6 +131,10 @@
             </label>
           </div>
         </div>
+
+        {% if not can_choose_upload_scope %}
+          <p class="field-hint upload-scope-note" id="upload-scope-note">Uploads are limited to your assigned plant and department.</p>
+        {% endif %}
 
         <!-- Internal document toggle -->
         <div class="internal-toggle-row">

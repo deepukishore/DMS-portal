@@ -100,6 +100,17 @@ class AuthService:
         return session.get('user_qms_level', 'L4')
 
     @staticmethod
+    def can_upload_across_scope(user=None):
+        """Only Admin, L1, and L2 users may upload outside their profile scope."""
+        if user is None:
+            user = AuthService.get_current_user()
+        if not user:
+            return False
+        if user.get("role") == "Admin":
+            return True
+        return user.get("qms_level", session.get("user_qms_level", "L4")) in {"L1", "L2"}
+
+    @staticmethod
     def is_qms_first_approver(user=None):
         if user is None:
             user = AuthService.get_current_user()
