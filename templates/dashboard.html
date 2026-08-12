@@ -26,19 +26,13 @@
     </div>
   </div>
   <div class="dashboard-library-stats-grid">
-    {% set max_library_count = (library_stats | map(attribute='count') | max) if library_stats else 1 %}
     {% for item in library_stats %}
       <a href="{{ url_for('document_library.index', category_key=item.key) }}"
          class="dashboard-library-stat {% if item.folder_image %}has-folder-art{% endif %}"
          {% if item.folder_image %}style="--folder-bg:url('{{ url_for('static', filename=item.folder_image, v='20260804-2') }}')"{% endif %}
-         aria-label="Open {{ item.dashboard_label or item.label }}, {{ item.count }} approved files">
+         aria-label="Open {{ item.dashboard_label or item.label }}">
         <span class="dashboard-library-stat-copy">
           <small>{{ item.dashboard_label or item.label }}</small>
-          <strong>{{ item.count }}</strong>
-          <em>available file{{ '' if item.count == 1 else 's' }}</em>
-          <span class="dashboard-library-stat-bar" aria-hidden="true">
-            <i style="width: {{ (item.count * 100 / max_library_count) | round(1) }}%"></i>
-          </span>
         </span>
         <b aria-hidden="true">→</b>
       </a>
