@@ -49,6 +49,13 @@
       </div>
     </div>
     <div class="summary-card">
+      <div class="summary-icon">&#9208;</div>
+      <div class="summary-content">
+        <h3>Hold</h3>
+        <p class="summary-value">{{ stats.overall.hold }}</p>
+      </div>
+    </div>
+    <div class="summary-card">
       <div class="summary-icon">📅</div>
       <div class="summary-content">
         <h3>This Month</h3>
@@ -122,6 +129,10 @@
         <div class="stat-item pending">
           <span class="stat-label">Pending</span>
           <span class="stat-value">{{ stats.overall.pending }}</span>
+        </div>
+        <div class="stat-item hold">
+          <span class="stat-label">Hold</span>
+          <span class="stat-value">{{ stats.overall.hold }}</span>
         </div>
         <div class="stat-item rejected">
           <span class="stat-label">Rejected</span>
@@ -234,6 +245,7 @@ function cssVar(name) {
 
 const C_GREEN   = '#10b981';
 const C_AMBER   = '#f59e0b';
+const C_HOLD    = '#8b5cf6';
 const C_RED     = '#ef4444';
 const C_BLUE    = '#3b82f6';
 
@@ -260,10 +272,10 @@ function gridColor()  { return 'rgba(255,255,255,0.06)'; }
 new Chart(document.getElementById('overallChart'), {
   type: 'doughnut',
   data: {
-    labels: ['Approved', 'Pending', 'Rejected'],
+    labels: ['Approved', 'Pending', 'Hold', 'Rejected'],
     datasets: [{
-      data: [stats.overall.approved, stats.overall.pending, stats.overall.rejected],
-      backgroundColor: [C_GREEN, C_AMBER, C_RED],
+      data: [stats.overall.approved, stats.overall.pending, stats.overall.hold, stats.overall.rejected],
+      backgroundColor: [C_GREEN, C_AMBER, C_HOLD, C_RED],
       borderColor: 'transparent',
       borderWidth: 2,
       hoverOffset: 6,
@@ -298,6 +310,7 @@ new Chart(document.getElementById('plantChart'), {
     datasets: [
       { label: 'Approved', data: plantEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 4 },
       { label: 'Pending',  data: plantEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 4 },
+      { label: 'Hold',     data: plantEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 4 },
       { label: 'Rejected', data: plantEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 4 },
     ]
   },
@@ -324,6 +337,7 @@ new Chart(document.getElementById('customerChart'), {
     datasets: [
       { label: 'Approved', data: custEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 4 },
       { label: 'Pending',  data: custEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 4 },
+      { label: 'Hold',     data: custEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 4 },
       { label: 'Rejected', data: custEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 4 },
     ]
   },
@@ -349,6 +363,7 @@ new Chart(document.getElementById('departmentChart'), {
     datasets: [
       { label: 'Approved', data: deptEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 4 },
       { label: 'Pending',  data: deptEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 4 },
+      { label: 'Hold',     data: deptEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 4 },
       { label: 'Rejected', data: deptEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 4 },
     ]
   },

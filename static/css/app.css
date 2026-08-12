@@ -3168,6 +3168,15 @@ select:disabled {
   background: rgba(245, 158, 11, 0.1);
 }
 
+.stat-item.hold {
+  background: rgba(139, 92, 246, 0.05);
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.stat-item.hold:hover {
+  background: rgba(139, 92, 246, 0.1);
+}
+
 .stat-item.rejected {
   background: rgba(239, 68, 68, 0.05);
   border-color: rgba(239, 68, 68, 0.2);
@@ -7776,6 +7785,14 @@ body * {
   width: 100%;
   min-width: 0;
 }
+.auth-register-form .password-match-message {
+  grid-column: 1 / -1;
+  min-height: 1em;
+  font-size: .7rem;
+  font-weight: 600;
+}
+.auth-register-form .password-match-message.is-match { color: var(--green); }
+.auth-register-form .password-match-message.is-mismatch { color: var(--red); }
 .upload-form #library-secondary-row > label,
 .upload-form #library-tertiary-row > label,
 .upload-form #library-quaternary-row > label {

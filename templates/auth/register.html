@@ -75,7 +75,7 @@
           </label>
           <label>Password
             <div class="password-field-wrapper">
-              <input type="password" name="password" required placeholder="Min. 8 characters" autocomplete="new-password" />
+              <input type="password" name="password" id="register-password" required placeholder="Min. 8 characters" autocomplete="new-password" />
               <label class="password-toggle-label">
                 <input type="checkbox" class="password-toggle-checkbox" />
                 <span>Show password</span>
@@ -84,12 +84,13 @@
           </label>
           <label>Confirm password
             <div class="password-field-wrapper">
-              <input type="password" name="confirm_password" required placeholder="Repeat password" autocomplete="new-password" />
+              <input type="password" name="confirm_password" id="register-confirm-password" required placeholder="Repeat password" autocomplete="new-password" aria-describedby="password-match-message" />
               <label class="password-toggle-label">
                 <input type="checkbox" class="password-toggle-checkbox" />
                 <span>Show password</span>
               </label>
             </div>
+            <small id="password-match-message" class="password-match-message" aria-live="polite"></small>
           </label>
           <p class="auth-demo">New registrations are created with standard uploader access. Higher-level access is managed separately.</p>
           <button type="submit" class="btn-primary btn-full auth-submit">Create account <span aria-hidden="true">&#8594;</span></button>
@@ -101,5 +102,26 @@
     </div>
   </div>
   <script src="{{ url_for('static', filename='js/app.js', v='20260807-1') }}"></script>
+  <script>
+    const registrationPassword = document.getElementById('register-password');
+    const registrationConfirmation = document.getElementById('register-confirm-password');
+    const passwordMatchMessage = document.getElementById('password-match-message');
+
+    function updatePasswordMatchMessage() {
+      if (!registrationConfirmation.value) {
+        passwordMatchMessage.textContent = '';
+        passwordMatchMessage.className = 'password-match-message';
+        registrationConfirmation.setCustomValidity('');
+        return;
+      }
+      const matches = registrationPassword.value === registrationConfirmation.value;
+      passwordMatchMessage.textContent = matches ? 'Passwords match' : 'Passwords do not match';
+      passwordMatchMessage.className = `password-match-message ${matches ? 'is-match' : 'is-mismatch'}`;
+      registrationConfirmation.setCustomValidity(matches ? '' : 'Passwords do not match');
+    }
+
+    registrationPassword.addEventListener('input', updatePasswordMatchMessage);
+    registrationConfirmation.addEventListener('input', updatePasswordMatchMessage);
+  </script>
 </body>
 </html>

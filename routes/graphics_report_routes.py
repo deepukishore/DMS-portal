@@ -21,7 +21,10 @@ def _require_login():
 
 def _add_status_count(bucket, record):
     status = record.get("approval_status") or "Pending"
-    if DocumentService.is_pending_status(status):
+    if status == "Hold":
+        bucket["hold"] += 1
+        return
+    if status in {"Pending", "Pending Final Approval"}:
         bucket["pending"] += 1
         return
     status_key = str(status).strip().lower()
@@ -48,7 +51,8 @@ def _get_statistics(records=None):
 
     total     = len(records)
     approved  = sum(1 for r in records if r.get("approval_status") == "Approved")
-    pending   = DocumentService.count_pending(records)
+    pending   = sum(1 for r in records if (r.get("approval_status") or "Pending") in {"Pending", "Pending Final Approval"})
+    hold      = sum(1 for r in records if r.get("approval_status") == "Hold")
     rejected  = sum(1 for r in records if r.get("approval_status") == "Rejected")
 
     this_month = 0
@@ -67,7 +71,7 @@ def _get_statistics(records=None):
     plant_stats = {}
     for r in records:
         plant = r.get("plant", "Unknown")
-        s = plant_stats.setdefault(plant, {"total": 0, "approved": 0, "pending": 0, "rejected": 0})
+        s = plant_stats.setdefault(plant, {"total": 0, "approved": 0, "pending": 0, "hold": 0, "rejected": 0})
         s["total"] += 1
         _add_status_count(s, r)
 
@@ -75,7 +79,7 @@ def _get_statistics(records=None):
     customer_stats = {}
     for r in records:
         cust = r.get("customer", "Unknown")
-        s = customer_stats.setdefault(cust, {"total": 0, "approved": 0, "pending": 0, "rejected": 0})
+        s = customer_stats.setdefault(cust, {"total": 0, "approved": 0, "pending": 0, "hold": 0, "rejected": 0})
         s["total"] += 1
         _add_status_count(s, r)
 
@@ -83,7 +87,7 @@ def _get_statistics(records=None):
     dept_stats = {}
     for r in records:
         dept = r.get("department", "Unknown")
-        s = dept_stats.setdefault(dept, {"total": 0, "approved": 0, "pending": 0, "rejected": 0})
+        s = dept_stats.setdefault(dept, {"total": 0, "approved": 0, "pending": 0, "hold": 0, "rejected": 0})
         s["total"] += 1
         _add_status_count(s, r)
 
@@ -92,6 +96,7 @@ def _get_statistics(records=None):
             "total":      total,
             "approved":   approved,
             "pending":    pending,
+            "hold":       hold,
             "rejected":   rejected,
             "this_month": this_month,
             "this_week":  this_week,
