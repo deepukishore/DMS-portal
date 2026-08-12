@@ -13,6 +13,7 @@ from data.departments import (
     normalize_records,
     normalize_user_map,
 )
+from data.document_categories import categorize_document_records
 
 
 USERS = {
@@ -255,6 +256,7 @@ DASHBOARD_RECORDS = [
         "department": "Quality",
         "customer": "Internal",
         "file_name": "inspection_report_0420.pdf",
+        "category": "qms",
         "uploaded_at": "2026-04-20",
         "approval_status": "Approved",
     },
@@ -267,6 +269,7 @@ DASHBOARD_RECORDS = [
         "department": "Production",
         "customer": "Tata Motors",
         "file_name": "assembly_line_report.xlsx",
+        "category": "csr",
         "uploaded_at": "2026-04-19",
         "approval_status": "Pending",
     },
@@ -279,6 +282,7 @@ DASHBOARD_RECORDS = [
         "department": "Engineering",
         "customer": "Hyundai Motors",
         "file_name": "cad_revision_summary.pdf",
+        "category": "csr",
         "uploaded_at": "2026-04-18",
         "approval_status": "Approved",
     },
@@ -291,6 +295,7 @@ DASHBOARD_RECORDS = [
         "department": "Safety",
         "customer": "TVS Motors",
         "file_name": "safety_audit_report.pdf",
+        "category": "eohms",
         "uploaded_at": "2026-04-17",
         "approval_status": "Rejected",
     },
@@ -303,6 +308,7 @@ DASHBOARD_RECORDS = [
         "department": "Manufacturing",
         "customer": "Ashok Leyland",
         "file_name": "production_schedule_april.xlsx",
+        "category": "csr",
         "uploaded_at": "2026-04-16",
         "approval_status": "Pending",
     },
@@ -315,6 +321,7 @@ DASHBOARD_RECORDS = [
         "department": "Maintenance",
         "customer": "Internal",
         "file_name": "preventive_maintenance_log.pdf",
+        "category": "qms",
         "uploaded_at": "2026-04-15",
         "approval_status": "Approved",
     },
@@ -327,6 +334,7 @@ DASHBOARD_RECORDS = [
         "department": "Procurement",
         "customer": "Tata Motors",
         "file_name": "vendor_contracts_q2.pdf",
+        "category": "csr",
         "uploaded_at": "2026-04-14",
         "approval_status": "Pending",
     },
@@ -538,7 +546,9 @@ UPLOAD_LOGS = [
 
 USERS = normalize_user_map(USERS)
 CUSTOMER_RECORDS = normalize_customer_keys(CUSTOMER_RECORDS)
-DASHBOARD_RECORDS = normalize_customer_records(normalize_records(DASHBOARD_RECORDS))
+DASHBOARD_RECORDS = categorize_document_records(
+    normalize_customer_records(normalize_records(DASHBOARD_RECORDS))
+)
 ARCHIVE_RECORDS = normalize_customer_records(normalize_records(ARCHIVE_RECORDS))
 PLANT_ASSETS = normalize_nested_department_keys(PLANT_ASSETS)
 UPLOAD_LOGS = normalize_records(UPLOAD_LOGS)

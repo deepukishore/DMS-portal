@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 import sqlite3
 from data.customers import normalize_customer_records
 from data.departments import normalize_records
+from data.document_categories import categorize_document_records
 from werkzeug.security import generate_password_hash
 from database import get_connection
 
@@ -768,7 +769,9 @@ def seed_documents():
             "approval_updated_at": (base_date + timedelta(days=0)).strftime("%Y-%m-%d"),
         },
     ]
-    documents = normalize_customer_records(normalize_records(documents))
+    documents = categorize_document_records(
+        normalize_customer_records(normalize_records(documents))
+    )
     
     conn = get_connection()
     cursor = conn.cursor()
@@ -781,11 +784,11 @@ def seed_documents():
         if not cursor.fetchone():
             cursor.execute('''
                 INSERT INTO documents 
-                (name, user_id, uploader_email, plant, department, customer, file_name, uploaded_at, approval_status, approval_updated_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (name, user_id, uploader_email, plant, department, customer, file_name, uploaded_at, approval_status, approval_updated_at, category)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (doc['name'], doc['user_id'], doc['uploader_email'], doc['plant'],
                   doc['department'], doc['customer'], doc['file_name'], doc['uploaded_at'],
-                  doc['approval_status'], doc['approval_updated_at']))
+                  doc['approval_status'], doc['approval_updated_at'], doc['category']))
             print(f"[+] Created document: {doc['file_name']} - Status: {doc['approval_status']}")
     
     conn.commit()

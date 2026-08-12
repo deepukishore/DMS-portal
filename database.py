@@ -4,6 +4,7 @@ import sqlite3
 
 from data.customers import LEGACY_CUSTOMER_MAP
 from data.departments import LEGACY_DEPARTMENT_MAP
+from data.document_categories import infer_document_category
 
 
 _DATABASE_CONFIG = {
@@ -630,6 +631,23 @@ def _migrate_plants(cursor):
     )
 
 
+def _migrate_document_categories(cursor):
+    """Assign every legacy document to a real Document Library category."""
+    cursor.execute(
+        """SELECT id, category, file_name, original_file_name,
+                  document_number, department, customer
+           FROM documents"""
+    )
+    for row in cursor.fetchall():
+        record = dict(row)
+        category = infer_document_category(record)
+        if category != (record.get("category") or ""):
+            cursor.execute(
+                "UPDATE documents SET category = ? WHERE id = ?",
+                (category, record["id"]),
+            )
+
+
 def init_db():
     """Create and update the selected database schema."""
     if is_mysql():
@@ -644,6 +662,7 @@ def init_db():
         _migrate_departments(cursor)
         _migrate_customers(cursor)
         _migrate_plants(cursor)
+        _migrate_document_categories(cursor)
         connection.commit()
     except Exception:
         connection.rollback()

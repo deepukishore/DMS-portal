@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 
 from data.customers import customer_query_values, normalize_customer
 from data.departments import normalize_department
+from data.document_categories import infer_document_category
 from database import get_connection
 from services.pdf_conversion_service import convert_to_pdf, is_allowed_file
 
@@ -50,6 +51,7 @@ class DocumentService:
     def _normalize_record(record):
         record["department"] = normalize_department(record.get("department", ""))
         record["customer"] = normalize_customer(record.get("customer", ""))
+        record["category"] = infer_document_category(record)
         return record
 
     @staticmethod

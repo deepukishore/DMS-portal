@@ -8,6 +8,7 @@ from services.document_tracking_service import DocumentTrackingService
 from data.mock_data import DASHBOARD_RECORDS, PLANTS
 from data.departments import OFFICIAL_DEPARTMENTS
 from data.customers import OFFICIAL_CUSTOMERS
+from data.document_categories import infer_document_category
 
 graphics_report_bp = Blueprint("graphics_report", __name__)
 
@@ -28,13 +29,18 @@ def _add_status_count(bucket, record):
         bucket[status_key] += 1
 
 
-def _get_statistics():
+def _get_records():
     visible_department = AuthService.get_visible_department()
     records = DocumentService.get_all_documents(access_department=visible_department)
     if not records:
         records = DASHBOARD_RECORDS
         if visible_department:
             records = [r for r in records if r.get("department") == visible_department]
+    return records
+
+
+def _get_statistics(records=None):
+    records = records if records is not None else _get_records()
 
     now = datetime.now()
     month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
@@ -107,53 +113,36 @@ def index():
     if redir:
         return redir
 
-    stats = _get_statistics()
+    records = _get_records()
+    stats = _get_statistics(records)
     visible_department = AuthService.get_visible_department()
     trend_data = DocumentTrackingService.get_upload_trend_data(
         days=90, access_department=visible_department
     )
 
-    # Document library statistics and breakdown per category / subfolder
-    def _collect_library_breakdown():
-        breakdown = {}
-        qms_level = AuthService.get_qms_level() if hasattr(AuthService, 'get_qms_level') else ''
-        categories = DocumentLibraryService.get_categories()
-        for cat in categories:
-            key = cat.get('key')
-            label = cat.get('label')
-            data = DocumentLibraryService.get_client_category_data(key, qms_level=qms_level, access_department=visible_department)
-            total = len(DocumentLibraryService._collect_document_files(data))
-            entry = {'label': label, 'total': total, 'breakdown': {}}
+    # Count the same document records used by the dashboard table. The previous
+    # report counted static catalogue entries, which produced 178 versus the
+    # actual 78 document records.
+    categories = {
+        category["key"]: category["label"]
+        for category in DocumentLibraryService.get_categories()
+    }
+    library_stats = {
+        key: {"label": label, "total": 0, "breakdown": {}}
+        for key, label in categories.items()
+    }
+    for record in records:
+        category_key = infer_document_category(record)
+        label = categories[category_key]
+        entry = library_stats.setdefault(
+            category_key,
+            {"label": label, "total": 0, "breakdown": {}},
+        )
+        entry["total"] += 1
 
-            # QMS: show groups and subfolders
-            if key == 'qms':
-                groups = data.get('document_groups', {})
-                for gk, gv in groups.items():
-                    gcount = len(DocumentLibraryService._collect_document_files(gv))
-                    sub = {'label': gv.get('label') or gk, 'total': gcount, 'subfolders': {}}
-                    sec = gv.get('secondary_options') or gv.get('plant_departments') or {}
-                    if sec:
-                        for sk, sv in sec.items():
-                            scount = len(DocumentLibraryService._collect_document_files(sv))
-                            sub['subfolders'][sk] = {'label': sv.get('label') or sk, 'total': scount}
-                    entry['breakdown'][gk] = sub
-
-            # primary_options style categories (CSR, Core tools, Awards)
-            elif 'primary_options' in data:
-                opts = data.get('primary_options', {})
-                for pk, pv in opts.items():
-                    pcount = len(DocumentLibraryService._collect_document_files(pv))
-                    entry['breakdown'][pk] = {'label': pv.get('label') or pk, 'total': pcount}
-
-            # flat categories with files only
-            else:
-                # no extra breakdown
-                pass
-
-            breakdown[key] = entry
-        return breakdown
-
-    library_stats = _collect_library_breakdown()
+    library_stats = dict(
+        sorted(library_stats.items(), key=lambda item: item[1]["label"].lower())
+    )
 
     return render_template(
         "graphics_report.html",
