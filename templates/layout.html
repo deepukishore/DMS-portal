@@ -115,7 +115,7 @@
     <div class="welcome-modal-box">
       <button type="button" class="modal-close" id="welcome-close" aria-label="Close welcome message">×</button>
       <div class="welcome-modal-copy">
-        <p class="eyebrow">Welcome back</p>
+        <p class="eyebrow">{{ 'Welcome' if welcome_is_new_user | default(false) else 'Welcome back' }}</p>
         <h2>Welcome, <strong>{{ session.get('user_name', 'User') }}</strong></h2>
         <p class="page-sub">Your document overview is ready. Use quick actions or filters to find the files you need.</p>
       </div>

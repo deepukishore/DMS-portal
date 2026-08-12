@@ -16,13 +16,12 @@
     <section class="auth-panel-left" aria-labelledby="system-title">
       <div class="login-brand-lockup">
         <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="ZF Rane" class="login-company-logo" />
-        <span class="login-location">SGD</span>
       </div>
 
       <div class="login-hero-copy">
         <p class="login-eyebrow">Secure. Controlled. Traceable.</p>
         <h1 id="system-title">Document<br />Management System</h1>
-        <p class="login-company-name">ZF Rane Automotive India PVT LTD, SGD</p>
+        <p class="login-company-name">ZF Rane Automotive India PVT LTD</p>
         <p class="login-description">A single, reliable workspace for controlled documents, approvals, revisions, and records.</p>
       </div>
 
@@ -41,7 +40,7 @@
       <div class="auth-card">
         <div class="auth-card-kicker">Employee access</div>
         <h2>Sign in</h2>
-        <p class="auth-sub">Use your GENID or registered email to continue.</p>
+        <p class="auth-sub">Use your GEN ID or registered email to continue.</p>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}{% for cat, msg in messages %}
@@ -51,7 +50,7 @@
 
         <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
           <input type="hidden" name="next" value="{{ next_url }}" />
-          <label>GENID or email
+          <label>GEN ID or email
             <input type="text" name="email" required placeholder="e.g. EMP001 or you@example.com" autocomplete="email" />
           </label>
           <label>Password

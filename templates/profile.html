@@ -65,17 +65,20 @@
         <h2 class="section-title">Profile Information</h2>
         <p class="section-sub">Your account details and assigned plant/department.</p>
       </div>
+      <button type="button" id="edit-profile-button" class="btn-outline" aria-controls="profile-info-form" aria-expanded="false" onclick="toggleProfileEdit(true)">
+        Edit Profile
+      </button>
     </div>
 
-    <form method="POST" action="{{ url_for('profile.update_profile') }}" class="profile-info">
+    <form method="POST" action="{{ url_for('profile.update_profile') }}" class="profile-info" id="profile-info-form">
       <div class="profile-fields-grid">
         <label class="profile-field">Full Name
-          <input type="text" value="{{ current_user.name }}" readonly class="readonly-field" />
+          <input type="text" name="name" value="{{ current_user.name }}" required readonly class="readonly-field" data-profile-editable />
         </label>
         <label class="profile-field">Email
           <input type="text" value="{{ current_user.email }}" readonly class="readonly-field" />
         </label>
-        <label class="profile-field">Employee ID / GENID
+        <label class="profile-field">Employee ID / GEN ID
           <input type="text" value="{{ current_user.emp_id }}" readonly class="readonly-field" />
         </label>
         <label class="profile-field">Role
@@ -88,11 +91,12 @@
           <input type="text" value="{{ current_user.department }}" readonly class="readonly-field" />
         </label>
         <label class="profile-field">Mobile Number
-          <input type="tel" name="mobile" value="{{ current_user.mobile or session.get('user_mobile', '') }}" placeholder="Enter mobile number" autocomplete="tel" />
+          <input type="tel" name="mobile" value="{{ current_user.mobile or session.get('user_mobile', '') }}" placeholder="Enter mobile number" autocomplete="tel" readonly class="readonly-field" data-profile-editable />
         </label>
       </div>
-      <div class="profile-form-actions">
-        <button type="submit" class="btn-primary">Save Mobile Number</button>
+      <div class="profile-form-actions" id="profile-form-actions" hidden>
+        <button type="submit" class="btn-primary">Save Changes</button>
+        <button type="button" class="btn-outline" onclick="toggleProfileEdit(false)">Cancel</button>
       </div>
     </form>
 
@@ -176,6 +180,29 @@
 
 {% block scripts %}
 <script>
+function toggleProfileEdit(shouldEdit) {
+  const form = document.getElementById('profile-info-form');
+  const editButton = document.getElementById('edit-profile-button');
+  const actions = document.getElementById('profile-form-actions');
+  const editableFields = form.querySelectorAll('[data-profile-editable]');
+
+  if (!shouldEdit) {
+    form.reset();
+  }
+
+  editableFields.forEach((field) => {
+    field.readOnly = !shouldEdit;
+    field.classList.toggle('readonly-field', !shouldEdit);
+  });
+  actions.hidden = !shouldEdit;
+  editButton.hidden = shouldEdit;
+  editButton.setAttribute('aria-expanded', String(shouldEdit));
+
+  if (shouldEdit) {
+    editableFields[0]?.focus();
+  }
+}
+
 function togglePasswordForm() {
   const form = document.getElementById('password-form');
   const btn = document.getElementById('toggle-password-form');

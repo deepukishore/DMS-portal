@@ -30,11 +30,11 @@ def login():
         user = None
         error = None
         
-        # Check if credential looks like a GENID (alphanumeric, typically starts with EMP)
+        # Check if credential looks like a GEN ID (alphanumeric, typically starts with EMP)
         if credential and not '@' in credential:
             user, error = AuthService.login_by_genid(credential, password)
         
-        # If GENID login failed or credential has @, try email login
+        # If GEN ID login failed or credential has @, try email login
         if not user and '@' in credential:
             user, error = AuthService.login(credential, password)
         elif not user and not error:
@@ -44,6 +44,9 @@ def login():
             ip = request.remote_addr or "-"
             SystemLogService.log_login(user["email"], user["name"], ip)
             session['show_welcome'] = True
+            session['welcome_is_new_user'] = (
+                session.pop('new_user_email', '').lower() == user["email"].lower()
+            )
             return redirect(next_url)
         flash(error or "Invalid credentials", "error")
     return render_template("auth/login.html", next_url=next_url)
@@ -68,6 +71,7 @@ def register():
         if user:
             ip = request.remote_addr or "-"
             SystemLogService.log_register(user["email"], user["name"], ip)
+            session['new_user_email'] = user["email"]
             flash("Account created! Please log in.", "success")
             return redirect(url_for("auth.login"))
         flash(error, "error")

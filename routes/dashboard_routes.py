@@ -171,18 +171,10 @@ def index():
         qms_level=AuthService.get_qms_level(),
         access_department=visible_department,
     )
-    library_total = sum(item["count"] for item in library_stats)
-    plant_library_total = sum(
-        item["count"] for item in library_stats
-        if item["key"] in {"qms", "core_tools_manuals", "eohms", "awards_certifications"}
-    )
-    customer_library_total = sum(
-        item["count"] for item in library_stats
-        if item["key"] in {"csr", "customer_score_card"}
-    )
     
     # Pop the one-time welcome flag set on login
     show_welcome = session.pop('show_welcome', False)
+    welcome_is_new_user = session.pop('welcome_is_new_user', False)
     
     # Get user data for recently viewed and bookmarks
     user_email = session.get('user_email', '')
@@ -215,12 +207,10 @@ def index():
         department_counts=department_counts,
         daily_trend=daily_trend,
         library_stats=library_stats,
-        library_total=library_total,
-        plant_library_total=plant_library_total,
-        customer_library_total=customer_library_total,
         recently_viewed=recently_viewed,
         bookmarks=bookmarks,
         show_welcome=show_welcome,
+        welcome_is_new_user=welcome_is_new_user,
     )
 
 

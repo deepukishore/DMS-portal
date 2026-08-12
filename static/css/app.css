@@ -2340,8 +2340,13 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 
 .profile-form-actions {
   display: flex;
+  gap: .75rem;
   justify-content: flex-end;
   padding-top: .15rem;
+}
+
+.profile-form-actions[hidden] {
+  display: none;
 }
 
 .profile-password-section {
@@ -6719,7 +6724,6 @@ textarea:focus {
   flex-wrap: wrap;
   gap: .5rem;
 }
-.dashboard-library-totals span,
 .dashboard-library-totals a {
   display: inline-flex;
   align-items: center;
@@ -6734,7 +6738,6 @@ textarea:focus {
   text-decoration: none;
   box-shadow: 0 5px 14px rgba(0, 45, 72, .045);
 }
-.dashboard-library-totals strong { color: var(--text); font-size: .82rem; }
 .dashboard-library-totals a {
   color: #fff;
   border-color: transparent;
@@ -7065,7 +7068,6 @@ html[data-theme="light"] .customer-card[data-customer-name] .plant-card-arrow {
   .dashboard-search-panel { margin-bottom: 1.5rem; }
   .dashboard-library-stats-grid { grid-template-columns: 1fr; }
   .dashboard-library-stat { min-height: 104px; }
-  .dashboard-library-totals span,
   .dashboard-library-totals a { flex: 1 1 auto; justify-content: center; }
 }
 

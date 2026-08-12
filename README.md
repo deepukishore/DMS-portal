@@ -3,7 +3,7 @@
 Smart DMS is the current Flask-based document management portal used for document upload, approval, library browsing, records access, reporting, and audit logging.
 
 ## What the app does
-- Supports user login with email or employee ID (GENID)
+- Supports user login with email or employee ID (GEN ID)
 - Allows document upload with metadata and approval workflow
 - Provides a dashboard for search, filtering, status tracking, bookmarks, and recent documents
 - Includes approval review pages for first-stage and final-stage review

@@ -39,7 +39,7 @@ class AuthService:
         if user and check_password_hash(user['password_hash'], password):
             AuthService._set_session(user)
             return user, None
-        return None, 'Invalid GENID or password.'
+        return None, 'Invalid GEN ID or password.'
 
     @staticmethod
     def logout():

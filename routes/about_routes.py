@@ -127,7 +127,7 @@ TRACK_MY_DOCS = {
     "workflow": [
         {
             "title": "Sign in or register",
-            "description": "Use your GENID or email credentials. New users register with plant and department details before access is assigned.",
+            "description": "Use your GEN ID or email credentials. New users register with plant and department details before access is assigned.",
         },
         {
             "title": "Upload to the right library path",

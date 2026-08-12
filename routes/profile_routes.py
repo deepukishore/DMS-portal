@@ -64,16 +64,23 @@ def update_profile():
     if redir:
         return redir
 
+    name = request.form.get("name", "").strip()
     mobile = request.form.get("mobile", "").strip()
+    if not name:
+        flash("Full name is required.", "error")
+        return redirect(url_for("profile.index"))
+
     if mobile and not re.match(r'^[0-9()+\-\s]{6,20}$', mobile):
         flash("Please enter a valid mobile number using digits, +, -, spaces, or parentheses.", "error")
         return redirect(url_for("profile.index"))
 
     updated_user = UserStoreService.update_user_profile(
         session["user_email"],
+        name=name,
         mobile=mobile,
     )
     if updated_user:
+        session["user_name"] = updated_user.get("name", name)
         session["user_mobile"] = updated_user.get("mobile", "")
 
     flash("Profile updated successfully.", "success")
