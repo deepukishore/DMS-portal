@@ -66,6 +66,7 @@ CATEGORY_ALIASES = {
     "certification": {"key": "awards_certifications", "primary": "certifications"},
     # Keep old bookmarks working while presenting IATF Audit inside QMS.
     "audit_nc": {"key": "qms", "secondary": "iatf_audit"},
+    "iatf_manual": {"key": "qms", "secondary": "iatf_manual"},
     # Keep older bookmarks routed to the main QMS library when the standalone plant-wise view is removed.
     "master_records": {"key": "qms"},
 }
@@ -97,6 +98,14 @@ QMS_DOCUMENT_GROUPS = {
             "quality_manual_master_index.pdf",
             "qms_quality_policy_manual.pdf",
             "quality_manual_revision_register.xlsx",
+        ],
+    },
+    "iatf_manual": {
+        "label": "IATF Manual",
+        "description": "IATF quality management system manual and references.",
+        "files": [
+            "iatf_16949_manual.pdf",
+            "iatf_requirements_reference.pdf",
         ],
     },
     "business_procedures": {
@@ -480,14 +489,6 @@ LIBRARY_DATA = {
                 "files": [
                     "cp_control_plan_manual.pdf",
                     "cp_control_plan_template.xlsx",
-                ],
-            },
-            "iatf_manual": {
-                "label": "IATF Manual",
-                "description": "IATF quality management system manual and references.",
-                "files": [
-                    "iatf_16949_manual.pdf",
-                    "iatf_requirements_reference.pdf",
                 ],
             },
         },

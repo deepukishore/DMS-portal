@@ -52,12 +52,11 @@ class DocumentLibraryService:
             ("apqp", "apqp"),
             ("spc", "spc"),
             ("control_plan", "cp"),
-            ("iatf", "iatf_manual"),
         )
         for marker, folder_key in folder_markers:
             if marker in normalized:
                 return folder_key
-        return "iatf_manual"
+        return "ppap"
 
     @staticmethod
     def _order_customer_mappings(node):
@@ -89,14 +88,30 @@ class DocumentLibraryService:
                 department=access_department,
                 approved_only=True,
             )
+            legacy_iatf_records = [
+                record
+                for record in CategoryDocumentService.get_file_records_for_category(
+                    "core_tools_manuals",
+                    department=access_department,
+                    approved_only=True,
+                )
+                if (record.get("sub_category") or "").split(":", 1)[0] == "iatf_manual"
+            ]
         else:
             legacy_audit_records = []
+            legacy_iatf_records = []
         if not uploaded:
-            if not legacy_audit_records:
+            if not legacy_audit_records and not legacy_iatf_records:
                 return data
 
         if category_key == "qms":
             groups = data.get("document_groups", {})
+            iatf_manual_files = groups.get("iatf_manual", {}).setdefault("files", [])
+            for record in legacy_iatf_records:
+                DocumentLibraryService._append_unique(
+                    iatf_manual_files,
+                    record.get("file_name"),
+                )
             for record in uploaded:
                 sub_category = record.get("sub_category") or ""
                 path_parts = [part for part in sub_category.split(":") if part]

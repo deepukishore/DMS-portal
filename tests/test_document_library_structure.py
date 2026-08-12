@@ -17,3 +17,11 @@ def test_qms_sops_and_records_use_plant_and_department_structure():
         for plant, plant_data in group["plant_departments"].items():
             assert plant_data.get("departments"), f"{key} should define departments for {plant}"
             assert plant_data.get("files"), f"{key} should define files for {plant}"
+
+
+def test_iatf_manual_is_under_qms_not_core_tools():
+    qms_data = DocumentLibraryService.get_client_category_data("qms", qms_level="L1")
+    core_tools_data = DocumentLibraryService.get_client_category_data("core_tools_manuals")
+
+    assert qms_data["document_groups"]["iatf_manual"]["label"] == "IATF Manual"
+    assert "iatf_manual" not in core_tools_data["primary_options"]

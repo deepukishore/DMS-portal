@@ -648,6 +648,25 @@ def _migrate_document_categories(cursor):
             )
 
 
+def _migrate_iatf_manual_to_qms(cursor):
+    """Move legacy Core Tools/IATF Manual uploads into the QMS folder."""
+    cursor.execute(
+        """UPDATE documents
+           SET category = 'qms'
+           WHERE file_name IN (
+               SELECT file_name FROM category_documents
+               WHERE category = 'core_tools_manuals'
+                 AND (sub_category = 'iatf_manual' OR sub_category LIKE 'iatf_manual:%')
+           )"""
+    )
+    cursor.execute(
+        """UPDATE category_documents
+           SET category = 'qms', sub_category = 'iatf_manual'
+           WHERE category = 'core_tools_manuals'
+             AND (sub_category = 'iatf_manual' OR sub_category LIKE 'iatf_manual:%')"""
+    )
+
+
 def init_db():
     """Create and update the selected database schema."""
     if is_mysql():
@@ -663,6 +682,7 @@ def init_db():
         _migrate_customers(cursor)
         _migrate_plants(cursor)
         _migrate_document_categories(cursor)
+        _migrate_iatf_manual_to_qms(cursor)
         connection.commit()
     except Exception:
         connection.rollback()
