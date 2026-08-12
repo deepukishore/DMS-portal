@@ -184,8 +184,7 @@ function createOptionGrid(options, onSelect) {
     card.innerHTML = `
       <div class="proc-type-header">${option.label}</div>
       <p class="proc-type-desc">${option.description || ''}</p>
-      ${option.meta ? `<p class="proc-type-desc"><strong>${option.meta}</strong></p>` : ''}
-      <span class="proc-type-cta">Browse documents</span>`;
+      ${option.meta ? `<p class="proc-type-desc"><strong>${option.meta}</strong></p>` : ''}`;
     card.addEventListener('click', () => runAndNavigate(onSelect, option.key));
     grid.appendChild(card);
   });
