@@ -49,7 +49,8 @@ def index():
         department = request.form.get('department') or (current_user or {}).get("department", "")
         customer = request.form.get("customer", "")
         document_number = request.form.get("document_number", "").strip()
-        revision_number = request.form.get("revision_number", "").strip()
+        is_revision = request.form.get("is_revision") == "on"
+        revision_number = request.form.get("revision_number", "").strip() if is_revision else ""
         category = request.form.get("category", "").strip()
         doc_type = request.form.get("doc_type", "external")
         files = request.files.getlist("files")

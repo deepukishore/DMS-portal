@@ -95,8 +95,8 @@
           <label>Document Number <span class="field-required">*</span>
             <input type="text" name="document_number" id="document-number-input" required placeholder="e.g. DOC-2026-014" />
           </label>
-          <label>Revision Number <span class="field-hint">(optional)</span>
-            <input type="text" name="revision_number" id="revision_number_input" placeholder="e.g. Rev.01 — fill if this is a revised document" />
+          <label>Revision Number <span class="field-hint">(enable by selecting Revised)</span>
+            <input type="text" name="revision_number" id="revision_number_input" placeholder="e.g. Rev.01" disabled />
           </label>
         </div>
 
@@ -213,7 +213,7 @@
           <label class="toggle-switch-label" style="margin-left:auto;flex-shrink:0;">
             <input type="checkbox" id="is_revision_checkbox" name="is_revision" />
             <span class="toggle-switch"></span>
-            <span>Add summary</span>
+            <span>Revised</span>
           </label>
         </div>
         <div id="revision-fields" style="display:none; margin-top:.75rem;">

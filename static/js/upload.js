@@ -652,11 +652,22 @@ customerSelect?.addEventListener('change', updateLibraryPath);
 plantSelect?.addEventListener('change', updateLibraryPath);
 deptSelect?.addEventListener('change', updateLibraryPath);
 
+function updateRevisionUI() {
+  const isRevised = Boolean(isRevisionCb?.checked);
+  if (revisionFields) revisionFields.style.display = isRevised ? 'block' : 'none';
+  if (revNumInput) {
+    revNumInput.disabled = !isRevised;
+    if (!isRevised) revNumInput.value = '';
+  }
+  if (!isRevised) {
+    const summaryInput = document.getElementById('change_summary_input');
+    if (summaryInput) summaryInput.value = '';
+  }
+}
+
 if (isRevisionCb) {
-  isRevisionCb.addEventListener('change', () => {
-    revisionFields.style.display = isRevisionCb.checked ? 'block' : 'none';
-    if (!isRevisionCb.checked) document.getElementById('change_summary_input').value = '';
-  });
+  isRevisionCb.addEventListener('change', updateRevisionUI);
+  updateRevisionUI();
 }
 
 browseTrig.addEventListener('click', () => fileInput.click());
