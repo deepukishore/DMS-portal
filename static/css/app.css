@@ -7807,8 +7807,9 @@ body * {
 }
 .library-overview-card.has-folder-art .dashboard-library-stat-copy small {
   max-width: 24rem;
-  font-size: .88rem;
-  line-height: 1.28;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
 }
 .library-overview-card.has-folder-art > b {
   color: rgba(255, 255, 255, .9);

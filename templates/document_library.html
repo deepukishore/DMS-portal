@@ -48,12 +48,9 @@
         <a href="{{ url_for('document_library.index', category_key=cat.key) }}"
            class="dashboard-library-stat library-overview-card {% if cat.folder_image %}has-folder-art{% endif %}"
            {% if cat.folder_image %}style="--folder-bg:url('{{ url_for('static', filename=cat.folder_image, v='20260804-2') }}')"{% endif %}
-           aria-label="Open {{ cat.dashboard_label or cat.label }} on a separate page, {{ cat.count }} available files">
+           aria-label="Open {{ cat.dashboard_label or cat.label }} on a separate page">
           <span class="dashboard-library-stat-copy">
             <small>{{ cat.dashboard_label or cat.label }}</small>
-            <strong>{{ cat.count }}</strong>
-            <em>available file{{ '' if cat.count == 1 else 's' }}</em>
-            <span class="dashboard-library-stat-bar" aria-hidden="true"><i style="width:100%"></i></span>
           </span>
           <b aria-hidden="true">&#8594;</b>
         </a>
