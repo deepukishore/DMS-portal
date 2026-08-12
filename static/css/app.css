@@ -7596,10 +7596,19 @@ body * {
   }
   .upload-page-header {
     flex: 0 0 auto;
-    margin-bottom: .3rem;
+    margin-bottom: .7rem;
   }
   .upload-page-header .eyebrow { margin-bottom: .1rem; }
-  .upload-page-header .page-sub { margin-top: .1rem; }
+  .upload-page-header .page-title {
+    font-size: clamp(1.3rem, 1.7vw, 1.55rem);
+    line-height: 1.2;
+  }
+  .upload-page-header .page-title::after { bottom: -6px; }
+  .upload-page-header .page-sub {
+    margin-top: .65rem;
+    font-size: .78rem;
+    line-height: 1.45;
+  }
   .upload-page-body .upload-grid {
     display: grid;
     flex: 0 0 auto;
@@ -7641,7 +7650,7 @@ body * {
   }
   .upload-form-fit {
     display: grid;
-    grid-template-columns: minmax(270px, .72fr) minmax(530px, 1.6fr);
+    grid-template-columns: minmax(260px, .72fr) minmax(0, 1.6fr);
     grid-template-rows: auto auto auto;
     gap: .55rem;
     height: auto;
