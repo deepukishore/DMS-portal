@@ -364,6 +364,24 @@ class DocumentService:
         return records[0] if records else None
 
     @staticmethod
+    def get_document_by_document_number(document_number, access_department=""):
+        """Return the latest document matching an exact controlled document number."""
+        normalized_number = DocumentService.validate_document_number(document_number)
+        access_department = normalize_department(access_department) if access_department else ""
+        conn = get_connection()
+        cursor = conn.cursor()
+        query = "SELECT * FROM documents WHERE UPPER(document_number) = ?"
+        params = [normalized_number]
+        if access_department:
+            query += " AND department = ?"
+            params.append(access_department)
+        query += " ORDER BY id DESC LIMIT 1"
+        cursor.execute(query, params)
+        row = cursor.fetchone()
+        conn.close()
+        return DocumentService._normalize_record(dict(row)) if row else None
+
+    @staticmethod
     def get_document_by_file_name(file_name, access_department=""):
         access_department = normalize_department(access_department) if access_department else access_department
         conn = get_connection()

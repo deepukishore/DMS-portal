@@ -4222,6 +4222,22 @@ select:disabled {
 /* ── Field helpers ───────────────────────────────────────────── */
 .field-required { color: var(--red); font-size: .75rem; }
 .field-hint { color: var(--text-dim); font-size: .72rem; font-weight: 400; }
+.document-number-validation {
+  display: none;
+  min-height: 1.1rem;
+  font-size: .7rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.document-number-validation.is-pending,
+.document-number-validation.is-checking,
+.document-number-validation.is-valid,
+.document-number-validation.is-error { display: block; }
+.document-number-validation.is-pending,
+.document-number-validation.is-checking { color: var(--text-dim); }
+.document-number-validation.is-valid { color: var(--green); }
+.document-number-validation.is-error { color: var(--red); }
 
 /* ── Internal document toggle row ───────────────────────────── */
 .internal-toggle-row {

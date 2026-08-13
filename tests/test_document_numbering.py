@@ -85,8 +85,21 @@ class DocumentNumberingTests(unittest.TestCase):
         conn.commit()
         conn.close()
 
+        existing = DocumentService.get_document_by_document_number(
+            "ZRAI-DOC-P3-2026-007"
+        )
+        self.assertIsNotNone(existing)
+        self.assertEqual(existing["original_file_name"], None)
+
         record = self._save("P3 - Guduvanchery Plant", "next.pdf")
         self.assertEqual(record["document_number"], "ZRAI-DOC-P3-2026-008")
+
+    def test_unknown_revision_document_number_is_not_found(self):
+        self.assertIsNone(
+            DocumentService.get_document_by_document_number(
+                "ZRAI-DOC-P1-2026-999"
+            )
+        )
 
     def test_revision_document_number_is_validated(self):
         self.assertEqual(

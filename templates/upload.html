@@ -98,6 +98,7 @@
                    value="{{ profile_next_document_number }}"
                    placeholder="Assigned automatically after selecting a plant" />
             <span class="field-hint" id="document-number-hint">Assigned automatically and separately for each plant.</span>
+            <span class="document-number-validation" id="document-number-validation" aria-live="polite"></span>
           </label>
           <label class="upload-field">
             <span class="upload-field-label">Revision Number</span>
@@ -300,6 +301,7 @@
   window.LIBRARY_DATA = {{ library_data|tojson }};
   window.NEXT_DOCUMENT_NUMBERS = {{ next_document_numbers|tojson }};
   window.PROFILE_NEXT_DOCUMENT_NUMBER = {{ profile_next_document_number|tojson }};
+  window.DOCUMENT_NUMBER_VALIDATION_URL = {{ url_for('upload.validate_document_number')|tojson }};
 </script>
-<script src="{{ url_for('static', filename='js/upload.js', v='20260813-2') }}"></script>
+<script src="{{ url_for('static', filename='js/upload.js', v='20260813-3') }}"></script>
 {% endblock %}

@@ -34,6 +34,7 @@ const libraryPathStatus = document.getElementById('library-path-status');
 const docNumInput = document.getElementById('document-number-input');
 const docNumLabel = document.getElementById('document-number-label');
 const docNumHint = document.getElementById('document-number-hint');
+const docNumValidation = document.getElementById('document-number-validation');
 const revNumInput = document.getElementById('revision_number_input');
 const plantSelect = document.getElementById('plant-select');
 const deptSelect = document.getElementById('department-select');
@@ -42,6 +43,7 @@ const ALLOWED_EXTS = ['.pdf', '.docx', '.doc', '.xlsx', '.xls', '.pptx', '.ppt']
 const LIBRARY_DATA = window.LIBRARY_DATA || {};
 const NEXT_DOCUMENT_NUMBERS = window.NEXT_DOCUMENT_NUMBERS || {};
 const PROFILE_NEXT_DOCUMENT_NUMBER = window.PROFILE_NEXT_DOCUMENT_NUMBER || '';
+const DOCUMENT_NUMBER_VALIDATION_URL = window.DOCUMENT_NUMBER_VALIDATION_URL || '';
 
 let currentPathState = {
   valid: false,
@@ -50,6 +52,10 @@ let currentPathState = {
   missing: '',
 };
 let droppedFiles = null;
+let hasSelectedFiles = false;
+let revisionDocumentValidated = false;
+let documentValidationTimer = null;
+let documentValidationRequest = 0;
 
 function formatSize(bytes) {
   if (bytes < 1024) return bytes + ' B';
@@ -173,9 +179,60 @@ function getUploadTarget() {
   return checked ? checked.value : 'library';
 }
 
-function updateSubmitState(hasFiles) {
-  submitBtn.disabled = !hasFiles;
-  submitHint.style.display = hasFiles ? 'none' : 'inline';
+function updateSubmitState(hasFiles = hasSelectedFiles) {
+  hasSelectedFiles = Boolean(hasFiles);
+  const revisionReady = !isRevisionCb?.checked || revisionDocumentValidated;
+  submitBtn.disabled = !hasSelectedFiles || !revisionReady;
+  submitHint.style.display = submitBtn.disabled ? 'inline' : 'none';
+  if (!hasSelectedFiles) {
+    submitHint.textContent = 'Select at least one file to continue';
+  } else if (!revisionReady) {
+    submitHint.textContent = 'Verify the existing document number to continue';
+  }
+}
+
+function setDocumentValidation(state, message = '') {
+  if (!docNumValidation) return;
+  docNumValidation.className = `document-number-validation${state ? ` is-${state}` : ''}`;
+  docNumValidation.textContent = message;
+}
+
+async function validateRevisionDocument() {
+  if (!isRevisionCb?.checked || !docNumInput) return;
+  const documentNumber = docNumInput.value.trim();
+  if (!/^ZRAI-DOC-P[1-4]-\d{4}-\d{3,}$/i.test(documentNumber)) {
+    revisionDocumentValidated = false;
+    setDocumentValidation('error', 'Enter a complete document number to verify it.');
+    updateSubmitState();
+    return;
+  }
+
+  const requestId = ++documentValidationRequest;
+  revisionDocumentValidated = false;
+  setDocumentValidation('checking', 'Checking document number...');
+  updateSubmitState();
+
+  try {
+    const params = new URLSearchParams({
+      document_number: documentNumber,
+      plant: plantSelect?.value || '',
+    });
+    const response = await fetch(`${DOCUMENT_NUMBER_VALIDATION_URL}?${params.toString()}`, {
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+    });
+    const data = await response.json();
+    if (requestId !== documentValidationRequest) return;
+    if (!response.ok || !data.ok) throw new Error(data.message || 'Document number could not be verified.');
+
+    revisionDocumentValidated = true;
+    const details = [data.document?.file_name, data.document?.revision_number].filter(Boolean).join(' · ');
+    setDocumentValidation('valid', details ? `Verified: ${details}` : 'Document verified.');
+  } catch (error) {
+    if (requestId !== documentValidationRequest) return;
+    revisionDocumentValidated = false;
+    setDocumentValidation('error', error.message || 'Document number could not be verified.');
+  }
+  updateSubmitState();
 }
 
 function renderFiles(files) {
@@ -657,12 +714,18 @@ plantSelect?.addEventListener('change', updateLibraryPath);
 plantSelect?.addEventListener('change', () => {
   if (!isRevisionCb?.checked && docNumInput) {
     docNumInput.value = NEXT_DOCUMENT_NUMBERS[plantSelect.value] || '';
+  } else if (isRevisionCb?.checked) {
+    revisionDocumentValidated = false;
+    validateRevisionDocument();
   }
 });
 deptSelect?.addEventListener('change', updateLibraryPath);
 
 function updateRevisionUI() {
   const isRevised = Boolean(isRevisionCb?.checked);
+  revisionDocumentValidated = false;
+  documentValidationRequest += 1;
+  if (documentValidationTimer) clearTimeout(documentValidationTimer);
   if (revisionFields) revisionFields.style.display = isRevised ? 'block' : 'none';
   if (revNumInput) {
     revNumInput.disabled = !isRevised;
@@ -689,6 +752,11 @@ function updateRevisionUI() {
       ? 'Enter the complete document number for the document being revised.'
       : 'Assigned automatically and separately for each plant.';
   }
+  setDocumentValidation(
+    isRevised ? 'pending' : '',
+    isRevised ? 'Enter an existing document number to continue.' : ''
+  );
+  updateSubmitState();
 }
 
 if (isRevisionCb) {
@@ -696,7 +764,16 @@ if (isRevisionCb) {
   updateRevisionUI();
 }
 docNumInput?.addEventListener('input', () => {
-  if (isRevisionCb?.checked) docNumInput.value = docNumInput.value.toUpperCase();
+  if (!isRevisionCb?.checked) return;
+  docNumInput.value = docNumInput.value.toUpperCase();
+  revisionDocumentValidated = false;
+  documentValidationRequest += 1;
+  setDocumentValidation('pending', 'Enter an existing document number to continue.');
+  updateSubmitState();
+  if (documentValidationTimer) clearTimeout(documentValidationTimer);
+  if (/^ZRAI-DOC-P[1-4]-\d{4}-\d{3,}$/i.test(docNumInput.value.trim())) {
+    documentValidationTimer = setTimeout(validateRevisionDocument, 350);
+  }
 });
 
 browseTrig.addEventListener('click', () => fileInput.click());
@@ -737,6 +814,11 @@ uploadForm.addEventListener('submit', event => {
     const selectedPlant = plantSelect?.value.match(/^\s*(P[1-4])(?:\s|-)/i)?.[1]?.toUpperCase();
     if (documentPlant && selectedPlant && documentPlant !== selectedPlant) {
       showInlineError('The document number must match the selected plant.');
+      return;
+    }
+    if (!revisionDocumentValidated) {
+      showInlineError('Verify an existing document number before uploading the revision.');
+      validateRevisionDocument();
       return;
     }
   }
@@ -790,8 +872,13 @@ uploadForm.addEventListener('submit', event => {
       window.location.reload();
     })
     .catch(error => {
-      submitBtn.disabled = false;
       submitBtn.innerHTML = originalLabel;
+      if (isRevisionCb?.checked) {
+        revisionDocumentValidated = false;
+        validateRevisionDocument();
+      } else {
+        updateSubmitState();
+      }
       showInlineError(error.message || 'An error occurred. Please try again.');
     });
 });

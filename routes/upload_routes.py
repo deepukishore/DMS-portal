@@ -36,6 +36,59 @@ def _normalize_library_subcategory(category, library_subcategory):
     return f"{AuthService.get_qms_level()}:{library_subcategory}"
 
 
+@upload_bp.route("/upload/validate-document-number", methods=["GET"])
+def validate_document_number():
+    redir = _require_login()
+    if redir:
+        return jsonify({"ok": False, "message": "Please sign in again."}), 401
+
+    current_user = AuthService.get_current_user()
+    can_choose_upload_scope = AuthService.can_upload_across_scope(current_user)
+    profile_plant = (current_user or {}).get("plant", "")
+    profile_department = normalize_department((current_user or {}).get("department", ""))
+    requested_plant = request.args.get("plant", "").strip() or profile_plant
+    document_number = request.args.get("document_number", "").strip()
+
+    try:
+        normalized_number = DocumentService.validate_document_number(
+            document_number,
+            plant=requested_plant,
+        )
+    except ValueError as exc:
+        return jsonify({"ok": False, "message": str(exc)}), 400
+
+    source_document = DocumentService.get_document_by_document_number(
+        normalized_number,
+        access_department="" if can_choose_upload_scope else profile_department,
+    )
+    if not source_document:
+        return jsonify({
+            "ok": False,
+            "message": "No existing document was found with this document number.",
+        }), 404
+
+    try:
+        DocumentService.validate_document_number(
+            source_document.get("document_number", ""),
+            plant=requested_plant,
+        )
+    except ValueError:
+        return jsonify({
+            "ok": False,
+            "message": "This document does not belong to the selected plant.",
+        }), 400
+
+    return jsonify({
+        "ok": True,
+        "message": "Document verified. You can continue with the revision.",
+        "document": {
+            "document_number": source_document.get("document_number", ""),
+            "file_name": source_document.get("original_file_name") or source_document.get("file_name", ""),
+            "revision_number": source_document.get("revision_number", ""),
+        },
+    })
+
+
 @upload_bp.route("/upload", methods=["GET", "POST"])
 def index():
     redir = _require_login()
@@ -165,6 +218,14 @@ def index():
                 )
             except ValueError as exc:
                 return _upload_error(str(exc))
+            source_document = DocumentService.get_document_by_document_number(
+                document_number,
+                access_department="" if can_choose_upload_scope else profile_department,
+            )
+            if not source_document:
+                return _upload_error(
+                    "No existing document was found with this document number."
+                )
         else:
             # Empty tells the service to reserve the next plant-specific number.
             document_number = ""
