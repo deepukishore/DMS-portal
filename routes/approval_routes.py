@@ -58,6 +58,19 @@ def _is_original_uploader(record, user=None):
     ).strip().lower()
 
 
+def _normalize_selected_recipients(values):
+    """Return unique recipient emails from repeated or comma-separated fields."""
+    recipients = []
+    seen = set()
+    for value in values or []:
+        for item in (value or "").replace(";", ",").split(","):
+            email = item.strip().lower()
+            if email and email not in seen:
+                seen.add(email)
+                recipients.append(email)
+    return recipients
+
+
 def _records_with_tokens(records):
     return [
         {
@@ -205,6 +218,9 @@ def review_document(token):
         for user in UserStoreService.get_all_users()
         if (user.get("email") or "").strip()
     ]
+    selected_recipient_emails = set(
+        _normalize_selected_recipients([record.get("selected_recipients", "")])
+    )
 
     return render_template(
         "approval_review.html",
@@ -215,6 +231,7 @@ def review_document(token):
         review_file_url=review_file_url,
         preview=preview,
         recipient_users=recipient_users,
+        selected_recipient_emails=selected_recipient_emails,
         can_decide=_can_decide_record(record),
         can_resubmit=(
             record.get("approval_status") == "Hold"
@@ -303,7 +320,10 @@ def update_decision(token):
         return redirect(url_for("approvals.review_document", token=token))
 
     rejection_comment = request.form.get("rejection_comment", "").strip()
-    selected_recipients = request.form.get("selected_recipients", "").strip()
+    selected_recipient_emails = _normalize_selected_recipients(
+        request.form.getlist("selected_recipients")
+    )
+    selected_recipients = ",".join(selected_recipient_emails)
     if status == "Rejected" and not rejection_comment:
         message = "Please add rejection comments so the uploader knows what to fix."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
@@ -317,7 +337,7 @@ def update_decision(token):
         flash(message, "error")
         return redirect(url_for("approvals.review_document", token=token))
     if status == "First Approved" and not selected_recipients:
-        message = "Please select a recipient before sending the document to final approval."
+        message = "Please select at least one recipient before sending the document to final approval."
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return jsonify({"ok": False, "message": message}), 400
         flash(message, "error")
@@ -328,8 +348,9 @@ def update_decision(token):
             for user in UserStoreService.get_all_users()
             if (user.get("email") or "").strip()
         }
-        if selected_recipients.lower() not in directory_emails:
-            message = "Please select a valid recipient from the people directory."
+        invalid_recipients = set(selected_recipient_emails) - directory_emails
+        if invalid_recipients:
+            message = "Please select valid recipients from the people directory."
             if request.headers.get("X-Requested-With") == "XMLHttpRequest":
                 return jsonify({"ok": False, "message": message}), 400
             flash(message, "error")

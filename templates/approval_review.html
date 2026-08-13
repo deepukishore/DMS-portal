@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document Review | Document Management System</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260813-1') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260813-2') }}" />
 </head>
 <body class="review-body">
   <main class="review-shell">
@@ -226,17 +226,26 @@
             {% if can_decide %}
               <form method="POST" action="{{ url_for('approvals.update_decision', token=token) }}" class="review-actions review-actions-stacked" id="approval-form" data-doc-id="{{ record.id }}">
                 {% if record.approval_status == 'Pending' %}
-                <label style="display:flex;flex-direction:column;gap:.4rem;">
-                  <span class="section-sub">Select the person who should receive the file after final approval.</span>
-                  <select name="selected_recipients" id="selected-recipients-input" class="review-recipient-select">
-                    <option value="">Select a person</option>
+                <fieldset class="review-recipient-fieldset">
+                  <legend>Select the people who should receive the file after final approval.</legend>
+                  <p class="section-sub">Select one or more email recipients.</p>
+                  <div class="review-recipient-picker" id="selected-recipients-input">
                     {% for user in recipient_users %}
-                    <option value="{{ user.email }}" {% if (record.selected_recipients or '') | lower == user.email | lower %}selected{% endif %}>
-                      {{ user.name }} — {{ user.email }}{% if user.department %} ({{ user.department }}){% endif %}
-                    </option>
+                    <label class="review-recipient-option">
+                      <input type="checkbox"
+                             name="selected_recipients"
+                             value="{{ user.email }}"
+                             {% if user.email | lower in selected_recipient_emails %}checked{% endif %} />
+                      <span>
+                        <strong>{{ user.name }}</strong>
+                        <small>{{ user.email }}{% if user.department %} · {{ user.department }}{% endif %}</small>
+                      </span>
+                    </label>
+                    {% else %}
+                    <p class="review-recipient-empty">No people with email addresses are available.</p>
                     {% endfor %}
-                  </select>
-                </label>
+                  </div>
+                </fieldset>
                 {% elif record.selected_recipients %}
                 <div class="alert alert-info">
                   <span>Selected final notification recipients: {{ record.selected_recipients }}</span>
@@ -363,9 +372,9 @@
             : 'Please add rejection comments before rejecting this document.');
           return;
         }
-        if (status === 'First Approved' && !selectedRecipientsInput?.value) {
-          alert('Please select a recipient before sending the document to final approval.');
-          selectedRecipientsInput?.focus();
+        if (status === 'First Approved' && !selectedRecipientsInput?.querySelector('input:checked')) {
+          alert('Please select at least one recipient before sending the document to final approval.');
+          selectedRecipientsInput?.querySelector('input')?.focus();
           return;
         }
 

@@ -2104,10 +2104,74 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   flex-direction: column;
   margin-top: 0;
 }
-.review-recipient-select {
-  width: 100%;
-  min-height: 44px;
+.review-recipient-fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+.review-recipient-fieldset legend {
+  margin-bottom: .2rem;
+  color: var(--text-sub);
+  font-size: .78rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.review-recipient-fieldset > .section-sub {
+  margin-bottom: .5rem;
+}
+.review-recipient-picker {
+  display: flex;
+  max-height: 210px;
+  overflow-y: auto;
+  flex-direction: column;
+  gap: 0;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.review-recipient-option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .65rem;
+  align-items: center;
+  justify-content: start;
+  padding: .65rem .75rem;
+  border-bottom: 1px solid var(--border-2);
   cursor: pointer;
+}
+.review-recipient-option:last-child {
+  border-bottom: 0;
+}
+.review-recipient-option:hover {
+  background: rgba(240, 165, 0, .06);
+}
+.review-recipient-option input {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  accent-color: var(--accent);
+}
+.review-recipient-option span,
+.review-recipient-option strong,
+.review-recipient-option small {
+  display: block;
+  min-width: 0;
+}
+.review-recipient-option strong {
+  color: var(--text);
+  font-size: .78rem;
+}
+.review-recipient-option small {
+  overflow: hidden;
+  color: var(--text-dim);
+  font-size: .7rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.review-recipient-empty {
+  padding: .75rem;
+  color: var(--text-dim);
+  font-size: .75rem;
 }
 
 /* Revision history keeps metadata readable without breaking words vertically. */
