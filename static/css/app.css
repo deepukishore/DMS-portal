@@ -1981,6 +1981,20 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   grid-template-columns: 1fr;
   margin-bottom: 0;
 }
+.review-document-details-card {
+  margin-bottom: 1.25rem;
+}
+.review-document-details-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-bottom: 0;
+}
+.review-document-details-grid .review-meta-item {
+  min-width: 0;
+}
+.review-document-details-grid .review-meta-item strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
 .review-meta-item {
   background: var(--bg-3);
   border: 1px solid var(--border);
@@ -2350,6 +2364,12 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   gap: .75rem;
   justify-content: flex-end;
   padding-top: .15rem;
+}
+
+@media (max-width: 1100px) {
+  .review-document-details-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .profile-form-actions[hidden] {
@@ -4308,6 +4328,11 @@ select:disabled {
   font-weight: 600;
   line-height: 1.35;
   overflow-wrap: anywhere;
+}
+@media (max-width: 620px) {
+  .review-document-details-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .document-number-validation.is-pending,
 .document-number-validation.is-checking,
