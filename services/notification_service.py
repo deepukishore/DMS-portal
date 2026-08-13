@@ -26,6 +26,7 @@ class NotificationService:
             ),
         )
         conn.commit()
+        cursor.close()
         conn.close()
 
     @staticmethod
@@ -51,6 +52,38 @@ class NotificationService:
             )
 
     @staticmethod
+    def notify_all_users(title, message, link_url="", notification_type="portal_update"):
+        emails = []
+        seen = set()
+        for user in UserStoreService.get_all_users():
+            email = (user.get("email") or "").strip().lower()
+            if email and email not in seen:
+                seen.add(email)
+                emails.append(email)
+
+        if not emails:
+            return 0
+
+        created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.executemany(
+            '''
+            INSERT INTO notifications
+                (user_email, title, message, link_url, notification_type, is_read, popup_seen, created_at)
+            VALUES (?, ?, ?, ?, ?, 0, 0, ?)
+            ''',
+            [
+                (email, title, message, link_url, notification_type, created_at)
+                for email in emails
+            ],
+        )
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return len(emails)
+
+    @staticmethod
     def get_recent_for_user(user_email, limit=8):
         conn = get_connection()
         cursor = conn.cursor()
@@ -64,6 +97,7 @@ class NotificationService:
             (user_email, limit),
         )
         rows = [dict(row) for row in cursor.fetchall()]
+        cursor.close()
         conn.close()
         for row in rows:
             row["message"] = row.get("message", "").replace(
@@ -81,8 +115,47 @@ class NotificationService:
             (user_email,),
         )
         count = cursor.fetchone()["count"]
+        cursor.close()
         conn.close()
         return count
+
+    @staticmethod
+    def get_unseen_portal_update(user_email):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            '''
+            SELECT * FROM notifications
+            WHERE user_email = ?
+              AND notification_type = 'portal_update'
+              AND popup_seen = 0
+            ORDER BY created_at DESC, id DESC
+            LIMIT 1
+            ''',
+            (user_email,),
+        )
+        row = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return dict(row) if row else None
+
+    @staticmethod
+    def mark_popup_seen(user_email, notification_id):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            '''
+            UPDATE notifications
+            SET popup_seen = 1
+            WHERE id = ? AND user_email = ? AND notification_type = 'portal_update'
+            ''',
+            (int(notification_id), user_email),
+        )
+        conn.commit()
+        affected = cursor.rowcount
+        cursor.close()
+        conn.close()
+        return affected > 0
 
     @staticmethod
     def mark_read(user_email, notification_id):
@@ -94,6 +167,7 @@ class NotificationService:
         )
         conn.commit()
         affected = cursor.rowcount
+        cursor.close()
         conn.close()
         return affected > 0
 
@@ -107,6 +181,7 @@ class NotificationService:
         )
         conn.commit()
         affected = cursor.rowcount
+        cursor.close()
         conn.close()
         return affected
 
@@ -120,5 +195,6 @@ class NotificationService:
         )
         conn.commit()
         affected = cursor.rowcount
+        cursor.close()
         conn.close()
         return affected

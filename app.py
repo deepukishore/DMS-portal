@@ -77,9 +77,11 @@ def create_app():
         try:
             notifications = NotificationService.get_recent_for_user(user_email) if user_email else []
             notification_unread_count = NotificationService.get_unread_count(user_email) if user_email else 0
+            portal_update_popup = NotificationService.get_unseen_portal_update(user_email) if user_email else None
         except Exception:
             notifications = []
             notification_unread_count = 0
+            portal_update_popup = None
         return {
             "current_user": current_user,
             "can_access_admin_sections": AuthService.has_high_level_access(current_user),
@@ -87,6 +89,7 @@ def create_app():
             "pending_count": pending_count,
             "notifications": notifications,
             "notification_unread_count": notification_unread_count,
+            "portal_update_popup": portal_update_popup,
             "customer_brands": CUSTOMER_BRANDS,
         }
 

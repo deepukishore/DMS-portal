@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% block title %}Portal Updates | Document Management System{% endblock %}
+
+{% block breadcrumb %}
+  <span class="bc-item"><a href="{{ url_for('dashboard.index') }}">Dashboard</a></span>
+  <span class="bc-sep">/</span>
+  <span class="bc-item bc-current">Portal Updates</span>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <p class="eyebrow">Admin · Announcements</p>
+    <h1 class="page-title">Publish a Portal Update</h1>
+    <p class="page-sub">Announce new features, fixes, or important changes to every registered user.</p>
+  </div>
+</div>
+
+<div class="portal-update-admin-grid">
+  <section class="surface-panel">
+    <div class="panel-head">
+      <div>
+        <h2 class="section-title">New notification</h2>
+        <p class="section-sub">Users will receive a one-time popup and an unread notification in the top bar.</p>
+      </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('notifications.portal_updates') }}" class="portal-update-form">
+      <label>
+        <span>Update title</span>
+        <input type="text" name="title" maxlength="120" required placeholder="e.g. New document search is now available" />
+      </label>
+
+      <label>
+        <span>What changed?</span>
+        <textarea name="message" rows="7" maxlength="1000" required placeholder="Describe the latest portal update and what users need to know."></textarea>
+        <small class="field-hint">Keep the message concise and action-oriented.</small>
+      </label>
+
+      <label>
+        <span>Open this page when users select the update</span>
+        <select name="link_url">
+          {% for value, label in destinations %}
+          <option value="{{ value }}">{{ label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <div class="portal-update-form-actions">
+        <button type="submit" class="btn-primary">Publish to all users</button>
+      </div>
+    </form>
+  </section>
+
+  <aside class="surface-panel portal-update-guide">
+    <p class="eyebrow">Delivery</p>
+    <h2 class="section-title">What users will see</h2>
+    <ol>
+      <li>A popup presenting the most recent portal update.</li>
+      <li>An unread item in the notification bar.</li>
+      <li>An optional link to the relevant portal page.</li>
+    </ol>
+    <p class="section-sub">Closing the popup does not remove the notification. Users can still open it later from the bell icon.</p>
+  </aside>
+</div>
+{% endblock %}

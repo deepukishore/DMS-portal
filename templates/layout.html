@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Document Management System{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260813-3') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260813-4') }}" />
 </head>
 <body class="app-body {% block body_class %}{% endblock %}">
   <div class="shell">
@@ -50,6 +50,9 @@
               <div class="notification-head">
                 <strong>Notifications</strong>
                 <div class="notification-head-actions">
+                  {% if is_admin_user %}
+                  <a href="{{ url_for('notifications.portal_updates') }}" class="link-btn notification-create-link">Create update</a>
+                  {% endif %}
                   <button type="button" class="link-btn" id="notification-mark-all">Mark all read</button>
                   <button type="button" class="link-btn" id="notification-clear-all">Clear all</button>
                 </div>
@@ -64,6 +67,9 @@
                       data-has-link="{{ '1' if notification.link_url else '0' }}"
                     >
                       <div class="notification-copy">
+                        {% if notification.notification_type == 'portal_update' %}
+                        <span class="notification-kind">Recent portal update</span>
+                        {% endif %}
                         <strong>{{ notification.title }}</strong>
                         <p>{{ notification.message }}</p>
                       </div>
@@ -122,12 +128,33 @@
     </div>
   </div>
   {% endif %}
+  {% if portal_update_popup %}
+  <div class="portal-update-popup-overlay" id="portal-update-popup" data-notification-id="{{ portal_update_popup.id }}">
+    <section class="portal-update-popup" role="dialog" aria-modal="true" aria-labelledby="portal-update-popup-title">
+      <button type="button" class="modal-close" id="portal-update-popup-close" aria-label="Close portal update">×</button>
+      <div class="portal-update-popup-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+      <p class="eyebrow">Recent portal update</p>
+      <h2 id="portal-update-popup-title">{{ portal_update_popup.title }}</h2>
+      <p class="portal-update-popup-message">{{ portal_update_popup.message }}</p>
+      <span class="portal-update-popup-time">Published {{ portal_update_popup.created_at }}</span>
+      <div class="portal-update-popup-actions">
+        {% if portal_update_popup.link_url %}
+        <a href="{{ portal_update_popup.link_url }}" class="btn-primary" id="portal-update-popup-link">View update</a>
+        {% endif %}
+        <button type="button" class="btn-outline" id="portal-update-popup-dismiss">Got it</button>
+      </div>
+    </section>
+  </div>
+  {% endif %}
   <script>
     window.APP_SHORTCUTS = {
       dashboard: "{{ url_for('dashboard.index') }}",
       upload: "{{ url_for('upload.index') }}",
       approvals: "{{ url_for('approvals.index') }}",
       markNotificationReadBase: "{{ url_for('notifications.mark_read', notification_id=0)[:-1] }}",
+      markNotificationPopupSeenBase: "{{ url_for('notifications.mark_popup_seen', notification_id=0)[:-1] }}",
       markAllNotificationsRead: "{{ url_for('notifications.mark_all_read') }}",
       clearAllNotifications: "{{ url_for('notifications.clear_all') }}"
     };
@@ -135,7 +162,7 @@
     window.CUSTOMER_BRANDS = {{ customer_brands | tojson }};
   </script>
   <script src="{{ url_for('static', filename='js/customer_branding.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/app.js', v='20260807-1') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js', v='20260813-1') }}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

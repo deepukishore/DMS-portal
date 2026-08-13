@@ -152,9 +152,12 @@ class UserStoreService:
 
     @staticmethod
     def get_all_users():
-        with UserStoreService._connect() as connection:
+        connection = UserStoreService._connect()
+        try:
             rows = connection.execute("SELECT * FROM users ORDER BY name ASC").fetchall()
-        return [dict(row) for row in rows]
+            return [dict(row) for row in rows]
+        finally:
+            connection.close()
 
     @staticmethod
     def email_exists(email):

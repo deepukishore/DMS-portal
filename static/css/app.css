@@ -404,6 +404,24 @@ html[data-theme="light"] .btn-theme .theme-moon {
   font-size: .8rem;
   margin-bottom: .2rem;
 }
+.notification-copy p {
+  overflow-wrap: anywhere;
+}
+.notification-kind {
+  display: inline-flex;
+  margin-bottom: .35rem;
+  padding: .16rem .4rem;
+  color: var(--blue);
+  background: rgba(88, 166, 255, .12);
+  border-radius: 999px;
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.notification-create-link {
+  white-space: nowrap;
+}
 .notification-copy p,
 .notification-time,
 .notification-empty,
@@ -2971,6 +2989,121 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   background: var(--bg-2);
   color: var(--text);
 }
+
+/* Admin portal-update publishing and user popup ------------------------- */
+.portal-update-admin-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, .75fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+.portal-update-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.portal-update-form label {
+  align-items: stretch;
+}
+.portal-update-form input,
+.portal-update-form select,
+.portal-update-form textarea {
+  width: 100%;
+  padding: .7rem .8rem;
+  color: var(--text);
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: 0;
+  font: inherit;
+  font-size: .82rem;
+}
+.portal-update-form textarea {
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.portal-update-form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.portal-update-guide ol {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  margin: 1rem 0;
+  padding-left: 1.2rem;
+  color: var(--text-sub);
+  font-size: .8rem;
+  line-height: 1.5;
+}
+.portal-update-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 650;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(3, 12, 22, .68);
+  backdrop-filter: blur(5px);
+  animation: app-fade-in .18s ease-out both;
+}
+.portal-update-popup-overlay.is-closing {
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+.portal-update-popup {
+  position: relative;
+  width: min(520px, 100%);
+  padding: 1.6rem;
+  overflow: hidden;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--cyan);
+  border-radius: var(--radius);
+  box-shadow: 0 28px 70px rgba(0, 26, 45, .34);
+  animation: app-pop-in .22s ease-out both;
+}
+.portal-update-popup-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 1rem;
+  color: #fff;
+  background: var(--brand-gradient);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 114, 188, .2);
+}
+.portal-update-popup h2 {
+  padding-right: 2rem;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.portal-update-popup-message {
+  margin-top: .75rem;
+  color: var(--text-sub);
+  font-size: .88rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+.portal-update-popup-time {
+  display: block;
+  margin-top: .8rem;
+  color: var(--text-dim);
+  font-size: .7rem;
+}
+.portal-update-popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .65rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
 .people-qms-level-description {
   min-height: 1.2rem;
   color: var(--text-dim);
@@ -3940,6 +4073,7 @@ select:disabled {
   }
   .upload-grid,
   .review-layout,
+  .portal-update-admin-grid,
   .info-grid-two,
   .info-grid-main-aside {
     grid-template-columns: 1fr;
@@ -4008,6 +4142,8 @@ select:disabled {
   .main-wrap { margin-left: 0; }
   .content { padding: 1.25rem; }
   .review-body { padding: 1rem; }
+  .portal-update-popup { padding: 1.25rem; }
+  .portal-update-popup-actions > * { width: 100%; justify-content: center; }
   .breadcrumb { font-size: .75rem; }
   .user-chip,
   .btn-logout,

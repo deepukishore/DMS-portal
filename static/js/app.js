@@ -231,6 +231,59 @@ document.querySelectorAll('.notification-item[data-notification-id]').forEach((i
   });
 });
 
+const portalUpdatePopup = document.getElementById('portal-update-popup');
+const portalUpdatePopupClose = document.getElementById('portal-update-popup-close');
+const portalUpdatePopupDismiss = document.getElementById('portal-update-popup-dismiss');
+const portalUpdatePopupLink = document.getElementById('portal-update-popup-link');
+
+async function markPortalUpdatePopupSeen() {
+  const notificationId = portalUpdatePopup?.dataset.notificationId;
+  if (!notificationId || portalUpdatePopup?.dataset.seenPending === '1') return;
+
+  portalUpdatePopup.dataset.seenPending = '1';
+  try {
+    const response = await fetch(
+      `${window.APP_SHORTCUTS.markNotificationPopupSeenBase}${notificationId}`,
+      {
+        method: 'POST',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      }
+    );
+    const payload = await response.json();
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.message || 'Portal update popup state could not be saved.');
+    }
+  } catch (error) {
+    console.error('Portal update popup error:', error);
+  } finally {
+    delete portalUpdatePopup.dataset.seenPending;
+  }
+}
+
+async function dismissPortalUpdatePopup() {
+  if (!portalUpdatePopup) return;
+  portalUpdatePopup.classList.add('is-closing');
+  await markPortalUpdatePopupSeen();
+  portalUpdatePopup.remove();
+}
+
+portalUpdatePopupClose?.addEventListener('click', dismissPortalUpdatePopup);
+portalUpdatePopupDismiss?.addEventListener('click', dismissPortalUpdatePopup);
+portalUpdatePopup?.addEventListener('click', (event) => {
+  if (event.target === portalUpdatePopup) dismissPortalUpdatePopup();
+});
+portalUpdatePopupLink?.addEventListener('click', async (event) => {
+  event.preventDefault();
+  const destination = portalUpdatePopupLink.href;
+  await markPortalUpdatePopupSeen();
+  window.location.href = destination;
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && document.getElementById('portal-update-popup')) {
+    dismissPortalUpdatePopup();
+  }
+});
+
 // Auto-dismiss alerts after 5s
 document.querySelectorAll('.alert').forEach(el => {
   setTimeout(() => el.style.opacity = '0', 4500);

@@ -137,3 +137,12 @@ class SystemLogService:
             "QMS_LEVEL_CHANGE",
             f'Changed QMS level for "{target_email}" from {previous_level} to {new_level}.',
         )
+
+    @staticmethod
+    def log_portal_update(admin_email, admin_name, title, recipient_count):
+        SystemLogService._entry(
+            admin_email,
+            admin_name,
+            "PORTAL_UPDATE",
+            f'Published portal update "{title}" to {recipient_count} user(s).',
+        )

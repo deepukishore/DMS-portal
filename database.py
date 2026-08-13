@@ -242,6 +242,7 @@ SQLITE_SCHEMA = [
         link_url TEXT,
         notification_type TEXT DEFAULT 'info',
         is_read INTEGER DEFAULT 0,
+        popup_seen INTEGER DEFAULT 0,
         created_at TEXT NOT NULL
     )
     """,
@@ -401,6 +402,7 @@ MYSQL_SCHEMA = [
         link_url VARCHAR(1000),
         notification_type VARCHAR(80) DEFAULT 'info',
         is_read TINYINT(1) DEFAULT 0,
+        popup_seen TINYINT(1) DEFAULT 0,
         created_at VARCHAR(32) NOT NULL,
         INDEX idx_notifications_user (user_email, is_read)
     ) ENGINE=InnoDB
@@ -538,6 +540,9 @@ REQUIRED_COLUMNS = {
         "document_number": ("TEXT", "VARCHAR(255)"),
         "revision_number": ("TEXT", "VARCHAR(80)"),
         "category": ("TEXT", "VARCHAR(255)"),
+    },
+    "notifications": {
+        "popup_seen": ("INTEGER DEFAULT 0", "TINYINT(1) DEFAULT 0"),
     },
 }
 
