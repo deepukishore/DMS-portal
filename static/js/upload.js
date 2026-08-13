@@ -674,17 +674,19 @@ function updateRevisionUI() {
   }
   if (docNumInput) {
     docNumInput.readOnly = !isRevised;
-    docNumInput.inputMode = isRevised ? 'numeric' : 'text';
-    docNumInput.pattern = isRevised ? '[0-9]+' : '';
-    docNumInput.placeholder = isRevised ? 'e.g. 001' : 'Assigned automatically after selecting a plant';
+    docNumInput.inputMode = 'text';
+    docNumInput.pattern = isRevised ? 'ZRAI-DOC-P[1-4]-[0-9]{4}-[0-9]{3,}' : '';
+    docNumInput.placeholder = isRevised
+      ? 'e.g. ZRAI-DOC-P1-2026-001'
+      : 'Assigned automatically after selecting a plant';
     docNumInput.value = isRevised
       ? ''
       : (NEXT_DOCUMENT_NUMBERS[plantSelect?.value] || PROFILE_NEXT_DOCUMENT_NUMBER);
   }
-  if (docNumLabel) docNumLabel.textContent = isRevised ? 'File Number' : 'Document Number';
+  if (docNumLabel) docNumLabel.textContent = 'Document Number';
   if (docNumHint) {
     docNumHint.textContent = isRevised
-      ? 'Enter only the numeric file number; the plant prefix is added automatically.'
+      ? 'Enter the complete document number for the document being revised.'
       : 'Assigned automatically and separately for each plant.';
   }
 }
@@ -693,6 +695,9 @@ if (isRevisionCb) {
   isRevisionCb.addEventListener('change', updateRevisionUI);
   updateRevisionUI();
 }
+docNumInput?.addEventListener('input', () => {
+  if (isRevisionCb?.checked) docNumInput.value = docNumInput.value.toUpperCase();
+});
 
 browseTrig.addEventListener('click', () => fileInput.click());
 dropZone.addEventListener('click', event => { if (event.target !== browseTrig) fileInput.click(); });
@@ -720,9 +725,20 @@ dropZone.addEventListener('drop', event => {
 uploadForm.addEventListener('submit', event => {
   event.preventDefault();
 
-  if (isRevisionCb?.checked && !/^\d+$/.test(docNumInput?.value.trim() || '')) {
-    showInlineError('Enter only the numeric file number for a revision (for example, 001).');
+  if (
+    isRevisionCb?.checked
+    && !/^ZRAI-DOC-P[1-4]-\d{4}-\d{3,}$/i.test(docNumInput?.value.trim() || '')
+  ) {
+    showInlineError('Enter the complete document number (for example, ZRAI-DOC-P1-2026-001).');
     return;
+  }
+  if (isRevisionCb?.checked) {
+    const documentPlant = docNumInput.value.trim().match(/^ZRAI-DOC-(P[1-4])-/i)?.[1]?.toUpperCase();
+    const selectedPlant = plantSelect?.value.match(/^\s*(P[1-4])(?:\s|-)/i)?.[1]?.toUpperCase();
+    if (documentPlant && selectedPlant && documentPlant !== selectedPlant) {
+      showInlineError('The document number must match the selected plant.');
+      return;
+    }
   }
 
   if (getUploadTarget() === 'library') {

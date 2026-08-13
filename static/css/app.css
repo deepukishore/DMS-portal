@@ -7680,7 +7680,7 @@ body * {
   .upload-page-body .upload-details-step { gap: .45rem; }
   .upload-page-body .upload-details-fields {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     align-items: start;
     gap: .55rem;
   }
@@ -7702,6 +7702,31 @@ body * {
   .upload-page-body .upload-form { gap: .55rem; }
   .upload-page-body .upload-info-row { padding: .4rem .55rem; }
   .upload-page-body .form-row { gap: .55rem; }
+  .upload-page-body .upload-number-row {
+    grid-template-columns: minmax(0, 1.35fr) minmax(140px, .65fr);
+    align-items: start;
+  }
+  .upload-page-body .upload-number-row > .upload-field {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    min-width: 0;
+    gap: .28rem;
+  }
+  .upload-page-body .upload-field-label {
+    display: flex;
+    align-items: baseline;
+    gap: .22rem;
+    min-width: 0;
+    line-height: 1.25;
+  }
+  .upload-page-body .upload-number-row .field-hint {
+    display: block;
+    min-height: 1.1rem;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+  }
   .upload-page-body label { gap: .18rem; font-size: .72rem; }
   .upload-page-body label input,
   .upload-page-body label select { min-height: 36px; padding: .38rem .55rem; font-size: .78rem; }

@@ -55,10 +55,13 @@ class DocumentNumberingTests(unittest.TestCase):
         second_p1 = self._save("P1 - Trichy Plant", "second.pdf")
         first_p2 = self._save("P2 - Guduvanchery Plant", "third.pdf")
 
-        self.assertEqual(first_p1["document_number"], "ZRAI-DOC-P1-001")
-        self.assertEqual(second_p1["document_number"], "ZRAI-DOC-P1-002")
-        self.assertEqual(first_p2["document_number"], "ZRAI-DOC-P2-001")
-        self.assertEqual(DocumentService.peek_next_document_number("P1"), "ZRAI-DOC-P1-003")
+        self.assertEqual(first_p1["document_number"], "ZRAI-DOC-P1-2026-001")
+        self.assertEqual(second_p1["document_number"], "ZRAI-DOC-P1-2026-002")
+        self.assertEqual(first_p2["document_number"], "ZRAI-DOC-P2-2026-001")
+        self.assertEqual(
+            DocumentService.peek_next_document_number("P1"),
+            "ZRAI-DOC-P1-2026-003",
+        )
 
     def test_existing_numbers_are_not_reused(self):
         conn = get_connection()
@@ -76,22 +79,33 @@ class DocumentNumberingTests(unittest.TestCase):
                 "Internal",
                 "legacy.pdf",
                 "2026-01-01",
-                "ZRAI-DOC-P3-007",
+                "ZRAI-DOC-P3-2026-007",
             ),
         )
         conn.commit()
         conn.close()
 
         record = self._save("P3 - Guduvanchery Plant", "next.pdf")
-        self.assertEqual(record["document_number"], "ZRAI-DOC-P3-008")
+        self.assertEqual(record["document_number"], "ZRAI-DOC-P3-2026-008")
 
-    def test_revision_file_number_is_formatted_and_validated(self):
+    def test_revision_document_number_is_validated(self):
         self.assertEqual(
-            DocumentService.format_document_number("P4 - Uttarakhand Plant", "9"),
-            "ZRAI-DOC-P4-009",
+            DocumentService.validate_document_number(
+                "ZRAI-DOC-P4-2026-009",
+                plant="P4 - Uttarakhand Plant",
+            ),
+            "ZRAI-DOC-P4-2026-009",
         )
         with self.assertRaises(ValueError):
-            DocumentService.format_document_number("P4 - Uttarakhand Plant", "P4-009")
+            DocumentService.validate_document_number(
+                "009",
+                plant="P4 - Uttarakhand Plant",
+            )
+        with self.assertRaises(ValueError):
+            DocumentService.validate_document_number(
+                "ZRAI-DOC-P3-2026-009",
+                plant="P4 - Uttarakhand Plant",
+            )
 
 
 if __name__ == "__main__":

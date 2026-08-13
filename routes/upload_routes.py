@@ -159,9 +159,9 @@ def index():
 
         if is_revision:
             try:
-                document_number = DocumentService.format_document_number(
-                    plant,
+                document_number = DocumentService.validate_document_number(
                     submitted_document_number,
+                    plant=plant,
                 )
             except ValueError as exc:
                 return _upload_error(str(exc))

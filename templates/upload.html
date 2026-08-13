@@ -91,15 +91,18 @@
           {% endif %}
         </div>
 
-        <div class="form-row">
-          <label><span id="document-number-label">Document Number</span> <span class="field-required">*</span>
+        <div class="form-row upload-number-row">
+          <label class="upload-field">
+            <span class="upload-field-label"><span id="document-number-label">Document Number</span> <span class="field-required">*</span></span>
             <input type="text" name="document_number" id="document-number-input" required readonly
                    value="{{ profile_next_document_number }}"
                    placeholder="Assigned automatically after selecting a plant" />
             <span class="field-hint" id="document-number-hint">Assigned automatically and separately for each plant.</span>
           </label>
-          <label>Revision Number <span class="field-hint">(enable by selecting Revised)</span>
+          <label class="upload-field">
+            <span class="upload-field-label">Revision Number</span>
             <input type="text" name="revision_number" id="revision_number_input" placeholder="e.g. Rev.01" disabled />
+            <span class="field-hint">Enable by selecting Revised.</span>
           </label>
         </div>
 
@@ -282,7 +285,7 @@
         <div><h2 class="section-title">Tips</h2></div>
       </div>
       <ul class="compact-list">
-        <li>New document numbers are assigned automatically, e.g. <code style="font-family:monospace;font-size:.75rem;">ZRAI-DOC-P1-001</code>.</li>
+        <li>New document numbers are assigned automatically, e.g. <code style="font-family:monospace;font-size:.75rem;">ZRAI-DOC-P1-2026-001</code>.</li>
         <li>Select the correct customer so filtering works later.</li>
         <li>Group related files in one submission when possible.</li>
         <li>For internal memos or reports, tick "Internal Document".</li>
@@ -298,5 +301,5 @@
   window.NEXT_DOCUMENT_NUMBERS = {{ next_document_numbers|tojson }};
   window.PROFILE_NEXT_DOCUMENT_NUMBER = {{ profile_next_document_number|tojson }};
 </script>
-<script src="{{ url_for('static', filename='js/upload.js', v='20260813-1') }}"></script>
+<script src="{{ url_for('static', filename='js/upload.js', v='20260813-2') }}"></script>
 {% endblock %}
