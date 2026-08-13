@@ -1,4 +1,5 @@
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 from flask import Flask
@@ -26,6 +27,19 @@ class IatfCapaDownloadTests(unittest.TestCase):
         self.assertIn("Audit NCs Tracking Report", response.headers["Content-Disposition"])
         self.assertTrue(response.data.startswith(b"PK"))
         response.close()
+
+    def test_download_button_is_rendered_in_iatf_panel_header(self):
+        project_root = Path(__file__).resolve().parent.parent
+        template = (project_root / "templates" / "document_library.html").read_text(
+            encoding="utf-8"
+        )
+        script = (project_root / "static" / "js" / "document_library.js").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertNotIn("Audit NC CAPA Format", template)
+        self.assertIn("External Audit NC tracking Report format", script)
+        self.assertIn("asset-panel-header-actions", script)
 
 
 if __name__ == "__main__":

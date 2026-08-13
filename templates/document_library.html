@@ -28,13 +28,6 @@
   </div>
   {% if not is_overview %}
     <div class="page-actions">
-      {% if category_key == 'qms' and preselected_secondary == 'iatf_audit' %}
-        <a href="{{ url_for('document_library.download_iatf_audit_nc_capa_format') }}"
-           class="btn-primary"
-           download>
-          <span aria-hidden="true">&#8595;</span> Audit NC CAPA Format
-        </a>
-      {% endif %}
       <a href="{{ url_for('document_library.index') }}" class="btn-outline library-all-folders-btn">
         <span aria-hidden="true">&#8592;</span> All folders
       </a>
@@ -87,7 +80,8 @@ const PRESELECT_DEPARTMENT = "{{ preselected_department }}";
 const VIEW_URL = "{{ url_for('document_library.view_file') }}";
 const MASTER_DEPT_URL = "{{ url_for('document_library.master_record_departments') }}";
 const MASTER_FILE_URL = "{{ url_for('document_library.master_record_files') }}";
+const IATF_CAPA_DOWNLOAD_URL = "{{ url_for('document_library.download_iatf_audit_nc_capa_format') }}";
 </script>
-<script src="{{ url_for('static', filename='js/document_library.js', v='20260812-1') }}"></script>
+<script src="{{ url_for('static', filename='js/document_library.js', v='20260813-1') }}"></script>
 {% endif %}
 {% endblock %}

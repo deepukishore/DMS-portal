@@ -1297,6 +1297,13 @@ label input:focus, label select:focus { border-color: var(--accent); }
   border-bottom: 1px solid var(--border);
 }
 .asset-panel-header h2 { font-size: 1.05rem; font-weight: 600; }
+.asset-panel-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .65rem;
+  flex-wrap: wrap;
+}
 
 .dept-tabs {
   display: flex;

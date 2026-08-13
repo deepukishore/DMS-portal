@@ -141,7 +141,7 @@ function createStepBar(labels, activeIndex) {
   return wrap;
 }
 
-function createHeader(title, subtitle, backLabel, onBack) {
+function createHeader(title, subtitle, backLabel, onBack, headerAction = null) {
   const panel = document.createElement('div');
   panel.className = 'surface-panel';
   panel.style.marginTop = '1rem';
@@ -153,14 +153,28 @@ function createHeader(title, subtitle, backLabel, onBack) {
       <h2>${title}</h2>
     </div>`;
 
+  const actions = document.createElement('div');
+  actions.className = 'asset-panel-header-actions';
+
+  if (headerAction?.href && headerAction?.label) {
+    const link = document.createElement('a');
+    link.className = headerAction.className || 'btn-primary';
+    link.href = headerAction.href;
+    link.textContent = headerAction.label;
+    if (headerAction.download) link.setAttribute('download', '');
+    actions.appendChild(link);
+  }
+
   if (backLabel && onBack) {
     const button = document.createElement('button');
     button.className = 'btn-outline btn-sm';
     button.type = 'button';
     button.textContent = backLabel;
     button.addEventListener('click', () => runAndNavigate(onBack));
-    header.appendChild(button);
+    actions.appendChild(button);
   }
+
+  if (actions.childElementCount) header.appendChild(actions);
 
   panel.appendChild(header);
   if (subtitle) {
@@ -694,7 +708,14 @@ function renderQms() {
           selectedSecondary = '';
           selectedTertiary = '';
           render();
-        }
+        },
+        selectedSecondary === 'iatf_audit'
+          ? {
+              label: 'External Audit NC tracking Report format',
+              href: IATF_CAPA_DOWNLOAD_URL,
+              download: true,
+            }
+          : null
       );
       panel.appendChild(createOptionGrid(options, key => {
         selectedPrimary = key;
