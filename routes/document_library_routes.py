@@ -1,4 +1,6 @@
-from flask import Blueprint, jsonify, redirect, render_template, request, session, url_for
+from pathlib import Path
+
+from flask import Blueprint, jsonify, redirect, render_template, request, send_file, session, url_for
 
 from services.auth_service import AuthService
 from services.document_library_service import DocumentLibraryService
@@ -6,6 +8,12 @@ from services.plant_asset_service import PlantAssetService
 from services.system_log_service import SystemLogService
 
 document_library_bp = Blueprint("document_library", __name__)
+
+IATF_AUDIT_NC_CAPA_TEMPLATE = (
+    Path(__file__).resolve().parent.parent
+    / "download_templates"
+    / "IATF 16949 -2016 2nd Surveillance  Audit NCs Tracking Report - Format.xlsx"
+)
 
 
 def _require_login():
@@ -66,6 +74,20 @@ def index(category_key=None):
         preselected_tertiary=preselected_tertiary,
         preselected_plant=preselected_plant,
         preselected_department=preselected_department,
+    )
+
+
+@document_library_bp.route("/document-library/iatf-audit-nc-capa-format")
+def download_iatf_audit_nc_capa_format():
+    redir = _require_login()
+    if redir:
+        return redir
+
+    return send_file(
+        IATF_AUDIT_NC_CAPA_TEMPLATE,
+        as_attachment=True,
+        download_name=IATF_AUDIT_NC_CAPA_TEMPLATE.name,
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
 
 

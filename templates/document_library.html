@@ -28,6 +28,13 @@
   </div>
   {% if not is_overview %}
     <div class="page-actions">
+      {% if category_key == 'qms' and preselected_secondary == 'iatf_audit' %}
+        <a href="{{ url_for('document_library.download_iatf_audit_nc_capa_format') }}"
+           class="btn-primary"
+           download>
+          <span aria-hidden="true">&#8595;</span> Audit NC CAPA Format
+        </a>
+      {% endif %}
       <a href="{{ url_for('document_library.index') }}" class="btn-outline library-all-folders-btn">
         <span aria-hidden="true">&#8592;</span> All folders
       </a>
