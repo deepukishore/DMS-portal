@@ -1937,7 +1937,7 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 }
 .review-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) 340px;
+  grid-template-columns: minmax(0, 1.7fr) minmax(360px, 400px);
   gap: 1.25rem;
   align-items: start;
 }
@@ -2209,6 +2209,61 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 }
 .review-recipient-empty[hidden] {
   display: none;
+}
+.review-selected-recipients {
+  min-width: 0;
+  padding: .8rem .9rem;
+  color: var(--blue);
+  background: rgba(88, 166, 255, .1);
+  border: 1px solid rgba(88, 166, 255, .3);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 4px 0 0 var(--cyan), 0 8px 20px rgba(34, 196, 214, .08);
+}
+.review-selected-recipients > span {
+  display: block;
+  margin-bottom: .55rem;
+  font-size: .78rem;
+  font-weight: 600;
+}
+.review-recipient-chips {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+.review-recipient-chip {
+  display: inline-block;
+  max-width: 100%;
+  padding: .3rem .5rem;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  background: var(--bg-2);
+  border: 1px solid rgba(88, 166, 255, .3);
+  border-radius: 999px;
+  font-size: .72rem;
+  line-height: 1.35;
+}
+.review-comment-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: stretch;
+  gap: .45rem;
+}
+.review-comment-field textarea {
+  display: block;
+  width: 100%;
+  min-height: 116px;
+  padding: .7rem .8rem;
+  resize: vertical;
+  color: var(--text);
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: 0;
+  font: inherit;
+  font-size: .82rem;
+  line-height: 1.45;
 }
 
 /* Revision history keeps metadata readable without breaking words vertically. */

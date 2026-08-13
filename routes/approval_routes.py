@@ -218,8 +218,8 @@ def review_document(token):
         for user in UserStoreService.get_all_users()
         if (user.get("email") or "").strip()
     ]
-    selected_recipient_emails = set(
-        _normalize_selected_recipients([record.get("selected_recipients", "")])
+    selected_recipient_emails = _normalize_selected_recipients(
+        [record.get("selected_recipients", "")]
     )
 
     return render_template(

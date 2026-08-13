@@ -39,6 +39,9 @@ class MultipleApprovalRecipientTests(unittest.TestCase):
         self.assertIn("Search by name, email, or department", template)
         self.assertIn('data-recipient-search="', template)
         self.assertIn("option.hidden = !matches", template)
+        self.assertIn('class="review-selected-recipients"', template)
+        self.assertIn('class="review-recipient-chip"', template)
+        self.assertIn('class="review-comment-field"', template)
 
     def test_first_approval_saves_all_selected_recipient_emails(self):
         app = Flask(__name__)

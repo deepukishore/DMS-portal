@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document Review | Document Management System</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260813-2') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260813-3') }}" />
 </head>
 <body class="review-body">
   <main class="review-shell">
@@ -260,11 +260,16 @@
                   </div>
                 </fieldset>
                 {% elif record.selected_recipients %}
-                <div class="alert alert-info">
-                  <span>Selected final notification recipients: {{ record.selected_recipients }}</span>
+                <div class="review-selected-recipients" role="note">
+                  <span>Selected final notification recipients</span>
+                  <div class="review-recipient-chips">
+                    {% for email in selected_recipient_emails %}
+                    <span class="review-recipient-chip" title="{{ email }}">{{ email }}</span>
+                    {% endfor %}
+                  </div>
                 </div>
                 {% endif %}
-                <label style="display:flex;flex-direction:column;gap:.4rem;">
+                <label class="review-comment-field">
                   <span class="section-sub">Comments are required when rejecting or placing the document on hold.</span>
                   <textarea name="rejection_comment" id="rejection-comment-input" rows="4" placeholder="Tell the uploader exactly what needs to be fixed...">{{ record.rejection_comment or '' }}</textarea>
                 </label>
