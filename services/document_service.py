@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 from data.customers import customer_query_values, normalize_customer
 from data.departments import normalize_department
 from data.document_categories import infer_document_category
-from database import get_connection
+from database import get_connection, is_mysql
 from services.pdf_conversion_service import convert_to_pdf, is_allowed_file
 
 
@@ -16,6 +16,89 @@ class DocumentService:
     """Manages document records used across dashboard and approvals."""
 
     PENDING_APPROVAL_STATUSES = {"Pending", "Pending Final Approval", "Hold"}
+    DOCUMENT_NUMBER_PREFIX = "ZRAI-DOC"
+    _DOCUMENT_NUMBER_PATTERN = re.compile(r"^ZRAI-DOC-(P[1-4])-(\d+)$", re.IGNORECASE)
+
+    @staticmethod
+    def _document_plant_code(plant):
+        match = re.match(r"^\s*(P[1-4])(?=\s*(?:-|$))", str(plant or ""), re.IGNORECASE)
+        if not match:
+            raise ValueError("Please select a valid plant (P1, P2, P3, or P4).")
+        return match.group(1).upper()
+
+    @staticmethod
+    def format_document_number(plant, file_number):
+        """Build a controlled document number from a plant and numeric file number."""
+        plant_id = DocumentService._document_plant_code(plant)
+        value = str(file_number or "").strip()
+        if not re.fullmatch(r"\d+", value) or int(value) < 1:
+            raise ValueError("File number must contain digits only and be at least 001.")
+        return f"{DocumentService.DOCUMENT_NUMBER_PREFIX}-{plant_id}-{int(value):03d}"
+
+    @staticmethod
+    def _max_persisted_document_number(cursor, plant_id):
+        prefix = f"{DocumentService.DOCUMENT_NUMBER_PREFIX}-{plant_id}-"
+        cursor.execute(
+            "SELECT document_number FROM documents WHERE document_number LIKE ?",
+            (f"{prefix}%",),
+        )
+        highest = 0
+        for row in cursor.fetchall():
+            value = row.get("document_number") if isinstance(row, dict) else row["document_number"]
+            match = DocumentService._DOCUMENT_NUMBER_PATTERN.fullmatch(value or "")
+            if match and match.group(1).upper() == plant_id:
+                highest = max(highest, int(match.group(2)))
+        return highest
+
+    @staticmethod
+    def _reserve_document_number(cursor, plant):
+        """Atomically reserve the next number for a plant in the active transaction."""
+        plant_id = DocumentService._document_plant_code(plant)
+        insert_sql = (
+            "INSERT IGNORE INTO document_number_sequences (plant_code, last_number) VALUES (?, 0)"
+            if is_mysql()
+            else "INSERT OR IGNORE INTO document_number_sequences (plant_code, last_number) VALUES (?, 0)"
+        )
+        cursor.execute(insert_sql, (plant_id,))
+        select_sql = "SELECT last_number FROM document_number_sequences WHERE plant_code = ?"
+        if is_mysql():
+            select_sql += " FOR UPDATE"
+        cursor.execute(select_sql, (plant_id,))
+        row = cursor.fetchone()
+        stored_number = int(row.get("last_number", 0) if isinstance(row, dict) else row["last_number"])
+        next_number = max(
+            stored_number,
+            DocumentService._max_persisted_document_number(cursor, plant_id),
+        ) + 1
+        cursor.execute(
+            "UPDATE document_number_sequences SET last_number = ? WHERE plant_code = ?",
+            (next_number, plant_id),
+        )
+        return DocumentService.format_document_number(plant_id, next_number)
+
+    @staticmethod
+    def peek_next_document_number(plant):
+        """Return an advisory next number for the upload form without reserving it."""
+        plant_id = DocumentService._document_plant_code(plant)
+        conn = get_connection()
+        try:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT last_number FROM document_number_sequences WHERE plant_code = ?",
+                (plant_id,),
+            )
+            row = cursor.fetchone()
+            stored_number = (
+                int(row.get("last_number", 0) if isinstance(row, dict) else row["last_number"])
+                if row else 0
+            )
+            next_number = max(
+                stored_number,
+                DocumentService._max_persisted_document_number(cursor, plant_id),
+            ) + 1
+            return DocumentService.format_document_number(plant_id, next_number)
+        finally:
+            conn.close()
 
     @staticmethod
     def is_pending_status(status):
@@ -310,6 +393,11 @@ class DocumentService:
 
         conn = get_connection()
         cursor = conn.cursor()
+        if not is_mysql():
+            cursor.execute("BEGIN IMMEDIATE")
+        document_number = (document_number or "").strip()
+        if not document_number:
+            document_number = DocumentService._reserve_document_number(cursor, plant)
         cursor.execute('''INSERT INTO documents 
             (name, user_id, uploader_email, plant, department, customer, file_name, uploaded_at, approval_status, original_file_name, pdf_file_name, current_version, category, document_number, revision_number, rejection_comment, decision_by)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',

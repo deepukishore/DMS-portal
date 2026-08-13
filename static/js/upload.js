@@ -32,12 +32,16 @@ const librarySubHidden = document.getElementById('library-subcategory-hidden');
 const libraryPathPreview = document.getElementById('library-path-preview');
 const libraryPathStatus = document.getElementById('library-path-status');
 const docNumInput = document.getElementById('document-number-input');
+const docNumLabel = document.getElementById('document-number-label');
+const docNumHint = document.getElementById('document-number-hint');
 const revNumInput = document.getElementById('revision_number_input');
 const plantSelect = document.getElementById('plant-select');
 const deptSelect = document.getElementById('department-select');
 
 const ALLOWED_EXTS = ['.pdf', '.docx', '.doc', '.xlsx', '.xls', '.pptx', '.ppt'];
 const LIBRARY_DATA = window.LIBRARY_DATA || {};
+const NEXT_DOCUMENT_NUMBERS = window.NEXT_DOCUMENT_NUMBERS || {};
+const PROFILE_NEXT_DOCUMENT_NUMBER = window.PROFILE_NEXT_DOCUMENT_NUMBER || '';
 
 let currentPathState = {
   valid: false,
@@ -650,6 +654,11 @@ libraryTertiarySelect?.addEventListener('change', configureLibraryTertiary);
 libraryQuaternarySelect?.addEventListener('change', updateLibraryPath);
 customerSelect?.addEventListener('change', updateLibraryPath);
 plantSelect?.addEventListener('change', updateLibraryPath);
+plantSelect?.addEventListener('change', () => {
+  if (!isRevisionCb?.checked && docNumInput) {
+    docNumInput.value = NEXT_DOCUMENT_NUMBERS[plantSelect.value] || '';
+  }
+});
 deptSelect?.addEventListener('change', updateLibraryPath);
 
 function updateRevisionUI() {
@@ -662,6 +671,21 @@ function updateRevisionUI() {
   if (!isRevised) {
     const summaryInput = document.getElementById('change_summary_input');
     if (summaryInput) summaryInput.value = '';
+  }
+  if (docNumInput) {
+    docNumInput.readOnly = !isRevised;
+    docNumInput.inputMode = isRevised ? 'numeric' : 'text';
+    docNumInput.pattern = isRevised ? '[0-9]+' : '';
+    docNumInput.placeholder = isRevised ? 'e.g. 001' : 'Assigned automatically after selecting a plant';
+    docNumInput.value = isRevised
+      ? ''
+      : (NEXT_DOCUMENT_NUMBERS[plantSelect?.value] || PROFILE_NEXT_DOCUMENT_NUMBER);
+  }
+  if (docNumLabel) docNumLabel.textContent = isRevised ? 'File Number' : 'Document Number';
+  if (docNumHint) {
+    docNumHint.textContent = isRevised
+      ? 'Enter only the numeric file number; the plant prefix is added automatically.'
+      : 'Assigned automatically and separately for each plant.';
   }
 }
 
@@ -696,8 +720,8 @@ dropZone.addEventListener('drop', event => {
 uploadForm.addEventListener('submit', event => {
   event.preventDefault();
 
-  if (!docNumInput?.value.trim()) {
-    showInlineError('Document number is required.');
+  if (isRevisionCb?.checked && !/^\d+$/.test(docNumInput?.value.trim() || '')) {
+    showInlineError('Enter only the numeric file number for a revision (for example, 001).');
     return;
   }
 

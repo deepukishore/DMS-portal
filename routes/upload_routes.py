@@ -60,7 +60,7 @@ def index():
         plant = requested_plant if can_choose_upload_scope else profile_plant
         department = requested_department if can_choose_upload_scope else profile_department
         customer = request.form.get("customer", "")
-        document_number = request.form.get("document_number", "").strip()
+        submitted_document_number = request.form.get("document_number", "").strip()
         is_revision = request.form.get("is_revision") == "on"
         revision_number = request.form.get("revision_number", "").strip() if is_revision else ""
         category = request.form.get("category", "").strip()
@@ -81,8 +81,6 @@ def index():
         if not files or all(uploaded_file.filename == "" for uploaded_file in files):
             return _upload_error("Please select at least one file.")
 
-        if not document_number:
-            return _upload_error("Document number is required.")
         if not revision_number:
             revision_number = 'Rev.00'
         if not category:
@@ -158,6 +156,18 @@ def index():
                 "You can upload only to your assigned plant and department.",
                 status_code=403,
             )
+
+        if is_revision:
+            try:
+                document_number = DocumentService.format_document_number(
+                    plant,
+                    submitted_document_number,
+                )
+            except ValueError as exc:
+                return _upload_error(str(exc))
+        else:
+            # Empty tells the service to reserve the next plant-specific number.
+            document_number = ""
 
         uploaded_count = 0
         email_failures = []
@@ -291,6 +301,17 @@ def index():
         for category in categories
     }
 
+    next_document_numbers = {
+        plant["label"]: DocumentService.peek_next_document_number(plant["label"])
+        for plant in PLANTS
+    }
+    try:
+        profile_next_document_number = (
+            DocumentService.peek_next_document_number(profile_plant) if profile_plant else ""
+        )
+    except ValueError:
+        profile_next_document_number = ""
+
     return render_template(
         "upload.html",
         customers=CUSTOMERS,
@@ -300,6 +321,8 @@ def index():
         PLANTS=PLANTS,
         DEPARTMENTS=DEPARTMENTS,
         can_choose_upload_scope=can_choose_upload_scope,
+        next_document_numbers=next_document_numbers,
+        profile_next_document_number=profile_next_document_number,
     )
 
 

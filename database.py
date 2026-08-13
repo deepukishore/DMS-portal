@@ -317,6 +317,12 @@ SQLITE_SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS document_number_sequences (
+        plant_code TEXT PRIMARY KEY,
+        last_number INTEGER NOT NULL DEFAULT 0
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS recently_viewed (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_email TEXT NOT NULL,
@@ -472,6 +478,12 @@ MYSQL_SCHEMA = [
         revision_number VARCHAR(80),
         category VARCHAR(255),
         INDEX idx_versions_document (document_id, version_number)
+    ) ENGINE=InnoDB
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS document_number_sequences (
+        plant_code VARCHAR(8) PRIMARY KEY,
+        last_number INT NOT NULL DEFAULT 0
     ) ENGINE=InnoDB
     """,
     """
