@@ -711,7 +711,7 @@ function renderQms() {
         },
         selectedSecondary === 'iatf_audit'
           ? {
-              label: 'External Audit NC tracking Report format',
+              label: 'External Audit NCs CAPA format',
               href: IATF_CAPA_DOWNLOAD_URL,
               download: true,
             }

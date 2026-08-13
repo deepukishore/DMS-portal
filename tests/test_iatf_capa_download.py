@@ -38,7 +38,7 @@ class IatfCapaDownloadTests(unittest.TestCase):
         )
 
         self.assertNotIn("Audit NC CAPA Format", template)
-        self.assertIn("External Audit NC tracking Report format", script)
+        self.assertIn("External Audit NCs CAPA format", script)
         self.assertIn("asset-panel-header-actions", script)
 
 
