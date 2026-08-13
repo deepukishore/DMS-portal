@@ -11,6 +11,7 @@ class UserStoreService:
     """Persists profiles and credentials in the portal's central database."""
 
     _legacy_db_path = None
+    QMS_LEVELS = {"L1", "L2", "L3", "L4"}
 
     @staticmethod
     def init_app(app):
@@ -219,6 +220,36 @@ class UserStoreService:
             )
             connection.commit()
         return UserStoreService.get_user_by_email(email)
+
+    @staticmethod
+    def update_qms_level(email, qms_level):
+        """Update a non-admin user's QMS access level."""
+        normalized_level = str(qms_level or "").strip().upper()
+        if normalized_level not in UserStoreService.QMS_LEVELS:
+            raise ValueError("QMS level must be L1, L2, L3, or L4.")
+
+        connection = UserStoreService._connect()
+        try:
+            existing = connection.execute(
+                "SELECT * FROM users WHERE email = ?",
+                (email,),
+            ).fetchone()
+            if not existing:
+                return None
+            if existing["role"] == "Admin" and normalized_level != "L1":
+                raise ValueError("Admin accounts are always assigned QMS level L1.")
+            connection.execute(
+                "UPDATE users SET qms_level = ? WHERE email = ?",
+                (normalized_level, email),
+            )
+            connection.commit()
+            updated = connection.execute(
+                "SELECT * FROM users WHERE email = ?",
+                (email,),
+            ).fetchone()
+            return dict(updated) if updated else None
+        finally:
+            connection.close()
 
     @staticmethod
     def update_avatar(email, filename):

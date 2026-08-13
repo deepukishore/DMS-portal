@@ -35,7 +35,7 @@
             {% endif %}
           </p>
         </div>
-        <strong>{{ level_counts[level] }}</strong>
+        <strong data-level-count="{{ level }}">{{ level_counts[level] }}</strong>
       </article>
     {% endfor %}
   </section>
@@ -86,7 +86,7 @@
         <tbody>
           {% for user in users %}
           {% set level = user.qms_level or 'L4' %}
-          <tr data-qms-level="{{ level }}">
+          <tr data-qms-level="{{ level }}" data-user-email="{{ user.email }}">
             <td>
               <div class="people-user-cell">
                 {% if user.avatar %}
@@ -115,10 +115,22 @@
               <span class="badge badge-{{ user.role|lower }}">{{ user.role }}</span>
             </td>
             <td>
-              <span class="qms-level-badge qms-level-{{ level|lower }}">{{ level }}</span>
+              <div class="people-qms-control">
+                <span class="qms-level-badge qms-level-{{ level|lower }}" data-qms-badge>{{ level }}</span>
+                {% if can_edit_qms_levels and user.role != 'Admin' %}
+                  <button type="button" class="people-qms-edit" title="Edit QMS level"
+                          aria-label="Edit QMS level for {{ user.name }}"
+                          data-qms-edit data-email="{{ user.email }}" data-name="{{ user.name }}" data-level="{{ level }}">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                  </button>
+                {% endif %}
+              </div>
             </td>
             <td>
-              <span class="people-access people-access-{{ level|lower }}">
+              <span class="people-access people-access-{{ level|lower }}" data-approval-access>
                 {% if level == 'L1' %}
                   Final approver
                 {% elif level == 'L2' %}
@@ -141,6 +153,34 @@
     </div>
   </section>
 </div>
+
+{% if can_edit_qms_levels %}
+<div class="modal-overlay" id="qms-level-modal" role="dialog" aria-modal="true" aria-labelledby="qms-level-modal-title">
+  <div class="modal-box people-qms-modal">
+    <button type="button" class="modal-close" id="qms-level-modal-close" aria-label="Close">&#x2715;</button>
+    <p class="eyebrow">Admin access</p>
+    <h3 id="qms-level-modal-title">Update QMS Level</h3>
+    <p class="people-qms-modal-user" id="qms-level-modal-user"></p>
+    <form id="qms-level-form">
+      <input type="hidden" id="qms-level-email" />
+      <label>QMS Level
+        <select id="qms-level-select" required>
+          <option value="L1">L1 · Final approval</option>
+          <option value="L2">L2 · First approval</option>
+          <option value="L3">L3 · Procedure access</option>
+          <option value="L4">L4 · Standard access</option>
+        </select>
+      </label>
+      <p class="people-qms-level-description" id="qms-level-description"></p>
+      <p class="people-qms-form-message" id="qms-level-form-message" aria-live="polite"></p>
+      <div class="people-qms-modal-actions">
+        <button type="submit" class="btn-primary" id="qms-level-save">Save Level</button>
+        <button type="button" class="btn-outline" id="qms-level-cancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block scripts %}
@@ -150,6 +190,29 @@ const peopleLevelFilter = document.getElementById('people-level-filter');
 const peopleRows = [...document.querySelectorAll('#people-table tbody tr')];
 const peopleVisibleCount = document.getElementById('people-visible-count');
 const peopleEmpty = document.getElementById('people-empty');
+const qmsUpdateUrl = {{ url_for('people.update_qms_level')|tojson }};
+const qmsModal = document.getElementById('qms-level-modal');
+const qmsForm = document.getElementById('qms-level-form');
+const qmsEmail = document.getElementById('qms-level-email');
+const qmsSelect = document.getElementById('qms-level-select');
+const qmsModalUser = document.getElementById('qms-level-modal-user');
+const qmsDescription = document.getElementById('qms-level-description');
+const qmsMessage = document.getElementById('qms-level-form-message');
+const qmsSave = document.getElementById('qms-level-save');
+
+const qmsAccessLabels = {
+  L1: 'Final approver',
+  L2: 'First approver',
+  L3: 'Procedure viewer',
+  L4: 'Standard user',
+};
+
+const qmsDescriptions = {
+  L1: 'Can perform final document approval.',
+  L2: 'Can perform first-stage document approval.',
+  L3: 'Can access controlled procedures.',
+  L4: 'Standard document access.',
+};
 
 function filterPeople() {
   const query = peopleSearch.value.trim().toLowerCase();
@@ -170,5 +233,87 @@ function filterPeople() {
 
 peopleSearch.addEventListener('input', filterPeople);
 peopleLevelFilter.addEventListener('change', filterPeople);
+
+function closeQmsModal() {
+  if (!qmsModal) return;
+  qmsModal.classList.remove('open');
+  qmsMessage.textContent = '';
+  qmsMessage.className = 'people-qms-form-message';
+}
+
+function updateQmsDescription() {
+  if (qmsDescription && qmsSelect) qmsDescription.textContent = qmsDescriptions[qmsSelect.value] || '';
+}
+
+function updateLevelCounts() {
+  ['L1', 'L2', 'L3', 'L4'].forEach((level) => {
+    const count = peopleRows.filter((row) => row.dataset.qmsLevel === level).length;
+    const output = document.querySelector(`[data-level-count="${level}"]`);
+    if (output) output.textContent = count;
+  });
+}
+
+document.querySelectorAll('[data-qms-edit]').forEach((button) => {
+  button.addEventListener('click', () => {
+    qmsEmail.value = button.dataset.email;
+    qmsSelect.value = button.dataset.level;
+    qmsModalUser.textContent = `${button.dataset.name} · ${button.dataset.email}`;
+    qmsMessage.textContent = '';
+    qmsMessage.className = 'people-qms-form-message';
+    updateQmsDescription();
+    qmsModal.classList.add('open');
+    qmsSelect.focus();
+  });
+});
+
+qmsSelect?.addEventListener('change', updateQmsDescription);
+document.getElementById('qms-level-modal-close')?.addEventListener('click', closeQmsModal);
+document.getElementById('qms-level-cancel')?.addEventListener('click', closeQmsModal);
+qmsModal?.addEventListener('click', (event) => { if (event.target === qmsModal) closeQmsModal(); });
+document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && qmsModal?.classList.contains('open')) closeQmsModal(); });
+
+qmsForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  qmsSave.disabled = true;
+  qmsMessage.textContent = 'Saving...';
+  qmsMessage.className = 'people-qms-form-message';
+  try {
+    const response = await fetch(qmsUpdateUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+      body: JSON.stringify({ email: qmsEmail.value, qms_level: qmsSelect.value }),
+    });
+    const data = await response.json();
+    if (!response.ok || !data.ok) throw new Error(data.message || 'Unable to update the QMS level.');
+
+    const row = peopleRows.find((item) => item.dataset.userEmail === data.user.email);
+    if (row) {
+      const level = data.user.qms_level;
+      const badge = row.querySelector('[data-qms-badge]');
+      const access = row.querySelector('[data-approval-access]');
+      const editButton = row.querySelector('[data-qms-edit]');
+      row.dataset.qmsLevel = level;
+      if (badge) {
+        badge.textContent = level;
+        badge.className = `qms-level-badge qms-level-${level.toLowerCase()}`;
+      }
+      if (access) {
+        access.textContent = qmsAccessLabels[level];
+        access.className = `people-access people-access-${level.toLowerCase()}`;
+      }
+      if (editButton) editButton.dataset.level = level;
+    }
+    updateLevelCounts();
+    filterPeople();
+    qmsMessage.textContent = data.message;
+    qmsMessage.className = 'people-qms-form-message is-success';
+    setTimeout(closeQmsModal, 700);
+  } catch (error) {
+    qmsMessage.textContent = error.message || 'Unable to update the QMS level.';
+    qmsMessage.className = 'people-qms-form-message is-error';
+  } finally {
+    qmsSave.disabled = false;
+  }
+});
 </script>
 {% endblock %}

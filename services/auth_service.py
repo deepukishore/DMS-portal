@@ -97,7 +97,12 @@ class AuthService:
     @staticmethod
     def get_qms_level():
         """Return the current user's QMS access level (L1–L4). Admin always L1."""
-        return session.get('user_qms_level', 'L4')
+        user = AuthService.get_current_user()
+        if not user:
+            return session.get('user_qms_level', 'L4')
+        qms_level = 'L1' if user.get('role') == 'Admin' else user.get('qms_level', 'L4')
+        session['user_qms_level'] = qms_level
+        return qms_level
 
     @staticmethod
     def can_upload_across_scope(user=None):

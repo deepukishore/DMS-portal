@@ -128,3 +128,12 @@ class SystemLogService:
     @staticmethod
     def log_password_change(user_email, user_name):
         SystemLogService._entry(user_email, user_name, "PASSWORD_CHANGE", "Password updated successfully.")
+
+    @staticmethod
+    def log_qms_level_change(admin_email, admin_name, target_email, previous_level, new_level):
+        SystemLogService._entry(
+            admin_email,
+            admin_name,
+            "QMS_LEVEL_CHANGE",
+            f'Changed QMS level for "{target_email}" from {previous_level} to {new_level}.',
+        )
