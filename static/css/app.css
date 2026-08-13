@@ -8061,7 +8061,7 @@ body.app-body {
 .approval-records-table .approval-col-file { width: 260px; }
 .approval-records-table .approval-col-plant { width: 75px; }
 .approval-records-table .approval-col-department { width: 220px; }
-.approval-records-table .approval-col-customer { width: 165px; }
+.approval-records-table .approval-col-document-number { width: 165px; }
 .approval-records-table .approval-col-status { width: 175px; }
 .approval-records-table .approval-col-review { width: 95px; }
 .approval-records-table th,
@@ -8108,6 +8108,13 @@ body.app-body {
 }
 .record-date {
   font-size: .78rem;
+  white-space: nowrap;
+}
+.record-document-number {
+  overflow: hidden;
+  font-size: .78rem;
+  font-weight: 500;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 .record-cell-clamp {

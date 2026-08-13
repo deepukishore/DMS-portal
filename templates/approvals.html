@@ -1,5 +1,4 @@
 {% extends 'layout.html' %}
-{% from 'components/customer_brand.html' import badge with context %}
 {% block title %}Approvals | Document Management System{% endblock %}
 
 {% block breadcrumb %}
@@ -116,7 +115,7 @@
         <col class="approval-col-file" />
         <col class="approval-col-plant" />
         <col class="approval-col-department" />
-        <col class="approval-col-customer" />
+        <col class="approval-col-document-number" />
         <col class="approval-col-status" />
         <col class="approval-col-review" />
       </colgroup>
@@ -126,7 +125,7 @@
           <th>File</th>
           <th>Plant</th>
           <th>Department</th>
-          <th>Customer</th>
+          <th>Document Number</th>
           <th>Status</th>
           <th>Review</th>
         </tr>
@@ -143,13 +142,15 @@
                   <strong title="{{ r.original_file_name or r.file_name }}">{{ r.original_file_name or r.file_name }}</strong>
                 </div>
                 <div class="text-dim record-file-meta">
-                  {{ r.document_number or '—' }} · {{ r.revision_number or '—' }}{% if r.category %} · {{ r.category }}{% endif %}
+                  {{ r.revision_number or '—' }}{% if r.category %} · {{ r.category }}{% endif %}
                 </div>
               </div>
             </td>
             <td><span class="plant-badge" title="{{ r.plant | plant_code }}">{{ r.plant | plant_code }}</span></td>
             <td><span class="record-cell-clamp" title="{{ r.department }}">{{ r.department }}</span></td>
-            <td>{{ badge(r.customer, true) }}</td>
+            <td class="record-document-number" title="{{ r.document_number or 'Not assigned' }}">
+              {{ r.document_number or '—' }}
+            </td>
             <td><span class="status-pill status-{{ r.approval_status|lower }}">{{ r.approval_status }}</span></td>
             <td><a href="{{ url_for('approvals.review_document', token=r.review_token) }}" class="btn-outline btn-sm">Review</a></td>
           </tr>
