@@ -229,9 +229,21 @@
                 <fieldset class="review-recipient-fieldset">
                   <legend>Select the people who should receive the file after final approval.</legend>
                   <p class="section-sub">Select one or more email recipients.</p>
+                  {% if recipient_users %}
+                  <div class="review-recipient-search-wrap">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="search"
+                           id="recipient-search-input"
+                           class="review-recipient-search"
+                           placeholder="Search by name, email, or department"
+                           aria-label="Search recipients"
+                           aria-controls="selected-recipients-input"
+                           autocomplete="off" />
+                  </div>
+                  {% endif %}
                   <div class="review-recipient-picker" id="selected-recipients-input">
                     {% for user in recipient_users %}
-                    <label class="review-recipient-option">
+                    <label class="review-recipient-option" data-recipient-search="{{ user.name }} {{ user.email }} {{ user.department }}">
                       <input type="checkbox"
                              name="selected_recipients"
                              value="{{ user.email }}"
@@ -244,6 +256,7 @@
                     {% else %}
                     <p class="review-recipient-empty">No people with email addresses are available.</p>
                     {% endfor %}
+                    <p class="review-recipient-empty" id="recipient-search-empty" hidden>No matching people found.</p>
                   </div>
                 </fieldset>
                 {% elif record.selected_recipients %}
@@ -302,6 +315,31 @@
     const reviewRejectionComment = document.getElementById('review-rejection-comment');
     const rejectionCommentInput = document.getElementById('rejection-comment-input');
     const selectedRecipientsInput = document.getElementById('selected-recipients-input');
+    const recipientSearchInput = document.getElementById('recipient-search-input');
+    const recipientSearchEmpty = document.getElementById('recipient-search-empty');
+
+    if (recipientSearchInput && selectedRecipientsInput) {
+      const recipientOptions = Array.from(
+        selectedRecipientsInput.querySelectorAll('.review-recipient-option')
+      );
+      recipientSearchInput.addEventListener('input', () => {
+        const searchTerms = recipientSearchInput.value
+          .trim()
+          .toLocaleLowerCase()
+          .split(/\s+/)
+          .filter(Boolean);
+        let visibleCount = 0;
+
+        recipientOptions.forEach((option) => {
+          const searchableText = (option.dataset.recipientSearch || '').toLocaleLowerCase();
+          const matches = searchTerms.every((term) => searchableText.includes(term));
+          option.hidden = !matches;
+          if (matches) visibleCount += 1;
+        });
+
+        if (recipientSearchEmpty) recipientSearchEmpty.hidden = visibleCount > 0;
+      });
+    }
 
     function syncApprovalStatus(docId, status) {
       localStorage.setItem('approval-status-update', JSON.stringify({

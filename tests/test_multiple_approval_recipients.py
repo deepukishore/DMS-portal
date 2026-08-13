@@ -35,6 +35,10 @@ class MultipleApprovalRecipientTests(unittest.TestCase):
         self.assertIn('type="checkbox"', template)
         self.assertIn('name="selected_recipients"', template)
         self.assertIn("Select one or more email recipients.", template)
+        self.assertIn('id="recipient-search-input"', template)
+        self.assertIn("Search by name, email, or department", template)
+        self.assertIn('data-recipient-search="', template)
+        self.assertIn("option.hidden = !matches", template)
 
     def test_first_approval_saves_all_selected_recipient_emails(self):
         app = Flask(__name__)
