@@ -63,12 +63,13 @@ class DashboardReportRequestedUpdatesTests(unittest.TestCase):
         self.assertIn("function shadeChartColor", template)
         self.assertIn("const sideColor = shadeChartColor(frontColor, -.3)", template)
 
-    def test_request_corrections_precedes_reject(self):
+    def test_update_required_precedes_reject(self):
         template = self.read_template("approval_review.html")
 
         corrections_index = template.index('value="Hold" class="btn-decision btn-hold')
         reject_index = template.index('value="Rejected" class="btn-decision btn-reject')
         self.assertLess(corrections_index, reject_index)
+        self.assertIn("Update required", template[corrections_index:reject_index])
 
 
 if __name__ == "__main__":
