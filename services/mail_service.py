@@ -7,6 +7,84 @@ from extensions import mail
 from services.presentation_service import plant_code
 
 
+def _safe_html(value, fallback="N/A"):
+    return escape(str(value or fallback), quote=True)
+
+
+def _build_status_email_html(
+    *,
+    title,
+    subtitle,
+    intro,
+    details,
+    status_label,
+    header_start,
+    header_end,
+    badge_background,
+    badge_color,
+    note="",
+):
+    detail_rows = "".join(
+        f"""
+          <tr>
+            <td style="width:150px;padding:5px 10px 5px 0;color:#475467;font-weight:700;">{_safe_html(label)}</td>
+            <td style="padding:5px 0;color:#1d2939;word-break:break-word;">{_safe_html(value)}</td>
+          </tr>
+        """
+        for label, value in details
+    )
+    note_block = (
+        f"""
+          <div style="margin:20px 0 0;padding:13px 15px;background:#f6f9fc;border-left:4px solid {header_start};border-radius:4px;font-size:13px;line-height:1.6;color:#475467;">
+            {_safe_html(note)}
+          </div>
+        """
+        if note
+        else ""
+    )
+    current_year = datetime.now().year
+    return f"""
+      <!doctype html>
+      <html lang="en">
+        <body style="margin:0;padding:0;background:#eef3f7;font-family:Arial,Helvetica,sans-serif;color:#344054;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#eef3f7;">
+            <tr>
+              <td align="center" style="padding:24px 12px;">
+                <table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:640px;background:#ffffff;border:1px solid #d8e3ec;border-radius:8px;overflow:hidden;">
+                  <tr>
+                    <td align="center" style="padding:24px 28px;background:{header_start};background:linear-gradient(105deg,{header_start} 0%,{header_end} 100%);color:#ffffff;">
+                      <div style="font-size:22px;line-height:1.25;font-weight:700;">{_safe_html(title)}</div>
+                      <div style="margin-top:7px;font-size:12px;line-height:1.5;color:#ffffff;opacity:.92;">{_safe_html(subtitle)}</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:26px 30px 22px;">
+                      <p style="margin:0 0 18px;font-size:14px;line-height:1.65;color:#475467;">{_safe_html(intro)}</p>
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:13px;line-height:1.45;">
+                        {detail_rows}
+                      </table>
+                      {note_block}
+                      <div style="margin:22px 0 4px;text-align:center;font-size:16px;color:#667085;">
+                        <strong>Status:</strong>
+                        <span style="display:inline-block;margin-left:5px;padding:5px 10px;background:{badge_background};color:{badge_color};border-radius:999px;font-size:13px;font-weight:700;">{_safe_html(status_label)}</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="padding:16px 24px;background:#e7edf4;border-top:1px solid #d2dce6;color:#d92d20;font-size:11px;line-height:1.65;">
+                      <strong>&copy; {current_year} Rane Group | Confidential Information</strong><br />
+                      This is a system-generated email. Please do not reply to it.
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+      </html>
+    """
+
+
 class MailService:
     """Handles outbound email delivery."""
 
@@ -171,17 +249,20 @@ class MailService:
         """Send notification to uploader about approval decision."""
         try:
             if status == "Approved":
-                status_color, status_bg = "#3fb950", "rgba(63,185,80,.15)"
+                header_start, header_end = "#168a50", "#27b36a"
+                status_color, status_bg = "#137a46", "#dcf7e8"
             elif status == "Hold":
-                status_color, status_bg = "#d29922", "rgba(210,153,34,.15)"
+                header_start, header_end = "#c77800", "#f0a500"
+                status_color, status_bg = "#9a5b00", "#fff1d6"
             else:
-                status_color, status_bg = "#f85149", "rgba(248,81,73,.15)"
+                header_start, header_end = "#b42318", "#e5484d"
+                status_color, status_bg = "#a11f16", "#fde7e7"
             rejection_comment = (rejection_comment or "").strip()
-            status_phrase = "placed on hold" if status == "Hold" else status.lower()
-            subject_status = "On Hold" if status == "Hold" else status
+            status_phrase = "marked as update required" if status == "Hold" else status.lower()
+            subject_status = "Update Required" if status == "Hold" else status
             comment_block = ""
             if status in {"Rejected", "Hold"} and rejection_comment:
-                comment_label = "Corrections requested" if status == "Hold" else "Rejection comments"
+                comment_label = "Update requested" if status == "Hold" else "Rejection comments"
                 comment_block = f"{comment_label}: {rejection_comment}\n"
             
             msg = Message(
@@ -205,27 +286,34 @@ class MailService:
             )
             rejection_html = ""
             if status in {"Rejected", "Hold"} and rejection_comment:
-                comment_label = "Corrections requested" if status == "Hold" else "Rejection comments"
-                rejection_html = f"""
-                  <tr><td><strong>{comment_label}</strong></td><td>{rejection_comment}</td></tr>
-                """
-            msg.html = f"""
-                <p>Your document has been <strong>{status_phrase}</strong>.</p>
-                <table cellpadding="6" cellspacing="0" border="0">
-                  <tr><td><strong>File</strong></td><td>{record['file_name']}</td></tr>
-                  <tr><td><strong>Uploaded by</strong></td><td>{record['name']} ({record['user_id']})</td></tr>
-                  <tr><td><strong>Plant</strong></td><td>{plant_code(record['plant'])}</td></tr>
-                  <tr><td><strong>Department</strong></td><td>{record['department']}</td></tr>
-                  <tr><td><strong>Customer</strong></td><td>{record['customer']}</td></tr>
-                  <tr><td><strong>Document number</strong></td><td>{record.get('document_number', 'N/A')}</td></tr>
-                  <tr><td><strong>Revision number</strong></td><td>{record.get('revision_number', 'N/A')}</td></tr>
-                  <tr><td><strong>Category</strong></td><td>{record.get('category', 'N/A')}</td></tr>
-                  <tr><td><strong>Status</strong></td><td><span style="background:{status_bg};color:{status_color};padding:4px 8px;border-radius:4px;font-weight:600;">{status}</span></td></tr>
-                  <tr><td><strong>Updated at</strong></td><td>{decision_made_at or record.get('approval_updated_at', 'N/A')}</td></tr>
-                  {rejection_html}
-                </table>
-                <p style="margin-top:16px;color:#6e7681;">You can view your document in the Document Management System dashboard.</p>
-            """
+                comment_label = "Update requested" if status == "Hold" else "Rejection comments"
+                rejection_html = rejection_comment
+            display_status = "Update required" if status == "Hold" else status
+            details = [
+                ("Document", record.get("original_file_name") or record.get("file_name")),
+                ("Uploaded by", f"{record.get('name') or 'N/A'} ({record.get('user_id') or 'N/A'})"),
+                ("Plant", plant_code(record.get("plant", ""))),
+                ("Department", record.get("department")),
+                ("Customer", record.get("customer")),
+                ("Document number", record.get("document_number")),
+                ("Revision number", record.get("revision_number")),
+                ("Category", record.get("category")),
+                ("Updated at", decision_made_at or record.get("approval_updated_at")),
+            ]
+            if rejection_html:
+                details.append((comment_label, rejection_html))
+            msg.html = _build_status_email_html(
+                title=f"Document {subject_status}",
+                subtitle="Document Management System | Approval decision notification",
+                intro=f"Your document has been {status_phrase}.",
+                details=details,
+                status_label=display_status,
+                header_start=header_start,
+                header_end=header_end,
+                badge_background=status_bg,
+                badge_color=status_color,
+                note="Open the Document Management System dashboard to review the latest document status.",
+            )
             mail.send(msg)
             return True, None
         except Exception as exc:
@@ -254,19 +342,27 @@ class MailService:
                 f"Final approver: {record.get('final_approver', 'N/A')}\n"
                 f"Approved at: {approved_at or record.get('final_approved_at') or record.get('approval_updated_at', 'N/A')}\n"
             )
-            msg.html = f"""
-                <p>A Master Records document has received final approval.</p>
-                <table cellpadding="6" cellspacing="0" border="0">
-                  <tr><td><strong>File</strong></td><td>{record['file_name']}</td></tr>
-                  <tr><td><strong>Plant</strong></td><td>{plant_code(record['plant'])}</td></tr>
-                  <tr><td><strong>Department</strong></td><td>{record['department']}</td></tr>
-                  <tr><td><strong>Document number</strong></td><td>{record.get('document_number', 'N/A')}</td></tr>
-                  <tr><td><strong>Revision number</strong></td><td>{record.get('revision_number', 'N/A')}</td></tr>
-                  <tr><td><strong>First approver</strong></td><td>{record.get('first_approver', 'N/A')}</td></tr>
-                  <tr><td><strong>Final approver</strong></td><td>{record.get('final_approver', 'N/A')}</td></tr>
-                  <tr><td><strong>Approved at</strong></td><td>{approved_at or record.get('final_approved_at') or record.get('approval_updated_at', 'N/A')}</td></tr>
-                </table>
-            """
+            approved_on = approved_at or record.get("final_approved_at") or record.get("approval_updated_at")
+            msg.html = _build_status_email_html(
+                title="Master Records Approved",
+                subtitle="Document Management System | Final approval notification",
+                intro="A Master Records document has received final approval.",
+                details=[
+                    ("Document", record.get("original_file_name") or record.get("file_name")),
+                    ("Plant", plant_code(record.get("plant", ""))),
+                    ("Department", record.get("department")),
+                    ("Document number", record.get("document_number")),
+                    ("Revision number", record.get("revision_number")),
+                    ("First approver", record.get("first_approver")),
+                    ("Final approver", record.get("final_approver")),
+                    ("Approved at", approved_on),
+                ],
+                status_label="Approved",
+                header_start="#168a50",
+                header_end="#27b36a",
+                badge_background="#dcf7e8",
+                badge_color="#137a46",
+            )
             mail.send(msg)
             return True, None
         except Exception as exc:
@@ -296,19 +392,26 @@ class MailService:
                 f"Final approver: {record.get('final_approver', 'N/A')}\n"
                 f"Approved at: {approved_on}\n"
             )
-            msg.html = f"""
-                <p>A document has received final approval and has been shared with you.</p>
-                <table cellpadding="6" cellspacing="0" border="0">
-                  <tr><td><strong>File</strong></td><td>{record['file_name']}</td></tr>
-                  <tr><td><strong>Plant</strong></td><td>{plant_code(record['plant'])}</td></tr>
-                  <tr><td><strong>Department</strong></td><td>{record['department']}</td></tr>
-                  <tr><td><strong>Document number</strong></td><td>{record.get('document_number', 'N/A')}</td></tr>
-                  <tr><td><strong>Revision number</strong></td><td>{record.get('revision_number', 'N/A')}</td></tr>
-                  <tr><td><strong>First approver</strong></td><td>{record.get('first_approver', 'N/A')}</td></tr>
-                  <tr><td><strong>Final approver</strong></td><td>{record.get('final_approver', 'N/A')}</td></tr>
-                  <tr><td><strong>Approved at</strong></td><td>{approved_on}</td></tr>
-                </table>
-            """
+            msg.html = _build_status_email_html(
+                title="Document Approved and Shared",
+                subtitle="Document Management System | Final approval notification",
+                intro="A document has received final approval and has been shared with you.",
+                details=[
+                    ("Document", record.get("original_file_name") or record.get("file_name")),
+                    ("Plant", plant_code(record.get("plant", ""))),
+                    ("Department", record.get("department")),
+                    ("Document number", record.get("document_number")),
+                    ("Revision number", record.get("revision_number")),
+                    ("First approver", record.get("first_approver")),
+                    ("Final approver", record.get("final_approver")),
+                    ("Approved at", approved_on),
+                ],
+                status_label="Approved",
+                header_start="#168a50",
+                header_end="#27b36a",
+                badge_background="#dcf7e8",
+                badge_color="#137a46",
+            )
             mail.send(msg)
             return True, None
         except Exception as exc:

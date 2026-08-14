@@ -64,6 +64,67 @@ class ApprovalRequestEmailTests(unittest.TestCase):
         self.assertIn("Action required - Final approval", message.subject)
         self.assertIn("Pending final approval", message.html)
 
+    def test_decision_email_header_color_matches_response(self):
+        record = {
+            "file_name": "control-plan.pdf",
+            "name": "Uploader",
+            "user_id": "EMP001",
+            "plant": "P1 - Trichy Plant",
+            "department": "Quality",
+            "customer": "ZF",
+            "document_number": "ZRAI-DOC-P1-2026-001",
+            "revision_number": "Rev.01",
+            "category": "QMS",
+        }
+        expected = {
+            "Approved": ("#168a50", "Document Approved"),
+            "Hold": ("#c77800", "Document Update Required"),
+            "Rejected": ("#b42318", "Document Rejected"),
+        }
+
+        for status, (header_color, title) in expected.items():
+            with self.subTest(status=status), app.app_context(), patch(
+                "services.mail_service.mail.send"
+            ) as send:
+                ok, error = MailService.send_approval_decision_notification(
+                    "uploader@example.com",
+                    record,
+                    status,
+                    "2026-08-14 15:55:24",
+                    rejection_comment="Please update the document." if status != "Approved" else "",
+                )
+
+            self.assertTrue(ok)
+            self.assertIsNone(error)
+            message = send.call_args.args[0]
+            self.assertIn(title, message.html)
+            self.assertIn(f"background:{header_color}", message.html)
+
+    def test_approved_shared_email_uses_green_header(self):
+        record = {
+            "file_name": "approved-document.pdf",
+            "name": "Uploader",
+            "user_id": "EMP001",
+            "plant": "P1 - Trichy Plant",
+            "department": "Quality",
+            "document_number": "ZRAI-DOC-P1-2026-001",
+            "revision_number": "Rev.01",
+            "first_approver": "First Reviewer",
+            "final_approver": "Final Reviewer",
+        }
+
+        with app.app_context(), patch("services.mail_service.mail.send") as send:
+            ok, error = MailService.send_final_shared_notification(
+                ["recipient@example.com"], record, "2026-08-14 15:55:24"
+            )
+
+        self.assertTrue(ok)
+        self.assertIsNone(error)
+        message = send.call_args.args[0]
+        self.assertIn("Document Approved and Shared", message.html)
+        self.assertIn("background:#168a50", message.html)
+        self.assertIn("Status:</strong>", message.html)
+
 
 if __name__ == "__main__":
     unittest.main()
