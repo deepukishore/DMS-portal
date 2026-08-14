@@ -242,6 +242,27 @@ const legendDefaults = {
 function scaleColor() { return cssVar('--text-dim'); }
 function gridColor()  { return 'rgba(255,255,255,0.06)'; }
 
+function shadeChartColor(color, amount) {
+  const value = String(color || '').trim();
+  let channels = null;
+  if (/^#[0-9a-f]{6}$/i.test(value)) {
+    channels = [
+      parseInt(value.slice(1, 3), 16),
+      parseInt(value.slice(3, 5), 16),
+      parseInt(value.slice(5, 7), 16),
+    ];
+  } else {
+    const match = value.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+    if (match) channels = match.slice(1, 4).map(Number);
+  }
+  if (!channels) return value || 'rgb(25, 114, 255)';
+  const adjusted = channels.map(channel => {
+    const target = amount < 0 ? 0 : 255;
+    return Math.round(channel + ((target - channel) * Math.abs(amount)));
+  });
+  return `rgb(${adjusted[0]}, ${adjusted[1]}, ${adjusted[2]})`;
+}
+
 // Add dimensional faces and lighting to Chart.js elements while preserving
 // the existing chart types, data, tooltips, and responsive behaviour.
 const chart3DDepthPlugin = {
@@ -249,20 +270,34 @@ const chart3DDepthPlugin = {
   beforeDatasetDraw(chart, args, pluginOptions) {
     const { ctx } = chart;
     const meta = chart.getDatasetMeta(args.index);
-    const depth = Number(pluginOptions.depth) || 7;
+    const dataset = chart.data.datasets[args.index] || {};
+    const depth = Number(pluginOptions.depth) || 5;
     ctx.save();
 
     if (meta.type === 'bar') {
-      ctx.fillStyle = 'rgba(15, 42, 74, .2)';
-      meta.data.forEach(element => {
+      meta.data.forEach((element, elementIndex) => {
         const props = element.getProps(['x', 'y', 'base', 'width', 'height'], true);
         if (![props.x, props.y, props.base, props.width, props.height].every(Number.isFinite)) return;
+        const horizontal = chart.options.indexAxis === 'y';
+        const visibleLength = horizontal
+          ? Math.abs(props.x - props.base)
+          : Math.abs(props.y - props.base);
+        if (visibleLength < 1) return;
 
-        if (chart.options.indexAxis === 'y') {
+        const datasetColor = Array.isArray(dataset.backgroundColor)
+          ? dataset.backgroundColor[elementIndex]
+          : dataset.backgroundColor;
+        const frontColor = datasetColor || 'rgb(25, 114, 255)';
+        const topColor = shadeChartColor(frontColor, -.12);
+        const sideColor = shadeChartColor(frontColor, -.3);
+        ctx.save();
+
+        if (horizontal) {
           const left = Math.min(props.x, props.base);
           const right = Math.max(props.x, props.base);
           const top = props.y - (props.height / 2);
           const bottom = props.y + (props.height / 2);
+          ctx.fillStyle = topColor;
           ctx.beginPath();
           ctx.moveTo(left, top);
           ctx.lineTo(right, top);
@@ -270,6 +305,7 @@ const chart3DDepthPlugin = {
           ctx.lineTo(left + depth, top - depth);
           ctx.closePath();
           ctx.fill();
+          ctx.fillStyle = sideColor;
           ctx.beginPath();
           ctx.moveTo(right, top);
           ctx.lineTo(right, bottom);
@@ -282,6 +318,7 @@ const chart3DDepthPlugin = {
           const right = props.x + (props.width / 2);
           const top = Math.min(props.y, props.base);
           const bottom = Math.max(props.y, props.base);
+          ctx.fillStyle = topColor;
           ctx.beginPath();
           ctx.moveTo(left, top);
           ctx.lineTo(right, top);
@@ -289,6 +326,7 @@ const chart3DDepthPlugin = {
           ctx.lineTo(left + depth, top - depth);
           ctx.closePath();
           ctx.fill();
+          ctx.fillStyle = sideColor;
           ctx.beginPath();
           ctx.moveTo(right, top);
           ctx.lineTo(right, bottom);
@@ -297,29 +335,44 @@ const chart3DDepthPlugin = {
           ctx.closePath();
           ctx.fill();
         }
+        ctx.restore();
       });
     }
 
     if (meta.type === 'doughnut' || meta.type === 'pie') {
-      ctx.fillStyle = 'rgba(15, 42, 74, .24)';
-      meta.data.forEach(element => {
+      meta.data.forEach((element, elementIndex) => {
         const arc = element.getProps(
           ['x', 'y', 'innerRadius', 'outerRadius', 'startAngle', 'endAngle'],
           true
         );
         if (![arc.x, arc.y, arc.innerRadius, arc.outerRadius, arc.startAngle, arc.endAngle].every(Number.isFinite)) return;
+        if (Math.abs(arc.endAngle - arc.startAngle) < .001) return;
+        const segmentColor = Array.isArray(dataset.backgroundColor)
+          ? dataset.backgroundColor[elementIndex]
+          : dataset.backgroundColor;
+        ctx.save();
+        ctx.fillStyle = segmentColor || 'rgb(25, 114, 255)';
+        ctx.globalAlpha = .42;
         ctx.beginPath();
         ctx.arc(arc.x, arc.y + depth, arc.outerRadius, arc.startAngle, arc.endAngle);
         ctx.arc(arc.x, arc.y + depth, arc.innerRadius, arc.endAngle, arc.startAngle, true);
         ctx.closePath();
         ctx.fill();
+        ctx.restore();
       });
     }
 
-    ctx.shadowColor = 'rgba(15, 42, 74, .3)';
-    ctx.shadowBlur = 12;
-    ctx.shadowOffsetX = 5;
-    ctx.shadowOffsetY = 7;
+    if (meta.type === 'bar') {
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+    } else {
+      ctx.shadowColor = 'rgba(15, 42, 74, .18)';
+      ctx.shadowBlur = 6;
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 4;
+    }
   },
   afterDatasetDraw(chart) {
     chart.ctx.restore();
@@ -369,10 +422,10 @@ new Chart(document.getElementById('plantChart'), {
   data: {
     labels: plantEntries.map(([k]) => plantCode(k)),
     datasets: [
-      { label: 'Approved', data: plantEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 4 },
-      { label: 'Pending',  data: plantEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 4 },
-      { label: 'Hold',     data: plantEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 4 },
-      { label: 'Rejected', data: plantEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 4 },
+      { label: 'Approved', data: plantEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 0 },
+      { label: 'Pending',  data: plantEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 0 },
+      { label: 'Hold',     data: plantEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 0 },
+      { label: 'Rejected', data: plantEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 0 },
     ]
   },
   options: {
@@ -396,10 +449,10 @@ new Chart(document.getElementById('customerChart'), {
   data: {
     labels: custEntries.map(([k]) => k),
     datasets: [
-      { label: 'Approved', data: custEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 4 },
-      { label: 'Pending',  data: custEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 4 },
-      { label: 'Hold',     data: custEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 4 },
-      { label: 'Rejected', data: custEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 4 },
+      { label: 'Approved', data: custEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 0 },
+      { label: 'Pending',  data: custEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 0 },
+      { label: 'Hold',     data: custEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 0 },
+      { label: 'Rejected', data: custEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 0 },
     ]
   },
   options: {
@@ -422,10 +475,10 @@ new Chart(document.getElementById('departmentChart'), {
   data: {
     labels: deptLabels,
     datasets: [
-      { label: 'Approved', data: deptEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 4 },
-      { label: 'Pending',  data: deptEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 4 },
-      { label: 'Hold',     data: deptEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 4 },
-      { label: 'Rejected', data: deptEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 4 },
+      { label: 'Approved', data: deptEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 0 },
+      { label: 'Pending',  data: deptEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 0 },
+      { label: 'Hold',     data: deptEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 0 },
+      { label: 'Rejected', data: deptEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 0 },
     ]
   },
   options: {
@@ -505,7 +558,7 @@ if (libEntries.length) {
         backgroundColor: libColors,
         borderColor: libColors,
         borderWidth: 1,
-        borderRadius: { topLeft: 7, topRight: 7, bottomLeft: 0, bottomRight: 0 },
+        borderRadius: 0,
         borderSkipped: 'bottom',
         categoryPercentage: 0.68,
         barPercentage: 0.72,

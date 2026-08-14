@@ -59,6 +59,9 @@ class DashboardReportRequestedUpdatesTests(unittest.TestCase):
         self.assertIn("Chart.register(chart3DDepthPlugin)", template)
         self.assertIn("meta.type === 'bar'", template)
         self.assertIn("meta.type === 'doughnut'", template)
+        self.assertIn("if (visibleLength < 1) return", template)
+        self.assertIn("function shadeChartColor", template)
+        self.assertIn("const sideColor = shadeChartColor(frontColor, -.3)", template)
 
     def test_request_corrections_precedes_reject(self):
         template = self.read_template("approval_review.html")
