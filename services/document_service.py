@@ -169,7 +169,8 @@ class DocumentService:
         if status == "Pending":
             return [
                 record for record in records
-                if DocumentService.is_pending_status(record.get("approval_status"))
+                if (record.get("approval_status") or "Pending")
+                in {"Pending", "Pending Final Approval"}
             ]
         return [
             record for record in records

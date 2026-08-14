@@ -282,11 +282,11 @@
                   {% if record.approval_status == 'Pending Final Approval' %}Approve final stage{% else %}Approve{% endif %}
                 </button>
                 {% endif %}
-                <button type="submit" name="status" value="Rejected" class="btn-decision btn-reject {% if record.approval_status == 'Rejected' %}is-active{% endif %}">
-                  Reject
-                </button>
                 <button type="submit" name="status" value="Hold" class="btn-decision btn-hold {% if record.approval_status == 'Hold' %}is-active{% endif %}">
                   Request corrections
+                </button>
+                <button type="submit" name="status" value="Rejected" class="btn-decision btn-reject {% if record.approval_status == 'Rejected' %}is-active{% endif %}">
+                  Reject
                 </button>
               </form>
             {% else %}

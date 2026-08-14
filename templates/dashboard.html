@@ -91,23 +91,54 @@
   <div class="dashboard-section-heading">
     <div>
       <p class="eyebrow">Activity</p>
-      <h2 id="activity-heading">Daily document trend</h2>
+      <h2 id="activity-heading">Your document shortcuts</h2>
     </div>
-    <p>Uploads during the last 14 days. Select a point to open that day.</p>
+    <p>Open saved and recently viewed documents without searching again.</p>
   </div>
   <div class="dashboard-activity-grid">
-    <article class="dashboard-analytics-panel dashboard-trend-panel">
+    <article class="dashboard-analytics-panel dashboard-bookmarks-panel">
       <div class="dashboard-panel-title">
-        <div><strong>Daily uploads</strong><span>Documents added per day</span></div>
-        <a href="{{ url_for('graphics_report.index') }}">Open full report →</a>
+        <div><strong>Bookmarks</strong><span>Your saved documents</span></div>
       </div>
-      <div class="dashboard-trend-chart" id="dashboard-trend-chart"
-           data-points='{{ daily_trend | tojson }}'
-           data-base-url="{{ url_for('dashboard.index') }}"
-           role="img" aria-label="Daily document upload trend for the last 14 days">
-        <svg viewBox="0 0 900 280" preserveAspectRatio="none" aria-hidden="true"></svg>
-        <p class="dashboard-chart-empty" hidden>No uploads were recorded in this period.</p>
-      </div>
+      {% if bookmarks %}
+        <div class="table-wrap dashboard-bookmarks-wrap">
+          <table class="data-table dashboard-bookmarks-table">
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Document No.</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody data-bookmarks-body>
+              {% for doc in bookmarks %}
+                <tr data-bookmark-row>
+                  <td>
+                    <a class="dashboard-bookmark-name" href="{{ url_for('dashboard.view_document', doc_id=doc.id) }}" title="{{ doc.original_file_name or doc.file_name }}">
+                      {{ doc.original_file_name or doc.file_name }}
+                    </a>
+                  </td>
+                  <td class="mono text-dim">{{ doc.document_number or 'Not assigned' }}</td>
+                  <td><span class="status-pill status-{{ (doc.approval_status or 'pending') | lower }}">{{ doc.approval_status or 'Pending' }}</span></td>
+                  <td class="action-cell">
+                    <div class="table-actions">
+                      <a href="{{ url_for('dashboard.view_document', doc_id=doc.id) }}" class="btn-icon btn-view" title="Open document" aria-label="Open document">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                      </a>
+                      <button class="btn-icon btn-bookmark active" data-doc-id="{{ doc.id }}" title="Remove from bookmarks" aria-label="Remove from bookmarks" onclick="toggleBookmark(event, {{ doc.id }})">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="dashboard-empty-note" data-bookmarks-empty><span aria-hidden="true">☆</span><strong>No bookmarks yet</strong><p>Use the bookmark button in the documents table to save quick links here.</p></div>
+      {% endif %}
     </article>
     <article class="dashboard-analytics-panel dashboard-recent-panel">
       <div class="dashboard-panel-title">
@@ -132,11 +163,11 @@
   </div>
 </section>
 
-<section class="surface-panel dashboard-search-panel" id="dashboard-search">
+<section class="surface-panel dashboard-search-panel dashboard-documents-panel" id="documents">
   <div class="panel-head">
     <div>
-      <h2 class="section-title">Find a document</h2>
-      <p class="section-sub">Search by file, uploader, document number, category, customer, department, or date. Use filters to narrow the list.</p>
+      <h2 class="section-title">Documents</h2>
+      <p class="section-sub">Find documents by file, uploader, document number, category, customer, department, or date. {{ total_records }} record(s) match the current view.</p>
     </div>
     <a href="{{ url_for('dashboard.export_documents', search=search, plant=selected_plant, department=selected_dept, customer=selected_customer, status=selected_status) }}" class="btn-outline">Export current view</a>
   </div>
@@ -174,15 +205,6 @@
     <button type="submit" class="btn-primary">Apply</button>
     <a href="{{ url_for('dashboard.index') }}" class="btn-outline">Reset</a>
   </form>
-</section>
-
-<section class="surface-panel dashboard-documents-panel" id="documents">
-  <div class="panel-head">
-    <div>
-      <h2 class="section-title">Documents</h2>
-      <p class="section-sub">{{ total_records }} record(s) shown in the current view.</p>
-    </div>
-  </div>
 
   <div class="pg-bar">
     <span class="pg-info">
@@ -359,6 +381,14 @@ function toggleBookmark(event, docId) {
       } else {
         btn.classList.remove('active');
         btn.title = 'Add to bookmarks';
+        const bookmarkRow = btn.closest('[data-bookmark-row]');
+        if (bookmarkRow) {
+          const bookmarkBody = bookmarkRow.parentElement;
+          bookmarkRow.remove();
+          if (bookmarkBody && !bookmarkBody.querySelector('[data-bookmark-row]')) {
+            bookmarkBody.innerHTML = '<tr><td colspan="4" class="empty-state">No bookmarked documents yet.</td></tr>';
+          }
+        }
       }
     }
   })

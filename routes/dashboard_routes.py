@@ -4,7 +4,6 @@ import os
 from io import StringIO
 import json
 from collections import Counter
-from datetime import datetime, timedelta
 
 from flask import Blueprint, Response, flash, redirect, render_template, request, send_file, session, url_for, abort, current_app, jsonify
 
@@ -58,33 +57,6 @@ def _count_approved_by(records, field):
         if (record.get("approval_status") or "") == "Approved"
     ]
     return _count_by(approved_records, field)
-
-
-def _daily_upload_trend(records, days=14):
-    """Return a gap-free daily upload series suitable for the dashboard chart."""
-    today = datetime.now().date()
-    first_day = today - timedelta(days=days - 1)
-    daily_counts = Counter()
-
-    for record in records:
-        uploaded_at = str(record.get("uploaded_at") or "").strip()
-        if len(uploaded_at) < 10:
-            continue
-        try:
-            uploaded_day = datetime.strptime(uploaded_at[:10], "%Y-%m-%d").date()
-        except ValueError:
-            continue
-        if first_day <= uploaded_day <= today:
-            daily_counts[uploaded_day.isoformat()] += 1
-
-    return [
-        {
-            "date": (first_day + timedelta(days=offset)).isoformat(),
-            "label": (first_day + timedelta(days=offset)).strftime("%d %b"),
-            "count": daily_counts[(first_day + timedelta(days=offset)).isoformat()],
-        }
-        for offset in range(days)
-    ]
 
 
 def _require_login():
@@ -166,7 +138,6 @@ def index():
     plant_counts = _count_approved_by(overview_records, "plant")
     department_counts = _count_by(overview_records, "department")
     plant_count_map = {item["label"]: item["count"] for item in plant_counts}
-    daily_trend = _daily_upload_trend(overview_records)
     library_stats = DocumentLibraryService.get_dashboard_statistics(
         qms_level=AuthService.get_qms_level(),
         access_department=visible_department,
@@ -205,7 +176,6 @@ def index():
         plant_counts=plant_counts,
         plant_count_map=plant_count_map,
         department_counts=department_counts,
-        daily_trend=daily_trend,
         library_stats=library_stats,
         recently_viewed=recently_viewed,
         bookmarks=bookmarks,
