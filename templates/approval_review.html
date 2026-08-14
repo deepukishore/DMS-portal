@@ -228,7 +228,6 @@
                 {% if record.approval_status == 'Pending' %}
                 <fieldset class="review-recipient-fieldset">
                   <legend>Select the people who should receive the file after final approval.</legend>
-                  <p class="section-sub">Select one or more email recipients.</p>
                   {% if recipient_users %}
                   <div class="review-recipient-search-wrap">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -241,7 +240,7 @@
                            autocomplete="off" />
                   </div>
                   {% endif %}
-                  <!-- <div class="review-recipient-picker" id="selected-recipients-input">
+                  <div class="review-recipient-picker" id="selected-recipients-input">
                     {% for user in recipient_users %}
                     <label class="review-recipient-option" data-recipient-search="{{ user.name }} {{ user.email }} {{ user.department }}">
                       <input type="checkbox"
@@ -257,7 +256,11 @@
                     <p class="review-recipient-empty">No people with email addresses are available.</p>
                     {% endfor %}
                     <p class="review-recipient-empty" id="recipient-search-empty" hidden>No matching people found.</p>
-                  </div> -->
+                  </div>
+                  <div class="review-selected-people" id="selected-people-summary" aria-live="polite" hidden>
+                    <span>Selected people</span>
+                    <div class="review-recipient-chips" id="selected-people-names"></div>
+                  </div>
                 </fieldset>
                 {% elif record.selected_recipients %}
                 <div class="review-selected-recipients" role="note">
@@ -275,11 +278,11 @@
                 </label>
                 {% if record.approval_status == 'Pending' %}
                 <button type="submit" name="status" value="First Approved" class="btn-decision btn-approve">
-                  Approve first stage
+                  Approve
                 </button>
                 {% else %}
                 <button type="submit" name="status" value="Approved" class="btn-decision btn-approve {% if record.approval_status == 'Approved' %}is-active{% endif %}">
-                  {% if record.approval_status == 'Pending Final Approval' %}Approve final stage{% else %}Approve{% endif %}
+                  {% if record.approval_status == 'Pending Final Approval' %}Approve {% else %}Approve{% endif %}
                 </button>
                 {% endif %}
                 <button type="submit" name="status" value="Hold" class="btn-decision btn-hold {% if record.approval_status == 'Hold' %}is-active{% endif %}">
@@ -322,11 +325,36 @@
     const selectedRecipientsInput = document.getElementById('selected-recipients-input');
     const recipientSearchInput = document.getElementById('recipient-search-input');
     const recipientSearchEmpty = document.getElementById('recipient-search-empty');
+    const selectedPeopleSummary = document.getElementById('selected-people-summary');
+    const selectedPeopleNames = document.getElementById('selected-people-names');
 
     if (recipientSearchInput && selectedRecipientsInput) {
       const recipientOptions = Array.from(
         selectedRecipientsInput.querySelectorAll('.review-recipient-option')
       );
+
+      const updateSelectedPeople = () => {
+        if (!selectedPeopleSummary || !selectedPeopleNames) return;
+        const selectedNames = recipientOptions
+          .filter(option => option.querySelector('input[type="checkbox"]')?.checked)
+          .map(option => option.querySelector('strong')?.textContent.trim())
+          .filter(Boolean);
+
+        selectedPeopleNames.replaceChildren();
+        selectedNames.forEach(name => {
+          const chip = document.createElement('span');
+          chip.className = 'review-recipient-chip';
+          chip.textContent = name;
+          selectedPeopleNames.appendChild(chip);
+        });
+        selectedPeopleSummary.hidden = selectedNames.length === 0;
+      };
+
+      recipientOptions.forEach(option => {
+        option.querySelector('input[type="checkbox"]')?.addEventListener('change', updateSelectedPeople);
+      });
+      updateSelectedPeople();
+
       recipientSearchInput.addEventListener('input', () => {
         const searchTerms = recipientSearchInput.value
           .trim()
@@ -337,7 +365,11 @@
 
         recipientOptions.forEach((option) => {
           const searchableText = (option.dataset.recipientSearch || '').toLocaleLowerCase();
-          const matches = searchTerms.every((term) => searchableText.includes(term));
+          const compactSearchableText = searchableText.replace(/[\s._@-]+/g, '');
+          const matches = searchTerms.every((term) => (
+            searchableText.includes(term)
+            || compactSearchableText.includes(term.replace(/[\s._@-]+/g, ''))
+          ));
           option.hidden = !matches;
           if (matches) visibleCount += 1;
         });

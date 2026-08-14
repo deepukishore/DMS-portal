@@ -2228,6 +2228,23 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 .review-recipient-empty[hidden] {
   display: none;
 }
+.review-selected-people {
+  margin-top: .6rem;
+  padding: .7rem .75rem;
+  background: rgba(25, 114, 255, .07);
+  border: 1px solid rgba(25, 114, 255, .2);
+  border-radius: var(--radius-sm);
+}
+.review-selected-people[hidden] {
+  display: none;
+}
+.review-selected-people > span {
+  display: block;
+  margin-bottom: .45rem;
+  color: var(--text-sub);
+  font-size: .72rem;
+  font-weight: 700;
+}
 .review-selected-recipients {
   min-width: 0;
   padding: .8rem .9rem;

@@ -71,6 +71,16 @@ class DashboardReportRequestedUpdatesTests(unittest.TestCase):
         self.assertLess(corrections_index, reject_index)
         self.assertIn("Update required", template[corrections_index:reject_index])
 
+    def test_recipient_picker_is_visible_and_searchable(self):
+        template = self.read_template("approval_review.html")
+
+        self.assertIn('<div class="review-recipient-picker" id="selected-recipients-input">', template)
+        self.assertNotIn('<!-- <div class="review-recipient-picker"', template)
+        self.assertIn("compactSearchableText", template)
+        self.assertIn('id="selected-people-summary"', template)
+        self.assertIn("const updateSelectedPeople", template)
+        self.assertIn("chip.textContent = name", template)
+
 
 if __name__ == "__main__":
     unittest.main()

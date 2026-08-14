@@ -34,7 +34,10 @@ class MultipleApprovalRecipientTests(unittest.TestCase):
         self.assertIn('class="review-recipient-picker"', template)
         self.assertIn('type="checkbox"', template)
         self.assertIn('name="selected_recipients"', template)
-        self.assertIn("Select one or more email recipients.", template)
+        self.assertIn(
+            "Select the people who should receive the file after final approval.",
+            template,
+        )
         self.assertIn('id="recipient-search-input"', template)
         self.assertIn("Search by name, email, or department", template)
         self.assertIn('data-recipient-search="', template)
