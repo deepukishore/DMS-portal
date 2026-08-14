@@ -81,6 +81,12 @@ class DashboardReportRequestedUpdatesTests(unittest.TestCase):
         self.assertIn("const updateSelectedPeople", template)
         self.assertIn("chip.textContent = name", template)
 
+    def test_every_successful_decision_refreshes_review_page(self):
+        template = self.read_template("approval_review.html")
+
+        self.assertIn("setTimeout(() => window.location.reload(), 900);", template)
+        self.assertNotIn("if (status === 'Hold')", template)
+
 
 if __name__ == "__main__":
     unittest.main()

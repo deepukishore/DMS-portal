@@ -472,9 +472,7 @@
           setReviewStatus(payload.status, payload.approval_updated_at, payload.rejection_comment);
           syncApprovalStatus(payload.doc_id, payload.status);
           showSuccessPopup(payload.message);
-          if (status === 'Hold') {
-            setTimeout(() => window.location.reload(), 900);
-          }
+          setTimeout(() => window.location.reload(), 900);
         })
         .catch(error => {
           console.error('Error:', error);
