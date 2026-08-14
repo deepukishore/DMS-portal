@@ -2354,6 +2354,7 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   overflow-wrap: anywhere;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 .revision-file-name {
   color: var(--text-sub);
@@ -8519,6 +8520,7 @@ body.app-body {
   overflow-wrap: anywhere;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 .approval-records-table .plant-badge,
 .dashboard-document-table .plant-badge {
