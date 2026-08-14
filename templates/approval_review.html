@@ -241,7 +241,7 @@
                            autocomplete="off" />
                   </div>
                   {% endif %}
-                  <div class="review-recipient-picker" id="selected-recipients-input">
+                  <!-- <div class="review-recipient-picker" id="selected-recipients-input">
                     {% for user in recipient_users %}
                     <label class="review-recipient-option" data-recipient-search="{{ user.name }} {{ user.email }} {{ user.department }}">
                       <input type="checkbox"
@@ -257,7 +257,7 @@
                     <p class="review-recipient-empty">No people with email addresses are available.</p>
                     {% endfor %}
                     <p class="review-recipient-empty" id="recipient-search-empty" hidden>No matching people found.</p>
-                  </div>
+                  </div> -->
                 </fieldset>
                 {% elif record.selected_recipients %}
                 <div class="review-selected-recipients" role="note">

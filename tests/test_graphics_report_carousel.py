@@ -14,8 +14,7 @@ class GraphicsReportCarouselTests(unittest.TestCase):
         self.assertIn("let isPausedByUser = false", template)
         self.assertIn("if (isPausedByUser || document.hidden) return", template)
         self.assertIn("isPausedByUser = !isPausedByUser", template)
-        self.assertIn("data-pause-label", template)
-        self.assertIn("isPausedByUser ? 'Resume' : 'Pause'", template)
+        self.assertNotIn("data-pause-label", template)
 
 
 if __name__ == "__main__":

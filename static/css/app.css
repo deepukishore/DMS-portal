@@ -3410,40 +3410,25 @@ select:disabled {
   top: 1rem;
   right: 1rem;
   z-index: 7;
-  display: inline-flex;
-  align-items: center;
-  gap: .55rem;
-  min-height: 40px;
-  padding: .35rem .85rem .35rem .4rem;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
   color: rgb(25, 114, 255);
   background: rgba(255, 255, 255, .96);
   border: 1px solid rgba(25, 114, 255, .22);
-  border-radius: 999px;
+  border-radius: 50%;
   box-shadow: 0 8px 22px rgba(15, 23, 42, .13);
-  font: inherit;
-  font-size: .78rem;
-  font-weight: 700;
-  letter-spacing: .01em;
   cursor: pointer;
   transition: color .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
 
-.report-carousel-pause-icon {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  color: #fff;
-  background: linear-gradient(135deg, #2684ff, #1764db);
-  border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(25, 114, 255, .26);
-  transition: color .2s ease, background .2s ease, box-shadow .2s ease;
-}
-
 .report-carousel-pause:hover,
 .report-carousel-pause:focus-visible {
-  color: #0f58c7;
-  border-color: rgba(25, 114, 255, .48);
+  color: #fff;
+  background: linear-gradient(135deg, #2684ff, #1764db);
+  border-color: transparent;
   box-shadow: 0 12px 28px rgba(25, 114, 255, .2);
   outline: none;
   transform: translateY(-1px);
@@ -3456,14 +3441,8 @@ select:disabled {
   box-shadow: 0 12px 28px rgba(25, 114, 255, .28);
 }
 
-.report-carousel-pause[aria-pressed="true"] .report-carousel-pause-icon {
-  color: rgb(25, 114, 255);
-  background: #fff;
-  box-shadow: none;
-}
-
 .report-slide .chart-header {
-  padding-right: 7rem;
+  padding-right: 3.25rem;
 }
 
 .report-carousel-pause [hidden] {
@@ -3757,14 +3736,8 @@ select:disabled {
   .report-carousel-pause {
     top: .7rem;
     right: .7rem;
-    min-height: 36px;
-    padding: .25rem .7rem .25rem .3rem;
-    font-size: .72rem;
-  }
-
-  .report-carousel-pause-icon {
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
   }
 
   .dashboard-insights-grid {

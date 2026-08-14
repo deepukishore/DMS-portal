@@ -110,12 +110,9 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
-    <button type="button" class="report-carousel-pause" data-carousel-pause aria-label="Pause automatic graph rotation" aria-pressed="false" title="Pause automatic graph rotation">
-      <span class="report-carousel-pause-icon" aria-hidden="true">
-        <svg data-pause-icon width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
-        <svg data-play-icon width="15" height="15" viewBox="0 0 24 24" fill="currentColor" hidden><path d="M8 5.5v13a1 1 0 0 0 1.53.85l10-6.5a1 1 0 0 0 0-1.7l-10-6.5A1 1 0 0 0 8 5.5Z"/></svg>
-      </span>
-      <span data-pause-label>Pause</span>
+    <button type="button" class="report-carousel-pause" data-carousel-pause aria-label="Stop automatic graph rotation" aria-pressed="false">
+      <svg data-pause-icon width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+      <svg data-play-icon width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M8 5.5v13a1 1 0 0 0 1.53.85l10-6.5a1 1 0 0 0 0-1.7l-10-6.5A1 1 0 0 0 8 5.5Z"/></svg>
     </button>
     <div class="report-carousel-viewport">
       <div class="report-carousel-track">
@@ -576,14 +573,12 @@ if (libEntries.length) {
   function updatePauseButton() {
     if (!pauseButton) return;
     const label = isPausedByUser
-      ? 'Resume automatic graph rotation'
-      : 'Pause automatic graph rotation';
+      ? 'Start automatic graph rotation'
+      : 'Stop automatic graph rotation';
     pauseButton.setAttribute('aria-label', label);
     pauseButton.setAttribute('aria-pressed', String(isPausedByUser));
-    pauseButton.title = label;
     pauseButton.querySelector('[data-pause-icon]').hidden = isPausedByUser;
     pauseButton.querySelector('[data-play-icon]').hidden = !isPausedByUser;
-    pauseButton.querySelector('[data-pause-label]').textContent = isPausedByUser ? 'Resume' : 'Pause';
   }
 
   prevButton?.addEventListener('click', () => {
