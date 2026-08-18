@@ -487,7 +487,6 @@ def resubmit_held_document(token):
 
     corrected_file = request.files.get("file")
     correction_summary = request.form.get("correction_summary", "").strip()
-    revision_number = request.form.get("revision_number", "").strip()
     if not corrected_file or not corrected_file.filename:
         flash("Please select the corrected document.", "error")
         return redirect(url_for("approvals.review_document", token=token))
@@ -503,7 +502,6 @@ def resubmit_held_document(token):
         current_user.get("email", session.get("user_email", "")),
         current_app.config["UPLOAD_FOLDER"],
         correction_summary,
-        revision_number=revision_number,
     )
     if error:
         flash(error, "error")

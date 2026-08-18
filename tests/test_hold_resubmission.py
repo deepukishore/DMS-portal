@@ -80,7 +80,6 @@ class HoldResubmissionTests(unittest.TestCase):
             "uploader@example.com",
             self.upload_dir,
             "Updated section 4 and corrected the owner.",
-            revision_number="Rev.02",
         )
         self.assertIsNone(error)
         self.assertEqual(updated["approval_status"], "Pending")

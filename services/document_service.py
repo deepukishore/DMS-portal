@@ -571,7 +571,6 @@ class DocumentService:
         user_email,
         upload_folder,
         correction_summary,
-        revision_number="",
     ):
         """Replace a held document and return it to the reviewer who placed the hold."""
         filename = secure_filename(file.filename or "")
@@ -613,7 +612,7 @@ class DocumentService:
 
         new_version = (doc.get("current_version") or 1) + 1
         next_status = "Pending Final Approval" if doc.get("first_approved_at") else "Pending"
-        effective_revision = (revision_number or "").strip() or doc.get("revision_number", "")
+        effective_revision = doc.get("revision_number", "")
         updated_at = timestamp.strftime("%Y-%m-%d %H:%M:%S")
 
         cursor.execute(
