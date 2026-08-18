@@ -151,7 +151,11 @@
             <td class="record-document-number" title="{{ r.document_number or 'Not assigned' }}">
               {{ r.document_number or '—' }}
             </td>
-            <td><span class="status-pill status-{{ r.approval_status|lower }}">{{ r.approval_status }}</span></td>
+            <td class="approval-status-cell">
+              <span class="status-pill status-{{ r.approval_status|lower|replace(' ', '-') }}" title="{{ r.approval_status }}">
+                {{ r.approval_status }}
+              </span>
+            </td>
             <td><a href="{{ url_for('approvals.review_document', token=r.review_token) }}" class="btn-outline btn-sm">Review</a></td>
           </tr>
           {% endfor %}
