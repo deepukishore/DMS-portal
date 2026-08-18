@@ -64,8 +64,6 @@
           </div>
         </div>
 
-        <input type="hidden" name="doc_type" id="doc_type_input" value="external" />
-
         <div class="upload-details-fields">
           <div class="upload-details-meta">
 
@@ -102,8 +100,7 @@
           </label>
           <label class="upload-field">
             <span class="upload-field-label">Revision Number</span>
-            <input type="text" name="revision_number" id="revision_number_input" placeholder="Filled after document verification" readonly disabled />
-            <span class="field-hint">Calculated automatically after the document is verified.</span>
+            <input type="text" name="revision_number" id="revision_number_input" placeholder="Auto-filled" readonly disabled />
           </label>
         </div>
 
@@ -127,30 +124,11 @@
               {% endfor %}
             </select>
           </label>
-          <div id="customer-field-wrap">
-            <label>Customer <span class="field-required" id="customer-required-star">*</span>
-              <select name="customer" id="customer-select" data-customer-select required>
-                <option value="">Select customer</option>
-                {% for customer in customers %}
-                  <option value="{{ customer }}">{{ customer }}</option>
-                {% endfor %}
-              </select>
-            </label>
-          </div>
         </div>
 
         {% if not can_choose_upload_scope %}
           <p class="field-hint upload-scope-note" id="upload-scope-note">Uploads are limited to your assigned plant and department.</p>
         {% endif %}
-
-        <!-- Internal document toggle -->
-        <div class="internal-toggle-row">
-          <label class="toggle-switch-label">
-            <input type="checkbox" name="is_internal" id="is_internal_checkbox" />
-            <span class="toggle-switch"></span>
-            <span>This is an <strong>Internal Document</strong> — no customer required</span>
-          </label>
-        </div>
 
           </div>
 
@@ -287,9 +265,7 @@
       </div>
       <ul class="compact-list">
         <li>New document numbers are assigned automatically, e.g. <code style="font-family:monospace;font-size:.75rem;">ZRAI-DOC-P1-2026-001</code>.</li>
-        <li>Select the correct customer so filtering works later.</li>
         <li>Group related files in one submission when possible.</li>
-        <li>For internal memos or reports, tick "Internal Document".</li>
       </ul>
     </section>
   </aside>
@@ -303,5 +279,5 @@
   window.PROFILE_NEXT_DOCUMENT_NUMBER = {{ profile_next_document_number|tojson }};
   window.DOCUMENT_NUMBER_VALIDATION_URL = {{ url_for('upload.validate_document_number')|tojson }};
 </script>
-<script src="{{ url_for('static', filename='js/upload.js', v='20260818-3') }}"></script>
+<script src="{{ url_for('static', filename='js/upload.js', v='20260818-4') }}"></script>
 {% endblock %}

@@ -4740,54 +4740,6 @@ select:disabled {
   to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
-/* ── Internal document toggle row ───────────────────────────── */
-.internal-toggle-row {
-  padding: .75rem 1rem;
-  background: var(--bg-3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-}
-
-/* ── Toggle switch ───────────────────────────────────────────── */
-.toggle-switch-label {
-  display: flex;
-  align-items: center;
-  gap: .65rem;
-  cursor: pointer;
-  font-size: .82rem;
-  color: var(--text-sub);
-  user-select: none;
-  font-weight: 400;
-}
-.toggle-switch-label input[type="checkbox"] { display: none; }
-.toggle-switch {
-  position: relative;
-  width: 36px;
-  height: 20px;
-  background: var(--border);
-  border-radius: 99px;
-  flex-shrink: 0;
-  transition: background .2s;
-}
-.toggle-switch::after {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #fff;
-  transition: transform .2s;
-}
-.toggle-switch-label input:checked ~ .toggle-switch {
-  background: var(--accent);
-}
-.toggle-switch-label input:checked ~ .toggle-switch::after {
-  transform: translateX(16px);
-}
-.toggle-switch-label strong { color: var(--text); }
-
 .revision-confirm-checkbox {
   align-self: stretch;
   width: 100%;
@@ -6499,9 +6451,6 @@ label:focus-within .field-hint { color: var(--text-sub); }
 input:not([type="checkbox"]):not([type="radio"]):hover,
 select:hover,
 textarea:hover { border-color: var(--text-dim); }
-.toggle-switch { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04); }
-.toggle-switch-label:hover .toggle-switch { box-shadow: 0 0 0 3px rgba(41, 168, 223, .1); }
-.toggle-switch::after { box-shadow: 0 2px 5px rgba(0, 0, 0, .25); }
 .drop-zone { position: relative; overflow: hidden; }
 .drop-zone::after {
   content: '';
@@ -8279,7 +8228,6 @@ body * {
   .upload-page-body label { gap: .18rem; font-size: .72rem; }
   .upload-page-body label input,
   .upload-page-body label select { min-height: 36px; padding: .38rem .55rem; font-size: .78rem; }
-  .upload-page-body .internal-toggle-row { padding: .45rem .6rem; }
   .upload-page-body .library-path-card { margin-bottom: .45rem; padding: .55rem; }
   .upload-page-body .library-path-head { margin-bottom: .35rem; }
   .upload-page-body .library-path-head strong { font-size: .82rem; }

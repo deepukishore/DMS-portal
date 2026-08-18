@@ -8,10 +8,6 @@ const submitBtn = document.getElementById('submit-btn');
 const submitHint = document.getElementById('submit-hint');
 const browseTrig = document.getElementById('browse-trigger');
 const uploadForm = document.getElementById('upload-form');
-const docTypeInput = document.getElementById('doc_type_input');
-const customerSelect = document.getElementById('customer-select');
-const customerReqStar = document.getElementById('customer-required-star');
-const internalCheckbox = document.getElementById('is_internal_checkbox');
 const isRevisionCb = document.getElementById('is_revision_checkbox');
 const revisionFields = document.getElementById('revision-fields');
 const uploadTargetRadios = document.querySelectorAll('input[name="upload_target"]');
@@ -121,6 +117,15 @@ function setRequired(field, required) {
 function showField(wrapper, visible, requiredField) {
   if (wrapper) wrapper.style.display = visible ? 'block' : 'none';
   setRequired(requiredField, visible);
+}
+
+function showPrimary(visible, label = 'Folder') {
+  showField(libraryPrimWrap, visible, libraryPrimSelect);
+  if (libraryPrimWrap) {
+    const marker = libraryPrimWrap.querySelector('#library-primary-required');
+    libraryPrimWrap.childNodes[0].textContent = `${label} `;
+    if (marker) libraryPrimWrap.insertBefore(marker, libraryPrimWrap.childNodes[1] || null);
+  }
 }
 
 function showSecondary(visible, label = 'Subfolder') {
@@ -301,24 +306,8 @@ function showInlineError(message) {
   setTimeout(() => { if (el) el.style.display = 'none'; }, 5000);
 }
 
-function updateInternalUI() {
-  const isInternal = internalCheckbox.checked;
-  docTypeInput.value = isInternal ? 'internal' : 'external';
-  customerSelect.disabled = isInternal;
-  customerSelect.classList.toggle('disabled-field', isInternal);
-  if (isInternal) {
-    customerSelect.removeAttribute('required');
-    customerSelect.value = '';
-    customerReqStar.style.display = 'none';
-  } else {
-    customerSelect.setAttribute('required', 'required');
-    customerReqStar.style.display = '';
-  }
-  updateLibraryPath();
-}
-
 function resetLibraryFields() {
-  showField(libraryPrimWrap, false, libraryPrimSelect);
+  showPrimary(false);
   showSecondary(false);
   showTertiary(false);
   showQuaternary(false);
@@ -341,7 +330,7 @@ function configureLibraryCategory() {
   }
 
   if (data.scope && data.document_groups) {
-    showField(libraryPrimWrap, false, libraryPrimSelect);
+    showPrimary(false);
     const groups = data.scope.groups || [];
     showSecondary(true, 'Document type');
     setOptions(
@@ -354,7 +343,7 @@ function configureLibraryCategory() {
   }
 
   if (data.primary_options) {
-    showField(libraryPrimWrap, true, libraryPrimSelect);
+    showPrimary(true);
     setOptions(
       libraryPrimSelect,
       'Select folder',
@@ -366,7 +355,13 @@ function configureLibraryCategory() {
 
   if (data.customers) {
     showSecondary(false);
-    updateLibraryPath();
+    showPrimary(true, 'Customer');
+    setOptions(
+      libraryPrimSelect,
+      'Select customer',
+      Object.keys(data.customers).map(customer => ({ value: customer, label: customer }))
+    );
+    setPathState(false, `${categoryLabel(category)} / Select customer`, '', 'Select a customer folder.');
     return;
   }
 
@@ -400,12 +395,27 @@ function configureLibraryPrimary() {
     return;
   }
 
+  if (data.customers) {
+    updateLibraryPath();
+    return;
+  }
+
   const folder = data.primary_options?.[primary];
   if (!folder) return;
 
   if (folder.customers) {
-    showSecondary(false);
-    updateLibraryPath();
+    showSecondary(true, 'Customer');
+    setOptions(
+      librarySubSelect,
+      'Select customer',
+      Object.keys(folder.customers).map(customer => ({ value: customer, label: customer }))
+    );
+    setPathState(
+      false,
+      `${categoryLabel(category)} / ${folder.label || primary} / Select customer`,
+      '',
+      'Select a customer folder.'
+    );
     return;
   }
 
@@ -521,9 +531,9 @@ function updateLibraryPath() {
   }
 
   if (data.customers) {
-    const customer = customerSelect?.value;
+    const customer = libraryPrimSelect.value;
     if (!customer) {
-      setPathState(false, `${categoryLabel(category)} / Select customer`, '', 'Select a customer from the form above.');
+      setPathState(false, `${categoryLabel(category)} / Select customer`, '', 'Select a customer folder.');
       return;
     }
     setPathState(true, `${categoryLabel(category)} / ${customer}`, customer);
@@ -634,9 +644,9 @@ function updateLibraryPath() {
 
   const folder = data.primary_options?.[primary];
   if (folder?.customers) {
-    const customer = customerSelect?.value;
+    const customer = librarySubSelect.value;
     if (!customer) {
-      setPathState(false, `${categoryLabel(category)} / ${folder.label || primary} / Select customer`, '', 'Select a customer from the form above.');
+      setPathState(false, `${categoryLabel(category)} / ${folder.label || primary} / Select customer`, '', 'Select a customer folder.');
       return;
     }
     setPathState(
@@ -719,13 +729,11 @@ function showSuccessPopup(message, redirectUrl) {
   setTimeout(() => { window.location.href = redirectUrl || window.location.href; }, 2500);
 }
 
-internalCheckbox.addEventListener('change', updateInternalUI);
 libraryCatSelect?.addEventListener('change', configureLibraryCategory);
 libraryPrimSelect?.addEventListener('change', configureLibraryPrimary);
 librarySubSelect?.addEventListener('change', configureLibrarySecondary);
 libraryTertiarySelect?.addEventListener('change', configureLibraryTertiary);
 libraryQuaternarySelect?.addEventListener('change', updateLibraryPath);
-customerSelect?.addEventListener('change', updateLibraryPath);
 plantSelect?.addEventListener('change', updateLibraryPath);
 plantSelect?.addEventListener('change', () => {
   if (!isRevisionCb?.checked && docNumInput) {
@@ -855,11 +863,6 @@ uploadForm.addEventListener('submit', event => {
     }
   }
 
-  if (!internalCheckbox.checked && !customerSelect.value) {
-    showInlineError('Please select a customer, or tick "Internal Document".');
-    return;
-  }
-
   const originalLabel = submitBtn.innerHTML;
   submitBtn.disabled = true;
   submitBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/></svg> Uploading...`;
@@ -903,6 +906,5 @@ uploadForm.addEventListener('submit', event => {
     });
 });
 
-updateInternalUI();
 configureLibraryCategory();
 updateLibraryPath();

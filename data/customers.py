@@ -52,7 +52,7 @@ CUSTOMER_BRANDS = {
 }
 
 
-CUSTOMER_FILTERS = ["Internal", *OFFICIAL_CUSTOMERS]
+CUSTOMER_FILTERS = list(OFFICIAL_CUSTOMERS)
 
 
 LEGACY_CUSTOMER_MAP = {
@@ -81,12 +81,10 @@ LEGACY_CUSTOMER_MAP = {
 
 def normalize_customer(customer):
     if customer is None:
-        return customer
+        return ""
     cleaned = " ".join(str(customer).split())
-    if not cleaned:
-        return "Internal"
-    if cleaned == "Internal":
-        return cleaned
+    if not cleaned or cleaned.casefold() == "internal":
+        return ""
     return LEGACY_CUSTOMER_MAP.get(cleaned, cleaned)
 
 

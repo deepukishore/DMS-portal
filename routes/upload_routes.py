@@ -125,12 +125,11 @@ def index():
             )
         plant = requested_plant if can_choose_upload_scope else profile_plant
         department = requested_department if can_choose_upload_scope else profile_department
-        customer = request.form.get("customer", "")
+        customer = ""
         submitted_document_number = request.form.get("document_number", "").strip()
         is_revision = request.form.get("is_revision") == "on"
         revision_number = request.form.get("revision_number", "").strip() if is_revision else ""
         category = request.form.get("category", "").strip()
-        doc_type = request.form.get("doc_type", "external")
         files = request.files.getlist("files")
         upload_target = request.form.get('upload_target', 'library')
         library_category = category
@@ -138,12 +137,6 @@ def index():
         if not plant or not department:
             return _upload_error("Your profile is missing plant or department details. Please contact an admin.")
 
-        # If internal document, customer is optional
-        if doc_type == "internal":
-            customer = "Internal"
-        elif not customer:
-            return _upload_error("Please select a customer or mark the document as internal.")
-        
         if not files or all(uploaded_file.filename == "" for uploaded_file in files):
             return _upload_error("Please select at least one file.")
 
@@ -170,6 +163,7 @@ def index():
         parts = [p for p in library_subcategory.split(":") if p]
         if parts and parts[0] in {"L1", "L2", "L3", "L4"}:
             parts = parts[1:]
+        customer = next((part for part in parts if part in CUSTOMERS), "")
 
         try:
             if category == 'qms' and parts:
@@ -391,7 +385,6 @@ def index():
 
     return render_template(
         "upload.html",
-        customers=CUSTOMERS,
         current_user=current_user,
         library_categories=categories,
         library_data=library_data,

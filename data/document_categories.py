@@ -46,7 +46,7 @@ def infer_document_category(record):
         return "eohms"
     if "human resources" in department or department.startswith("hrd"):
         return "eohms"
-    if customer and customer != "internal":
+    if customer:
         return "csr"
     return "qms"
 

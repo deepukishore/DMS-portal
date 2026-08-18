@@ -131,7 +131,7 @@ TRACK_MY_DOCS = {
         },
         {
             "title": "Upload to the right library path",
-            "description": "Choose internal or customer-linked documents, select the controlled category and subfolder, add document and revision details, then submit.",
+            "description": "Select the controlled Document Library category and folder path, add document and revision details, then submit.",
         },
         {
             "title": "Review through approvals",

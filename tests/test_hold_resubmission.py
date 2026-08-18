@@ -37,7 +37,7 @@ class HoldResubmissionTests(unittest.TestCase):
             "uploader@example.com",
             "P1 - Trichy Plant",
             "Quality",
-            "Internal",
+            "",
             self.upload_dir,
             "DOC-100",
             "Rev.01",

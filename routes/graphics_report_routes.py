@@ -78,7 +78,9 @@ def _get_statistics(records=None):
     # Per-customer stats
     customer_stats = {}
     for r in records:
-        cust = r.get("customer", "Unknown")
+        cust = (r.get("customer") or "").strip()
+        if not cust:
+            continue
         s = customer_stats.setdefault(cust, {"total": 0, "approved": 0, "pending": 0, "hold": 0, "rejected": 0})
         s["total"] += 1
         _add_status_count(s, r)
