@@ -221,10 +221,10 @@
             <strong>Revision change summary <span class="field-hint">(optional)</span></strong>
             <p>Only needed if this file replaces a previous version.</p>
           </div>
-          <label class="toggle-switch-label" style="margin-left:auto;flex-shrink:0;">
-            <input type="checkbox" id="is_revision_checkbox" name="is_revision" />
-            <span class="toggle-switch"></span>
-            <span>Revised</span>
+          <label class="checkbox-label revision-confirm-checkbox">
+            <input type="checkbox" id="is_revision_checkbox" name="is_revision"
+                   aria-controls="revision-fields" aria-expanded="false" />
+            <span>This upload is a revised document</span>
           </label>
         </div>
         <div id="revision-fields" style="display:none; margin-top:.75rem;">
@@ -303,5 +303,5 @@
   window.PROFILE_NEXT_DOCUMENT_NUMBER = {{ profile_next_document_number|tojson }};
   window.DOCUMENT_NUMBER_VALIDATION_URL = {{ url_for('upload.validate_document_number')|tojson }};
 </script>
-<script src="{{ url_for('static', filename='js/upload.js', v='20260818-1') }}"></script>
+<script src="{{ url_for('static', filename='js/upload.js', v='20260818-2') }}"></script>
 {% endblock %}
