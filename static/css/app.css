@@ -4789,16 +4789,18 @@ select:disabled {
 .toggle-switch-label strong { color: var(--text); }
 
 .revision-confirm-checkbox {
-  align-self: center;
-  margin-left: auto;
-  padding: .45rem .65rem;
-  flex: 0 0 auto;
-  gap: .5rem;
+  align-self: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: .65rem .75rem;
+  gap: .6rem;
   border: 1px solid var(--border);
-  border-radius: 7px;
+  border-radius: 8px;
   background: var(--bg-3);
   color: var(--text-sub);
   line-height: 1.25;
+  transition: border-color .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
 }
 .upload-page-body .revision-confirm-checkbox input[type="checkbox"] {
   width: 18px;
@@ -4809,20 +4811,30 @@ select:disabled {
   accent-color: var(--accent);
 }
 .revision-confirm-checkbox span {
-  font-size: .76rem;
+  font-size: .78rem;
   font-weight: 600;
 }
 .revision-confirm-checkbox:hover {
   border-color: var(--accent);
   color: var(--text);
 }
+.revision-confirm-checkbox.is-checked {
+  border-color: rgba(41, 168, 223, .55);
+  background: rgba(41, 168, 223, .08);
+  color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(41, 168, 223, .08);
+}
+.upload-revision-step {
+  gap: .7rem;
+}
+.upload-revision-step #revision-fields {
+  padding-top: .1rem;
+}
 
 @media (max-width: 620px) {
   .revision-confirm-checkbox {
-    width: 100%;
-    margin-left: 0;
+    padding: .6rem .65rem;
   }
-  .upload-revision-step .upload-step-header { flex-wrap: wrap; }
 }
 
 /* ── Submit row ──────────────────────────────────────────────── */

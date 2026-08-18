@@ -740,6 +740,7 @@ deptSelect?.addEventListener('change', updateLibraryPath);
 function updateRevisionUI() {
   const isRevised = Boolean(isRevisionCb?.checked);
   isRevisionCb?.setAttribute('aria-expanded', String(isRevised));
+  isRevisionCb?.closest('.revision-confirm-checkbox')?.classList.toggle('is-checked', isRevised);
   revisionDocumentValidated = false;
   documentValidationRequest += 1;
   if (documentValidationTimer) clearTimeout(documentValidationTimer);
