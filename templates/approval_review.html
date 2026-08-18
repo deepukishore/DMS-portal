@@ -61,10 +61,12 @@
             <span>Document Number</span>
             <strong>{{ record.document_number or 'Not set' }}</strong>
           </div>
+          {% if record.approval_status != 'Hold' %}
           <div class="review-meta-item">
             <span>Revision Number</span>
             <strong>{{ record.revision_number or 'Not set' }}</strong>
           </div>
+          {% endif %}
           <div class="review-meta-item">
             <span>Category</span>
             <strong>{{ record.category or 'Not set' }}</strong>
