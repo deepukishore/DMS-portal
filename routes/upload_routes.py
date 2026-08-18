@@ -1,3 +1,5 @@
+import re
+
 from flask import Blueprint, current_app, flash, redirect, render_template, request, session, url_for, jsonify
 
 from data.mock_data import CUSTOMERS, PLANTS, DEPARTMENTS
@@ -12,6 +14,14 @@ from services.revision_history_service import RevisionHistoryService
 from data.departments import normalize_department
 
 upload_bp = Blueprint("upload", __name__)
+
+
+def _next_revision_number(current_revision):
+    """Return the next controlled revision in the standard Rev.00 format."""
+    match = re.search(r"(\d+)\s*$", str(current_revision or ""))
+    current_number = int(match.group(1)) if match else 0
+    width = max(2, len(match.group(1)) if match else 2)
+    return f"Rev.{current_number + 1:0{width}d}"
 
 
 def _require_login():
@@ -85,6 +95,9 @@ def validate_document_number():
             "document_number": source_document.get("document_number", ""),
             "file_name": source_document.get("original_file_name") or source_document.get("file_name", ""),
             "revision_number": source_document.get("revision_number", ""),
+            "next_revision_number": _next_revision_number(
+                source_document.get("revision_number", "")
+            ),
         },
     })
 
@@ -226,6 +239,9 @@ def index():
                 return _upload_error(
                     "No existing document was found with this document number."
                 )
+            revision_number = _next_revision_number(
+                source_document.get("revision_number", "")
+            )
         else:
             # Empty tells the service to reserve the next plant-specific number.
             document_number = ""

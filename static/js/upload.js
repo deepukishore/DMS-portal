@@ -56,6 +56,7 @@ let hasSelectedFiles = false;
 let revisionDocumentValidated = false;
 let documentValidationTimer = null;
 let documentValidationRequest = 0;
+let documentValidationMessageTimer = null;
 
 function formatSize(bytes) {
   if (bytes < 1024) return bytes + ' B';
@@ -193,8 +194,19 @@ function updateSubmitState(hasFiles = hasSelectedFiles) {
 
 function setDocumentValidation(state, message = '') {
   if (!docNumValidation) return;
+  if (documentValidationMessageTimer) {
+    clearTimeout(documentValidationMessageTimer);
+    documentValidationMessageTimer = null;
+  }
   docNumValidation.className = `document-number-validation${state ? ` is-${state}` : ''}`;
   docNumValidation.textContent = message;
+  if ((state === 'valid' || state === 'error') && message) {
+    documentValidationMessageTimer = setTimeout(() => {
+      docNumValidation.className = 'document-number-validation';
+      docNumValidation.textContent = '';
+      documentValidationMessageTimer = null;
+    }, 3200);
+  }
 }
 
 async function validateRevisionDocument() {
@@ -202,6 +214,7 @@ async function validateRevisionDocument() {
   const documentNumber = docNumInput.value.trim();
   if (!/^ZRAI-DOC-P[1-4]-\d{4}-\d{3,}$/i.test(documentNumber)) {
     revisionDocumentValidated = false;
+    if (revNumInput) revNumInput.value = '';
     setDocumentValidation('error', 'Enter a complete document number to verify it.');
     updateSubmitState();
     return;
@@ -209,6 +222,7 @@ async function validateRevisionDocument() {
 
   const requestId = ++documentValidationRequest;
   revisionDocumentValidated = false;
+  if (revNumInput) revNumInput.value = '';
   setDocumentValidation('checking', 'Checking document number...');
   updateSubmitState();
 
@@ -225,11 +239,13 @@ async function validateRevisionDocument() {
     if (!response.ok || !data.ok) throw new Error(data.message || 'Document number could not be verified.');
 
     revisionDocumentValidated = true;
+    if (revNumInput) revNumInput.value = data.document?.next_revision_number || '';
     const details = [data.document?.file_name, data.document?.revision_number].filter(Boolean).join(' · ');
     setDocumentValidation('valid', details ? `Verified: ${details}` : 'Document verified.');
   } catch (error) {
     if (requestId !== documentValidationRequest) return;
     revisionDocumentValidated = false;
+    if (revNumInput) revNumInput.value = '';
     setDocumentValidation('error', error.message || 'Document number could not be verified.');
   }
   updateSubmitState();
@@ -729,7 +745,8 @@ function updateRevisionUI() {
   if (revisionFields) revisionFields.style.display = isRevised ? 'block' : 'none';
   if (revNumInput) {
     revNumInput.disabled = !isRevised;
-    if (!isRevised) revNumInput.value = '';
+    revNumInput.readOnly = true;
+    revNumInput.value = '';
   }
   if (!isRevised) {
     const summaryInput = document.getElementById('change_summary_input');
@@ -767,6 +784,7 @@ docNumInput?.addEventListener('input', () => {
   if (!isRevisionCb?.checked) return;
   docNumInput.value = docNumInput.value.toUpperCase();
   revisionDocumentValidated = false;
+  if (revNumInput) revNumInput.value = '';
   documentValidationRequest += 1;
   setDocumentValidation('pending', 'Enter an existing document number to continue.');
   updateSubmitState();

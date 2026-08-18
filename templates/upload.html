@@ -102,8 +102,8 @@
           </label>
           <label class="upload-field">
             <span class="upload-field-label">Revision Number</span>
-            <input type="text" name="revision_number" id="revision_number_input" placeholder="e.g. Rev.01" disabled />
-            <span class="field-hint">Enable by selecting Revised.</span>
+            <input type="text" name="revision_number" id="revision_number_input" placeholder="Filled after document verification" readonly disabled />
+            <span class="field-hint">Calculated automatically after the document is verified.</span>
           </label>
         </div>
 
@@ -303,5 +303,5 @@
   window.PROFILE_NEXT_DOCUMENT_NUMBER = {{ profile_next_document_number|tojson }};
   window.DOCUMENT_NUMBER_VALIDATION_URL = {{ url_for('upload.validate_document_number')|tojson }};
 </script>
-<script src="{{ url_for('static', filename='js/upload.js', v='20260813-3') }}"></script>
+<script src="{{ url_for('static', filename='js/upload.js', v='20260818-1') }}"></script>
 {% endblock %}

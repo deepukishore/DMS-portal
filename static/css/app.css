@@ -4701,25 +4701,42 @@ select:disabled {
 .field-hint { color: var(--text-dim); font-size: .72rem; font-weight: 400; }
 .document-number-validation {
   display: none;
-  min-height: 1.1rem;
-  font-size: .7rem;
-  font-weight: 600;
-  line-height: 1.35;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1200;
+  width: min(320px, calc(100vw - 2rem));
+  padding: .6rem .75rem;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  box-shadow: 0 10px 28px rgba(16, 24, 40, .16);
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.4;
   overflow-wrap: anywhere;
+  animation: documentValidationPopup .18s ease-out;
 }
 @media (max-width: 620px) {
   .review-document-details-grid {
     grid-template-columns: 1fr;
   }
 }
-.document-number-validation.is-pending,
-.document-number-validation.is-checking,
 .document-number-validation.is-valid,
 .document-number-validation.is-error { display: block; }
-.document-number-validation.is-pending,
-.document-number-validation.is-checking { color: var(--text-dim); }
-.document-number-validation.is-valid { color: var(--green); }
-.document-number-validation.is-error { color: var(--red); }
+.document-number-validation.is-valid {
+  color: #187a3d;
+  background: #f0fff5;
+  border-color: rgba(24, 122, 61, .3);
+}
+.document-number-validation.is-error {
+  color: #c33232;
+  background: #fff4f4;
+  border-color: rgba(195, 50, 50, .3);
+}
+@keyframes documentValidationPopup {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* ── Internal document toggle row ───────────────────────────── */
 .internal-toggle-row {
