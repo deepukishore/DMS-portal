@@ -7562,7 +7562,16 @@ textarea:focus {
   padding: 1.15rem 5.25rem 4.55rem;
 }
 .customer-card[data-customer-name="Renault Nissan"] .customer-logo-card img {
-  padding: .75rem 8.1rem 4.35rem;
+  padding: 0 0 3.8rem;
+  object-fit: cover;
+  object-position: center;
+}
+.customer-brand-badge[data-customer-name="Renault Nissan"] .customer-logo img {
+  padding: 0;
+  object-fit: cover;
+}
+.customer-banner[data-customer-name="Renault Nissan"] > img {
+  border-radius: 9px;
 }
 .customer-card[data-customer-name]:hover .customer-logo-card img {
   filter: saturate(1.08) contrast(1.04);

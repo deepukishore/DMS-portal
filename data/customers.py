@@ -38,7 +38,7 @@ CUSTOMER_BRANDS = {
     },
     "Renault Nissan": {
         "display_name": "Renault Nissan",
-        "logo": "images/customers/renault-nissan.svg",
+        "logo": "images/customers/Renault.jpg",
     },
     "SML ISUZU": {
         "display_name": "SML ISUZU",
