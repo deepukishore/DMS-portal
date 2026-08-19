@@ -169,7 +169,11 @@ class DocumentLibraryService:
                                 record.get("file_name"),
                             )
                 elif "plant_departments" in group:
-                    plant = path_parts[2] if len(path_parts) > 2 else record.get("plant") or ""
+                    # Plant/department groups use the path
+                    # group:plant:department (after an optional QMS level is
+                    # removed). Reading indexes 2/3 here incorrectly promoted
+                    # the department to a plant in the library browser.
+                    plant = path_parts[1] if len(path_parts) > 1 else record.get("plant") or ""
                     plant = DocumentLibraryService._plant_folder_key(
                         group.setdefault("plant_departments", {}),
                         plant,
@@ -179,7 +183,7 @@ class DocumentLibraryService:
                             plant,
                             {"label": plant, "departments": {}},
                         )
-                        department = path_parts[3] if len(path_parts) > 3 else record.get("department") or "General"
+                        department = path_parts[2] if len(path_parts) > 2 else record.get("department") or "General"
                         departments = plant_entry.setdefault("departments", {})
                         dept_entry = departments.setdefault(department, {"files": []})
                         DocumentLibraryService._append_unique(

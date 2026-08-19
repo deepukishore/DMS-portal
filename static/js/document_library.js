@@ -265,23 +265,35 @@ function createCustomerGrid(customers, onSelect) {
   return grid;
 }
 
+function departmentCardLabel(department, departmentData) {
+  const configuredLabel = departmentData?.label;
+  return typeof configuredLabel === 'string' && configuredLabel.trim()
+    ? configuredLabel.trim()
+    : department;
+}
+
+function departmentCardInitials(label) {
+  const code = String(label || '').split(' - ')[0].trim();
+  const codeParts = code.split(/\s+/).filter(Boolean);
+  const initials = codeParts.length > 1
+    ? codeParts.map(part => part[0]).join('')
+    : code;
+  return initials.replace(/[^a-z0-9]/gi, '').slice(0, 3).toUpperCase() || 'DEP';
+}
+
 function createDepartmentGrid(departments, onSelect) {
   const grid = document.createElement('div');
   grid.className = 'customer-card-grid';
   Object.entries(departments || {}).forEach(([department, departmentData]) => {
+    const departmentLabel = departmentCardLabel(department, departmentData);
     const card = document.createElement('button');
     card.type = 'button';
     card.className = 'customer-card';
-    const initials = (departmentData?.label || department)
-      .split(/\s+/)
-      .map(word => word[0])
-      .join('')
-      .slice(0, 2)
-      .toUpperCase();
+    const initials = departmentCardInitials(departmentLabel);
     card.innerHTML = `
       <div class="customer-avatar" style="background:rgba(240,165,0,.12);color:var(--accent);font-size:.75rem;font-weight:700;font-family:'IBM Plex Mono',monospace">${initials}</div>
       <div class="customer-info">
-        <strong>${departmentData?.label || department}</strong>
+        <strong>${departmentLabel}</strong>
         <small>Open department folder</small>
       </div>
       <div class="plant-card-arrow">
@@ -298,19 +310,15 @@ function createDepartmentGridForPlant(departmentList, plantDepartments, onSelect
   grid.className = 'customer-card-grid';
   (departmentList || []).forEach(department => {
     const departmentData = plantDepartments[department] || { label: department, files: [] };
+    const departmentLabel = departmentCardLabel(department, departmentData);
     const card = document.createElement('button');
     card.type = 'button';
     card.className = 'customer-card';
-    const initials = (departmentData?.label || department)
-      .split(/\s+/)
-      .map(word => word[0])
-      .join('')
-      .slice(0, 2)
-      .toUpperCase();
+    const initials = departmentCardInitials(departmentLabel);
     card.innerHTML = `
       <div class="customer-avatar" style="background:rgba(240,165,0,.12);color:var(--accent);font-size:.75rem;font-weight:700;font-family:'IBM Plex Mono',monospace">${initials}</div>
       <div class="customer-info">
-        <strong>${departmentData.label}</strong>
+        <strong>${departmentLabel}</strong>
         <small>Open department folder</small>
       </div>
       <div class="plant-card-arrow">
