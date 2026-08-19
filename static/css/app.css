@@ -7561,10 +7561,25 @@ textarea:focus {
 .customer-card[data-customer-name="SML ISUZU"] .customer-logo-card img {
   padding: 1.15rem 5.25rem 4.55rem;
 }
+.customer-card[data-customer-name="Renault Nissan"] .customer-logo-card {
+  inset: 0 0 61px;
+  height: auto;
+  background: #14755d url("../images/customers/Renault.jpg") center / cover no-repeat;
+  background-blend-mode: multiply;
+  border-radius: 11px 11px 0 0;
+}
 .customer-card[data-customer-name="Renault Nissan"] .customer-logo-card img {
-  padding: 0 0 3.8rem;
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 116px;
+  height: 116px;
+  padding: 0;
   object-fit: cover;
   object-position: center;
+  transform: translateX(-50%);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
 }
 .customer-brand-badge[data-customer-name="Renault Nissan"] .customer-logo img {
   padding: 0;
@@ -7576,6 +7591,9 @@ textarea:focus {
 .customer-card[data-customer-name]:hover .customer-logo-card img {
   filter: saturate(1.08) contrast(1.04);
   transform: scale(1.075);
+}
+.customer-card[data-customer-name="Renault Nissan"]:hover .customer-logo-card img {
+  transform: translateX(-50%) scale(1.055);
 }
 .customer-card[data-customer-name] .customer-logo-fallback {
   color: #fff;
