@@ -22,13 +22,30 @@ function navigateToCurrentSelection() {
   });
   const destination = `${url.pathname}${url.search}`;
   const current = `${window.location.pathname}${window.location.search}`;
-  if (destination !== current) window.location.assign(destination);
+  if (destination !== current) {
+    window.history.pushState({ documentLibrary: true }, '', destination);
+  }
 }
 
 function runAndNavigate(callback, value) {
   callback(value);
   navigateToCurrentSelection();
 }
+
+function restoreSelectionFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  selectedPrimary = params.get('primary') || '';
+  selectedSecondary = params.get('secondary') || '';
+  selectedTertiary = params.get('tertiary') || '';
+  selectedPlant = params.get('plant') || '';
+  selectedDept = params.get('department') || '';
+  currentPage = 1;
+}
+
+window.addEventListener('popstate', () => {
+  restoreSelectionFromUrl();
+  render();
+});
 
 const FILE_ICONS = {
   pdf: 'PDF',
