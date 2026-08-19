@@ -8459,24 +8459,30 @@ body.app-body {
 
 /* Readable document and approval record tables ------------------------- */
 .approval-records-table {
-  min-width: 1180px;
+  width: 100%;
+  min-width: 0;
   table-layout: fixed;
 }
-.approval-records-table .approval-col-date { width: 120px; }
-.approval-records-table .approval-col-file { width: 250px; }
-.approval-records-table .approval-col-plant { width: 75px; }
-.approval-records-table .approval-col-department { width: 210px; }
-.approval-records-table .approval-col-document-number { width: 190px; }
-.approval-records-table .approval-col-status { width: 220px; }
-.approval-records-table .approval-col-review { width: 95px; }
+.approval-records-table .approval-col-date { width: 9%; }
+.approval-records-table .approval-col-file { width: 24%; }
+.approval-records-table .approval-col-plant { width: 7%; }
+.approval-records-table .approval-col-department { width: 20%; }
+.approval-records-table .approval-col-document-number { width: 21%; }
+.approval-records-table .approval-col-status { width: 12%; }
+.approval-records-table .approval-col-review { width: 7%; }
 .approval-records-table th,
 .approval-records-table td {
-  padding-right: .85rem;
-  padding-left: .85rem;
+  padding-right: .55rem;
+  padding-left: .55rem;
   vertical-align: middle;
 }
+.approval-records-table th {
+  overflow: hidden;
+  font-size: .66rem;
+  text-overflow: ellipsis;
+}
 .approval-records-table td {
-  height: 68px;
+  height: 62px;
 }
 .approval-records-table .file-block {
   min-width: 0;
@@ -8544,14 +8550,21 @@ body.app-body {
   white-space: nowrap;
 }
 .approval-records-table .approval-status-cell {
-  overflow: visible;
-  white-space: nowrap;
+  overflow: hidden;
+  white-space: normal;
 }
 .approval-records-table .status-pill {
-  max-width: none;
-  overflow: visible;
-  text-overflow: clip;
+  max-width: 100%;
+  overflow: hidden;
+  font-size: .65rem;
+  text-overflow: ellipsis;
   white-space: nowrap;
+}
+.approval-records-table td[data-label="Review"] .btn-outline {
+  max-width: 100%;
+  padding-right: .5rem;
+  padding-left: .5rem;
+  justify-content: center;
 }
 .status-pending-final-approval {
   color: var(--yellow);
@@ -8559,6 +8572,187 @@ body.app-body {
 }
 .status-pending-final-approval::before {
   animation: status-pulse 1.8s ease-in-out infinite;
+}
+
+/* Approval records: one compact, searchable workspace ------------------ */
+.approval-records-panel {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 1.1rem 1.25rem 1.25rem;
+  container: approval-records / inline-size;
+}
+.approval-records-head {
+  min-width: 0;
+  margin-bottom: .85rem;
+  padding-bottom: .7rem;
+}
+.approval-records-head > div,
+.approval-records-head .section-title,
+.approval-records-head .section-sub {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.approval-records-filter {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .65rem;
+  margin: 0 0 .85rem;
+}
+.approval-records-filter .search-wrap {
+  flex: 1 1 360px;
+  width: auto;
+  max-width: 520px;
+}
+.approval-records-filter .search-wrap svg {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.approval-records-filter .search-wrap:focus-within svg {
+  transform: translateY(-50%) scale(1.08);
+}
+.approval-records-filter .search-wrap,
+.approval-records-filter .approval-status-filter {
+  display: block;
+  min-width: 0;
+}
+.approval-records-filter .approval-status-filter {
+  flex: 0 1 250px;
+  min-width: 210px;
+}
+.approval-records-filter .search-wrap input,
+.approval-records-filter .approval-status-filter select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 38px;
+}
+.approval-records-filter .btn-primary,
+.approval-records-filter .btn-outline {
+  min-height: 38px;
+  justify-content: center;
+}
+.approval-records-pagination {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  margin-bottom: .75rem;
+  padding: .5rem .75rem;
+}
+.approval-records-pagination .pg-size-label {
+  flex-direction: row;
+}
+.approval-records-wrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+@container approval-records (max-width: 760px) {
+  .approval-records-wrap {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+  }
+  .approval-records-table,
+  .approval-records-table tbody,
+  .approval-records-table tr,
+  .approval-records-table td {
+    display: block;
+    width: 100%;
+  }
+  .approval-records-table colgroup,
+  .approval-records-table thead {
+    display: none;
+  }
+  .approval-records-table tbody {
+    display: grid;
+    gap: .75rem;
+  }
+  .approval-records-table tbody tr {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-2);
+  }
+  .approval-records-table tbody td {
+    display: grid;
+    grid-template-columns: minmax(105px, 34%) minmax(0, 1fr);
+    align-items: center;
+    min-height: 42px;
+    height: auto;
+    padding: .5rem .65rem;
+    overflow: visible;
+    gap: .65rem;
+    border-bottom: 1px solid var(--table-row-border);
+    white-space: normal;
+  }
+  .approval-records-table tbody td:last-child {
+    border-bottom: 0;
+  }
+  .approval-records-table tbody td::before {
+    content: attr(data-label);
+    color: var(--text-dim);
+    font-size: .66rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .approval-records-table .file-cell strong,
+  .approval-records-table .record-file-meta,
+  .approval-records-table .record-document-number {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .approval-records-table .status-pill,
+  .approval-records-table td[data-label="Review"] .btn-outline {
+    width: fit-content;
+    max-width: 100%;
+  }
+  .approval-records-table .approval-empty-row td {
+    display: block;
+    padding: 2rem !important;
+    text-align: center;
+  }
+  .approval-records-table .approval-empty-row td::before {
+    content: none;
+  }
+}
+
+@container approval-records (max-width: 680px) {
+  .approval-records-filter {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .approval-records-filter .search-wrap,
+  .approval-records-filter .approval-status-filter,
+  .approval-records-filter .btn-primary,
+  .approval-records-filter .btn-outline {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+  .approval-records-pagination {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .approval-records-pagination .pg-controls {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 680px) {
+  .approval-records-panel { padding: .9rem; }
+  .approval-records-filter .btn-primary,
+  .approval-records-filter .btn-outline { width: 100%; }
 }
 
 .dashboard-document-table {

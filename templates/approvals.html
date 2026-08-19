@@ -50,36 +50,40 @@
   </article>
 </div>
 
-<section class="surface-panel">
-  <form method="GET" action="{{ url_for('approvals.index') }}" class="filter-bar">
-    <input type="hidden" name="page_size" value="{{ page_size }}" />
-    <div class="search-wrap search-wrap-wide">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" name="search" placeholder="Search by file, uploader, document number…" value="{{ search or '' }}" />
-    </div>
-    <select name="status">
-      <option value="">All statuses</option>
-      <option value="Pending"  {% if selected_status=='Pending'  %}selected{% endif %}>Pending / Final Pending</option>
-      <option value="Pending Final Approval" {% if selected_status=='Pending Final Approval' %}selected{% endif %}>Pending Final Approval only</option>
-      <option value="Hold" {% if selected_status=='Hold' %}selected{% endif %}>Hold</option>
-      <option value="Approved" {% if selected_status=='Approved' %}selected{% endif %}>Approved</option>
-      <option value="Rejected" {% if selected_status=='Rejected' %}selected{% endif %}>Rejected</option>
-    </select>
-    <button type="submit" class="btn-primary">Apply</button>
-    <a href="{{ url_for('approvals.index') }}" class="btn-outline">Reset</a>
-  </form>
-</section>
-
-<section class="surface-panel">
-  <div class="panel-head">
+<section class="surface-panel approval-records-panel">
+  <div class="panel-head approval-records-head">
     <div>
       <h2 class="section-title">Approval Records</h2>
       <p class="section-sub">{{ total_records }} record(s) total.</p>
     </div>
   </div>
 
+  <form method="GET" action="{{ url_for('approvals.index') }}" class="filter-bar approval-records-filter" role="search">
+    <input type="hidden" name="page_size" value="{{ page_size }}" />
+    <label class="search-wrap search-wrap-wide" for="approval-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span class="sr-only">Search approval records</span>
+      <input id="approval-search" type="search" name="search" placeholder="Search by file, uploader, document number…" value="{{ search or '' }}" />
+    </label>
+    <label class="approval-status-filter" for="approval-status">
+      <span class="sr-only">Filter approval records by status</span>
+      <select id="approval-status" name="status">
+        <option value="">All statuses</option>
+        <option value="Pending"  {% if selected_status=='Pending'  %}selected{% endif %}>Pending / Final Pending</option>
+        <option value="Pending Final Approval" {% if selected_status=='Pending Final Approval' %}selected{% endif %}>Pending Final Approval only</option>
+        <option value="Hold" {% if selected_status=='Hold' %}selected{% endif %}>Hold</option>
+        <option value="Approved" {% if selected_status=='Approved' %}selected{% endif %}>Approved</option>
+        <option value="Rejected" {% if selected_status=='Rejected' %}selected{% endif %}>Rejected</option>
+      </select>
+    </label>
+    <button type="submit" class="btn-primary">Search</button>
+    {% if search or selected_status %}
+      <a href="{{ url_for('approvals.index', page_size=page_size) }}" class="btn-outline">Clear</a>
+    {% endif %}
+  </form>
+
   <!-- Pagination bar -->
-  <div class="pg-bar">
+  <div class="pg-bar approval-records-pagination">
     <span class="pg-info">
       Showing {{ ((page-1)*page_size)+1 }}–{{ [page*page_size, total_records]|min }} of {{ total_records }}
     </span>
@@ -134,8 +138,8 @@
         {% if page_records %}
           {% for r in page_records %}
           <tr data-doc-id="{{ r.id }}">
-            <td class="record-date text-dim">{{ r.uploaded_at }}</td>
-            <td>
+            <td class="record-date text-dim" data-label="Date">{{ r.uploaded_at }}</td>
+            <td data-label="File">
               <div class="file-block">
                 <div class="file-cell">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -146,21 +150,21 @@
                 </div>
               </div>
             </td>
-            <td><span class="plant-badge" title="{{ r.plant | plant_code }}">{{ r.plant | plant_code }}</span></td>
-            <td><span class="record-cell-clamp" title="{{ r.department }}">{{ r.department }}</span></td>
-            <td class="record-document-number" title="{{ r.document_number or 'Not assigned' }}">
+            <td data-label="Plant"><span class="plant-badge" title="{{ r.plant | plant_code }}">{{ r.plant | plant_code }}</span></td>
+            <td data-label="Department"><span class="record-cell-clamp" title="{{ r.department }}">{{ r.department }}</span></td>
+            <td class="record-document-number" data-label="Document Number" title="{{ r.document_number or 'Not assigned' }}">
               {{ r.document_number or '—' }}
             </td>
-            <td class="approval-status-cell">
+            <td class="approval-status-cell" data-label="Status">
               <span class="status-pill status-{{ r.approval_status|lower|replace(' ', '-') }}" title="{{ r.approval_status }}">
                 {{ r.approval_status }}
               </span>
             </td>
-            <td><a href="{{ url_for('approvals.review_document', token=r.review_token) }}" class="btn-outline btn-sm">Review</a></td>
+            <td data-label="Review"><a href="{{ url_for('approvals.review_document', token=r.review_token) }}" class="btn-outline btn-sm">Review</a></td>
           </tr>
           {% endfor %}
         {% else %}
-          <tr><td colspan="7" class="empty-state">No records found.</td></tr>
+          <tr class="approval-empty-row"><td colspan="7" class="empty-state">No records found.</td></tr>
         {% endif %}
       </tbody>
     </table>
