@@ -98,30 +98,30 @@
       {% if revisions %}
         {% for rev in revisions %}
         <tr>
-          <td>
+          <td data-label="Date">
             <time class="revision-date" datetime="{{ rev.revision_date }}">
               <span>{{ rev.display_date }}</span>
               {% if rev.display_time %}<small>{{ rev.display_time }}</small>{% endif %}
             </time>
           </td>
-          <td>
+          <td data-label="File Name">
             <span class="revision-file-name" title="{{ rev.display_file_name or rev.file_name }}">{{ rev.display_file_name or rev.file_name }}</span>
           </td>
-          <td><span class="status-pill revision-number-pill">{{ rev.revision_number }}</span></td>
-          <td>
+          <td data-label="Revision"><span class="status-pill revision-number-pill">{{ rev.revision_number }}</span></td>
+          <td data-label="Revised By">
             <span class="revision-person">
               <strong>{{ rev.display_revised_by }}</strong>
               {% if rev.reviser_email %}<small title="{{ rev.reviser_email }}">{{ rev.reviser_email }}</small>{% endif %}
             </span>
           </td>
-          <td>{% if rev.plant %}<span class="plant-badge">{{ rev.plant | plant_code }}</span>{% else %}<span class="text-dim">—</span>{% endif %}</td>
-          <td><span class="revision-cell-text" title="{{ rev.department or '' }}">{{ rev.department or '—' }}</span></td>
-          <td><span class="revision-cell-text text-dim" title="{{ rev.change_summary or '' }}">{{ rev.change_summary or '—' }}</span></td>
-          <td><span class="revision-file-name revision-previous-file text-dim" title="{{ rev.display_previous_file_name or '' }}">{{ rev.display_previous_file_name or '—' }}</span></td>
+          <td data-label="Plant">{% if rev.plant %}<span class="plant-badge">{{ rev.plant | plant_code }}</span>{% else %}<span class="text-dim">—</span>{% endif %}</td>
+          <td data-label="Department"><span class="revision-cell-text" title="{{ rev.department or '' }}">{{ rev.department or '—' }}</span></td>
+          <td data-label="Change Summary"><span class="revision-cell-text text-dim" title="{{ rev.change_summary or '' }}">{{ rev.change_summary or '—' }}</span></td>
+          <td data-label="Previous Version"><span class="revision-file-name revision-previous-file text-dim" title="{{ rev.display_previous_file_name or '' }}">{{ rev.display_previous_file_name or '—' }}</span></td>
         </tr>
         {% endfor %}
       {% else %}
-        <tr><td colspan="8" class="empty-state">No revision history found.</td></tr>
+        <tr class="revision-empty-row"><td colspan="8" class="empty-state">No revision history found.</td></tr>
       {% endif %}
     </tbody>
   </table>

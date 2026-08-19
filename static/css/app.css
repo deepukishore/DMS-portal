@@ -2303,21 +2303,27 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 
 /* Revision history keeps metadata readable without breaking words vertically. */
 .revision-history-table {
-  min-width: 1180px;
+  width: 100%;
+  min-width: 0;
   table-layout: fixed;
 }
-.revision-history-table .revision-col-date { width: 120px; }
-.revision-history-table .revision-col-file { width: 190px; }
-.revision-history-table .revision-col-number { width: 105px; }
-.revision-history-table .revision-col-person { width: 165px; }
-.revision-history-table .revision-col-plant { width: 74px; }
-.revision-history-table .revision-col-department { width: 205px; }
-.revision-history-table .revision-col-summary { width: 180px; }
-.revision-history-table .revision-col-previous { width: 190px; }
+.revision-history-table .revision-col-date { width: 10%; }
+.revision-history-table .revision-col-file { width: 16%; }
+.revision-history-table .revision-col-number { width: 9%; }
+.revision-history-table .revision-col-person { width: 14%; }
+.revision-history-table .revision-col-plant { width: 6%; }
+.revision-history-table .revision-col-department { width: 17%; }
+.revision-history-table .revision-col-summary { width: 14%; }
+.revision-history-table .revision-col-previous { width: 14%; }
 .revision-history-table th,
 .revision-history-table td {
-  padding-left: .85rem;
-  padding-right: .85rem;
+  padding-left: .55rem;
+  padding-right: .55rem;
+}
+.revision-history-table th {
+  overflow: hidden;
+  font-size: .65rem;
+  text-overflow: ellipsis;
 }
 .revision-history-table td {
   height: 68px;
@@ -2379,6 +2385,81 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 }
 .revision-previous-file {
   font-weight: 400;
+}
+.revision-history-wrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  container: revision-history / inline-size;
+}
+
+@container revision-history (max-width: 820px) {
+  .revision-history-table,
+  .revision-history-table tbody,
+  .revision-history-table tr,
+  .revision-history-table td {
+    display: block;
+    width: 100%;
+  }
+  .revision-history-table colgroup,
+  .revision-history-table thead {
+    display: none;
+  }
+  .revision-history-table tbody {
+    display: grid;
+    gap: .75rem;
+    padding: .75rem;
+  }
+  .revision-history-table tbody tr {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-2);
+  }
+  .revision-history-table tbody td {
+    display: grid;
+    grid-template-columns: minmax(115px, 34%) minmax(0, 1fr);
+    align-items: center;
+    min-height: 42px;
+    height: auto;
+    padding: .5rem .65rem;
+    overflow: visible;
+    gap: .65rem;
+    border-bottom: 1px solid var(--table-row-border);
+    white-space: normal;
+  }
+  .revision-history-table tbody td:last-child {
+    border-bottom: 0;
+  }
+  .revision-history-table tbody td::before {
+    content: attr(data-label);
+    color: var(--text-dim);
+    font-size: .66rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .revision-history-table .revision-file-name,
+  .revision-history-table .revision-cell-text {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+  }
+  .revision-history-table .revision-person strong,
+  .revision-history-table .revision-person small {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+  .revision-history-table .revision-empty-row td {
+    display: block;
+    padding: 2rem !important;
+    text-align: center;
+  }
+  .revision-history-table .revision-empty-row td::before {
+    content: none;
+  }
 }
 /* ─── Checkbox Wrapper ──────────────────────────────────────────────────── */
 .checkbox-wrapper {
