@@ -5,13 +5,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document View | Document Management System</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260807-8') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260820-2') }}" />
 </head>
-<body class="review-body">
+<body class="review-body document-view-body">
   <main class="review-shell">
     <header class="review-brandbar">
       <div class="review-brandbar-left">
         <button type="button" class="btn-page-back" onclick="goToPreviousPage('{{ url_for('dashboard.index') }}')" aria-label="Go to previous page">&#8592; Previous</button>
+        <a href="{{ url_for('dashboard.index') }}" class="btn-page-home" aria-label="Go to dashboard" title="Go to dashboard">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5" />
+            <path d="M5 9.5V21h14V9.5" />
+            <path d="M9 21v-7h6v7" />
+          </svg>
+        </a>
         <a href="{{ url_for('dashboard.index') }}" class="review-brand-link">
           <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="ZF Rane" />
           <span>Document Management System <small>SGD</small></span>
@@ -23,10 +30,10 @@
       </button>
     </header>
     <section class="review-topbar">
-      <div>
+      <div class="document-view-heading">
         <p class="eyebrow">Document View</p>
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <h1 class="page-title">{{ record.file_name }}</h1>
+        <div class="document-view-title-row">
+          <h1 class="page-title document-view-title">{{ record.file_name }}</h1>
           <button class="btn-icon btn-bookmark" data-doc-id="{{ record.id }}" title="Add to bookmarks" onclick="toggleBookmark(event, {{ record.id }})">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="bookmark-icon"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
           </button>
@@ -49,7 +56,7 @@
 
     <section class="review-layout">
       <div class="review-main">
-        <section class="review-card">
+        <section class="review-card document-preview-card">
           <div class="panel-head">
             <div>
               <h2 class="section-title">Preview</h2>
@@ -129,7 +136,7 @@
       </div>
 
       <aside class="review-side">
-        <section class="review-card">
+        <section class="review-card document-details-card">
           <div class="panel-head">
             <div>
               <h2 class="section-title">Document Details</h2>
@@ -137,7 +144,7 @@
             </div>
           </div>
 
-            <div class="review-meta-grid review-meta-grid-single">
+          <div class="review-meta-grid review-meta-grid-single">
             <div class="review-meta-item">
               <span>Document number</span>
               <strong>{{ record.document_number or 'Not set' }}</strong>
@@ -189,21 +196,6 @@
           </div>
         </section>
 
-        <section class="review-card">
-          <div class="panel-head">
-            <div>
-              <h2 class="section-title">Actions</h2>
-              <p class="section-sub">Return to previous page or dashboard.</p>
-            </div>
-          </div>
-
-          <div class="review-actions review-actions-stacked">
-            <a href="{{ url_for('dashboard.index') }}" class="btn-outline">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              Go to Dashboard
-            </a>
-          </div>
-        </section>
       </aside>
     </section>
   </main>
