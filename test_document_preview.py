@@ -2,6 +2,8 @@ import os
 import tempfile
 import unittest
 
+from pypdf import PdfWriter
+
 from services.document_preview_service import DocumentPreviewService
 from services.document_service import DocumentService
 
@@ -40,6 +42,20 @@ class DocumentPreviewPathTests(unittest.TestCase):
             preview_path = DocumentService.get_preview_file_path(record, upload_folder)
 
             self.assertEqual(preview_path, os.path.join(upload_folder, source_name))
+
+    def test_pdf_preview_includes_the_total_page_count(self):
+        with tempfile.TemporaryDirectory() as upload_folder:
+            pdf_path = os.path.join(upload_folder, "three-pages.pdf")
+            writer = PdfWriter()
+            for _ in range(3):
+                writer.add_blank_page(width=612, height=792)
+            with open(pdf_path, "wb") as pdf_file:
+                writer.write(pdf_file)
+
+            self.assertEqual(
+                DocumentPreviewService.build_preview(pdf_path, "/file"),
+                {"mode": "pdf", "url": "/file", "page_count": 3},
+            )
 
 
 if __name__ == "__main__":

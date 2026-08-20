@@ -5,6 +5,9 @@ import os
 import zipfile
 from xml.etree import ElementTree as ET
 
+from pypdf import PdfReader
+from pypdf.errors import PyPdfError
+
 
 class DocumentPreviewService:
     """Builds safe in-page previews for uploaded documents."""
@@ -25,7 +28,11 @@ class DocumentPreviewService:
         if mime_type and mime_type.startswith("image/"):
             return {"mode": "image", "url": file_url}
         if extension == ".pdf":
-            return {"mode": "pdf", "url": file_url}
+            preview = {"mode": "pdf", "url": file_url}
+            page_count = DocumentPreviewService._pdf_page_count(file_path)
+            if page_count:
+                preview["page_count"] = page_count
+            return preview
         if extension in {".htm", ".html"}:
             return {"mode": "html", "url": file_url}
         if extension == ".docx":
@@ -41,6 +48,14 @@ class DocumentPreviewService:
             "mode": "unsupported",
             "message": "This file type does not have an in-page preview yet.",
         }
+
+    @staticmethod
+    def _pdf_page_count(file_path):
+        """Return the number of pages without failing the document view."""
+        try:
+            return len(PdfReader(file_path).pages)
+        except (OSError, ValueError, PyPdfError):
+            return None
 
     @staticmethod
     def can_stream_inline(file_path):

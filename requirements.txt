@@ -7,5 +7,6 @@ openpyxl==3.1.5
 python-pptx==1.0.2
 reportlab==4.5.1
 Pillow==12.2.0
+pypdf>=6,<7
 PyMySQL>=1.1,<2
 python-dotenv>=1,<2

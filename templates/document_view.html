@@ -203,6 +203,21 @@
           <h2 id="document-preview-modal-title">{{ record.file_name }}</h2>
         </div>
         <div class="document-preview-modal-actions">
+          {% if preview.mode == 'pdf' %}
+          <nav class="document-preview-pagination" id="document-preview-pagination" aria-label="Document pages" data-page-count="{{ preview.page_count | default(0) }}">
+            <button type="button" class="document-preview-page-button" id="document-preview-page-previous" aria-label="Previous page" title="Previous page" disabled>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <label class="document-preview-page-field">
+              <span>Page</span>
+              <input type="number" id="document-preview-page-number" min="1" {% if preview.page_count is defined %}max="{{ preview.page_count }}"{% endif %} value="1" inputmode="numeric" aria-label="Page number" />
+              {% if preview.page_count is defined %}<span aria-hidden="true">of {{ preview.page_count }}</span><span class="sr-only">of {{ preview.page_count }}</span>{% endif %}
+            </label>
+            <button type="button" class="document-preview-page-button" id="document-preview-page-next" aria-label="Next page" title="Next page" {% if preview.page_count is defined and preview.page_count <= 1 %}disabled{% endif %}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </nav>
+          {% endif %}
           {% if preview.url is defined %}
           <a href="{{ preview.url }}" target="_blank" rel="noopener noreferrer" class="btn-outline btn-sm">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
@@ -231,7 +246,7 @@
   <script src="{{ url_for('static', filename='js/customer_branding.js') }}"></script>
   <script src="{{ url_for('static', filename='js/app.js', v='20260820-2') }}"></script>
   <script src="{{ url_for('static', filename='js/product_tour.js', v='20260820-2') }}"></script>
-  <script src="{{ url_for('static', filename='js/document_view.js', v='20260820-1') }}"></script>
+  <script src="{{ url_for('static', filename='js/document_view.js', v='20260820-2') }}"></script>
   <script>
     // Bookmark functionality
     function toggleBookmark(event, docId) {

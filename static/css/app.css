@@ -9155,6 +9155,9 @@ body.app-body {
 .document-preview-toolbar .btn-outline,
 .document-preview-modal-actions .btn-outline { justify-content: center; }
 .document-preview-card .review-preview { position: relative; }
+.document-preview-card .review-image,
+.document-preview-card .review-generated-preview,
+.document-preview-card .review-text-preview { cursor: zoom-in; }
 .document-preview-expand {
   position: absolute;
   top: .75rem;
@@ -9233,6 +9236,62 @@ body.app-body {
   align-items: center;
   gap: .6rem;
 }
+.document-preview-pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .25rem;
+  color: var(--text-sub);
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.document-preview-page-button {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--text-main);
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.document-preview-page-button:hover:not(:disabled),
+.document-preview-page-button:focus-visible {
+  color: #fff;
+  background: var(--accent);
+  outline: none;
+}
+.document-preview-page-button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+.document-preview-page-field {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .82rem;
+  white-space: nowrap;
+}
+.document-preview-page-field input {
+  width: 48px;
+  height: 30px;
+  padding: .2rem .3rem;
+  color: var(--text-main);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+}
+.document-preview-page-field input:focus {
+  border-color: var(--accent);
+  outline: 2px solid rgba(41, 168, 223, .2);
+}
 .document-preview-modal-close {
   display: inline-flex;
   width: 36px;
@@ -9305,6 +9364,8 @@ body.app-body {
   .document-preview-modal-actions .btn-outline { width: 38px; min-width: 38px; padding: .45rem; }
   .document-preview-modal-actions .btn-outline svg { margin: 0; }
   .document-preview-modal-actions .btn-outline { font-size: 0; }
+  .document-preview-modal-actions { flex-wrap: wrap; justify-content: flex-end; }
+  .document-preview-pagination { order: 3; }
   .document-preview-modal-body { padding: .4rem; }
 }
 
