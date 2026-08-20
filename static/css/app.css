@@ -8963,3 +8963,162 @@ body.app-body {
 .dashboard-document-table .action-cell > .table-actions > * {
   margin: 0;
 }
+
+/* Guided product tour ---------------------------------------------------- */
+.review-brandbar-actions {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+.auth-tour-launch {
+  right: 4.25rem;
+}
+.auth-register .auth-tour-launch { display: inline-flex; }
+.app-body .nav-tour-button {
+  width: calc(100% - 1.3rem);
+  color: var(--text-sub);
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.app-body .nav-tour-button svg { color: var(--cyan); }
+
+.product-tour {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  pointer-events: none;
+}
+.product-tour[hidden] { display: none !important; }
+.product-tour-backdrop {
+  position: fixed;
+  z-index: 5000;
+  background: rgba(3, 12, 22, .72);
+  pointer-events: auto;
+  transition: top .24s ease, left .24s ease, width .24s ease, height .24s ease;
+}
+.product-tour-highlight {
+  position: fixed;
+  z-index: 5001;
+  border: 2px solid var(--cyan);
+  border-radius: 12px;
+  background: transparent;
+  box-shadow: 0 0 0 4px rgba(34, 196, 214, .2), 0 16px 44px rgba(0, 0, 0, .28);
+  pointer-events: auto;
+  transition: top .24s ease, left .24s ease, width .24s ease, height .24s ease;
+}
+.product-tour-popover {
+  position: fixed;
+  z-index: 5002;
+  width: min(380px, calc(100vw - 24px));
+  padding: 1.2rem;
+  color: var(--text);
+  background:
+    linear-gradient(120deg, rgba(0, 114, 188, .055), rgba(34, 196, 214, .035)),
+    var(--bg-2);
+  border: 1px solid rgba(34, 196, 214, .42);
+  border-top: 3px solid var(--cyan);
+  border-radius: 12px;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, .34);
+  pointer-events: auto;
+  animation: product-tour-pop .2s ease-out both;
+}
+.product-tour-head,
+.product-tour-footer,
+.product-tour-actions {
+  display: flex;
+  align-items: center;
+}
+.product-tour-head {
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .65rem;
+}
+.product-tour-progress {
+  color: var(--accent);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.product-tour-close {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.product-tour-close:hover,
+.product-tour-close:focus-visible {
+  color: var(--text);
+  background: var(--bg-3);
+  border-color: var(--border);
+}
+.product-tour-popover h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+.product-tour-popover > p {
+  margin: .55rem 0 1.1rem;
+  color: var(--text-sub);
+  font-size: .82rem;
+  line-height: 1.6;
+}
+.product-tour-footer {
+  justify-content: space-between;
+  gap: .75rem;
+  padding-top: .9rem;
+  border-top: 1px solid var(--border-2);
+}
+.product-tour-actions { gap: .55rem; }
+.product-tour-actions .btn-primary,
+.product-tour-actions .btn-outline {
+  min-width: 88px;
+  justify-content: center;
+}
+.product-tour-actions button:disabled {
+  opacity: .42;
+  cursor: not-allowed;
+  transform: none;
+}
+.product-tour-skip {
+  padding: .4rem .1rem;
+  color: var(--text-dim);
+  background: transparent;
+  border: 0;
+  font-size: .75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.product-tour-skip:hover,
+.product-tour-skip:focus-visible { color: var(--text); text-decoration: underline; }
+
+@keyframes product-tour-pop {
+  from { opacity: 0; transform: translateY(8px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 520px) {
+  .product-tour-popover { padding: 1rem; }
+  .product-tour-footer { align-items: stretch; flex-direction: column; }
+  .product-tour-skip { align-self: flex-start; }
+  .product-tour-actions { width: 100%; }
+  .product-tour-actions .btn-primary,
+  .product-tour-actions .btn-outline { flex: 1 1 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-tour-backdrop,
+  .product-tour-highlight { transition: none; }
+  .product-tour-popover { animation: none; }
+}
