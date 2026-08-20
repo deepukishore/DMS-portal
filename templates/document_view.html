@@ -1,11 +1,10 @@
-{% from 'components/customer_brand.html' import badge with context %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document View | Document Management System</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260820-2') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260820-3') }}" />
 </head>
 <body class="review-body document-view-body">
   <main class="review-shell">
@@ -54,7 +53,39 @@
       {% endif %}
     {% endwith %}
 
-    <section class="review-layout">
+    <section class="review-card review-document-details-card">
+      <div class="panel-head">
+        <div>
+          <h2 class="section-title">Document Details</h2>
+          <p class="section-sub">Information about this uploaded file.</p>
+        </div>
+      </div>
+
+      <div class="review-meta-grid review-document-details-grid">
+        <div class="review-meta-item">
+          <span>Document Number</span>
+          <strong>{{ record.document_number or 'Not set' }}</strong>
+        </div>
+        <div class="review-meta-item">
+          <span>Revision Number</span>
+          <strong>{{ record.revision_number or 'Not set' }}</strong>
+        </div>
+        <div class="review-meta-item">
+          <span>Category</span>
+          <strong>{{ record.category or 'Not set' }}</strong>
+        </div>
+        <div class="review-meta-item">
+          <span>Requested by</span>
+          <strong>{{ record.name }} ({{ record.user_id }})</strong>
+        </div>
+        <div class="review-meta-item">
+          <span>Date of upload</span>
+          <strong>{{ record.uploaded_at }}</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="review-layout document-view-preview-layout">
       <div class="review-main">
         <section class="review-card document-preview-card">
           <div class="panel-head">
@@ -134,69 +165,6 @@
           </div>
         </section>
       </div>
-
-      <aside class="review-side">
-        <section class="review-card document-details-card">
-          <div class="panel-head">
-            <div>
-              <h2 class="section-title">Document Details</h2>
-              <p class="section-sub">Information about this uploaded file.</p>
-            </div>
-          </div>
-
-          <div class="review-meta-grid review-meta-grid-single">
-            <div class="review-meta-item">
-              <span>Document number</span>
-              <strong>{{ record.document_number or 'Not set' }}</strong>
-            </div>
-            <div class="review-meta-item">
-              <span>Revision number</span>
-              <strong>{{ record.revision_number or 'Not set' }}</strong>
-            </div>
-            <div class="review-meta-item">
-              <span>Category</span>
-              <strong>{{ record.category or 'Not set' }}</strong>
-            </div>
-            <div class="review-meta-item">
-              <span>Uploaded by</span>
-              <strong>{{ record.name }} ({{ record.user_id }})</strong>
-            </div>
-            <div class="review-meta-item">
-              <span>Plant</span>
-              <strong>{{ record.plant | plant_code }}</strong>
-            </div>
-            <div class="review-meta-item">
-              <span>Department</span>
-              <strong>{{ record.department }}</strong>
-            </div>
-            <div class="review-meta-item">
-              <span>Customer association</span>
-              <strong>{{ badge(record.customer, true) if record.customer else 'Not customer-linked' }}</strong>
-            </div>
-            <div class="review-meta-item">
-              <span>Uploaded on</span>
-              <strong>{{ record.uploaded_at }}</strong>
-            </div>
-            <div class="review-meta-item">
-              <span>Current status</span>
-              <strong>{{ record.approval_status }}</strong>
-            </div>
-            {% if record.approval_updated_at %}
-              <div class="review-meta-item">
-                <span>Status updated at</span>
-                <strong>{{ record.approval_updated_at }}</strong>
-              </div>
-            {% endif %}
-            {% if record.rejection_comment %}
-              <div class="review-meta-item">
-                <span>Rejection comments</span>
-                <strong>{{ record.rejection_comment }}</strong>
-              </div>
-            {% endif %}
-          </div>
-        </section>
-
-      </aside>
     </section>
   </main>
 

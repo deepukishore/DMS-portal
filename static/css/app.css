@@ -8091,65 +8091,8 @@ body * {
 .document-view-body .review-meta-item strong {
   overflow-wrap: anywhere;
 }
-
-@media (min-width: 901px) and (min-height: 650px) {
-  .document-view-body {
-    height: 100dvh;
-    overflow: hidden;
-  }
-  .document-view-body .review-shell {
-    display: flex;
-    flex-direction: column;
-    height: calc(100dvh - 4rem);
-    min-height: 0;
-  }
-  .document-view-body .review-brandbar,
-  .document-view-body .review-topbar {
-    flex: 0 0 auto;
-  }
-  .document-view-body .review-layout {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow: hidden;
-  }
-  .document-view-body .review-main,
-  .document-view-body .review-side,
-  .document-view-body .document-preview-card,
-  .document-view-body .document-details-card {
-    min-height: 0;
-    height: 100%;
-  }
-  .document-view-body .document-preview-card,
-  .document-view-body .document-details-card {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .document-view-body .document-preview-card .panel-head,
-  .document-view-body .document-details-card .panel-head {
-    flex: 0 0 auto;
-  }
-  .document-view-body .review-preview {
-    flex: 1 1 auto;
-    min-height: 0;
-  }
-  .document-view-body .review-frame,
-  .document-view-body .review-image,
-  .document-view-body .review-text-preview,
-  .document-view-body .review-generated-preview {
-    height: 100%;
-    min-height: 0;
-  }
-  .document-view-body .review-generated-preview {
-    overflow: auto;
-  }
-  .document-view-body .document-details-card .review-meta-grid {
-    flex: 1 1 auto;
-    min-height: 0;
-    padding-right: .35rem;
-    overflow-y: auto;
-    scrollbar-gutter: stable;
-  }
+.document-view-preview-layout {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 @media (max-width: 900px) {
