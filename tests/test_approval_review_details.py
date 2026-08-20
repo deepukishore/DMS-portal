@@ -4,6 +4,15 @@ from pathlib import Path
 
 
 class ApprovalReviewDetailsTests(unittest.TestCase):
+    def test_header_has_dashboard_home_button(self):
+        project_root = Path(__file__).resolve().parent.parent
+        template = (project_root / "templates" / "approval_review.html").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn('class="btn-page-home"', template)
+        self.assertIn('aria-label="Go to dashboard"', template)
+
     def test_document_details_are_horizontal_and_contain_only_requested_fields(self):
         project_root = Path(__file__).resolve().parent.parent
         template = (project_root / "templates" / "approval_review.html").read_text(
