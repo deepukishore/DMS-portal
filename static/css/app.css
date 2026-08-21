@@ -8068,6 +8068,31 @@ body * {
   outline: 3px solid rgba(41,168,223,.18);
   outline-offset: 2px;
 }
+.btn-product-tour {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--accent);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.btn-product-tour:hover,
+.btn-product-tour:focus-visible {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 103, 177, .24);
+  outline: 3px solid rgba(41,168,223,.18);
+  outline-offset: 2px;
+}
 
 /* Keep the standalone document viewer contained and usable on desktop. */
 .document-view-heading,
@@ -8974,16 +8999,6 @@ body.app-body {
   right: 4.25rem;
 }
 .auth-register .auth-tour-launch { display: inline-flex; }
-.app-body .nav-tour-button {
-  width: calc(100% - 1.3rem);
-  color: var(--text-sub);
-  background: transparent;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-.app-body .nav-tour-button svg { color: var(--cyan); }
-
 .product-tour {
   position: fixed;
   inset: 0;

@@ -48,7 +48,9 @@ class ProductTourTests(unittest.TestCase):
 
     def test_new_users_auto_start_and_tour_can_be_replayed(self):
         self.assertIn("welcome_is_new_user", self.layout)
-        self.assertIn('id="product-tour-launch"', self.sidebar)
+        self.assertIn('id="product-tour-launch"', self.layout)
+        self.assertIn('class="btn-product-tour"', self.layout)
+        self.assertNotIn('id="product-tour-launch"', self.sidebar)
         self.assertIn("dms-product-tour-complete", self.script)
         self.assertIn("window.startProductTour", self.script)
         self.assertIn("function launchTour()", self.script)

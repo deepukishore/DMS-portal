@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Document Management System{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260820-4') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='20260821-2') }}" />
 </head>
 <body class="app-body {% block body_class %}{% endblock %}">
   <div class="shell">
@@ -45,6 +45,13 @@
           </div>
         </div>
         <div class="topbar-right">
+          <button type="button" class="btn-product-tour" id="product-tour-launch" title="Start product tour" aria-label="Start product tour">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 18h6"></path>
+              <path d="M10 22h4"></path>
+              <path d="M8.5 14.5A6 6 0 1 1 15.5 14.5C14.7 15.1 14 16 14 17h-4c0-1-.7-1.9-1.5-2.5Z"></path>
+            </svg>
+          </button>
           <div class="notification-wrap" id="notification-wrap" data-tour="notifications">
             <button id="notification-toggle" class="btn-theme btn-notification" type="button" aria-label="Open notifications" aria-expanded="false">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
