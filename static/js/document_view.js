@@ -29,8 +29,9 @@
   }
 
   function showPage(requestedPage) {
-    const frame = modalBody.querySelector('.review-frame');
-    if (!frame || !pageNumberInput) return;
+    const currentPreview = modalBody.querySelector('.review-frame, .document-preview-page-image');
+    const pageImageUrl = pagination?.dataset.pageImageUrl;
+    if (!currentPreview || !pageNumberInput || !pageImageUrl) return;
 
     const count = pageCount();
     let page = Number.parseInt(requestedPage, 10);
@@ -38,9 +39,21 @@
     page = Math.max(1, count ? Math.min(page, count) : page);
     currentPage = page;
 
-    const sourceUrl = frame.dataset.documentSource || frame.getAttribute('src').split('#')[0];
-    frame.dataset.documentSource = sourceUrl;
-    frame.src = `${sourceUrl}#page=${page}&toolbar=0&navpanes=0&scrollbar=1&view=FitH`;
+    let pageImage = currentPreview;
+    if (!pageImage.classList.contains('document-preview-page-image')) {
+      pageImage = document.createElement('img');
+      pageImage.className = 'review-image document-preview-page-image';
+      pageImage.draggable = false;
+      pageImage.addEventListener('contextmenu', (event) => event.preventDefault());
+      currentPreview.replaceWith(pageImage);
+    }
+
+    const totalLabel = count ? ` of ${count}` : '';
+    pageImage.alt = `Page ${page}${totalLabel}`;
+    modalBody.setAttribute('aria-busy', 'true');
+    pageImage.addEventListener('load', () => modalBody.setAttribute('aria-busy', 'false'), { once: true });
+    pageImage.addEventListener('error', () => modalBody.setAttribute('aria-busy', 'false'), { once: true });
+    pageImage.src = `${pageImageUrl}?page=${page}`;
     updatePageControls();
   }
 
@@ -57,6 +70,7 @@
     document.body.classList.add('document-preview-open');
     currentPage = 1;
     updatePageControls();
+    if (pagination) showPage(1);
     closeButton.focus({ preventScroll: true });
   }
 

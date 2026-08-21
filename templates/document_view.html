@@ -204,7 +204,7 @@
         </div>
         <div class="document-preview-modal-actions">
           {% if preview.mode == 'pdf' %}
-          <nav class="document-preview-pagination" id="document-preview-pagination" aria-label="Document pages" data-page-count="{{ preview.page_count | default(0) }}">
+          <nav class="document-preview-pagination" id="document-preview-pagination" aria-label="Document pages" data-page-count="{{ preview.page_count | default(0) }}" data-page-image-url="{{ url_for('dashboard.view_file_page', doc_id=record.id) }}">
             <button type="button" class="document-preview-page-button" id="document-preview-page-previous" aria-label="Previous page" title="Previous page" disabled>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
             </button>
@@ -246,7 +246,7 @@
   <script src="{{ url_for('static', filename='js/customer_branding.js') }}"></script>
   <script src="{{ url_for('static', filename='js/app.js', v='20260820-2') }}"></script>
   <script src="{{ url_for('static', filename='js/product_tour.js', v='20260820-2') }}"></script>
-  <script src="{{ url_for('static', filename='js/document_view.js', v='20260820-2') }}"></script>
+  <script src="{{ url_for('static', filename='js/document_view.js', v='20260820-3') }}"></script>
   <script>
     // Bookmark functionality
     function toggleBookmark(event, docId) {

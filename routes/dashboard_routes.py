@@ -367,6 +367,41 @@ def view_file(doc_id):
     return response
 
 
+@dashboard_bp.route("/dashboard/view/<int:doc_id>/page")
+def view_file_page(doc_id):
+    """Return a single PDF page as an image for the expanded preview."""
+    redir = _require_login()
+    if redir:
+        return redir
+
+    document = DocumentService.get_document_by_id(
+        doc_id,
+        access_department=AuthService.get_visible_department(),
+    )
+    if not document:
+        abort(404)
+
+    page_number = request.args.get("page", type=int)
+    if page_number is None or page_number < 1:
+        abort(404)
+
+    file_path = DocumentService.get_preview_file_path(
+        document,
+        current_app.config["UPLOAD_FOLDER"],
+    )
+    if not os.path.exists(file_path) or os.path.splitext(file_path)[1].lower() != ".pdf":
+        abort(404)
+
+    page_image = DocumentPreviewService.render_pdf_page(file_path, page_number)
+    if page_image is None:
+        abort(404)
+
+    response = Response(page_image, mimetype="image/png")
+    response.headers["Cache-Control"] = "private, max-age=300"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    return response
+
+
 @dashboard_bp.route("/api/bookmark/<int:doc_id>", methods=["POST"])
 def toggle_bookmark(doc_id):
     """Toggle bookmark for a document."""

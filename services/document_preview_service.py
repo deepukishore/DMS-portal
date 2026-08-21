@@ -5,6 +5,7 @@ import os
 import zipfile
 from xml.etree import ElementTree as ET
 
+import pymupdf
 from pypdf import PdfReader
 from pypdf.errors import PyPdfError
 
@@ -55,6 +56,23 @@ class DocumentPreviewService:
         try:
             return len(PdfReader(file_path).pages)
         except (OSError, ValueError, PyPdfError):
+            return None
+
+    @staticmethod
+    def render_pdf_page(file_path, page_number):
+        """Render one PDF page to PNG for reliable in-app navigation."""
+        try:
+            with pymupdf.open(file_path) as document:
+                if page_number < 1 or page_number > document.page_count:
+                    return None
+
+                page = document.load_page(page_number - 1)
+                width = max(page.rect.width, 1)
+                height = max(page.rect.height, 1)
+                scale = min(2.0, 2200 / max(width, height), (6_000_000 / (width * height)) ** 0.5)
+                pixmap = page.get_pixmap(matrix=pymupdf.Matrix(scale, scale), alpha=False)
+                return pixmap.tobytes("png")
+        except (OSError, ValueError, RuntimeError, pymupdf.FileDataError, pymupdf.EmptyFileError):
             return None
 
     @staticmethod

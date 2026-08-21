@@ -57,6 +57,11 @@ class DocumentPreviewPathTests(unittest.TestCase):
                 {"mode": "pdf", "url": "/file", "page_count": 3},
             )
 
+            second_page = DocumentPreviewService.render_pdf_page(pdf_path, 2)
+            self.assertIsNotNone(second_page)
+            self.assertTrue(second_page.startswith(b"\x89PNG\r\n\x1a\n"))
+            self.assertIsNone(DocumentPreviewService.render_pdf_page(pdf_path, 4))
+
 
 if __name__ == "__main__":
     unittest.main()
