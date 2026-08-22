@@ -146,9 +146,14 @@
         </div>
       </div>
 
-      <div class="log-table-wrapper profile-log-table">
+      <div class="log-table-wrapper profile-log-table" role="region" aria-label="My activity logs" tabindex="0">
         {% if user_logs %}
           <table class="log-table">
+            <colgroup>
+              <col class="profile-log-col-time" />
+              <col class="profile-log-col-action" />
+              <col class="profile-log-col-details" />
+            </colgroup>
             <thead>
               <tr>
                 <th>Timestamp</th>
@@ -159,11 +164,17 @@
             <tbody>
               {% for log in user_logs %}
                 <tr>
-                  <td>{{ log.timestamp }}</td>
-                  <td>
+                  <td class="profile-log-timestamp">
+                    {% set timestamp_parts = log.timestamp.split(' ', 1) %}
+                    <time datetime="{{ log.timestamp }}">
+                      <span>{{ timestamp_parts[0] }}</span>
+                      {% if timestamp_parts|length > 1 %}<span>{{ timestamp_parts[1] }}</span>{% endif %}
+                    </time>
+                  </td>
+                  <td class="profile-log-action">
                     <span class="badge badge-{{ log.action_type|lower }}">{{ log.action_type }}</span>
                   </td>
-                  <td>{{ log.details }}</td>
+                  <td class="profile-log-details">{{ log.details }}</td>
                 </tr>
               {% endfor %}
             </tbody>

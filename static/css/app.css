@@ -2600,7 +2600,7 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 
 .profile-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(320px, .85fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(430px, 1fr);
   gap: 1.25rem;
   align-items: start;
 }
@@ -2723,6 +2723,67 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 .profile-log-table {
   max-height: 600px;
   overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.profile-log-table::-webkit-scrollbar {
+  width: 8px;
+}
+
+.profile-log-table::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.profile-log-table::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border: 2px solid var(--table-wrap-bg);
+  border-radius: 999px;
+}
+
+.profile-log-table .log-table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.profile-log-col-time { width: 29%; }
+.profile-log-col-action { width: 22%; }
+.profile-log-col-details { width: 49%; }
+
+.profile-log-table th,
+.profile-log-table td {
+  min-width: 0;
+  padding-right: .7rem;
+  padding-left: .7rem;
+}
+
+.profile-log-table td {
+  vertical-align: top;
+}
+
+.profile-log-timestamp time {
+  display: flex;
+  flex-direction: column;
+  gap: .12rem;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.profile-log-action .badge {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-log-details {
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
 }
 
 @media (max-width: 1180px) {
