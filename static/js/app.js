@@ -21,17 +21,26 @@ function goToPreviousPage(fallbackUrl = '/dashboard') {
 
 window.goToPreviousPage = goToPreviousPage;
 
-// Initialize theme from localStorage or system preference (default to light mode)
+// Keep the theme in sync after the head-level first-paint initializer runs.
 function initializeTheme() {
-  const savedTheme = localStorage.getItem('theme');
-  const theme = savedTheme || 'light'; // Default to light mode
+  let savedTheme = null;
+  try {
+    savedTheme = localStorage.getItem('theme');
+  } catch (error) {
+    // Browser storage can be unavailable in restricted/private contexts.
+  }
+  const theme = savedTheme === 'dark' ? 'dark' : 'light';
   
   if (theme === 'light') {
     document.documentElement.setAttribute('data-theme', 'light');
   } else {
     document.documentElement.removeAttribute('data-theme');
   }
-  localStorage.setItem('theme', theme);
+  try {
+    localStorage.setItem('theme', theme);
+  } catch (error) {
+    // The selected theme still applies for the current page.
+  }
 }
 
 // Initialize theme on page load
@@ -52,7 +61,11 @@ document.getElementById('theme-toggle')?.addEventListener('click', () => {
     html.removeAttribute('data-theme');
   }
   
-  localStorage.setItem('theme', newTheme);
+  try {
+    localStorage.setItem('theme', newTheme);
+  } catch (error) {
+    // The selected theme still applies for the current page.
+  }
   window.setTimeout(() => body?.classList.remove('theme-switching'), 360);
 });
 

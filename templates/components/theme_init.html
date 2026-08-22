@@ -1,0 +1,13 @@
+<script>
+  (function () {
+    var theme = 'light';
+    try {
+      theme = window.localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+    } catch (error) {
+      // Keep the light default when browser storage is unavailable.
+    }
+    if (theme === 'dark') {
+      document.documentElement.removeAttribute('data-theme');
+    }
+  })();
+</script>
