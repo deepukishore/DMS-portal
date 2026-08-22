@@ -53,7 +53,7 @@
     modalBody.setAttribute('aria-busy', 'true');
     pageImage.addEventListener('load', () => modalBody.setAttribute('aria-busy', 'false'), { once: true });
     pageImage.addEventListener('error', () => modalBody.setAttribute('aria-busy', 'false'), { once: true });
-    pageImage.src = `${pageImageUrl}?page=${page}`;
+    pageImage.src = `${pageImageUrl}?page=${page}&v=${Date.now()}`;
     updatePageControls();
   }
 

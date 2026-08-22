@@ -1,4 +1,7 @@
+import base64
 import os
+import subprocess
+import tempfile
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
@@ -105,6 +108,88 @@ def _xlsx_to_pdf(src_path, dest_path):
 
 
 def _pptx_to_pdf(src_path, dest_path):
+    """Render a presentation as real slides when Microsoft PowerPoint is available."""
+    if os.name == 'nt':
+        try:
+            _pptx_to_pdf_with_powerpoint(src_path, dest_path)
+            return dest_path, None
+        except (OSError, RuntimeError, subprocess.SubprocessError):
+            # Keep the text fallback for servers that do not have PowerPoint installed.
+            pass
+
+    return _pptx_to_text_pdf(src_path, dest_path)
+
+
+def _pptx_to_pdf_with_powerpoint(src_path, dest_path):
+    """Use PowerPoint's own PDF exporter so slide layouts and graphics are preserved."""
+    source_path = os.path.abspath(src_path)
+    destination_path = os.path.abspath(dest_path)
+    destination_dir = os.path.dirname(destination_path) or os.getcwd()
+    os.makedirs(destination_dir, exist_ok=True)
+
+    temporary_file = tempfile.NamedTemporaryFile(
+        prefix='dms-pptx-preview-',
+        suffix='.pdf',
+        dir=destination_dir,
+        delete=False,
+    )
+    temporary_path = temporary_file.name
+    temporary_file.close()
+    os.remove(temporary_path)
+
+    script = r'''
+$ErrorActionPreference = 'Stop'
+$sourcePath = [Environment]::GetEnvironmentVariable('DMS_PPTX_SOURCE')
+$destinationPath = [Environment]::GetEnvironmentVariable('DMS_PPTX_DESTINATION')
+$powerPoint = $null
+$presentation = $null
+
+try {
+    $powerPoint = New-Object -ComObject PowerPoint.Application
+    $presentation = $powerPoint.Presentations.Open($sourcePath, $true, $true, $false)
+    $presentation.SaveAs($destinationPath, 32)
+}
+finally {
+    if ($null -ne $presentation) {
+        $presentation.Close()
+        [System.Runtime.InteropServices.Marshal]::ReleaseComObject($presentation) | Out-Null
+    }
+    if ($null -ne $powerPoint) {
+        $powerPoint.Quit()
+        [System.Runtime.InteropServices.Marshal]::ReleaseComObject($powerPoint) | Out-Null
+    }
+    [GC]::Collect()
+    [GC]::WaitForPendingFinalizers()
+}
+'''
+    encoded_script = base64.b64encode(script.encode('utf-16-le')).decode('ascii')
+    environment = os.environ.copy()
+    environment['DMS_PPTX_SOURCE'] = source_path
+    environment['DMS_PPTX_DESTINATION'] = temporary_path
+
+    try:
+        result = subprocess.run(
+            ['powershell.exe', '-NoLogo', '-NoProfile', '-NonInteractive', '-EncodedCommand', encoded_script],
+            capture_output=True,
+            text=True,
+            timeout=120,
+            check=False,
+            env=environment,
+        )
+        if result.returncode != 0:
+            error_message = result.stderr.strip() or result.stdout.strip() or 'PowerPoint conversion failed.'
+            raise RuntimeError(error_message)
+        if not os.path.isfile(temporary_path) or os.path.getsize(temporary_path) == 0:
+            raise RuntimeError('PowerPoint did not create a PDF preview.')
+
+        os.replace(temporary_path, destination_path)
+    finally:
+        if os.path.exists(temporary_path):
+            os.remove(temporary_path)
+
+
+def _pptx_to_text_pdf(src_path, dest_path):
+    """Create a basic text preview when a native presentation renderer is unavailable."""
     from pptx import Presentation
     prs = Presentation(src_path)
     pdf_doc = SimpleDocTemplate(dest_path, pagesize=A4,

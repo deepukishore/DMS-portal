@@ -397,7 +397,7 @@ def view_file_page(doc_id):
         abort(404)
 
     response = Response(page_image, mimetype="image/png")
-    response.headers["Cache-Control"] = "private, max-age=300"
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     response.headers["X-Content-Type-Options"] = "nosniff"
     return response
 

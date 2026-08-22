@@ -46,6 +46,7 @@ class DocumentPreviewModalTests(unittest.TestCase):
         self.assertIn("data-page-image-url", self.template)
         self.assertIn("document-preview-page-image", self.script)
         self.assertIn("?page=${page}", self.script)
+        self.assertIn("&v=${Date.now()}", self.script)
 
 
 if __name__ == "__main__":
