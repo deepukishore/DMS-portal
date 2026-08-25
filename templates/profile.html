@@ -142,9 +142,64 @@
       <div class="panel-head">
         <div>
           <h2 class="section-title">My Activity Logs</h2>
-          <p class="section-sub">Recent actions performed by you ({{ user_logs|length }} total).</p>
+          <p class="section-sub">Recent actions performed by you ({{ total_user_logs }} total).</p>
         </div>
       </div>
+
+      <form method="GET" action="{{ url_for('profile.index') }}" class="profile-log-filters" role="search">
+        <input type="hidden" name="log_page_size" value="{{ log_page_size }}" />
+        <label class="search-wrap" for="profile-log-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span class="sr-only">Search activity logs</span>
+          <input id="profile-log-search" type="search" name="log_search" placeholder="Search activity…" value="{{ log_search }}" />
+        </label>
+        <label for="profile-log-action" class="sr-only">Filter by action</label>
+        <select id="profile-log-action" name="log_action" class="profile-log-action-filter">
+          <option value="">All actions</option>
+          {% for action in log_actions %}
+            <option value="{{ action }}" {% if selected_log_action == action %}selected{% endif %}>{{ action | replace('_', ' ') | title }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" class="btn-primary btn-sm">Apply</button>
+        {% if log_search or selected_log_action %}
+          <a href="{{ url_for('profile.index', log_page_size=log_page_size) }}" class="btn-outline btn-sm">Clear</a>
+        {% endif %}
+      </form>
+
+      <nav class="pg-bar profile-log-pagination" aria-label="Activity log pages">
+        <span class="pg-info">
+          {% if filtered_log_count %}
+            Showing {{ ((log_page - 1) * log_page_size) + 1 }}–{{ [log_page * log_page_size, filtered_log_count] | min }} of {{ filtered_log_count }}
+          {% else %}
+            No matching activity
+          {% endif %}
+        </span>
+        <div class="pg-controls">
+          <form method="GET" action="{{ url_for('profile.index') }}" class="pg-size-form">
+            <input type="hidden" name="log_search" value="{{ log_search }}" />
+            <input type="hidden" name="log_action" value="{{ selected_log_action }}" />
+            <input type="hidden" name="log_page" value="1" />
+            <label class="pg-size-label">Per page
+              <select name="log_page_size" onchange="this.form.submit()" class="pg-size-select">
+                {% for size in [10, 25, 50] %}
+                  <option value="{{ size }}" {% if log_page_size == size %}selected{% endif %}>{{ size }}</option>
+                {% endfor %}
+              </select>
+            </label>
+          </form>
+          <span class="pg-pages">Page {{ log_page }} of {{ log_page_count }}</span>
+          {% if log_page > 1 %}
+            <a href="{{ url_for('profile.index', log_search=log_search, log_action=selected_log_action, log_page=log_page-1, log_page_size=log_page_size) }}" class="btn-outline btn-sm">← Prev</a>
+          {% else %}
+            <button type="button" class="btn-outline btn-sm" disabled>← Prev</button>
+          {% endif %}
+          {% if log_page < log_page_count %}
+            <a href="{{ url_for('profile.index', log_search=log_search, log_action=selected_log_action, log_page=log_page+1, log_page_size=log_page_size) }}" class="btn-outline btn-sm">Next →</a>
+          {% else %}
+            <button type="button" class="btn-outline btn-sm" disabled>Next →</button>
+          {% endif %}
+        </div>
+      </nav>
 
       <div class="log-table-wrapper profile-log-table" role="region" aria-label="My activity logs" tabindex="0">
         {% if user_logs %}

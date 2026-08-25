@@ -2720,6 +2720,55 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   min-width: 0;
 }
 
+.profile-log-filters {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(120px, .65fr) auto auto;
+  gap: .55rem;
+  margin-bottom: .75rem;
+}
+
+.profile-log-filters .search-wrap {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+.profile-log-filters .search-wrap input,
+.profile-log-action-filter {
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+}
+
+.profile-log-action-filter {
+  padding: .4rem .55rem;
+  color: var(--text);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.profile-log-action-filter:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(34, 196, 214, .12);
+}
+
+.profile-log-pagination {
+  align-items: stretch;
+  flex-direction: column;
+  margin-bottom: .75rem;
+  padding: .55rem .7rem;
+}
+
+.profile-log-pagination .pg-controls {
+  justify-content: space-between;
+}
+
+.profile-log-pagination .pg-size-label {
+  flex-direction: row;
+}
+
 .profile-log-table {
   max-height: 600px;
   overflow-y: auto;
@@ -2821,6 +2870,21 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 }
 
 @media (max-width: 560px) {
+  .profile-log-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-log-filters .btn-primary,
+  .profile-log-filters .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-log-pagination .pg-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
   .profile-hero-identity {
     align-items: flex-start;
     flex-direction: column;

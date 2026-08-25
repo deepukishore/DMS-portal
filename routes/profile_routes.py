@@ -23,11 +23,57 @@ def index():
         return redir
 
     current_user = AuthService.get_current_user()
-    user_logs = SystemLogService.get_logs_by_user(session["user_email"])
+    all_user_logs = SystemLogService.get_logs_by_user(session["user_email"])
+    log_search = request.args.get("log_search", "").strip()
+    selected_log_action = request.args.get("log_action", "").strip()
+    log_page = max(1, request.args.get("log_page", 1, type=int))
+    log_page_size = request.args.get("log_page_size", 10, type=int)
+    if log_page_size not in (10, 25, 50):
+        log_page_size = 10
+
+    log_actions = sorted({
+        log.get("action_type", "")
+        for log in all_user_logs
+        if log.get("action_type")
+    })
+    filtered_logs = all_user_logs
+    if selected_log_action:
+        filtered_logs = [
+            log for log in filtered_logs
+            if log.get("action_type", "") == selected_log_action
+        ]
+    if log_search:
+        search_term = log_search.casefold()
+        filtered_logs = [
+            log for log in filtered_logs
+            if search_term in " ".join((
+                str(log.get("timestamp", "")),
+                str(log.get("action_type", "")),
+                str(log.get("details", "")),
+            )).casefold()
+        ]
+
+    filtered_log_count = len(filtered_logs)
+    log_page_count = max(1, (filtered_log_count + log_page_size - 1) // log_page_size)
+    log_page = min(log_page, log_page_count)
+    log_start = (log_page - 1) * log_page_size
+    user_logs = filtered_logs[log_start:log_start + log_page_size]
     if current_user.get("avatar"):
         session["user_avatar"] = current_user["avatar"]
 
-    return render_template("profile.html", current_user=current_user, user_logs=user_logs)
+    return render_template(
+        "profile.html",
+        current_user=current_user,
+        user_logs=user_logs,
+        total_user_logs=len(all_user_logs),
+        filtered_log_count=filtered_log_count,
+        log_actions=log_actions,
+        log_search=log_search,
+        selected_log_action=selected_log_action,
+        log_page=log_page,
+        log_page_size=log_page_size,
+        log_page_count=log_page_count,
+    )
 
 
 @profile_bp.route("/profile/upload-avatar", methods=["POST"])
