@@ -13,11 +13,14 @@ class RenaultBrandingTests(unittest.TestCase):
 
     def test_renault_uses_the_supplied_jpeg_asset(self):
         asset = CUSTOMER_BRANDS["Renault Nissan"]["logo"]
+        supplied_asset = self.project_root / "Images" / "Renault.jpg"
+        deployed_asset = self.project_root / "static" / asset
 
         self.assertEqual(asset, "images/customers/Renault.jpg")
-        self.assertTrue((self.project_root / "static" / asset).is_file())
+        self.assertTrue(deployed_asset.is_file())
+        self.assertEqual(supplied_asset.read_bytes(), deployed_asset.read_bytes())
 
-    def test_renault_card_blends_the_square_logo_into_the_wide_card(self):
+    def test_renault_card_uses_the_black_logo_without_blending_or_masking(self):
         card_selector = (
             '.customer-card[data-customer-name="Renault Nissan"] '
             ".customer-logo-card"
@@ -25,12 +28,13 @@ class RenaultBrandingTests(unittest.TestCase):
         card_rule = self.styles.split(card_selector, 1)[1].split("}", 1)[0]
         image_rule = self.styles.split(f"{card_selector} img", 1)[1].split("}", 1)[0]
 
-        self.assertIn('url("../images/customers/Renault.jpg")', card_rule)
-        self.assertIn("background-blend-mode: multiply", card_rule)
+        self.assertIn("background: #000", card_rule)
+        self.assertNotIn("background-blend-mode", card_rule)
         self.assertIn("inset: 0 0 61px", card_rule)
         self.assertIn("height: auto", card_rule)
-        self.assertIn("mask-image: linear-gradient", image_rule)
-        self.assertIn("transform: translateX(-50%)", image_rule)
+        self.assertIn("object-fit: contain", image_rule)
+        self.assertIn("transform: scale(1.02)", image_rule)
+        self.assertNotIn("mask-image", image_rule)
 
 
 if __name__ == "__main__":

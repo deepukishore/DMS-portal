@@ -8063,28 +8063,32 @@ textarea:focus {
 .customer-card[data-customer-name="Renault Nissan"] .customer-logo-card {
   inset: 0 0 61px;
   height: auto;
-  background: #14755d url("../images/customers/Renault.jpg") center / cover no-repeat;
-  background-blend-mode: multiply;
+  background: #000;
   border-radius: 11px 11px 0 0;
 }
 .customer-card[data-customer-name="Renault Nissan"] .customer-logo-card img {
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  width: 116px;
-  height: 116px;
+  position: static;
+  width: 100%;
+  height: 100%;
   padding: 0;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-  transform: translateX(-50%);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
+  transform: scale(1.02);
+}
+.customer-brand-badge[data-customer-name="Renault Nissan"] .customer-logo {
+  background: #000;
 }
 .customer-brand-badge[data-customer-name="Renault Nissan"] .customer-logo img {
   padding: 0;
-  object-fit: cover;
+  object-fit: contain;
+}
+.customer-banner[data-customer-name="Renault Nissan"] {
+  background: #000;
+  border-color: rgba(255, 255, 255, .12);
 }
 .customer-banner[data-customer-name="Renault Nissan"] > img {
+  width: 100%;
+  object-position: center;
   border-radius: 9px;
 }
 .customer-card[data-customer-name]:hover .customer-logo-card img {
@@ -8092,7 +8096,7 @@ textarea:focus {
   transform: scale(1.075);
 }
 .customer-card[data-customer-name="Renault Nissan"]:hover .customer-logo-card img {
-  transform: translateX(-50%) scale(1.055);
+  transform: scale(1.055);
 }
 .customer-card[data-customer-name] .customer-logo-fallback {
   color: #fff;
