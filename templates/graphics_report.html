@@ -10,66 +10,100 @@
 
 {% block content %}
 <div class="graphics-report-container">
-  <div class="page-header">
-    <div>
-      <p class="eyebrow">Reports</p>
-      <h1 class="page-title">Graphics Report</h1>
-      <p class="page-sub">Visual representation of document statistics and analytics across plants, departments and customers.</p>
-    </div>
-  </div>
+  <header class="graphics-analytics-header">
+    <p class="eyebrow">Reports</p>
+    <h1 class="page-title">Graphics Report</h1>
+    <span class="graphics-title-accent" aria-hidden="true"></span>
+    <p class="page-sub">Visual breakdown of document approval activity across plants, departments and time.</p>
+  </header>
 
-  <!-- Summary Statistics — top of page -->
-  <div class="summary-grid" style="margin-bottom:1.75rem">
-    <a class="summary-card summary-card-link" href="{{ url_for('dashboard.index', _anchor='documents') }}" aria-label="View all documents">
-      <div class="summary-icon">📊</div>
-      <div class="summary-content">
-        <h3>Total Documents</h3>
-        <p class="summary-value">{{ stats.overall.total }}</p>
+  <form class="report-scope-filter" method="GET" action="{{ url_for('graphics_report.index') }}" aria-label="Filter graphics report">
+    <nav class="report-plant-tabs" aria-label="Filter by plant">
+      <a href="{{ url_for('graphics_report.index', department=selected_department) }}"
+         class="report-filter-pill {% if not selected_plant %}active{% endif %}">All Plants</a>
+      {% for plant in plants %}
+        <a href="{{ url_for('graphics_report.index', plant=plant.label, department=selected_department) }}"
+           class="report-filter-pill {% if selected_plant == plant.label %}active{% endif %}">{{ plant.id }}</a>
+      {% endfor %}
+    </nav>
+    {% if selected_plant %}<input type="hidden" name="plant" value="{{ selected_plant }}" />{% endif %}
+    <label class="report-department-filter" for="report-department">
+      <span class="sr-only">Filter by department</span>
+      <select id="report-department" name="department" onchange="this.form.submit()">
+        <option value="">All Departments</option>
+        {% for department in departments %}
+          <option value="{{ department }}" {% if selected_department == department %}selected{% endif %}>{{ department }}</option>
+        {% endfor %}
+      </select>
+    </label>
+  </form>
+
+  <section class="report-kpi-grid" aria-label="Document analytics overview">
+    <a class="report-total-card" href="{{ url_for('dashboard.index', _anchor='documents') }}" aria-label="View all documents">
+      <span class="report-kpi-label">Total documents tracked</span>
+      <strong>{{ stats.overall.total }}</strong>
+      <p>{{ 'Across all plants & departments' if not selected_plant and not selected_department else 'Within the selected report scope' }}</p>
+      <div class="report-total-metrics">
+        <span><b>{{ stats.overall.this_week }}</b><small>This week</small></span>
+        <span><b>{{ stats.overall.this_month }}</b><small>This month</small></span>
+        <span class="{% if stats.overall.month_change < 0 %}is-negative{% endif %}">
+          <b>{{ '+' if stats.overall.month_change > 0 else '' }}{{ stats.overall.month_change }}%</b>
+          <small>vs last month</small>
+        </span>
       </div>
     </a>
-    <a class="summary-card summary-card-link" href="{{ url_for('dashboard.index', status='Approved', _anchor='documents') }}" aria-label="View approved documents">
-      <div class="summary-icon">✅</div>
-      <div class="summary-content">
-        <h3>Approved</h3>
-        <p class="summary-value">{{ stats.overall.approved }}</p>
+
+    <article class="report-rate-card">
+      <span class="report-kpi-label">Approval rate</span>
+      <strong>{{ stats.overall.approval_rate }}<small>%</small></strong>
+      <p class="report-rate-change {% if stats.overall.approval_rate_change < 0 %}is-negative{% endif %}">
+        {{ '↑' if stats.overall.approval_rate_change >= 0 else '↓' }}
+        {{ stats.overall.approval_rate_change | abs }}% vs last month
+      </p>
+      <div class="report-rate-trend">
+        <span>Weekly trend</span>
+        <div class="report-rate-chart"><canvas id="approvalRateTrendChart"></canvas></div>
       </div>
-    </a>
-    <a class="summary-card summary-card-link" href="{{ url_for('dashboard.index', status='Pending', _anchor='documents') }}" aria-label="View pending documents">
-      <div class="summary-icon">⏳</div>
-      <div class="summary-content">
-        <h3>Pending</h3>
-        <p class="summary-value">{{ stats.overall.pending }}</p>
-      </div>
-    </a>
-    <a class="summary-card summary-card-link" href="{{ url_for('dashboard.index', status='Rejected', _anchor='documents') }}" aria-label="View rejected documents">
-      <div class="summary-icon">❌</div>
-      <div class="summary-content">
-        <h3>Rejected</h3>
-        <p class="summary-value">{{ stats.overall.rejected }}</p>
-      </div>
-    </a>
-    <a class="summary-card summary-card-link" href="{{ url_for('dashboard.index', status='Hold', _anchor='documents') }}" aria-label="View documents on hold">
-      <div class="summary-icon">&#9208;</div>
-      <div class="summary-content">
-        <h3>Hold</h3>
-        <p class="summary-value">{{ stats.overall.hold }}</p>
-      </div>
-    </a>
-    <div class="summary-card">
-      <div class="summary-icon">📅</div>
-      <div class="summary-content">
-        <h3>This Month</h3>
-        <p class="summary-value">{{ stats.overall.this_month }}</p>
-      </div>
+    </article>
+  </section>
+
+  <section class="report-status-section" aria-labelledby="report-status-heading">
+    <h2 id="report-status-heading">Status breakdown</h2>
+    <div class="summary-grid report-status-grid">
+      <a class="report-status-card report-status-approved" href="{{ url_for('dashboard.index', status='Approved', _anchor='documents') }}" aria-label="View approved documents">
+        <div class="report-status-head">
+          <span class="report-status-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+          <span>Approved</span>
+        </div>
+        <strong>{{ stats.overall.approved }}</strong>
+        <small>↑ {{ stats.overall.approved_this_week }} this week</small>
+      </a>
+      <a class="report-status-card report-status-pending" href="{{ url_for('dashboard.index', status='Pending', _anchor='documents') }}" aria-label="View pending documents">
+        <div class="report-status-head">
+          <span class="report-status-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9s8 4 8 9"/></svg></span>
+          <span>Pending</span>
+        </div>
+        <strong>{{ stats.overall.pending }}</strong>
+        <small>Awaiting decision</small>
+      </a>
+      <a class="report-status-card report-status-rejected" href="{{ url_for('dashboard.index', status='Rejected', _anchor='documents') }}" aria-label="View rejected documents">
+        <div class="report-status-head">
+          <span class="report-status-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></span>
+          <span>Rejected</span>
+        </div>
+        <strong>{{ stats.overall.rejected }}</strong>
+        <small>Returned to uploader</small>
+      </a>
+      <a class="report-status-card report-status-hold" href="{{ url_for('dashboard.index', status='Hold', _anchor='documents') }}" aria-label="View documents on hold">
+        <div class="report-status-head">
+          <span class="report-status-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></svg></span>
+          <span>Hold</span>
+        </div>
+        <strong>{{ stats.overall.hold }}</strong>
+        <small>Paused for review</small>
+      </a>
     </div>
-    <div class="summary-card">
-      <div class="summary-icon">📆</div>
-      <div class="summary-content">
-        <h3>This Week</h3>
-        <p class="summary-value">{{ stats.overall.this_week }}</p>
-      </div>
-    </div>
-  </div>
+  </section>
 
   <section class="report-carousel" data-report-carousel aria-label="Graphics report chart carousel">
     <div class="report-carousel-actions">
@@ -381,6 +415,44 @@ const chart3DDepthPlugin = {
 
 Chart.register(chart3DDepthPlugin);
 Chart.defaults.plugins.chart3DDepth = { depth: 7 };
+
+const approvalTrend = stats.approval_trend || [];
+const approvalTrendCanvas = document.getElementById('approvalRateTrendChart');
+if (approvalTrendCanvas && approvalTrend.length) {
+  new Chart(approvalTrendCanvas, {
+    type: 'line',
+    data: {
+      labels: approvalTrend.map(item => item.label),
+      datasets: [{
+        data: approvalTrend.map(item => item.rate),
+        borderColor: '#18a56a',
+        backgroundColor: 'rgba(24, 165, 106, .09)',
+        pointRadius: 0,
+        pointHoverRadius: 3,
+        borderWidth: 2,
+        tension: .38,
+        fill: true,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { intersect: false, mode: 'index' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          ...tooltipDefaults,
+          callbacks: { label: context => ` Approval rate: ${context.parsed.y}%` }
+        },
+        chart3DDepth: false,
+      },
+      scales: {
+        x: { display: false },
+        y: { display: false, min: 0, max: 100 }
+      }
+    }
+  });
+}
 
 // ── Chart 1: Overall doughnut ──────────────────────────────────
 new Chart(document.getElementById('overallChart'), {

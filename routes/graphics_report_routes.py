@@ -1,12 +1,11 @@
 from datetime import datetime, timedelta
 
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, request, url_for
 from services.auth_service import AuthService
 from services.document_service import DocumentService
 from services.document_library_service import DocumentLibraryService
-from services.document_tracking_service import DocumentTrackingService
 from data.mock_data import DASHBOARD_RECORDS, PLANTS
-from data.departments import OFFICIAL_DEPARTMENTS
+from data.departments import OFFICIAL_DEPARTMENTS, normalize_department
 from data.customers import OFFICIAL_CUSTOMERS
 from data.document_categories import infer_document_category
 
@@ -42,12 +41,36 @@ def _get_records():
     return records
 
 
+def _get_upload_trend(records, days=90):
+    cutoff = (datetime.now() - timedelta(days=days)).date()
+    counts = {}
+    for record in records:
+        try:
+            uploaded_date = datetime.strptime(
+                str(record.get("uploaded_at", ""))[:10], "%Y-%m-%d"
+            ).date()
+        except (ValueError, TypeError):
+            continue
+        if uploaded_date < cutoff:
+            continue
+        date_key = uploaded_date.isoformat()
+        counts[date_key] = counts.get(date_key, 0) + 1
+    return [
+        {"date": date_key, "count": count}
+        for date_key, count in sorted(counts.items())
+    ]
+
+
 def _get_statistics(records=None):
     records = records if records is not None else _get_records()
 
     now = datetime.now()
     month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     week_start  = (now - timedelta(days=now.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
+    previous_month_end = month_start
+    previous_month_start = (month_start - timedelta(days=1)).replace(
+        day=1, hour=0, minute=0, second=0, microsecond=0
+    )
 
     total     = len(records)
     approved  = sum(1 for r in records if r.get("approval_status") == "Approved")
@@ -57,15 +80,65 @@ def _get_statistics(records=None):
 
     this_month = 0
     this_week  = 0
+    previous_month = 0
+    approved_this_week = 0
+    current_month_approved = 0
+    previous_month_approved = 0
+    parsed_records = []
     for r in records:
         try:
             ts = datetime.strptime(str(r.get("uploaded_at", ""))[:10], "%Y-%m-%d")
+            parsed_records.append((r, ts))
             if ts >= month_start:
                 this_month += 1
+                if r.get("approval_status") == "Approved":
+                    current_month_approved += 1
             if ts >= week_start:
                 this_week += 1
+                if r.get("approval_status") == "Approved":
+                    approved_this_week += 1
+            if previous_month_start <= ts < previous_month_end:
+                previous_month += 1
+                if r.get("approval_status") == "Approved":
+                    previous_month_approved += 1
         except (ValueError, TypeError):
             pass
+
+    month_change = (
+        round(((this_month - previous_month) / previous_month) * 100)
+        if previous_month
+        else 0
+    )
+    approval_rate = round((approved / total) * 100, 1) if total else 0
+    current_month_rate = (
+        (current_month_approved / this_month) * 100 if this_month else approval_rate
+    )
+    previous_month_rate = (
+        (previous_month_approved / previous_month) * 100 if previous_month else current_month_rate
+    )
+    approval_rate_change = round(current_month_rate - previous_month_rate, 1)
+
+    approval_trend = []
+    for weeks_ago in range(7, -1, -1):
+        bucket_start = week_start - timedelta(weeks=weeks_ago)
+        bucket_end = bucket_start + timedelta(days=7)
+        bucket_records = [
+            record
+            for record, uploaded_at in parsed_records
+            if bucket_start <= uploaded_at < bucket_end
+        ]
+        bucket_approved = sum(
+            1 for record in bucket_records
+            if record.get("approval_status") == "Approved"
+        )
+        approval_trend.append(
+            {
+                "label": bucket_start.strftime("%d %b"),
+                "rate": round((bucket_approved / len(bucket_records)) * 100, 1)
+                if bucket_records
+                else 0,
+            }
+        )
 
     # Per-plant stats
     plant_stats = {}
@@ -102,7 +175,13 @@ def _get_statistics(records=None):
             "rejected":   rejected,
             "this_month": this_month,
             "this_week":  this_week,
+            "previous_month": previous_month,
+            "month_change": month_change,
+            "approved_this_week": approved_this_week,
+            "approval_rate": approval_rate,
+            "approval_rate_change": approval_rate_change,
         },
+        "approval_trend": approval_trend,
         # True master-list totals (independent of what's in documents)
         "total_plants":      len(PLANTS),
         "total_customers":   len(OFFICIAL_CUSTOMERS),
@@ -120,12 +199,20 @@ def index():
     if redir:
         return redir
 
-    records = _get_records()
-    stats = _get_statistics(records)
-    visible_department = AuthService.get_visible_department()
-    trend_data = DocumentTrackingService.get_upload_trend_data(
-        days=90, access_department=visible_department
+    selected_plant = request.args.get("plant", "").strip()
+    selected_department = normalize_department(
+        request.args.get("department", "").strip()
     )
+    records = _get_records()
+    if selected_plant:
+        records = [record for record in records if record.get("plant") == selected_plant]
+    if selected_department:
+        records = [
+            record for record in records
+            if normalize_department(record.get("department", "")) == selected_department
+        ]
+    stats = _get_statistics(records)
+    trend_data = _get_upload_trend(records, days=90)
 
     # Count the same document records used by the dashboard table. The previous
     # report counted static catalogue entries, which produced 178 versus the
@@ -156,5 +243,9 @@ def index():
         stats=stats,
         trend_data=trend_data,
         library_stats=library_stats,
+        plants=PLANTS,
+        departments=OFFICIAL_DEPARTMENTS,
+        selected_plant=selected_plant,
+        selected_department=selected_department,
         can_manage_documents=AuthService.has_high_level_access(),
     )
