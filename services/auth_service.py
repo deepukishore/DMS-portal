@@ -116,6 +116,20 @@ class AuthService:
         return user.get("qms_level", session.get("user_qms_level", "L4")) in {"L1", "L2"}
 
     @staticmethod
+    def can_access_approval_queue(user=None):
+        """Return whether the user may view and export the approval queue."""
+        if user is None:
+            user = AuthService.get_current_user()
+        if not user:
+            return False
+        if user.get("role") == "Admin":
+            return True
+        qms_level = user.get("qms_level")
+        if not qms_level:
+            qms_level = session.get("user_qms_level", "L4")
+        return str(qms_level or "").strip().upper() in {"L1", "L2"}
+
+    @staticmethod
     def is_qms_first_approver(user=None):
         if user is None:
             user = AuthService.get_current_user()

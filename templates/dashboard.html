@@ -53,13 +53,14 @@
   <div class="dashboard-command-grid">
     {% set actions = [
       ('upload.index', 'upload', 'Upload documents', 'Add files and send them for approval'),
-      ('approvals.index', 'approve', 'Pending items', 'Review documents waiting for a decision'),
+      ('approvals.index', 'approve', 'Approval queue', 'Review documents waiting for a decision'),
       ('document_library.index', 'library', 'Document library', 'Browse controlled folders and records'),
       ('tracking.index', 'track', 'Track approvals', 'Follow every stage of your submissions'),
       ('graphics_report.index', 'report', 'Reports and trends', 'See document performance and analytics'),
       ('revision_history.index', 'history', 'Revision history', 'Check previous versions and changes')
     ] %}
     {% for endpoint, icon, label, help_text in actions %}
+      {% if endpoint != 'approvals.index' or can_access_approval_queue %}
       <a href="{{ url_for(endpoint) }}" class="dashboard-command-card">
         <span class="dashboard-command-icon dashboard-command-icon-{{ icon }}" aria-hidden="true">
           {% if icon == 'upload' %}↑{% elif icon == 'approve' %}✓{% elif icon == 'library' %}▱{% elif icon == 'track' %}↝{% elif icon == 'report' %}▥{% else %}↺{% endif %}
@@ -67,6 +68,7 @@
         <span><strong>{{ label }}</strong><small>{{ help_text }}</small></span>
         <b aria-hidden="true">→</b>
       </a>
+      {% endif %}
     {% endfor %}
     {% if can_access_admin_sections %}
       <a href="{{ url_for('archive.index') }}" class="dashboard-command-card">

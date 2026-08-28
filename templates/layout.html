@@ -170,7 +170,7 @@
     window.APP_SHORTCUTS = {
       dashboard: "{{ url_for('dashboard.index') }}",
       upload: "{{ url_for('upload.index') }}",
-      approvals: "{{ url_for('approvals.index') }}",
+      approvals: {% if can_access_approval_queue %}"{{ url_for('approvals.index') }}"{% else %}null{% endif %},
       markNotificationReadBase: "{{ url_for('notifications.mark_read', notification_id=0)[:-1] }}",
       markNotificationPopupSeenBase: "{{ url_for('notifications.mark_popup_seen', notification_id=0)[:-1] }}",
       markAllNotificationsRead: "{{ url_for('notifications.mark_all_read') }}",

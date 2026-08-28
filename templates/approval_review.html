@@ -11,7 +11,7 @@
   <main class="review-shell">
     <header class="review-brandbar">
       <div class="review-brandbar-left">
-        <button type="button" class="btn-page-back" data-fallback-url="{{ url_for('approvals.index') }}" onclick="goToPreviousPage(this.dataset.fallbackUrl)" aria-label="Go to previous page">&#8592; Previous</button>
+        <button type="button" class="btn-page-back" data-fallback-url="{{ url_for('approvals.index') if can_access_approval_queue else url_for('dashboard.index') }}" onclick="goToPreviousPage(this.dataset.fallbackUrl)" aria-label="Go to previous page">&#8592; Previous</button>
         <a href="{{ url_for('dashboard.index') }}" class="btn-page-home" aria-label="Go to dashboard" title="Go to dashboard">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M3 10.5 12 3l9 7.5" />

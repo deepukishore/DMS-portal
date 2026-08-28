@@ -23,13 +23,15 @@
       Upload
     </a>
 
-    <a href="{{ url_for('approvals.index') }}" class="nav-item {% if request.endpoint == 'approvals.index' %}active{% endif %}">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-      Pending Items
-      {% if pending_count > 0 %}
-        <span class="nav-badge">{{ pending_count }}</span>
-      {% endif %}
-    </a>
+    {% if can_access_approval_queue %}
+      <a href="{{ url_for('approvals.index') }}" class="nav-item {% if request.endpoint == 'approvals.index' %}active{% endif %}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Approval Queue
+        {% if pending_count > 0 %}
+          <span class="nav-badge">{{ pending_count }}</span>
+        {% endif %}
+      </a>
+    {% endif %}
 
     <a href="{{ url_for('graphics_report.index') }}" class="nav-item {% if request.endpoint == 'graphics_report.index' %}active{% endif %}">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 000 7H6"/></svg>

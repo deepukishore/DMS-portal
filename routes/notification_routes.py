@@ -17,7 +17,7 @@ PORTAL_UPDATE_DESTINATIONS = (
     ("", "Notification only"),
     ("/dashboard", "Dashboard"),
     ("/document-library", "Document Library"),
-    ("/approvals", "Pending Items"),
+    ("/approvals", "Approval Queue"),
     ("/about", "About the Portal"),
 )
 

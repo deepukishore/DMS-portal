@@ -39,6 +39,13 @@ def _require_login():
     return None
 
 
+def _require_approval_queue_access():
+    if not AuthService.can_access_approval_queue():
+        flash("Approval Queue access is limited to admins and L1/L2 users.", "error")
+        return redirect(url_for("dashboard.index"))
+    return None
+
+
 def _can_decide_record(record, user=None):
     user = user or AuthService.get_current_user()
     status = record.get("approval_status", "Pending")
@@ -103,6 +110,9 @@ def index():
     redir = _require_login()
     if redir:
         return redir
+    access_redir = _require_approval_queue_access()
+    if access_redir:
+        return access_redir
 
     status = request.args.get("status", "")
     search = request.args.get("search", "")
@@ -142,6 +152,9 @@ def export_records():
     redir = _require_login()
     if redir:
         return redir
+    access_redir = _require_approval_queue_access()
+    if access_redir:
+        return access_redir
 
     status = request.args.get("status", "")
     search = request.args.get("search", "")

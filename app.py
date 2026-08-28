@@ -85,6 +85,7 @@ def create_app():
         return {
             "current_user": current_user,
             "can_access_admin_sections": AuthService.has_high_level_access(current_user),
+            "can_access_approval_queue": AuthService.can_access_approval_queue(current_user),
             "is_admin_user": AuthService.is_admin(current_user),
             "pending_count": pending_count,
             "notifications": notifications,

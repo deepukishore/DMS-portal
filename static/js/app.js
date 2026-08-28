@@ -385,7 +385,7 @@ document.addEventListener('keydown', (event) => {
     window.location.href = window.APP_SHORTCUTS.dashboard;
   } else if (key === 'u') {
     window.location.href = window.APP_SHORTCUTS.upload;
-  } else if (key === 'p') {
+  } else if (key === 'p' && window.APP_SHORTCUTS.approvals) {
     window.location.href = window.APP_SHORTCUTS.approvals;
   }
 });

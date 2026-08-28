@@ -16,7 +16,7 @@
     {
       selector: '[data-tour="main-navigation"]',
       title: 'Move around the portal',
-      description: 'Use the main navigation to upload documents, review pending items, open the library, track approvals, and view reports.'
+      description: 'Use the main navigation to upload documents, open the approval queue, browse the library, track approvals, and view reports.'
     },
     {
       selector: '[data-tour="library-overview"]',
@@ -76,7 +76,7 @@
       { selector: '.upload-submit-row', title: 'Submit for approval', description: 'Review the information and send the document into the approval workflow.' }
     ],
     'approvals.index': [
-      { selector: '.page-header', title: 'Pending items', description: 'Review documents that are waiting for your decision or monitor completed approval records.' },
+      { selector: '.page-header', title: 'Approval queue', description: 'Review documents that are waiting for your decision or monitor completed approval records.' },
       { selector: '.approval-stats-grid', title: 'Approval summary', description: 'See pending, approved, rejected, and hold totals at a glance.' },
       { selector: '.approval-records-filter', title: 'Find approval records', description: 'Search records and narrow the list by approval status.' },
       { selector: '.approval-records-wrap', title: 'Review queue', description: 'Open a document to inspect its content and complete the required approval action.' }
