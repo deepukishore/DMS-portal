@@ -14,10 +14,14 @@ venv/
 env/
 ENV/
 
-# Uploads
+# Runtime data
 uploads/*
 !uploads/.gitkeep
-tmp/*.log
+tmp/
+
+# Logs and generated inspection files
+*.log
+*.inspect.ndjson
 
 # IDE
 .vscode/
