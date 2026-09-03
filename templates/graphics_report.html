@@ -280,6 +280,24 @@ const C_HOLD    = '#8b5cf6';
 const C_RED     = '#ef4444';
 const C_BLUE    = '#3b82f6';
 
+const statusDataset = (label, values, color) => ({
+  label,
+  data: values,
+  backgroundColor: color,
+  borderRadius: 5,
+  borderSkipped: false,
+  maxBarThickness: 42,
+  categoryPercentage: .72,
+  barPercentage: .82,
+});
+
+function fitHorizontalChart(canvas, rowCount) {
+  const wrapper = canvas?.closest('.chart-wrapper');
+  if (!wrapper) return;
+  const height = Math.max(265, Math.min(480, 82 + (Math.max(rowCount, 1) * 34)));
+  wrapper.style.height = `${height}px`;
+}
+
 const tooltipDefaults = {
   backgroundColor: 'rgba(10,14,26,0.92)',
   titleColor: '#fff',
@@ -486,18 +504,18 @@ new Chart(document.getElementById('plantChart'), {
   data: {
     labels: plantEntries.map(([k]) => plantCode(k)),
     datasets: [
-      { label: 'Approved', data: plantEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 0 },
-      { label: 'Pending',  data: plantEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 0 },
-      { label: 'Hold',     data: plantEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 0 },
-      { label: 'Rejected', data: plantEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 0 },
+      statusDataset('Approved', plantEntries.map(([,v]) => v.approved), C_GREEN),
+      statusDataset('Pending', plantEntries.map(([,v]) => v.pending), C_AMBER),
+      statusDataset('Hold', plantEntries.map(([,v]) => v.hold), C_HOLD),
+      statusDataset('Rejected', plantEntries.map(([,v]) => v.rejected), C_RED),
     ]
   },
   options: {
-    responsive: true, maintainAspectRatio: true,
+    responsive: true, maintainAspectRatio: false,
     plugins: { legend: legendDefaults, tooltip: tooltipDefaults },
     scales: {
-      x: { ticks: { color: scaleColor(), font: { size: 10 } }, grid: { color: gridColor() } },
-      y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1 }, grid: { color: gridColor() } }
+      x: { ticks: { color: scaleColor(), font: { size: 10, weight: '600' } }, grid: { display: false }, border: { display: false } },
+      y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1, padding: 8 }, grid: { color: 'rgba(77, 116, 146, .12)' }, border: { display: false } }
     }
   }
 });
@@ -508,24 +526,26 @@ const customerBrandLegend = document.getElementById('customer-chart-brand-legend
 custEntries.forEach(([customerName]) => {
   customerBrandLegend?.appendChild(window.CustomerBrand.createBadge(customerName, true));
 });
-new Chart(document.getElementById('customerChart'), {
+const customerChartCanvas = document.getElementById('customerChart');
+fitHorizontalChart(customerChartCanvas, custEntries.length);
+new Chart(customerChartCanvas, {
   type: 'bar',
   data: {
     labels: custEntries.map(([k]) => k),
     datasets: [
-      { label: 'Approved', data: custEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 0 },
-      { label: 'Pending',  data: custEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 0 },
-      { label: 'Hold',     data: custEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 0 },
-      { label: 'Rejected', data: custEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 0 },
+      statusDataset('Approved', custEntries.map(([,v]) => v.approved), C_GREEN),
+      statusDataset('Pending', custEntries.map(([,v]) => v.pending), C_AMBER),
+      statusDataset('Hold', custEntries.map(([,v]) => v.hold), C_HOLD),
+      statusDataset('Rejected', custEntries.map(([,v]) => v.rejected), C_RED),
     ]
   },
   options: {
-    responsive: true, maintainAspectRatio: true,
+    responsive: true, maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: { legend: legendDefaults, tooltip: tooltipDefaults },
     scales: {
-      x: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1 }, grid: { color: gridColor() } },
-      y: { ticks: { color: scaleColor(), font: { size: 10 } }, grid: { display: false } }
+      x: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1, padding: 8 }, grid: { color: 'rgba(77, 116, 146, .12)' }, border: { display: false } },
+      y: { ticks: { color: scaleColor(), font: { size: 10, weight: '600' } }, grid: { display: false }, border: { display: false } }
     }
   }
 });
@@ -534,19 +554,21 @@ new Chart(document.getElementById('customerChart'), {
 const deptEntries = Object.entries(stats.department).sort((a, b) => b[1].total - a[1].total);
 // Shorten dept labels: keep just the code part before " - "
 const deptLabels = deptEntries.map(([k]) => k.includes(' - ') ? k.split(' - ')[0] : k);
-new Chart(document.getElementById('departmentChart'), {
+const departmentChartCanvas = document.getElementById('departmentChart');
+fitHorizontalChart(departmentChartCanvas, deptEntries.length);
+new Chart(departmentChartCanvas, {
   type: 'bar',
   data: {
     labels: deptLabels,
     datasets: [
-      { label: 'Approved', data: deptEntries.map(([,v]) => v.approved), backgroundColor: C_GREEN, borderRadius: 0 },
-      { label: 'Pending',  data: deptEntries.map(([,v]) => v.pending),  backgroundColor: C_AMBER,  borderRadius: 0 },
-      { label: 'Hold',     data: deptEntries.map(([,v]) => v.hold),     backgroundColor: C_HOLD,   borderRadius: 0 },
-      { label: 'Rejected', data: deptEntries.map(([,v]) => v.rejected), backgroundColor: C_RED,   borderRadius: 0 },
+      statusDataset('Approved', deptEntries.map(([,v]) => v.approved), C_GREEN),
+      statusDataset('Pending', deptEntries.map(([,v]) => v.pending), C_AMBER),
+      statusDataset('Hold', deptEntries.map(([,v]) => v.hold), C_HOLD),
+      statusDataset('Rejected', deptEntries.map(([,v]) => v.rejected), C_RED),
     ]
   },
   options: {
-    responsive: true, maintainAspectRatio: true,
+    responsive: true, maintainAspectRatio: false,
     indexAxis: 'y',
     plugins: {
       legend: legendDefaults,
@@ -558,8 +580,8 @@ new Chart(document.getElementById('departmentChart'), {
       }
     },
     scales: {
-      x: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1 }, grid: { color: gridColor() } },
-      y: { ticks: { color: scaleColor(), font: { size: 10 } }, grid: { display: false } }
+      x: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1, padding: 8 }, grid: { color: 'rgba(77, 116, 146, .12)' }, border: { display: false } },
+      y: { ticks: { color: scaleColor(), font: { size: 10, weight: '600' } }, grid: { display: false }, border: { display: false } }
     }
   }
 });
@@ -580,23 +602,23 @@ if (trendData && trendData.length) {
         label: 'Uploads',
         data: trendData.map(d => d.count),
         borderColor: C_BLUE,
-        backgroundColor: 'rgba(59,130,246,0.1)',
+        backgroundColor: 'rgba(59, 130, 246, .10)',
         pointBackgroundColor: C_BLUE,
         pointBorderColor: '#fff',
-        pointRadius: 3,
+        pointRadius: 2,
         pointHoverRadius: 5,
-        borderWidth: 2,
-        tension: 0.35,
+        borderWidth: 2.5,
+        tension: .38,
         fill: true,
       }]
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
       plugins: { legend: legendDefaults, tooltip: tooltipDefaults },
       scales: {
-        x: { ticks: { color: scaleColor(), font: { size: 10 } }, grid: { display: false } },
-        y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1 }, grid: { color: gridColor() } }
+        x: { ticks: { color: scaleColor(), font: { size: 10, weight: '600' }, maxRotation: 0 }, grid: { display: false }, border: { display: false } },
+        y: { beginAtZero: true, ticks: { color: scaleColor(), font: { size: 10 }, stepSize: 1, padding: 8 }, grid: { color: 'rgba(77, 116, 146, .12)' }, border: { display: false } }
       }
     }
   });
@@ -622,8 +644,8 @@ if (libEntries.length) {
         backgroundColor: libColors,
         borderColor: libColors,
         borderWidth: 1,
-        borderRadius: 0,
-        borderSkipped: 'bottom',
+        borderRadius: 6,
+        borderSkipped: false,
         categoryPercentage: 0.68,
         barPercentage: 0.72,
         maxBarThickness: 68,

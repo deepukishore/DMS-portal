@@ -1218,7 +1218,7 @@ label input:focus, label select:focus { border-color: var(--accent); }
   display: flex;
   flex-wrap: wrap;
   gap: .4rem;
-  padding: 0 1rem .85rem;
+  padding: 0 .1rem .15rem;
 }
 
 .customer-banner {
@@ -4097,7 +4097,8 @@ select:disabled {
 }
 
 .chart-wrapper canvas {
-  max-height: 265px;
+  width: 100% !important;
+  height: 100% !important;
   max-width: 100%;
 }
 
