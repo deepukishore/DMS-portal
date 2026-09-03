@@ -3962,7 +3962,7 @@ select:disabled {
 .chart-card.report-slide {
   flex: 0 0 100%;
   min-width: 100%;
-  min-height: 520px;
+  min-height: 430px;
   box-sizing: border-box;
 }
 
@@ -4090,14 +4090,14 @@ select:disabled {
 /* Chart Wrapper */
 .chart-wrapper {
   position: relative;
-  height: 300px;
+  height: 265px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .chart-wrapper canvas {
-  max-height: 300px;
+  max-height: 265px;
   max-width: 100%;
 }
 
@@ -4449,7 +4449,7 @@ select:disabled {
   }
 
   .chart-card.report-slide {
-    min-height: 500px;
+    min-height: 430px;
     padding: 1.1rem;
   }
 

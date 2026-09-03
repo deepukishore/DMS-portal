@@ -437,7 +437,8 @@ const chart3DDepthPlugin = {
 };
 
 Chart.register(chart3DDepthPlugin);
-Chart.defaults.plugins.chart3DDepth = { depth: 7 };
+// Flat chart marks are easier to compare accurately and keep the report clean.
+Chart.defaults.plugins.chart3DDepth = false;
 
 const approvalTrend = stats.approval_trend || [];
 const approvalTrendCanvas = document.getElementById('approvalRateTrendChart');
