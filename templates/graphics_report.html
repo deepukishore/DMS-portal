@@ -121,15 +121,38 @@
     <div class="report-carousel-viewport">
       <div class="report-carousel-track">
     <!-- Chart 1: Overall Status Distribution -->
-    <div class="chart-card report-slide">
+    <div class="chart-card report-slide overall-status-slide">
       <div class="chart-header">
         <h2>Overall Documents</h2>
-        <p class="chart-subtitle">Document status distribution</p>
+        <p class="chart-subtitle">A clear view of the current document status mix</p>
       </div>
-      <div class="chart-wrapper">
-        <canvas id="overallChart"></canvas>
+      {% set overall_total = stats.overall.total or 0 %}
+      <div class="overall-status-summary">
+        <div class="overall-status-heading">
+          <div>
+            <span class="overall-status-eyebrow">Status progress</span>
+            <strong>Document distribution</strong>
+          </div>
+          <span class="overall-status-total"><b>{{ overall_total }}</b> documents</span>
+        </div>
+        <div class="overall-status-bar" role="group" aria-label="Document status distribution: {{ stats.overall.approved }} approved, {{ stats.overall.pending }} pending, {{ stats.overall.hold }} on hold, and {{ stats.overall.rejected }} rejected">
+          {% if overall_total %}
+            <span class="overall-status-segment approved" style="--segment-width: {{ (stats.overall.approved / overall_total * 100) | round(2) }}%" title="Approved: {{ stats.overall.approved }}"></span>
+            <span class="overall-status-segment pending" style="--segment-width: {{ (stats.overall.pending / overall_total * 100) | round(2) }}%" title="Pending: {{ stats.overall.pending }}"></span>
+            <span class="overall-status-segment hold" style="--segment-width: {{ (stats.overall.hold / overall_total * 100) | round(2) }}%" title="Hold: {{ stats.overall.hold }}"></span>
+            <span class="overall-status-segment rejected" style="--segment-width: {{ (stats.overall.rejected / overall_total * 100) | round(2) }}%" title="Rejected: {{ stats.overall.rejected }}"></span>
+          {% else %}
+            <span class="overall-status-empty">No documents in this report scope</span>
+          {% endif %}
+        </div>
+        <div class="overall-status-legend" aria-label="Status proportions">
+          <span class="approved"><i aria-hidden="true"></i>Approved <b>{{ stats.overall.approved }}</b><small>{{ ((stats.overall.approved / overall_total * 100) if overall_total else 0) | round(1) }}%</small></span>
+          <span class="pending"><i aria-hidden="true"></i>Pending <b>{{ stats.overall.pending }}</b><small>{{ ((stats.overall.pending / overall_total * 100) if overall_total else 0) | round(1) }}%</small></span>
+          <span class="hold"><i aria-hidden="true"></i>Hold <b>{{ stats.overall.hold }}</b><small>{{ ((stats.overall.hold / overall_total * 100) if overall_total else 0) | round(1) }}%</small></span>
+          <span class="rejected"><i aria-hidden="true"></i>Rejected <b>{{ stats.overall.rejected }}</b><small>{{ ((stats.overall.rejected / overall_total * 100) if overall_total else 0) | round(1) }}%</small></span>
+        </div>
       </div>
-      <div class="chart-stats">
+      <div class="chart-stats chart-stats-overall">
         <div class="stat-item approved">
           <span class="stat-label">Approved</span>
           <span class="stat-value">{{ stats.overall.approved }}</span>
@@ -454,39 +477,7 @@ if (approvalTrendCanvas && approvalTrend.length) {
   });
 }
 
-// ── Chart 1: Overall doughnut ──────────────────────────────────
-new Chart(document.getElementById('overallChart'), {
-  type: 'doughnut',
-  data: {
-    labels: ['Approved', 'Pending', 'Hold', 'Rejected'],
-    datasets: [{
-      data: [stats.overall.approved, stats.overall.pending, stats.overall.hold, stats.overall.rejected],
-      backgroundColor: [C_GREEN, C_AMBER, C_HOLD, C_RED],
-      borderColor: 'transparent',
-      borderWidth: 2,
-      hoverOffset: 6,
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: true,
-    cutout: '65%',
-    plugins: {
-      legend: legendDefaults,
-      tooltip: {
-        ...tooltipDefaults,
-        callbacks: {
-          label(ctx) {
-            const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-            const pct = total ? ((ctx.parsed * 100) / total).toFixed(1) : 0;
-            return ` ${ctx.label}: ${ctx.parsed} (${pct}%)`;
-          }
-        }
-      }
-    }
-  }
-});
-
+// ── Chart 1: Overall status progress bar ───────────────────────
 // ── Chart 2: Plant-wise bar ───────────────────────────────────
 const plantEntries = Object.entries(stats.plant);
 new Chart(document.getElementById('plantChart'), {
@@ -713,6 +704,7 @@ if (libEntries.length) {
   const carousel = document.querySelector('[data-report-carousel]');
   if (!carousel) return;
 
+  const viewport = carousel.querySelector('.report-carousel-viewport');
   const track = carousel.querySelector('.report-carousel-track');
   const slides = Array.from(carousel.querySelectorAll('.report-slide'));
   const prevButton = carousel.querySelector('[data-carousel-prev]');
@@ -723,7 +715,7 @@ if (libEntries.length) {
   let currentIndex = 0;
   let autoTimer = null;
   let isPausedByUser = false;
-  const chartIds = ['overallChart', 'plantChart', 'customerChart', 'departmentChart', 'uploadTrendChart', 'libraryChart'];
+  const chartIds = ['plantChart', 'customerChart', 'departmentChart', 'uploadTrendChart', 'libraryChart'];
 
   function resizeCharts() {
     window.requestAnimationFrame(() => {
@@ -735,9 +727,14 @@ if (libEntries.length) {
     });
   }
 
+  function syncViewportHeight() {
+    if (viewport) viewport.style.height = `${slides[currentIndex].offsetHeight}px`;
+  }
+
   function goToSlide(index) {
     currentIndex = (index + slides.length) % slides.length;
     track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    syncViewportHeight();
     resizeCharts();
   }
 
@@ -785,6 +782,7 @@ if (libEntries.length) {
     if (document.hidden) stopAuto();
     else startAuto();
   });
+  window.addEventListener('resize', syncViewportHeight);
 
   goToSlide(0);
   updatePauseButton();

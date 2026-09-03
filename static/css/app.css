@@ -3949,10 +3949,12 @@ select:disabled {
 .report-carousel-viewport {
   overflow: hidden;
   border-radius: var(--radius);
+  transition: height .35s ease;
 }
 
 .report-carousel-track {
   display: flex;
+  align-items: flex-start;
   transition: transform .55s cubic-bezier(.22, .75, .2, 1);
   will-change: transform;
 }
@@ -3962,6 +3964,10 @@ select:disabled {
   min-width: 100%;
   min-height: 520px;
   box-sizing: border-box;
+}
+
+.chart-card.report-slide.overall-status-slide {
+  min-height: 0;
 }
 
 .report-carousel-actions {
@@ -4094,6 +4100,116 @@ select:disabled {
   max-height: 300px;
   max-width: 100%;
 }
+
+/* Overall document status: compact alternative to the doughnut chart. */
+.overall-status-summary {
+  padding: 1.1rem 1.15rem 1rem;
+  border: 1px solid rgba(86, 128, 178, .18);
+  border-radius: calc(var(--radius-sm) + 2px);
+  background: linear-gradient(135deg, rgba(25, 114, 255, .045), rgba(16, 185, 129, .035));
+}
+
+.overall-status-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .8rem;
+}
+
+.overall-status-heading strong {
+  display: block;
+  color: var(--text);
+  font-size: .95rem;
+}
+
+.overall-status-eyebrow {
+  display: block;
+  margin-bottom: .2rem;
+  color: var(--text-dim);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.overall-status-total {
+  color: var(--text-dim);
+  font-size: .78rem;
+  white-space: nowrap;
+}
+
+.overall-status-total b {
+  color: var(--text);
+  font-size: 1.15rem;
+}
+
+.overall-status-bar {
+  display: flex;
+  min-height: 16px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(124, 151, 181, .14);
+  box-shadow: inset 0 1px 2px rgba(15, 42, 74, .1);
+}
+
+.overall-status-segment {
+  width: var(--segment-width);
+  min-width: var(--segment-width);
+  transition: filter .2s ease;
+}
+
+.overall-status-segment + .overall-status-segment {
+  box-shadow: inset 2px 0 0 rgba(255, 255, 255, .78);
+}
+
+.overall-status-segment:hover { filter: brightness(1.06); }
+.overall-status-segment.approved { background: #10b981; }
+.overall-status-segment.pending { background: #f59e0b; }
+.overall-status-segment.hold { background: #8b5cf6; }
+.overall-status-segment.rejected { background: #ef4444; }
+
+.overall-status-empty {
+  display: grid;
+  width: 100%;
+  min-height: 16px;
+  place-items: center;
+  color: var(--text-dim);
+  font-size: .72rem;
+}
+
+.overall-status-legend {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .6rem;
+  margin-top: .85rem;
+}
+
+.overall-status-legend > span {
+  display: flex;
+  align-items: center;
+  gap: .36rem;
+  min-width: 0;
+  color: var(--text-dim);
+  font-size: .75rem;
+  white-space: nowrap;
+}
+
+.overall-status-legend i {
+  width: .55rem;
+  height: .55rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+}
+
+.overall-status-legend .approved i { background: #10b981; }
+.overall-status-legend .pending i { background: #f59e0b; }
+.overall-status-legend .hold i { background: #8b5cf6; }
+.overall-status-legend .rejected i { background: #ef4444; }
+.overall-status-legend b { color: var(--text); }
+.overall-status-legend small { color: var(--text-dim); font-size: .68rem; }
+
+.chart-stats-overall { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 
 .chart-card.library-report-card {
   overflow: visible;
@@ -4364,6 +4480,11 @@ select:disabled {
 
   .chart-stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .overall-status-legend {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: .45rem;
   }
 
   .library-chart-panel {
