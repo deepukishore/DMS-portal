@@ -256,6 +256,12 @@
       </div>
     </div>
   </section>
+
+  <div id="graphics-report-data"
+       data-stats="{{ stats | tojson | forceescape }}"
+       data-trend="{{ trend_data | tojson | forceescape }}"
+       data-library-stats="{{ library_stats | tojson | forceescape }}"
+       hidden></div>
 </div>
 
 <!-- Include Chart.js library -->
@@ -265,7 +271,8 @@
 
 {% block scripts %}
 <script>
-const stats = {{ stats|tojson }};
+const graphicsReportData = document.getElementById('graphics-report-data');
+const stats = JSON.parse(graphicsReportData?.dataset.stats || '{}');
 
 // Resolve CSS variables to real colour strings at runtime
 function cssVar(name) {
@@ -585,7 +592,7 @@ new Chart(departmentChartCanvas, {
 });
 
 // ── Chart 5: Upload trend line ────────────────────────────────
-const trendData = {{ trend_data | tojson }};
+const trendData = JSON.parse(graphicsReportData?.dataset.trend || '[]');
 const trendCtx = document.getElementById('uploadTrendChart');
 if (trendData && trendData.length) {
   const labels = trendData.map(d => {
@@ -625,7 +632,7 @@ if (trendData && trendData.length) {
   trendCtx.parentElement.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:2rem 0;font-size:.85rem">No upload trend data available.</p>';
 }
 
-const libraryStats = {{ library_stats|tojson }} || {};
+const libraryStats = JSON.parse(graphicsReportData?.dataset.libraryStats || '{}');
 const libEntries = Object.entries(libraryStats);
 if (libEntries.length) {
   const libLabels = libEntries.map(([k, v]) => v.label || k);
