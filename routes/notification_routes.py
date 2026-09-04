@@ -1,8 +1,10 @@
-from flask import Blueprint, flash, jsonify, redirect, render_template, request, session, url_for
+from flask import Blueprint, current_app, flash, jsonify, redirect, render_template, request, session, url_for
 
 from services.auth_service import AuthService
+from services.mail_service import MailService
 from services.notification_service import NotificationService
 from services.system_log_service import SystemLogService
+from services.user_store_service import UserStoreService
 
 notification_bp = Blueprint("notifications", __name__)
 
@@ -51,6 +53,21 @@ def portal_updates():
                 link_url=link_url,
                 notification_type="portal_update",
             )
+            email_recipients = sorted({
+                str(user.get("email") or "").strip().lower()
+                for user in UserStoreService.get_all_users()
+                if str(user.get("email") or "").strip()
+            })
+            portal_base_url = (
+                current_app.config.get("PORTAL_BASE_URL") or request.url_root
+            ).rstrip("/")
+            action_url = f"{portal_base_url}{link_url or '/dashboard'}"
+            email_sent, email_error = MailService.send_portal_update(
+                email_recipients,
+                title,
+                message,
+                action_url,
+            )
             SystemLogService.log_portal_update(
                 session.get("user_email", ""),
                 session.get("user_name", "Administrator"),
@@ -58,9 +75,18 @@ def portal_updates():
                 recipient_count,
             )
             flash(
-                f"Portal update published to {recipient_count} registered user(s).",
+                f"Portal update published to {recipient_count} registered user(s)."
+                + (
+                    f" Email notification sent to {len(email_recipients)} user(s)."
+                    if email_sent else ""
+                ),
                 "success",
             )
+            if not email_sent:
+                flash(
+                    f"The portal update was published, but email delivery failed: {email_error}",
+                    "warning",
+                )
             return redirect(url_for("notifications.portal_updates"))
 
     return render_template(

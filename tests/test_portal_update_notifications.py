@@ -7,7 +7,9 @@ from flask import Flask
 
 from config import Config
 from database import configure_database, get_connection, init_db
+from extensions import mail
 from routes.notification_routes import notification_bp
+from services.mail_service import MailService
 from services.notification_service import NotificationService
 
 
@@ -83,6 +85,14 @@ class PortalUpdateNotificationRouteTests(unittest.TestCase):
         self.assertEqual(response.status_code, 403)
 
     @patch("routes.notification_routes.SystemLogService.log_portal_update")
+    @patch("routes.notification_routes.MailService.send_portal_update", return_value=(True, None))
+    @patch(
+        "routes.notification_routes.UserStoreService.get_all_users",
+        return_value=[
+            {"email": "admin@example.com"},
+            {"email": "user@example.com"},
+        ],
+    )
     @patch("routes.notification_routes.NotificationService.notify_all_users", return_value=12)
     @patch("routes.notification_routes.AuthService.is_admin", return_value=True)
     @patch("routes.notification_routes.AuthService.is_logged_in", return_value=True)
@@ -91,6 +101,8 @@ class PortalUpdateNotificationRouteTests(unittest.TestCase):
         _logged_in,
         _is_admin,
         notify_all,
+        get_users,
+        send_email,
         log_update,
     ):
         with self.client.session_transaction() as session:
@@ -113,12 +125,42 @@ class PortalUpdateNotificationRouteTests(unittest.TestCase):
             link_url="/dashboard",
             notification_type="portal_update",
         )
+        get_users.assert_called_once_with()
+        send_email.assert_called_once_with(
+            ["admin@example.com", "user@example.com"],
+            "New portal feature",
+            "A new portal feature is now available.",
+            "http://localhost/dashboard",
+        )
         log_update.assert_called_once_with(
             "admin@example.com",
             "Administrator",
             "New portal feature",
             12,
         )
+
+    def test_portal_update_email_is_branded_and_uses_bcc(self):
+        app = Flask(__name__)
+        app.config.update(MAIL_DEFAULT_SENDER="noreply@example.com", TESTING=True)
+        mail.init_app(app)
+
+        with app.app_context(), patch("services.mail_service.mail.send") as send:
+            ok, error = MailService.send_portal_update(
+                ["USER@example.com", "user@example.com", "admin@example.com"],
+                "Search <improved>",
+                "The portal now includes faster document search.",
+                "https://portal.example/dashboard",
+            )
+
+        self.assertTrue(ok)
+        self.assertIsNone(error)
+        email = send.call_args.args[0]
+        self.assertEqual(email.recipients, [])
+        self.assertEqual(email.bcc, ["admin@example.com", "user@example.com"])
+        self.assertIn("Portal Update", email.html)
+        self.assertIn("Search &lt;improved&gt;", email.html)
+        self.assertIn("Open Portal", email.html)
+        self.assertIn("https://portal.example/dashboard", email.html)
 
 
 if __name__ == "__main__":

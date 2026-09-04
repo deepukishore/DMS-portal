@@ -89,6 +89,63 @@ class MailService:
     """Handles outbound email delivery."""
 
     @staticmethod
+    def send_portal_update(to_emails, title, message, action_url):
+        """Email a portal announcement without exposing recipient addresses."""
+        try:
+            recipients = sorted({
+                str(email or "").strip().lower()
+                for email in to_emails
+                if str(email or "").strip()
+            })
+            if not recipients:
+                return False, "No registered email recipients were found."
+
+            safe_action_url = _safe_html(action_url, "#")
+            current_year = datetime.now().year
+            msg = Message(
+                subject=f"Portal update: {title}",
+                recipients=[],
+                bcc=recipients,
+            )
+            msg.body = (
+                f"Portal update: {title}\n\n"
+                f"{message}\n\n"
+                f"Open the portal: {action_url}\n\n"
+                "This is a system-generated email. Please do not reply to it."
+            )
+            msg.html = f"""
+              <!doctype html>
+              <html lang="en">
+                <body style="margin:0;padding:0;background:#eef3f7;font-family:Arial,Helvetica,sans-serif;color:#344054;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#eef3f7;">
+                    <tr><td align="center" style="padding:24px 12px;">
+                      <table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:640px;background:#ffffff;border:1px solid #d8e3ec;border-radius:8px;overflow:hidden;">
+                        <tr><td align="center" style="padding:24px 28px;background:#075d98;background:linear-gradient(105deg,#075d98 0%,#08a5d7 100%);color:#ffffff;">
+                          <div style="font-size:22px;line-height:1.25;font-weight:700;">Portal Update</div>
+                          <div style="margin-top:7px;font-size:13px;line-height:1.5;">{_safe_html(title)}</div>
+                        </td></tr>
+                        <tr><td style="padding:28px 30px 24px;">
+                          <p style="margin:0 0 22px;font-size:14px;line-height:1.7;color:#475467;white-space:pre-line;">{_safe_html(message)}</p>
+                          <div style="text-align:center;">
+                            <a href="{safe_action_url}" style="display:inline-block;padding:12px 24px;background:#087fb9;color:#ffffff;font-size:13px;font-weight:700;text-decoration:none;border-radius:6px;">Open Portal</a>
+                          </div>
+                        </td></tr>
+                        <tr><td align="center" style="padding:16px 24px;background:#e7edf4;border-top:1px solid #d2dce6;color:#d92d20;font-size:11px;line-height:1.65;">
+                          <strong>&copy; {current_year} Rane Group | Confidential Information</strong><br />
+                          This is a system-generated email. Please do not reply to it.
+                        </td></tr>
+                      </table>
+                    </td></tr>
+                  </table>
+                </body>
+              </html>
+            """
+            mail.send(msg)
+            return True, None
+        except Exception as exc:
+            return False, str(exc)
+
+    @staticmethod
     def send_password_reset(to_email, reset_url):
         try:
             msg = Message(
