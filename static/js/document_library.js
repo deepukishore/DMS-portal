@@ -213,9 +213,7 @@ function createOptionGrid(options, onSelect) {
     card.type = 'button';
     card.className = 'proc-type-card';
     card.innerHTML = `
-      <div class="proc-type-header">${option.label}</div>
-      <p class="proc-type-desc">${option.description || ''}</p>
-      ${option.meta ? `<p class="proc-type-desc"><strong>${option.meta}</strong></p>` : ''}`;
+      <div class="proc-type-header">${option.label}</div>`;
     card.addEventListener('click', () => runAndNavigate(onSelect, option.key));
     grid.appendChild(card);
   });
@@ -233,7 +231,6 @@ function createPlantGrid(plants, onSelect) {
       <div class="plant-card-id">${plant.id || 'PLANT'}</div>
       <div class="plant-card-info">
         <strong>${plantCode(plant.label)}</strong>
-        <small>Open plant folder</small>
       </div>
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
@@ -270,7 +267,6 @@ function createCustomerGrid(customers, onSelect) {
     card.innerHTML = `
       <div class="customer-info">
         <strong>${customer}</strong>
-        <small>Open customer folder</small>
       </div>
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
@@ -311,7 +307,6 @@ function createDepartmentGrid(departments, onSelect) {
       <div class="customer-avatar" style="background:rgba(240,165,0,.12);color:var(--accent);font-size:.75rem;font-weight:700;font-family:'IBM Plex Mono',monospace">${initials}</div>
       <div class="customer-info">
         <strong>${departmentLabel}</strong>
-        <small>Open department folder</small>
       </div>
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
@@ -336,7 +331,6 @@ function createDepartmentGridForPlant(departmentList, plantDepartments, onSelect
       <div class="customer-avatar" style="background:rgba(240,165,0,.12);color:var(--accent);font-size:.75rem;font-weight:700;font-family:'IBM Plex Mono',monospace">${initials}</div>
       <div class="customer-info">
         <strong>${departmentLabel}</strong>
-        <small>Open department folder</small>
       </div>
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
@@ -680,7 +674,6 @@ function renderQms() {
     const allowedGroups = (scope.groups || []).map(key => ({
       key,
       label: groups[key]?.label || key,
-      description: `Browse ${groups[key]?.label || 'documents'}.`,
     }));
 
     const el = setRoot();
@@ -1066,7 +1059,6 @@ async function renderDepartmentsForMasterRecords() {
       <div class="customer-avatar" style="background:rgba(240,165,0,.12);color:var(--accent);font-size:.75rem;font-weight:700;font-family:'IBM Plex Mono',monospace">${initials}</div>
       <div class="customer-info">
         <strong>${dept}</strong>
-        <small>Open department folder</small>
       </div>
       <div class="plant-card-arrow">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
