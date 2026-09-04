@@ -9041,9 +9041,9 @@ body * {
     min-height: 0;
   }
   .upload-form-fit .upload-file-step { grid-column: 1; grid-row: 1; min-height: 0; }
-  .upload-form-fit .upload-details-step { grid-column: 2; grid-row: 1 / 4; min-height: 0; }
+  .upload-form-fit .upload-details-step { grid-column: 2; grid-row: 1 / 3; min-height: 0; }
   .upload-form-fit .upload-revision-step { grid-column: 1; grid-row: 2; }
-  .upload-form-fit .upload-submit-fit { grid-column: 1; grid-row: 3; }
+  .upload-form-fit .upload-submit-fit { grid-column: 1 / -1; grid-row: 3; }
   .upload-page-body .upload-step-card { padding: .6rem .7rem; }
   .upload-page-body .upload-details-step { gap: .45rem; }
   .upload-page-body .upload-details-fields {
