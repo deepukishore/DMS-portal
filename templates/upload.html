@@ -27,7 +27,7 @@
   </div>
 {% endif %}
 
-<div class="upload-grid">
+<div class="upload-grid upload-grid-single">
   <section class="surface-panel">
     <form method="POST" action="{{ url_for('upload.index') }}" enctype="multipart/form-data" id="upload-form" class="upload-form upload-form-fit">
       <input type="hidden" name="upload_target" value="library" />
@@ -235,49 +235,6 @@
     </form>
   </section>
 
-  <!-- ── Sidebar info ──────────────────────────────────────────── -->
-  <aside class="stack-panel">
-    <section class="surface-panel info-card">
-      <div class="panel-head">
-        <div>
-          <h2 class="section-title">What happens next?</h2>
-        </div>
-      </div>
-      <div class="timeline-list">
-        <div class="timeline-item">
-          <span class="timeline-dot"></span>
-          <div>
-            <strong>File is stored</strong>
-            <p>Your document is saved with all metadata attached.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-dot"></span>
-          <div>
-            <strong>Approver is notified</strong>
-            <p>An email with a review link is sent to the approver.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-dot"></span>
-          <div>
-            <strong>Status updates</strong>
-            <p>You'll see Pending → Approved or Rejected in the dashboard.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="surface-panel info-card">
-      <div class="panel-head">
-        <div><h2 class="section-title">Tips</h2></div>
-      </div>
-      <ul class="compact-list">
-        <li>New document numbers are assigned automatically, e.g. <code style="font-family:monospace;font-size:.75rem;">ZRAI-DOC-P1-2026-001</code>.</li>
-        <li>Group related files in one submission when possible.</li>
-      </ul>
-    </section>
-  </aside>
 </div>
 {% endblock %}
 

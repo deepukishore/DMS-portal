@@ -915,6 +915,7 @@ html[data-theme="light"] .btn-theme .theme-moon {
   gap: 1.25rem;
   align-items: start;
 }
+.upload-grid-single { grid-template-columns: minmax(0, 1fr); }
 .stack-panel {
   display: flex;
   flex-direction: column;
