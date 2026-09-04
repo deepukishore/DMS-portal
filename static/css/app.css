@@ -3972,15 +3972,13 @@ select:disabled {
 
 .report-carousel-actions {
   position: absolute;
-  top: 50%;
-  left: .85rem;
-  right: .85rem;
+  top: 1rem;
+  right: 4.25rem;
   z-index: 6;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: .45rem;
   pointer-events: none;
-  transform: translateY(-50%);
 }
 
 .report-carousel-btn {
@@ -4015,8 +4013,8 @@ select:disabled {
   z-index: 7;
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   padding: 0;
   color: rgb(25, 114, 255);
   background: rgba(255, 255, 255, .96);
@@ -4045,7 +4043,7 @@ select:disabled {
 }
 
 .report-slide .chart-header {
-  padding-right: 3.25rem;
+  padding-right: 8.25rem;
 }
 
 .report-carousel-pause [hidden] {
@@ -4104,10 +4102,11 @@ select:disabled {
 
 /* Overall document status: compact alternative to the doughnut chart. */
 .overall-status-summary {
-  padding: 1.1rem 1.15rem 1rem;
-  border: 1px solid rgba(86, 128, 178, .18);
+  padding: 1rem 1.15rem .85rem;
+  border: 1px solid rgba(86, 128, 178, .16);
   border-radius: calc(var(--radius-sm) + 2px);
-  background: linear-gradient(135deg, rgba(25, 114, 255, .045), rgba(16, 185, 129, .035));
+  border-left: 3px solid #10b981;
+  background: linear-gradient(100deg, rgba(16, 185, 129, .075), rgba(25, 114, 255, .025));
 }
 
 .overall-status-heading {
@@ -4121,7 +4120,20 @@ select:disabled {
 .overall-status-heading strong {
   display: block;
   color: var(--text);
-  font-size: .95rem;
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
+.overall-status-heading strong b {
+  color: #0a9e65;
+  font-size: 1.45rem;
+}
+
+.overall-status-heading small {
+  display: block;
+  margin-top: .22rem;
+  color: var(--text-dim);
+  font-size: .72rem;
 }
 
 .overall-status-eyebrow {
@@ -4135,14 +4147,22 @@ select:disabled {
 }
 
 .overall-status-total {
-  color: var(--text-dim);
-  font-size: .78rem;
+  display: flex;
+  align-items: end;
+  gap: .35rem;
   white-space: nowrap;
 }
 
 .overall-status-total b {
   color: var(--text);
-  font-size: 1.15rem;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.overall-status-total small {
+  margin: 0 0 .1rem;
+  color: var(--text-dim);
+  font-size: .72rem;
 }
 
 .overall-status-bar {
@@ -4210,7 +4230,20 @@ select:disabled {
 .overall-status-legend b { color: var(--text); }
 .overall-status-legend small { color: var(--text-dim); font-size: .68rem; }
 
-.chart-stats-overall { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.chart-stats.chart-stats-overall {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .65rem;
+  padding-top: .85rem;
+}
+
+.chart-stats-overall .stat-item {
+  align-items: flex-start;
+  gap: .2rem;
+  padding: .7rem .8rem;
+  text-align: left;
+}
+
+.chart-stats-overall .stat-value { font-size: 1.35rem; }
 
 .chart-card.library-report-card {
   overflow: visible;
@@ -4455,13 +4488,15 @@ select:disabled {
   }
 
   .report-carousel-actions {
-    left: .35rem;
-    right: .35rem;
+    top: .7rem;
+    right: 3.45rem;
+    left: auto;
+    gap: .35rem;
   }
 
   .report-carousel-btn {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
   }
 
   .report-carousel-pause {
@@ -4482,6 +4517,12 @@ select:disabled {
   .chart-stats {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .chart-stats.chart-stats-overall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .report-slide .chart-header { padding-right: 7rem; }
 
   .overall-status-legend {
     grid-template-columns: repeat(2, minmax(0, 1fr));

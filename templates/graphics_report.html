@@ -127,13 +127,15 @@
         <p class="chart-subtitle">A clear view of the current document status mix</p>
       </div>
       {% set overall_total = stats.overall.total or 0 %}
+      {% set approval_rate = ((stats.overall.approved / overall_total * 100) if overall_total else 0) | round(1) %}
       <div class="overall-status-summary">
         <div class="overall-status-heading">
           <div>
-            <span class="overall-status-eyebrow">Status progress</span>
-            <strong>Document distribution</strong>
+            <span class="overall-status-eyebrow">Approval snapshot</span>
+            <strong><b>{{ approval_rate }}%</b> approved</strong>
+            <small>{{ stats.overall.approved }} of {{ overall_total }} documents are approved</small>
           </div>
-          <span class="overall-status-total"><b>{{ overall_total }}</b> documents</span>
+          <span class="overall-status-total"><b>{{ overall_total }}</b><small>Total documents</small></span>
         </div>
         <div class="overall-status-bar" role="group" aria-label="Document status distribution: {{ stats.overall.approved }} approved, {{ stats.overall.pending }} pending, {{ stats.overall.hold }} on hold, and {{ stats.overall.rejected }} rejected">
           {% if overall_total %}
@@ -168,10 +170,6 @@
         <div class="stat-item rejected">
           <span class="stat-label">Rejected</span>
           <span class="stat-value">{{ stats.overall.rejected }}</span>
-        </div>
-        <div class="stat-item total">
-          <span class="stat-label">Total</span>
-          <span class="stat-value">{{ stats.overall.total }}</span>
         </div>
       </div>
     </div>
