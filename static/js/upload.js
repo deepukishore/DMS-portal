@@ -40,6 +40,7 @@ const LIBRARY_DATA = window.LIBRARY_DATA || {};
 const NEXT_DOCUMENT_NUMBERS = window.NEXT_DOCUMENT_NUMBERS || {};
 const PROFILE_NEXT_DOCUMENT_NUMBER = window.PROFILE_NEXT_DOCUMENT_NUMBER || '';
 const DOCUMENT_NUMBER_VALIDATION_URL = window.DOCUMENT_NUMBER_VALIDATION_URL || '';
+const REVISION_PREFILL = window.REVISION_PREFILL || null;
 
 let currentPathState = {
   valid: false,
@@ -770,7 +771,7 @@ function updateRevisionUI() {
       ? 'e.g. ZRAI-DOC-P1-2026-001'
       : 'Assigned automatically after selecting a plant';
     docNumInput.value = isRevised
-      ? ''
+      ? (REVISION_PREFILL?.document_number || '')
       : (NEXT_DOCUMENT_NUMBERS[plantSelect?.value] || PROFILE_NEXT_DOCUMENT_NUMBER);
   }
   if (docNumLabel) docNumLabel.textContent = 'Document Number';
@@ -906,5 +907,34 @@ uploadForm.addEventListener('submit', event => {
     });
 });
 
-configureLibraryCategory();
-updateLibraryPath();
+function applyRevisionPrefill() {
+  configureLibraryCategory();
+  if (!REVISION_PREFILL) {
+    updateLibraryPath();
+    return;
+  }
+
+  const parts = Array.isArray(REVISION_PREFILL.library_path_parts)
+    ? REVISION_PREFILL.library_path_parts
+    : [];
+  const categoryData = LIBRARY_DATA[libraryCatSelect?.value];
+
+  if (categoryData?.scope && categoryData.document_groups) {
+    if (librarySubSelect && parts[0]) librarySubSelect.value = parts[0];
+    configureLibrarySecondary();
+    if (libraryTertiarySelect && parts[1]) libraryTertiarySelect.value = parts[1];
+    configureLibraryTertiary();
+    if (libraryQuaternarySelect && parts[2]) libraryQuaternarySelect.value = parts[2];
+  } else if (categoryData?.primary_options) {
+    if (libraryPrimSelect && parts[0]) libraryPrimSelect.value = parts[0];
+    configureLibraryPrimary();
+    if (librarySubSelect && parts[1]) librarySubSelect.value = parts[1];
+  } else if (categoryData?.customers && libraryPrimSelect && parts[0]) {
+    libraryPrimSelect.value = parts[0];
+  }
+
+  updateLibraryPath();
+  if (isRevisionCb?.checked && docNumInput?.value) validateRevisionDocument();
+}
+
+applyRevisionPrefill();

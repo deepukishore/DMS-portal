@@ -1,5 +1,6 @@
 import os
 import sqlite3
+from contextlib import closing
 from datetime import datetime
 
 from database import get_connection
@@ -43,7 +44,7 @@ class UserStoreService:
         finally:
             legacy_connection.close()
 
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             for legacy_user in legacy_users:
                 user = dict(legacy_user)
                 existing = connection.execute(
@@ -78,7 +79,7 @@ class UserStoreService:
 
     @staticmethod
     def _seed_users():
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             count_row = connection.execute("SELECT COUNT(*) AS count FROM users").fetchone()
             count = count_row["count"]
             if count:
@@ -111,7 +112,7 @@ class UserStoreService:
 
     @staticmethod
     def _migrate_departments():
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             for old_value, new_value in LEGACY_DEPARTMENT_MAP.items():
                 connection.execute(
                     "UPDATE users SET department = ? WHERE department = ?",
@@ -121,25 +122,25 @@ class UserStoreService:
 
     @staticmethod
     def get_user_by_email(email):
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             row = connection.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
         return dict(row) if row else None
 
     @staticmethod
     def get_user_by_genid(genid):
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             row = connection.execute("SELECT * FROM users WHERE emp_id = ?", (genid,)).fetchone()
         return dict(row) if row else None
 
     @staticmethod
     def get_users_by_role(role):
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             rows = connection.execute("SELECT * FROM users WHERE role = ? ORDER BY name ASC", (role,)).fetchall()
         return [dict(row) for row in rows]
 
     @staticmethod
     def get_users_by_qms_level(qms_level):
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             rows = connection.execute(
                 "SELECT * FROM users WHERE qms_level = ? ORDER BY name ASC",
                 (qms_level,),
@@ -178,7 +179,7 @@ class UserStoreService:
         user_id = UserStoreService._next_user_id()
         created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             connection.execute(
                 """
                 INSERT INTO users (
@@ -206,7 +207,7 @@ class UserStoreService:
 
     @staticmethod
     def update_user_profile(email, name=None, plant=None, department=None, role=None, mobile=None):
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             existing = connection.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
             if not existing:
                 return None
@@ -256,13 +257,13 @@ class UserStoreService:
 
     @staticmethod
     def update_avatar(email, filename):
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             connection.execute("UPDATE users SET avatar = ? WHERE email = ?", (filename, email))
             connection.commit()
 
     @staticmethod
     def update_password(email, password_hash):
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             cursor = connection.execute(
                 "UPDATE users SET password_hash = ? WHERE email = ?",
                 (password_hash, email),
@@ -272,7 +273,7 @@ class UserStoreService:
 
     @staticmethod
     def _next_user_id():
-        with UserStoreService._connect() as connection:
+        with closing(UserStoreService._connect()) as connection:
             rows = connection.execute("SELECT user_id FROM users").fetchall()
 
         max_id = 0

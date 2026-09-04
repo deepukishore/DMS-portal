@@ -77,6 +77,9 @@ Configuration is loaded from environment variables and an optional `.env` file. 
 | `FIRST_APPROVAL_RECIPIENT` | First-stage approval mailbox | Application fallback |
 | `FINAL_APPROVAL_RECIPIENT` | Final-stage approval mailbox | Application fallback |
 | `REVIEW_TOKEN_SALT` | Salt for signed approval links | Development fallback |
+| `PORTAL_BASE_URL` | Public base URL used in reminder email links | `http://127.0.0.1:5001` |
+| `QUARTERLY_REMINDERS_ENABLED` | Enable automatic quarterly document-review emails | `true` |
+| `QUARTERLY_REMINDER_HOUR` | Local server hour for reminders on each quarter's first day | `9` |
 
 For MySQL, set `DATABASE_ENGINE=mysql` and the `MYSQL_*` values before starting the app. To copy existing SQLite records into the configured MySQL database, run:
 
@@ -116,6 +119,7 @@ python -m pytest
 - Uploaded files and local databases are runtime data and are intentionally excluded from Git.
 - PowerPoint previews use Microsoft PowerPoint on Windows when available; otherwise the app creates a text-based PDF preview.
 - SMTP must be configured with valid credentials for password resets and approval emails.
+- Quarterly reminders run on January 1, April 1, July 1, and October 1. Run `flask --app app send-quarterly-reminders` to send any unsent reminders for the current quarter manually.
 - Replace all development fallback secrets and mail settings before deployment.
 
 Additional project documentation is available in [USER_MANUAL.md](USER_MANUAL.md) and [DMS_PORTAL_UPDATED_PROCESS_FLOW.md](DMS_PORTAL_UPDATED_PROCESS_FLOW.md).

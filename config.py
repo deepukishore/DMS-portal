@@ -32,6 +32,15 @@ class Config:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', 'sjhd dofp hzof qpou')
     MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER', 'deepu004.dk@gmail.com')
 
+    # Quarterly document-review reminders are sent at 09:00 local server time
+    # on January 1, April 1, July 1, and October 1. The database prevents a
+    # document from being emailed more than once in the same quarter.
+    QUARTERLY_REMINDERS_ENABLED = os.environ.get(
+        'QUARTERLY_REMINDERS_ENABLED', 'true'
+    ).lower() == 'true'
+    QUARTERLY_REMINDER_HOUR = int(os.environ.get('QUARTERLY_REMINDER_HOUR', 9))
+    PORTAL_BASE_URL = os.environ.get('PORTAL_BASE_URL', 'http://127.0.0.1:5001').rstrip('/')
+
     FIRST_APPROVAL_RECIPIENT = os.environ.get(
         'FIRST_APPROVAL_RECIPIENT',
         'anithaashok2000@gmail.com',

@@ -146,3 +146,12 @@ class SystemLogService:
             "PORTAL_UPDATE",
             f'Published portal update "{title}" to {recipient_count} user(s).',
         )
+
+    @staticmethod
+    def log_quarterly_reminder(quarter_key, file_name, recipient_count):
+        SystemLogService._entry(
+            "system",
+            "Quarterly Reminder",
+            "QUARTERLY_REMINDER",
+            f'Sent {quarter_key} update reminder for "{file_name}" to {recipient_count} recipient(s).',
+        )

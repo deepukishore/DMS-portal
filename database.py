@@ -340,6 +340,18 @@ SQLITE_SCHEMA = [
         UNIQUE(user_email, document_id)
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS quarterly_document_reminders (
+        quarter_key TEXT NOT NULL,
+        document_id INTEGER NOT NULL,
+        status TEXT NOT NULL DEFAULT 'sending',
+        attempted_at TEXT NOT NULL,
+        sent_at TEXT,
+        recipients TEXT,
+        error TEXT,
+        PRIMARY KEY (quarter_key, document_id)
+    )
+    """,
 ]
 
 
@@ -504,6 +516,18 @@ MYSQL_SCHEMA = [
         document_id BIGINT NOT NULL,
         bookmarked_at VARCHAR(32) NOT NULL,
         UNIQUE KEY uq_bookmark_user_document (user_email, document_id)
+    ) ENGINE=InnoDB
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS quarterly_document_reminders (
+        quarter_key VARCHAR(16) NOT NULL,
+        document_id BIGINT NOT NULL,
+        status VARCHAR(32) NOT NULL DEFAULT 'sending',
+        attempted_at VARCHAR(32) NOT NULL,
+        sent_at VARCHAR(32),
+        recipients LONGTEXT,
+        error LONGTEXT,
+        PRIMARY KEY (quarter_key, document_id)
     ) ENGINE=InnoDB
     """,
 ]

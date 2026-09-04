@@ -99,6 +99,27 @@ class CategoryDocumentService:
         return rows
 
     @staticmethod
+    def get_library_location_for_file(file_name):
+        """Return the most recent library category/path recorded for a file."""
+        if not file_name:
+            return None
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            '''
+            SELECT category, sub_category, plant, department
+            FROM category_documents
+            WHERE file_name = ?
+            ORDER BY id DESC
+            LIMIT 1
+            ''',
+            (file_name,),
+        )
+        row = cursor.fetchone()
+        conn.close()
+        return dict(row) if row else None
+
+    @staticmethod
     def sync_status_for_file(file_name, approval_status):
         conn = get_connection()
         cursor = conn.cursor()

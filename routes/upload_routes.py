@@ -383,6 +383,43 @@ def index():
     except ValueError:
         profile_next_document_number = ""
 
+    revision_prefill = None
+    revision_of = request.args.get("revision_of", "").strip()
+    if revision_of.isdigit():
+        source_document = DocumentService.get_document_by_id(
+            int(revision_of),
+            access_department="" if can_choose_upload_scope else profile_department,
+        )
+        if source_document and (
+            can_choose_upload_scope
+            or (
+                source_document.get("plant") == profile_plant
+                and normalize_department(source_document.get("department", "")) == profile_department
+            )
+        ):
+            library_location = CategoryDocumentService.get_library_location_for_file(
+                source_document.get("file_name", "")
+            ) or {}
+            library_subcategory = library_location.get("sub_category") or ""
+            path_parts = [part for part in library_subcategory.split(":") if part]
+            if path_parts and path_parts[0] in {"L1", "L2", "L3", "L4"}:
+                path_parts = path_parts[1:]
+            revision_prefill = {
+                "document_id": source_document["id"],
+                "document_number": source_document.get("document_number", ""),
+                "file_name": source_document.get("original_file_name") or source_document.get("file_name", ""),
+                "revision_number": source_document.get("revision_number", ""),
+                "plant": source_document.get("plant", ""),
+                "department": source_document.get("department", ""),
+                "category": library_location.get("category") or source_document.get("category", ""),
+                "library_path_parts": path_parts,
+            }
+        else:
+            flash(
+                "The document selected for revision was not found or is outside your upload scope.",
+                "error",
+            )
+
     return render_template(
         "upload.html",
         current_user=current_user,
@@ -393,6 +430,7 @@ def index():
         can_choose_upload_scope=can_choose_upload_scope,
         next_document_numbers=next_document_numbers,
         profile_next_document_number=profile_next_document_number,
+        revision_prefill=revision_prefill,
     )
 
 

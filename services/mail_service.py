@@ -416,3 +416,81 @@ class MailService:
             return True, None
         except Exception as exc:
             return False, str(exc)
+
+    @staticmethod
+    def send_quarterly_document_reminder(
+        to_emails,
+        record,
+        document_url,
+        revision_upload_url,
+    ):
+        """Ask document stakeholders to review an approved file each quarter."""
+        try:
+            recipients = sorted({
+                str(email or "").strip().lower()
+                for email in to_emails
+                if str(email or "").strip()
+            })
+            if not recipients:
+                return False, "No quarterly reminder recipients were found."
+
+            file_name = record.get("original_file_name") or record.get("file_name") or "Document"
+            safe_document_url = _safe_html(document_url, "#")
+            safe_revision_url = _safe_html(revision_upload_url, "#")
+            current_year = datetime.now().year
+            msg = Message(
+                subject=f"Quarterly document review required: {file_name}",
+                recipients=recipients,
+            )
+            msg.body = (
+                "This is your quarterly reminder to review the controlled document below.\n\n"
+                f"Document: {file_name}\n"
+                f"Document number: {record.get('document_number') or 'N/A'}\n"
+                f"Revision number: {record.get('revision_number') or 'N/A'}\n"
+                f"Plant: {plant_code(record.get('plant', ''))}\n"
+                f"Department: {record.get('department') or 'N/A'}\n\n"
+                "If the document is still current, no upload is required. If anything has changed, "
+                "upload the revised document for approval using the link below.\n\n"
+                f"Upload revised document: {revision_upload_url}\n"
+                f"View current document: {document_url}\n\n"
+                "This is a system-generated email. Please do not reply to it."
+            )
+            msg.html = f"""
+              <!doctype html>
+              <html lang="en">
+                <body style="margin:0;padding:0;background:#eef3f7;font-family:Arial,Helvetica,sans-serif;color:#344054;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#eef3f7;">
+                    <tr><td align="center" style="padding:24px 12px;">
+                      <table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:640px;background:#ffffff;border:1px solid #d8e3ec;border-radius:8px;overflow:hidden;">
+                        <tr><td align="center" style="padding:24px 28px;background:#075d98;background:linear-gradient(105deg,#075d98 0%,#08a5d7 100%);color:#ffffff;">
+                          <div style="font-size:22px;line-height:1.25;font-weight:700;">Quarterly Document Review</div>
+                          <div style="margin-top:7px;font-size:12px;line-height:1.5;">Confirm that this controlled document is still current</div>
+                        </td></tr>
+                        <tr><td style="padding:26px 30px 22px;">
+                          <p style="margin:0 0 18px;font-size:14px;line-height:1.65;color:#475467;">Please review this document. If its content has changed, upload a revised version for approval.</p>
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:13px;line-height:1.45;">
+                            <tr><td style="width:150px;padding:5px 10px 5px 0;color:#475467;font-weight:700;">Document</td><td style="padding:5px 0;color:#1d2939;word-break:break-word;">{_safe_html(file_name)}</td></tr>
+                            <tr><td style="padding:5px 10px 5px 0;color:#475467;font-weight:700;">Document number</td><td style="padding:5px 0;color:#1d2939;">{_safe_html(record.get('document_number'))}</td></tr>
+                            <tr><td style="padding:5px 10px 5px 0;color:#475467;font-weight:700;">Revision number</td><td style="padding:5px 0;color:#1d2939;">{_safe_html(record.get('revision_number'))}</td></tr>
+                            <tr><td style="padding:5px 10px 5px 0;color:#475467;font-weight:700;">Plant</td><td style="padding:5px 0;color:#1d2939;">{_safe_html(plant_code(record.get('plant', '')))}</td></tr>
+                            <tr><td style="padding:5px 10px 5px 0;color:#475467;font-weight:700;">Department</td><td style="padding:5px 0;color:#1d2939;">{_safe_html(record.get('department'))}</td></tr>
+                          </table>
+                          <div style="margin:22px 0 12px;text-align:center;">
+                            <a href="{safe_revision_url}" style="display:inline-block;padding:12px 22px;background:#087fb9;color:#ffffff;font-size:13px;font-weight:700;text-decoration:none;border-radius:6px;">Upload Revised Document</a>
+                          </div>
+                          <div style="text-align:center;font-size:12px;"><a href="{safe_document_url}" style="color:#087fb9;">View current document</a></div>
+                        </td></tr>
+                        <tr><td align="center" style="padding:16px 24px;background:#e7edf4;border-top:1px solid #d2dce6;color:#d92d20;font-size:11px;line-height:1.65;">
+                          <strong>&copy; {current_year} Rane Group | Confidential Information</strong><br />
+                          This is a system-generated email. Please do not reply to it.
+                        </td></tr>
+                      </table>
+                    </td></tr>
+                  </table>
+                </body>
+              </html>
+            """
+            mail.send(msg)
+            return True, None
+        except Exception as exc:
+            return False, str(exc)

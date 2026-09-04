@@ -1,4 +1,5 @@
 import os
+import click
 from flask import Flask
 from config import Config
 from extensions import mail
@@ -6,6 +7,10 @@ from database import configure_database, init_db
 from services.auth_service import AuthService
 from services.password_reset_service import PasswordResetService
 from services.user_store_service import UserStoreService
+from services.quarterly_reminder_service import (
+    QuarterlyReminderScheduler,
+    QuarterlyReminderService,
+)
 from services.presentation_service import plant_code
 from data.customers import CUSTOMER_BRANDS
 from routes.auth_routes import auth_bp
@@ -38,6 +43,7 @@ def create_app():
     mail.init_app(app)
     PasswordResetService.init_app(app)
     UserStoreService.init_app(app)
+    QuarterlyReminderScheduler.init_app(app)
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
@@ -93,6 +99,17 @@ def create_app():
             "portal_update_popup": portal_update_popup,
             "customer_brands": CUSTOMER_BRANDS,
         }
+
+    @app.cli.command("send-quarterly-reminders")
+    def send_quarterly_reminders_command():
+        """Send any quarterly document reminders not yet delivered this quarter."""
+        result = QuarterlyReminderService.send_due_reminders(
+            app.config["PORTAL_BASE_URL"]
+        )
+        click.echo(
+            f"{result['quarter']}: {result['sent']} sent, "
+            f"{result['failed']} failed, {result['skipped']} already sent."
+        )
 
     return app
 

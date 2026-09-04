@@ -12,11 +12,20 @@
 {% block content %}
 <div class="page-header upload-page-header">
   <div>
-    <p class="eyebrow">New Submission</p>
-    <h1 class="page-title">Upload Documents</h1>
+    <p class="eyebrow">{{ 'Revised Submission' if revision_prefill else 'New Submission' }}</p>
+    <h1 class="page-title">{{ 'Upload Revised Document' if revision_prefill else 'Upload Documents' }}</h1>
     <p class="page-sub">Upload documents to the Document Library. Every file is submitted for approval.</p>
   </div>
 </div>
+
+{% if revision_prefill %}
+  <div class="alert alert-info revision-prefill-banner">
+    <span>
+      Revising <strong>{{ revision_prefill.file_name }}</strong>
+      ({{ revision_prefill.document_number }}, {{ revision_prefill.revision_number or 'Rev.00' }}).
+    </span>
+  </div>
+{% endif %}
 
 <div class="upload-grid">
   <section class="surface-panel">
@@ -93,7 +102,7 @@
           <label class="upload-field">
             <span class="upload-field-label"><span id="document-number-label">Document Number</span> <span class="field-required">*</span></span>
             <input type="text" name="document_number" id="document-number-input" required readonly
-                   value="{{ profile_next_document_number }}"
+                   value="{{ revision_prefill.document_number if revision_prefill else profile_next_document_number }}"
                    placeholder="Assigned automatically after selecting a plant" />
             <span class="field-hint" id="document-number-hint">Assigned automatically and separately for each plant.</span>
             <span class="document-number-validation" id="document-number-validation" aria-live="polite"></span>
@@ -109,7 +118,7 @@
             <select name="plant" id="plant-select" {% if not can_choose_upload_scope %}disabled aria-describedby="upload-scope-note"{% endif %}>
               <option value="">Select plant</option>
               {% for p in PLANTS %}
-                <option value="{{ p.label }}" {% if current_user and current_user.plant == p.label %}selected{% endif %}>{{ p.label | plant_code }}</option>
+                <option value="{{ p.label }}" {% if (revision_prefill and revision_prefill.plant == p.label) or (not revision_prefill and current_user and current_user.plant == p.label) %}selected{% endif %}>{{ p.label | plant_code }}</option>
               {% endfor %}
             </select>
           </label>
@@ -120,7 +129,7 @@
             <select name="department" id="department-select" {% if not can_choose_upload_scope %}disabled aria-describedby="upload-scope-note"{% endif %}>
               <option value="">Select department</option>
               {% for d in DEPARTMENTS %}
-                <option value="{{ d }}" {% if current_user and current_user.department == d %}selected{% endif %}>{{ d }}</option>
+                <option value="{{ d }}" {% if (revision_prefill and revision_prefill.department == d) or (not revision_prefill and current_user and current_user.department == d) %}selected{% endif %}>{{ d }}</option>
               {% endfor %}
             </select>
           </label>
@@ -151,7 +160,7 @@
               <select name="category" id="library-category-select">
                 <option value="">Select a category</option>
                 {% for c in library_categories %}
-                  <option value="{{ c.key }}">{{ c.label }}</option>
+                  <option value="{{ c.key }}" {% if revision_prefill and revision_prefill.category == c.key %}selected{% endif %}>{{ c.label }}</option>
                 {% endfor %}
               </select>
             </label>
@@ -202,7 +211,7 @@
         </div>
         <label class="checkbox-label revision-confirm-checkbox">
           <input type="checkbox" id="is_revision_checkbox" name="is_revision"
-                 aria-controls="revision-fields" aria-expanded="false" />
+                 aria-controls="revision-fields" aria-expanded="false" {% if revision_prefill %}checked{% endif %} />
           <span>This upload is a revised document</span>
         </label>
         <div id="revision-fields" style="display:none;">
@@ -278,6 +287,7 @@
   window.NEXT_DOCUMENT_NUMBERS = {{ next_document_numbers|tojson }};
   window.PROFILE_NEXT_DOCUMENT_NUMBER = {{ profile_next_document_number|tojson }};
   window.DOCUMENT_NUMBER_VALIDATION_URL = {{ url_for('upload.validate_document_number')|tojson }};
+  window.REVISION_PREFILL = {{ revision_prefill|tojson }};
 </script>
-<script src="{{ url_for('static', filename='js/upload.js', v='20260818-4') }}"></script>
+<script src="{{ url_for('static', filename='js/upload.js', v='20260904-1') }}"></script>
 {% endblock %}
