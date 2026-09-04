@@ -1330,7 +1330,10 @@ label input:focus, label select:focus { border-color: var(--accent); }
   margin-bottom: 1rem;
 }
 
-.library-browser-panel > .proc-type-grid {
+.library-browser-panel > .proc-type-grid,
+.library-browser-panel > .plant-card-grid,
+.library-browser-panel > .customer-card-grid,
+.library-browser-panel > .category-card-grid {
   margin-bottom: 0;
 }
 
