@@ -160,11 +160,11 @@ function createStepBar(labels, activeIndex) {
 
 function createHeader(title, subtitle, backLabel, onBack, headerAction = null) {
   const panel = document.createElement('div');
-  panel.className = 'surface-panel';
+  panel.className = 'surface-panel library-browser-panel';
   panel.style.marginTop = '1rem';
 
   const header = document.createElement('div');
-  header.className = 'asset-panel-header';
+  header.className = 'asset-panel-header library-browser-header';
   header.innerHTML = `
     <div>
       <h2>${title}</h2>
