@@ -117,13 +117,42 @@ class DocumentLibraryService:
                 path_parts = [part for part in sub_category.split(":") if part]
                 if path_parts and path_parts[0] in {"L1", "L2", "L3", "L4"}:
                     path_parts = path_parts[1:]
-                group_key = path_parts[0] if path_parts else ""
-                subfolder_key = path_parts[1] if len(path_parts) > 1 else ""
                 # Plans used to be a top-level QMS folder. Keep previously
                 # uploaded files visible after moving it under IATF Audit.
-                if group_key == "plans":
-                    group_key = "iatf_audit"
-                    subfolder_key = "plans"
+                if path_parts and path_parts[0] == "plans":
+                    path_parts = ["iatf_audit", "external_audit", "plans", *path_parts[1:]]
+
+                # Preserve uploads stored with the previous flat IATF Audit
+                # folder structure after introducing Internal/External groups.
+                if path_parts and path_parts[0] == "iatf_audit" and len(path_parts) > 1:
+                    legacy_folder = path_parts[1]
+                    legacy_map = {
+                        "plans": ("external_audit", "plans"),
+                        "internal_audit_ncs": ("internal_audit", "audit_ncs"),
+                        "internal_audit_reports": ("internal_audit", "audit_reports"),
+                        "external_audit_ncs": ("external_audit", "audit_ncs"),
+                        "external_audit_reports": ("external_audit", "audit_reports"),
+                    }
+                    if legacy_folder in legacy_map:
+                        audit_type, audit_folder = legacy_map[legacy_folder]
+                        path_parts = [
+                            "iatf_audit",
+                            audit_type,
+                            audit_folder,
+                            *path_parts[2:],
+                        ]
+                    elif legacy_folder == "auditors_list":
+                        # The previous extra list-type level is now combined
+                        # into the single Internal Audit / Auditors List folder.
+                        path_parts = [
+                            "iatf_audit",
+                            "internal_audit",
+                            "auditors_list",
+                            *path_parts[3:],
+                        ]
+
+                group_key = path_parts[0] if path_parts else ""
+                subfolder_key = path_parts[1] if len(path_parts) > 1 else ""
                 group = groups.get(group_key)
                 if not group:
                     continue
@@ -197,7 +226,7 @@ class DocumentLibraryService:
                     )
 
             audit_group = groups.get("iatf_audit", {})
-            audit_folders = audit_group.get("secondary_options", {})
+            audit_types = audit_group.get("secondary_options", {})
             for record in legacy_audit_records:
                 parts = [part for part in (record.get("sub_category") or "").split(":") if part]
                 primary = parts[0] if parts else ""
@@ -207,12 +236,11 @@ class DocumentLibraryService:
                     "iatf_external_audits": "external_audit",
                 }.get(primary, primary)
                 folder_key = {
-                    ("internal_audit", "ncs"): "internal_audit_ncs",
-                    ("internal_audit", "reports"): "internal_audit_reports",
-                    ("external_audit", "ncs"): "external_audit_ncs",
-                    ("external_audit", "reports"): "external_audit_reports",
-                }.get((primary, secondary))
-                folder = audit_folders.get(folder_key) if folder_key else None
+                    "ncs": "audit_ncs",
+                    "reports": "audit_reports",
+                }.get(secondary)
+                audit_type = audit_types.get(primary, {})
+                folder = audit_type.get("secondary_options", {}).get(folder_key) if folder_key else None
                 if not folder:
                     continue
                 plant = parts[2] if len(parts) > 2 else record.get("plant") or ""

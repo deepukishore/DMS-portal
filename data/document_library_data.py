@@ -81,10 +81,11 @@ def _audit_plant_file_map(audit_scope, document_type):
     }
 
 
-def _auditor_plant_pdf_map(auditor_type):
+def _auditors_list_plant_file_map():
     return {
         plant["label"]: [
-            f"{plant['id'].lower().replace('&', 'and')}_{auditor_type}_list.pdf",
+            f"{plant['id'].lower().replace('&', 'and')}_supplier_auditor_list.pdf",
+            f"{plant['id'].lower().replace('&', 'and')}_internal_auditor_list.pdf",
         ]
         for plant in PLANTS
     }
@@ -292,50 +293,43 @@ QMS_DOCUMENT_GROUPS = {
     },
     "iatf_audit": {
         "label": "IATF Audit Reports",
-        "description": "IATF audit reports and auditor lists organized by folder and plant.",
+        "description": "Internal and external IATF audit documents organized by folder and plant.",
         "secondary_options": {
-            "plans": {
-                "label": "Plans",
-                "description": "IATF audit plans and planning records.",
-                "files": [
-                    "quality_objective_plan.xlsx",
-                    "internal_audit_plan.pdf",
-                    "management_review_plan.docx",
-                ],
-            },
-            "internal_audit_ncs": {
-                "label": "Internal Audit - NCs",
-                "description": "Internal audit non-conformance documents by plant.",
-                "plants": _audit_plant_file_map("internal_audit", "ncs"),
-            },
-            "internal_audit_reports": {
-                "label": "Internal Audit - Reports",
-                "description": "Internal audit reports by plant.",
-                "plants": _audit_plant_file_map("internal_audit", "reports"),
-            },
-            "external_audit_ncs": {
-                "label": "External Audit - NCs",
-                "description": "External audit non-conformance documents by plant.",
-                "plants": _audit_plant_file_map("external_audit", "ncs"),
-            },
-            "external_audit_reports": {
-                "label": "External Audit - Reports",
-                "description": "External audit reports by plant.",
-                "plants": _audit_plant_file_map("external_audit", "reports"),
-            },
-            "auditors_list": {
-                "label": "Auditors List",
-                "description": "Select an auditor list, then select a plant to open its PDF.",
+            "internal_audit": {
+                "label": "Internal Audit",
                 "secondary_options": {
-                    "supplier_auditor_list": {
-                        "label": "Supplier Auditor List",
-                        "description": "Supplier auditor list PDF organized by plant.",
-                        "plants": _auditor_plant_pdf_map("supplier_auditor"),
+                    "auditors_list": {
+                        "label": "Auditors List",
+                        "plants": _auditors_list_plant_file_map(),
                     },
-                    "internal_auditor_list": {
-                        "label": "Internal Auditor List",
-                        "description": "Internal auditor list PDF organized by plant.",
-                        "plants": _auditor_plant_pdf_map("internal_auditor"),
+                    "audit_ncs": {
+                        "label": "Audit NCs",
+                        "plants": _audit_plant_file_map("internal_audit", "ncs"),
+                    },
+                    "audit_reports": {
+                        "label": "Audit Reports",
+                        "plants": _audit_plant_file_map("internal_audit", "reports"),
+                    },
+                },
+            },
+            "external_audit": {
+                "label": "External Audit",
+                "secondary_options": {
+                    "plans": {
+                        "label": "Plans",
+                        "files": [
+                            "quality_objective_plan.xlsx",
+                            "internal_audit_plan.pdf",
+                            "management_review_plan.docx",
+                        ],
+                    },
+                    "audit_ncs": {
+                        "label": "Audit NCs",
+                        "plants": _audit_plant_file_map("external_audit", "ncs"),
+                    },
+                    "audit_reports": {
+                        "label": "Audit Reports",
+                        "plants": _audit_plant_file_map("external_audit", "reports"),
                     },
                 },
             },

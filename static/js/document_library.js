@@ -710,13 +710,17 @@ function renderQms() {
   if (group.secondary_options) {
     const subfolders = group.secondary_options;
     if (!selectedPrimary) {
+      const isIatfAudit = selectedSecondary === 'iatf_audit';
       const options = Object.entries(subfolders).map(([key, folder]) => ({
         key,
         label: folder.label || key,
         description: folder.description || '',
       }));
       const el = setRoot();
-      el.appendChild(createStepBar(['Select Document Type', 'Select Subfolder', 'Browse Files'], 1));
+      el.appendChild(createStepBar(
+        ['Select Document Type', isIatfAudit ? 'Select Audit Type' : 'Select Subfolder', 'Browse Files'],
+        1
+      ));
       const panel = createHeader(
         group.label || selectedSecondary,
         'Choose a subfolder to browse its documents.',
@@ -727,7 +731,7 @@ function renderQms() {
           selectedTertiary = '';
           render();
         },
-        selectedSecondary === 'iatf_audit'
+        isIatfAudit
           ? {
               label: 'External Audit NCs CAPA format',
               href: IATF_CAPA_DOWNLOAD_URL,
@@ -756,7 +760,7 @@ function renderQms() {
 
     if (subfolder.secondary_options) {
       const nestedFolders = subfolder.secondary_options;
-      const stepLabels = ['Select Document Type', 'Select Audit Folder', 'Select List', 'Select Plant', 'Browse Files'];
+      const folderStepLabels = ['Select Document Type', 'Select Audit Type', 'Select Folder', 'Browse Files'];
 
       if (!selectedTertiary) {
         const options = Object.entries(nestedFolders).map(([key, folder]) => ({
@@ -765,11 +769,11 @@ function renderQms() {
           description: folder.description || '',
         }));
         const el = setRoot();
-        el.appendChild(createStepBar(stepLabels, 2));
+        el.appendChild(createStepBar(folderStepLabels, 2));
         const panel = createHeader(
           subfolder.label || selectedPrimary,
-          subfolder.description || 'Choose a list to continue.',
-          'Change audit folder',
+          subfolder.description || 'Choose a folder to continue.',
+          'Change audit type',
           () => {
             selectedPrimary = '';
             selectedTertiary = '';
@@ -795,39 +799,58 @@ function renderQms() {
         return;
       }
 
-      if (!selectedPlant) {
-        const el = setRoot();
-        el.appendChild(createStepBar(stepLabels, 3));
-        const panel = createHeader(
-          nestedFolder.label || selectedTertiary,
-          nestedFolder.description || 'Select a plant to open its PDF.',
-          'Change list',
+      if (nestedFolder.plants) {
+        const plantStepLabels = ['Select Document Type', 'Select Audit Type', 'Select Folder', 'Select Plant', 'Browse Files'];
+        if (!selectedPlant) {
+          const el = setRoot();
+          el.appendChild(createStepBar(plantStepLabels, 3));
+          const panel = createHeader(
+            nestedFolder.label || selectedTertiary,
+            nestedFolder.description || 'Select a plant to browse its documents.',
+            'Change folder',
+            () => {
+              selectedTertiary = '';
+              selectedPlant = '';
+              render();
+            }
+          );
+          panel.appendChild(createPlantGrid(
+            plantOptionsFor(nestedFolder.plants),
+            plant => {
+              selectedPlant = plant;
+              currentPage = 1;
+              render();
+            }
+          ));
+          el.appendChild(panel);
+          return;
+        }
+
+        renderFilesView(
+          plantStepLabels,
+          4,
+          `${nestedFolder.label || selectedTertiary} / ${selectedPlant}`,
+          `Documents for ${selectedPlant}.`,
+          nestedFolder.plants[selectedPlant] || [],
+          'Change plant',
           () => {
-            selectedTertiary = '';
             selectedPlant = '';
             render();
-          }
+          },
+          scope
         );
-        panel.appendChild(createPlantGrid(
-          plantOptionsFor(nestedFolder.plants || {}),
-          plant => {
-            selectedPlant = plant;
-            currentPage = 1;
-            render();
-          }
-        ));
-        el.appendChild(panel);
         return;
       }
 
       renderFilesView(
-        stepLabels,
-        4,
-        `${nestedFolder.label || selectedTertiary} / ${selectedPlant}`,
-        `PDF files for ${selectedPlant}.`,
-        nestedFolder.plants?.[selectedPlant] || [],
-        'Change plant',
+        folderStepLabels,
+        3,
+        nestedFolder.label || selectedTertiary,
+        nestedFolder.description || '',
+        nestedFolder.files || [],
+        'Change folder',
         () => {
+          selectedTertiary = '';
           selectedPlant = '';
           render();
         },

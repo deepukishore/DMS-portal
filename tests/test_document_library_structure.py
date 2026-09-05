@@ -25,3 +25,20 @@ def test_iatf_manual_is_removed_from_document_library():
 
     assert "iatf_manual" not in qms_data["document_groups"]
     assert "iatf_manual" not in core_tools_data["primary_options"]
+
+
+def test_iatf_audit_uses_internal_and_external_hierarchy():
+    data = DocumentLibraryService.get_client_category_data("qms", qms_level="L1")
+    audit_types = data["document_groups"]["iatf_audit"]["secondary_options"]
+
+    assert list(audit_types) == ["internal_audit", "external_audit"]
+    assert audit_types["internal_audit"]["label"] == "Internal Audit"
+    assert [
+        folder["label"]
+        for folder in audit_types["internal_audit"]["secondary_options"].values()
+    ] == ["Auditors List", "Audit NCs", "Audit Reports"]
+    assert audit_types["external_audit"]["label"] == "External Audit"
+    assert [
+        folder["label"]
+        for folder in audit_types["external_audit"]["secondary_options"].values()
+    ] == ["Plans", "Audit NCs", "Audit Reports"]

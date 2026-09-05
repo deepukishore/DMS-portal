@@ -315,7 +315,7 @@ function resetLibraryFields() {
   if (libraryPrimSelect) setOptions(libraryPrimSelect, 'Select folder', []);
   if (librarySubSelect) setOptions(librarySubSelect, 'Select subfolder', []);
   if (libraryTertiarySelect) setOptions(libraryTertiarySelect, 'Select subfolder', []);
-  if (libraryQuaternarySelect) setOptions(libraryQuaternarySelect, 'Select list', []);
+  if (libraryQuaternarySelect) setOptions(libraryQuaternarySelect, 'Select folder', []);
   setPathState(false, 'No library path selected', '', 'Select a library category.');
 }
 
@@ -446,10 +446,10 @@ function configureLibrarySecondary() {
     const group = data.document_groups[groupKey];
     if (group?.secondary_options) {
       const isAuditFolder = groupKey === 'iatf_audit';
-      showTertiary(true, isAuditFolder ? 'IATF Audit folder' : 'Business Procedure folder');
+      showTertiary(true, isAuditFolder ? 'Audit type' : 'Business Procedure folder');
       setOptions(
         libraryTertiarySelect,
-        isAuditFolder ? 'Select IATF Audit folder' : 'Select Business Procedure folder',
+        isAuditFolder ? 'Select Internal Audit or External Audit' : 'Select Business Procedure folder',
         Object.entries(group.secondary_options).map(([value, folder]) => ({
           value,
           label: folder.label || value,
@@ -457,9 +457,9 @@ function configureLibrarySecondary() {
       );
       setPathState(
         false,
-        `${categoryLabel(category)} / ${group.label || groupKey} / Select subfolder`,
+        `${categoryLabel(category)} / ${group.label || groupKey} / ${isAuditFolder ? 'Select audit type' : 'Select subfolder'}`,
         '',
-        isAuditFolder ? 'Select an IATF Audit folder.' : 'Select a Business Procedures subfolder.'
+        isAuditFolder ? 'Select Internal Audit or External Audit.' : 'Select a Business Procedures subfolder.'
       );
       return;
     }
@@ -492,10 +492,10 @@ function configureLibraryTertiary() {
     const tertiaryKey = libraryTertiarySelect.value;
     const subfolder = data.document_groups[groupKey]?.secondary_options?.[tertiaryKey];
     if (subfolder?.secondary_options) {
-      showQuaternary(true, 'Auditor list');
+      showQuaternary(true, 'Audit folder');
       setOptions(
         libraryQuaternarySelect,
-        'Select auditor list',
+        'Select audit folder',
         Object.entries(subfolder.secondary_options).map(([value, folder]) => ({
           value,
           label: folder.label || value,
@@ -551,11 +551,12 @@ function updateLibraryPath() {
     if (group?.secondary_options) {
       const tertiary = libraryTertiarySelect.value;
       if (!tertiary) {
+        const isIatfAudit = secondary === 'iatf_audit';
         setPathState(
           false,
-          `${categoryLabel(category)} / ${group.label || secondary} / Select subfolder`,
+          `${categoryLabel(category)} / ${group.label || secondary} / ${isIatfAudit ? 'Select audit type' : 'Select subfolder'}`,
           '',
-          secondary === 'iatf_audit' ? 'Select an IATF Audit folder.' : 'Select a Business Procedures subfolder.'
+          isIatfAudit ? 'Select Internal Audit or External Audit.' : 'Select a Business Procedures subfolder.'
         );
         return;
       }
@@ -565,27 +566,28 @@ function updateLibraryPath() {
         if (!quaternary) {
           setPathState(
             false,
-            `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder.label || tertiary} / Select auditor list`,
+            `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder.label || tertiary} / Select audit folder`,
             '',
-            'Select Supplier Auditor List or Internal Auditor List.'
+            'Select an audit folder.'
           );
           return;
         }
         const nestedFolder = subfolder.secondary_options[quaternary];
         const plant = plantSelect.value;
-        if (nestedFolder?.plants && !plant) {
+        const requiresPlant = Boolean(nestedFolder?.plants);
+        if (requiresPlant && !plant) {
           setPathState(
             false,
             `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder.label || tertiary} / ${nestedFolder.label || quaternary} / Select plant`,
             '',
-            'Select the plant for this auditor list.'
+            'Select the plant for this audit folder.'
           );
           return;
         }
         setPathState(
           true,
-          `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder.label || tertiary} / ${nestedFolder?.label || quaternary}${plant ? ` / ${plantCode(plant)}` : ''}`,
-          `${secondary}:${tertiary}:${quaternary}${plant ? `:${plant}` : ''}`
+          `${categoryLabel(category)} / ${group.label || secondary} / ${subfolder.label || tertiary} / ${nestedFolder?.label || quaternary}${requiresPlant ? ` / ${plantCode(plant)}` : ''}`,
+          `${secondary}:${tertiary}:${quaternary}${requiresPlant ? `:${plant}` : ''}`
         );
         return;
       }
@@ -907,6 +909,43 @@ uploadForm.addEventListener('submit', event => {
     });
 });
 
+function normalizeRevisionLibraryPathParts(pathParts) {
+  const parts = [...pathParts];
+  if (parts[0] === 'plans') {
+    return ['iatf_audit', 'external_audit', 'plans', ...parts.slice(1)];
+  }
+
+  const legacyAuditType = {
+    iatf_internal_audits: 'internal_audit',
+    iatf_external_audits: 'external_audit',
+  }[parts[0]] || parts[0];
+  if (['internal_audit', 'external_audit'].includes(legacyAuditType)
+      && ['ncs', 'reports'].includes(parts[1])) {
+    return [
+      'iatf_audit',
+      legacyAuditType,
+      parts[1] === 'ncs' ? 'audit_ncs' : 'audit_reports',
+      ...parts.slice(2),
+    ];
+  }
+
+  if (parts[0] !== 'iatf_audit' || !parts[1]) return parts;
+  const legacyFolderMap = {
+    plans: ['external_audit', 'plans'],
+    internal_audit_ncs: ['internal_audit', 'audit_ncs'],
+    internal_audit_reports: ['internal_audit', 'audit_reports'],
+    external_audit_ncs: ['external_audit', 'audit_ncs'],
+    external_audit_reports: ['external_audit', 'audit_reports'],
+  };
+  if (legacyFolderMap[parts[1]]) {
+    return ['iatf_audit', ...legacyFolderMap[parts[1]], ...parts.slice(2)];
+  }
+  if (parts[1] === 'auditors_list') {
+    return ['iatf_audit', 'internal_audit', 'auditors_list', ...parts.slice(3)];
+  }
+  return parts;
+}
+
 function applyRevisionPrefill() {
   configureLibraryCategory();
   if (!REVISION_PREFILL) {
@@ -914,9 +953,11 @@ function applyRevisionPrefill() {
     return;
   }
 
-  const parts = Array.isArray(REVISION_PREFILL.library_path_parts)
-    ? REVISION_PREFILL.library_path_parts
-    : [];
+  const parts = normalizeRevisionLibraryPathParts(
+    Array.isArray(REVISION_PREFILL.library_path_parts)
+      ? REVISION_PREFILL.library_path_parts
+      : []
+  );
   const categoryData = LIBRARY_DATA[libraryCatSelect?.value];
 
   if (categoryData?.scope && categoryData.document_groups) {
