@@ -3238,7 +3238,7 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 /* Admin portal-update publishing and user popup ------------------------- */
 .portal-update-admin-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(280px, .75fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.25rem;
   align-items: start;
 }
@@ -3272,16 +3272,6 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   display: flex;
   justify-content: flex-end;
 }
-.portal-update-guide ol {
-  display: flex;
-  flex-direction: column;
-  gap: .7rem;
-  margin: 1rem 0;
-  padding-left: 1.2rem;
-  color: var(--text-sub);
-  font-size: .8rem;
-  line-height: 1.5;
-}
 .quarterly-reminder-admin {
   grid-column: 1 / -1;
   display: flex;
@@ -3298,6 +3288,63 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
 .quarterly-reminder-admin form,
 .quarterly-reminder-admin button {
   flex-shrink: 0;
+}
+
+@media (min-width: 901px) {
+  .portal-updates-page-body,
+  .portal-updates-page-body .shell,
+  .portal-updates-page-body .main-wrap {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .portal-updates-page-body .content {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 1rem 1.5rem;
+    overflow: hidden;
+  }
+
+  .portal-updates-page-header {
+    flex: 0 0 auto;
+    margin-bottom: .75rem;
+  }
+
+  .portal-update-admin-grid {
+    flex: 1 1 auto;
+    grid-template-rows: minmax(0, 1fr) auto;
+    min-height: 0;
+    gap: .75rem;
+  }
+
+  .portal-update-admin-grid > .surface-panel {
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  .portal-update-admin-grid > .surface-panel:first-child {
+    padding: .9rem 1.15rem;
+    overflow: hidden;
+  }
+
+  .portal-update-admin-grid .panel-head {
+    margin-bottom: .65rem;
+  }
+
+  .portal-update-form {
+    gap: .65rem;
+  }
+
+  .portal-update-form textarea {
+    height: clamp(78px, 14vh, 120px);
+    min-height: 78px;
+    resize: none;
+  }
+
+  .quarterly-reminder-admin {
+    padding: .85rem 1.15rem;
+  }
 }
 .portal-update-popup-overlay {
   position: fixed;
