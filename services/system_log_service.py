@@ -157,6 +157,18 @@ class SystemLogService:
         )
 
     @staticmethod
+    def log_quarterly_digest(quarter_key, recipient_email, document_count):
+        SystemLogService._entry(
+            "system",
+            "Quarterly Reminder",
+            "QUARTERLY_REMINDER",
+            (
+                f'Sent one {quarter_key} reminder email to "{recipient_email}" '
+                f'for {document_count} relevant document(s).'
+            ),
+        )
+
+    @staticmethod
     def log_manual_quarterly_reminders(admin_email, admin_name, result):
         SystemLogService._entry(
             admin_email,

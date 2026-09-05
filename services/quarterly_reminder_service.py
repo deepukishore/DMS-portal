@@ -11,7 +11,7 @@ from services.user_store_service import UserStoreService
 
 
 class QuarterlyReminderService:
-    """Send one update-review reminder per current approved document each quarter."""
+    """Send one relevant document-review digest per L1/L2 user each quarter."""
 
     @staticmethod
     def quarter_key(now=None):
@@ -31,35 +31,64 @@ class QuarterlyReminderService:
         return sorted(latest.values(), key=lambda item: int(item.get("id") or 0))
 
     @staticmethod
-    def recipient_emails(record):
-        """Include all L1/L2 users plus the uploader and same-department stakeholders."""
-        recipients = set()
-        document_department = normalize_department(record.get("department") or "").casefold()
+    def eligible_recipients():
+        """Return L1/L2 users who have a department for document matching."""
+        recipients = []
         for user in UserStoreService.get_all_users():
             email = str(user.get("email") or "").strip().lower()
-            if not email:
-                continue
+            department = normalize_department(user.get("department") or "")
             qms_level = str(user.get("qms_level") or "").strip().upper()
-            same_department = (
-                document_department
-                and normalize_department(user.get("department") or "").casefold() == document_department
-            )
-            if qms_level in {"L1", "L2"} or user.get("role") == "Admin" or same_department:
-                recipients.add(email)
-
-        uploader_email = str(record.get("uploader_email") or "").strip().lower()
-        if uploader_email:
-            recipients.add(uploader_email)
-        return sorted(recipients)
+            if user.get("role") == "Admin":
+                qms_level = "L1"
+            if not email or not department or qms_level not in {"L1", "L2"}:
+                continue
+            recipients.append({**user, "email": email, "department": department})
+        return sorted(recipients, key=lambda item: item["email"])
 
     @staticmethod
-    def _claim(quarter_key, document_id, attempted_at, force=False):
+    def documents_for_recipient(user, documents):
+        """Match approved documents by department and any configured category scope."""
+        department = normalize_department(user.get("department") or "").casefold()
+        raw_categories = (
+            user.get("document_categories")
+            or user.get("categories")
+            or user.get("category")
+            or ""
+        )
+        if isinstance(raw_categories, str):
+            category_scope = {
+                item.strip().casefold()
+                for item in raw_categories.replace(";", ",").split(",")
+                if item.strip()
+            }
+        else:
+            category_scope = {
+                str(item).strip().casefold()
+                for item in raw_categories
+                if str(item).strip()
+            }
+
+        relevant = []
+        for record in documents:
+            document_department = normalize_department(
+                record.get("department") or ""
+            ).casefold()
+            document_category = str(record.get("category") or "Uncategorized").strip()
+            if document_department != department:
+                continue
+            if category_scope and document_category.casefold() not in category_scope:
+                continue
+            relevant.append(record)
+        return relevant
+
+    @staticmethod
+    def _claim(quarter_key, recipient_email, attempted_at, force=False):
         conn = get_connection()
         cursor = conn.cursor()
         try:
             cursor.execute(
-                "SELECT status FROM quarterly_document_reminders WHERE quarter_key = ? AND document_id = ?",
-                (quarter_key, int(document_id)),
+                "SELECT status FROM quarterly_recipient_reminders WHERE quarter_key = ? AND recipient_email = ?",
+                (quarter_key, recipient_email),
             )
             existing = cursor.fetchone()
             if existing and existing["status"] == "sending":
@@ -69,20 +98,20 @@ class QuarterlyReminderService:
             if existing:
                 cursor.execute(
                     """
-                    UPDATE quarterly_document_reminders
+                    UPDATE quarterly_recipient_reminders
                     SET status = 'sending', attempted_at = ?, sent_at = NULL, error = NULL
-                    WHERE quarter_key = ? AND document_id = ? AND status != 'sending'
+                    WHERE quarter_key = ? AND recipient_email = ? AND status != 'sending'
                     """,
-                    (attempted_at, quarter_key, int(document_id)),
+                    (attempted_at, quarter_key, recipient_email),
                 )
             else:
                 cursor.execute(
                     """
-                    INSERT INTO quarterly_document_reminders
-                        (quarter_key, document_id, status, attempted_at)
+                    INSERT INTO quarterly_recipient_reminders
+                        (quarter_key, recipient_email, status, attempted_at)
                     VALUES (?, ?, 'sending', ?)
                     """,
-                    (quarter_key, int(document_id), attempted_at),
+                    (quarter_key, recipient_email, attempted_at),
                 )
             conn.commit()
             return cursor.rowcount > 0
@@ -94,23 +123,23 @@ class QuarterlyReminderService:
             conn.close()
 
     @staticmethod
-    def _finish(quarter_key, document_id, recipients, error=None):
+    def _finish(quarter_key, recipient_email, document_ids, error=None):
         now_text = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(
             """
-            UPDATE quarterly_document_reminders
-            SET status = ?, sent_at = ?, recipients = ?, error = ?
-            WHERE quarter_key = ? AND document_id = ?
+            UPDATE quarterly_recipient_reminders
+            SET status = ?, sent_at = ?, document_ids = ?, error = ?
+            WHERE quarter_key = ? AND recipient_email = ?
             """,
             (
                 "failed" if error else "sent",
                 None if error else now_text,
-                json.dumps(recipients),
+                json.dumps(document_ids),
                 error,
                 quarter_key,
-                int(document_id),
+                recipient_email,
             ),
         )
         conn.commit()
@@ -122,41 +151,54 @@ class QuarterlyReminderService:
         now = now or datetime.now()
         quarter_key = QuarterlyReminderService.quarter_key(now)
         base_url = str(base_url or "").rstrip("/")
-        result = {"quarter": quarter_key, "sent": 0, "failed": 0, "skipped": 0}
+        documents = QuarterlyReminderService.current_approved_documents()
+        result = {
+            "quarter": quarter_key,
+            "sent": 0,
+            "failed": 0,
+            "skipped": 0,
+            "documents": 0,
+        }
 
-        for record in QuarterlyReminderService.current_approved_documents():
-            document_id = int(record["id"])
+        for user in QuarterlyReminderService.eligible_recipients():
+            relevant_documents = QuarterlyReminderService.documents_for_recipient(
+                user,
+                documents,
+            )
+            if not relevant_documents:
+                continue
+
+            recipient_email = user["email"]
             attempted_at = now.strftime("%Y-%m-%d %H:%M:%S")
             if not QuarterlyReminderService._claim(
                 quarter_key,
-                document_id,
+                recipient_email,
                 attempted_at,
                 force=force,
             ):
                 result["skipped"] += 1
                 continue
 
-            recipients = QuarterlyReminderService.recipient_emails(record)
-            document_url = f"{base_url}/dashboard/view/{document_id}"
-            revision_url = f"{base_url}/upload?revision_of={document_id}"
-            sent, error = MailService.send_quarterly_document_reminder(
-                recipients,
-                record,
-                document_url,
-                revision_url,
+            document_ids = [int(record["id"]) for record in relevant_documents]
+            result["documents"] += len(document_ids)
+            sent, error = MailService.send_quarterly_document_digest(
+                recipient_email,
+                user.get("name") or "Colleague",
+                relevant_documents,
+                base_url,
             )
             QuarterlyReminderService._finish(
                 quarter_key,
-                document_id,
-                recipients,
+                recipient_email,
+                document_ids,
                 error=None if sent else (error or "Email delivery failed."),
             )
             if sent:
                 result["sent"] += 1
-                SystemLogService.log_quarterly_reminder(
+                SystemLogService.log_quarterly_digest(
                     quarter_key,
-                    record.get("file_name", "Document"),
-                    len(recipients),
+                    recipient_email,
+                    len(relevant_documents),
                 )
             else:
                 result["failed"] += 1

@@ -107,7 +107,7 @@ def create_app():
             app.config["PORTAL_BASE_URL"]
         )
         click.echo(
-            f"{result['quarter']}: {result['sent']} sent, "
+            f"{result['quarter']}: {result['sent']} consolidated email(s) sent, "
             f"{result['failed']} failed, {result['skipped']} already sent."
         )
 

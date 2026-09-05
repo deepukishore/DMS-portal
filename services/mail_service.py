@@ -3,6 +3,7 @@ from html import escape
 
 from flask_mail import Message
 
+from data.departments import normalize_department
 from extensions import mail
 from services.presentation_service import plant_code
 
@@ -536,6 +537,130 @@ class MailService:
                             <a href="{safe_revision_url}" style="display:inline-block;padding:12px 22px;background:#087fb9;color:#ffffff;font-size:13px;font-weight:700;text-decoration:none;border-radius:6px;">Upload Revised Document</a>
                           </div>
                           <div style="text-align:center;font-size:12px;"><a href="{safe_document_url}" style="color:#087fb9;">View current document</a></div>
+                        </td></tr>
+                        <tr><td align="center" style="padding:16px 24px;background:#e7edf4;border-top:1px solid #d2dce6;color:#d92d20;font-size:11px;line-height:1.65;">
+                          <strong>&copy; {current_year} Rane Group | Confidential Information</strong><br />
+                          This is a system-generated email. Please do not reply to it.
+                        </td></tr>
+                      </table>
+                    </td></tr>
+                  </table>
+                </body>
+              </html>
+            """
+            mail.send(msg)
+            return True, None
+        except Exception as exc:
+            return False, str(exc)
+
+    @staticmethod
+    def send_quarterly_document_digest(
+        to_email,
+        recipient_name,
+        records,
+        base_url,
+    ):
+        """Send one quarterly email containing a recipient's relevant documents."""
+        try:
+            recipient = str(to_email or "").strip().lower()
+            documents = list(records or [])
+            if not recipient:
+                return False, "No quarterly reminder recipient was found."
+            if not documents:
+                return False, "No relevant documents were found for this recipient."
+
+            base_url = str(base_url or "").rstrip("/")
+            grouped = {}
+            for record in documents:
+                category = str(record.get("category") or "Uncategorized").strip()
+                grouped.setdefault(category, []).append(record)
+
+            text_sections = []
+            html_sections = []
+            for category in sorted(grouped, key=str.casefold):
+                category_label = category.replace("_", " ").strip().title()
+                text_lines = [f"Category: {category_label}"]
+                html_rows = []
+                for record in sorted(
+                    grouped[category],
+                    key=lambda item: str(
+                        item.get("original_file_name") or item.get("file_name") or ""
+                    ).casefold(),
+                ):
+                    document_id = int(record["id"])
+                    file_name = (
+                        record.get("original_file_name")
+                        or record.get("file_name")
+                        or "Document"
+                    )
+                    document_url = f"{base_url}/dashboard/view/{document_id}"
+                    revision_url = f"{base_url}/upload?revision_of={document_id}"
+                    text_lines.extend([
+                        f"- {file_name}",
+                        f"  Document number: {record.get('document_number') or 'N/A'}",
+                        f"  Revision: {record.get('revision_number') or 'N/A'}",
+                        f"  View: {document_url}",
+                        f"  Upload revision: {revision_url}",
+                    ])
+                    html_rows.append(f"""
+                      <tr>
+                        <td style="padding:14px 0;border-top:1px solid #e4eaf0;">
+                          <div style="font-size:14px;font-weight:700;color:#1d2939;word-break:break-word;">{_safe_html(file_name)}</div>
+                          <div style="margin-top:5px;font-size:12px;line-height:1.55;color:#667085;">
+                            {_safe_html(record.get('document_number'))} &nbsp;|&nbsp;
+                            {_safe_html(record.get('revision_number'))} &nbsp;|&nbsp;
+                            {_safe_html(plant_code(record.get('plant', '')))}
+                          </div>
+                          <div style="margin-top:10px;font-size:12px;">
+                            <a href="{_safe_html(document_url, '#')}" style="color:#087fb9;font-weight:700;text-decoration:none;">View document</a>
+                            <span style="padding:0 8px;color:#98a2b3;">|</span>
+                            <a href="{_safe_html(revision_url, '#')}" style="color:#087fb9;font-weight:700;text-decoration:none;">Upload revised document</a>
+                          </div>
+                        </td>
+                      </tr>
+                    """)
+                text_sections.append("\n".join(text_lines))
+                html_sections.append(f"""
+                  <div style="margin-top:22px;padding:10px 12px;background:#eaf5fb;border-left:4px solid #087fb9;color:#075d98;font-size:13px;font-weight:700;">
+                    { _safe_html(category_label) }
+                  </div>
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                    {''.join(html_rows)}
+                  </table>
+                """)
+
+            department = normalize_department(documents[0].get("department") or "")
+            current_year = datetime.now().year
+            msg = Message(
+                subject=f"Quarterly document review: {len(documents)} relevant document(s)",
+                recipients=[recipient],
+            )
+            msg.body = (
+                f"Dear {recipient_name or 'Colleague'},\n\n"
+                "This is your quarterly reminder to review the controlled documents relevant "
+                f"to your department ({department or 'N/A'}).\n\n"
+                + "\n\n".join(text_sections)
+                + "\n\nIf a document is still current, no upload is required. If anything has changed, "
+                "use its Upload revision link.\n\n"
+                "This is a system-generated email. Please do not reply to it."
+            )
+            msg.html = f"""
+              <!doctype html>
+              <html lang="en">
+                <body style="margin:0;padding:0;background:#eef3f7;font-family:Arial,Helvetica,sans-serif;color:#344054;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#eef3f7;">
+                    <tr><td align="center" style="padding:24px 12px;">
+                      <table role="presentation" width="680" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:680px;background:#ffffff;border:1px solid #d8e3ec;border-radius:8px;overflow:hidden;">
+                        <tr><td align="center" style="padding:24px 28px;background:#075d98;background:linear-gradient(105deg,#075d98 0%,#08a5d7 100%);color:#ffffff;">
+                          <div style="font-size:22px;line-height:1.25;font-weight:700;">Quarterly Document Review</div>
+                          <div style="margin-top:7px;font-size:12px;line-height:1.5;">{len(documents)} relevant document(s) grouped by category</div>
+                        </td></tr>
+                        <tr><td style="padding:26px 30px 22px;">
+                          <p style="margin:0 0 8px;font-size:14px;line-height:1.65;color:#344054;">Dear {_safe_html(recipient_name, 'Colleague')},</p>
+                          <p style="margin:0;font-size:14px;line-height:1.65;color:#475467;">
+                            Please review the controlled documents relevant to <strong>{_safe_html(department)}</strong>. If a document has changed, use its revision link below.
+                          </p>
+                          {''.join(html_sections)}
                         </td></tr>
                         <tr><td align="center" style="padding:16px 24px;background:#e7edf4;border-top:1px solid #d2dce6;color:#d92d20;font-size:11px;line-height:1.65;">
                           <strong>&copy; {current_year} Rane Group | Confidential Information</strong><br />

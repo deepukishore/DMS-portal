@@ -61,7 +61,7 @@ class QuarterlyReminderTests(unittest.TestCase):
     def test_sends_latest_approved_document_only_once_per_quarter(self):
         with patch.object(
             MailService,
-            "send_quarterly_document_reminder",
+            "send_quarterly_document_digest",
             return_value=(True, None),
         ) as send:
             first = QuarterlyReminderService.send_due_reminders(
@@ -75,19 +75,17 @@ class QuarterlyReminderTests(unittest.TestCase):
         self.assertEqual(second["sent"], 0)
         self.assertEqual(second["skipped"], 1)
         send.assert_called_once()
-        recipients, record, document_url, revision_url = send.call_args.args
-        self.assertEqual(record["file_name"], "current.pdf")
-        self.assertEqual(
-            set(recipients),
-            {"l1@example.com", "l2@example.com", "dept@example.com", "owner@example.com"},
-        )
-        self.assertTrue(document_url.endswith(f"/dashboard/view/{record['id']}"))
-        self.assertTrue(revision_url.endswith(f"/upload?revision_of={record['id']}"))
+        recipient, recipient_name, records, base_url = send.call_args.args
+        self.assertEqual(recipient, "l2@example.com")
+        self.assertEqual(recipient_name, "L2 User")
+        self.assertEqual([record["file_name"] for record in records], ["current.pdf"])
+        self.assertEqual(base_url, "https://portal.example")
+        self.assertEqual(first["documents"], 1)
 
     def test_manual_run_can_resend_reminders_in_the_same_quarter(self):
         with patch.object(
             MailService,
-            "send_quarterly_document_reminder",
+            "send_quarterly_document_digest",
             return_value=(True, None),
         ) as send:
             first = QuarterlyReminderService.send_due_reminders(
@@ -104,34 +102,65 @@ class QuarterlyReminderTests(unittest.TestCase):
         self.assertEqual(manual["skipped"], 0)
         self.assertEqual(send.call_count, 2)
 
-    def test_email_contains_revision_action(self):
+    def test_documents_are_filtered_by_department_and_configured_category(self):
+        documents = [
+            {"id": 1, "department": "Quality", "category": "qms"},
+            {"id": 2, "department": "Quality", "category": "csr"},
+            {"id": 3, "department": "Finance", "category": "csr"},
+        ]
+        relevant = QuarterlyReminderService.documents_for_recipient(
+            {
+                "department": "QAD - Quality Assurance Department",
+                "document_categories": "csr",
+            },
+            documents,
+        )
+        self.assertEqual([record["id"] for record in relevant], [2])
+
+    def test_digest_email_contains_all_relevant_documents_and_revision_actions(self):
         app = Flask(__name__)
         app.config.update(MAIL_DEFAULT_SENDER="noreply@example.com", TESTING=True)
         mail.init_app(app)
-        record = {
-            "file_name": "stored.pdf",
-            "original_file_name": "Control <Plan>.pdf",
-            "document_number": "ZRAI-DOC-P1-2026-001",
-            "revision_number": "Rev.01",
-            "plant": "P1 - Trichy Plant",
-            "department": "Quality",
-        }
+        records = [
+            {
+                "id": 1,
+                "file_name": "stored.pdf",
+                "original_file_name": "Control <Plan>.pdf",
+                "document_number": "ZRAI-DOC-P1-2026-001",
+                "revision_number": "Rev.01",
+                "plant": "P1 - Trichy Plant",
+                "department": "Quality",
+                "category": "qms",
+            },
+            {
+                "id": 2,
+                "file_name": "audit-report.pdf",
+                "document_number": "ZRAI-DOC-P1-2026-002",
+                "revision_number": "Rev.00",
+                "plant": "P1 - Trichy Plant",
+                "department": "Quality",
+                "category": "audit_reports",
+            },
+        ]
 
         with app.app_context(), patch("services.mail_service.mail.send") as send:
-            ok, error = MailService.send_quarterly_document_reminder(
-                ["l1@example.com", "l2@example.com"],
-                record,
-                "https://portal.example/dashboard/view/1",
-                "https://portal.example/upload?revision_of=1",
+            ok, error = MailService.send_quarterly_document_digest(
+                "l2@example.com",
+                "L2 Reviewer",
+                records,
+                "https://portal.example",
             )
 
         self.assertTrue(ok)
         self.assertIsNone(error)
         message = send.call_args.args[0]
-        self.assertIn("Quarterly document review required", message.subject)
-        self.assertIn("Upload Revised Document", message.html)
-        self.assertIn("revision_of=1", message.html)
+        self.assertEqual(message.recipients, ["l2@example.com"])
+        self.assertIn("2 relevant document(s)", message.subject)
         self.assertIn("Control &lt;Plan&gt;.pdf", message.html)
+        self.assertIn("audit-report.pdf", message.html)
+        self.assertIn("revision_of=1", message.html)
+        self.assertIn("revision_of=2", message.html)
+        self.assertEqual(message.html.count("Upload revised document"), 2)
 
 
 if __name__ == "__main__":

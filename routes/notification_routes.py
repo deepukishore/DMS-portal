@@ -124,7 +124,10 @@ def send_quarterly_reminders():
 
     if result["sent"]:
         flash(
-            f'{result["quarter"]} reminders sent for {result["sent"]} document(s).',
+            (
+                f'{result["quarter"]}: {result["sent"]} consolidated reminder email(s) sent '
+                f'covering {result["documents"]} relevant document assignment(s).'
+            ),
             "success",
         )
     elif result["skipped"]:

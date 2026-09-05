@@ -93,7 +93,13 @@ class PortalUpdateNotificationRouteTests(unittest.TestCase):
     @patch("routes.notification_routes.SystemLogService.log_manual_quarterly_reminders")
     @patch(
         "routes.notification_routes.QuarterlyReminderService.send_due_reminders",
-        return_value={"quarter": "2026-Q3", "sent": 4, "failed": 0, "skipped": 0},
+        return_value={
+            "quarter": "2026-Q3",
+            "sent": 4,
+            "failed": 0,
+            "skipped": 0,
+            "documents": 12,
+        },
     )
     @patch("routes.notification_routes.AuthService.is_admin", return_value=True)
     @patch("routes.notification_routes.AuthService.is_logged_in", return_value=True)
@@ -115,7 +121,13 @@ class PortalUpdateNotificationRouteTests(unittest.TestCase):
         log_manual_run.assert_called_once_with(
             "admin@example.com",
             "Administrator",
-            {"quarter": "2026-Q3", "sent": 4, "failed": 0, "skipped": 0},
+            {
+                "quarter": "2026-Q3",
+                "sent": 4,
+                "failed": 0,
+                "skipped": 0,
+                "documents": 12,
+            },
         )
 
     @patch("routes.notification_routes.SystemLogService.log_portal_update")

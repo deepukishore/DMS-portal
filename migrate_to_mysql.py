@@ -19,6 +19,8 @@ TABLES = [
     "recently_viewed",
     "bookmarks",
     "notifications",
+    "quarterly_document_reminders",
+    "quarterly_recipient_reminders",
 ]
 
 

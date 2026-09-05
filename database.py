@@ -352,6 +352,18 @@ SQLITE_SCHEMA = [
         PRIMARY KEY (quarter_key, document_id)
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS quarterly_recipient_reminders (
+        quarter_key TEXT NOT NULL,
+        recipient_email TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'sending',
+        attempted_at TEXT NOT NULL,
+        sent_at TEXT,
+        document_ids TEXT,
+        error TEXT,
+        PRIMARY KEY (quarter_key, recipient_email)
+    )
+    """,
 ]
 
 
@@ -528,6 +540,18 @@ MYSQL_SCHEMA = [
         recipients LONGTEXT,
         error LONGTEXT,
         PRIMARY KEY (quarter_key, document_id)
+    ) ENGINE=InnoDB
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS quarterly_recipient_reminders (
+        quarter_key VARCHAR(16) NOT NULL,
+        recipient_email VARCHAR(255) NOT NULL,
+        status VARCHAR(32) NOT NULL DEFAULT 'sending',
+        attempted_at VARCHAR(32) NOT NULL,
+        sent_at VARCHAR(32),
+        document_ids LONGTEXT,
+        error LONGTEXT,
+        PRIMARY KEY (quarter_key, recipient_email)
     ) ENGINE=InnoDB
     """,
 ]

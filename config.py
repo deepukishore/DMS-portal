@@ -34,7 +34,7 @@ class Config:
 
     # Quarterly document-review reminders are sent at 09:00 local server time
     # on January 1, April 1, July 1, and October 1. The database prevents a
-    # document from being emailed more than once in the same quarter.
+    # recipient from receiving more than one consolidated email in the same quarter.
     QUARTERLY_REMINDERS_ENABLED = os.environ.get(
         'QUARTERLY_REMINDERS_ENABLED', 'true'
     ).lower() == 'true'

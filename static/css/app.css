@@ -206,6 +206,13 @@ img { height: auto; }
   gap: .5rem;
 }
 .sidebar-footer small { color: var(--text-dim); font-size: .7rem; }
+.sidebar-footer .sidebar-design-credit {
+  color: var(--accent);
+  font-size: .63rem;
+  font-weight: 700;
+  letter-spacing: .045em;
+  line-height: 1.45;
+}
 
 .plant-indicators { display: flex; gap: .4rem; }
 .plant-dot {
