@@ -3,6 +3,7 @@ from flask import Blueprint, current_app, flash, jsonify, redirect, render_templ
 from services.auth_service import AuthService
 from services.mail_service import MailService
 from services.notification_service import NotificationService
+from services.quarterly_reminder_service import QuarterlyReminderService
 from services.system_log_service import SystemLogService
 from services.user_store_service import UserStoreService
 
@@ -93,6 +94,53 @@ def portal_updates():
         "portal_updates.html",
         destinations=PORTAL_UPDATE_DESTINATIONS,
     )
+
+
+@notification_bp.route("/notifications/quarterly-reminders/send", methods=["POST"])
+def send_quarterly_reminders():
+    redir = _require_login()
+    if redir:
+        return redir
+    if not AuthService.is_admin():
+        return "Only an administrator can send quarterly reminders.", 403
+
+    portal_base_url = (
+        current_app.config.get("PORTAL_BASE_URL") or request.url_root
+    ).rstrip("/")
+    try:
+        result = QuarterlyReminderService.send_due_reminders(
+            portal_base_url,
+            force=True,
+        )
+        SystemLogService.log_manual_quarterly_reminders(
+            session.get("user_email", ""),
+            session.get("user_name", "Administrator"),
+            result,
+        )
+    except Exception:
+        current_app.logger.exception("Manual quarterly reminders failed")
+        flash("Quarterly reminders could not be sent. Check the system log and email settings.", "error")
+        return redirect(url_for("notifications.portal_updates"))
+
+    if result["sent"]:
+        flash(
+            f'{result["quarter"]} reminders sent for {result["sent"]} document(s).',
+            "success",
+        )
+    elif result["skipped"]:
+        flash(
+            "No reminders were sent because another reminder run is currently processing those documents.",
+            "warning",
+        )
+    else:
+        flash("There are no approved documents requiring a reminder.", "warning")
+
+    if result["failed"]:
+        flash(
+            f'Email delivery failed for {result["failed"]} document(s). Check the system log.',
+            "warning",
+        )
+    return redirect(url_for("notifications.portal_updates"))
 
 
 @notification_bp.route("/notifications/mark-read/<int:notification_id>", methods=["POST"])

@@ -84,6 +84,40 @@ class PortalUpdateNotificationRouteTests(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 403)
 
+    @patch("routes.notification_routes.AuthService.is_admin", return_value=False)
+    @patch("routes.notification_routes.AuthService.is_logged_in", return_value=True)
+    def test_non_admin_cannot_send_quarterly_reminders(self, _logged_in, _is_admin):
+        response = self.client.post("/notifications/quarterly-reminders/send")
+        self.assertEqual(response.status_code, 403)
+
+    @patch("routes.notification_routes.SystemLogService.log_manual_quarterly_reminders")
+    @patch(
+        "routes.notification_routes.QuarterlyReminderService.send_due_reminders",
+        return_value={"quarter": "2026-Q3", "sent": 4, "failed": 0, "skipped": 0},
+    )
+    @patch("routes.notification_routes.AuthService.is_admin", return_value=True)
+    @patch("routes.notification_routes.AuthService.is_logged_in", return_value=True)
+    def test_admin_can_send_quarterly_reminders_manually(
+        self,
+        _logged_in,
+        _is_admin,
+        send_reminders,
+        log_manual_run,
+    ):
+        with self.client.session_transaction() as session:
+            session["user_email"] = "admin@example.com"
+            session["user_name"] = "Administrator"
+
+        response = self.client.post("/notifications/quarterly-reminders/send")
+
+        self.assertEqual(response.status_code, 302)
+        send_reminders.assert_called_once_with("http://localhost", force=True)
+        log_manual_run.assert_called_once_with(
+            "admin@example.com",
+            "Administrator",
+            {"quarter": "2026-Q3", "sent": 4, "failed": 0, "skipped": 0},
+        )
+
     @patch("routes.notification_routes.SystemLogService.log_portal_update")
     @patch("routes.notification_routes.MailService.send_portal_update", return_value=(True, None))
     @patch(

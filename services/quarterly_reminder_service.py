@@ -53,7 +53,7 @@ class QuarterlyReminderService:
         return sorted(recipients)
 
     @staticmethod
-    def _claim(quarter_key, document_id, attempted_at):
+    def _claim(quarter_key, document_id, attempted_at, force=False):
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -62,14 +62,16 @@ class QuarterlyReminderService:
                 (quarter_key, int(document_id)),
             )
             existing = cursor.fetchone()
-            if existing and existing["status"] in {"sending", "sent"}:
+            if existing and existing["status"] == "sending":
+                return False
+            if existing and existing["status"] == "sent" and not force:
                 return False
             if existing:
                 cursor.execute(
                     """
                     UPDATE quarterly_document_reminders
                     SET status = 'sending', attempted_at = ?, sent_at = NULL, error = NULL
-                    WHERE quarter_key = ? AND document_id = ? AND status = 'failed'
+                    WHERE quarter_key = ? AND document_id = ? AND status != 'sending'
                     """,
                     (attempted_at, quarter_key, int(document_id)),
                 )
@@ -116,7 +118,7 @@ class QuarterlyReminderService:
         conn.close()
 
     @staticmethod
-    def send_due_reminders(base_url, now=None):
+    def send_due_reminders(base_url, now=None, force=False):
         now = now or datetime.now()
         quarter_key = QuarterlyReminderService.quarter_key(now)
         base_url = str(base_url or "").rstrip("/")
@@ -125,7 +127,12 @@ class QuarterlyReminderService:
         for record in QuarterlyReminderService.current_approved_documents():
             document_id = int(record["id"])
             attempted_at = now.strftime("%Y-%m-%d %H:%M:%S")
-            if not QuarterlyReminderService._claim(quarter_key, document_id, attempted_at):
+            if not QuarterlyReminderService._claim(
+                quarter_key,
+                document_id,
+                attempted_at,
+                force=force,
+            ):
                 result["skipped"] += 1
                 continue
 

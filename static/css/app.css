@@ -3275,6 +3275,23 @@ html[data-theme="light"] .btn-theme-auth .theme-moon {
   font-size: .8rem;
   line-height: 1.5;
 }
+.quarterly-reminder-admin {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+.quarterly-reminder-copy {
+  margin-top: .55rem;
+  color: var(--text-sub);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+.quarterly-reminder-admin form,
+.quarterly-reminder-admin button {
+  flex-shrink: 0;
+}
 .portal-update-popup-overlay {
   position: fixed;
   inset: 0;
@@ -4944,6 +4961,14 @@ select:disabled {
   }
   .topbar-right {
     justify-content: flex-start;
+  }
+  .quarterly-reminder-admin {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .quarterly-reminder-admin button {
+    width: 100%;
+    justify-content: center;
   }
   .btn-logout {
     text-align: center;

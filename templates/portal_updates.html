@@ -63,5 +63,20 @@
     </ol>
     <p class="section-sub">Closing the popup does not remove the notification. Users can still open it later from the bell icon.</p>
   </aside>
+
+  <section class="surface-panel quarterly-reminder-admin">
+    <div>
+      <p class="eyebrow">Document review</p>
+      <h2 class="section-title">Quarterly reminders</h2>
+      <p class="quarterly-reminder-copy">
+        Send document-update reminders now to the relevant stakeholders and all L1 and L2 users.
+      </p>
+    </div>
+    <form method="POST"
+          action="{{ url_for('notifications.send_quarterly_reminders') }}"
+          onsubmit="return window.confirm('Send quarterly document reminders now?');">
+      <button type="submit" class="btn-primary">Send reminders now</button>
+    </form>
+  </section>
 </div>
 {% endblock %}

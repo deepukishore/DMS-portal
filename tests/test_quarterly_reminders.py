@@ -84,6 +84,26 @@ class QuarterlyReminderTests(unittest.TestCase):
         self.assertTrue(document_url.endswith(f"/dashboard/view/{record['id']}"))
         self.assertTrue(revision_url.endswith(f"/upload?revision_of={record['id']}"))
 
+    def test_manual_run_can_resend_reminders_in_the_same_quarter(self):
+        with patch.object(
+            MailService,
+            "send_quarterly_document_reminder",
+            return_value=(True, None),
+        ) as send:
+            first = QuarterlyReminderService.send_due_reminders(
+                "https://portal.example", now=datetime(2026, 7, 1, 9, 0)
+            )
+            manual = QuarterlyReminderService.send_due_reminders(
+                "https://portal.example",
+                now=datetime(2026, 8, 15, 11, 0),
+                force=True,
+            )
+
+        self.assertEqual(first["sent"], 1)
+        self.assertEqual(manual["sent"], 1)
+        self.assertEqual(manual["skipped"], 0)
+        self.assertEqual(send.call_count, 2)
+
     def test_email_contains_revision_action(self):
         app = Flask(__name__)
         app.config.update(MAIL_DEFAULT_SENDER="noreply@example.com", TESTING=True)

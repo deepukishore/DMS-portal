@@ -155,3 +155,16 @@ class SystemLogService:
             "QUARTERLY_REMINDER",
             f'Sent {quarter_key} update reminder for "{file_name}" to {recipient_count} recipient(s).',
         )
+
+    @staticmethod
+    def log_manual_quarterly_reminders(admin_email, admin_name, result):
+        SystemLogService._entry(
+            admin_email,
+            admin_name,
+            "MANUAL_QUARTERLY_REMINDER",
+            (
+                f'Manually triggered {result.get("quarter", "current quarter")} reminders: '
+                f'{result.get("sent", 0)} sent, {result.get("failed", 0)} failed, '
+                f'{result.get("skipped", 0)} skipped.'
+            ),
+        )
